@@ -16,7 +16,7 @@
     height="100%"
     busyIndicatorDelay="0"
 >
-    <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false">
+    <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false" showFooter="true" selectedSection="section1">
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="headerTitle">
                 <uxap:expandedContent>
@@ -30,7 +30,7 @@
         </uxap:headerTitle>
 
         <uxap:sections>
-            <uxap:ObjectPageSection id="section1" showTitle="true" title="{i18n>section1_title}" selectedSubSection="subsection1">
+            <uxap:ObjectPageSection id="section1" showTitle="true" title="{i18n>section1_title}">
                 <uxap:ObjectPageSubSection id="subsection1">
                     <form:SimpleForm id="secForm1" editable="true" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1">
                         <Label id="lblCompany" labelFor="txtCompany" text="{i18n>tab1_col02}">
@@ -94,7 +94,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec2F1" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec2F1" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd12" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -106,7 +106,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec2F2" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec2F2" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd14" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -118,7 +118,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec2F3" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec2F3" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd16" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -170,7 +170,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F3" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec3F3" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd24" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -182,7 +182,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F4" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec3F4" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd26" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -194,7 +194,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F5" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec3F5" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd28" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -206,7 +206,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F6" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec3F6" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd30" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -294,7 +294,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec4F1" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec4F1" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd44" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -318,7 +318,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec4F3" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec4F3" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd48" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -408,51 +408,59 @@
                                 <table:Column id="tab1Col4">
                                     <Text id="txtTab1Col4" text="{i18n>sec6_f3}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem4" type="Number" value="{f4}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab1Tem4" type="Number" textDirection="RTL" value="{f4}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col5">
                                     <Text id="txtTab1Col5" text="{i18n>sec6_f4}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem5" type="Number" value="{f5}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab1Tem5" type="Number" textDirection="RTL" value="{f5}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col6">
                                     <Text id="txtTab1Col6" text="{i18n>sec6_f5}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem6" type="Number" value="{f6}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab1Tem6" type="Number" textDirection="RTL" value="{f6}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col7">
                                     <Text id="txtTab1Col7" text="{i18n>sec6_f6}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem7" type="Number" value="{f7}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab1Tem7" type="Number" textDirection="RTL" value="{f7}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col8">
                                     <Text id="txtTab1Col8" text="{i18n>sec6_f7}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem8" type="Number" value="{f8}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab1Tem8" type="Number" textDirection="RTL" value="{f8}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col9">
                                     <Text id="txtTab1Col9" text="{i18n>sec6_f8}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem9" type="Number" value="{f9}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab1Tem9" type="Number" textDirection="RTL" value="{f9}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
                             </table:columns>
 
                             <table:footer>
-                                <HBox id="hbox3" alignContent="Center" alignItems="Center">
-                                    <Label id="lblSec6F20" labelFor="txtSec6F20" text="{i18n>sec6_f20}" />
-                                    <Text id="txtSec6F20" />
-                                </HBox>
+                                <form:SimpleForm id="tab1FooterForm" layout="ResponsiveGridLayout" editable="false" columnsXL="1" columnsL="1" columnsM="1">
+                                    <Label id="lblSec6F20" labelFor="txtSec6F20" text="{i18n>sec6_f20}">
+                                        <layoutData>
+                                            <l:GridData id="gdf6-1" span="XL9 L9 M12 S12" />
+                                        </layoutData>
+                                    </Label>
+                                    <Text id="txtSec6F20" textDirection="RTL" text="111.00">
+                                        <layoutData>
+                                            <l:GridData id="gdf6-2" span="XL1 L1 M12 S12" />
+                                        </layoutData>
+                                    </Text>
+                                </form:SimpleForm>
                             </table:footer>
                         </table:Table>
                     </uxap:ObjectPageSubSection>
@@ -516,7 +524,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec8F2" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec8F2" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd66" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -528,7 +536,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec8F3" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec8F3" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd68" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -552,7 +560,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec8F5" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec8F5" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd72" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -576,15 +584,104 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec8F7" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtSec8F7" type="Number" textDirection="RTL" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd76" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
                         </form:SimpleForm>
                     </uxap:ObjectPageSubSection>
+
+                    <uxap:ObjectPageSubSection id="subsection9">
+                        <table:Table id="tab2" rows="{Sec8Tab1}" selectionMode="None" visibleRowCount="5" editable="{viewState>/editable}">
+                            <table:columns>
+                                <table:Column id="tab2Col1">
+                                    <Text id="txtTab2Col1" />
+                                    <table:template>
+                                        <Text id="txtSec9F1" text="{f1}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab2Col2">
+                                    <Text id="txtTab2Col2" text="{i18n>sec9_f1}" />
+                                    <table:template>
+                                        <Input id="txtSec9F2" type="Number" textDirection="RTL" value="{f2}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab2Col3">
+                                    <Text id="txtTab2Col3" />
+                                    <table:template>
+                                        <Text id="txtSec9F3" text="{f3}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab2Col4">
+                                    <Text id="txtTab2Col4" />
+                                    <table:template>
+                                        <Input id="txtSec9F4" value="{f4}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab2Col5">
+                                    <Text id="txtTab2Col5" />
+                                    <table:template>
+                                        <Text id="txtSec9F5" text="{f5}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab2Col6">
+                                    <Text id="txtTab2Col6" />
+                                    <table:template>
+                                        <Input id="txtSec9F6" value="{f6}" />
+                                    </table:template>
+                                </table:Column>
+                            </table:columns>
+
+                            <table:footer>
+                                <form:SimpleForm id="tab2FooterForm" layout="ResponsiveGridLayout" columnsL="1" columnsXL="1" columnsM="1" editable="false">
+                                    <Label id="lblFooterFormF1" labelFor="txtFooterFormF1" text="{i18n>sec8_f2}">
+                                        <layoutData>
+                                            <l:GridData id="gd77" span="XL10 L10 M10 S10" />
+                                        </layoutData>
+                                    </Label>
+
+                                    <Text id="txtFooterFormF1" textDirection="RTL">
+                                        <layoutData>
+                                            <l:GridData id="gd78" span="XL2 L2 M2 S2" />
+                                        </layoutData>
+                                    </Text>
+
+                                    <Label id="lblFooterFormF2" labelFor="txtFooterFormF2" text="{i18n>sec8_f3}">
+                                        <layoutData>
+                                            <l:GridData id="gd79" span="XL10 L10 M10 S10" />
+                                        </layoutData>
+                                    </Label>
+
+                                    <Text id="txtFooterFormF2" textDirection="RTL">
+                                        <layoutData>
+                                            <l:GridData id="gd80" span="XL2 L2 M2 S2" />
+                                        </layoutData>
+                                    </Text>
+                                </form:SimpleForm>
+                            </table:footer>
+                        </table:Table>
+                    </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
         </uxap:sections>
+
+        <uxap:footer>
+            <OverflowToolbar id="pageToolbar">
+                <content>
+                    <ToolbarSpacer id="pageToolbarSpacer" />
+                    <Button id="btnSave" text="{i18n>footer_f1}" press="onSave" />
+                    <Button id="btnChange" text="{i18n>footer_f2}" press="onChange" />
+                    <Button id="btnRequest" text="{i18n>footer_f3}" press="onRequest" />
+                    <Button id="btnGenerate" text="{i18n>footer_f4}" type="Emphasized" press="onGenerate" />
+                    <Button id="btnStop" text="{i18n>footer_f5}" type="Attention" press="onStop" />
+                </content>
+            </OverflowToolbar>
+        </uxap:footer>
     </uxap:ObjectPageLayout>
 </mvc:View>
