@@ -1,0 +1,463 @@
+<mvc:View
+    xmlns:control="sap.gantt.control"
+    xmlns:cssgrid="sap.ui.layout.cssgrid"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:uxap="sap.uxap"
+    controllerName="com.shin.pstore.pstore.controller.StoreDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:sec2bl1="com.shin.pstore.pstore.controller.blocks"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle id="headerTitle">
+                <uxap:expandedContent>
+                    <Text id="expandTitle" text="{i18n>detail_title}" />
+                </uxap:expandedContent>
+
+                <uxap:snappedContent>
+                    <Text id="snapTitle" text="{i18n>detail_title}" />
+                </uxap:snappedContent>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <uxap:sections>
+            <uxap:ObjectPageSection id="section1" showTitle="true" title="{i18n>section1_title}">
+                <uxap:ObjectPageSubSection id="subsection1">
+                    <form:SimpleForm id="secForm1" editable="true" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1">
+                        <Label id="lblCompany" labelFor="txtCompany" text="{i18n>tab1_col02}">
+                            <layoutData>
+                                <l:GridData id="gd1" span="XL2 L2 M12 S12" />
+                            </layoutData>
+                        </Label>
+
+                        <Text id="txtCompany" text="{tab1_col02}">
+                            <layoutData>
+                                <l:GridData id="gd2" span="XL4 L4 M12 S12" />
+                            </layoutData>
+                        </Text>
+
+                        <Label id="lblInvName" labelFor="txtInvUserName" text="{i18n>invUserName}">
+                            <layoutData>
+                                <l:GridData id="gd3" span="XL2 L2 M12 S12" />
+                            </layoutData>
+                        </Label>
+
+                        <Input id="txtInvUserName" editable="{viewState>/editable}" required="true">
+                            <layoutData>
+                                <l:GridData id="gd4" span="XL4 L4 M12 S12" />
+                            </layoutData>
+                        </Input>
+
+                        <Label id="lblStore" labelFor="txtStore" text="{i18n>store}">
+                            <layoutData>
+                                <l:GridData id="gd5" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
+                            </layoutData>
+                        </Label>
+
+                        <Text id="txtStore" text="{tab1_col01}">
+                            <layoutData>
+                                <l:GridData id="gd6" span="XL4 L4 M12 S12" />
+                            </layoutData>
+                        </Text>
+
+                        <Label id="lblBusDate" labelFor="txtBusDate" text="{i18n>busDate}">
+                            <layoutData>
+                                <l:GridData id="gd9" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
+                            </layoutData>
+                        </Label>
+
+                        <Text id="txtBusDate" text="{tab1_col04}">
+                            <layoutData>
+                                <l:GridData id="gd10" span="XL4 L4 M12 S12" />
+                            </layoutData>
+                        </Text>
+                    </form:SimpleForm>
+                </uxap:ObjectPageSubSection>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection id="section2" showTitle="true" title="{i18n>section2_title}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="subsection2" showTitle="false">
+                        <form:SimpleForm id="subForm2" layout="ResponsiveGridLayout" editable="true" columnsL="2" columnsXL="2" columnsM="1">
+                            <Label id="lblSec2F1" labelFor="txtSec2F1" text="{i18n>sec2_f1}">
+                                <layoutData>
+                                    <l:GridData id="gd11" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" linebreakM="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec2F1" type="Number" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd12" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec2F2" labelFor="txtSec2F2" text="{i18n>sec2_f2}">
+                                <layoutData>
+                                    <l:GridData id="gd13" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" linebreakM="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec2F2" type="Number" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd14" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec2F3" labelFor="txtSec2F3" text="{i18n>sec2_f3}">
+                                <layoutData>
+                                    <l:GridData id="gd15" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" linebreakM="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec2F3" type="Number" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd16" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec2F4" labelFor="txtSec2F4" text="{i18n>sec2_f4}">
+                                <layoutData>
+                                    <l:GridData id="gd17" span="XL2 L2 M12 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec2F4" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd18" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+                        </form:SimpleForm>
+                    </uxap:ObjectPageSubSection>
+
+                    <uxap:ObjectPageSubSection id="subsection3">
+                        <form:SimpleForm id="secForm3" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1" editable="true">
+                            <Label id="lblSec3F1" labelFor="txtSec3F1" text="{i18n>sec3_f1}">
+                                <layoutData>
+                                    <l:GridData id="gd19" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec3F1" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd20" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec3F2" labelFor="txtSec3F2" text="{i18n>sec3_f2}">
+                                <layoutData>
+                                    <l:GridData id="gd21" span="XL2 L2 M12 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec3F2" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd22" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec3F3" labelFor="txtSec3F3" text="{i18n>sec3_f3}">
+                                <layoutData>
+                                    <l:GridData id="gd23" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec3F3" type="Number" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd24" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec3F4" labelFor="txtSec3F4" text="{i18n>sec3_f4}">
+                                <layoutData>
+                                    <l:GridData id="gd25" span="XL2 L2 M12 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec3F4" type="Number" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd26" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec3F5" labelFor="txtSec3F5" text="{i18n>sec3_f5}">
+                                <layoutData>
+                                    <l:GridData id="gd27" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec3F5" type="Number" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd28" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec3F6" labelFor="txtSec3F6" text="{i18n>sec3_f6}">
+                                <layoutData>
+                                    <l:GridData id="gd29" span="XL2 L2 M12 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec3F6" type="Number" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd30" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec3F7" labelFor="txtSec3F7" text="{i18n>sec3_f7}">
+                                <layoutData>
+                                    <l:GridData id="gd31" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec3F7" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd32" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec3F8" labelFor="txtSec3F8" text="{i18n>sec3_f8}">
+                                <layoutData>
+                                    <l:GridData id="gd33" span="XL2 L2 M12 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec3F8" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd34" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec3F9" labelFor="txtSec3F9" text="{i18n>sec3_f9}">
+                                <layoutData>
+                                    <l:GridData id="gd35" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Text id="txtSec3F9">
+                                <layoutData>
+                                    <l:GridData id="gd36" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Text>
+
+                            <Label id="lblSec3F10" labelFor="txtSec3F10" text="{i18n>sec3_f10}">
+                                <layoutData>
+                                    <l:GridData id="gd37" span="XL2 L2 M12 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Text id="txtSec3F10">
+                                <layoutData>
+                                    <l:GridData id="gd38" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Text>
+
+                            <Label id="lblSec3F11" labelFor="txtSec3F11" text="{i18n>sec3_f11}">
+                                <layoutData>
+                                    <l:GridData id="gd39" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Text id="txtSec3F11">
+                                <layoutData>
+                                    <l:GridData id="gd40" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Text>
+
+                            <Label id="lblSec3F12" labelFor="txtSec3F12" text="{i18n>sec3_f12}">
+                                <layoutData>
+                                    <l:GridData id="gd41" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Text id="txtSec3F12">
+                                <layoutData>
+                                    <l:GridData id="gd42" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Text>
+                        </form:SimpleForm>
+                    </uxap:ObjectPageSubSection>
+
+                    <uxap:ObjectPageSubSection id="subsection5">
+                        <form:SimpleForm id="subForm5" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1">
+                            <Label id="lblSec4F1" labelFor="txtSec4F1" text="{i18n>sec4_f1}">
+                                <layoutData>
+                                    <l:GridData id="gd43" span="XL2 L2 M12 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec4F1" type="Number" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd44" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec4F2" labelFor="txtSec4F2" text="{i18n>sec4_f2}">
+                                <layoutData>
+                                    <l:GridData id="gd45" span="XL2 L2 M12 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec4F2" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd46" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec4F3" labelFor="txtSec4F3" text="{i18n>sec4_f3}">
+                                <layoutData>
+                                    <l:GridData id="gd47" span="XL2 L2 M12 S12" linebreakL="true" linebreakM="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec4F3" type="Number" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd48" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec4F4" labelFor="txtSec4F4" text="{i18n>sec4_f4}">
+                                <layoutData>
+                                    <l:GridData id="gd49" span="XL2 L2 M12 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec4F4" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd50" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec4F5" labelFor="txtSec4F5" text="{i18n>sec4_f5}">
+                                <layoutData>
+                                    <l:GridData id="gd51" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Text id="txtSec4F5">
+                                <layoutData>
+                                    <l:GridData id="gd52" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Text>
+
+                            <Label id="lblSec4F6" labelFor="txtSec4F6" text="{i18n>sec4_f6}">
+                                <layoutData>
+                                    <l:GridData id="gd53" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Text id="txtSec4F6">
+                                <layoutData>
+                                    <l:GridData id="gd54" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Text>
+
+                            <Label id="lblSec4F7" labelFor="txtSec4F7" text="{i18n>sec4_f7}">
+                                <layoutData>
+                                    <l:GridData id="gd55" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Text id="txtSec4F7">
+                                <layoutData>
+                                    <l:GridData id="gd56" span="XL4 L4 M12 S12" />
+                                </layoutData>
+                            </Text>
+                        </form:SimpleForm>
+                    </uxap:ObjectPageSubSection>
+
+                    <uxap:ObjectPageSubSection id="subsection6">
+                        <table:Table id="tab1" editable="true" rows="{Sec6Tab1}" visibleRowCount="8" selectionMode="None">
+                            <table:extension>
+                                <HBox id="hbox2" alignContent="Center" alignItems="Center">
+                                    <Label id="lblSec6F1" labelFor="txtSec6F1" text="{i18n>sec6_f1}" />
+                                    <Input id="txtSec6F1" editable="{viewState>/editable}" /> 
+                                </HBox>
+                            </table:extension>
+
+                            <table:columns>
+                                <table:Column id="tab1Col1">
+                                    <Text id="txtTab1Col1" />
+                                    <table:template>
+                                        <Text id="txtTab1Tem1" text="{f1}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab1Col2">
+                                    <Text id="txtTab1Col2" />
+                                    <table:template>
+                                        <Text id="txtTab1Tem2" text="{f2}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab1Col3">
+                                    <Text id="txtTab1Col3" text="{i18n>sec6_f2}" />
+                                    <table:template>
+                                        <Input id="txtTab1Tem3" value="{f3}" editable="{viewState>/editable}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab1Col4">
+                                    <Text id="txtTab1Col4" text="{i18n>sec6_f3}" />
+                                    <table:template>
+                                        <Input id="txtTab1Tem4" type="Number" value="{f4}" editable="{viewState>/editable}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab1Col5">
+                                    <Text id="txtTab1Col5" text="{i18n>sec6_f4}" />
+                                    <table:template>
+                                        <Input id="txtTab1Tem5" type="Number" value="{f5}" editable="{viewState>/editable}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab1Col6">
+                                    <Text id="txtTab1Col6" text="{i18n>sec6_f5}" />
+                                    <table:template>
+                                        <Input id="txtTab1Tem6" type="Number" value="{f6}" editable="{viewState>/editable}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab1Col7">
+                                    <Text id="txtTab1Col7" text="{i18n>sec6_f6}" />
+                                    <table:template>
+                                        <Input id="txtTab1Tem7" type="Number" value="{f7}" editable="{viewState>/editable}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab1Col8">
+                                    <Text id="txtTab1Col8" text="{i18n>sec6_f7}" />
+                                    <table:template>
+                                        <Input id="txtTab1Tem8" type="Number" value="{f8}" editable="{viewState>/editable}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab1Col9">
+                                    <Text id="txtTab1Col9" text="{i18n>sec6_f8}" />
+                                    <table:template>
+                                        <Input id="txtTab1Tem9" type="Number" value="{f9}" editable="{viewState>/editable}" />
+                                    </table:template>
+                                </table:Column>
+                            </table:columns>
+
+                            <table:footer>
+                                <HBox id="hbox3" alignContent="Center" alignItems="Center">
+                                    <Label id="lblSec6F20" labelFor="txtSec6F20" text="{i18n>sec6_f20}" />
+                                    <Text id="txtSec6F20" /> 
+                                </HBox>
+                            </table:footer>
+                        </table:Table>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>

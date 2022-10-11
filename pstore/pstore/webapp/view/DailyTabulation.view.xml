@@ -1,0 +1,208 @@
+<mvc:View xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:uxap="sap.uxap"
+	controllerName="com.shin.pstore.pstore.controller.DailyTabulation"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:table="sap.ui.table" 
+    xmlns:f="sap.f" 
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+
+	height="100%"
+	busyIndicatorDelay="0"
+>
+<f:DynamicPage id="dynamicPage1">
+    <f:header>
+
+        <f:DynamicPageHeader id="pageHeader">
+            <f:content>
+                <smartfilterbar:SmartFilterBar id="dailyFilter" entitySet=""></smartfilterbar:SmartFilterBar>
+            </f:content>
+        </f:DynamicPageHeader>
+    </f:header>
+
+    <f:content>
+        <table:Table id="table1" 
+        enableColumnFreeze="true" 
+        enableGrouping="true" 
+        enableCustomFilter="true" 
+        enableBusyIndicator="true"
+        
+        rows="{/DataSet}"
+        visibleRowCount="50"
+        rowActionCount="1"
+        class="sapFDynamicPageAlignContent"
+        >
+
+        <table:rowActionTemplate>
+            <table:RowAction id="tab1RowAction">
+                <table:items>
+                    <table:RowActionItem id="tab1RowActionItem" type="Navigation" icon="sap-icon://navigation-right-arrow" press="onNavigate"/>
+                </table:items>
+            </table:RowAction>
+        </table:rowActionTemplate>
+
+        <table:extension>
+            <OverflowToolbar id="tableToolBar">
+                <content>
+                    <ToolbarSpacer id="toolbarSpacer" />
+                    <Button id="btnShowAddDialog" text="{i18n>tab1_btn01}" type="Transparent" press="onShowAddDialog"/>
+                    <Button id="btnShowCopyDialog" text="{i18n>tab1_btn02}" type="Transparent" press="onShowCopyDialog"/>
+                    <Button id="btnShowDeleteDialog" text="{i18n>tab1_btn03}" type="Attention" press="onShowDeleteDialog"/>
+                    <Button id="btnShowGenerateDialog" text="{i18n>tab1_btn04}" type="Transparent" press="onShowGenerateDialog"/>
+                    <Button id="btnExportPdf" text="{i18n>tab1_btn05}" type="Transparent" press="onExportPdf"/>
+                </content>
+            </OverflowToolbar>
+        </table:extension>
+
+            <table:columns>
+                <table:Column id="col1">
+                    <table:template>
+                        <Text id="txtCol1" text="{tab1_col01}"  wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol1" text="{i18n>tab1_col01}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col2">
+                    <table:template>
+                        <Text id="txtCol2" text="{tab1_col02}" wrapping="false" />
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol2" text="{i18n>tab1_col02}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col3">
+                    <table:template>
+                        <Text id="txtCol3" text="{tab1_col03}" wrapping="false" />
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol3" text="{i18n>tab1_col03}" />
+                    </table:label>
+                </table:Column>
+                
+                <table:Column id="col4">
+                    <table:template>
+                        <Text id="txtCol4" text="{path : '{tab1_col04}', 
+                                    type : 'sap.ui.model.type.DateTime',
+                                    formatOptions: { style : 'medium'}}" />
+
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol4" text="{i18n>tab1_col04}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col5">
+                    <table:template>
+                        <Text id="txtCol5" text="{tab1_col05}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol5" text="{i18n>tab1_col05}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col6">
+                    <table:template>
+                        <Text id="txtCol6" text="{tab1_col06}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol6" text="{i18n>tab1_col06}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col7">
+                    <table:template>
+                        <Text id="txtCol7" text="{tab1_col07}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol7" text="{i18n>tab1_col07}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col8">
+                    <table:template>
+                        <Text id="txtCol8" text="{tab1_col08}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol8" text="{i18n>tab1_col08}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col9">
+                    <table:template>
+                        <Text id="txtCol9" text="{tab1_col09}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol9" text="{i18n>tab1_col09}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col10">
+                    <table:template>
+                        <Text id="txtCol10" text="{tab1_col10}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol10" text="{i18n>tab1_col10}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col11">
+                    <table:template>
+                        <Text id="txtCol11" text="{tab1_col11}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol11" text="{i18n>tab1_col11}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col12">
+                    <table:template>
+                        <Text id="txtCol12" text="{tab1_col12}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol12" text="{i18n>tab1_col12}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col13">
+                    <table:template>
+                        <Text id="txtCol13" text="{tab1_col13}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol13" text="{i18n>tab1_col13}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col14">
+                    <table:template>
+                        <Text id="txtCol14" text="{tab1_col14}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol14" text="{i18n>tab1_col14}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col15">
+                    <table:template>
+                        <Text id="txtCol15" text="{tab1_col15}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol15" text="{i18n>tab1_col15}" />
+                    </table:label>
+                </table:Column>
+
+                <table:Column id="col16">
+                    <table:template>
+                        <Text id="txtCol16" text="{tab1_col16}" wrapping="false"/>
+                    </table:template>
+                    <table:label>
+                        <Label id="lblCol16" text="{i18n>tab1_col16}" />
+                    </table:label>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </f:content>
+</f:DynamicPage>
+</mvc:View>
