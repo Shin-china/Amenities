@@ -1,6 +1,4 @@
 <mvc:View
-    xmlns:control="sap.gantt.control"
-    xmlns:cssgrid="sap.ui.layout.cssgrid"
     xmlns:form="sap.ui.layout.form"
     xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
     xmlns:uxap="sap.uxap"
@@ -11,12 +9,11 @@
     xmlns:f="sap.f"
     xmlns:c="sap.ui.core"
     xmlns:l="sap.ui.layout"
-    xmlns:sec2bl1="com.shin.pstore.pstore.controller.blocks"
     displayBlock="true"
     height="100%"
     busyIndicatorDelay="0"
 >
-    <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false" showFooter="true" selectedSection="section1">
+    <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false" selectedSection="section1" showTitleInHeaderContent="true" showFooter="true">
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="headerTitle">
                 <uxap:expandedContent>
@@ -30,7 +27,7 @@
         </uxap:headerTitle>
 
         <uxap:sections>
-            <uxap:ObjectPageSection id="section1" showTitle="true" title="{i18n>section1_title}">
+            <uxap:ObjectPageSection id="section1" showTitle="true" title="{i18n>section1_title}" selectedSubSection="subsection1">
                 <uxap:ObjectPageSubSection id="subsection1">
                     <form:SimpleForm id="secForm1" editable="true" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1">
                         <Label id="lblCompany" labelFor="txtCompany" text="{i18n>tab1_col02}">
@@ -667,6 +664,172 @@
                             </table:footer>
                         </table:Table>
                     </uxap:ObjectPageSubSection>
+
+                    <uxap:ObjectPageSubSection id="subsection10">
+                        <form:SimpleForm id="subForm10" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="1" editable="true">
+                            <Label id="lblSec10F1" labelFor="txtSec10F1" text="{i18n>sec10_f1}">
+                                <layoutData>
+                                    <l:GridData id="gd81" span="XL2 L2 M6 S12" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec10F1" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd82" span="XL4 L4 M6 S12" />
+                                </layoutData>
+                            </Input>
+
+                            <Label id="lblSec10F2" labelFor="txtSec10F2" text="{i18n>sec10_f2}">
+                                <layoutData>
+                                    <l:GridData id="gd83" span="XL2 L2 M6 S12" linebreakXL="true" linebreakL="true" />
+                                </layoutData>
+                            </Label>
+
+                            <Input id="txtSec10F2" editable="{viewState>/editable}">
+                                <layoutData>
+                                    <l:GridData id="gd84" span="XL4 L4 M6 S12" />
+                                </layoutData>
+                            </Input>
+                        </form:SimpleForm>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection id="section3" title="{i18n>section3_title}" showTitle="true">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="subsection11">
+                        <table:Table id="tab3" rows="{InData}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
+                            <table:extension>
+                                <OverflowToolbar id="tab3Toolbar">
+                                    <content>
+                                        <ToolbarSpacer id="toolbarSpacer4" />
+                                        <Button id="btnTab3Add" text="{i18n>tab1_btn01}" press="onTab3Add" />
+                                        <Button id="btnTab3Delete" text="{i18n>tab1_btn03}" type="Attention" press="onTab3Delete" />
+                                    </content>
+                                </OverflowToolbar>
+                            </table:extension>
+
+                            <table:columns>
+                                <table:Column id="tab3Col1">
+                                    <Label id="lblTab3Col1" text="{i18n>tab3_col1}" />
+                                    <table:template>
+                                        <Input id="txtTab3Col1" value="{f1}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab3Col2">
+                                    <Label id="lblTab3Col2" text="{i18n>tab3_col2}" />
+                                    <table:template>
+                                        <Input id="txtTab3Col2" value="{f2}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab3Col3">
+                                    <Label id="lblTab3Col3" text="{i18n>tab3_col3}" />
+                                    <table:template>
+                                        <Input id="txtTab3Col3" value="{f3}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab3Col4">
+                                    <Label id="lblTab3Col4" text="{i18n>tab3_col4}" />
+                                    <table:template>
+                                        <Input id="txtTab3Col4" value="{f4}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab3Col5">
+                                    <Label id="lblTab3Col5" text="{i18n>tab3_col5}" />
+                                    <table:template>
+                                        <Input id="txtTab3Col5" value="{f5}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab3Col6">
+                                    <Label id="lblTab3Col6" text="{i18n>tab3_col6}" />
+                                    <table:template>
+                                        <Input id="txtTab3Col6" value="{f6}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab3Col7">
+                                    <Label id="lblTab3Col7" text="{i18n>tab3_col7}" />
+                                    <table:template>
+                                        <Input id="txtTab3Col7" value="{f7}" />
+                                    </table:template>
+                                </table:Column>
+                            </table:columns>
+                        </table:Table>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection id="section4" title="{i18n>section4_title}" showTitle="true">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="subsection12">
+                        <table:Table id="tab4" rows="{OutData}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
+                            <table:extension>
+                                <OverflowToolbar id="tab4Toolbar">
+                                    <content>
+                                        <ToolbarSpacer id="toolbarSpacer5" />
+                                        <Button id="btnTab4Add" text="{i18n>tab1_btn01}" press="onTab4Add" />
+                                        <Button id="btnTab4Delete" text="{i18n>tab1_btn03}" type="Attention" press="onTab4Delete" />
+                                    </content>
+                                </OverflowToolbar>
+                            </table:extension>
+
+                            <table:columns>
+                                <table:Column id="tab4Col1">
+                                    <Label id="lblTab4Col1" text="{i18n>tab3_col1}" />
+                                    <table:template>
+                                        <Input id="txtTab4Col1" value="{f1}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab4Col2">
+                                    <Label id="lblTab4Col2" text="{i18n>tab3_col2}" />
+                                    <table:template>
+                                        <Input id="txtTab4Col2" value="{f2}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab4Col3">
+                                    <Label id="lblTab4Col3" text="{i18n>tab3_col3}" />
+                                    <table:template>
+                                        <Input id="txtTab4Col3" value="{f3}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab4Col4">
+                                    <Label id="lblTab4Col4" text="{i18n>tab3_col4}" />
+                                    <table:template>
+                                        <Input id="txtTab4Col4" value="{f4}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab4Col5">
+                                    <Label id="lblTab4Col5" text="{i18n>tab3_col5}" />
+                                    <table:template>
+                                        <Input id="txtTab4Col5" value="{f5}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab4Col6">
+                                    <Label id="lblTab4Col6" text="{i18n>tab3_col6}" />
+                                    <table:template>
+                                        <Input id="txtTab4Col6" value="{f6}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab4Col7">
+                                    <Label id="lblTab4Col7" text="{i18n>tab3_col7}" />
+                                    <table:template>
+                                        <Input id="txtTab4Col7" value="{f7}" />
+                                    </table:template>
+                                </table:Column>
+                            </table:columns>
+                        </table:Table>
+                    </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
         </uxap:sections>
@@ -674,6 +837,16 @@
         <uxap:footer>
             <OverflowToolbar id="pageToolbar">
                 <content>
+                    <Button
+                        id="btnMessagePopover"
+                        visible="false"
+                        icon="{ path: 'Message', formatter: '.formatter.buttonIconFormatter' }"
+                        type="{ path: 'Message', formatter: '.formatter.buttonTypeFormatter' }"
+                        press="onMessagePopoverPress"
+                        text="{path: 'Message', formatter: '.formatter.highestSeverityMessages' }"
+                        ariaHasPopup="Dialog"
+                    />
+
                     <ToolbarSpacer id="pageToolbarSpacer" />
                     <Button id="btnSave" text="{i18n>footer_f1}" press="onSave" />
                     <Button id="btnChange" text="{i18n>footer_f2}" press="onChange" />

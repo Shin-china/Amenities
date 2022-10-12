@@ -9,7 +9,7 @@
                     </IconTabFilter>
 
                     <IconTabFilter id="iconTabFilter2" text="{i18n>tab2}">
-                        <!-- <mvc:XMLView id="storeDetailView" viewName="com.shin.pstore.pstore.view.StoreDetail" height="80%" ></mvc:XMLView> -->
+                        <mvc:XMLView id="resultView" viewName="com.shin.pstore.pstore.view.Result" height="80%" ></mvc:XMLView>
                     </IconTabFilter>
                 </items>
             </IconTabBar>

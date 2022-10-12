@@ -30,6 +30,7 @@
         rows="{/DataSet}"
         visibleRowCount="50"
         rowActionCount="1"
+        
         class="sapFDynamicPageAlignContent"
         >
 
