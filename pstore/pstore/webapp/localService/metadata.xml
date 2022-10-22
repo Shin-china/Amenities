@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZZPSTORE_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="Store" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KaishaCd"/>
+                    <PropertyRef Name="TenpoCd"/>
+                    <PropertyRef Name="EigyoBi"/>
+                    <PropertyRef Name="KihyoNo"/>
+                </Key>
+                <Property Name="KaishaCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="KAISHA_CD"/>
+                <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="TENPO_CD"/>
+                <Property Name="EigyoBi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="EIGYO_BI"/>
+                <Property Name="KihyoNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="KIHYO_NO"/>
+                <Property Name="KaishaNm" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="KAISHA_NM" sap:filterable="false"/>
+                <Property Name="TenpoName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="TENPO_NAME" sap:filterable="false"/>
+                <Property Name="KihyoshaName" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="KIHYOSHA_NAME" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="ZnjtsKrkshGankin" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="ZNJTS_KRKSH_GANKIN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GnkNyukinSogaku" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="GNK_NYUKIN_SOGAKU" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RyogaekinUkeire" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="RYOGAEKIN_UKEIRE" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KamokuSetei1" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="KAMOKU_SETEI_1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PMeter" Type="Edm.String" MaxLength="11" sap:unicode="false" sap:label="P_METER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PGenkinUriage" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="P_GENKIN_URIAGE" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PCardUriage" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="P_CARD_URIAGE" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KamokuSetei2" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="KAMOKU_SETEI_2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PUriage" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="P_URIAGE" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SMeter" Type="Edm.String" MaxLength="11" sap:unicode="false" sap:label="S_METER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SGenkinUriage" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="S_GENKIN_URIAGE" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SCardUriage" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="S_CARD_URIAGE" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KamokuSetei3" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="KAMOKU_SETEI_3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SUriage" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="S_URIAGE" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GenkinUragGokei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="GENKIN_URAG_GOKEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UriageSogokei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="URIAGE_SOGOKEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HanbaiAmt" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="HANBAI_AMT" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KamokuSetei4" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="KAMOKU_SETEI_4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SekisanAmt" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SEKISAN_AMT" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KamokuSetei5" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="KAMOKU_SETEI_5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KadoHanbaiGokei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="KADO_HANBAI_GOKEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SonotaNyukinKei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SONOTA_NYUKIN_KEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SonotaShunyuKei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SONOTA_SHUNYU_KEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hyojibasho1" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="HYOJIBASHO_1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinCd1" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="SYOHIN_CD_1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinZenjtsZan1" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_ZENJTS_ZAN_1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirSu1" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SHIR_SU_1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinSyukoSu1" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SYUKO_SU_1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinHonjtsZan1" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_HONJTS_ZAN_1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirAmt1" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_SHIR_AMT_1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinTanka1" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_TANKA1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hyojibasho2" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="HYOJIBASHO_2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinCd2" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="SYOHIN_CD_2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinZenjtsZan2" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_ZENJTS_ZAN_2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirSu2" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SHIR_SU_2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinSyukoSu2" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SYUKO_SU_2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinHonjtsZan2" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_HONJTS_ZAN_2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirAmt2" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_SHIR_AMT_2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinTanka2" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_TANKA2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hyojibasho3" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="HYOJIBASHO_3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinCd3" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="SYOHIN_CD_3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinZenjtsZan3" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_ZENJTS_ZAN_3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirSu3" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SHIR_SU_3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinSyukoSu3" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SYUKO_SU_3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinHonjtsZan3" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_HONJTS_ZAN_3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirAmt3" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_SHIR_AMT_3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinTanka3" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_TANKA3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hyojibasho4" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="HYOJIBASHO_4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinCd4" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="SYOHIN_CD_4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinZenjtsZan4" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_ZENJTS_ZAN_4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirSu4" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SHIR_SU_4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinSyukoSu4" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SYUKO_SU_4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinHonjtsZan4" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_HONJTS_ZAN_4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirAmt4" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_SHIR_AMT_4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinTanka4" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_TANKA4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hyojibasho5" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="HYOJIBASHO_5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinCd5" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="SYOHIN_CD_5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinZenjtsZan5" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_ZENJTS_ZAN_5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirSu5" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SHIR_SU_5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinSyukoSu5" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SYUKO_SU_5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinHonjtsZan5" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_HONJTS_ZAN_5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirAmt5" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_SHIR_AMT_5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinTanka5" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_TANKA5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hyojibasho6" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="HYOJIBASHO_6" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinCd6" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="SYOHIN_CD_6" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinZenjtsZan6" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_ZENJTS_ZAN_6" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirSu6" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SHIR_SU_6" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinSyukoSu6" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SYUKO_SU_6" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinHonjtsZan6" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_HONJTS_ZAN_6" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirAmt6" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_SHIR_AMT_6" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinTanka6" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_TANKA6" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hyojibasho7" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="HYOJIBASHO_7" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinCd7" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="SYOHIN_CD_7" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinZenjtsZan7" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_ZENJTS_ZAN_7" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirSu7" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SHIR_SU_7" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinSyukoSu7" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_SYUKO_SU_7" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinHonjtsZan7" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:label="SYOHIN_HONJTS_ZAN_7" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinShirAmt7" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_SHIR_AMT_7" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyohinTanka7" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYOHIN_TANKA7" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KeihinShirdk" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="KEIHIN_SHIRDK" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HacyuNo" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="HACYU_NO" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SyunyuGokei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SYUNYU_GOKEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShishutsuGokei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SHISHUTSU_GOKEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HnjtsKrkshdk" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="HNJTS_KRKSHDK" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HnjtsHnshSofukin" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="HNJTS_HNSH_SOFUKIN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZnjtsHnshSfknRk" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="ZNJTS_HNSH_SFKN_RK" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RyogaekinModoshi" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="RYOGAEKIN_MODOSHI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SofukinGokei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SOFUKIN_GOKEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KiteiGankinAmt" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="KITEI_GANKIN_AMT" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HnjtsKrkshdkUgki" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="HNJTS_KRKSHDK_UGKI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GnknKfskUchwk" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="GNKN_KFSK_UCHWK" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GnknKfskShosai" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="GNKN_KFSK_SHOSAI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Biko1" Type="Edm.String" MaxLength="300" sap:unicode="false" sap:label="BIKO1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NikkeihyoStatusCd" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="NIKKEIHYO_STATUS_CD" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NikkeihyoStatus" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="NIKKEIHYO_STATUS" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShinseiDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="SHINSEI_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShinseiUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="SHINSEI_USER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastShinseiDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="LAST_SHINSEI_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastShinseiUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="LAST_SHINSEI_USER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShoninDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="SHONIN_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShoninUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="SHONIN_USER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RegDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="REG_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RegUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="REG_USER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdDttm" Type="Edm.String" MaxLength="14" ConcurrencyMode="Fixed" sap:unicode="false" sap:label="UPD_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="UPD_USER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SakuhyoFlag" Type="Edm.Boolean" sap:unicode="false" sap:label="SAKUHYO_FLAG" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SakuhyoDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="SAKUHYO_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SakuhyoUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="SAKUHYO_USER" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="OutDataSet" Relationship="ZZPSTORE_SRV.asso_Store_OutData" FromRole="FromRole_asso_Store_OutData" ToRole="ToRole_asso_Store_OutData"/>
+                <NavigationProperty Name="Cash" Relationship="ZZPSTORE_SRV.asso_Store_Cash" FromRole="FromRole_asso_Store_Cash" ToRole="ToRole_asso_Store_Cash"/>
+                <NavigationProperty Name="MessageSet" Relationship="ZZPSTORE_SRV.asso_Store_Message" FromRole="FromRole_asso_Store_Message" ToRole="ToRole_asso_Store_Message"/>
+                <NavigationProperty Name="InDataSet" Relationship="ZZPSTORE_SRV.asso_Store_InData" FromRole="FromRole_asso_Store_InData" ToRole="ToRole_asso_Store_InData"/>
+            </EntityType>
+            <EntityType Name="InData" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KaishaCd"/>
+                    <PropertyRef Name="TenpoCd"/>
+                    <PropertyRef Name="EigyoBi"/>
+                    <PropertyRef Name="KihyoNo"/>
+                    <PropertyRef Name="MeisaiNo"/>
+                </Key>
+                <Property Name="KaishaCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="KAISHA_CD" sap:updatable="false"/>
+                <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="TENPO_CD"/>
+                <Property Name="EigyoBi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="EIGYO_BI"/>
+                <Property Name="KihyoNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="KIHYO_NO"/>
+                <Property Name="MeisaiNo" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="MEISAI_NO"/>
+                <Property Name="TenpoName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="TENPO_NAME" sap:filterable="false"/>
+                <Property Name="KihyoshaName" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="KIHYOSHA_NAME" sap:filterable="false"/>
+                <Property Name="Keijobusho" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="KEIJOBUSHO" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KarikataCd" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="KARIKATA_CD" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nyknsaki" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="NYKNSAKI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nykntekiyo" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="NYKNTEKIYO" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nyknkingaku" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="NYKNKINGAKU" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nyknkamokucd" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="NYKNKAMOKUCD" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zeicd" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="ZEICD" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SonotaNyukinKei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SONOTA_NYUKIN_KEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="NoPostFlag" Type="Edm.Boolean" sap:unicode="false" sap:label="NO_POST_FLAG" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RegDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="REG_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RegUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="REG_USER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="UPD_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="UPD_USER" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="OutData" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KaishaCd"/>
+                    <PropertyRef Name="TenpoCd"/>
+                    <PropertyRef Name="EigyoBi"/>
+                    <PropertyRef Name="KihyoNo"/>
+                    <PropertyRef Name="MeisaiNo"/>
+                </Key>
+                <Property Name="KaishaCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="KAISHA_CD"/>
+                <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="TENPO_CD"/>
+                <Property Name="EigyoBi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="EIGYO_BI"/>
+                <Property Name="KihyoNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="KIHYO_NO"/>
+                <Property Name="MeisaiNo" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="MEISAI_NO"/>
+                <Property Name="TenpoName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="TENPO_NAME" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KihyoshaName" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="KIHYOSHA_NAME" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Keijobusho" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="KEIJOBUSHO" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shknsaki" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="SHKNSAKI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shkntekiyo" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="SHKNTEKIYO" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shknkingaku" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:label="SHKNKINGAKU" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shknkamokucd" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="SHKNKAMOKUCD" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Zeicd" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="ZEICD" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SonotaShunyuKei" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:label="SONOTA_SHUNYU_KEI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NoPostFlag" Type="Edm.Boolean" sap:unicode="false" sap:label="NO_POST_FLAG" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RegDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="REG_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RegUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="REG_USER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="UPD_DTTM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="UPD_USER" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Cash" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KaishaCd"/>
+                    <PropertyRef Name="TenpoCd"/>
+                    <PropertyRef Name="EigyoBi"/>
+                    <PropertyRef Name="KihyoNo"/>
+                </Key>
+                <Property Name="KaishaCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="KAISHA_CD"/>
+                <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="TENPO_CD"/>
+                <Property Name="EigyoBi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="EIGYO_BI"/>
+                <Property Name="KihyoNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="KIHYO_NO"/>
+                <Property Name="YuukouMaisuu1man" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_1MAN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouMaisuu5sen" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_5SEN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouMaisuu2sen" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_2SEN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouMaisuuSen" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_SEN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouMaisuu500en" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_500EN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouMaisuu100en" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_100EN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouMaisuu50en" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_50EN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouMaisuu10en" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_10EN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouMaisuu5en" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_5EN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouMaisuu1en" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="YUUKOU_MAISUU_1EN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouGkiAmt" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="YUUKOU_GKI_AMT" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HasonMaisuu1man" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="HASON_MAISUU_1MAN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HasonMaisuu5sen" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="HASON_MAISUU_5SEN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HasonMaisuu2sen" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="HASON_MAISUU_2SEN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HasonMaisuuSen" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="HASON_MAISUU_SEN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HasonMaisuu500en" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:label="HASON_MAISUU_500EN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HasonGkiAmt" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="HASON_GKI_AMT" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZyunbikinAmt1" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="ZYUNBIKIN_AMT_1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZyunbikinAmt2" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="ZYUNBIKIN_AMT_2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZyunbikinAmt3" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="ZYUNBIKIN_AMT_3" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZyunbikinAmt4" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="ZYUNBIKIN_AMT_4" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZyunbikinAmt5" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="ZYUNBIKIN_AMT_5" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZyunbikinGkiAmt" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="ZYUNBIKIN_GKI_AMT" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZyunbikinAmt6" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="ZYUNBIKIN_AMT_6" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Yokuzitusohukin" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="YOKUZITUSOHUKIN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Yokuzituryougaekin" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="YOKUZITURYOUGAEKIN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Yokuzitunyuukin" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="YOKUZITUNYUUKIN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Yokuzitukinkonai" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="YOKUZITUKINKONAI" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HonzitukurikosiSansyo" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="HONZITUKURIKOSI_SANSYO" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Yokuzitukiteimotokin" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="YOKUZITUKITEIMOTOKIN" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sagaku" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SAGAKU" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bikou2" Type="Edm.String" MaxLength="300" sap:unicode="false" sap:label="BIKOU2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="RegDt" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="REG_DT" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RegTm" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="REG_TM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RegUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="REG_USER" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdDt" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="UPD_DT" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdTm" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="UPD_TM" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="UPD_USER" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Message" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KaishaCd"/>
+                    <PropertyRef Name="TenpoCd"/>
+                    <PropertyRef Name="EigyoBi"/>
+                    <PropertyRef Name="KihyoNo"/>
+                </Key>
+                <Property Name="KaishaCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="KAISHA_CD" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="TENPO_CD" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="EigyoBi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="EIGYO_BI" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="KihyoNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="KIHYO_NO" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Message Type" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Message Title" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="220" sap:unicode="false" sap:label="Message Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Subtitle" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Subtitle" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Counter" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="INT2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="asso_Store_InData" sap:content-version="1">
+                <End Type="ZZPSTORE_SRV.Store" Multiplicity="1" Role="FromRole_asso_Store_InData"/>
+                <End Type="ZZPSTORE_SRV.InData" Multiplicity="*" Role="ToRole_asso_Store_InData"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_asso_Store_InData">
+                        <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_asso_Store_InData">
+                        <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="asso_Store_OutData" sap:content-version="1">
+                <End Type="ZZPSTORE_SRV.Store" Multiplicity="1" Role="FromRole_asso_Store_OutData"/>
+                <End Type="ZZPSTORE_SRV.OutData" Multiplicity="*" Role="ToRole_asso_Store_OutData"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_asso_Store_OutData">
+                        <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_asso_Store_OutData">
+                        <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="asso_Store_Message" sap:content-version="1">
+                <End Type="ZZPSTORE_SRV.Store" Multiplicity="1" Role="FromRole_asso_Store_Message"/>
+                <End Type="ZZPSTORE_SRV.Message" Multiplicity="*" Role="ToRole_asso_Store_Message"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_asso_Store_Message">
+                        <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_asso_Store_Message">
+                        <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="asso_Store_Cash" sap:content-version="1">
+                <End Type="ZZPSTORE_SRV.Store" Multiplicity="1" Role="FromRole_asso_Store_Cash"/>
+                <End Type="ZZPSTORE_SRV.Cash" Multiplicity="0..1" Role="ToRole_asso_Store_Cash"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_asso_Store_Cash">
+                        <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_asso_Store_Cash">
+                        <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZZPSTORE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="StoreSet" EntityType="ZZPSTORE_SRV.Store" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="InDataSet" EntityType="ZZPSTORE_SRV.InData" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="OutDataSet" EntityType="ZZPSTORE_SRV.OutData" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="CashSet" EntityType="ZZPSTORE_SRV.Cash" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="MessageSet" EntityType="ZZPSTORE_SRV.Message" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <AssociationSet Name="asso_Store_OutDataSet" Association="ZZPSTORE_SRV.asso_Store_OutData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="StoreSet" Role="FromRole_asso_Store_OutData"/>
+                    <End EntitySet="OutDataSet" Role="ToRole_asso_Store_OutData"/>
+                </AssociationSet>
+                <AssociationSet Name="asso_Store_CashSet" Association="ZZPSTORE_SRV.asso_Store_Cash" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="StoreSet" Role="FromRole_asso_Store_Cash"/>
+                    <End EntitySet="CashSet" Role="ToRole_asso_Store_Cash"/>
+                </AssociationSet>
+                <AssociationSet Name="asso_Store_InDataSet" Association="ZZPSTORE_SRV.asso_Store_InData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="StoreSet" Role="FromRole_asso_Store_InData"/>
+                    <End EntitySet="InDataSet" Role="ToRole_asso_Store_InData"/>
+                </AssociationSet>
+                <AssociationSet Name="asso_Store_MessageSet" Association="ZZPSTORE_SRV.asso_Store_Message" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="StoreSet" Role="FromRole_asso_Store_Message"/>
+                    <End EntitySet="MessageSet" Role="ToRole_asso_Store_Message"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://58.246.235.222:8010/sap/opu/odata/sap/ZZPSTORE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://58.246.235.222:8010/sap/opu/odata/sap/ZZPSTORE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

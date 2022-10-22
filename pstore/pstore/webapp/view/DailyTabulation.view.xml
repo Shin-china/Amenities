@@ -27,7 +27,7 @@
         enableCustomFilter="true" 
         enableBusyIndicator="true"
         
-        rows="{/DataSet}"
+        rows="{/StoreSet}"
         visibleRowCount="50"
         rowActionCount="1"
         
@@ -58,7 +58,7 @@
             <table:columns>
                 <table:Column id="col1">
                     <table:template>
-                        <Text id="txtCol1" text="{tab1_col01}"  wrapping="false"/>
+                        <Text id="txtCol1" text="{KIHYO_NO}"  wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol1" text="{i18n>tab1_col01}" />

@@ -612,11 +612,11 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec8F9" type="Number" editable="{viewState>/editable}">
+                            <TextArea id="txtSec8F9" value="" rows="5" editable="{viewState>/editable}">
                                 <layoutData>
-                                    <l:GridData id="gd88" span="XL4 L4 M12 S12" />
+                                    <l:GridData id="gd88" span="XL9 L9 M12 S12" />
                                 </layoutData>
-                            </Input>
+                            </TextArea>
                         </form:SimpleForm>
                     </uxap:ObjectPageSubSection>
 
@@ -1133,11 +1133,11 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSubForm17F8" value="">
+                            <TextArea id="txtSubForm17F8" value="" rows="5">
                                 <layoutData>
-                                    <l:GridData id="gd110" spanXL="4" spanL="4" spanM="12" spanS="12" />
+                                    <l:GridData id="gd110" spanXL="10" spanL="10" spanM="12" spanS="12" />
                                 </layoutData>
-                            </Input>
+                            </TextArea>
                         </form:SimpleForm>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>

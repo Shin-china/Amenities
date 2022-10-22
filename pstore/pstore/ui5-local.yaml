@@ -31,7 +31,8 @@ server:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
           - path: /sap
-            url: http://localhost
+            url: http://58.246.235.222:8010
+            client: '300'
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
