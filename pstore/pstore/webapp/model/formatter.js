@@ -102,5 +102,27 @@ sap.ui.define([], function () {
                 return oMessageItem.type === sHighestSeverityMessageType ? ++iNumberOfMessages : iNumberOfMessages;
             }, 0);
         },
+
+        logStatusFormat: function(sStatus) {
+            switch (sStatus) {
+                case "Success":
+                    return "sap-icon://accept";
+                case "Error":
+                    return "sap-icon://error";
+                default:
+                    return "sap-icon://alert";
+            }
+        },
+
+        logStateFormat: function(sStatus) {
+            switch (sStatus) {
+                case "Success":
+                    return "Accept";
+                case "Error":
+                    return "Reject";
+                default:
+                    return "Attention";
+            }
+        }
     };
 });

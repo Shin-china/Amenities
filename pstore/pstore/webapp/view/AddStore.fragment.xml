@@ -9,13 +9,16 @@
 
                 <form:content> 
                         <Label id="lbl01" text="{i18n>tab1_col02}" labelFor="inputTab1Col02" />
-                        <Input id="inputTab1Col02" /> 
+                        <Input id="inputTab1Col02" required="true" maxLength="4" /> 
  
                         <Label id="lbl02" text="{i18n>tab1_col05}" labelFor="inputTab1Col05" />
-                        <Input id="inputTab1Col05" /> 
+                        <Input id="inputTab1Col05" required="true" maxLength="10" /> 
  
                         <Label id="lbl03" text="{i18n>tab1_col04}" labelFor="inputTab1Col04" />
-                        <DatePicker id="inputTab1Col04" displayFormat="yyyy-MM-dd"/>       
+                        <DatePicker id="inputTab1Col04" 
+                                    required="true" 
+                                    displayFormat="yyyy/MM/dd"
+                                    />       
                 </form:content>
 
             </form:SimpleForm>

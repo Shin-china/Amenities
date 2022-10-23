@@ -1,13 +1,10 @@
 <mvc:View
     xmlns:form="sap.ui.layout.form"
-    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
     xmlns:uxap="sap.uxap"
     controllerName="com.shin.pstore.pstore.controller.StoreDetail"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:table="sap.ui.table"
-    xmlns:f="sap.f"
-    xmlns:c="sap.ui.core"
     xmlns:l="sap.ui.layout"
     displayBlock="true"
     height="100%"
@@ -36,7 +33,7 @@
                             </layoutData>
                         </Label>
 
-                        <Text id="txtCompany" text="{tab1_col02}">
+                        <Text id="txtCompany" text="{KaishaCd}">
                             <layoutData>
                                 <l:GridData id="gd2" span="XL4 L4 M12 S12" />
                             </layoutData>
@@ -48,7 +45,7 @@
                             </layoutData>
                         </Label>
 
-                        <Input id="txtInvUserName" editable="{viewState>/editable}" required="true">
+                        <Input id="txtInvUserName" editable="{viewState>/editable}" value="{TenpoName}" required="true">
                             <layoutData>
                                 <l:GridData id="gd4" span="XL4 L4 M12 S12" />
                             </layoutData>
@@ -60,7 +57,7 @@
                             </layoutData>
                         </Label>
 
-                        <Text id="txtStore" text="{tab1_col01}">
+                        <Text id="txtStore" text="{TenpoCd}">
                             <layoutData>
                                 <l:GridData id="gd6" span="XL4 L4 M12 S12" />
                             </layoutData>
@@ -72,7 +69,13 @@
                             </layoutData>
                         </Label>
 
-                        <Text id="txtBusDate" text="{tab1_col04}">
+                        <Text id="txtBusDate" text="{
+                                    path: 'EigyoBi',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                    pattern: 'yyyy/MM/dd'
+                                    }
+                                }">
                             <layoutData>
                                 <l:GridData id="gd10" span="XL4 L4 M12 S12" />
                             </layoutData>

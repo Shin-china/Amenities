@@ -34,8 +34,8 @@ sap.ui.define([
             },
 
             _onDetailMatched: function (oEvent) {
-                this._pathId = oEvent.getParameter("arguments").id;
-                var sPath = "/DataSet/" + this._pathId;
+                this._path = oEvent.getParameter("arguments").path;
+                var sPath = "/" + this._path;
 
                 var oView = this.getView();
                 oView.bindElement(sPath);

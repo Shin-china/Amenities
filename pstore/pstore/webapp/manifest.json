@@ -106,7 +106,7 @@
                 },
                 {
                     "name": "StoreDetail",
-                    "pattern": "/StoreDetail/{id}",
+                    "pattern": "/StoreDetail/{path}",
                     "target": [
                         "TargetStoreDetail"
                     ]

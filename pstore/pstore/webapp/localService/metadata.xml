@@ -10,9 +10,14 @@
                     <PropertyRef Name="EigyoBi"/>
                     <PropertyRef Name="KihyoNo"/>
                 </Key>
+                <Property Name="Action" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Action" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="KaishaCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="KAISHA_CD"/>
+                <Property Name="TenpoKakuninCd" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="TENPO_KAKUNIN_CD" sap:filterable="false"/>
+                <Property Name="RegUserName" Type="Edm.String" Nullable="false" MaxLength="90" sap:unicode="false" sap:label="Reg User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="TENPO_CD"/>
+                <Property Name="TenpoKakunin" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="TENPO_KAKUNIN" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="EigyoBi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="EIGYO_BI"/>
+                <Property Name="UpdUserName" Type="Edm.String" Nullable="false" MaxLength="90" sap:unicode="false" sap:label="Update User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="KihyoNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="KIHYO_NO"/>
                 <Property Name="KaishaNm" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="KAISHA_NM" sap:filterable="false"/>
                 <Property Name="TenpoName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="TENPO_NAME" sap:filterable="false"/>
@@ -126,10 +131,10 @@
                 <Property Name="SakuhyoFlag" Type="Edm.Boolean" sap:unicode="false" sap:label="SAKUHYO_FLAG" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="SakuhyoDttm" Type="Edm.String" MaxLength="14" sap:unicode="false" sap:label="SAKUHYO_DTTM" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="SakuhyoUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="SAKUHYO_USER" sap:sortable="false" sap:filterable="false"/>
-                <NavigationProperty Name="OutDataSet" Relationship="ZZPSTORE_SRV.asso_Store_OutData" FromRole="FromRole_asso_Store_OutData" ToRole="ToRole_asso_Store_OutData"/>
-                <NavigationProperty Name="Cash" Relationship="ZZPSTORE_SRV.asso_Store_Cash" FromRole="FromRole_asso_Store_Cash" ToRole="ToRole_asso_Store_Cash"/>
                 <NavigationProperty Name="MessageSet" Relationship="ZZPSTORE_SRV.asso_Store_Message" FromRole="FromRole_asso_Store_Message" ToRole="ToRole_asso_Store_Message"/>
+                <NavigationProperty Name="OutDataSet" Relationship="ZZPSTORE_SRV.asso_Store_OutData" FromRole="FromRole_asso_Store_OutData" ToRole="ToRole_asso_Store_OutData"/>
                 <NavigationProperty Name="InDataSet" Relationship="ZZPSTORE_SRV.asso_Store_InData" FromRole="FromRole_asso_Store_InData" ToRole="ToRole_asso_Store_InData"/>
+                <NavigationProperty Name="Cash" Relationship="ZZPSTORE_SRV.asso_Store_Cash" FromRole="FromRole_asso_Store_Cash" ToRole="ToRole_asso_Store_Cash"/>
             </EntityType>
             <EntityType Name="InData" sap:content-version="1">
                 <Key>
@@ -263,16 +268,16 @@
                 <End Type="ZZPSTORE_SRV.InData" Multiplicity="*" Role="ToRole_asso_Store_InData"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_InData">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_InData">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -281,16 +286,16 @@
                 <End Type="ZZPSTORE_SRV.OutData" Multiplicity="*" Role="ToRole_asso_Store_OutData"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_OutData">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_OutData">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -299,16 +304,16 @@
                 <End Type="ZZPSTORE_SRV.Message" Multiplicity="*" Role="ToRole_asso_Store_Message"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_Message">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_Message">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -317,16 +322,16 @@
                 <End Type="ZZPSTORE_SRV.Cash" Multiplicity="0..1" Role="ToRole_asso_Store_Cash"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_Cash">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_Cash">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>

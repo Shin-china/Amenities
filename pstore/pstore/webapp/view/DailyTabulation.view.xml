@@ -1,16 +1,15 @@
-<mvc:View xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:uxap="sap.uxap"
+<mvc:View xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
 	controllerName="com.shin.pstore.pstore.controller.DailyTabulation"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
     xmlns:table="sap.ui.table" 
-    xmlns:f="sap.f" 
-	xmlns:c="sap.ui.core"
+    xmlns:f="sap.f"
 	displayBlock="true"
 
 	height="100%"
 	busyIndicatorDelay="0"
 >
-<f:DynamicPage id="dynamicPage1">
+<f:DynamicPage id="dynamicPage1" showFooter="true">
     <f:header>
 
         <f:DynamicPageHeader id="pageHeader">
@@ -26,7 +25,7 @@
         enableGrouping="true" 
         enableCustomFilter="true" 
         enableBusyIndicator="true"
-        
+       
         rows="{/StoreSet}"
         visibleRowCount="50"
         rowActionCount="1"
@@ -56,7 +55,7 @@
         </table:extension>
 
             <table:columns>
-                <table:Column id="col1">
+                <table:Column id="col1" sortProperty="KihyoNo">
                     <table:template>
                         <Text id="txtCol1" text="{KihyoNo}"  wrapping="false"/>
                     </table:template>
@@ -102,7 +101,7 @@
 
                 <table:Column id="col5">
                     <table:template>
-                        <Text id="txtCol5" text="{tab1_col05}" wrapping="false"/>
+                        <Text id="txtCol5" text="{TenpoCd}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol5" text="{i18n>tab1_col05}" />
@@ -111,7 +110,7 @@
 
                 <table:Column id="col6">
                     <table:template>
-                        <Text id="txtCol6" text="{tab1_col06}" wrapping="false"/>
+                        <Text id="txtCol6" text="{TenpoName}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol6" text="{i18n>tab1_col06}" />
@@ -120,7 +119,7 @@
 
                 <table:Column id="col7">
                     <table:template>
-                        <Text id="txtCol7" text="{tab1_col07}" wrapping="false"/>
+                        <Text id="txtCol7" text="{NikkeihyoStatus}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol7" text="{i18n>tab1_col07}" />
@@ -129,7 +128,7 @@
 
                 <table:Column id="col8">
                     <table:template>
-                        <Text id="txtCol8" text="{tab1_col08}" wrapping="false"/>
+                        <Text id="txtCol8" text="{TenpoKakunin}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol8" text="{i18n>tab1_col08}" />
@@ -138,7 +137,7 @@
 
                 <table:Column id="col9">
                     <table:template>
-                        <Text id="txtCol9" text="{tab1_col09}" wrapping="false"/>
+                        <Text id="txtCol9" text="{ShinseiDttm}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol9" text="{i18n>tab1_col09}" />
@@ -147,7 +146,7 @@
 
                 <table:Column id="col10">
                     <table:template>
-                        <Text id="txtCol10" text="{tab1_col10}" wrapping="false"/>
+                        <Text id="txtCol10" text="{RegUser}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol10" text="{i18n>tab1_col10}" />
@@ -156,7 +155,7 @@
 
                 <table:Column id="col11">
                     <table:template>
-                        <Text id="txtCol11" text="{tab1_col11}" wrapping="false"/>
+                        <Text id="txtCol11" text="{RegUserName}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol11" text="{i18n>tab1_col11}" />
@@ -165,7 +164,7 @@
 
                 <table:Column id="col12">
                     <table:template>
-                        <Text id="txtCol12" text="{tab1_col12}" wrapping="false"/>
+                        <Text id="txtCol12" text="{KihyoshaName}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol12" text="{i18n>tab1_col12}" />
@@ -174,7 +173,7 @@
 
                 <table:Column id="col13">
                     <table:template>
-                        <Text id="txtCol13" text="{tab1_col13}" wrapping="false"/>
+                        <Text id="txtCol13" text="{LastShinseiDttm}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol13" text="{i18n>tab1_col13}" />
@@ -183,7 +182,7 @@
 
                 <table:Column id="col14">
                     <table:template>
-                        <Text id="txtCol14" text="{tab1_col14}" wrapping="false"/>
+                        <Text id="txtCol14" text="{UpdUser}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol14" text="{i18n>tab1_col14}" />
@@ -192,7 +191,7 @@
 
                 <table:Column id="col15">
                     <table:template>
-                        <Text id="txtCol15" text="{tab1_col15}" wrapping="false"/>
+                        <Text id="txtCol15" text="{UpdUserName}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol15" text="{i18n>tab1_col15}" />
@@ -201,7 +200,7 @@
 
                 <table:Column id="col16">
                     <table:template>
-                        <Text id="txtCol16" text="{tab1_col16}" wrapping="false"/>
+                        <Text id="txtCol16" text="{ShoninDttm}" wrapping="false"/>
                     </table:template>
                     <table:label>
                         <Label id="lblCol16" text="{i18n>tab1_col16}" />
