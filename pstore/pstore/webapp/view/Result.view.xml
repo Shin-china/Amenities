@@ -27,7 +27,7 @@
         enableCustomFilter="true" 
         enableBusyIndicator="true"
         
-        rows="{/ResultSet}"
+        rows=""
         visibleRowCount="50"
         
         class="sapFDynamicPageAlignContent"

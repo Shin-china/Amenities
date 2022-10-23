@@ -5,7 +5,7 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("com.shin.pstore.pstore.controller.controller.App", {
+      return BaseController.extend("com.shin.pstore.pstore.controller.App", {
         onInit() {
         }
       });
