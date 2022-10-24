@@ -22,7 +22,7 @@ sap.ui.define([
                     this._comm = new Common();
                 }
 
-                this._viewState.editable = true;
+                this._viewState.editable = false;
 
                 var viewStateModel = new sap.ui.model.json.JSONModel(this._viewState);
                 this.getView().setModel(viewStateModel, "viewState");
@@ -52,7 +52,9 @@ sap.ui.define([
             },
 
             onChange: function () {
-                this._comm.showMessagePopoverFor(this, "Message", "btnMessagePopover")
+                this._viewState.editable = true;
+                this.getView().getModel("viewState").refresh();
+                //this._comm.showMessagePopoverFor(this, "Message", "btnMessagePopover")
             },
 
             onRequest: function () {

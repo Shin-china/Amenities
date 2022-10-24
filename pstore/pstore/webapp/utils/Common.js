@@ -55,7 +55,7 @@ sap.ui.define([
             oContext.byId(sAttachButtonId).setVisible(true);
         },
 
-        navBackFrom: function(context){
+        navBackFrom: function (context) {
             var oHistory = History.getInstance();
             var sPreviousHash = oHistory.getPreviousHash();
 
@@ -67,6 +67,18 @@ sap.ui.define([
             }
 
             context.getView().getModel().refresh();
+        },
+
+        convertFrontendDateToOdata(value) {
+            var oTempDate = new Date(value);
+            var oDate = new Date(oTempDate.getTime() + oTempDate.getTimezoneOffset() * (-60000));
+            return "\/Date(" + oDate.getTime() + ")\/";
+        },
+
+        convertOdataDateToFrontend(value) {
+            var oTempDate = new Date(value);
+            oDate = new Date(oTempDate.getTime() + oTempDate.getTimezoneOffset() * (60000));
+            return oDate;
         }
 
     });

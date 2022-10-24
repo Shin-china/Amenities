@@ -1064,7 +1064,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSubForm17F2" textDirection="RTL" value="" type="Number">
+                            <Input id="txtSubForm17F2" textDirection="RTL" value="" editable="{viewState>/editable}" type="Number">
                                 <layoutData>
                                     <l:GridData id="gd98" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
@@ -1112,7 +1112,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSubForm17F6" textDirection="RTL" value="" type="Number">
+                            <Input id="txtSubForm17F6" textDirection="RTL" editable="{viewState>/editable}" value="" type="Number">
                                 <layoutData>
                                     <l:GridData id="gd106" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
@@ -1136,7 +1136,7 @@
                                 </layoutData>
                             </Label>
 
-                            <TextArea id="txtSubForm17F8" value="" rows="5">
+                            <TextArea id="txtSubForm17F8" value="" editable="{viewState>/editable}" rows="5">
                                 <layoutData>
                                     <l:GridData id="gd110" spanXL="10" spanL="10" spanM="12" spanS="12" />
                                 </layoutData>

@@ -117,11 +117,14 @@ sap.ui.define([], function () {
         logStateFormat: function(sStatus) {
             switch (sStatus) {
                 case "Success":
-                    return "Accept";
+                    //return "Accept";
+                    return "green";
                 case "Error":
-                    return "Reject";
+                    //return "Reject";
+                    return "red";
                 default:
-                    return "Attention";
+                    //return "Attention";
+                    return "orange";
             }
         }
     };
