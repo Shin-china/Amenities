@@ -73,15 +73,11 @@ sap.ui.define([
             this._comm.closeDialog(this, "generateDialog");
         },
 
-        onShowLogDialog: function () {
-            this._comm.openDialog(this, "com.shin.pstore.pstore.view.ShowLog");
-        },
-
         onCloseLogDialog: function () {
             this._comm.closeDialog(this, "showLogDialog");
         },
 
-        checkInput: function () {
+        checkCreateInput: function () {
             var f1 = this.byId("inputTab1Col02");
 
             if (f1.getValue() == "") {
@@ -112,7 +108,7 @@ sap.ui.define([
         },
 
         onAddStore: function () {
-            var checkOk = this.checkInput();
+            var checkOk = this.checkCreateInput();
             if (checkOk) {
                 this._busyDialog = new sap.m.BusyDialog({});
                 this._busyDialog.open();
@@ -129,7 +125,8 @@ sap.ui.define([
                 d.Cash = {};
                 o.d = d;
 
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel(); 
+                
                 oModel.create("/StoreSet", o, {
                     success: function (oData, oResponse) { 
                         that._busyDialog.close();

@@ -1,4 +1,4 @@
-sap.ui.define([], function () {
+sap.ui.define(["sap/ui/core/format/NumberFormat"], function (NumberFormat) {
     "use strict";
     return {
         buttonIconFormatter: function (aMessages) {
@@ -9,7 +9,7 @@ sap.ui.define([], function () {
             }
 
             aMessages.forEach(function (sMessage) {
-                switch (sMessage.type) {
+                switch (sMessage.Type) {
                     case "Error":
                         sIcon = "sap-icon://error";
                         break;
@@ -36,7 +36,7 @@ sap.ui.define([], function () {
             }
 
             aMessages.forEach(function (sMessage) {
-                switch (sMessage.type) {
+                switch (sMessage.Type) {
                     case "Error":
                         sHighestSeverityIcon = "Negative";
                         break;
@@ -65,7 +65,7 @@ sap.ui.define([], function () {
             var sHighestSeverityIcon;
 
             aMessages.forEach(function (sMessage) {
-                switch (sMessage.type) {
+                switch (sMessage.Type) {
                     case "Error":
                         sHighestSeverityIcon = "Negative";
                         break;
@@ -99,7 +99,7 @@ sap.ui.define([], function () {
             }
 
             return aMessages.reduce(function (iNumberOfMessages, oMessageItem) {
-                return oMessageItem.type === sHighestSeverityMessageType ? ++iNumberOfMessages : iNumberOfMessages;
+                return oMessageItem.Type === sHighestSeverityMessageType ? ++iNumberOfMessages : iNumberOfMessages;
             }, 0);
         },
 
@@ -126,6 +126,21 @@ sap.ui.define([], function () {
                     //return "Attention";
                     return "orange";
             }
+        },
+
+        formatNumber: function(number){
+            if(number == 0 || number == "0"){
+                return "";
+            }
+
+            return number;
+        },
+
+        formatPUriage: function(PGenkinUriage, PCardUriage, Waers){
+            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
+            
+            var sum = Number(PGenkinUriage) + Number(PCardUriage);
+            return oCurrencyFormat.format(sum, Waers);
         }
     };
 });

@@ -2,11 +2,13 @@ sap.ui.define([
     "sap/ui/base/Object",
     "sap/m/MessagePopover",
     "sap/m/MessageItem",
+    "sap/ui/core/format/NumberFormat",
     "sap/ui/core/routing/History"
 ], function (
     BaseObject,
     MessagePopover,
     MessageItem,
+    NumberFormat,
     History
 ) {
     "use strict";
@@ -33,22 +35,22 @@ sap.ui.define([
             });
         },
 
-        showMessagePopoverFor: function (oContext, sBindingPath, sAttachButtonId) {
+        showMessagePopoverFor: function (oContext, oModel, sBindingPath, sAttachButtonId) {
 
             var oMessageTemplate = new MessageItem({
-                type: '{type}',
-                title: '{title}',
-                activeTitle: "{active}",
-                description: '{description}',
-                subtitle: '{subtitle}',
-                counter: '{counter}'
+                type: '{' + oModel + '>Type}',
+                title: '{' + oModel + '>Title}',
+                description: '{' + oModel + '>Description}',
+                subtitle: '{' + oModel + '>Subtitle}',
+                counter: '{' + oModel + '>Counter}'
             });
 
             oContext._oMessagePopover = new MessagePopover({
                 items: {
-                    path: sBindingPath,
+                    path: oModel + '>' + sBindingPath,
                     template: oMessageTemplate
-                }
+                },
+                groupItems: true
             });
 
             oContext.byId(sAttachButtonId).addDependent(oContext._oMessagePopover);
@@ -69,16 +71,21 @@ sap.ui.define([
             context.getView().getModel().refresh();
         },
 
-        convertFrontendDateToOdata(value) {
+        convertFrontendDateToOdata: function(value) {
             var oTempDate = new Date(value);
             var oDate = new Date(oTempDate.getTime() + oTempDate.getTimezoneOffset() * (-60000));
             return "\/Date(" + oDate.getTime() + ")\/";
         },
 
-        convertOdataDateToFrontend(value) {
+        convertOdataDateToFrontend: function(value) {
             var oTempDate = new Date(value);
             oDate = new Date(oTempDate.getTime() + oTempDate.getTimezoneOffset() * (60000));
             return oDate;
+        },
+
+        parseCurrency: function(sCurrency){
+            var oCurrencyFormat = NumberFormat.getFloatInstance();
+            return oCurrencyFormat.parse(sCurrency);
         }
 
     });

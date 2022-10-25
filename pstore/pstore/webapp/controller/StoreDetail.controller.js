@@ -1,14 +1,20 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
+    "sap/m/MessageToast",
     "sap/ui/core/UIComponent",
-    "sap/ui/core/routing/History",
+    "sap/ui/model/json/JSONModel",
     "com/shin/pstore/pstore/utils/Common",
     "../model/formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, UIComponent, History, Common, formatter) {
+    function (Controller,
+	MessageToast,
+	UIComponent,
+	JSONModel, 
+    Common,
+	formatter) {
         "use strict";
 
         return Controller.extend("com.shin.pstore.pstore.controller.StoreDetail", {
@@ -18,14 +24,9 @@ sap.ui.define([
                     this._viewState = {};
                 }
 
-                if(!this._comm){
+                if (!this._comm) {
                     this._comm = new Common();
                 }
-
-                this._viewState.editable = false;
-
-                var viewStateModel = new sap.ui.model.json.JSONModel(this._viewState);
-                this.getView().setModel(viewStateModel, "viewState");
 
                 this._oRouter = UIComponent.getRouterFor(this);
                 this._oRouter.getRoute("StoreDetail").attachPatternMatched(this._onDetailMatched, this);
@@ -39,16 +40,76 @@ sap.ui.define([
 
                 var oView = this.getView();
                 oView.bindElement(sPath);
-               
+
                 //每次进入详细页面，默认会保存上一次的section，滚动到页头第一个section
                 var oPageLayout = this.byId("objectPageLayout");
-                oPageLayout.scrollToSection(this.byId("section1").getId()); 
+                oPageLayout.scrollToSection(this.byId("section1").getId());
+
+                this._viewState.editable = false;
+
+                var viewStateModel = new sap.ui.model.json.JSONModel(this._viewState);
+                this.getView().setModel(viewStateModel, "viewState");
 
                 this.byId("btnMessagePopover").setVisible(false);
             },
 
+            checkEditData: function() {
+                var oInputUserName = this.byId("txtInvUserName");
+                if (oInputUserName.getValue() == '') {
+                    oInputUserName.setValueState("Error");
+                    return false;
+                }
+
+                return true;
+            },
+
             onSave: function () {
-                this._comm.showMessagePopoverFor(this, "Message", "btnMessagePopover")
+                var checkOk = this.checkEditData();
+                if (!checkOk) {
+                    return;
+                }
+
+                this._busyDialog = new sap.m.BusyDialog({});
+                this._busyDialog.open();
+                var that = this;
+
+                var elem = this.getView().getBindingContext();  
+                var oModel = elem.getModel(); 
+                var d = elem.getObject();
+                d.PUriage = this._comm.parseCurrency(this.byId("txtPUriage").getText());
+                delete d.__metadata;
+
+                for(var f in d){
+                    if(typeof(d[f]) === 'number'){
+                        d[f] = d[f].toString();
+                    }
+                }
+                 
+                var o = {};
+                d.MessageSet = [];
+                d.OutDataSet = [];
+                d.InDataSet = [];
+                d.Cash = {};
+                d.Action = 'U';
+                 
+                o.d = d;
+                oModel.create('/StoreSet', o, {
+                    success: function (oData, oResponse) {   
+                        var oMessage = {};
+                        oMessage.MessageSet = oData.MessageSet.results;
+                        var logModel = new JSONModel(oMessage);
+                        that.getView().setModel(logModel, "log");
+                        that._busyDialog.close();
+                        that._comm.showMessagePopoverFor(that, "log", "/MessageSet", "btnMessagePopover")
+
+                    },
+                    error: function (oError) { 
+                        MessageToast.show('OData Error:' + oError.message); 
+                    }
+                });
+
+                oModel.refresh();
+
             },
 
             onChange: function () {
@@ -66,7 +127,7 @@ sap.ui.define([
             },
 
             onStop: function () {
-                if(this._comm){
+                if (this._comm) {
                     this._comm.navBackFrom(this);
                 }
             },
@@ -82,7 +143,7 @@ sap.ui.define([
                 this._oModel.refresh();
                 var index = this._InData.length - 1;
                 this.byId("tab3").setFirstVisibleRow(index);
-                
+
             },
 
             onTab3Delete: function (oEvent) {
@@ -107,7 +168,7 @@ sap.ui.define([
                 this._oModel.refresh();
                 var index = this._OutData.length - 1;
                 this.byId("tab4").setFirstVisibleRow(index);
-                
+
             },
 
             onTab4Delete: function (oEvent) {
@@ -121,8 +182,8 @@ sap.ui.define([
                 }
             },
 
-            onMessagePopoverPress:function(oEvent){
-                if(this._oMessagePopover){
+            onMessagePopoverPress: function (oEvent) {
+                if (this._oMessagePopover) {
                     this._oMessagePopover.toggle(oEvent.getSource());
                 }
             }

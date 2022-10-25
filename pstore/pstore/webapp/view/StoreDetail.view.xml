@@ -45,7 +45,7 @@
                             </layoutData>
                         </Label>
 
-                        <Input id="txtInvUserName" editable="{viewState>/editable}" value="{TenpoName}" required="true">
+                        <Input id="txtInvUserName" editable="{viewState>/editable}" value="{KihyoshaName}" required="true">
                             <layoutData>
                                 <l:GridData id="gd4" span="XL4 L4 M12 S12" />
                             </layoutData>
@@ -100,7 +100,7 @@
                                 </layoutData>
                             </Input> -->
 
-                            <Input id="txtSec2F1" description="{/currencyCode}" textDirection="RTL" value="{parts:[{path:'f1'},{path: 'currencyCode'}], type: 'sap.ui.model.type.Currency',
+                            <Input id="txtSec2F1" value="{parts:[{path:'ZnjtsKrkshGankin'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd12" span="XL4 L4 M12 S12" />
@@ -113,7 +113,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec2F2" type="Number" value="{f2}" textDirection="RTL" editable="{viewState>/editable}">
+                            <Input id="txtSec2F2" value="{parts:[{path:'GnkNyukinSogaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd14" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -125,7 +126,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec2F3" type="Number" value="{= ${f1} + ${f2}}" textDirection="RTL" editable="{viewState>/editable}">
+                            <Input id="txtSec2F3" value="{parts:[{path:'RyogaekinUkeire'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd16" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -137,7 +139,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec2F4" editable="{viewState>/editable}">
+                            <Input id="txtSec2F4" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd18" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -153,7 +155,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F1" editable="{viewState>/editable}">
+                            <Input id="txtSec3F1" value="{PMeter}" maxLength="11" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd20" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -165,7 +167,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F2" editable="{viewState>/editable}">
+                            <Input id="txtSec3F2" value="{SMeter}" maxLength="11" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd22" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -177,7 +179,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F3" type="Number" textDirection="RTL" editable="{viewState>/editable}">
+                            <Input id="txtSec3F3" value="{parts:[{path:'PGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd24" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -189,7 +192,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F4" type="Number" textDirection="RTL" editable="{viewState>/editable}">
+                            <Input id="txtSec3F4" type="Number" value="{parts:[{path:'SGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd26" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -201,7 +205,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F5" type="Number" textDirection="RTL" editable="{viewState>/editable}">
+                            <Input id="txtSec3F5" value="{parts:[{path:'PCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd28" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -213,7 +218,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F6" type="Number" textDirection="RTL" editable="{viewState>/editable}">
+                            <Input id="txtSec3F6" value="{parts:[{path:'SCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd30" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -225,7 +231,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F7" editable="{viewState>/editable}">
+                            <Input id="txtSec3F7" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd32" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -237,7 +243,7 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F8" editable="{viewState>/editable}">
+                            <Input id="txtSec3F8" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd34" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -249,19 +255,19 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec3F9">
+                            <Text id="txtPUriage" text="{parts:[{path:'PGenkinUriage'}, {path:'PCardUriage'}, {path: 'Waers'}], formatter:'.formatter.formatPUriage'}">
                                 <layoutData>
                                     <l:GridData id="gd36" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-
+<!-- TODO-->
                             <Label id="lblSec3F10" labelFor="txtSec3F10" text="{i18n>sec3_f10}">
                                 <layoutData>
                                     <l:GridData id="gd37" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec3F10">
+                            <Text id="txtSec3F10" text="{=${PGenkinUriage} + 1}">
                                 <layoutData>
                                     <l:GridData id="gd38" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -382,7 +388,7 @@
                     </uxap:ObjectPageSubSection>
 
                     <uxap:ObjectPageSubSection id="subsection6">
-                        <table:Table id="tab1" editable="true" rows="{Sec6Tab1}" visibleRowCount="8" selectionMode="None">
+                        <table:Table id="tab1" editable="true"  visibleRowCount="8" selectionMode="None">
                             <table:extension>
                                 <HBox id="hbox2" alignContent="Center" alignItems="Center">
                                     <Label id="lblSec6F1" labelFor="txtSec6F1" text="{i18n>sec6_f1}" />
@@ -732,7 +738,7 @@
             <uxap:ObjectPageSection id="section3" title="{i18n>section3_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection11">
-                        <table:Table id="tab3" rows="{InData}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
+                        <table:Table id="tab3" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
                             <table:extension>
                                 <OverflowToolbar id="tab3Toolbar">
                                     <content>
@@ -815,7 +821,7 @@
             <uxap:ObjectPageSection id="section4" title="{i18n>section4_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection12">
-                        <table:Table id="tab4" rows="{OutData}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
+                        <table:Table id="tab4" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
                             <table:extension>
                                 <OverflowToolbar id="tab4Toolbar">
                                     <content>
@@ -891,7 +897,7 @@
             <uxap:ObjectPageSection id="section5" title="{i18n>section5_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection13">
-                        <table:Table id="tab5" selectionMode="None" rows="{ET}" visibleRowCount="10" editable="{viewState>/editable}">
+                        <table:Table id="tab5" selectionMode="None" visibleRowCount="10" editable="{viewState>/editable}">
                             <table:extension>
                                 <Text id="txtTab5Header" text="{i18n>sub13_title}" />
                             </table:extension>
@@ -941,7 +947,7 @@
                     </uxap:ObjectPageSubSection>
 
                     <uxap:ObjectPageSubSection id="subsection14">
-                        <table:Table id="tab6" selectionMode="None" rows="{PT}" visibleRowCount="5" editable="{viewState>/editable}">
+                        <table:Table id="tab6" selectionMode="None" visibleRowCount="5" editable="{viewState>/editable}">
                             <table:extension>
                                 <Text id="txtTab6Header" text="{i18n>sub14_title}" />
                             </table:extension>
@@ -991,7 +997,7 @@
                     </uxap:ObjectPageSubSection>
 
                     <uxap:ObjectPageSubSection id="subsection15">
-                        <table:Table id="tab7" selectionMode="None" rows="{ZT}" visibleRowCount="6" editable="{viewState>/editable}">
+                        <table:Table id="tab7" selectionMode="None" visibleRowCount="6" editable="{viewState>/editable}">
                             <table:extension>
                                 <Text id="txtTab7Header" text="{i18n>sub15_title}" />
                             </table:extension>
@@ -1153,15 +1159,15 @@
                     <Button
                         id="btnMessagePopover"
                         visible="false"
-                        icon="{ path: 'Message', formatter: '.formatter.buttonIconFormatter' }"
-                        type="{ path: 'Message', formatter: '.formatter.buttonTypeFormatter' }"
+                        icon="{ path: 'log>/MessageSet', formatter: '.formatter.buttonIconFormatter' }"
+                        type="{ path: 'log>/MessageSet', formatter: '.formatter.buttonTypeFormatter' }"
+                        text="{path: 'log>/MessageSet', formatter: '.formatter.highestSeverityMessages' }"
                         press="onMessagePopoverPress"
-                        text="{path: 'Message', formatter: '.formatter.highestSeverityMessages' }"
                         ariaHasPopup="Dialog"
                     />
 
                     <ToolbarSpacer id="pageToolbarSpacer" />
-                    <Button id="btnSave" text="{i18n>footer_f1}" press="onSave" />
+                    <Button id="btnSave" text="{i18n>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
                     <Button id="btnChange" text="{i18n>footer_f2}" press="onChange" />
                     <Button id="btnRequest" text="{i18n>footer_f3}" press="onRequest" />
                     <Button id="btnGenerate" text="{i18n>footer_f4}" type="Emphasized" press="onGenerate" />
