@@ -27,49 +27,49 @@
             <uxap:ObjectPageSection id="section1" showTitle="true" title="{i18n>section1_title}" selectedSubSection="subsection1">
                 <uxap:ObjectPageSubSection id="subsection1">
                     <form:SimpleForm id="secForm1" editable="true" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1">
-                        <Label id="lblCompany" labelFor="txtCompany" text="{i18n>tab1_col02}">
+                        <Label id="lblKaishaCd" labelFor="txtKaishaCd" text="{i18n>tab1_col02}">
                             <layoutData>
                                 <l:GridData id="gd1" span="XL2 L2 M12 S12" />
                             </layoutData>
                         </Label>
 
-                        <Text id="txtCompany" text="{KaishaCd}">
+                        <Text id="txtKaishaCd" text="{KaishaCd}">
                             <layoutData>
                                 <l:GridData id="gd2" span="XL4 L4 M12 S12" />
                             </layoutData>
                         </Text>
 
-                        <Label id="lblInvName" labelFor="txtInvUserName" text="{i18n>invUserName}">
+                        <Label id="lblKihyoshaName" labelFor="txtKihyoshaName" text="{i18n>invUserName}">
                             <layoutData>
                                 <l:GridData id="gd3" span="XL2 L2 M12 S12" />
                             </layoutData>
                         </Label>
 
-                        <Input id="txtInvUserName" editable="{viewState>/editable}" value="{KihyoshaName}" required="true">
+                        <Input id="txtKihyoshaName" editable="{viewState>/editable}" value="{KihyoshaName}" required="true">
                             <layoutData>
                                 <l:GridData id="gd4" span="XL4 L4 M12 S12" />
                             </layoutData>
                         </Input>
 
-                        <Label id="lblStore" labelFor="txtStore" text="{i18n>store}">
+                        <Label id="lblTenpoCd" labelFor="txtTenpoCd" text="{i18n>store}">
                             <layoutData>
                                 <l:GridData id="gd5" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
                             </layoutData>
                         </Label>
 
-                        <Text id="txtStore" text="{TenpoCd}">
+                        <Text id="txtTenpoCd" text="{TenpoCd}">
                             <layoutData>
                                 <l:GridData id="gd6" span="XL4 L4 M12 S12" />
                             </layoutData>
                         </Text>
 
-                        <Label id="lblBusDate" labelFor="txtBusDate" text="{i18n>busDate}">
+                        <Label id="lblEigyoBi" labelFor="txtEigyoBi" text="{i18n>busDate}">
                             <layoutData>
                                 <l:GridData id="gd9" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
                             </layoutData>
                         </Label>
 
-                        <Text id="txtBusDate" text="{
+                        <Text id="txtEigyoBi" text="{
                                     path: 'EigyoBi',
                                     type: 'sap.ui.model.type.Date',
                                     formatOptions: {
@@ -88,7 +88,7 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection2" showTitle="false">
                         <form:SimpleForm id="subForm2" layout="ResponsiveGridLayout" editable="true" columnsL="2" columnsXL="2" columnsM="1">
-                            <Label id="lblSec2F1" labelFor="txtSec2F1" text="{i18n>sec2_f1}">
+                            <Label id="lblZnjtsKrkshGankin" labelFor="txtZnjtsKrkshGankin" text="{i18n>sec2_f1}">
                                 <layoutData>
                                     <l:GridData id="gd11" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" linebreakM="true" />
                                 </layoutData>
@@ -100,46 +100,46 @@
                                 </layoutData>
                             </Input> -->
 
-                            <Input id="txtSec2F1" value="{parts:[{path:'ZnjtsKrkshGankin'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                            <Input id="txtZnjtsKrkshGankin" value="{parts:[{path:'ZnjtsKrkshGankin'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd12" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec2F2" labelFor="txtSec2F2" text="{i18n>sec2_f2}">
+                            <Label id="lblGnkNyukinSogaku" labelFor="txtGnkNyukinSogaku" text="{i18n>sec2_f2}">
                                 <layoutData>
                                     <l:GridData id="gd13" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" linebreakM="true" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec2F2" value="{parts:[{path:'GnkNyukinSogaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                            <Input id="txtGnkNyukinSogaku" value="{parts:[{path:'GnkNyukinSogaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd14" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec2F3" labelFor="txtSec2F3" text="{i18n>sec2_f3}">
+                            <Label id="lblRyogaekinUkeire" labelFor="txtRyogaekinUkeire" text="{i18n>sec2_f3}">
                                 <layoutData>
                                     <l:GridData id="gd15" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" linebreakM="true" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec2F3" value="{parts:[{path:'RyogaekinUkeire'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                            <Input id="txtRyogaekinUkeire" value="{parts:[{path:'RyogaekinUkeire'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd16" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec2F4" labelFor="txtSec2F4" text="{i18n>sec2_f4}">
+                            <Label id="lblKamokuSetei1" labelFor="txtKamokuSetei1" text="{i18n>sec2_f4}">
                                 <layoutData>
                                     <l:GridData id="gd17" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec2F4" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
+                            <Input id="txtKamokuSetei1" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd18" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -149,107 +149,107 @@
 
                     <uxap:ObjectPageSubSection id="subsection3">
                         <form:SimpleForm id="secForm3" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1" editable="true">
-                            <Label id="lblSec3F1" labelFor="txtSec3F1" text="{i18n>sec3_f1}">
+                            <Label id="lblPMeter" labelFor="txtPMeter" text="{i18n>sec3_f1}">
                                 <layoutData>
                                     <l:GridData id="gd19" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F1" value="{PMeter}" maxLength="11" editable="{viewState>/editable}">
+                            <Input id="txtPMeter" value="{PMeter}" maxLength="11" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd20" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec3F2" labelFor="txtSec3F2" text="{i18n>sec3_f2}">
+                            <Label id="lblSMeter" labelFor="txtSMeter" text="{i18n>sec3_f2}">
                                 <layoutData>
                                     <l:GridData id="gd21" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F2" value="{SMeter}" maxLength="11" editable="{viewState>/editable}">
+                            <Input id="txtSMeter" value="{SMeter}" maxLength="11" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd22" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec3F3" labelFor="txtSec3F3" text="{i18n>sec3_f3}">
+                            <Label id="lblPGenkinUriage" labelFor="txtPGenkinUriage" text="{i18n>sec3_f3}">
                                 <layoutData>
                                     <l:GridData id="gd23" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F3" value="{parts:[{path:'PGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                            <Input id="txtPGenkinUriage" value="{parts:[{path:'PGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd24" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec3F4" labelFor="txtSec3F4" text="{i18n>sec3_f4}">
+                            <Label id="lblSGenkinUriage" labelFor="txtSGenkinUriage" text="{i18n>sec3_f4}">
                                 <layoutData>
                                     <l:GridData id="gd25" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F4" type="Number" value="{parts:[{path:'SGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                            <Input id="txtSGenkinUriage" value="{parts:[{path:'SGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd26" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec3F5" labelFor="txtSec3F5" text="{i18n>sec3_f5}">
+                            <Label id="lblPCardUriage" labelFor="txtPCardUriage" text="{i18n>sec3_f5}">
                                 <layoutData>
                                     <l:GridData id="gd27" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F5" value="{parts:[{path:'PCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                            <Input id="txtPCardUriage" value="{parts:[{path:'PCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd28" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec3F6" labelFor="txtSec3F6" text="{i18n>sec3_f6}">
+                            <Label id="lblSCardUriage" labelFor="txtSCardUriage" text="{i18n>sec3_f6}">
                                 <layoutData>
                                     <l:GridData id="gd29" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F6" value="{parts:[{path:'SCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                            <Input id="txtSCardUriage" value="{parts:[{path:'SCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd30" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec3F7" labelFor="txtSec3F7" text="{i18n>sec3_f7}">
+                            <Label id="lblKamokuSetei2" labelFor="txtKamokuSetei2" text="{i18n>sec3_f7}">
                                 <layoutData>
                                     <l:GridData id="gd31" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F7" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
+                            <Input id="txtKamokuSetei2" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd32" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec3F8" labelFor="txtSec3F8" text="{i18n>sec3_f8}">
+                            <Label id="lblKamokuSetei3" labelFor="txtKamokuSetei3" text="{i18n>sec3_f8}">
                                 <layoutData>
                                     <l:GridData id="gd33" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec3F8" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
+                            <Input id="txtKamokuSetei3" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd34" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec3F9" labelFor="txtSec3F9" text="{i18n>sec3_f9}">
+                            <Label id="lblPUriage" labelFor="txtPUriage" text="{i18n>sec3_f9}">
                                 <layoutData>
                                     <l:GridData id="gd35" span="XL2 L2 M12 S12" linebreakXL="true" linebreakL="true" />
                                 </layoutData>
@@ -260,38 +260,43 @@
                                     <l:GridData id="gd36" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-<!-- TODO-->
-                            <Label id="lblSec3F10" labelFor="txtSec3F10" text="{i18n>sec3_f10}">
+
+                            <Label id="lblSUriage" labelFor="txtSUriage" text="{i18n>sec3_f10}">
                                 <layoutData>
                                     <l:GridData id="gd37" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec3F10" text="{=${PGenkinUriage} + 1}">
+                            <Text id="txtSUriage" text="{parts:[{path:'SGenkinUriage'}, {path:'SCardUriage'}, {path: 'Waers'}], formatter:'.formatter.formatSUriage'}">
                                 <layoutData>
                                     <l:GridData id="gd38" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
 
-                            <Label id="lblSec3F11" labelFor="txtSec3F11" text="{i18n>sec3_f11}">
+                            <Label id="lblGenkinUragGokei" labelFor="txtGenkinUragGokei" text="{i18n>sec3_f11}">
                                 <layoutData>
                                     <l:GridData id="gd39" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec3F11">
+                            <Text id="txtGenkinUragGokei" text="{parts:[{path:'PGenkinUriage'}, {path:'SGenkinUriage'}, {path: 'Waers'}], formatter:'.formatter.formatGenkinUragGokei'}">
                                 <layoutData>
                                     <l:GridData id="gd40" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
 
-                            <Label id="lblSec3F12" labelFor="txtSec3F12" text="{i18n>sec3_f12}">
+                            <Label id="lblUriageSogokei" labelFor="txtUriageSogokei" text="{i18n>sec3_f12}">
                                 <layoutData>
                                     <l:GridData id="gd41" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec3F12">
+                            <Text id="txtUriageSogokei" text="{parts:[{path:'PGenkinUriage'}, 
+                                {path:'PCardUriage'}, 
+                                {path:'SGenkinUriage'},
+                                {path:'SCardUriage'},
+                                {path: 'Waers'}], 
+                                formatter:'.formatter.formatUriageSogokei'}">
                                 <layoutData>
                                     <l:GridData id="gd42" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -301,66 +306,68 @@
 
                     <uxap:ObjectPageSubSection id="subsection5">
                         <form:SimpleForm id="subForm5" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1">
-                            <Label id="lblSec4F1" labelFor="txtSec4F1" text="{i18n>sec4_f1}">
+                            <Label id="lblHanbaiAmt" labelFor="txtHanbaiAmt" text="{i18n>sec4_f1}">
                                 <layoutData>
                                     <l:GridData id="gd43" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec4F1" type="Number" textDirection="RTL" editable="{viewState>/editable}">
+                            <Input id="txtHanbaiAmt" value="{parts:[{path:'HanbaiAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd44" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec4F2" labelFor="txtSec4F2" text="{i18n>sec4_f2}">
+                            <Label id="lblKamokuSetei4" labelFor="txtKamokuSetei4" text="{i18n>sec4_f2}">
                                 <layoutData>
                                     <l:GridData id="gd45" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec4F2" editable="{viewState>/editable}">
+                            <Input id="txtKamokuSetei4" value="{KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd46" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec4F3" labelFor="txtSec4F3" text="{i18n>sec4_f3}">
+                            <Label id="lblSekisanAmt" labelFor="txtSekisanAmt" text="{i18n>sec4_f3}">
                                 <layoutData>
                                     <l:GridData id="gd47" span="XL2 L2 M12 S12" linebreakL="true" linebreakM="true" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec4F3" type="Number" textDirection="RTL" editable="{viewState>/editable}">
+                            <Input id="txtSekisanAmt" value="{parts:[{path:'SekisanAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd48" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec4F4" labelFor="txtSec4F4" text="{i18n>sec4_f4}">
+                            <Label id="lblKamokuSetei5" labelFor="txtKamokuSetei5" text="{i18n>sec4_f4}">
                                 <layoutData>
                                     <l:GridData id="gd49" span="XL2 L2 M12 S12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSec4F4" editable="{viewState>/editable}">
+                            <Input id="txtKamokuSetei5" value="{KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd50" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSec4F5" labelFor="txtSec4F5" text="{i18n>sec4_f5}">
+                            <Label id="lblKadoHanbaiGokei" labelFor="txtKadoHanbaiGokei" text="{i18n>sec4_f5}">
                                 <layoutData>
                                     <l:GridData id="gd51" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec4F5">
+                            <Text id="txtKadoHanbaiGokei" text="{parts:[{path: 'HanbaiAmt'}, {path: 'SekisanAmt'}, {path: 'Waers'}], formatter:'.formatter.formatKadoHanbaiGokei'}">
                                 <layoutData>
                                     <l:GridData id="gd52" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-
+<!--TODO uncheck-->
                             <Label id="lblSec4F6" labelFor="txtSec4F6" text="{i18n>sec4_f6}">
                                 <layoutData>
                                     <l:GridData id="gd53" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
@@ -384,15 +391,16 @@
                                     <l:GridData id="gd56" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
+<!--TODO UNCHECK END-->                            
                         </form:SimpleForm>
                     </uxap:ObjectPageSubSection>
 
                     <uxap:ObjectPageSubSection id="subsection6">
-                        <table:Table id="tab1" editable="true"  visibleRowCount="8" selectionMode="None">
+                        <table:Table id="tabGoods" editable="true" rows="{GoodsSet}"  visibleRowCount="8" selectionMode="None">
                             <table:extension>
                                 <HBox id="hbox2" alignContent="Center" alignItems="Center">
-                                    <Label id="lblSec6F1" labelFor="txtSec6F1" text="{i18n>sec6_f1}" />
-                                    <Input id="txtSec6F1" editable="{viewState>/editable}" />
+                                    <Label id="lblHacyuNo" labelFor="txtHacyuNo" text="{i18n>sec6_f1}" />
+                                    <Input id="txtHacyuNo" value="{HacyuNo}" maxLength="10" editable="{viewState>/editable}" />
                                 </HBox>
                             </table:extension>
 
@@ -400,63 +408,66 @@
                                 <table:Column id="tab1Col1">
                                     <Text id="txtTab1Col1" />
                                     <table:template>
-                                        <Text id="txtTab1Tem1" text="{f1}" />
+                                        <Text id="txtHyojibasho" text="{Hyojibasho}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col2">
                                     <Text id="txtTab1Col2" />
                                     <table:template>
-                                        <Text id="txtTab1Tem2" text="{f2}" />
+                                        <Text id="txtDesc" text="{Desc}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col3">
                                     <Text id="txtTab1Col3" text="{i18n>sec6_f2}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem3" value="{f3}" editable="{viewState>/editable}" />
+                                        <Input id="txtSyohinCd" value="{SyohinCd}" maxLength="5" visible="{Visible}" 
+                                        editable="{viewState>/editable}" change="onSyohinCdChange" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col4">
                                     <Text id="txtTab1Col4" text="{i18n>sec6_f3}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem4" type="Number" textDirection="RTL" value="{f4}" editable="{viewState>/editable}" />
+                                        <Input id="txtSyohinZenjtsZan" type="Number" value="{SyohinZenjtsZan}" visible="{Visible}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col5">
                                     <Text id="txtTab1Col5" text="{i18n>sec6_f4}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem5" type="Number" textDirection="RTL" value="{f5}" editable="{viewState>/editable}" />
+                                        <Input id="txtSyohinShirSu" type="Number" value="{SyohinShirSu}" visible="{Visible}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col6">
                                     <Text id="txtTab1Col6" text="{i18n>sec6_f5}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem6" type="Number" textDirection="RTL" value="{f6}" editable="{viewState>/editable}" />
+                                        <Input id="txtSyohinSyukoSu" type="Number" value="{SyohinSyukoSu}" visible="{Visible}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col7">
                                     <Text id="txtTab1Col7" text="{i18n>sec6_f6}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem7" type="Number" textDirection="RTL" value="{f7}" editable="{viewState>/editable}" />
+                                        <Input id="txtSyohinHonjtsZan" type="Number" value="{SyohinHonjtsZan}" visible="{Visible}"  editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col8">
                                     <Text id="txtTab1Col8" text="{i18n>sec6_f7}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem8" type="Number" textDirection="RTL" value="{f8}" editable="{viewState>/editable}" />
+                                        <Input id="txtSyohinShirAmt" value="{parts:[{path:'SyohinShirAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" visible="{Visible}" editable="false" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col9">
                                     <Text id="txtTab1Col9" text="{i18n>sec6_f8}" />
                                     <table:template>
-                                        <Input id="txtTab1Tem9" type="Number" textDirection="RTL" value="{f9}" editable="{viewState>/editable}" />
+                                        <Input id="txtSyohinTanka" value="{parts:[{path:'SyohinTanka'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" visible="{Visible}" editable="false" />
                                     </table:template>
                                 </table:Column>
                             </table:columns>

@@ -136,10 +136,41 @@ sap.ui.define(["sap/ui/core/format/NumberFormat"], function (NumberFormat) {
             return number;
         },
 
+        //P売上
         formatPUriage: function(PGenkinUriage, PCardUriage, Waers){
             var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
             
             var sum = Number(PGenkinUriage) + Number(PCardUriage);
+            return oCurrencyFormat.format(sum, Waers);
+        },
+
+        //S売上
+        formatSUriage: function(SGenkinUriage, SCardUriage, Waers){
+            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
+            
+            var sum = Number(SGenkinUriage) + Number(SCardUriage);
+            return oCurrencyFormat.format(sum, Waers);
+        },
+
+        //現金売上合計
+        formatGenkinUragGokei: function(PGenkinUriage, SGenkinUriage, Waers){
+            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
+            
+            var sum = Number(PGenkinUriage) + Number(SGenkinUriage);
+            return oCurrencyFormat.format(sum, Waers);
+        },
+
+        //売上総合計
+        formatUriageSogokei: function(PGenkinUriage, PCardUriage, SGenkinUriage, SCardUriage,Waers){
+            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false}); 
+            var sum = Number(PGenkinUriage) + Number(PCardUriage) + Number(SGenkinUriage) + Number(SCardUriage);
+            return oCurrencyFormat.format(sum, Waers);
+        },
+
+        //カード販売合計
+        formatKadoHanbaiGokei: function(HanbaiAmt, SekisanAmt, Waers){
+            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
+            var sum = Number(HanbaiAmt) - Number(SekisanAmt);
             return oCurrencyFormat.format(sum, Waers);
         }
     };

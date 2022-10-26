@@ -54,7 +54,7 @@ sap.ui.define([
             },
 
             checkEditData: function() {
-                var oInputUserName = this.byId("txtInvUserName");
+                var oInputUserName = this.byId("txtKihyoshaName");
                 if (oInputUserName.getValue() == '') {
                     oInputUserName.setValueState("Error");
                     return false;
@@ -76,7 +76,17 @@ sap.ui.define([
                 var elem = this.getView().getBindingContext();  
                 var oModel = elem.getModel(); 
                 var d = elem.getObject();
+
+                //Sum Fields
                 d.PUriage = this._comm.parseCurrency(this.byId("txtPUriage").getText());
+                d.SUriage = this._comm.parseCurrency(this.byId("txtSUriage").getText());
+                d.GenkinUragGokei = this._comm.parseCurrency(this.byId("txtGenkinUragGokei").getText());
+                d.UriageSogokei = this._comm.parseCurrency(this.byId("txtUriageSogokei").getText());
+                d.KadoHanbaiGokei= this._comm.parseCurrency(this.byId("txtKadoHanbaiGokei").getText());
+                
+                //Deep Entities
+                //d.GoodsSet = this.byId("tabGoods").getBindingContext().getObject("/");
+                
                 delete d.__metadata;
 
                 for(var f in d){
@@ -186,6 +196,28 @@ sap.ui.define([
                 if (this._oMessagePopover) {
                     this._oMessagePopover.toggle(oEvent.getSource());
                 }
+            },
+
+            onSyohinCdChange: function(oEvent){
+                var oContext = oEvent.getSource().getBindingContext(); 
+                var sValue = oEvent.mParameters.newValue;
+
+                var oModel = oContext.getModel();
+                var sPath = "/MaterialSet(TenpoCd='" + oContext.getProperty("TenpoCd") +
+                            "',Hyojibasho='" + oContext.getProperty("Hyojibasho") +
+                            "',ShohinCd='" + sValue + "')";
+                            ;
+                var that = this;            
+                oModel.read(sPath, {
+                    success: function (oData, oResponse) {
+                        oModel.setProperty(oContext.sPath + "/SyohinTanka", oData.ShohinTanka);
+                        debugger;
+                        oModel.refresh();
+                    },
+                    error: function(oError){
+                        debugger;
+                    }
+                });
             }
         });
     });
