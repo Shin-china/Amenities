@@ -3,6 +3,7 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/ui/core/UIComponent",
     "sap/ui/model/json/JSONModel",
+    "sap/ui/core/format/NumberFormat",
     "com/shin/pstore/pstore/utils/Common",
     "../model/formatter"
 ],
@@ -12,8 +13,9 @@ sap.ui.define([
     function (Controller,
 	MessageToast,
 	UIComponent,
-	JSONModel, 
-    Common,
+	JSONModel,
+	NumberFormat,
+	Common,
 	formatter) {
         "use strict";
 
@@ -76,16 +78,20 @@ sap.ui.define([
                 var elem = this.getView().getBindingContext();  
                 var oModel = elem.getModel(); 
                 var d = elem.getObject();
-
-                //Sum Fields
-                d.PUriage = this._comm.parseCurrency(this.byId("txtPUriage").getText());
-                d.SUriage = this._comm.parseCurrency(this.byId("txtSUriage").getText());
-                d.GenkinUragGokei = this._comm.parseCurrency(this.byId("txtGenkinUragGokei").getText());
-                d.UriageSogokei = this._comm.parseCurrency(this.byId("txtUriageSogokei").getText());
-                d.KadoHanbaiGokei= this._comm.parseCurrency(this.byId("txtKadoHanbaiGokei").getText());
                 
                 //Deep Entities
-                //d.GoodsSet = this.byId("tabGoods").getBindingContext().getObject("/");
+                d.GoodsSet = this._comm.getTableData(this, "tabGoods");
+                // var goods = this.byId("tabGoods").getRows();
+                // for(var g of goods){
+                //     var good = g.getBindingContext().getObject();
+                //     delete good.__metadata;
+                //     d.GoodsSet.push(good);
+                // }
+
+                d.EffectiveCashSet = this._comm.getTableData(this, "tabEffectiveCash");
+                d.LossCashSet = this._comm.getTableData(this, "tabLossCash");
+
+                debugger;
                 
                 delete d.__metadata;
 
@@ -98,8 +104,7 @@ sap.ui.define([
                 var o = {};
                 d.MessageSet = [];
                 d.OutDataSet = [];
-                d.InDataSet = [];
-                d.Cash = {};
+                d.InDataSet = []; 
                 d.Action = 'U';
                  
                 o.d = d;
@@ -147,7 +152,7 @@ sap.ui.define([
                     this._oModel = this.getView().getModel();
                 }
 
-                this._InData = this.getView().getBindingContext().getObject().InData;//this._oModel.getData().DataSet[this._pathId].InData;
+                this._InData = this.getView().getBindingContext().getObject().InData;
                 var obj = {};
                 this._InData.push(obj);
                 this._oModel.refresh();
@@ -199,25 +204,68 @@ sap.ui.define([
             },
 
             onSyohinCdChange: function(oEvent){
-                var oContext = oEvent.getSource().getBindingContext(); 
-                var sValue = oEvent.mParameters.newValue;
+                var oSource = oEvent.getSource()
+                var oContext = oSource.getBindingContext(); 
+                var sValue = oEvent.mParameters.newValue.toUpperCase();
+                oSource.setValue(sValue);
 
                 var oModel = oContext.getModel();
                 var sPath = "/MaterialSet(TenpoCd='" + oContext.getProperty("TenpoCd") +
                             "',Hyojibasho='" + oContext.getProperty("Hyojibasho") +
                             "',ShohinCd='" + sValue + "')";
-                            ;
-                var that = this;            
+                            
+                var that = this;   
+                that._goodsSource = oSource;
+                //读取物料单价
                 oModel.read(sPath, {
                     success: function (oData, oResponse) {
                         oModel.setProperty(oContext.sPath + "/SyohinTanka", oData.ShohinTanka);
-                        debugger;
-                        oModel.refresh();
+                        //更新景品仕入高合计
+                        that.onLineAmountChange();
                     },
                     error: function(oError){
-                        debugger;
+                       that._goodsSource.setValueState("Error");
                     }
                 });
+            },
+
+            //景品仕入高合计
+            onLineAmountChange:function(){
+                var aItems = this.byId("tabGoods").getRows();
+                var amount = 0, waers = '', lineAmount = 0;
+                for( var item of aItems ){
+                    var data = item.getBindingContext().getObject();
+                    var qty = Number(data.SyohinZenjtsZan) + Number(data.SyohinShirSu) - Number(data.SyohinSyukoSu);
+                    lineAmount = qty * Number(data.SyohinTanka);
+                    amount += lineAmount;
+                    waers = ( waers === '' ) ? data.Waers : 'JPY';
+                }
+
+                var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
+                this.byId("txtKeihinShirdk").setText(oCurrencyFormat.format(amount, waers));
+            },
+
+            _calcCashSumAmount: function(oContext, sTableId, sSumFieldId){
+                var oCurrencyParse = NumberFormat.getFloatInstance();
+                var aItems = oContext.byId(sTableId).getRows();
+                var amount = 0, waers = '', lineAmount = 0;
+                for( var item of aItems ){
+                    var data = item.getBindingContext().getObject();
+                    lineAmount = oCurrencyParse.parse(data.Desc) * Number(data.Man);
+                    amount += lineAmount;
+                    waers = ( waers === '' ) ? data.Waers : 'JPY';
+                }
+
+                var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
+                this.byId(sSumFieldId).setText(oCurrencyFormat.format(amount, waers));   
+            },
+
+            onEffectiveCashManChange: function(){
+                this._calcCashSumAmount(this, "tabEffectiveCash", "txtYuukouGkiAmt");              
+            },
+
+            onLossCashManChange: function(){
+                this._calcCashSumAmount(this, "tabLossCash", "txtHasonGkiAmt");              
             }
         });
     });

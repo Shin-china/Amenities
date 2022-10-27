@@ -187,7 +187,9 @@ sap.ui.define([
                     d.MessageSet = [];
                     d.OutDataSet = [];
                     d.InDataSet = [];
-                    d.Cash = {};
+                    d.GoodsSet = [];
+                    d.EffectiveCashSet = [];
+                    d.LossCashSet = [];
                     o.d = d;
                     oMessage.MessageSet = [];
                     oModel.create("/StoreSet", o, {

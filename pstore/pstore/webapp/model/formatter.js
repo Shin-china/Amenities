@@ -136,34 +136,13 @@ sap.ui.define(["sap/ui/core/format/NumberFormat"], function (NumberFormat) {
             return number;
         },
 
-        //P売上
-        formatPUriage: function(PGenkinUriage, PCardUriage, Waers){
-            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
-            
-            var sum = Number(PGenkinUriage) + Number(PCardUriage);
-            return oCurrencyFormat.format(sum, Waers);
-        },
-
-        //S売上
-        formatSUriage: function(SGenkinUriage, SCardUriage, Waers){
-            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
-            
-            var sum = Number(SGenkinUriage) + Number(SCardUriage);
-            return oCurrencyFormat.format(sum, Waers);
-        },
-
-        //現金売上合計
-        formatGenkinUragGokei: function(PGenkinUriage, SGenkinUriage, Waers){
-            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
-            
-            var sum = Number(PGenkinUriage) + Number(SGenkinUriage);
-            return oCurrencyFormat.format(sum, Waers);
-        },
-
-        //売上総合計
-        formatUriageSogokei: function(PGenkinUriage, PCardUriage, SGenkinUriage, SCardUriage,Waers){
+        formatSumCurrency: function(Waers, ...vals){
             var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false}); 
-            var sum = Number(PGenkinUriage) + Number(PCardUriage) + Number(SGenkinUriage) + Number(SCardUriage);
+            var sum = 0;
+            for(var i = 0; i < vals.length; i++){
+                sum += Number(vals[i]);
+            }
+            
             return oCurrencyFormat.format(sum, Waers);
         },
 
@@ -172,6 +151,28 @@ sap.ui.define(["sap/ui/core/format/NumberFormat"], function (NumberFormat) {
             var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
             var sum = Number(HanbaiAmt) - Number(SekisanAmt);
             return oCurrencyFormat.format(sum, Waers);
+        },
+
+        formatGoodsTodayRemain: function(yesterdayRemain, todayIn, todayOut){
+            var sum = 0.00;
+            sum = Number(yesterdayRemain) + Number(todayIn) - Number(todayOut);
+            return sum.toFixed(2);
+        },
+
+        formatGoodsTodayRemainAmount: function(waers,yesterdayRemain, todayIn, todayOut, price){
+            var qty = 0.00;
+            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
+            qty = Number(yesterdayRemain) + Number(todayIn) - Number(todayOut);
+            var amount = qty * Number(price);
+            
+            return oCurrencyFormat.format(amount, waers);
+        },
+
+        formatEffectiveCash: function(desc, man, waers){
+            var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
+            var oCurrencyParse = NumberFormat.getFloatInstance();
+            var amount = oCurrencyParse.parse(desc) * Number(man);
+            return oCurrencyFormat.format(amount, waers);
         }
     };
 });

@@ -86,6 +86,18 @@ sap.ui.define([
         parseCurrency: function(sCurrency){
             var oCurrencyFormat = NumberFormat.getFloatInstance();
             return oCurrencyFormat.parse(sCurrency);
+        },
+
+        getTableData: function(oContext, sTableId){
+            var arr = [];
+            var rows = oContext.byId(sTableId).getRows();
+            for(var r of rows){
+                var item = r.getBindingContext().getObject();
+                delete item.__metadata;
+                arr.push(item);
+            }
+
+            return arr;
         }
 
     });
