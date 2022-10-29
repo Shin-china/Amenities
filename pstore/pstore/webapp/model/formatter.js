@@ -173,6 +173,14 @@ sap.ui.define(["sap/ui/core/format/NumberFormat"], function (NumberFormat) {
             var oCurrencyParse = NumberFormat.getFloatInstance();
             var amount = oCurrencyParse.parse(desc) * Number(man);
             return oCurrencyFormat.format(amount, waers);
+        },
+
+        formatCheckbox: function(sVal){
+            if(sVal == "X"){
+                return true;
+            }else{
+                return false;
+            }
         }
     };
 });

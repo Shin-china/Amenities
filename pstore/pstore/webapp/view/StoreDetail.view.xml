@@ -659,7 +659,7 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection11">
                         <table:Table id="tabInCash" 
-                                     rows="{path: 'InCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: ''}]}" 
+                                     rows="{path: 'InCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" 
                                      visibleRowCount="5" 
                                      selectionMode="Single" 
                                      editable="{viewState>/editable}"
@@ -734,7 +734,7 @@
                                 <table:Column id="tab3Col9">
                                     <Label id="lblTab3Jidoutenkifuyo" text="{i18n>tab3_col8}" />
                                     <table:template>
-                                        <CheckBox id="chkTab3Jidoutenkifuyo" text="{InCash>Jidoutenkifuyo}" />
+                                        <CheckBox id="chkTab3Jidoutenkifuyo" selected="{InCash>Jidoutenkifuyo}"/>
                                     </table:template>
                                 </table:Column>
                             </table:columns>
@@ -746,7 +746,7 @@
             <uxap:ObjectPageSection id="section4" title="{i18n>section4_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection12">
-                        <table:Table id="tabOutCash" rows="{OutCash>/}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
+                        <table:Table id="tabOutCash" rows="{path:'OutCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
                             <table:extension>
                                 <OverflowToolbar id="tab4Toolbar">
                                     <content>
@@ -810,7 +810,7 @@
                                 <table:Column id="tab4Col8">
                                     <Label id="lblTab4Jidoutenkifuyo" text="{i18n>tab3_col8}" />
                                     <table:template>
-                                        <CheckBox id="chkTab4Jidoutenkifuyo" text="{OutCash>Jidoutenkifuyo}" />
+                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{OutCash>Jidoutenkifuyo}" />
                                     </table:template>
                                 </table:Column>
                             </table:columns>
@@ -1098,7 +1098,7 @@
                     />
 
                     <ToolbarSpacer id="pageToolbarSpacer" />
-                    <Button id="btnSave" text="{i18n>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
+                    <Button id="btnSave" text="{i18n>footer_f1}"  enabled="{viewState>/editable}" press="onSave" />
                     <Button id="btnChange" text="{i18n>footer_f2}" press="onChange" />
                     <Button id="btnRequest" text="{i18n>footer_f3}" press="onRequest" />
                     <Button id="btnGenerate" text="{i18n>footer_f4}" type="Emphasized" press="onGenerate" />

@@ -124,7 +124,7 @@ sap.ui.define([
                 var d = elem.getObject();
 
                 //Deep Entities
-                d.GoodsSet = this._comm.getTableData(this, "tabGoods");
+                d.GoodsSet = this._comm.getTableData(this, "tabGoods", null);
                 // var goods = this.byId("tabGoods").getRows();
                 // for(var g of goods){
                 //     var good = g.getBindingContext().getObject();
@@ -132,11 +132,13 @@ sap.ui.define([
                 //     d.GoodsSet.push(good);
                 // }
 
-                d.EffectiveCashSet = this._comm.getTableData(this, "tabEffectiveCash",);
-                d.LossCashSet = this._comm.getTableData(this, "tabLossCash");
+                d.EffectiveCashSet = this._comm.getTableData(this, "tabEffectiveCash", null);
+                d.LossCashSet = this._comm.getTableData(this, "tabLossCash", null);
                 d.PlanCashSet = this._comm.getTableData(this, "tabPlanCash", "Amount");
-                d.InCashSet = this._comm.getTableData(this, "tabInCash");
-                d.OutCashSet = this._comm.getTableData(this, "tabOutCash");
+                d.InCashSet = this._InCashSet;//this._comm.getTableData(this, "tabInCash");
+                d.OutCashSet = this._OutCashSet;//this._comm.getTableData(this, "tabOutCash");
+                d.InCashSet = this._comm.convertCashData(d.InCashSet);
+                d.OutCashSet = this._comm.convertCashData(d.OutCashSet);
 
                 debugger;
 
@@ -153,8 +155,6 @@ sap.ui.define([
 
                 var o = {};
                 d.MessageSet = [];
-                d.OutDataSet = [];
-                d.InDataSet = [];
                 d.Action = 'U';
 
                 o.d = d;
@@ -166,7 +166,7 @@ sap.ui.define([
                         that.getView().setModel(logModel, "log");
                         that._busyDialog.close();
                         that._comm.showMessagePopoverFor(that, "log", "/MessageSet", "btnMessagePopover")
-
+                        oModel.refresh();
                     },
                     error: function (oError) {
                         that._busyDialog.close();
@@ -174,7 +174,7 @@ sap.ui.define([
                     }
                 });
 
-                oModel.refresh();
+
 
             },
 
@@ -202,11 +202,12 @@ sap.ui.define([
                 var oModel = oContext.getView().getModel(sModelName);
                 oContext[sBindingProperty] = oModel.getData();
                 var obj = {};
-                obj.Loekz = '';
+                obj.Loekz = false;
                 obj.KaishaCd = this._KaishaCd;
                 obj.TenpoCd = this._TenpoCd;
                 obj.EigyoBi = this._EigyoBi;
                 obj.KihyoNo = this._KihyoNo;
+                obj.Jidoutenkifuyo = false;
 
                 if (oContext[sBindingProperty].length === 0) {
                     obj.MeisaiNo = '10';
@@ -233,7 +234,7 @@ sap.ui.define([
                     if (sMeisaiNo) {
                         for (var j = 0; j < oContext[sBindingProperty].length; j++) {
                             if (oContext[sBindingProperty][j].MeisaiNo === sMeisaiNo) {
-                                oContext[sBindingProperty][j].Loekz = 'X';
+                                oContext[sBindingProperty][j].Loekz = true;
                             }
                         }
                     }
@@ -242,7 +243,7 @@ sap.ui.define([
                 oModel.refresh();
 
                 var filter = [];
-                filter.push(new sap.ui.model.Filter("Loekz", sap.ui.model.FilterOperator.EQ, ''));
+                filter.push(new sap.ui.model.Filter("Loekz", sap.ui.model.FilterOperator.EQ, false));
 
                 oContext.byId(sTabName).getBinding("rows").filter(new sap.ui.model.Filter(filter, true));
 
@@ -294,6 +295,7 @@ sap.ui.define([
                         that._goodsSource.setValueState("Error");
                     }
                 });
+ 
             },
 
             //景品仕入高合计
@@ -353,6 +355,10 @@ sap.ui.define([
 
             onPlanCashAmountChange: function () {
                 this._calcTableColumnSum(this, "tabPlanCash", "Amount", "txtZyunbikinGkiAmt");
-            }
+            },
+
+            // onTab3JidoutenkifuyoCheck: function(oEvent){
+            //     debugger;
+            // }
         });
     });

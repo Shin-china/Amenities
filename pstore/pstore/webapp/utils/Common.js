@@ -35,19 +35,19 @@ sap.ui.define([
             });
         },
 
-        showMessagePopoverFor: function (oContext, oModel, sBindingPath, sAttachButtonId) {
+        showMessagePopoverFor: function (oContext, sModel, sBindingPath, sAttachButtonId) {
 
             var oMessageTemplate = new MessageItem({
-                type: '{' + oModel + '>Type}',
-                title: '{' + oModel + '>Title}',
-                description: '{' + oModel + '>Description}',
-                subtitle: '{' + oModel + '>Subtitle}',
-                counter: '{' + oModel + '>Counter}'
+                type: '{' + sModel + '>Type}',
+                title: '{' + sModel + '>Title}',
+                description: '{' + sModel + '>Description}',
+                subtitle: '{' + sModel + '>Subtitle}',
+                counter: '{' + sModel + '>Counter}'
             });
 
             oContext._oMessagePopover = new MessagePopover({
                 items: {
-                    path: oModel + '>' + sBindingPath,
+                    path: sModel + '>' + sBindingPath,
                     template: oMessageTemplate
                 },
                 groupItems: true
@@ -95,7 +95,7 @@ sap.ui.define([
                 var item = r.getBindingContext().getObject();
                 delete item.__metadata;
 
-                if (convertFields.length > 0) {
+                if (convertFields != null && convertFields.length > 0) {
                     for (var f of convertFields) {
                         if (typeof (item[f]) === 'number') {
                             item[f] = item[f].toString();
@@ -117,6 +117,29 @@ sap.ui.define([
             }
 
             return oObj;
+        },
+
+        convertJsonBooleanToString: function(oObj, ...fields){
+            for(var f in oObj){
+                if(fields.indexOf(f) !== -1 && typeof(oObj[f]) === 'boolean'){
+                    if(oObj[f] === true){
+                        oObj[f] = 'X';
+                    }else{
+                        oObj[f] = '';
+                    }
+                }
+            }
+
+            return oObj;
+        },
+
+        convertCashData: function(aData){
+            var that = this;
+            for(var a of aData){
+                that.convertJsonBooleanToString(a, 'Jidoutenkifuyo');
+            }
+
+            return aData;
         }
 
     });
