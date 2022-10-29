@@ -1,15 +1,4 @@
-<mvc:View
-    xmlns:form="sap.ui.layout.form"
-    xmlns:uxap="sap.uxap"
-    controllerName="com.shin.pstore.pstore.controller.StoreDetail"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    xmlns:table="sap.ui.table"
-    xmlns:l="sap.ui.layout"
-    displayBlock="true"
-    height="100%"
-    busyIndicatorDelay="0"
->
+<mvc:View xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" controllerName="com.shin.pstore.pstore.controller.StoreDetail" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:l="sap.ui.layout" displayBlock="true" height="100%" busyIndicatorDelay="0">
     <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false" selectedSection="section1" showTitleInHeaderContent="true" showFooter="true">
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="headerTitle">
@@ -69,13 +58,16 @@
                             </layoutData>
                         </Label>
 
-                        <Text id="txtEigyoBi" text="{
+                        <Text
+                            id="txtEigyoBi"
+                            text="{
                                     path: 'EigyoBi',
                                     type: 'sap.ui.model.type.Date',
                                     formatOptions: {
                                     pattern: 'yyyy/MM/dd'
                                     }
-                                }">
+                                }"
+                        >
                             <layoutData>
                                 <l:GridData id="gd10" span="XL4 L4 M12 S12" />
                             </layoutData>
@@ -291,12 +283,15 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtUriageSogokei" text="{parts:[{path: 'Waers'},{path:'PGenkinUriage'}, 
+                            <Text
+                                id="txtUriageSogokei"
+                                text="{parts:[{path: 'Waers'},{path:'PGenkinUriage'}, 
                                 {path:'PCardUriage'}, 
                                 {path:'SGenkinUriage'},
                                 {path:'SCardUriage'}
                                 ], 
-                                formatter:'.formatter.formatSumCurrency'}">
+                                formatter:'.formatter.formatSumCurrency'}"
+                            >
                                 <layoutData>
                                     <l:GridData id="gd42" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -367,7 +362,7 @@
                                     <l:GridData id="gd52" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-<!--TODO uncheck-->
+                            <!--TODO uncheck-->
                             <Label id="lblSec4F6" labelFor="txtSec4F6" text="{i18n>sec4_f6}">
                                 <layoutData>
                                     <l:GridData id="gd53" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
@@ -391,12 +386,12 @@
                                     <l:GridData id="gd56" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-<!--TODO UNCHECK END-->                            
+                            <!--TODO UNCHECK END-->
                         </form:SimpleForm>
                     </uxap:ObjectPageSubSection>
 
                     <uxap:ObjectPageSubSection id="subsection6">
-                        <table:Table id="tabGoods" editable="true" rows="{GoodsSet}"  visibleRowCount="8" selectionMode="None">
+                        <table:Table id="tabGoods" editable="true" rows="{GoodsSet}" visibleRowCount="8" selectionMode="None">
                             <table:extension>
                                 <HBox id="hbox2" alignContent="Center" alignItems="Center">
                                     <Label id="lblHacyuNo" labelFor="txtHacyuNo" text="{i18n>sec6_f1}" />
@@ -422,8 +417,7 @@
                                 <table:Column id="tab1Col3">
                                     <Text id="txtTab1Col3" text="{i18n>sec6_f2}" />
                                     <table:template>
-                                        <Input id="txtSyohinCd" value="{SyohinCd}" maxLength="5" visible="{Visible}" 
-                                        editable="{viewState>/editable}" change="onSyohinCdChange" />
+                                        <Input id="txtSyohinCd" value="{SyohinCd}" maxLength="5" visible="{Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" />
                                     </table:template>
                                 </table:Column>
 
@@ -451,16 +445,27 @@
                                 <table:Column id="tab1Col7">
                                     <Text id="txtTab1Col7" text="{i18n>sec6_f6}" />
                                     <table:template>
-                                        <Input id="txtSyohinHonjtsZan" type="Number" value="{parts:[{path: 'SyohinZenjtsZan'},{path: 'SyohinShirSu'},{path: 'SyohinSyukoSu'}], 
-                                        formatter:'.formatter.formatGoodsTodayRemain'}" visible="{Visible}" editable="false" />
+                                        <Input
+                                            id="txtSyohinHonjtsZan"
+                                            type="Number"
+                                            value="{parts:[{path: 'SyohinZenjtsZan'},{path: 'SyohinShirSu'},{path: 'SyohinSyukoSu'}], 
+                                        formatter:'.formatter.formatGoodsTodayRemain'}"
+                                            visible="{Visible}"
+                                            editable="false"
+                                        />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab1Col8">
                                     <Text id="txtTab1Col8" text="{i18n>sec6_f7}" />
                                     <table:template>
-                                        <Input id="txtSyohinShirAmt" value="{parts:[{path: 'Waers'},{path: 'SyohinZenjtsZan'},{path: 'SyohinShirSu'},{path: 'SyohinSyukoSu'},{path:'SyohinTanka'}], 
-                                        formatter:'.formatter.formatGoodsTodayRemainAmount'}" visible="{Visible}" editable="false" />
+                                        <Input
+                                            id="txtSyohinShirAmt"
+                                            value="{parts:[{path: 'Waers'},{path: 'SyohinZenjtsZan'},{path: 'SyohinShirSu'},{path: 'SyohinSyukoSu'},{path:'SyohinTanka'}], 
+                                        formatter:'.formatter.formatGoodsTodayRemainAmount'}"
+                                            visible="{Visible}"
+                                            editable="false"
+                                        />
                                     </table:template>
                                 </table:Column>
 
@@ -498,7 +503,7 @@
                                     <l:GridData id="gd57" span="XL3 L3 M12 S12" />
                                 </layoutData>
                             </Label>
-<!--TODO-->
+                            <!--TODO-->
                             <Text id="txtSec7F1">
                                 <layoutData>
                                     <l:GridData id="gd58" span="XL4 L4 M12 S12" />
@@ -543,7 +548,7 @@
                                     <l:GridData id="gd64" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-<!--TODO END-->
+                            <!--TODO END-->
                             <Label id="lblZnjtsHnshSfknRk" labelFor="txtZnjtsHnshSfknRk" text="{i18n>sec8_f2}">
                                 <layoutData>
                                     <l:GridData id="gd65" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -576,13 +581,13 @@
                                 </layoutData>
                             </Label>
 
-<!--TODO-->
+                            <!--TODO-->
                             <Text id="txtSec8F4">
                                 <layoutData>
                                     <l:GridData id="gd70" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-<!--todo end-->                            
+                            <!--todo end-->
 
                             <Label id="lblKiteiGankinAmt" labelFor="txtKiteiGankinAmt" text="{i18n>sec8_f5}">
                                 <layoutData>
@@ -596,7 +601,7 @@
                                     <l:GridData id="gd72" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
-<!--TODO-->
+                            <!--TODO-->
                             <Label id="lblSec8F6" labelFor="txtSec8F6" text="{i18n>sec8_f6}">
                                 <layoutData>
                                     <l:GridData id="gd73" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -608,7 +613,7 @@
                                     <l:GridData id="gd74" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-<!--TODO END-->
+                            <!--TODO END-->
                             <Label id="lblGnknKfskUchwk" labelFor="txtGnknKfskUchwk" text="{i18n>sec8_f7}">
                                 <layoutData>
                                     <l:GridData id="gd75" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -640,7 +645,7 @@
                                 </layoutData>
                             </Label>
 
-                            <TextArea id="txtBiko1" value="{Biko1}" rows="5" editable="{viewState>/editable}">
+                            <TextArea id="txtBiko1" value="{Biko1}" maxLength="300" rows="5" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd88" span="XL9 L9 M12 S12" />
                                 </layoutData>
@@ -653,78 +658,83 @@
             <uxap:ObjectPageSection id="section3" title="{i18n>section3_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection11">
-                        <table:Table id="tab3" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
+                        <table:Table id="tabInCash" 
+                                     rows="{path: 'InCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: ''}]}" 
+                                     visibleRowCount="5" 
+                                     selectionMode="Single" 
+                                     editable="{viewState>/editable}"
+                                     >
                             <table:extension>
                                 <OverflowToolbar id="tab3Toolbar">
                                     <content>
                                         <ToolbarSpacer id="toolbarSpacer4" />
-                                        <Button id="btnTab3Add" text="{i18n>tab1_btn01}" press="onTab3Add" />
-                                        <Button id="btnTab3Delete" text="{i18n>tab1_btn03}" type="Attention" press="onTab3Delete" />
+                                        <Button id="btnTab3Add" text="{i18n>tab1_btn01}" enabled="{viewState>/editable}" press="onTabInCashAdd" />
+                                        <Button id="btnTab3Delete" text="{i18n>tab1_btn03}" enabled="{viewState>/editable}" type="Attention" press="onTabInCashDelete" />
                                     </content>
                                 </OverflowToolbar>
                             </table:extension>
 
                             <table:columns>
                                 <table:Column id="tab3Col1">
-                                    <Label id="lblTab3Col1" text="{i18n>tab3_col1}" />
+                                    <Label id="lblTab3KeijoBusho" text="{i18n>tab3_col1}" />
                                     <table:template>
-                                        <Input id="txtTab3Col1" value="{f1}" />
-                                    </table:template>
-                                </table:Column>
-
-                                <table:Column id="tab3Col2_1">
-                                    <Label id="lblTab3Col2_1" text="{i18n>tab3_col2_1}" />
-                                    <table:template>
-                                        <Input id="txtTab3Col2_1" value="{f9}" />
+                                        <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col2">
-                                    <Label id="lblTab3Col2" text="{i18n>tab3_col2}" />
+                                    <Label id="lblTab3DrkamokuCd" text="{i18n>tab3_col2_1}" />
                                     <table:template>
-                                        <Input id="txtTab3Col2" value="{f2}" />
+                                        <Input id="txtTab3DrkamokuCd" maxLength="10" value="{InCash>DrkamokuCd}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col3">
-                                    <Label id="lblTab3Col3" text="{i18n>tab3_col3}" />
+                                    <Label id="lblTab3NyknSaki" text="{i18n>tab3_col2}" />
                                     <table:template>
-                                        <Input id="txtTab3Col3" value="{f3}" />
+                                        <Input id="txtTab3NyknSaki" maxLength="22" value="{InCash>NyknSaki}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col4">
-                                    <Label id="lblTab3Col4" text="{i18n>tab3_col4}" />
+                                    <Label id="lblTab3NyknTekiyo" text="{i18n>tab3_col3}" />
                                     <table:template>
-                                        <Input id="txtTab3Col4" textDirection="RTL" value="{f4}" />
+                                        <Input id="txtTab3NyknTekiyo" maxLength="42" value="{InCash>NyknTekiyo}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col5">
-                                    <Label id="lblTab3Col5" text="{i18n>tab3_col5}" />
+                                    <Label id="lblTab3NyknKingaku" text="{i18n>tab3_col4}" />
                                     <table:template>
-                                        <Input id="txtTab3Col5" value="{f5}" />
+                                        <Input id="txtTab3NyknKingaku" textDirection="RTL" value="{InCash>NyknKingaku}" />
                                     </table:template>
                                 </table:Column>
 
-                                <!-- <table:Column id="tab3Col6">
-                                    <Label id="lblTab3Col6" text="{i18n>tab3_col6}" />
+                                <table:Column id="tab3Col6">
+                                    <Label id="lblTab3NyknKamokuCd" text="{i18n>tab3_col5}" />
                                     <table:template>
-                                        <Input id="txtTab3Col6" value="{f6}" />
+                                        <Input id="txtTab3NyknKamokuCd" maxLength="10" value="{InCash>NyknKamokuCd}" />
                                     </table:template>
-                                </table:Column> -->
+                                </table:Column>
 
                                 <table:Column id="tab3Col7">
-                                    <Label id="lblTab3Col7" text="{i18n>tab3_col7}" />
+                                    <Label id="lblTab3NyknKamokuNm" text="{i18n>tab3_col6}" />
                                     <table:template>
-                                        <Input id="txtTab3Col7" value="{f7}" />
+                                        <Text id="txtTab3NyknKamokuNm" text="{InCash>NyknKamokuNm}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col8">
-                                    <Label id="lblTab3Col8" text="{i18n>tab3_col8}" />
+                                    <Label id="lblTab3ZeiCd" text="{i18n>tab3_col7}" />
                                     <table:template>
-                                        <CheckBox id="chkTab3Col8" text="{f8}" />
+                                        <Input id="txtTab3ZeiCd" maxLength="2" value="{InCash>ZeiCd}" />
+                                    </table:template>
+                                </table:Column>
+
+                                <table:Column id="tab3Col9">
+                                    <Label id="lblTab3Jidoutenkifuyo" text="{i18n>tab3_col8}" />
+                                    <table:template>
+                                        <CheckBox id="chkTab3Jidoutenkifuyo" text="{InCash>Jidoutenkifuyo}" />
                                     </table:template>
                                 </table:Column>
                             </table:columns>
@@ -736,71 +746,71 @@
             <uxap:ObjectPageSection id="section4" title="{i18n>section4_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection12">
-                        <table:Table id="tab4" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
+                        <table:Table id="tabOutCash" rows="{OutCash>/}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
                             <table:extension>
                                 <OverflowToolbar id="tab4Toolbar">
                                     <content>
                                         <ToolbarSpacer id="toolbarSpacer5" />
-                                        <Button id="btnTab4Add" text="{i18n>tab1_btn01}" press="onTab4Add" />
-                                        <Button id="btnTab4Delete" text="{i18n>tab1_btn03}" type="Attention" press="onTab4Delete" />
+                                        <Button id="btnTab4Add" text="{i18n>tab1_btn01}" enabled="{viewState>/editable}" press="onTabOutCashAdd" />
+                                        <Button id="btnTab4Delete" text="{i18n>tab1_btn03}" enabled="{viewState>/editable}" type="Attention" press="onTabOutCashDelete" />
                                     </content>
                                 </OverflowToolbar>
                             </table:extension>
 
                             <table:columns>
                                 <table:Column id="tab4Col1">
-                                    <Label id="lblTab4Col1" text="{i18n>tab3_col1}" />
+                                    <Label id="lblTab4KeihiFutanBusho" text="{i18n>tab3_col1}" />
                                     <table:template>
-                                        <Input id="txtTab4Col1" value="{f1}" />
+                                        <Input id="txtTab4KeihiFutanBusho" maxLength="4" value="{OutCash>KeihiFutanBusho}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab4Col2">
-                                    <Label id="lblTab4Col2" text="{i18n>tab3_col2}" />
+                                    <Label id="lblTab4ShknSaki" text="{i18n>tab3_col2}" />
                                     <table:template>
-                                        <Input id="txtTab4Col2" value="{f2}" />
+                                        <Input id="txtTab4ShknSaki" maxLength="22" value="{OutCash>ShknSaki}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab4Col3">
-                                    <Label id="lblTab4Col3" text="{i18n>tab3_col3}" />
+                                    <Label id="lblTab4ShknTekiyo" text="{i18n>tab3_col3}" />
                                     <table:template>
-                                        <Input id="txtTab4Col3" value="{f3}" />
+                                        <Input id="txtTab4ShknTekiyo" maxLength="42" value="{OutCash>ShknTekiyo}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab4Col4">
-                                    <Label id="lblTab4Col4" text="{i18n>tab3_col4}" />
+                                    <Label id="lblTab4ShknKingaku" text="{i18n>tab3_col4}" />
                                     <table:template>
-                                        <Input id="txtTab4Col4" textDirection="RTL" value="{f4}" />
+                                        <Input id="txtTab4ShknKingaku" textDirection="RTL" value="{OutCash>ShknKingaku}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab4Col5">
-                                    <Label id="lblTab4Col5" text="{i18n>tab3_col5}" />
+                                    <Label id="lblTab4ShknKamokuCd" text="{i18n>tab3_col5}" />
                                     <table:template>
-                                        <Input id="txtTab4Col5" value="{f5}" />
+                                        <Input id="txtTab4ShknKamokuCd" maxLength="10" value="{OutCash>ShknKamokuCd}" />
                                     </table:template>
                                 </table:Column>
 
-                                <!-- <table:Column id="tab4Col6">
-                                    <Label id="lblTab4Col6" text="{i18n>tab3_col6}" />
+                                <table:Column id="tab4Col6">
+                                    <Label id="lblTab4ShknKamokuNm" text="{i18n>tab3_col6}" />
                                     <table:template>
-                                        <Input id="txtTab4Col6" value="{f6}" />
+                                        <Text id="txtTab4ShknKamokuNm" text="{OutCash>ShknKamokuNm}" />
                                     </table:template>
-                                </table:Column> -->
+                                </table:Column>
 
                                 <table:Column id="tab4Col7">
-                                    <Label id="lblTab4Col7" text="{i18n>tab3_col7}" />
+                                    <Label id="lblTab4ZeiCd" text="{i18n>tab3_col7}" />
                                     <table:template>
-                                        <Input id="txtTab4Col7" value="{f7}" />
+                                        <Input id="txtTab4ZeiCd" maxLength="2" value="{OutCash>ZeiCd}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab4Col8">
-                                    <Label id="lblTab4Col8" text="{i18n>tab3_col8}" />
+                                    <Label id="lblTab4Jidoutenkifuyo" text="{i18n>tab3_col8}" />
                                     <table:template>
-                                        <CheckBox id="chkTab4Col8" text="{f8}" />
+                                        <CheckBox id="chkTab4Jidoutenkifuyo" text="{OutCash>Jidoutenkifuyo}" />
                                     </table:template>
                                 </table:Column>
                             </table:columns>
@@ -812,7 +822,7 @@
             <uxap:ObjectPageSection id="section5" title="{i18n>section5_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection13">
-                        <table:Table id="tabEffectiveCash" selectionMode="None" rows="{EffectiveCashSet}" visibleRowCount="10" rowsUpdated="onEffectiveCashManChange" >
+                        <table:Table id="tabEffectiveCash" selectionMode="None" rows="{EffectiveCashSet}" visibleRowCount="10" rowsUpdated="onEffectiveCashManChange">
                             <table:extension>
                                 <Text id="txtTab5Header" text="{i18n>sub13_title}" />
                             </table:extension>
@@ -852,7 +862,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtYuukouGkiAmt" >
+                                    <Text id="txtYuukouGkiAmt">
                                         <layoutData>
                                             <l:GridData id="gd90" spanL="4" spanXL="4" spanM="4" />
                                         </layoutData>
@@ -863,8 +873,7 @@
                     </uxap:ObjectPageSubSection>
 
                     <uxap:ObjectPageSubSection id="subsection14">
-                        <table:Table id="tabLossCash" selectionMode="None" rows="{LossCashSet}" visibleRowCount="5" 
-                            editable="{viewState>/editable}" rowsUpdated="onLossCashManChange">
+                        <table:Table id="tabLossCash" selectionMode="None" rows="{LossCashSet}" visibleRowCount="5" editable="{viewState>/editable}" rowsUpdated="onLossCashManChange">
                             <table:extension>
                                 <Text id="txtTab6Header" text="{i18n>sub14_title}" />
                             </table:extension>
@@ -915,46 +924,47 @@
                     </uxap:ObjectPageSubSection>
 
                     <uxap:ObjectPageSubSection id="subsection15">
-                        <table:Table id="tab7" selectionMode="None" visibleRowCount="6" editable="{viewState>/editable}">
+                        <table:Table id="tabPlanCash" selectionMode="None" rows="{PlanCashSet}" rowsUpdated="onPlanCashAmountChange" visibleRowCount="6" editable="{viewState>/editable}">
                             <table:extension>
                                 <Text id="txtTab7Header" text="{i18n>sub15_title}" />
                             </table:extension>
 
                             <table:columns>
                                 <table:Column id="tab7Col1">
-                                    <Label id="lblTab7Col1" text="{i18n>sub15_col1}" />
+                                    <Label id="lblTab7Seq" labelFor="txtTab7Seq" text="{i18n>sub15_col1}" />
 
                                     <table:template>
-                                        <Label id="txtTab7Col1" text="{f1}" />
+                                        <Text id="txtTab7Seq" text="{Seq}" />
                                     </table:template>
                                 </table:Column>
 
-                                <table:Column id="tab7Col2">
-                                    <Label id="lblTab7Col2" text="{i18n>sub15_col2}" />
+                                <table:Column id="tab7Desc">
+                                    <Label id="lblTab7Desc" labelFor="txtTab7Desc" text="{i18n>sub15_col2}" />
 
                                     <table:template>
-                                        <Input id="txtTab7Col2" type="Number" textDirection="RTL" value="{f2}" />
+                                        <Text id="txtTab7Desc" text="{Desc}" />
                                     </table:template>
                                 </table:Column>
 
-                                <table:Column id="tab7Col3">
-                                    <Label id="lblTab7Col3" text="{i18n>sub15_col3}" />
+                                <table:Column id="tab7Amount">
+                                    <Label id="lblTab7Amount" labelFor="txtTab7Amount" text="{i18n>sub15_col3}" />
 
                                     <table:template>
-                                        <Input id="txtTab7Col3" type="Number" textDirection="RTL" value="{f3}" />
+                                        <Input id="txtTab7Amount" visible="{Visible}" editable="{viewState>/editable}" value="{parts:[{path:'Amount'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" />
                                     </table:template>
                                 </table:Column>
                             </table:columns>
 
                             <table:footer>
                                 <form:SimpleForm id="tab7FooterForm" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" editable="true">
-                                    <Label id="lblTab7FooterF1" labelFor="txtTab7FooterF1" text="{i18n>sub15_footer}">
+                                    <Label id="lblTab7FooterF1" labelFor="ZyunbikinGkiAmt" text="{i18n>sub15_footer}">
                                         <layoutData>
                                             <l:GridData id="gd93" spanL="8" spanXL="8" spanM="8" />
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtTab7FooterF2" text="100.00" textDirection="RTL">
+                                    <Text id="txtZyunbikinGkiAmt">
                                         <layoutData>
                                             <l:GridData id="gd94" spanL="4" spanXL="4" spanM="4" />
                                         </layoutData>
@@ -970,25 +980,27 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection16">
                         <form:SimpleForm id="subForm17" layout="ResponsiveGridLayout" editable="{viewState>/editable}">
-                            <Label id="lblSubForm17F1" labelFor="txtSubForm17F1" text="{i18n>sub16_f1}">
+                            <Label id="lblYokuzitusohukin" labelFor="txtYokuzitusohukin" text="{i18n>sub16_f1}">
                                 <layoutData>
                                     <l:GridData id="gd95" spanXL="2" spanL="2" spanM="12" spanS="12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSubForm17F1" textDirection="RTL" value="" type="Number" editable="{viewState>/editable}">
+                            <Input id="txtYokuzitusohukin" value="{parts:[{path:'Fi1007/Yokuzitusohukin'},{path: 'Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd96" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSubForm17F2" labelFor="txtSubForm17F2" text="{i18n>sub16_f2}">
+                            <Label id="lblYokuzituryougaekin" labelFor="txtYokuzituryougaekin" text="{i18n>sub16_f2}">
                                 <layoutData>
                                     <l:GridData id="gd97" linebreakXL="true" linebreakL="true" spanXL="2" spanL="2" spanM="12" spanS="12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSubForm17F2" textDirection="RTL" value="" editable="{viewState>/editable}" type="Number">
+                            <Input id="txtYokuzituryougaekin" value="{parts:[{path:'Fi1007/Yokuzituryougaekin'},{path: 'Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd98" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
@@ -1030,13 +1042,14 @@
                                 </layoutData>
                             </Text>
 
-                            <Label id="lblSubForm17F6" labelFor="txtSubForm17F6" text="{i18n>sub16_f6}">
+                            <Label id="lblYokuzitukiteimotokin" labelFor="txtYokuzitukiteimotokin" text="{i18n>sub16_f6}">
                                 <layoutData>
                                     <l:GridData id="gd105" linebreakXL="true" linebreakL="true" spanXL="2" spanL="2" spanM="12" spanS="12" />
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtSubForm17F6" textDirection="RTL" editable="{viewState>/editable}" value="" type="Number">
+                            <Input id="txtYokuzitukiteimotokin" value="{parts:[{path:'Fi1007/Yokuzitukiteimotokin'},{path: 'Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd106" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
@@ -1054,13 +1067,13 @@
                                 </layoutData>
                             </Text>
 
-                            <Label id="lblSubForm17F8" labelFor="txtSubForm17F8" text="{i18n>sub16_f8}">
+                            <Label id="lblBikou2" labelFor="txtBikou2" text="{i18n>sub16_f8}">
                                 <layoutData>
                                     <l:GridData id="gd109" linebreakXL="true" linebreakL="true" spanXL="2" spanL="2" spanM="12" spanS="12" />
                                 </layoutData>
                             </Label>
 
-                            <TextArea id="txtSubForm17F8" value="" editable="{viewState>/editable}" rows="5">
+                            <TextArea id="txtBikou2" maxLength="300" value="{Fi1007/Bikou2}" editable="{viewState>/editable}" rows="5">
                                 <layoutData>
                                     <l:GridData id="gd110" spanXL="10" spanL="10" spanM="12" spanS="12" />
                                 </layoutData>

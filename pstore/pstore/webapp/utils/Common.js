@@ -71,33 +71,52 @@ sap.ui.define([
             context.getView().getModel().refresh();
         },
 
-        convertFrontendDateToOdata: function(value) {
+        convertFrontendDateToOdata: function (value) {
             var oTempDate = new Date(value);
             var oDate = new Date(oTempDate.getTime() + oTempDate.getTimezoneOffset() * (-60000));
             return "\/Date(" + oDate.getTime() + ")\/";
         },
 
-        convertOdataDateToFrontend: function(value) {
+        convertOdataDateToFrontend: function (value) {
             var oTempDate = new Date(value);
             oDate = new Date(oTempDate.getTime() + oTempDate.getTimezoneOffset() * (60000));
             return oDate;
         },
 
-        parseCurrency: function(sCurrency){
+        parseCurrency: function (sCurrency) {
             var oCurrencyFormat = NumberFormat.getFloatInstance();
             return oCurrencyFormat.parse(sCurrency);
         },
 
-        getTableData: function(oContext, sTableId){
+        getTableData: function (oContext, sTableId, ...convertFields) {
             var arr = [];
             var rows = oContext.byId(sTableId).getRows();
-            for(var r of rows){
+            for (var r of rows) {
                 var item = r.getBindingContext().getObject();
                 delete item.__metadata;
+
+                if (convertFields.length > 0) {
+                    for (var f of convertFields) {
+                        if (typeof (item[f]) === 'number') {
+                            item[f] = item[f].toString();
+                        }
+                    }
+                }
+
                 arr.push(item);
             }
 
             return arr;
+        },
+
+        convertJsonNumberToString: function(oObj){
+            for(var f in oObj){
+                if(typeof(oObj[f]) === 'number'){
+                    oObj[f] = oObj[f].toString();
+                }
+            }
+
+            return oObj;
         }
 
     });

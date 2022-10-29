@@ -120,9 +120,13 @@ sap.ui.define([
                 d.EigyoBi = this._comm.convertFrontendDateToOdata(this.byId("inputTab1Col04").getValue());
                 d.Action = 'A';
                 d.MessageSet = [];
-                d.OutDataSet = [];
-                d.InDataSet = [];
-                d.Cash = {};
+                d.OutCashSet = [];
+                d.InCashSet = [];
+                d.GoodsSet = [];
+                d.EffectiveCashSet = [];
+                d.LossCashSet = [];
+                d.PlanCashSet = [];
+                d.Fi1007 = {};
                 o.d = d;
 
                 var oModel = this.getOwnerComponent().getModel(); 
@@ -185,11 +189,13 @@ sap.ui.define([
                     d.KihyoNo = oData.KihyoNo;
                     d.Action = 'D';
                     d.MessageSet = [];
-                    d.OutDataSet = [];
-                    d.InDataSet = [];
+                    d.OutCashSet = [];
+                    d.InCashSet = [];
                     d.GoodsSet = [];
                     d.EffectiveCashSet = [];
                     d.LossCashSet = [];
+                    d.PlanCashSet = [];
+                    d.Fi1007 = {};
                     o.d = d;
                     oMessage.MessageSet = [];
                     oModel.create("/StoreSet", o, {
