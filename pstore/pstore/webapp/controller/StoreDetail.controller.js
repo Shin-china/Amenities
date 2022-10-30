@@ -79,24 +79,15 @@ sap.ui.define([
 
                 this.byId("btnMessagePopover").setVisible(false);
 
-                //读取关联表到jsonmodel，本地添加删除行
-                // this._InCashSet = [];
-                // this._OutCashSet = [];
-                // var oModel = this.getOwnerComponent().getModel();
-                // if (oModel) {
-                //     oModel.read(sPath, {
-                //         urlParameters: {
-                //             "$expand": "InCashSet,OutCashSet"
-                //         },
-                //         success: function (oData, oResponse) {
-                //             this._InCashSet = oData.InCashSet;
-                //             this._OutCashSet = oData.OutCashSet;
-                //         },
+                //汇总model
+                this._sum = {
+                    "InCashSum": 0,
+                    "OutCashSum": 0,
+                    "Waers": 'JPY'
+                };
 
-                //         error: function (oData, oResponse) { 
-                //         }
-                //     });
-                // }
+                var oSumModel = new JSONModel(this._sum, "sum");
+                oView.setModel(oSumModel, "sum");
             },
 
             checkEditData: function () {
@@ -198,25 +189,18 @@ sap.ui.define([
                 }
             },
 
-            _addNewRow: function (oContext, sModelName, sTabName, sBindingProperty, oEvent = null) {
+            _addNewRow: function (oContext, sModelName, sTabName, sBindingProperty, oObj, oEvent = null) {
                 var oModel = oContext.getView().getModel(sModelName);
-                oContext[sBindingProperty] = oModel.getData();
-                var obj = {};
-                obj.Loekz = false;
-                obj.KaishaCd = this._KaishaCd;
-                obj.TenpoCd = this._TenpoCd;
-                obj.EigyoBi = this._EigyoBi;
-                obj.KihyoNo = this._KihyoNo;
-                obj.Jidoutenkifuyo = false;
+                oContext[sBindingProperty] = oModel.getData(); 
 
                 if (oContext[sBindingProperty].length === 0) {
-                    obj.MeisaiNo = '10';
+                    oObj.MeisaiNo = '10';
                 } else {
                     var last = oContext[sBindingProperty][oContext[sBindingProperty].length - 1];
-                    obj.MeisaiNo = (parseInt(last.MeisaiNo) + 10).toString();
+                    oObj.MeisaiNo = (parseInt(last.MeisaiNo) + 10).toString();
                 }
 
-                oContext[sBindingProperty].push(obj);
+                oContext[sBindingProperty].push(oObj);
                 oModel.refresh();
 
                 var index = oContext[sBindingProperty].length - 1;
@@ -250,7 +234,23 @@ sap.ui.define([
             },
 
             onTabInCashAdd: function (oEvent) {
-                this._addNewRow(this, "InCash", "tabInCash", "_InCashSet", oEvent);
+                var oNewObj = {};
+                oNewObj.Loekz = false;
+                oNewObj.KaishaCd = this._KaishaCd;
+                oNewObj.TenpoCd = this._TenpoCd;
+                oNewObj.EigyoBi = this._EigyoBi;
+                oNewObj.KihyoNo = this._KihyoNo;
+                oNewObj.KeijoBusho = "";
+                oNewObj.DrkamokuCd = "";
+                oNewObj.NyknSaki = "";
+                oNewObj.NyknTekiyo = "";
+                oNewObj.Waers = 'JPY';
+                oNewObj.NyknKingaku = 0;
+                oNewObj.NyknKamokuCd = "";
+                oNewObj.NyknKamokuNm = "";
+                oNewObj.ZeiCd = "";
+                oNewObj.Jidoutenkifuyo = false;
+                this._addNewRow(this, "InCash", "tabInCash", "_InCashSet", oNewObj, oEvent);
             },
 
             onTabInCashDelete: function (oEvent) {
@@ -258,7 +258,22 @@ sap.ui.define([
             },
 
             onTabOutCashAdd: function (oEvent) {
-                this._addNewRow(this, "OutCash", "tabOutCash", "_OutCashSet", oEvent);
+                var oNewObj = {};
+                oNewObj.Loekz = false;
+                oNewObj.KaishaCd = this._KaishaCd;
+                oNewObj.TenpoCd = this._TenpoCd;
+                oNewObj.EigyoBi = this._EigyoBi;
+                oNewObj.KihyoNo = this._KihyoNo;
+                oNewObj.KeihiFutanBusho = "";
+                oNewObj.ShknSaki = "";
+                oNewObj.ShknTekiyo = "";
+                oNewObj.Waers = 'JPY';
+                oNewObj.ShknKingaku = 0;
+                oNewObj.ShknKamokuCd = "";
+                oNewObj.ShknKamokuNm = "";
+                oNewObj.ZeiCd = "";
+                oNewObj.Jidoutenkifuyo = false;
+                this._addNewRow(this, "OutCash", "tabOutCash", "_OutCashSet", oNewObj, oEvent);
             },
 
             onTabOutCashDelete: function (oEvent) {
@@ -295,7 +310,7 @@ sap.ui.define([
                         that._goodsSource.setValueState("Error");
                     }
                 });
- 
+
             },
 
             //景品仕入高合计
@@ -329,20 +344,38 @@ sap.ui.define([
                 this.byId(sSumFieldId).setText(oCurrencyFormat.format(amount, waers));
             },
 
-            _calcTableColumnSum: function (oContext, sTableId, sColumnId, sSumFieldId) {
+            _calcTableColumnSum: function (oContext, sBindingPath, sTableId, sColumnId, sSumFieldId) {
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var aItems = oContext.byId(sTableId).getRows();
                 var amount = 0, waers = '', lineAmount = 0;
+                var oBindingContext, oData;
                 for (var item of aItems) {
-                    var data = item.getBindingContext().getObject();
-                    var colVal = data[sColumnId].toString();
-                    lineAmount = oCurrencyParse.parse(colVal);
-                    amount += lineAmount;
-                    waers = (waers === '') ? data.Waers : 'JPY';
+                    if (sBindingPath) {
+                        oBindingContext = item.getBindingContext(sBindingPath);
+                        // data = item.getBindingContext(sBindingPath).getObject();
+                    } else {
+                        oBindingContext = item.getBindingContext();
+                        // data = item.getBindingContext().getObject();
+                    }
+
+                    if (oBindingContext) {
+                        oData = oBindingContext.getObject();
+                        var colVal = "0";
+                        if (oData[sColumnId]) {
+                            colVal = oData[sColumnId].toString();
+                        }
+                        lineAmount = oCurrencyParse.parse(colVal);
+                        amount += lineAmount;
+                        waers = (waers === '') ? oData.Waers : 'JPY';
+                    }
                 }
 
-                var oCurrencyFormat = NumberFormat.getCurrencyInstance({ showMeasure: false });
-                this.byId(sSumFieldId).setText(oCurrencyFormat.format(amount, waers));
+                if (sSumFieldId != null) {
+                    var oCurrencyFormat = NumberFormat.getCurrencyInstance({ showMeasure: false });
+                    this.byId(sSumFieldId).setText(oCurrencyFormat.format(amount, waers));
+                }
+
+                return amount;
             },
 
             onEffectiveCashManChange: function () {
@@ -354,11 +387,15 @@ sap.ui.define([
             },
 
             onPlanCashAmountChange: function () {
-                this._calcTableColumnSum(this, "tabPlanCash", "Amount", "txtZyunbikinGkiAmt");
+                this._calcTableColumnSum(this, null, "tabPlanCash", "Amount", "txtZyunbikinGkiAmt");
             },
 
-            // onTab3JidoutenkifuyoCheck: function(oEvent){
-            //     debugger;
-            // }
+            onTabInCashRowUpdate: function (oEvent) {
+                this._sum.InCashSum = this._calcTableColumnSum(this, "InCash", "tabInCash", "NyknKingaku", null);
+            },
+
+            onTabOutCashRowUpdate: function(oEvent){
+                this._sum.OutCashSum = this._calcTableColumnSum(this, "OutCash", "tabOutCash", "ShknKingaku", null);
+            }
         });
     });

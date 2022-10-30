@@ -663,7 +663,7 @@
                                      visibleRowCount="5" 
                                      selectionMode="Single" 
                                      editable="{viewState>/editable}"
-                                     >
+                                     rowsUpdated="onTabInCashRowUpdate">
                             <table:extension>
                                 <OverflowToolbar id="tab3Toolbar">
                                     <content>
@@ -706,7 +706,8 @@
                                 <table:Column id="tab3Col5">
                                     <Label id="lblTab3NyknKingaku" text="{i18n>tab3_col4}" />
                                     <table:template>
-                                        <Input id="txtTab3NyknKingaku" textDirection="RTL" value="{InCash>NyknKingaku}" />
+                                        <Input id="txtTab3NyknKingaku" value="{parts:[{path:'InCash>NyknKingaku'},{path:'Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" change="onTabInCashRowUpdate"/>
                                     </table:template>
                                 </table:Column>
 
@@ -734,10 +735,27 @@
                                 <table:Column id="tab3Col9">
                                     <Label id="lblTab3Jidoutenkifuyo" text="{i18n>tab3_col8}" />
                                     <table:template>
-                                        <CheckBox id="chkTab3Jidoutenkifuyo" selected="{InCash>Jidoutenkifuyo}"/>
+                                        <CheckBox id="chkTab3Jidoutenkifuyo" selected="{InCash>Jidoutenkifuyo}" />
                                     </table:template>
                                 </table:Column>
                             </table:columns>
+
+                            <table:footer>
+                                <form:SimpleForm id="sfTabInCash" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" editable="{viewState>/editable}">
+                                    <Label id="lblInCashTotal" labelFor="txtInCashTotal" text="{i18n>tab3_total}">
+                                        <layoutData>
+                                            <l:GridData id="gd111" span="XL5 L5 M5" />
+                                        </layoutData>
+                                    </Label>
+
+                                    <Text id="txtInCashTotal" text="{parts:[{path:'sum>/InCashSum'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
+                                        <layoutData>
+                                            <l:GridData id="gd112" span="XL7 L7 M7" />
+                                        </layoutData>
+                                    </Text>
+                                </form:SimpleForm>
+                            </table:footer>
                         </table:Table>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
@@ -746,7 +764,12 @@
             <uxap:ObjectPageSection id="section4" title="{i18n>section4_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection12">
-                        <table:Table id="tabOutCash" rows="{path:'OutCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}">
+                        <table:Table id="tabOutCash" 
+                                     rows="{path:'OutCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" 
+                                     visibleRowCount="5" 
+                                     selectionMode="Single" 
+                                     editable="{viewState>/editable}"
+                                     rowsUpdated="onTabOutCashRowUpdate">
                             <table:extension>
                                 <OverflowToolbar id="tab4Toolbar">
                                     <content>
@@ -782,7 +805,8 @@
                                 <table:Column id="tab4Col4">
                                     <Label id="lblTab4ShknKingaku" text="{i18n>tab3_col4}" />
                                     <table:template>
-                                        <Input id="txtTab4ShknKingaku" textDirection="RTL" value="{OutCash>ShknKingaku}" />
+                                        <Input id="txtTab4ShknKingaku" value="{parts:[{path:'OutCash>ShknKingaku'},{path: 'OutCash>Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" change="onTabOutCashRowUpdate" />
                                     </table:template>
                                 </table:Column>
 
@@ -814,6 +838,22 @@
                                     </table:template>
                                 </table:Column>
                             </table:columns>
+                            <table:footer>
+                                <form:SimpleForm id="sfTabOutCash" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" editable="{viewState>/editable}">
+                                    <Label id="lblOutCashTotal" labelFor="txtInCashTotal" text="{i18n>tab2_total}">
+                                        <layoutData>
+                                            <l:GridData id="gd113" span="XL5 L5 M5" />
+                                        </layoutData>
+                                    </Label>
+
+                                    <Text id="txtOutCashTotal" text="{parts:[{path:'sum>/OutCashSum'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
+                                        <layoutData>
+                                            <l:GridData id="gd114" span="XL7 L7 M7" />
+                                        </layoutData>
+                                    </Text>
+                                </form:SimpleForm>
+                            </table:footer>
                         </table:Table>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
@@ -1098,7 +1138,7 @@
                     />
 
                     <ToolbarSpacer id="pageToolbarSpacer" />
-                    <Button id="btnSave" text="{i18n>footer_f1}"  enabled="{viewState>/editable}" press="onSave" />
+                    <Button id="btnSave" text="{i18n>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
                     <Button id="btnChange" text="{i18n>footer_f2}" press="onChange" />
                     <Button id="btnRequest" text="{i18n>footer_f3}" press="onRequest" />
                     <Button id="btnGenerate" text="{i18n>footer_f4}" type="Emphasized" press="onGenerate" />

@@ -134,9 +134,20 @@ sap.ui.define([
         },
 
         convertCashData: function(aData){
-            var that = this;
-            for(var a of aData){
-                that.convertJsonBooleanToString(a, 'Jidoutenkifuyo');
+            //var that = this;
+            for(var oObj of aData){
+                //that.convertJsonBooleanToString(a, 'Jidoutenkifuyo');
+                for(var f in oObj){
+                    if(typeof(oObj[f]) === 'number'){
+                        oObj[f] = oObj[f].toString();
+                    }else if(f === 'Jidoutenkifuyo'){
+                        if(oObj[f] === true){
+                            oObj[f] = 'X';
+                        }else{
+                            oObj[f] = '';
+                        }
+                    }
+                }
             }
 
             return aData;
