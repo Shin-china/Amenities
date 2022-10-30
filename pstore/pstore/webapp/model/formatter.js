@@ -175,8 +175,8 @@ sap.ui.define(["sap/ui/core/format/NumberFormat"], function (NumberFormat) {
             return oCurrencyFormat.format(amount, waers);
         },
 
-        formatCheckbox: function(sVal){
-            if(sVal == "X"){
+        formatCheckBox: function(sVal){
+            if(sVal === "X"){
                 return true;
             }else{
                 return false;

@@ -678,28 +678,28 @@
                                 <table:Column id="tab3Col1">
                                     <Label id="lblTab3KeijoBusho" text="{i18n>tab3_col1}" />
                                     <table:template>
-                                        <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" />
+                                        <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col2">
                                     <Label id="lblTab3DrkamokuCd" text="{i18n>tab3_col2_1}" />
                                     <table:template>
-                                        <Input id="txtTab3DrkamokuCd" maxLength="10" value="{InCash>DrkamokuCd}" />
+                                        <Input id="txtTab3DrkamokuCd" maxLength="10" value="{InCash>DrkamokuCd}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col3">
                                     <Label id="lblTab3NyknSaki" text="{i18n>tab3_col2}" />
                                     <table:template>
-                                        <Input id="txtTab3NyknSaki" maxLength="22" value="{InCash>NyknSaki}" />
+                                        <Input id="txtTab3NyknSaki" maxLength="22" value="{InCash>NyknSaki}" editable="{viewState>/editable}"/>
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col4">
                                     <Label id="lblTab3NyknTekiyo" text="{i18n>tab3_col3}" />
                                     <table:template>
-                                        <Input id="txtTab3NyknTekiyo" maxLength="42" value="{InCash>NyknTekiyo}" />
+                                        <Input id="txtTab3NyknTekiyo" maxLength="42" value="{InCash>NyknTekiyo}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
@@ -707,14 +707,14 @@
                                     <Label id="lblTab3NyknKingaku" text="{i18n>tab3_col4}" />
                                     <table:template>
                                         <Input id="txtTab3NyknKingaku" value="{parts:[{path:'InCash>NyknKingaku'},{path:'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" change="onTabInCashRowUpdate"/>
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onTabInCashRowUpdate"/>
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col6">
                                     <Label id="lblTab3NyknKamokuCd" text="{i18n>tab3_col5}" />
                                     <table:template>
-                                        <Input id="txtTab3NyknKamokuCd" maxLength="10" value="{InCash>NyknKamokuCd}" />
+                                        <Input id="txtTab3NyknKamokuCd" maxLength="10" value="{InCash>NyknKamokuCd}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
@@ -728,14 +728,14 @@
                                 <table:Column id="tab3Col8">
                                     <Label id="lblTab3ZeiCd" text="{i18n>tab3_col7}" />
                                     <table:template>
-                                        <Input id="txtTab3ZeiCd" maxLength="2" value="{InCash>ZeiCd}" />
+                                        <Input id="txtTab3ZeiCd" maxLength="2" value="{InCash>ZeiCd}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col9">
                                     <Label id="lblTab3Jidoutenkifuyo" text="{i18n>tab3_col8}" />
                                     <table:template>
-                                        <CheckBox id="chkTab3Jidoutenkifuyo" selected="{InCash>Jidoutenkifuyo}" />
+                                        <CheckBox id="chkTab3Jidoutenkifuyo" selected="{InCash>Jidoutenkifuyo}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
                             </table:columns>
@@ -784,21 +784,21 @@
                                 <table:Column id="tab4Col1">
                                     <Label id="lblTab4KeihiFutanBusho" text="{i18n>tab3_col1}" />
                                     <table:template>
-                                        <Input id="txtTab4KeihiFutanBusho" maxLength="4" value="{OutCash>KeihiFutanBusho}" />
+                                        <Input id="txtTab4KeihiFutanBusho" maxLength="4" value="{OutCash>KeihiFutanBusho}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab4Col2">
                                     <Label id="lblTab4ShknSaki" text="{i18n>tab3_col2}" />
                                     <table:template>
-                                        <Input id="txtTab4ShknSaki" maxLength="22" value="{OutCash>ShknSaki}" />
+                                        <Input id="txtTab4ShknSaki" maxLength="22" value="{OutCash>ShknSaki}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab4Col3">
                                     <Label id="lblTab4ShknTekiyo" text="{i18n>tab3_col3}" />
                                     <table:template>
-                                        <Input id="txtTab4ShknTekiyo" maxLength="42" value="{OutCash>ShknTekiyo}" />
+                                        <Input id="txtTab4ShknTekiyo" maxLength="42" value="{OutCash>ShknTekiyo}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
@@ -806,14 +806,14 @@
                                     <Label id="lblTab4ShknKingaku" text="{i18n>tab3_col4}" />
                                     <table:template>
                                         <Input id="txtTab4ShknKingaku" value="{parts:[{path:'OutCash>ShknKingaku'},{path: 'OutCash>Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" change="onTabOutCashRowUpdate" />
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onTabOutCashRowUpdate" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab4Col5">
                                     <Label id="lblTab4ShknKamokuCd" text="{i18n>tab3_col5}" />
                                     <table:template>
-                                        <Input id="txtTab4ShknKamokuCd" maxLength="10" value="{OutCash>ShknKamokuCd}" />
+                                        <Input id="txtTab4ShknKamokuCd" maxLength="10" value="{OutCash>ShknKamokuCd}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
@@ -827,14 +827,14 @@
                                 <table:Column id="tab4Col7">
                                     <Label id="lblTab4ZeiCd" text="{i18n>tab3_col7}" />
                                     <table:template>
-                                        <Input id="txtTab4ZeiCd" maxLength="2" value="{OutCash>ZeiCd}" />
+                                        <Input id="txtTab4ZeiCd" maxLength="2" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab4Col8">
                                     <Label id="lblTab4Jidoutenkifuyo" text="{i18n>tab3_col8}" />
                                     <table:template>
-                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{OutCash>Jidoutenkifuyo}" />
+                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{OutCash>Jidoutenkifuyo}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
                             </table:columns>

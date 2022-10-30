@@ -140,12 +140,6 @@ sap.ui.define([
                 for(var f in oObj){
                     if(typeof(oObj[f]) === 'number'){
                         oObj[f] = oObj[f].toString();
-                    }else if(f === 'Jidoutenkifuyo'){
-                        if(oObj[f] === true){
-                            oObj[f] = 'X';
-                        }else{
-                            oObj[f] = '';
-                        }
                     }
                 }
             }
