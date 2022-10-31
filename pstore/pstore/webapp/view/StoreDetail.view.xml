@@ -93,7 +93,7 @@
                             </Input> -->
 
                             <Input id="txtZnjtsKrkshGankin" value="{parts:[{path:'ZnjtsKrkshGankin'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcHnjtsKrkshdk">
                                 <layoutData>
                                     <l:GridData id="gd12" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -106,7 +106,7 @@
                             </Label>
 
                             <Input id="txtGnkNyukinSogaku" value="{parts:[{path:'GnkNyukinSogaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcHnjtsKrkshdk">
                                 <layoutData>
                                     <l:GridData id="gd14" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -119,7 +119,7 @@
                             </Label>
 
                             <Input id="txtRyogaekinUkeire" value="{parts:[{path:'RyogaekinUkeire'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcHnjtsKrkshdk">
                                 <layoutData>
                                     <l:GridData id="gd16" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -172,7 +172,7 @@
                             </Label>
 
                             <Input id="txtPGenkinUriage" value="{parts:[{path:'PGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcPUriage">
                                 <layoutData>
                                     <l:GridData id="gd24" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -185,7 +185,7 @@
                             </Label>
 
                             <Input id="txtSGenkinUriage" value="{parts:[{path:'SGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcSUriage">
                                 <layoutData>
                                     <l:GridData id="gd26" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -198,7 +198,7 @@
                             </Label>
 
                             <Input id="txtPCardUriage" value="{parts:[{path:'PCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcPUriage">
                                 <layoutData>
                                     <l:GridData id="gd28" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -211,7 +211,7 @@
                             </Label>
 
                             <Input id="txtSCardUriage" value="{parts:[{path:'SCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcSUriage">
                                 <layoutData>
                                     <l:GridData id="gd30" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -247,7 +247,9 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtPUriage" text="{parts:[{path: 'Waers'},{path:'PGenkinUriage'}, {path:'PCardUriage'}], formatter:'.formatter.formatSumCurrency'}">
+                            <!-- <Text id="txtPUriage" text="{parts:[{path: 'Waers'},{path:'PGenkinUriage'}, {path:'PCardUriage'}], formatter:'.formatter.formatSumCurrency'}"> -->
+                            <Text id="txtPUrigage" text="{parts:[{path:'sum>/PUriage'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false} }">
                                 <layoutData>
                                     <l:GridData id="gd36" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -259,7 +261,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSUriage" text="{parts:[{path: 'Waers'},{path:'SGenkinUriage'}, {path:'SCardUriage'}], formatter:'.formatter.formatSumCurrency'}">
+                            <Text id="txtSUriage" text="{parts:[{path: 'sum>/SUriage'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false} }">
                                 <layoutData>
                                     <l:GridData id="gd38" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -271,7 +274,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtGenkinUragGokei" text="{parts:[{path: 'Waers'},{path:'PGenkinUriage'}, {path:'SGenkinUriage'}], formatter:'.formatter.formatSumCurrency'}">
+                            <Text id="txtGenkinUragGokei" text="{parts:[{path: 'sum>/GenkinUragGokei'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false} }">
                                 <layoutData>
                                     <l:GridData id="gd40" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -285,12 +289,9 @@
 
                             <Text
                                 id="txtUriageSogokei"
-                                text="{parts:[{path: 'Waers'},{path:'PGenkinUriage'}, 
-                                {path:'PCardUriage'}, 
-                                {path:'SGenkinUriage'},
-                                {path:'SCardUriage'}
-                                ], 
-                                formatter:'.formatter.formatSumCurrency'}"
+                                text="{parts:[{path: 'sum>/UriageSogokei'},{path:'sum>/Waers'}], 
+                                type: 'sap.ui.model.type.Currency',
+							    formatOptions: {showMeasure: false} }"
                             >
                                 <layoutData>
                                     <l:GridData id="gd42" span="XL4 L4 M12 S12" />
@@ -308,7 +309,7 @@
                             </Label>
 
                             <Input id="txtHanbaiAmt" value="{parts:[{path:'HanbaiAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcKadoHanbaiGokei">
                                 <layoutData>
                                     <l:GridData id="gd44" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -333,7 +334,7 @@
                             </Label>
 
                             <Input id="txtSekisanAmt" value="{parts:[{path:'SekisanAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcKadoHanbaiGokei">
                                 <layoutData>
                                     <l:GridData id="gd48" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -357,19 +358,21 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtKadoHanbaiGokei" text="{parts:[{path: 'HanbaiAmt'}, {path: 'SekisanAmt'}, {path: 'Waers'}], formatter:'.formatter.formatKadoHanbaiGokei'}">
+                            <Text id="txtKadoHanbaiGokei" text="{parts:[{path: 'sum>/KadoHanbaiGokei'}, {path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd52" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-                            <!--TODO uncheck-->
+
                             <Label id="lblSec4F6" labelFor="txtSec4F6" text="{i18n>sec4_f6}">
                                 <layoutData>
                                     <l:GridData id="gd53" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec4F6">
+                            <Text id="txtSec4F6" text="{parts:[{path:'sum>/SonotaNyukinKei'},{path:'sum>/Waers'}],type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd54" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -381,12 +384,12 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec4F7">
+                            <Text id="txtSec4F7" text="{parts:[{path:'sum>/SonotaShunyuKei'},{path:'sum>/Waers'}],type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd56" span="XL4 L4 M12 S12" />
                                 </layoutData>
-                            </Text>
-                            <!--TODO UNCHECK END-->
+                            </Text> 
                         </form:SimpleForm>
                     </uxap:ObjectPageSubSection>
 
@@ -485,7 +488,7 @@
                                             <l:GridData id="gdf6-1" span="XL9 L9 M9 S9" />
                                         </layoutData>
                                     </Label>
-                                    <Text id="txtKeihinShirdk" textDirection="RTL" text="{parts:[{path:'KeihinShirdk'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                    <Text id="txtKeihinShirdk" textDirection="RTL" text="{parts:[{path:'sum>/KeihinShirdk'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}">
                                         <layoutData>
                                             <l:GridData id="gdf6-2" span="XL3 L3 M3 S3" />
@@ -503,8 +506,9 @@
                                     <l:GridData id="gd57" span="XL3 L3 M12 S12" />
                                 </layoutData>
                             </Label>
-                            <!--TODO-->
-                            <Text id="txtSec7F1">
+                            
+                            <Text id="txtSec7F1" text="{parts:[{path:'sum>/SyunyuGokei'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd58" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -516,7 +520,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec7F2">
+                            <Text id="txtSec7F2" text="{parts:[{path:'sum>/ShishutsuGokei'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd60" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -527,7 +532,8 @@
                                     <l:GridData id="gd61" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
                                 </layoutData>
                             </Label>
-                            <Text id="txtSec7F3">
+                            <Text id="txtSec7F3" text="{parts:[{path:'sum>/HnjtsKrkshdk'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd62" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -543,12 +549,13 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec8F1">
+                            <Text id="txtSec8F1" text="{parts:[{path:'sum>/HnjtsHnshSofukin'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd64" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-                            <!--TODO END-->
+                             
                             <Label id="lblZnjtsHnshSfknRk" labelFor="txtZnjtsHnshSfknRk" text="{i18n>sec8_f2}">
                                 <layoutData>
                                     <l:GridData id="gd65" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -556,7 +563,7 @@
                             </Label>
 
                             <Input id="txtZnjtsHnshSfknRk" value="{parts:[{path:'ZnjtsHnshSfknRk'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcSofukinGokei">
                                 <layoutData>
                                     <l:GridData id="gd66" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -569,7 +576,7 @@
                             </Label>
 
                             <Input id="txtRyogaekinModoshi" value="{parts:[{path:'RyogaekinModoshi'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcSofukinGokei">
                                 <layoutData>
                                     <l:GridData id="gd68" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -581,13 +588,12 @@
                                 </layoutData>
                             </Label>
 
-                            <!--TODO-->
-                            <Text id="txtSec8F4">
+                            <Text id="txtSec8F4" text="{parts:[{path:'sum>/SofukinGokei'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}" >
                                 <layoutData>
                                     <l:GridData id="gd70" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-                            <!--todo end-->
 
                             <Label id="lblKiteiGankinAmt" labelFor="txtKiteiGankinAmt" text="{i18n>sec8_f5}">
                                 <layoutData>
@@ -596,24 +602,25 @@
                             </Label>
 
                             <Input id="txtKiteiGankinAmt" value="{parts:[{path:'KiteiGankinAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcHnjtsKrkshdkUgki">
                                 <layoutData>
                                     <l:GridData id="gd72" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
-                            <!--TODO-->
+                            
                             <Label id="lblSec8F6" labelFor="txtSec8F6" text="{i18n>sec8_f6}">
                                 <layoutData>
                                     <l:GridData id="gd73" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSec8F6">
+                            <Text id="txtSec8F6" text="{parts:[{path:'sum>/HnjtsKrkshdkUgki'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd74" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-                            <!--TODO END-->
+                            
                             <Label id="lblGnknKfskUchwk" labelFor="txtGnknKfskUchwk" text="{i18n>sec8_f7}">
                                 <layoutData>
                                     <l:GridData id="gd75" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -748,7 +755,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtInCashTotal" text="{parts:[{path:'sum>/InCashSum'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+                                    <Text id="txtInCashTotal" text="{parts:[{path:'sum>/SonotaNyukinKei'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}">
                                         <layoutData>
                                             <l:GridData id="gd112" span="XL7 L7 M7" />
@@ -846,7 +853,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtOutCashTotal" text="{parts:[{path:'sum>/OutCashSum'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+                                    <Text id="txtOutCashTotal" text="{parts:[{path:'sum>/SonotaShunyuKei'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}">
                                         <layoutData>
                                             <l:GridData id="gd114" span="XL7 L7 M7" />
@@ -902,7 +909,9 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtYuukouGkiAmt">
+                                    <Text id="txtYuukouGkiAmt" text="{parts:[{path: 'sum>/YuukouGkiAmt'},{path:'sum>/Waers'}], 
+                                                                    type: 'sap.ui.model.type.Currency',
+							                                        formatOptions: {showMeasure: false} }">
                                         <layoutData>
                                             <l:GridData id="gd90" spanL="4" spanXL="4" spanM="4" />
                                         </layoutData>
@@ -953,7 +962,9 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtHasonGkiAmt">
+                                    <Text id="txtHasonGkiAmt" text="{parts:[{path: 'sum>/HasonGkiAmt'},{path:'sum>/Waers'}], 
+                                                                    type: 'sap.ui.model.type.Currency',
+							                                        formatOptions: {showMeasure: false} }">
                                         <layoutData>
                                             <l:GridData id="gd92" spanL="4" spanXL="4" spanM="4" />
                                         </layoutData>
@@ -1004,7 +1015,9 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtZyunbikinGkiAmt">
+                                    <Text id="txtZyunbikinGkiAmt" text="{parts:[{path: 'sum>/ZyunbikinGkiAmt'},{path:'sum>/Waers'}], 
+                                                                    type: 'sap.ui.model.type.Currency',
+							                                        formatOptions: {showMeasure: false} }">
                                         <layoutData>
                                             <l:GridData id="gd94" spanL="4" spanXL="4" spanM="4" />
                                         </layoutData>
@@ -1027,7 +1040,7 @@
                             </Label>
 
                             <Input id="txtYokuzitusohukin" value="{parts:[{path:'Fi1007/Yokuzitusohukin'},{path: 'Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcYokuzitunyuukin">
                                 <layoutData>
                                     <l:GridData id="gd96" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
@@ -1040,7 +1053,7 @@
                             </Label>
 
                             <Input id="txtYokuzituryougaekin" value="{parts:[{path:'Fi1007/Yokuzituryougaekin'},{path: 'Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}">
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onCalcYokuzitunyuukin">
                                 <layoutData>
                                     <l:GridData id="gd98" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
@@ -1052,7 +1065,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSubForm17F3" textDirection="RTL" text="">
+                            <Text id="txtSubForm17F3" text="{parts:[{path:'sum>/Yokuzitunyuukin'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd100" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
@@ -1064,7 +1078,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSubForm17F4" textDirection="RTL" text="">
+                            <Text id="txtSubForm17F4" text="{parts:[{path:'sum>/Yokuzitukinkonai'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd102" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
@@ -1076,7 +1091,8 @@
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSubForm17F5" textDirection="RTL" text="100.00">
+                            <Text id="txtSubForm17F5" text="{parts:[{path:'sum>/HnjtsKrkshdkUgki'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd104" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
@@ -1095,13 +1111,14 @@
                                 </layoutData>
                             </Input>
 
-                            <Label id="lblSubForm17F7" labelFor="txtSubForm17F7" text="{i18n>sub16_f7}">
+                            <Label id="lblSubForm17F7" labelFor="txtSagaku" text="{i18n>sub16_f7}">
                                 <layoutData>
                                     <l:GridData id="gd107" linebreakXL="true" linebreakL="true" spanXL="2" spanL="2" spanM="12" spanS="12" />
                                 </layoutData>
                             </Label>
 
-                            <Text id="txtSubForm17F7" textDirection="RTL" text="">
+                            <Text id="txtSagaku" text="{parts:[{path:'sum>/Sagaku'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd108" spanXL="4" spanL="4" spanM="12" spanS="12" />
                                 </layoutData>
