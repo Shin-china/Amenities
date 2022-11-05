@@ -2,7 +2,7 @@
 
     <Page id="mainPage" title="{i18n>appTitle}">
         <content>
-            <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+            <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding" stretchContentHeight="true">
                 <items>
                     <IconTabFilter id="iconTabFilter" text="{i18n>tab1}" >
                         <mvc:XMLView id="dailyTabulationView" viewName="com.shin.pstore.pstore.view.DailyTabulation" height="80%" />

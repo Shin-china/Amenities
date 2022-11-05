@@ -38,7 +38,7 @@ sap.ui.define([
         },
 
         onShowCopyDialog: function () {
-            var oTable = this.byId("table1");
+            var oTable = this.byId("table1").getTable();
             var aIndex = oTable.getSelectedIndices();
 
             if (aIndex.length <= 0) {
@@ -55,7 +55,7 @@ sap.ui.define([
         },
 
         onShowDeleteDialog: function () {
-            var oTable = this.byId("table1");
+            var oTable = this.byId("table1").getTable();
             var aIndex = oTable.getSelectedIndices();
 
             if (aIndex.length <= 0) {
@@ -170,7 +170,7 @@ sap.ui.define([
         },
 
         onCopyStore: function () {
-            var oTable = this.byId("table1");
+            var oTable = this.byId("table1").getTable();
             var aIndex = oTable.getSelectedIndices(); 
                    
             var oBindingData = oTable.getContextByIndex(aIndex[0]).getObject();
@@ -228,7 +228,7 @@ sap.ui.define([
         },
 
         onDeleteStore: function () {
-            var oTable = this.byId("table1");
+            var oTable = this.byId("table1").getTable();
             var aIndex = oTable.getSelectedIndices();
 
             if (aIndex.length <= 0) {

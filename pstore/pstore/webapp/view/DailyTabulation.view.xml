@@ -1,26 +1,58 @@
-<mvc:View xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
-	controllerName="com.shin.pstore.pstore.controller.DailyTabulation"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-    xmlns:table="sap.ui.table" 
+<mvc:View
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    controllerName="com.shin.pstore.pstore.controller.DailyTabulation"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core"
     xmlns:f="sap.f"
-	displayBlock="true"
-
-	height="100%"
-	busyIndicatorDelay="0"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
 >
-<f:DynamicPage id="dynamicPage1" showFooter="true">
-    <f:header>
+    <f:DynamicPage id="dynamicPage1" showFooter="true">
+        <f:header>
+            <f:DynamicPageHeader id="pageHeader">
+                <f:content>
+                    <smartfilterbar:SmartFilterBar id="storeFilter" entitySet="StoreSet" showClearOnFB="true" showGoOnFB="true" liveMode="true" />
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
 
-        <f:DynamicPageHeader id="pageHeader">
-            <f:content>
-                <smartfilterbar:SmartFilterBar id="dailyFilter" entitySet="StoreSet"></smartfilterbar:SmartFilterBar>
-            </f:content>
-        </f:DynamicPageHeader>
-    </f:header>
+        <f:content>
+            <smarttable:SmartTable id="table1" entitySet="StoreSet" persistencyKey="storePersistent" enableAutoBinding="true" width="100%" height="80%" showRowCount="true" smartFilterId="storeFilter" tableType="Table">
+                <smarttable:customToolbar>
+                    <OverflowToolbar id="overFlowToolbar">
+                        <ToolbarSpacer id="toolbarSpacer" />
+                        <Button id="btnShowAddDialog" text="{i18n>tab1_btn01}" type="Transparent" press="onShowAddDialog" />
+                        <Button id="btnShowCopyDialog" text="{i18n>tab1_btn02}" type="Transparent" press="onShowCopyDialog" />
+                        <Button id="btnShowDeleteDialog" text="{i18n>tab1_btn03}" type="Attention" press="onShowDeleteDialog" />
+                        <Button id="btnShowGenerateDialog" text="{i18n>tab1_btn04}" type="Transparent" press="onShowGenerateDialog" />
+                        <Button id="btnExportPdf" text="{i18n>tab1_btn05}" type="Transparent" press="onExportPdf" />
+                    </OverflowToolbar>
+                </smarttable:customToolbar>
 
-    <f:content>
-        <table:Table id="table1" 
+                <!-- <table:RowAction id="tab1RowAction">
+                    <table:items>
+                        <table:RowActionItem id="tab1RowActionItem" type="Navigation" icon="sap-icon://navigation-right-arrow" press="onNavigate" />
+                    </table:items>
+                </table:RowAction> -->
+                <!-- <Table id="tabInside" mode="MultiSelect"> 
+                    <ColumnListItem id="tab1RowActionItem" type="Navigation" press="onNavigate" /> 
+                </Table> -->
+
+                <table:Table id="tableInside" rowActionCount="1">
+                    <table:rowActionTemplate>
+                        <table:RowAction id="tab1RowAction" >
+                            <table:items>
+                                <table:RowActionItem id="tab1RowActionItem" type="Navigation" icon="sap-icon://navigation-right-arrow" press="onNavigate" />
+                            </table:items>
+                        </table:RowAction>
+                    </table:rowActionTemplate>
+                </table:Table>
+            </smarttable:SmartTable>
+            <!-- <table:Table id="table1" 
         enableColumnFreeze="true" 
         enableGrouping="true" 
         enableCustomFilter="true" 
@@ -207,7 +239,7 @@
                     </table:label>
                 </table:Column>
             </table:columns>
-        </table:Table>
-    </f:content>
-</f:DynamicPage>
+        </table:Table> -->
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>
