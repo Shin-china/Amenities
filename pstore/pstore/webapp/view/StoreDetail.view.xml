@@ -1163,8 +1163,10 @@
                     <ToolbarSpacer id="pageToolbarSpacer" />
                     <Button id="btnSave" text="{i18n>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
                     <Button id="btnChange" text="{i18n>footer_f2}" enabled="{= ${viewState>/editable} === false}" press="onChange" />
-                    <Button id="btnRequest" text="{i18n>footer_f3}" press="onRequest" />
-                    <Button id="btnGenerate" text="{i18n>footer_f4}" type="Emphasized" press="onGenerate" />
+                    <Button id="btnRequest" text="{i18n>footer_f3}" 
+                            enabled="{= ${NikkeihyoStatusCd} === '1' || ${NikkeihyoStatusCd} === '5' || ${NikkeihyoStatusCd} === '8' || ${NikkeihyoStatusCd} === ''}" 
+                            press="onRequest" />
+                    <Button id="btnGenerate" text="{i18n>footer_f4}" enabled="{= ${Belnr} === '' &amp;&amp; ${Gjahr} === '0000'}" type="Emphasized" press="onGenerate" />
                     <Button id="btnStop" text="{i18n>footer_f5}" type="Attention" press="onStop" />
                 </content>
             </OverflowToolbar>

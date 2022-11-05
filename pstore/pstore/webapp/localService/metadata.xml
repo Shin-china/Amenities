@@ -114,6 +114,37 @@
                 <Property Name="NameFirst" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="First name" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="NameLast" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Last name" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
+            <EntityType Name="CompanyHelp" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Butxt" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Company Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Land1" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Country/Reg." sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="AccountDoc" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KihyoNo"/>
+                    <PropertyRef Name="KaishaCd"/>
+                    <PropertyRef Name="Gjahr"/>
+                    <PropertyRef Name="Belnr"/>
+                </Key>
+                <Property Name="KihyoNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="起票番号" sap:updatable="false"/>
+                <Property Name="KaishaCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="会社コード" sap:updatable="false"/>
+                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="会計年度" sap:updatable="false"/>
+                <Property Name="Belnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="仕訳番号" sap:updatable="false"/>
+                <Property Name="EigyoBi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="営業日"/>
+                <Property Name="KaishaNm" Type="Edm.String" MaxLength="25" sap:unicode="false" sap:label="会社名称" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TenpoCd" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="店舗コード" sap:sortable="false"/>
+                <Property Name="TenpoNm" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="店舗名称" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Blart" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="伝票タイプ" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bktxt" Type="Edm.String" MaxLength="25" sap:unicode="false" sap:label="ヘッダテキスト" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Cpudt" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:unicode="false" sap:label="登録日付" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usnam" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="登録者ID" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UsnamText" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="登録者名" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stblg" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="反対仕訳番号" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stjah" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="反対仕訳会計年度" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
             <EntityType Name="Store" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="KaishaCd"/>
@@ -123,14 +154,25 @@
                 </Key>
                 <Property Name="Fi1007" Type="ZZPSTORE_SRV.Fi1007" Nullable="false"/>
                 <Property Name="Action" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Action" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="KaishaCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="KAISHA_CD"/>
+                <Property Name="Belnr" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Document Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gjahr" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RefKaishaCd" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="会社コード" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RefTenpoCd" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="店舗コード" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KaishaCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="会社コード"/>
+                <Property Name="RefEigyoBi" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="営業日" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RefKihyoNo" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="起票番号" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="TenpoKakuninCd" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="TENPO_KAKUNIN_CD" sap:filterable="false"/>
-                <Property Name="RegUserName" Type="Edm.String" Nullable="false" MaxLength="90" sap:unicode="false" sap:label="Reg User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="TENPO_CD"/>
+                <Property Name="RegUserName" Type="Edm.String" MaxLength="90" sap:unicode="false" sap:label="Reg User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShinseiDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShoninDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="店舗コード"/>
+                <Property Name="LastShinseiDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="TenpoKakunin" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="TENPO_KAKUNIN" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="EigyoBi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="EIGYO_BI"/>
-                <Property Name="UpdUserName" Type="Edm.String" Nullable="false" MaxLength="90" sap:unicode="false" sap:label="Update User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="KihyoNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="KIHYO_NO"/>
+                <Property Name="EigyoBi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="営業日"/>
+                <Property Name="RegDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpdUserName" Type="Edm.String" MaxLength="90" sap:unicode="false" sap:label="Update User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KihyoNo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="起票番号"/>
                 <Property Name="KaishaNm" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="KAISHA_NM" sap:filterable="false"/>
                 <Property Name="TenpoName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="TENPO_NAME" sap:filterable="false"/>
                 <Property Name="KihyoshaName" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="KIHYOSHA_NAME" sap:filterable="false"/>
@@ -228,7 +270,7 @@
                 <Property Name="GnknKfskUchwk" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="GNKN_KFSK_UCHWK" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="GnknKfskShosai" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="GNKN_KFSK_SHOSAI" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Biko1" Type="Edm.String" MaxLength="300" sap:unicode="false" sap:label="BIKO1" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NikkeihyoStatusCd" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="NIKKEIHYO_STATUS_CD" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NikkeihyoStatusCd" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="日計表ステータス" sap:sortable="false"/>
                 <Property Name="NikkeihyoStatus" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="NIKKEIHYO_STATUS" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ShinseiDttm" Type="Edm.Decimal" Precision="19" Scale="0" sap:unicode="false" sap:label="SHINSEI_DTTM" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ShinseiUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="SHINSEI_USER" sap:sortable="false" sap:filterable="false"/>
@@ -243,13 +285,13 @@
                 <Property Name="SakuhyoFlag" Type="Edm.Boolean" sap:unicode="false" sap:label="SAKUHYO_FLAG" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="SakuhyoDttm" Type="Edm.Decimal" Precision="19" Scale="0" sap:unicode="false" sap:label="SAKUHYO_DTTM" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="SakuhyoUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="SAKUHYO_USER" sap:sortable="false" sap:filterable="false"/>
-                <NavigationProperty Name="GoodsSet" Relationship="ZZPSTORE_SRV.asso_Store_Goods" FromRole="FromRole_asso_Store_Goods" ToRole="ToRole_asso_Store_Goods"/>
-                <NavigationProperty Name="MessageSet" Relationship="ZZPSTORE_SRV.asso_Store_Message" FromRole="FromRole_asso_Store_Message" ToRole="ToRole_asso_Store_Message"/>
-                <NavigationProperty Name="OutCashSet" Relationship="ZZPSTORE_SRV.asso_Store_OutCash" FromRole="FromRole_asso_Store_OutCash" ToRole="ToRole_asso_Store_OutCash"/>
-                <NavigationProperty Name="InCashSet" Relationship="ZZPSTORE_SRV.asso_Store_InCash" FromRole="FromRole_asso_Store_InCash" ToRole="ToRole_asso_Store_InCash"/>
-                <NavigationProperty Name="PlanCashSet" Relationship="ZZPSTORE_SRV.asso_Store_PlanCash" FromRole="FromRole_asso_Store_PlanCash" ToRole="ToRole_asso_Store_PlanCash"/>
-                <NavigationProperty Name="LossCashSet" Relationship="ZZPSTORE_SRV.asso_Store_LossCash" FromRole="FromRole_asso_Store_LossCash" ToRole="ToRole_asso_Store_LossCash"/>
                 <NavigationProperty Name="EffectiveCashSet" Relationship="ZZPSTORE_SRV.asso_Store_EffectiveCash" FromRole="FromRole_asso_Store_EffectiveCash" ToRole="ToRole_asso_Store_EffectiveCash"/>
+                <NavigationProperty Name="LossCashSet" Relationship="ZZPSTORE_SRV.asso_Store_LossCash" FromRole="FromRole_asso_Store_LossCash" ToRole="ToRole_asso_Store_LossCash"/>
+                <NavigationProperty Name="PlanCashSet" Relationship="ZZPSTORE_SRV.asso_Store_PlanCash" FromRole="FromRole_asso_Store_PlanCash" ToRole="ToRole_asso_Store_PlanCash"/>
+                <NavigationProperty Name="InCashSet" Relationship="ZZPSTORE_SRV.asso_Store_InCash" FromRole="FromRole_asso_Store_InCash" ToRole="ToRole_asso_Store_InCash"/>
+                <NavigationProperty Name="OutCashSet" Relationship="ZZPSTORE_SRV.asso_Store_OutCash" FromRole="FromRole_asso_Store_OutCash" ToRole="ToRole_asso_Store_OutCash"/>
+                <NavigationProperty Name="MessageSet" Relationship="ZZPSTORE_SRV.asso_Store_Message" FromRole="FromRole_asso_Store_Message" ToRole="ToRole_asso_Store_Message"/>
+                <NavigationProperty Name="GoodsSet" Relationship="ZZPSTORE_SRV.asso_Store_Goods" FromRole="FromRole_asso_Store_Goods" ToRole="ToRole_asso_Store_Goods"/>
             </EntityType>
             <EntityType Name="Message" sap:content-version="1">
                 <Key>
@@ -307,34 +349,34 @@
                 <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
             </EntityType>
             <ComplexType Name="Fi1007">
-                <Property Name="YuukouGkiAmt" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YUUKOU_GKI_AMT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Yokuzitunyuukin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUNYUUKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
                 <Property Name="Yokuzitusohukin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUSOHUKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="HasonGkiAmt" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="HASON_GKI_AMT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Yokuzitukinkonai" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUKINKONAI" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Yokuzitunyuukin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUNYUUKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouGkiAmt" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YUUKOU_GKI_AMT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Yokuzituryougaekin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITURYOUGAEKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZyunbikinGkiAmt" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="ZYUNBIKIN_GKI_AMT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="HonzitukurikosiSansyo" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="HONZITUKURIKOSI_SANSYO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Yokuzitukinkonai" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUKINKONAI" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HasonGkiAmt" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="HASON_GKI_AMT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Yokuzitukiteimotokin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUKITEIMOTOKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Sagaku" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="SAGAKU" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HonzitukurikosiSansyo" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="HONZITUKURIKOSI_SANSYO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZyunbikinGkiAmt" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="ZYUNBIKIN_GKI_AMT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Bikou2" Type="Edm.String" Nullable="false" MaxLength="300" sap:label="BIKOU2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sagaku" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="SAGAKU" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </ComplexType>
             <Association Name="asso_Store_EffectiveCash" sap:content-version="1">
                 <End Type="ZZPSTORE_SRV.Store" Multiplicity="1" Role="FromRole_asso_Store_EffectiveCash"/>
                 <End Type="ZZPSTORE_SRV.EffectiveCash" Multiplicity="*" Role="ToRole_asso_Store_EffectiveCash"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_EffectiveCash">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_EffectiveCash">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -343,16 +385,16 @@
                 <End Type="ZZPSTORE_SRV.LossCash" Multiplicity="*" Role="ToRole_asso_Store_LossCash"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_LossCash">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_LossCash">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -361,16 +403,16 @@
                 <End Type="ZZPSTORE_SRV.PlanCash" Multiplicity="*" Role="ToRole_asso_Store_PlanCash"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_PlanCash">
-                        <PropertyRef Name="KihyoNo"/>
-                        <PropertyRef Name="EigyoBi"/>
-                        <PropertyRef Name="TenpoCd"/>
                         <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_PlanCash">
-                        <PropertyRef Name="KihyoNo"/>
-                        <PropertyRef Name="EigyoBi"/>
-                        <PropertyRef Name="TenpoCd"/>
                         <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -379,16 +421,16 @@
                 <End Type="ZZPSTORE_SRV.InCash" Multiplicity="*" Role="ToRole_asso_Store_InCash"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_InCash">
-                        <PropertyRef Name="KihyoNo"/>
-                        <PropertyRef Name="EigyoBi"/>
-                        <PropertyRef Name="TenpoCd"/>
                         <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_InCash">
-                        <PropertyRef Name="KihyoNo"/>
-                        <PropertyRef Name="EigyoBi"/>
-                        <PropertyRef Name="TenpoCd"/>
                         <PropertyRef Name="KaishaCd"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="KihyoNo"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -397,16 +439,16 @@
                 <End Type="ZZPSTORE_SRV.OutCash" Multiplicity="*" Role="ToRole_asso_Store_OutCash"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_OutCash">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_OutCash">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -415,16 +457,16 @@
                 <End Type="ZZPSTORE_SRV.Message" Multiplicity="*" Role="ToRole_asso_Store_Message"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_Message">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_Message">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -433,16 +475,16 @@
                 <End Type="ZZPSTORE_SRV.Goods" Multiplicity="*" Role="ToRole_asso_Store_Goods"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_asso_Store_Goods">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Principal>
                     <Dependent Role="ToRole_asso_Store_Goods">
-                        <PropertyRef Name="KaishaCd"/>
-                        <PropertyRef Name="TenpoCd"/>
-                        <PropertyRef Name="EigyoBi"/>
                         <PropertyRef Name="KihyoNo"/>
+                        <PropertyRef Name="EigyoBi"/>
+                        <PropertyRef Name="TenpoCd"/>
+                        <PropertyRef Name="KaishaCd"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
@@ -456,7 +498,9 @@
                 <EntitySet Name="PlanCashSet" EntityType="ZZPSTORE_SRV.PlanCash" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="InCashSet" EntityType="ZZPSTORE_SRV.InCash" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="OutCashSet" EntityType="ZZPSTORE_SRV.OutCash" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="UserNameHelpSet" EntityType="ZZPSTORE_SRV.UserNameHelp" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="UserNameHelpSet" EntityType="ZZPSTORE_SRV.UserNameHelp" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="CompanyHelpSet" EntityType="ZZPSTORE_SRV.CompanyHelp" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="AccountDocSet" EntityType="ZZPSTORE_SRV.AccountDoc" sap:searchable="true" sap:content-version="1"/>
                 <AssociationSet Name="asso_Store_GoodsSet" Association="ZZPSTORE_SRV.asso_Store_Goods" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="StoreSet" Role="FromRole_asso_Store_Goods"/>
                     <End EntitySet="GoodsSet" Role="ToRole_asso_Store_Goods"/>

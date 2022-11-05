@@ -32,6 +32,128 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="zzpstore_annotation_anno_mdl.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="ZZPSTORE_SRV.Store">
+                <Annotation Term="com.sap.vocabularies.UI.v1.SelectionFields">
+                    <Collection>
+                        <PropertyPath>KaishaCd</PropertyPath>
+                        <PropertyPath>TenpoCd</PropertyPath>
+                        <PropertyPath>EigyoBi</PropertyPath>
+                        <PropertyPath>KihyoNo</PropertyPath>
+                        <PropertyPath>NikkeihyoStatusCd</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZPSTORE_SRV.Store">
+                <Annotation Term="com.sap.vocabularies.UI.v1.LineItem">
+                    <Collection>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="起票番号"/>
+                            <PropertyValue Property="Criticality" EnumMember="Critical"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="KihyoNo"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="会社コード"/>
+                            <PropertyValue Property="Criticality" EnumMember="Critical"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="KaishaCd"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="会社名称"/>
+                            <PropertyValue Property="Criticality" EnumMember="Positive"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="KaishaNm"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="営業日"/>
+                            <PropertyValue Property="Criticality" EnumMember="Critical"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="EigyoBi"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="店舗コード"/>
+                            <PropertyValue Property="Criticality" EnumMember="Critical"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="TenpoCd"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="店舗名"/>
+                            <PropertyValue Property="Criticality" EnumMember="Positive"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="TenpoName"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="ステータス"/>
+                            <PropertyValue Property="Criticality" EnumMember="Critical"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="NikkeihyoStatus"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="店舗確認"/>
+                            <PropertyValue Property="Criticality" EnumMember="Positive"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="TenpoKakunin"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="申請日時"/>
+                            <PropertyValue Property="Criticality" EnumMember="Positive"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="ShinseiDate"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="登録者ID"/>
+                            <PropertyValue Property="Criticality" EnumMember="Negative"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="RegUser"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="登録者名"/>
+                            <PropertyValue Property="Criticality" EnumMember="Negative"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="RegUserName"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="起票者"/>
+                            <PropertyValue Property="Criticality" EnumMember="Negative"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="KihyoshaName"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="最終申請日時"/>
+                            <PropertyValue Property="Criticality" EnumMember="Negative"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="LastShinseiDate"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="変更者ID"/>
+                            <PropertyValue Property="Criticality" EnumMember="Negative"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="UpdUser"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="ShoninDate"/>
+                            <PropertyValue Property="Criticality" EnumMember="Negative"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="最終承認日時"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
             <Annotations Target="ZZPSTORE_SRV.Store/KihyoshaName">
                 <Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
                     <Record Type="com.sap.vocabularies.Common.v1.ValueListType">
