@@ -32,7 +32,7 @@
                     </OverflowToolbar>
                 </smarttable:customToolbar>
 
-                <table:Table id="tableInside" rowActionCount="1" visibleRowCountMode="Auto">
+                <table:Table id="tableInside" rowActionCount="1" visibleRowCountMode="Auto" fixedColumnCount="5">
                     <table:rowActionTemplate>
                         <table:RowAction id="tab1RowAction" >
                             <table:items>
