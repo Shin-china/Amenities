@@ -106,6 +106,14 @@
                 <Property Name="ZeiCd" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="税コード" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Jidoutenkifuyo" Type="Edm.Boolean" sap:unicode="false" sap:label="自動転記不要" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
+            <EntityType Name="UserNameHelp" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KihyoshaName"/>
+                </Key>
+                <Property Name="KihyoshaName" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameFirst" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="First name" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameLast" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Last name" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
             <EntityType Name="Store" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="KaishaCd"/>
@@ -235,13 +243,13 @@
                 <Property Name="SakuhyoFlag" Type="Edm.Boolean" sap:unicode="false" sap:label="SAKUHYO_FLAG" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="SakuhyoDttm" Type="Edm.Decimal" Precision="19" Scale="0" sap:unicode="false" sap:label="SAKUHYO_DTTM" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="SakuhyoUser" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="SAKUHYO_USER" sap:sortable="false" sap:filterable="false"/>
-                <NavigationProperty Name="EffectiveCashSet" Relationship="ZZPSTORE_SRV.asso_Store_EffectiveCash" FromRole="FromRole_asso_Store_EffectiveCash" ToRole="ToRole_asso_Store_EffectiveCash"/>
-                <NavigationProperty Name="LossCashSet" Relationship="ZZPSTORE_SRV.asso_Store_LossCash" FromRole="FromRole_asso_Store_LossCash" ToRole="ToRole_asso_Store_LossCash"/>
-                <NavigationProperty Name="PlanCashSet" Relationship="ZZPSTORE_SRV.asso_Store_PlanCash" FromRole="FromRole_asso_Store_PlanCash" ToRole="ToRole_asso_Store_PlanCash"/>
-                <NavigationProperty Name="InCashSet" Relationship="ZZPSTORE_SRV.asso_Store_InCash" FromRole="FromRole_asso_Store_InCash" ToRole="ToRole_asso_Store_InCash"/>
-                <NavigationProperty Name="OutCashSet" Relationship="ZZPSTORE_SRV.asso_Store_OutCash" FromRole="FromRole_asso_Store_OutCash" ToRole="ToRole_asso_Store_OutCash"/>
-                <NavigationProperty Name="MessageSet" Relationship="ZZPSTORE_SRV.asso_Store_Message" FromRole="FromRole_asso_Store_Message" ToRole="ToRole_asso_Store_Message"/>
                 <NavigationProperty Name="GoodsSet" Relationship="ZZPSTORE_SRV.asso_Store_Goods" FromRole="FromRole_asso_Store_Goods" ToRole="ToRole_asso_Store_Goods"/>
+                <NavigationProperty Name="MessageSet" Relationship="ZZPSTORE_SRV.asso_Store_Message" FromRole="FromRole_asso_Store_Message" ToRole="ToRole_asso_Store_Message"/>
+                <NavigationProperty Name="OutCashSet" Relationship="ZZPSTORE_SRV.asso_Store_OutCash" FromRole="FromRole_asso_Store_OutCash" ToRole="ToRole_asso_Store_OutCash"/>
+                <NavigationProperty Name="InCashSet" Relationship="ZZPSTORE_SRV.asso_Store_InCash" FromRole="FromRole_asso_Store_InCash" ToRole="ToRole_asso_Store_InCash"/>
+                <NavigationProperty Name="PlanCashSet" Relationship="ZZPSTORE_SRV.asso_Store_PlanCash" FromRole="FromRole_asso_Store_PlanCash" ToRole="ToRole_asso_Store_PlanCash"/>
+                <NavigationProperty Name="LossCashSet" Relationship="ZZPSTORE_SRV.asso_Store_LossCash" FromRole="FromRole_asso_Store_LossCash" ToRole="ToRole_asso_Store_LossCash"/>
+                <NavigationProperty Name="EffectiveCashSet" Relationship="ZZPSTORE_SRV.asso_Store_EffectiveCash" FromRole="FromRole_asso_Store_EffectiveCash" ToRole="ToRole_asso_Store_EffectiveCash"/>
             </EntityType>
             <EntityType Name="Message" sap:content-version="1">
                 <Key>
@@ -299,10 +307,17 @@
                 <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
             </EntityType>
             <ComplexType Name="Fi1007">
-                <Property Name="Yokuzitusohukin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUSOHUKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="YuukouGkiAmt" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YUUKOU_GKI_AMT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Yokuzitunyuukin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUNYUUKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Yokuzitusohukin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUSOHUKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HasonGkiAmt" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="HASON_GKI_AMT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Yokuzitukinkonai" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUKINKONAI" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Yokuzituryougaekin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITURYOUGAEKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZyunbikinGkiAmt" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="ZYUNBIKIN_GKI_AMT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HonzitukurikosiSansyo" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="HONZITUKURIKOSI_SANSYO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Yokuzitukiteimotokin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUKITEIMOTOKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sagaku" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="SAGAKU" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Bikou2" Type="Edm.String" Nullable="false" MaxLength="300" sap:label="BIKOU2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </ComplexType>
             <Association Name="asso_Store_EffectiveCash" sap:content-version="1">
@@ -441,6 +456,7 @@
                 <EntitySet Name="PlanCashSet" EntityType="ZZPSTORE_SRV.PlanCash" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="InCashSet" EntityType="ZZPSTORE_SRV.InCash" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="OutCashSet" EntityType="ZZPSTORE_SRV.OutCash" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="UserNameHelpSet" EntityType="ZZPSTORE_SRV.UserNameHelp" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <AssociationSet Name="asso_Store_GoodsSet" Association="ZZPSTORE_SRV.asso_Store_Goods" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="StoreSet" Role="FromRole_asso_Store_Goods"/>
                     <End EntitySet="GoodsSet" Role="ToRole_asso_Store_Goods"/>

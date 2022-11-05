@@ -14,7 +14,7 @@
 
         <f:DynamicPageHeader id="pageHeader">
             <f:content>
-                <smartfilterbar:SmartFilterBar id="dailyFilter" entitySet=""></smartfilterbar:SmartFilterBar>
+                <smartfilterbar:SmartFilterBar id="dailyFilter" entitySet="StoreSet"></smartfilterbar:SmartFilterBar>
             </f:content>
         </f:DynamicPageHeader>
     </f:header>

@@ -38,6 +38,19 @@ sap.ui.define([
         },
 
         onShowCopyDialog: function () {
+            var oTable = this.byId("table1");
+            var aIndex = oTable.getSelectedIndices();
+
+            if (aIndex.length <= 0) {
+                MessageToast.show(this._comm.getI18nMessage(this, "select_at_least_row"));
+                return;
+            }
+
+            if(aIndex.length > 1){
+                MessageToast.show(this._comm.getI18nMessage(this, "select_one_row"));
+                return;
+            }
+
             this._comm.openDialog(this, "com.shin.pstore.pstore.view.CopyStore");
         },
 
@@ -46,7 +59,7 @@ sap.ui.define([
             var aIndex = oTable.getSelectedIndices();
 
             if (aIndex.length <= 0) {
-                MessageToast.show("少なくとも1行を選択してください。");
+                MessageToast.show(this._comm.getI18nMessage(this, "select_at_least_row"));
                 return;
             }
 
@@ -157,7 +170,61 @@ sap.ui.define([
         },
 
         onCopyStore: function () {
+            var oTable = this.byId("table1");
+            var aIndex = oTable.getSelectedIndices(); 
+                   
+            var oBindingData = oTable.getContextByIndex(aIndex[0]).getObject();
+            var checkOk = this.checkCreateInput();
+            if (checkOk) {
+                this._busyDialog = new sap.m.BusyDialog({});
+                this._busyDialog.open();
+                var that = this;
 
+                var d = {}, o = {};
+                d.KaishaCd = this.byId("inputTab1Col02").getValue();
+                d.TenpoCd = this.byId("inputTab1Col05").getValue();
+                d.EigyoBi = this._comm.convertFrontendDateToOdata(this.byId("inputTab1Col04").getValue());
+                d.RefKaishaCd = oBindingData.KaishaCd;
+                d.RefTenpoCd = oBindingData.TenpoCd;
+                d.RefEigyoBi = oBindingData.EigyoBi;
+                d.RefKihyoNo = oBindingData.KihyoNo;
+                d.Action = 'C';
+                d.MessageSet = [];
+                d.OutCashSet = [];
+                d.InCashSet = [];
+                d.GoodsSet = [];
+                d.EffectiveCashSet = [];
+                d.LossCashSet = [];
+                d.PlanCashSet = [];
+                d.Fi1007 = {};
+                o.d = d;
+                
+                var oModel = this.getOwnerComponent().getModel(); 
+                
+                oModel.create("/StoreSet", o, {
+                    success: function (oData, oResponse) { 
+                        that._busyDialog.close();
+                        that._comm.closeDialog(that, "copyDialog");
+
+                        that.loadFragment({
+                            name: "com.shin.pstore.pstore.view.ShowLog"
+                        }).then(function (oDialog) {
+                            var oMessage = {};
+                            oMessage.MessageSet = oData.MessageSet.results;
+                            oDialog.setModel(new sap.ui.model.json.JSONModel(oMessage), "log");
+                            oDialog.open();
+                            
+                        });
+
+                    },
+                    error: function (oError) {
+                        MessageToast.show('OData Error:' + oError.message);
+                        that._busyDialog.close();
+                    }
+                });
+
+                oModel.refresh(true); 
+            }
         },
 
         onDeleteStore: function () {

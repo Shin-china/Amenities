@@ -145,6 +145,12 @@ sap.ui.define([
             }
 
             return aData;
+        },
+
+        getI18nMessage(oContext, sMsgProperty){
+            var oModel = oContext.getView().getModel("i18n").getResourceBundle();
+            var sMsg = oModel.getText(sMsgProperty);
+            return sMsg;
         }
 
     });

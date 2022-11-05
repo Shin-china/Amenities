@@ -33,7 +33,6 @@ sap.ui.define([
                 this._oRouter = UIComponent.getRouterFor(this);
                 this._oRouter.getRoute("StoreDetail").attachPatternMatched(this._onDetailMatched, this);
 
-
             },
 
             _onDetailMatched: function (oEvent) {
@@ -43,8 +42,6 @@ sap.ui.define([
                 var oView = this.getView();
                 this._InCashSet = [];
                 this._OutCashSet = [];
-                var that = this;
-
                 //汇总model
                 this._sum = {
                     "PUriage": 0, //1. a + b
@@ -70,49 +67,114 @@ sap.ui.define([
                     "Waers": 'JPY'
                 };
 
-                oView.bindElement({
-                    path: sPath,
+                var that = this;
+
+                var oModel = this.getView().getModel();
+
+                oView.bindElement({path:sPath,
                     parameters: {
-                        expand: 'InCashSet,OutCashSet'
-                    },
-                    events: {
-                        dataReceived: function (oResponse) {
-                            that._InCashSet = oResponse.mParameters.data.InCashSet;
-                            that._OutCashSet = oResponse.mParameters.data.OutCashSet;
-                            var oInCashModel = new JSONModel(that._InCashSet);
-                            that.getView().setModel(oInCashModel, "InCash");
+                        expand: "GoodsSet,EffectiveCashSet,LossCashSet,PlanCashSet"
+                      },
+                    events:{
+                        dataReceived: function(oResponse){
+                            var oData = oResponse.mParameters.data;
+                            that._KaishaCd = oData.KaishaCd;
+                            that._TenpoCd = oData.TenpoCd;
+                            that._EigyoBi = oData.EigyoBi;
+                            that._KihyoNo = oData.KihyoNo;
+    
+                            that._sum.PUriage = oData.PUriage;
+                            that._sum.SUriage = oData.SUriage;
+                            that._sum.GenkinUragGokei = oData.GenkinUragGokei;
+                            that._sum.UriageSogokei = oData.UriageSogokei;
+                            that._sum.KadoHanbaiGokei = oData.KadoHanbaiGokei;
+                            that._sum.SonotaNyukinKei = oData.SonotaNyukinKei;
+                            that._sum.SonotaShunyuKei = oData.SonotaShunyuKei;
+                            that._sum.SyunyuGokei = oData.SyunyuGokei;
+                            that._sum.KeihinShirdk = oData.KeihinShirdk;
+                            that._sum.ShishutsuGokei = oData.ShishutsuGokei;
+                            that._sum.HnjtsKrkshdk = oData.HnjtsKrkshdk;
+                            that._sum.HnjtsHnshSofukin = oData.HnjtsHnshSofukin;
+                            that._sum.SofukinGokei = oData.SofukinGokei;
+                            that._sum.HnjtsKrkshdkUgki = oData.HnjtsKrkshdkUgki;
+                            that._sum.Yokuzitunyuukin = oData.Fi1007.Yokuzitunyuukin;
+                            that._sum.YuukouGkiAmt = oData.Fi1007.YuukouGkiAmt;
+                            that._sum.HasonGkiAmt = oData.Fi1007.HasonGkiAmt;
+                            that._sum.ZyunbikinGkiAmt = oData.Fi1007.ZyunbikinGkiAmt;
+                            that._sum.Yokuzitukinkonai = oData.Fi1007.Yokuzitukinkonai;
+                            that._sum.Sagaku = oData.Fi1007.Sagaku;
+    
+                            
+                            var oSumModel = new JSONModel(that._sum, "sum");
+                            that.getView().setModel(oSumModel, "sum");
+                        },
+                        change: function (oEvent) {
+                            // Get the context binding object
+                            var oContextBinding = oEvent.getSource();
+                
+                            // Refresh the binding.
+                            // This triggers a network call.
+                            oContextBinding.refresh(false);
+                        }.bind(this)
+                    }  
+                });
 
-                            var oOutCashModel = new JSONModel(that._OutCashSet);
-                            that.getView().setModel(oOutCashModel, "OutCash");
+                
 
-                            that._KaishaCd = oResponse.mParameters.data.KaishaCd;
-                            that._TenpoCd = oResponse.mParameters.data.TenpoCd;
-                            that._EigyoBi = oResponse.mParameters.data.EigyoBi;
-                            that._KihyoNo = oResponse.mParameters.data.KihyoNo;
-
-                            that._sum.PUriage = oResponse.mParameters.data.PUriage;
-                            that._sum.SUriage = oResponse.mParameters.data.SUriage;
-                            that._sum.GenkinUragGokei = oResponse.mParameters.data.GenkinUragGokei;
-                            that._sum.UriageSogokei = oResponse.mParameters.data.UriageSogokei;
-                            that._sum.KadoHanbaiGokei = oResponse.mParameters.data.KadoHanbaiGokei;
-                            that._sum.SonotaNyukinKei = oResponse.mParameters.data.SonotaNyukinKei;
-                            that._sum.SonotaShunyuKei = oResponse.mParameters.data.SonotaShunyuKei;
-                            that._sum.SyunyuGokei = oResponse.mParameters.data.SyunyuGokei;
-                            that._sum.KeihinShirdk = oResponse.mParameters.data.KeihinShirdk;
-                            that._sum.ShishutsuGokei = oResponse.mParameters.data.ShishutsuGokei;
-                            that._sum.HnjtsKrkshdk = oResponse.mParameters.data.HnjtsKrkshdk;
-                            that._sum.HnjtsHnshSofukin = oResponse.mParameters.data.HnjtsHnshSofukin;
-                            that._sum.SofukinGokei = oResponse.mParameters.data.SofukinGokei;
-                            that._sum.HnjtsKrkshdkUgki = oResponse.mParameters.data.HnjtsKrkshdkUgki;
-                            that._sum.Yokuzitunyuukin = oResponse.mParameters.data.Fi1007.Yokuzitunyuukin;
-                            that._sum.YuukouGkiAmt = oResponse.mParameters.data.Fi1007.YuukouGkiAmt;
-                            that._sum.HasonGkiAmt = oResponse.mParameters.data.Fi1007.HasonGkiAmt;
-                            that._sum.ZyunbikinGkiAmt = oResponse.mParameters.data.Fi1007.ZyunbikinGkiAmt;
-                            that._sum.Yokuzitukinkonai = oResponse.mParameters.data.Fi1007.Yokuzitukinkonai;
-                            that._sum.Sagaku = oResponse.mParameters.data.Fi1007.Sagaku;
-                        }
+                var sInCashPath = sPath + "/InCashSet";
+                oModel.read(sInCashPath, {
+                    success: function (oResponse) { 
+                        that._InCashSet = oResponse.results;
+                        var oInCashModel = new JSONModel(that._InCashSet);
+                        that.getView().setModel(oInCashModel, "InCash");
                     }
                 });
+
+                var sOutCashPath = sPath + "/OutCashSet";
+                oModel.read(sOutCashPath, {
+                    success: function (oResponse) { 
+                        that._OutCashSet = oResponse.results;
+                        var oOutCashModel = new JSONModel(that._OutCashSet);
+                        that.getView().setModel(oOutCashModel, "OutCash");
+                    }
+                });
+
+                // oModel.read(sPath, { 
+                //     success: function (oResponse) { 
+                        
+                //         that._KaishaCd = oResponse.KaishaCd;
+                //         that._TenpoCd = oResponse.TenpoCd;
+                //         that._EigyoBi = oResponse.EigyoBi;
+                //         that._KihyoNo = oResponse.KihyoNo;
+
+                //         that._sum.PUriage = oResponse.PUriage;
+                //         that._sum.SUriage = oResponse.SUriage;
+                //         that._sum.GenkinUragGokei = oResponse.GenkinUragGokei;
+                //         that._sum.UriageSogokei = oResponse.UriageSogokei;
+                //         that._sum.KadoHanbaiGokei = oResponse.KadoHanbaiGokei;
+                //         that._sum.SonotaNyukinKei = oResponse.SonotaNyukinKei;
+                //         that._sum.SonotaShunyuKei = oResponse.SonotaShunyuKei;
+                //         that._sum.SyunyuGokei = oResponse.SyunyuGokei;
+                //         that._sum.KeihinShirdk = oResponse.KeihinShirdk;
+                //         that._sum.ShishutsuGokei = oResponse.ShishutsuGokei;
+                //         that._sum.HnjtsKrkshdk = oResponse.HnjtsKrkshdk;
+                //         that._sum.HnjtsHnshSofukin = oResponse.HnjtsHnshSofukin;
+                //         that._sum.SofukinGokei = oResponse.SofukinGokei;
+                //         that._sum.HnjtsKrkshdkUgki = oResponse.HnjtsKrkshdkUgki;
+                //         that._sum.Yokuzitunyuukin = oResponse.Fi1007.Yokuzitunyuukin;
+                //         that._sum.YuukouGkiAmt = oResponse.Fi1007.YuukouGkiAmt;
+                //         that._sum.HasonGkiAmt = oResponse.Fi1007.HasonGkiAmt;
+                //         that._sum.ZyunbikinGkiAmt = oResponse.Fi1007.ZyunbikinGkiAmt;
+                //         that._sum.Yokuzitukinkonai = oResponse.Fi1007.Yokuzitukinkonai;
+                //         that._sum.Sagaku = oResponse.Fi1007.Sagaku;
+
+                        
+                //         var oSumModel = new JSONModel(that._sum, "sum");
+                //         that.getView().setModel(oSumModel, "sum");
+ 
+                //     }
+                // });
+
 
                 //每次进入详细页面，默认会保存上一次的section，滚动到页头第一个section
                 var oPageLayout = this.byId("objectPageLayout");
@@ -125,10 +187,6 @@ sap.ui.define([
 
                 this.byId("btnMessagePopover").setVisible(false);
 
-
-
-                var oSumModel = new JSONModel(this._sum, "sum");
-                oView.setModel(oSumModel, "sum");
             },
 
             checkEditData: function () {
@@ -616,7 +674,7 @@ sap.ui.define([
                 return sVal;
             },
 
-            onCalcHnjtsKrkshdk: function (oEvent) { 
+            onCalcHnjtsKrkshdk: function (oEvent) {
                 //Sum I - II + III + A - B
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var fZnjtsKrkshGankin = this.byId("txtZnjtsKrkshGankin").getValue();
@@ -658,7 +716,7 @@ sap.ui.define([
                 this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt);
             },
 
-            onCalcYokuzitunyuukin: function (oEvent) { 
+            onCalcYokuzitunyuukin: function (oEvent) {
                 //Sum XI
                 this._sum.Yokuzitunyuukin = this._calcFieldsSum("txtYokuzitusohukin", "txtYokuzituryougaekin");
 

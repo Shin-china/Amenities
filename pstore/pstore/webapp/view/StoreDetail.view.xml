@@ -1,4 +1,4 @@
-<mvc:View xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" controllerName="com.shin.pstore.pstore.controller.StoreDetail" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:l="sap.ui.layout" displayBlock="true" height="100%" busyIndicatorDelay="0">
+<mvc:View xmlns:smartfield="sap.ui.comp.smartfield" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" controllerName="com.shin.pstore.pstore.controller.StoreDetail" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:l="sap.ui.layout" displayBlock="true" height="100%" busyIndicatorDelay="0">
     <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false" selectedSection="section1" showTitleInHeaderContent="true" showFooter="true">
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="headerTitle">
@@ -34,11 +34,17 @@
                             </layoutData>
                         </Label>
 
-                        <Input id="txtKihyoshaName" editable="{viewState>/editable}" value="{KihyoshaName}" required="true">
+                        <!-- <Input id="txtKihyoshaName" editable="{viewState>/editable}" value="{KihyoshaName}" required="true">
                             <layoutData>
                                 <l:GridData id="gd4" span="XL4 L4 M12 S12" />
                             </layoutData>
-                        </Input>
+                        </Input> -->
+
+                        <smartfield:SmartField id="txtKihyoshaName" editable="{viewState>/editable}" value="{KihyoshaName}" mandatory="true">
+                            <smartfield:layoutData>
+                                <l:GridData id="gd4" span="XL4 L4 M12 S12" />
+                            </smartfield:layoutData>
+                        </smartfield:SmartField>
 
                         <Label id="lblTenpoCd" labelFor="txtTenpoCd" text="{i18n>store}">
                             <layoutData>
@@ -485,13 +491,13 @@
                                 <form:SimpleForm id="tab1FooterForm" layout="ResponsiveGridLayout" editable="false" columnsXL="1" columnsL="1" columnsM="1">
                                     <Label id="lblSec6F20" labelFor="txtKeihinShirdk" text="{i18n>sec6_f20}">
                                         <layoutData>
-                                            <l:GridData id="gdf6-1" span="XL9 L9 M9 S9" />
+                                            <l:GridData id="gdf6-1" span="XL10 L10 M10 S10" />
                                         </layoutData>
                                     </Label>
-                                    <Text id="txtKeihinShirdk" textDirection="RTL" text="{parts:[{path:'sum>/KeihinShirdk'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+                                    <Text id="txtKeihinShirdk" text="{parts:[{path:'sum>/KeihinShirdk'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}">
                                         <layoutData>
-                                            <l:GridData id="gdf6-2" span="XL3 L3 M3 S3" />
+                                            <l:GridData id="gdf6-2" span="XL2 L2 M2 S2" />
                                         </layoutData>
                                     </Text>
                                 </form:SimpleForm>
@@ -1156,7 +1162,7 @@
 
                     <ToolbarSpacer id="pageToolbarSpacer" />
                     <Button id="btnSave" text="{i18n>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
-                    <Button id="btnChange" text="{i18n>footer_f2}" press="onChange" />
+                    <Button id="btnChange" text="{i18n>footer_f2}" enabled="{= ${viewState>/editable} === false}" press="onChange" />
                     <Button id="btnRequest" text="{i18n>footer_f3}" press="onRequest" />
                     <Button id="btnGenerate" text="{i18n>footer_f4}" type="Emphasized" press="onGenerate" />
                     <Button id="btnStop" text="{i18n>footer_f5}" type="Attention" press="onStop" />
