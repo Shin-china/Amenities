@@ -1,0 +1,26 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+        title="{i18n>DialogTitle3}">
+        <content>
+            <VBox>
+                <HBox>
+                    <Label text="{i18n>ReversalReason}" class="dialogLabel"/>
+                    <Select id="idSelectReversalReason" showSecondaryValues="true" width="14rem" class="sapUiSmallMarginEnd"
+                        items="{
+                            path: 'local>/ReversalReasonVH',
+                            sorter: { path: 'Key1' },
+                            templateShareable:false
+                        }">
+                        <core:ListItem key="{local>Key1}" text="{local>Value1}" additionalText="{local>Key1}" tooltip="{local>Value1}"/>
+                    </Select>
+                </HBox>
+                <HBox>
+                    <Label text="{i18n>PostingDate}" class="dialogLabel"/>
+                    <DatePicker id="idDP1" placeholder="Enter Date" width="14rem" class="sapUiSmallMarginEnd"/>
+                </HBox>
+            </VBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>

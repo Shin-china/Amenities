@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZZDAILYBALANCEABR_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="ZzShopDailyBalance" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KAISHA_CD"/>
+                    <PropertyRef Name="KIHYO_NO"/>
+                </Key>
+                <Property Name="KAISHA_CD" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="会社コード" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="KIHYO_NO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="起票番号" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="TENPO_CD" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="店舗コード" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="TENPO_NM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="店舗名称" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EIGYO_BI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="営業日" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="KAISHA_NM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="会社名称" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TENKI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="天気" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KIHYOSHA_NM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="起票者名" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZNJTS_KRKSH_GANKIN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="前日繰越元金" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GNK_NYUKIN_SOGAKU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="銀行入金総額" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RYOGAEKIN_UKEIRE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="両替金受入" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SINNSEIBUMON" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="申請部門" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="INSHOKU_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="飲食売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BENTO_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="弁当売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GAME_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ゲーム売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LANE_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="レーン売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHOES_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="シューズ売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PRO_SHOP_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="プロショップ売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BILLIARD_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ビリヤード売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="JITEN_TVG_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="自店TVG売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KYOWA_TVG_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="共和TVG売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LOCKER_DAI_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ロッカー代売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KARAOKE_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="カラオケ売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FK_URIAGE8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ＦＫ8%売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FK_URIAGE10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ＦＫ10%売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NYUJORYO_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="入場料売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HANSOKUHIN_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="販促品売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KOKA_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="硬貨売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HAIBUN_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="配分売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="JIHANKI_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="自販機売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BUPPAN_URIAGE8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="物販8%売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BUPPAN_URIAGE10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="物販10%売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="REJI_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="レジ袋売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EVENT_URIAGEA8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="イベント8%売上Ａ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EVENT_URIAGEB8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="イベント8%売上Ｂ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EVENT_URIAGEA10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="イベント10%売上Ａ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EVENT_URIAGEB10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="イベント10%売上Ｂ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SONOTA_URIAGEA8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="他8%売上A" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SONOTA_URIAGEB8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="他8%売上B" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SONOTA_URIAGEA10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="他10%売上A" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SONOTA_URIAGEB10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="他10%売上B" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="URIAGE_NEBIKI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="売上値引" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="URIAGE_GOKEI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="売上合計" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GENKIN_URIAGE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="a 現金売上" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KAKEURI_TO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="b 掛売等" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="URAG_SHNY_UCHWK_KI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="売上収入内訳計" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SNT_GNKN_SHNY_GKI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="その他現金収入合計" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SNT_GNKN_SHSHT_GKI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="その他現金支出合計" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHUSHI_SAGAKU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="収支差額" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HONZITUKURIKOSI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ⅳ本日繰越高" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZNJT_HNSH_SFKN_RKI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="コリアプラザ　前日までの本社送付金累計" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HNJTS_SOFUKIN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="コリアプラザ　本日送付金" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RYOGAEKIN_MODOSHI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="コリアプラザ　両替金戻し" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GANKIN_ZOUGAKU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="コリアプラザ　元金増額" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SOFUKIN_YOTEIGAKU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="コリアプラザ　送付金予定額" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GANKIN_AMT" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="元金金額" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AMAREA_FURIKAE" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="アムエリア振替" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TOKKAIIN_KENSUU6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="特会員_件数6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TOKKAIIN_AMT6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="特会員_金額6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TOKKAIIN_BIKOU6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="特会員_備考6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HANSINIA_KENSUU6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="販シニア_件数6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HANSINIA_AMT6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="販シニア_金額6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HANSINIA_BIKOU6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="販シニア_備考6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SONOTA_KENSUU6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="その他_件数6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SONOTA_AMT6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="その他_金額6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SONOTA_BIKOU6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="その他_備考6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NEBIKI_GKI_KENSUU6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="販促値引_合計_件数6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NEBIKI_GKI_AMT6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="販促値引_合計_金額6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_KESUU_7_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_件数_7_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_KESUU_7_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_件数_7_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_KESUU_7_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_件数_7_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_KESUU_7_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_件数_7_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_AMT_7_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_金額_7_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_AMT_7_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_金額_7_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_AMT_7_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_金額_7_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_AMT_7_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_金額_7_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_BIKOU_7_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_備考_7_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_BIKOU_7_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_備考_7_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_BIKOU_7_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_備考_7_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_BIKOU_7_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_備考_7_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_GKI_KENSUU7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_合計_件数7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KENURIAGE_NEBIKI_GKI_AMT7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="券売上_合計_金額7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_KESUU_8_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_件数_8_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_KESUU_8_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_件数_8_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_KESUU_8_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_件数_8_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_KESUU_8_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_件数_8_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_KESUU_8_5" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_件数_8_5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_KESUU_8_6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_件数_8_6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_KESUU_8_7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_件数_8_7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_KESUU_8_8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_件数_8_8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_AMT_8_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_金額_8_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_AMT_8_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_金額_8_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_AMT_8_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_金額_8_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_AMT_8_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_金額_8_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_AMT_8_5" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_金額_8_5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_AMT_8_6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_金額_8_6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_AMT_8_7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_金額_8_7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_AMT_8_8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_金額_8_8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_BIKOU_8_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_備考_8_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_BIKOU_8_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_備考_8_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_BIKOU_8_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_備考_8_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_BIKOU_8_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_備考_8_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_BIKOU_8_5" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_備考_8_5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_BIKOU_8_6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_備考_8_6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_BIKOU_8_7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_備考_8_7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_BIKOU_8_8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_備考_8_8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_GKI_KENSUU8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_合計_件数8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUA_GKI_AMT8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上_合計_金額8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_KOUMOKU_9_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_項目名_9_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_KOUMOKU_9_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_項目名_9_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_KOUMOKU_9_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_項目名_9_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_AMT_9_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_金額_9_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_AMT_9_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_金額_9_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_AMT_9_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_金額_9_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_DRKAMOKU_9_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_借方科目_9_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_DRKAMOKU_9_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_借方科目_9_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_DRKAMOKU_9_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_借方科目_9_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_DRTAX_9_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_借方税_9_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_DRTAX_9_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_借方税_9_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_DRTAX_9_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_借方税_9_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_CRTAX_9_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_貸方税_9_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_CRTAX_9_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_貸方税_9_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_CRTAX_9_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_貸方税_9_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAJ_GKI_AMT9" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上自_合計_金額9" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_KOUMOKU_10_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_項目名_10_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_KOUMOKU_10_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_項目名_10_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_KOUMOKU_10_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_項目名_10_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_AMT_10_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_金額_10_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_AMT_10_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_金額_10_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_AMT_10_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_金額_10_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_DRTENPO_10_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_借方店舗_10_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_DRTENPO_10_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_借方店舗_10_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_DRTENPO_10_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_借方店舗_10_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_DRKAMOKU_10_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_借方科目_10_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_DRKAMOKU_10_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_借方科目_10_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_DRKAMOKU_10_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_借方科目_10_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_DRTAX_10_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_借方税_10_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_DRTAX_10_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_借方税_10_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_DRTAX_10_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_借方税_10_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_CRTAX_10_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_貸方税コード_10_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_CRTAX_10_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_貸方税コード_10_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_CRTAX_10_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_貸方税コード_10_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAT_GKI_AMT10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上他_合計_金額10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_5" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_9" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_9" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_11" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_11" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_12" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_13" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_13" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_14" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_14" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_SAKUHINMEI_11_15" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_作品名_11_15" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_5" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_9" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_9" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_11" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_11" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_12" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_13" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_13" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_14" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_14" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSYU_11_15" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_券種_11_15" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_5" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_9" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_9" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_11" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_11" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_12" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_13" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_13" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_14" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_14" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_KENSUU_11_15" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_11_15" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_GKI_KENSUU11" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_合計11" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_5" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_9" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_9" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_11" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_11" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_12" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_13" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_13" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_14" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_14" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_AMT_11_15" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_金額_11_15" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_GKI_AMT11" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_件数_合計11" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_4" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_5" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_6" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_6" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_7" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_7" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_8" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_8" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_9" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_9" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_10" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_11" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_11" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_12" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_13" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_13" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_14" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_14" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KUAS_HAIKYUU_11_15" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="掛売上シネマ_配給_11_15" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ITK_KENSUU12_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="委託販売_件数12_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ITK_KENSUU12_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="委託販売_件数12_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ITK_KENSUUGKI12" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="委託販売_件数12_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ITK_AMT12_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="委託販売_金額12_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ITK_AMT12_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="委託販売_金額12_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ITK_AMT12_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="委託販売_金額12_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ITK_BIKOU12_1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="委託販売_備考12_1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ITK_BIKOU12_2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="委託販売_備考12_2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ITK_BIKOU12_3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="委託販売_備考12_3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HASON_1MAN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="破損紙幣_1万円札" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HASON_5SEN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="破損紙幣_5千円札" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HASON_2SEN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="破損紙幣_2千円札" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HASON_SEN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="破損紙幣_千円札" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HASON_GKI_AMT" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="破損紙幣_合計金額" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_1MAN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_1万円札" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_5SEN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_5千円札" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_2SEN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_2千円札" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_SEN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_千円札" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_500EN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_500円玉" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_100EN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_100円玉" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_50EN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_50円玉" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_10EN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_10円玉" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_5EN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_5円玉" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_1EN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="金庫内_1円玉" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KINKO_GKI_AMT" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ⅷ金庫内金額" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SAGAKU_KURIKOSI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="本日繰越金との差額Ⅳ‐Ⅷ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NIKKEIHYO_STATUS_CD" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="日計表ステータスコード" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="NIKKEIHYO_STATUS" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="日計表ステータス" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TENPO_KAKUNIN" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="店舗確認" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHINSEI_DT" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="申請日" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHINSEI_TM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="申請時" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHINSEI_USER" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="申請者" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LAST_SHINSEI_DT" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="最終申請日" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LAST_SHINSEI_TM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="最終申請時" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LAST_SHINSEI_USER" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="最終申請者" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHONIN_DT_TANTOU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="承認日_財務担当者" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHONIN_TM_TANTOU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="承認時_財務担当者" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHONIN_USER_TANTOU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="承認者_財務担当者" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHONIN_DT_BUTYOU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="承認日_財務部長" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHONIN_TM_BUTYOU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="承認時_財務部長" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHONIN_USER_BUTYOU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="承認者_財務部長" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="REG_DT" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="登録日" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="REG_TM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="登録時" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="REG_USER" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="登録者" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UPD_DT" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="最終変更日" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UPD_TM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="最終変更時" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UPD_USER" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="変更者" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TORIKESI_DT" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="取消日" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TORIKESI_TM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="取消時" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TORIKESI_USER" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="取消者" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="to_ZzPaymentIncome" Relationship="ZZDAILYBALANCEABR_SRV.asso_ZzShopDailyBalance_ZzCashPayment" FromRole="FromRole_asso_ZzShopDailyBalance_ZzCashPayment" ToRole="ToRole_asso_ZzShopDailyBalance_ZzCashPayment"/>
+                <NavigationProperty Name="to_ZzCashIncome" Relationship="ZZDAILYBALANCEABR_SRV.asso_ZzShopDailyBalance_ZzCashIncome" FromRole="FromRole_asso_ZzShopDailyBalance_ZzCashIncome" ToRole="ToRole_asso_ZzShopDailyBalance_ZzCashIncome"/>
+            </EntityType>
+            <EntityType Name="ZzCashIncome" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KAISHA_CD"/>
+                    <PropertyRef Name="KIHYO_NO"/>
+                    <PropertyRef Name="MEISAI_NO"/>
+                </Key>
+                <Property Name="KAISHA_CD" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="会社コード" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="KIHYO_NO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="起票番号" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="MEISAI_NO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="明細番号" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KEIJO_BUSHO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="計上部署" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="DRKAMOKU_CD" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="借方科目コード" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="NYKN_SAKI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="入金先" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NYKN_TEKIYO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="入金摘要" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NYKN_KINGAKU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="入金金額" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NYKN_KAMOKU_CD" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="入金科目コード" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="NYKN_KAMOKU_NM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="入金勘定科目名" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZEI_CD" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="税コード" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZzCashPayment" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KAISHA_CD"/>
+                    <PropertyRef Name="KIHYO_NO"/>
+                    <PropertyRef Name="MEISAI_NO"/>
+                </Key>
+                <Property Name="KAISHA_CD" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="会社コード" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="KIHYO_NO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="起票番号" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="MEISAI_NO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="明細番号" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KEIHI_FUTAN_BUSHO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="経費負担部署" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHKN_SAKI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出金先" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHKN_TEKIYO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出金摘要" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHKN_KINGAKU" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出金金額" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SHKN_KAMOKU_CD" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出金科目コード" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="NYKN_KAMOKU_NM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出金勘定科目名" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZEI_CD" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="税コード" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="asso_ZzShopDailyBalance_ZzCashPayment" sap:content-version="1">
+                <End Type="ZZDAILYBALANCEABR_SRV.ZzShopDailyBalance" Multiplicity="1" Role="FromRole_asso_ZzShopDailyBalance_ZzCashPayment"/>
+                <End Type="ZZDAILYBALANCEABR_SRV.ZzCashPayment" Multiplicity="*" Role="ToRole_asso_ZzShopDailyBalance_ZzCashPayment"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_asso_ZzShopDailyBalance_ZzCashPayment">
+                        <PropertyRef Name="KIHYO_NO"/>
+                        <PropertyRef Name="KAISHA_CD"/>
+                    </Principal>
+                    <Dependent Role="ToRole_asso_ZzShopDailyBalance_ZzCashPayment">
+                        <PropertyRef Name="KIHYO_NO"/>
+                        <PropertyRef Name="KAISHA_CD"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="asso_ZzShopDailyBalance_ZzCashIncome" sap:content-version="1">
+                <End Type="ZZDAILYBALANCEABR_SRV.ZzShopDailyBalance" Multiplicity="1" Role="FromRole_asso_ZzShopDailyBalance_ZzCashIncome"/>
+                <End Type="ZZDAILYBALANCEABR_SRV.ZzCashIncome" Multiplicity="*" Role="ToRole_asso_ZzShopDailyBalance_ZzCashIncome"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_asso_ZzShopDailyBalance_ZzCashIncome">
+                        <PropertyRef Name="KIHYO_NO"/>
+                        <PropertyRef Name="KAISHA_CD"/>
+                    </Principal>
+                    <Dependent Role="ToRole_asso_ZzShopDailyBalance_ZzCashIncome">
+                        <PropertyRef Name="KIHYO_NO"/>
+                        <PropertyRef Name="KAISHA_CD"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZZDAILYBALANCEABR_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZzShopDailyBalanceSet" EntityType="ZZDAILYBALANCEABR_SRV.ZzShopDailyBalance" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ZzCashIncomeSet" EntityType="ZZDAILYBALANCEABR_SRV.ZzCashIncome" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ZzCashPaymentSet" EntityType="ZZDAILYBALANCEABR_SRV.ZzCashPayment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="asso_ZzShopDailyBalance_ZzCashPaymentSet" Association="ZZDAILYBALANCEABR_SRV.asso_ZzShopDailyBalance_ZzCashPayment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZzShopDailyBalanceSet" Role="FromRole_asso_ZzShopDailyBalance_ZzCashPayment"/>
+                    <End EntitySet="ZzCashPaymentSet" Role="ToRole_asso_ZzShopDailyBalance_ZzCashPayment"/>
+                </AssociationSet>
+                <AssociationSet Name="asso_ZzShopDailyBalance_ZzCashIncomeSet" Association="ZZDAILYBALANCEABR_SRV.asso_ZzShopDailyBalance_ZzCashIncome" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZzShopDailyBalanceSet" Role="FromRole_asso_ZzShopDailyBalance_ZzCashIncome"/>
+                    <End EntitySet="ZzCashIncomeSet" Role="ToRole_asso_ZzShopDailyBalance_ZzCashIncome"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://58.246.235.222:8010/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://58.246.235.222:8010/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
