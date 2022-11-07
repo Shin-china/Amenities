@@ -162,11 +162,19 @@ sap.ui.define([
                     path: sSortKey,
                     descending: false
                 });
+                //filter
+                var aFilter = [];
+                aFilter.push(new Filter("Key2", "Contains", "1000"));
+                var oFilter = new Filter({
+                    filters:aFilter,
+                    and: false
+                });
                 //将item添加到dialog中
                 oValueHelpDialog.bindAggregation("items", {
                     path: sBindingPath,
                     template: oItems,
-                    sorter: oSorter
+                    sorter: oSorter,
+                    filters: oFilter
                 });
 
                 oValueHelpDialog.open();

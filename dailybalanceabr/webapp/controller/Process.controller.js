@@ -275,7 +275,8 @@ sap.ui.define([
                         //科目
                         case "VH0004":
                             aAccount.push({
-                                Key1: line.ZKEY1,
+                                Key1: line.ZKEY1,//科目
+                                Key2: line.ZKEY2,//公司代码
                                 Value1: line.ZVALUE1
                             });
                             break;
