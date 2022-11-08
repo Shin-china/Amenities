@@ -227,7 +227,8 @@ sap.ui.define([
                     aReversalReason = [],
                     aCompany = [],
                     aShop = [],
-                    aAccount = [];
+                    aAccount = [],
+                    aTax = [];
                 oData.results.forEach(function(line){
                     switch (line.ZID) {
                         //天气
@@ -280,6 +281,13 @@ sap.ui.define([
                                 Value1: line.ZVALUE1
                             });
                             break;
+                        //税码
+                        case "VH0005":
+                            aTax.push({
+                                Key1: line.ZKEY1,
+                                Value1: line.ZVALUE1
+                            });
+                            break;
                     }
                 }.bind(this));
                 this._LocalData.setProperty("/FI0005", aFI0005);
@@ -288,6 +296,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/CompanyVH", aCompany);
                 this._LocalData.setProperty("/ShopVH", aShop);
                 this._LocalData.setProperty("/AccountVH", aAccount);
+                this._LocalData.setProperty("/TaxVH", aTax);
             },
 
             setPageBusy: function (isBusy) {

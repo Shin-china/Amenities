@@ -22,15 +22,15 @@ sap.ui.define([
 		}],
 		["Account",{
 			helpModel:"AccountVH",
-			valuePath:"Supplier",
-			headerTexts:["Account","AccountDesc"],
-			items:["Key1","Value1"]
+			// valuePath:"Supplier",
+			headerTexts:["Account","AccountDesc","AccountDesc"],
+			items:["Key1","Value1","Key2"]
 		}],
-		["Material",{
-			helpModel:"MaterialVH",
-			valuePath:"Material",
-			headerTexts:["MaterialT6I","PlantT6I","MaterialnameT6I","ProductoldidT6I","ColorT6I"],
-			items:["Matnr","Werks","Maktx","Bismt", "Normt"]
+		["Tax",{
+			helpModel:"TaxVH",
+			// valuePath:"Material",
+			headerTexts:["Tax","TaxDesc"],
+			items:["Key1","Value1"]
 		}]
 	]);
 	return Controller.extend("FICO.dailybalanceabr.controller.BaseController", {
@@ -69,6 +69,17 @@ sap.ui.define([
             } else {
                 sRowPath = sProperty;
             }
+
+            //filter
+            if (propertyKey == "Account") {
+                var aFilter = [];
+                aFilter.push(new Filter("Key2", "Contains", this._LocalData.getProperty("/dailyBalance/0/KAISHA_CD")));
+                var oFilter = new Filter({
+                    filters:aFilter,
+                    and: false
+                });
+            }
+
 
             //加载fragment 返回一个promise
             if (!this._pValueHelpDialog) {
@@ -111,7 +122,7 @@ sap.ui.define([
                 //解除search事件的绑定
                 oValueHelpDialog.detachSearch(this._handleValueHelpSearch);
                 //绑定Dialog列表的search事件 同时传入filter需要的key值
-                oValueHelpDialog.attachSearch({valueHelpParameters:valueHelpParameters}, this._handleValueHelpSearch);
+                oValueHelpDialog.attachSearch({valueHelpParameters:valueHelpParameters, filter:oFilter}, this._handleValueHelpSearch);
 
                 //设置表头的数组
                 var aHeaderTexts = valueHelpParameters.headerTexts;
@@ -162,13 +173,7 @@ sap.ui.define([
                     path: sSortKey,
                     descending: false
                 });
-                //filter
-                var aFilter = [];
-                aFilter.push(new Filter("Key2", "Contains", "1000"));
-                var oFilter = new Filter({
-                    filters:aFilter,
-                    and: false
-                });
+                
                 //将item添加到dialog中
                 oValueHelpDialog.bindAggregation("items", {
                     path: sBindingPath,
@@ -185,6 +190,7 @@ sap.ui.define([
         _handleValueHelpSearch: function (oEvent, obj) {
             // obj: 设置valueHelpDialog的参数，这里是获取搜索帮助filter时需要的property
             var sValue = oEvent.getParameter("value");
+            var oFilter = oEvent.getSource().getBindingInfo("items").filters;
             var aFilter = [];
             obj.valueHelpParameters.items.forEach(function (value) {
                 aFilter.push(new Filter(value, "Contains", sValue));
@@ -193,7 +199,18 @@ sap.ui.define([
                 filters:aFilter,
                 and: false
             });
-            oEvent.getSource().getBinding("items").filter(oFilter);
+
+            if (obj.filter) {
+                var aFilter1 = [];
+                aFilter1.push(oFilter);
+                aFilter1.push(obj.filter);
+                var oFilter1 = new Filter({
+                    filters:aFilter1,
+                    and: true
+                });
+            }
+            
+            oEvent.getSource().getBinding("items").filter(oFilter1);
         },
 
         // 搜索帮助dialog点击某一行时，关闭窗口并将值写入到对应的model属性中

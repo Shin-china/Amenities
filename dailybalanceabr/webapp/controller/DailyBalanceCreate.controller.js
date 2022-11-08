@@ -156,6 +156,12 @@ sap.ui.define([
             
             onSelectWeather: function () {
                 this._LocalData.setProperty("/dailyBalance/0/TENKI", this.byId("idSelectWeather").getSelectedKey());
+            },
+
+            onSelectTicket: function (oEvent) {
+                // this._LocalData.setProperty("/");
+                var sPath = oEvent.getSource().getParent().getBindingContext("local");
+                this._LocalData.setProperty(sPath + "/Ticket", oEvent.getSource().getSelectedKey());
             }
 
 

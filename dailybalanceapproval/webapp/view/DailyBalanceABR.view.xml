@@ -1,0 +1,113 @@
+<mvc:View controllerName="FICO.dailybalanceapproval.controller.DailyBalanceABR" displayBlock="true"
+	xmlns="sap.m"
+	xmlns:uitable="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:uxap="sap.uxap"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartform="sap.ui.comp.smartform"
+    xmlns:t="sap.ui.table"
+    xmlns:com="sap.suite.ui.commons"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <Page
+        id="idDetialPage1"
+        visible="true"
+        title="Detail 1"
+        backgroundDesign= "Solid">
+        <content>
+            <uxap:ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
+                <uxap:sections>
+                    <uxap:ObjectPageSection titleUppercase="false" title="{i18n>Section0}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection title="{i18n>Section0}">
+                                <uxap:blocks>
+                                    <form:SimpleForm
+                                        id="idSimpleForm1"
+                                        columnsM="2"
+                                        columnsL="2"
+                                        columnsXL="2"
+                                        editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" singleContainerFullSize="false"
+                                        labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="100">
+                                        <core:Title text="" />
+                                        <Label text="{i18n>KIHYOSHA_CD}"/>
+                                        <Text text="{local>/dailyBalance/0/KIHYOSHA_CD}"/>
+                                        <Label text="{i18n>KIHYOSHA_CD}"/>
+                                        <Text text="{local>companyname}"/>
+                                        <Label text="{i18n>EIGYO_BI}"/>
+                                        <Text text="{local>/dailyBalance/0/EIGYO_BI}"/>
+                                        <core:Title text="" />
+                                        <Label text="{i18n>KIHYOSHA_CD}:"/>
+                                        <Input value="" enabled="{local>/DailyBalanceEditable}"/>
+                                        <core:Title text="" />
+                                        <Label text="{i18n>Title1}" />
+                                        <Input value="{local>/differenceUpload/0/Supplierdepartment}" enabled="false"/>
+                                        <Label text="{i18n>Title2}" />
+                                        <Input value="{local>/differenceUpload/0/Suppliertel}" enabled="{local>/DailyBalanceEditable}"/>
+                                        <Label text="{i18n>Title3}" />
+                                        <Input value="{local>/differenceUpload/0/Supplierrepresentative}" enabled="{local>/DailyBalanceEditable}"/>
+                                        <Label text="{i18n>Title4}" />
+                                        <Input value="{local>/differenceUpload/0/Supplieremail}" enabled="{local>/DailyBalanceEditable}"/>
+                                        <core:Title text="" />
+                                        <core:Title text="{i18n>Title4a}" />
+                                        <Label text="{i18n>Title3}" />
+                                        <Input value="{local>/differenceUpload/0/Supplierrepresentative}" enabled="{local>/DailyBalanceEditable}"/>
+                                        <Label text="{i18n>Title4}" />
+                                        <Input value="{local>/differenceUpload/0/Supplieremail}" enabled="{local>/DailyBalanceEditable}"/>
+                                    </form:SimpleForm>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                    <uxap:ObjectPageSection titleUppercase="false" title="{i18n>Section1}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection title="{i18n>Section1}" >
+                                <uxap:blocks>
+                                    <com:Timeline
+                                        id="idTimeline"
+                                        lazyLoading="true"
+                                        growingThreshold="10"
+                                        showIcons="false"
+                                        showItemFilter="false"
+                                        showSearch="false"
+                                        showTimeFilter="false"
+                                        enableScroll="false"
+                                        textHeight="3"
+                                        content="{local>/approvalHistory}">
+                                        <com:content>
+                                            <com:TimelineItem
+                                                userName="{local>name}"
+                                                title="{local>position}"
+                                                dateTime="{local>time}"
+                                                text="{local>comment}"
+                                                select="onPressItems">
+                                                <com:embeddedControl>
+                                                    <ObjectStatus text="审批通过" state="Success" icon="sap-icon://sys-enter-2"></ObjectStatus>
+                                                </com:embeddedControl>
+                                            </com:TimelineItem>
+                                        </com:content>
+                                    </com:Timeline>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
+    
+            </uxap:ObjectPageLayout>
+        </content>        
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button type="Transparent" text="{i18n>PreSave}" press=".onCreatePress($event,'Create')"/>
+                <Button type="Transparent" text="{i18n>PreSave}" press=".onCreatePress($event,'Reference')"/>
+                <Button type="Transparent" text="{i18n>Delete}" press=".onConfirmBox($event,'DeleteConfirmMsg')"/>
+                <Button type="Transparent" text="{i18n>PreSave}" press=".onConfirmBox($event,'PostingConfirmMsg')"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

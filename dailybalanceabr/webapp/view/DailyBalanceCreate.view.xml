@@ -346,7 +346,8 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>TaxD}" />
 												<uitable:template>
-													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
@@ -364,7 +365,8 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>TaxC}" />
 												<uitable:template>
-													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -401,19 +403,22 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>ShopD}" />
 												<uitable:template>
-													<Input value="{local>ShopD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>ShopD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>AccountD}" />
 												<uitable:template>
-													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>TaxD}" />
 												<uitable:template>
-													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
@@ -425,13 +430,15 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>AccountC}" />
 												<uitable:template>
-													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>TaxC}" />
 												<uitable:template>
-													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -462,7 +469,15 @@
 											<uitable:Column width="6rem">
 												<Label text="{i18n>Ticket}" />
 												<uitable:template>
-                                                    <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/>
+                                                    <!-- <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/> -->
+													<Select id="idSelectTicket" width="6rem" class="sapUiSmallMarginEnd"
+														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}">
+														<core:Item key="" text=""/>
+														<core:Item key="ムビ" text="ムビ"/>
+														<core:Item key="紙" text="紙"/>
+														<core:Item key="無" text="無"/>
+														<core:Item key="他" text="他"/>
+													</Select>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
@@ -505,7 +520,8 @@
 											<uitable:Column width="6rem">
 												<Label text="{i18n>Shop}" />
 												<uitable:template>
-                                                    <Input value="{local>Shop}" enabled="{path:'local>Id', formatter:'.formatter.setTable12Enabled'}"/>
+                                                    <Input value="{local>Shop}" enabled="{path:'local>Id', formatter:'.formatter.setTable12Enabled'}"
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
