@@ -137,11 +137,16 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtKamokuSetei1" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
+                            <!-- <Input id="txtKamokuSetei1" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd18" span="XL4 L4 M12 S12" />
                                 </layoutData>
-                            </Input>
+                            </Input> -->
+                            <smartfield:SmartField id="txtKamokuSetei1" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
+                                <smartfield:layoutData>
+                                    <l:GridData id="gd18" span="XL4 L4 M12 S12" />
+                                </smartfield:layoutData>
+                            </smartfield:SmartField>
                         </form:SimpleForm>
                     </uxap:ObjectPageSubSection>
 

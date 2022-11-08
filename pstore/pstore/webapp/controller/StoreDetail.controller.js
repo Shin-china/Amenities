@@ -214,13 +214,7 @@ sap.ui.define([
                 var d = elem.getObject();
 
                 //Deep Entities
-                d.GoodsSet = this._comm.getTableData(this, "tabGoods", null);
-                // var goods = this.byId("tabGoods").getRows();
-                // for(var g of goods){
-                //     var good = g.getBindingContext().getObject();
-                //     delete good.__metadata;
-                //     d.GoodsSet.push(good);
-                // }
+                d.GoodsSet = this._comm.getTableData(this, "tabGoods", null); 
 
                 d.EffectiveCashSet = this._comm.getTableData(this, "tabEffectiveCash", null);
                 d.LossCashSet = this._comm.getTableData(this, "tabLossCash", null);
@@ -228,9 +222,7 @@ sap.ui.define([
                 d.InCashSet = this._InCashSet;//this._comm.getTableData(this, "tabInCash");
                 d.OutCashSet = this._OutCashSet;//this._comm.getTableData(this, "tabOutCash");
                 d.InCashSet = this._comm.convertCashData(d.InCashSet);
-                d.OutCashSet = this._comm.convertCashData(d.OutCashSet);
-
-                debugger;
+                d.OutCashSet = this._comm.convertCashData(d.OutCashSet); 
 
                 delete d.__metadata;
 
@@ -273,7 +265,53 @@ sap.ui.define([
             },
 
             onGenerate: function () {
+                var checkOk = this.checkEditData();
+                if (!checkOk) {
+                    return;
+                }
 
+                this._busyDialog = new sap.m.BusyDialog({});
+                this._busyDialog.open();
+                var that = this;
+
+                var elem = this.getView().getBindingContext();
+                var oModel = elem.getModel();
+                var d = elem.getObject();
+
+                //Deep Entities
+                d.GoodsSet = []
+
+                d.EffectiveCashSet = [];
+                d.LossCashSet = [];
+                d.PlanCashSet = [];
+                d.InCashSet = [];
+                d.OutCashSet = [];
+                d.InCashSet = [];
+                d.OutCashSet = [];
+                delete d.__metadata;
+
+                d.Fi1007 = [];
+
+                var o = {};
+                d.MessageSet = [];
+                d.Action = 'G';
+
+                o.d = d;
+                oModel.create('/StoreSet', o, {
+                    success: function (oData, oResponse) {
+                        var oMessage = {};
+                        oMessage.MessageSet = oData.MessageSet.results;
+                        var logModel = new JSONModel(oMessage);
+                        that.getView().setModel(logModel, "log");
+                        that._busyDialog.close();
+                        that._comm.showMessagePopoverFor(that, "log", "/MessageSet", "btnMessagePopover")
+                        oModel.refresh();
+                    },
+                    error: function (oError) {
+                        that._busyDialog.close();
+                        MessageToast.show('OData Error:' + oError.message);
+                    }
+                });
             },
 
             onStop: function () {

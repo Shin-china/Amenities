@@ -1,4 +1,4 @@
-<c:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:c="sap.ui.core">
+<c:FragmentDefinition xmlns:smartfield="sap.ui.comp.smartfield" xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:c="sap.ui.core">
     <Dialog id="addDialog" contentWidth="30%" title="{i18n>add_dialog_title}">
         <beginButton>
             <Button id="btnAddStore" text="{i18n>tab1_btn01}" type="Emphasized" press="onAddStore" />
@@ -9,7 +9,8 @@
 
                 <form:content> 
                         <Label id="lbl01" text="{i18n>tab1_col02}" labelFor="inputTab1Col02" />
-                        <Input id="inputTab1Col02" required="true" maxLength="4" /> 
+                        <Input id="inputTab1Col02" required="true" maxLength="4" />  
+                        <!-- <smartfield:SmartField id="inputTab1Col02"  maxLength="4" mandatory="true"></smartfield:SmartField> -->
  
                         <Label id="lbl02" text="{i18n>tab1_col05}" labelFor="inputTab1Col05" />
                         <Input id="inputTab1Col05" required="true" maxLength="4" /> 

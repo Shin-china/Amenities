@@ -2,14 +2,16 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/UIComponent",
     "com/shin/pstore/pstore/utils/Common",
+    "sap/ui/core/format/DateFormat",
     "sap/m/MessageToast",
     "../model/formatter"
 ], function (
     Controller,
-    UIComponent,
-    Common,
-    MessageToast,
-    formatter
+	UIComponent,
+	Common,
+	DateFormat,
+	MessageToast,
+	formatter
 ) {
     "use strict";
 
@@ -130,7 +132,9 @@ sap.ui.define([
                 var d = {}, o = {};
                 d.KaishaCd = this.byId("inputTab1Col02").getValue();
                 d.TenpoCd = this.byId("inputTab1Col05").getValue();
-                d.EigyoBi = this._comm.convertFrontendDateToOdata(this.byId("inputTab1Col04").getValue());
+                //d.EigyoBi = this._comm.convertFrontendDateToOdata(this.byId("inputTab1Col04").getValue());
+                var oDateFormatter = DateFormat.getDateInstance();
+                d.EigyoBi = oDateFormatter.parse(this.byId("inputTab1Col04").getValue(), true, true);
                 d.Action = 'A';
                 d.MessageSet = [];
                 d.OutCashSet = [];
@@ -183,7 +187,9 @@ sap.ui.define([
                 var d = {}, o = {};
                 d.KaishaCd = this.byId("inputTab1Col02").getValue();
                 d.TenpoCd = this.byId("inputTab1Col05").getValue();
-                d.EigyoBi = this._comm.convertFrontendDateToOdata(this.byId("inputTab1Col04").getValue());
+                //d.EigyoBi = this._comm.convertFrontendDateToOdata(this.byId("inputTab1Col04").getValue());
+                var oDateFormatter = DateFormat.getDateInstance();
+                d.EigyoBi = oDateFormatter.parse(this.byId("inputTab1Col04").getValue(), true, true);
                 d.RefKaishaCd = oBindingData.KaishaCd;
                 d.RefTenpoCd = oBindingData.TenpoCd;
                 d.RefEigyoBi = oBindingData.EigyoBi;
@@ -232,7 +238,7 @@ sap.ui.define([
             var aIndex = oTable.getSelectedIndices();
 
             if (aIndex.length <= 0) {
-                MessageToast.show("少なくとも1行を選択してください。");
+                MessageToast.show(this._comm.getI18nMessage(this, "select_at_least_row"));
                 return;
             }
 
@@ -300,7 +306,74 @@ sap.ui.define([
         },
 
         onGenerateDoc: function () {
+            var oTable = this.byId("table1").getTable();
+            var aIndex = oTable.getSelectedIndices();
 
+            if (aIndex.length <= 0) {
+                MessageToast.show(this._comm.getI18nMessage(this, "select_at_least_row"));
+                return;
+            }
+
+            this.onCloseGenerateDialog();
+
+            this._busyDialog = new sap.m.BusyDialog({});
+            this._busyDialog.open();
+
+            var oMessage = {}, completeCount = 0, that = this;
+            var oModel = this.getOwnerComponent().getModel();
+        
+
+            var p = new Promise(function (resolve, reject) {
+                for (var i = 0; i < aIndex.length; i++) {
+                    var oContext = oTable.getContextByIndex(aIndex[i]); 
+                    var oData = oContext.getObject();
+                    var o= {}, d = {};
+                    d.KaishaCd = oData.KaishaCd;
+                    d.TenpoCd = oData.TenpoCd;
+                    d.EigyoBi = oData.EigyoBi;
+                    d.KihyoNo = oData.KihyoNo;
+                    d.Action = 'G';
+                    d.MessageSet = [];
+                    d.OutCashSet = [];
+                    d.InCashSet = [];
+                    d.GoodsSet = [];
+                    d.EffectiveCashSet = [];
+                    d.LossCashSet = [];
+                    d.PlanCashSet = [];
+                    d.Fi1007 = {};
+                    o.d = d;
+                    oMessage.MessageSet = [];
+                    oModel.create("/StoreSet", o, {
+                        success: function (oData, oResponse) {
+                            completeCount++;
+                            oMessage.MessageSet = oMessage.MessageSet.concat(oData.MessageSet.results);
+                            if (completeCount == aIndex.length) {
+                                resolve();
+                            }
+                        },
+                        error: function (oError) {
+                            reject(oError);
+                        }
+                    });
+                }
+            });
+
+            p.then(function () {
+                that._busyDialog.close();
+
+                that.loadFragment({
+                    name: "com.shin.pstore.pstore.view.ShowLog"
+                }).then(function(o){
+                    o.setModel(new sap.ui.model.json.JSONModel(oMessage), "log");
+                    o.open();
+                });
+
+            }, function (oError) {
+                that._busyDialog.close();
+                MessageToast.show('OData Error:' + oError.message);
+            });
+
+            oModel.refresh();
         },
 
         onExportPdf: function () {

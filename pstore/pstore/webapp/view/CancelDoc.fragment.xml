@@ -9,14 +9,14 @@
 
                 <form:content> 
                         <Label id="lbl01" text="{i18n>dialog2_f1}" labelFor="inputTab1Col02" />
-                        <Select id="selectTab2F1" required="true" showSecondaryValues="true" items="{ path: '/CancelReason' }">
+                        <Select id="selectStgrd" required="true" showSecondaryValues="true" items="{ path: '/CancelReasonSet' }">
                             <items>
-                                <c:ListItem id="item" key="{key}" text="{key}"  additionalText="{text}" /> 
+                                <c:ListItem id="item" key="{Stgrd}" text="{Stgrd}"  additionalText="{Txt40}" /> 
                             </items>
                         </Select>
  
                         <Label id="lbl02" text="{i18n>dialog2_f2}" labelFor="inputTab1Col05" />
-                        <DatePicker id="datePickerTab2F2" required="true" displayFormat="yyyy-MM-dd" />      
+                        <DatePicker id="datePostingDate" required="true" displayFormat="yyyy-MM-dd" />      
                 </form:content>
 
             </form:SimpleForm>

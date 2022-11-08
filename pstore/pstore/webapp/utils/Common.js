@@ -79,7 +79,7 @@ sap.ui.define([
 
         convertOdataDateToFrontend: function (value) {
             var oTempDate = new Date(value);
-            oDate = new Date(oTempDate.getTime() + oTempDate.getTimezoneOffset() * (60000));
+            var oDate = new Date(oTempDate.getTime() + oTempDate.getTimezoneOffset() * (60000));
             return oDate;
         },
 

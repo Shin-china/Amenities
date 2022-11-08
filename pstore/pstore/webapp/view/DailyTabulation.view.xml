@@ -14,13 +14,13 @@
         <f:header>
             <f:DynamicPageHeader id="pageHeader">
                 <f:content>
-                    <smartfilterbar:SmartFilterBar id="storeFilter" entitySet="StoreSet" showClearOnFB="true" showGoOnFB="true" liveMode="true" />
+                    <smartfilterbar:SmartFilterBar id="storeFilter" persistencyKey="storeFilterPersistent" entitySet="StoreSet" showClearOnFB="true" showGoOnFB="true" liveMode="true" />
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
 
         <f:content>
-            <smarttable:SmartTable id="table1" entitySet="StoreSet" persistencyKey="storePersistent" enableAutoBinding="true" width="100%" height="80%" showRowCount="true" smartFilterId="storeFilter" tableType="Table">
+            <smarttable:SmartTable id="table1" entitySet="StoreSet" placeToolbarInTable="true" persistencyKey="storePersistent" enableAutoBinding="true" width="100%" height="80%" showRowCount="true" smartFilterId="storeFilter" tableType="Table">
                 <smarttable:customToolbar>
                     <OverflowToolbar id="overFlowToolbar">
                         <ToolbarSpacer id="toolbarSpacer" />
@@ -32,7 +32,7 @@
                     </OverflowToolbar>
                 </smarttable:customToolbar>
 
-                <table:Table id="tableInside" rowActionCount="1" visibleRowCountMode="Auto" fixedColumnCount="5">
+                <table:Table id="tableInside" rowActionCount="1" visibleRowCountMode="Auto" threshold="10" fixedColumnCount="5">
                     <table:rowActionTemplate>
                         <table:RowAction id="tab1RowAction" >
                             <table:items>

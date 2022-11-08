@@ -14,7 +14,7 @@
         <f:header>
             <f:DynamicPageHeader id="pageHeader">
                 <f:content>
-                    <smartfilterbar:SmartFilterBar id="docFilter" entitySet="AccountDocSet" showClearOnFB="true" showGoOnFB="true" liveMode="true" />
+                    <smartfilterbar:SmartFilterBar id="docFilter" persistencyKey="docFilterPersistent" entitySet="AccountDocSet" showClearOnFB="true" showGoOnFB="true" liveMode="true" />
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
@@ -28,7 +28,7 @@
                     </OverflowToolbar>
                 </smarttable:customToolbar>
 
-                <table:Table id="tableResultInside" visibleRowCountMode="Auto" fixedColumnCount="5" />
+                <table:Table id="tableResultInside" threshold="20" visibleRowCountMode="Auto"  fixedColumnCount="5" />
             </smarttable:SmartTable>
         </f:content>
     </f:DynamicPage>

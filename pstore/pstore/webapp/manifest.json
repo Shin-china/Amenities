@@ -22,8 +22,7 @@
                 "settings": {
                     "odataVersion": "2.0",
                     "annotations": [
-                        "ZZPSTORE_SRV_Annotation",
-                        "ZZPSTORE_SRV_Annotation2"
+                        "ZZPSTORE_SRV_Annotation"
                     ],
                     "localUri": "localService/metadata.xml"
                 }
@@ -33,13 +32,6 @@
                 "type": "ODataAnnotation",
                 "settings": {
                     "localUri": "localService/ZZPSTORE_SRV_Annotation.xml"
-                }
-            },
-            "ZZPSTORE_SRV_Annotation2": {
-                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZZPSTORE_ANNO_ACCDOC_ANNO_MDL',Version='0001')/$value/",
-                "type": "ODataAnnotation",
-                "settings": {
-                    "localUri": "localService/ZZPSTORE_SRV_Annotation2.xml"
                 }
             }
         }
