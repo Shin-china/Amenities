@@ -6,22 +6,47 @@
 
         <content>
             <form:SimpleForm id="addForm" columnsL="1" columnsXL="1" columnsM="1" editable="true">
+                <form:content>
+                    <Label id="lbl01" text="{i18n>tab1_col02}" labelFor="inputTab1Col02" />
+                    <Input id="inputTab1Col02" required="true" maxLength="4" showSuggestion="true" suggestionRows="{/CompanySet}">
+                        <suggestionColumns>
+                            <Column id="sCol1">
+                                <Label id="lblScol1" text="{i18n>tab1_col02}" />
+                            </Column>
+                            <Column id="sCol2">
+                                <Label id="lblScol2" text="{i18n>tab1_col03}" />
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem id="lstItem1">
+                                <Label id="txtItem1" text="{Bukrs}" />
+                                <Label id="txtItem2" text="{Butxt}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
+                    <!-- <smartfield:SmartField id="inputTab1Col02"  maxLength="4" mandatory="true"></smartfield:SmartField> -->
 
-                <form:content> 
-                        <Label id="lbl01" text="{i18n>tab1_col02}" labelFor="inputTab1Col02" />
-                        <Input id="inputTab1Col02" required="true" maxLength="4" />  
-                        <!-- <smartfield:SmartField id="inputTab1Col02"  maxLength="4" mandatory="true"></smartfield:SmartField> -->
- 
-                        <Label id="lbl02" text="{i18n>tab1_col05}" labelFor="inputTab1Col05" />
-                        <Input id="inputTab1Col05" required="true" maxLength="4" /> 
- 
-                        <Label id="lbl03" text="{i18n>tab1_col04}" labelFor="inputTab1Col04" />
-                        <DatePicker id="inputTab1Col04" 
-                                    required="true" 
-                                    displayFormat="yyyy/MM/dd"
-                                    />       
+                    <Label id="lbl02" text="{i18n>tab1_col05}" labelFor="inputTab1Col05" />
+                    <Input id="inputTab1Col05" required="true" maxLength="4" showSuggestion="true" suggestionRows="{/CostCenterSet}">
+                        <suggestionColumns>
+                            <Column id="sCol3">
+                                <Label id="lblScol3" text="{i18n>tab1_col05}" />
+                            </Column>
+                            <Column id="sCol4">
+                                <Label id="lblScol4" text="{i18n>tab1_col06}" />
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem id="lstItem2">
+                                <Label id="txtItem3" text="{Kostl}" />
+                                <Label id="txtItem4" text="{Ktext}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
+
+                    <Label id="lbl03" text="{i18n>tab1_col04}" labelFor="inputTab1Col04" />
+                    <DatePicker id="inputTab1Col04" required="true" displayFormat="yyyy/MM/dd" />
                 </form:content>
-
             </form:SimpleForm>
         </content>
 

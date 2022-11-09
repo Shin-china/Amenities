@@ -1,4 +1,17 @@
-<mvc:View xmlns:smartfield="sap.ui.comp.smartfield" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" controllerName="com.shin.pstore.pstore.controller.StoreDetail" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:l="sap.ui.layout" displayBlock="true" height="100%" busyIndicatorDelay="0">
+<mvc:View
+    xmlns:smartfield="sap.ui.comp.smartfield"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap"
+    controllerName="com.shin.pstore.pstore.controller.StoreDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
     <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false" selectedSection="section1" showTitleInHeaderContent="true" showFooter="true">
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle id="headerTitle">
@@ -234,11 +247,17 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtKamokuSetei2" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
+                            <!-- <Input id="txtKamokuSetei2" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd32" span="XL4 L4 M12 S12" />
                                 </layoutData>
-                            </Input>
+                            </Input> -->
+
+                            <smartfield:SmartField id="txtKamokuSetei2" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
+                                <smartfield:layoutData>
+                                    <l:GridData id="gd32" span="XL4 L4 M12 S12" />
+                                </smartfield:layoutData>
+                            </smartfield:SmartField>
 
                             <Label id="lblKamokuSetei3" labelFor="txtKamokuSetei3" text="{i18n>sec3_f8}">
                                 <layoutData>
@@ -246,11 +265,17 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtKamokuSetei3" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
+                            <!-- <Input id="txtKamokuSetei3" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd34" span="XL4 L4 M12 S12" />
                                 </layoutData>
-                            </Input>
+                            </Input> -->
+
+                            <smartfield:SmartField id="txtKamokuSetei3" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
+                                <smartfield:layoutData>
+                                    <l:GridData id="gd34" span="XL4 L4 M12 S12" />
+                                </smartfield:layoutData>
+                            </smartfield:SmartField>
 
                             <Label id="lblPUriage" labelFor="txtPUriage" text="{i18n>sec3_f9}">
                                 <layoutData>
@@ -298,12 +323,9 @@
                                 </layoutData>
                             </Label>
 
-                            <Text
-                                id="txtUriageSogokei"
-                                text="{parts:[{path: 'sum>/UriageSogokei'},{path:'sum>/Waers'}], 
+                            <Text id="txtUriageSogokei" text="{parts:[{path: 'sum>/UriageSogokei'},{path:'sum>/Waers'}], 
                                 type: 'sap.ui.model.type.Currency',
-							    formatOptions: {showMeasure: false} }"
-                            >
+							    formatOptions: {showMeasure: false} }">
                                 <layoutData>
                                     <l:GridData id="gd42" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -332,11 +354,17 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtKamokuSetei4" value="{KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
+                            <!-- <Input id="txtKamokuSetei4" value="{KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd46" span="XL4 L4 M12 S12" />
                                 </layoutData>
-                            </Input>
+                            </Input> -->
+
+                            <smartfield:SmartField id="txtKamokuSetei4" value="{KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
+                                <smartfield:layoutData>
+                                    <l:GridData id="gd46" span="XL4 L4 M12 S12" />
+                                </smartfield:layoutData>
+                            </smartfield:SmartField>
 
                             <Label id="lblSekisanAmt" labelFor="txtSekisanAmt" text="{i18n>sec4_f3}">
                                 <layoutData>
@@ -357,11 +385,17 @@
                                 </layoutData>
                             </Label>
 
-                            <Input id="txtKamokuSetei5" value="{KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
+                            <!-- <Input id="txtKamokuSetei5" value="{KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
                                 <layoutData>
                                     <l:GridData id="gd50" span="XL4 L4 M12 S12" />
                                 </layoutData>
-                            </Input>
+                            </Input> -->
+
+                            <smartfield:SmartField id="txtKamokuSetei5" value="{KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
+                                <smartfield:layoutData>
+                                    <l:GridData id="gd50" span="XL4 L4 M12 S12" />
+                                </smartfield:layoutData>
+                            </smartfield:SmartField>
 
                             <Label id="lblKadoHanbaiGokei" labelFor="txtKadoHanbaiGokei" text="{i18n>sec4_f5}">
                                 <layoutData>
@@ -400,7 +434,7 @@
                                 <layoutData>
                                     <l:GridData id="gd56" span="XL4 L4 M12 S12" />
                                 </layoutData>
-                            </Text> 
+                            </Text>
                         </form:SimpleForm>
                     </uxap:ObjectPageSubSection>
 
@@ -431,7 +465,8 @@
                                 <table:Column id="tab1Col3">
                                     <Text id="txtTab1Col3" text="{i18n>sec6_f2}" />
                                     <table:template>
-                                        <Input id="txtSyohinCd" value="{SyohinCd}" maxLength="5" visible="{Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" />
+                                        <!-- <Input id="txtSyohinCd" value="{SyohinCd}" maxLength="5" visible="{Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" /> -->
+                                        <smartfield:SmartField id="txtSyohinCd" value="{SyohinCd}" maxLength="5" visible="{Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" />
                                     </table:template>
                                 </table:Column>
 
@@ -517,7 +552,7 @@
                                     <l:GridData id="gd57" span="XL3 L3 M12 S12" />
                                 </layoutData>
                             </Label>
-                            
+
                             <Text id="txtSec7F1" text="{parts:[{path:'sum>/SyunyuGokei'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
 							formatOptions: {showMeasure: false}}">
                                 <layoutData>
@@ -566,7 +601,7 @@
                                     <l:GridData id="gd64" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-                             
+
                             <Label id="lblZnjtsHnshSfknRk" labelFor="txtZnjtsHnshSfknRk" text="{i18n>sec8_f2}">
                                 <layoutData>
                                     <l:GridData id="gd65" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -600,7 +635,7 @@
                             </Label>
 
                             <Text id="txtSec8F4" text="{parts:[{path:'sum>/SofukinGokei'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" >
+							formatOptions: {showMeasure: false}}">
                                 <layoutData>
                                     <l:GridData id="gd70" span="XL4 L4 M12 S12" />
                                 </layoutData>
@@ -618,7 +653,7 @@
                                     <l:GridData id="gd72" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Input>
-                            
+
                             <Label id="lblSec8F6" labelFor="txtSec8F6" text="{i18n>sec8_f6}">
                                 <layoutData>
                                     <l:GridData id="gd73" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -631,7 +666,7 @@
                                     <l:GridData id="gd74" span="XL4 L4 M12 S12" />
                                 </layoutData>
                             </Text>
-                            
+
                             <Label id="lblGnknKfskUchwk" labelFor="txtGnknKfskUchwk" text="{i18n>sec8_f7}">
                                 <layoutData>
                                     <l:GridData id="gd75" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -676,12 +711,7 @@
             <uxap:ObjectPageSection id="section3" title="{i18n>section3_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection11">
-                        <table:Table id="tabInCash" 
-                                     rows="{path: 'InCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" 
-                                     visibleRowCount="5" 
-                                     selectionMode="Single" 
-                                     editable="{viewState>/editable}"
-                                     rowsUpdated="onTabInCashRowUpdate">
+                        <table:Table id="tabInCash" rows="{path: 'InCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}" rowsUpdated="onTabInCashRowUpdate">
                             <table:extension>
                                 <OverflowToolbar id="tab3Toolbar">
                                     <content>
@@ -696,7 +726,31 @@
                                 <table:Column id="tab3Col1">
                                     <Label id="lblTab3KeijoBusho" text="{i18n>tab3_col1}" />
                                     <table:template>
-                                        <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" editable="{viewState>/editable}" />
+                                        <!-- <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" editable="{viewState>/editable}" showSuggestion="true" 
+                                            suggestionRows="{path:'/ProfitCenterSet', templateShareable: false}" maxSuggestionWidth="300px"
+                                            suggest="onInCashKeijoBushoSuggest"  > 
+                                            <suggestionColumns>
+                                                <Column id="sCol1">
+                                                    <Label id="lblS1Col1" text="{i18n>tab3_col1}" />
+                                                </Column>
+                                                <Column id="sCol2">
+                                                    <Label id="lblS1Col2" text="{i18n>description}" />
+                                                </Column>
+
+                                                <Column id="sCol3">
+                                                    <Label id="lblS1Col3" text="{i18n>description}" />
+                                                </Column>
+                                            </suggestionColumns>
+                                            <suggestionRows>
+                                                <ColumnListItem id="s1lstItem1">
+                                                    <Label id="txtS1Item3" text="{Prctr}" />
+                                                    <Label id="txtS1Item4" text="{Ktext}" />
+                                                    <Label id="txtS1Item5" text="{Kokrs}" />
+                                                </ColumnListItem>
+                                            </suggestionRows>
+                                        </Input> -->
+
+                                        <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="showKeijoBusho" /> 
                                     </table:template>
                                 </table:Column>
 
@@ -710,7 +764,7 @@
                                 <table:Column id="tab3Col3">
                                     <Label id="lblTab3NyknSaki" text="{i18n>tab3_col2}" />
                                     <table:template>
-                                        <Input id="txtTab3NyknSaki" maxLength="22" value="{InCash>NyknSaki}" editable="{viewState>/editable}"/>
+                                        <Input id="txtTab3NyknSaki" maxLength="22" value="{InCash>NyknSaki}" editable="{viewState>/editable}" />
                                     </table:template>
                                 </table:Column>
 
@@ -725,7 +779,7 @@
                                     <Label id="lblTab3NyknKingaku" text="{i18n>tab3_col4}" />
                                     <table:template>
                                         <Input id="txtTab3NyknKingaku" value="{parts:[{path:'InCash>NyknKingaku'},{path:'Waers'}], type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onTabInCashRowUpdate"/>
+							formatOptions: {showMeasure: false}}" editable="{viewState>/editable}" change="onTabInCashRowUpdate" />
                                     </table:template>
                                 </table:Column>
 
@@ -782,12 +836,7 @@
             <uxap:ObjectPageSection id="section4" title="{i18n>section4_title}" showTitle="true">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection id="subsection12">
-                        <table:Table id="tabOutCash" 
-                                     rows="{path:'OutCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" 
-                                     visibleRowCount="5" 
-                                     selectionMode="Single" 
-                                     editable="{viewState>/editable}"
-                                     rowsUpdated="onTabOutCashRowUpdate">
+                        <table:Table id="tabOutCash" rows="{path:'OutCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}" rowsUpdated="onTabOutCashRowUpdate">
                             <table:extension>
                                 <OverflowToolbar id="tab4Toolbar">
                                     <content>
@@ -920,9 +969,12 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtYuukouGkiAmt" text="{parts:[{path: 'sum>/YuukouGkiAmt'},{path:'sum>/Waers'}], 
+                                    <Text
+                                        id="txtYuukouGkiAmt"
+                                        text="{parts:[{path: 'sum>/YuukouGkiAmt'},{path:'sum>/Waers'}], 
                                                                     type: 'sap.ui.model.type.Currency',
-							                                        formatOptions: {showMeasure: false} }">
+							                                        formatOptions: {showMeasure: false} }"
+                                    >
                                         <layoutData>
                                             <l:GridData id="gd90" spanL="4" spanXL="4" spanM="4" />
                                         </layoutData>
@@ -973,9 +1025,12 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtHasonGkiAmt" text="{parts:[{path: 'sum>/HasonGkiAmt'},{path:'sum>/Waers'}], 
+                                    <Text
+                                        id="txtHasonGkiAmt"
+                                        text="{parts:[{path: 'sum>/HasonGkiAmt'},{path:'sum>/Waers'}], 
                                                                     type: 'sap.ui.model.type.Currency',
-							                                        formatOptions: {showMeasure: false} }">
+							                                        formatOptions: {showMeasure: false} }"
+                                    >
                                         <layoutData>
                                             <l:GridData id="gd92" spanL="4" spanXL="4" spanM="4" />
                                         </layoutData>
@@ -1026,9 +1081,12 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Text id="txtZyunbikinGkiAmt" text="{parts:[{path: 'sum>/ZyunbikinGkiAmt'},{path:'sum>/Waers'}], 
+                                    <Text
+                                        id="txtZyunbikinGkiAmt"
+                                        text="{parts:[{path: 'sum>/ZyunbikinGkiAmt'},{path:'sum>/Waers'}], 
                                                                     type: 'sap.ui.model.type.Currency',
-							                                        formatOptions: {showMeasure: false} }">
+							                                        formatOptions: {showMeasure: false} }"
+                                    >
                                         <layoutData>
                                             <l:GridData id="gd94" spanL="4" spanXL="4" spanM="4" />
                                         </layoutData>
@@ -1168,9 +1226,7 @@
                     <ToolbarSpacer id="pageToolbarSpacer" />
                     <Button id="btnSave" text="{i18n>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
                     <Button id="btnChange" text="{i18n>footer_f2}" enabled="{= ${viewState>/editable} === false}" press="onChange" />
-                    <Button id="btnRequest" text="{i18n>footer_f3}" 
-                            enabled="{= ${NikkeihyoStatusCd} === '1' || ${NikkeihyoStatusCd} === '5' || ${NikkeihyoStatusCd} === '8' || ${NikkeihyoStatusCd} === ''}" 
-                            press="onRequest" />
+                    <Button id="btnRequest" text="{i18n>footer_f3}" enabled="{= ${NikkeihyoStatusCd} === '1' || ${NikkeihyoStatusCd} === '5' || ${NikkeihyoStatusCd} === '8' || ${NikkeihyoStatusCd} === ''}" press="onRequest" />
                     <Button id="btnGenerate" text="{i18n>footer_f4}" enabled="{= ${Belnr} === '' &amp;&amp; ${Gjahr} === '0000'}" type="Emphasized" press="onGenerate" />
                     <Button id="btnStop" text="{i18n>footer_f5}" type="Attention" press="onStop" />
                 </content>

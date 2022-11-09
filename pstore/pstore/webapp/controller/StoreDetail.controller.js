@@ -4,6 +4,8 @@ sap.ui.define([
     "sap/ui/core/UIComponent",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/format/NumberFormat",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
     "com/shin/pstore/pstore/utils/Common",
     "../model/formatter"
 ],
@@ -11,12 +13,14 @@ sap.ui.define([
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     function (Controller,
-        MessageToast,
-        UIComponent,
-        JSONModel,
-        NumberFormat,
-        Common,
-        formatter) {
+	MessageToast,
+	UIComponent,
+	JSONModel,
+	NumberFormat,
+	Common,
+	Filter,
+    FilterOperator,
+	formatter) {
         "use strict";
 
         return Controller.extend("com.shin.pstore.pstore.controller.StoreDetail", {
@@ -71,18 +75,19 @@ sap.ui.define([
 
                 var oModel = this.getView().getModel();
 
-                oView.bindElement({path:sPath,
+                oView.bindElement({
+                    path: sPath,
                     parameters: {
                         expand: "GoodsSet,EffectiveCashSet,LossCashSet,PlanCashSet"
-                      },
-                    events:{
-                        dataReceived: function(oResponse){
+                    },
+                    events: {
+                        dataReceived: function (oResponse) {
                             var oData = oResponse.mParameters.data;
                             that._KaishaCd = oData.KaishaCd;
                             that._TenpoCd = oData.TenpoCd;
                             that._EigyoBi = oData.EigyoBi;
                             that._KihyoNo = oData.KihyoNo;
-    
+
                             that._sum.PUriage = oData.PUriage;
                             that._sum.SUriage = oData.SUriage;
                             that._sum.GenkinUragGokei = oData.GenkinUragGokei;
@@ -103,27 +108,27 @@ sap.ui.define([
                             that._sum.ZyunbikinGkiAmt = oData.Fi1007.ZyunbikinGkiAmt;
                             that._sum.Yokuzitukinkonai = oData.Fi1007.Yokuzitukinkonai;
                             that._sum.Sagaku = oData.Fi1007.Sagaku;
-    
-                            
+
+
                             var oSumModel = new JSONModel(that._sum, "sum");
                             that.getView().setModel(oSumModel, "sum");
                         },
                         change: function (oEvent) {
                             // Get the context binding object
                             var oContextBinding = oEvent.getSource();
-                
+
                             // Refresh the binding.
                             // This triggers a network call.
                             oContextBinding.refresh(false);
                         }.bind(this)
-                    }  
+                    }
                 });
 
-                
+
 
                 var sInCashPath = sPath + "/InCashSet";
                 oModel.read(sInCashPath, {
-                    success: function (oResponse) { 
+                    success: function (oResponse) {
                         that._InCashSet = oResponse.results;
                         var oInCashModel = new JSONModel(that._InCashSet);
                         that.getView().setModel(oInCashModel, "InCash");
@@ -132,7 +137,7 @@ sap.ui.define([
 
                 var sOutCashPath = sPath + "/OutCashSet";
                 oModel.read(sOutCashPath, {
-                    success: function (oResponse) { 
+                    success: function (oResponse) {
                         that._OutCashSet = oResponse.results;
                         var oOutCashModel = new JSONModel(that._OutCashSet);
                         that.getView().setModel(oOutCashModel, "OutCash");
@@ -141,7 +146,7 @@ sap.ui.define([
 
                 // oModel.read(sPath, { 
                 //     success: function (oResponse) { 
-                        
+
                 //         that._KaishaCd = oResponse.KaishaCd;
                 //         that._TenpoCd = oResponse.TenpoCd;
                 //         that._EigyoBi = oResponse.EigyoBi;
@@ -168,10 +173,10 @@ sap.ui.define([
                 //         that._sum.Yokuzitukinkonai = oResponse.Fi1007.Yokuzitukinkonai;
                 //         that._sum.Sagaku = oResponse.Fi1007.Sagaku;
 
-                        
+
                 //         var oSumModel = new JSONModel(that._sum, "sum");
                 //         that.getView().setModel(oSumModel, "sum");
- 
+
                 //     }
                 // });
 
@@ -214,7 +219,7 @@ sap.ui.define([
                 var d = elem.getObject();
 
                 //Deep Entities
-                d.GoodsSet = this._comm.getTableData(this, "tabGoods", null); 
+                d.GoodsSet = this._comm.getTableData(this, "tabGoods", null);
 
                 d.EffectiveCashSet = this._comm.getTableData(this, "tabEffectiveCash", null);
                 d.LossCashSet = this._comm.getTableData(this, "tabLossCash", null);
@@ -222,7 +227,7 @@ sap.ui.define([
                 d.InCashSet = this._InCashSet;//this._comm.getTableData(this, "tabInCash");
                 d.OutCashSet = this._OutCashSet;//this._comm.getTableData(this, "tabOutCash");
                 d.InCashSet = this._comm.convertCashData(d.InCashSet);
-                d.OutCashSet = this._comm.convertCashData(d.OutCashSet); 
+                d.OutCashSet = this._comm.convertCashData(d.OutCashSet);
 
                 delete d.__metadata;
 
@@ -768,6 +773,27 @@ sap.ui.define([
                 //Sum XII - IV
                 this._sum.Sagaku = this._sum.Yokuzitukinkonai - this._sum.HnjtsKrkshdkUgki;
 
+            },
+
+            showKeijoBusho: function (oEvent) {
+                this._busyDialog = new sap.m.BusyDialog({});
+                this._busyDialog.open();
+                var that = this;
+
+                var filter = [ new sap.ui.model.Filter("Kokrs", sap.ui.model.FilterOperator.EQ, this._KaishaCd) ];
+                var oModel = this.getView().getBindingContext().getModel();
+                oModel.read("/ProfitCenterSet", {
+                    filter: filter,
+                    success: (oData, response) => {
+                        debugger;
+                        that._busyDialog.close();
+                    },
+
+                    error: (oError) => {
+                        debugger;
+                        that._busyDialog.close();
+                    }
+                })
             }
 
 
