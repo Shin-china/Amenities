@@ -392,6 +392,34 @@
                 <Property Name="Hkont" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="G/L Acct" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
+            <EntityType Name="AGood" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TenpoCd"/>
+                    <PropertyRef Name="Hyojibasho"/>
+                    <PropertyRef Name="ShohinCd"/>
+                </Key>
+                <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="店舗コード" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Hyojibasho" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="表示場所" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="ShohinCd" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="賞品コード" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="ShohinName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="賞品名" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShohinTanka" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SHOHIN_TANKA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+            </EntityType>
+            <EntityType Name="ProfitCenter" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Spras"/>
+                    <PropertyRef Name="Prctr"/>
+                    <PropertyRef Name="Datbi"/>
+                    <PropertyRef Name="Kokrs"/>
+                </Key>
+                <Property Name="Spras" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Language" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Prctr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Profit Center" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Datbi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Valid To" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kokrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="CO Area" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Ktext" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ltext" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Long Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mctxt" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Profit Ctr Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
             <EntityType Name="UserName" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="KihyoshaName"/>
@@ -445,34 +473,6 @@
                 <Property Name="Spras" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Language" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Stgrd" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Reversal Reason" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Txt40" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="AGood" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="TenpoCd"/>
-                    <PropertyRef Name="Hyojibasho"/>
-                    <PropertyRef Name="ShohinCd"/>
-                </Key>
-                <Property Name="TenpoCd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="店舗コード" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Hyojibasho" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="表示場所" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-                <Property Name="ShohinCd" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="賞品コード" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-                <Property Name="ShohinName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="賞品名" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ShohinTanka" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="SHOHIN_TANKA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
-            </EntityType>
-            <EntityType Name="ProfitCenter" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Spras"/>
-                    <PropertyRef Name="Prctr"/>
-                    <PropertyRef Name="Datbi"/>
-                    <PropertyRef Name="Kokrs"/>
-                </Key>
-                <Property Name="Spras" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Language" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Prctr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Profit Center" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Datbi" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Valid To" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Kokrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="CO Area" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Ktext" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ltext" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Long Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Mctxt" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Profit Ctr Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <ComplexType Name="Fi1007">
                 <Property Name="Yokuzitusohukin" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unit="Waers" sap:label="YOKUZITUSOHUKIN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -631,13 +631,13 @@
                 <EntitySet Name="A04AccountSet" EntityType="ZZPSTORE_SRV.A04Account" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="A05AccountSet" EntityType="ZZPSTORE_SRV.A05Account" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="B01AccountSet" EntityType="ZZPSTORE_SRV.B01Account" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="AGoodSet" EntityType="ZZPSTORE_SRV.AGood" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ProfitCenterSet" EntityType="ZZPSTORE_SRV.ProfitCenter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="UserNameSet" EntityType="ZZPSTORE_SRV.UserName" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="CompanySet" EntityType="ZZPSTORE_SRV.Company" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="AccountSet" EntityType="ZZPSTORE_SRV.Account" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="CostCenterSet" EntityType="ZZPSTORE_SRV.CostCenter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="CancelReasonSet" EntityType="ZZPSTORE_SRV.CancelReason" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="AGoodSet" EntityType="ZZPSTORE_SRV.AGood" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="ProfitCenterSet" EntityType="ZZPSTORE_SRV.ProfitCenter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <AssociationSet Name="asso_Store_GoodsSet" Association="ZZPSTORE_SRV.asso_Store_Goods" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="StoreSet" Role="FromRole_asso_Store_Goods"/>
                     <End EntitySet="GoodsSet" Role="ToRole_asso_Store_Goods"/>

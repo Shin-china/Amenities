@@ -726,38 +726,14 @@
                                 <table:Column id="tab3Col1">
                                     <Label id="lblTab3KeijoBusho" text="{i18n>tab3_col1}" />
                                     <table:template>
-                                        <!-- <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" editable="{viewState>/editable}" showSuggestion="true" 
-                                            suggestionRows="{path:'/ProfitCenterSet', templateShareable: false}" maxSuggestionWidth="300px"
-                                            suggest="onInCashKeijoBushoSuggest"  > 
-                                            <suggestionColumns>
-                                                <Column id="sCol1">
-                                                    <Label id="lblS1Col1" text="{i18n>tab3_col1}" />
-                                                </Column>
-                                                <Column id="sCol2">
-                                                    <Label id="lblS1Col2" text="{i18n>description}" />
-                                                </Column>
-
-                                                <Column id="sCol3">
-                                                    <Label id="lblS1Col3" text="{i18n>description}" />
-                                                </Column>
-                                            </suggestionColumns>
-                                            <suggestionRows>
-                                                <ColumnListItem id="s1lstItem1">
-                                                    <Label id="txtS1Item3" text="{Prctr}" />
-                                                    <Label id="txtS1Item4" text="{Ktext}" />
-                                                    <Label id="txtS1Item5" text="{Kokrs}" />
-                                                </ColumnListItem>
-                                            </suggestionRows>
-                                        </Input> -->
-
-                                        <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="showKeijoBusho" /> 
+                                        <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowKeijoBusho" /> 
                                     </table:template>
                                 </table:Column>
 
                                 <table:Column id="tab3Col2">
                                     <Label id="lblTab3DrkamokuCd" text="{i18n>tab3_col2_1}" />
                                     <table:template>
-                                        <Input id="txtTab3DrkamokuCd" maxLength="10" value="{InCash>DrkamokuCd}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab3DrkamokuCd" maxLength="10" value="{InCash>DrkamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowCreditAccount" />
                                     </table:template>
                                 </table:Column>
 
@@ -786,7 +762,8 @@
                                 <table:Column id="tab3Col6">
                                     <Label id="lblTab3NyknKamokuCd" text="{i18n>tab3_col5}" />
                                     <table:template>
-                                        <Input id="txtTab3NyknKamokuCd" maxLength="10" value="{InCash>NyknKamokuCd}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab3NyknKamokuCd" maxLength="10" value="{InCash>NyknKamokuCd}" editable="{viewState>/editable}" 
+                                            showValueHelp="true" valueHelpRequest="onShowNyknKamokuCd" change="onGetNyknKamokuNm" />
                                     </table:template>
                                 </table:Column>
 
@@ -800,7 +777,7 @@
                                 <table:Column id="tab3Col8">
                                     <Label id="lblTab3ZeiCd" text="{i18n>tab3_col7}" />
                                     <table:template>
-                                        <Input id="txtTab3ZeiCd" maxLength="2" value="{InCash>ZeiCd}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab3ZeiCd" maxLength="2" value="{InCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowInCashTax" />
                                     </table:template>
                                 </table:Column>
 
@@ -851,7 +828,8 @@
                                 <table:Column id="tab4Col1">
                                     <Label id="lblTab4KeihiFutanBusho" text="{i18n>tab3_col1}" />
                                     <table:template>
-                                        <Input id="txtTab4KeihiFutanBusho" maxLength="4" value="{OutCash>KeihiFutanBusho}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab4KeihiFutanBusho" maxLength="4" value="{OutCash>KeihiFutanBusho}" editable="{viewState>/editable}" 
+                                            showValueHelp="true" valueHelpRequest="onShowKeihiFutanBusho"/>
                                     </table:template>
                                 </table:Column>
 
@@ -880,7 +858,8 @@
                                 <table:Column id="tab4Col5">
                                     <Label id="lblTab4ShknKamokuCd" text="{i18n>tab3_col5}" />
                                     <table:template>
-                                        <Input id="txtTab4ShknKamokuCd" maxLength="10" value="{OutCash>ShknKamokuCd}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab4ShknKamokuCd" maxLength="10" value="{OutCash>ShknKamokuCd}" editable="{viewState>/editable}" 
+                                        showValueHelp="true" valueHelpRequest="onShowShknKamokuCd" change="onGetShknKamokuNm" />
                                     </table:template>
                                 </table:Column>
 
@@ -894,7 +873,7 @@
                                 <table:Column id="tab4Col7">
                                     <Label id="lblTab4ZeiCd" text="{i18n>tab3_col7}" />
                                     <table:template>
-                                        <Input id="txtTab4ZeiCd" maxLength="2" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" />
+                                        <Input id="txtTab4ZeiCd" maxLength="2" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowOutCashTax" />
                                     </table:template>
                                 </table:Column>
 

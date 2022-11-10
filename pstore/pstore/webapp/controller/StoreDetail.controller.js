@@ -4,8 +4,6 @@ sap.ui.define([
     "sap/ui/core/UIComponent",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/format/NumberFormat",
-    "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
     "com/shin/pstore/pstore/utils/Common",
     "../model/formatter"
 ],
@@ -13,14 +11,12 @@ sap.ui.define([
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     function (Controller,
-	MessageToast,
-	UIComponent,
-	JSONModel,
-	NumberFormat,
-	Common,
-	Filter,
-    FilterOperator,
-	formatter) {
+        MessageToast,
+        UIComponent,
+        JSONModel,
+        NumberFormat,
+        Common,
+        formatter) {
         "use strict";
 
         return Controller.extend("com.shin.pstore.pstore.controller.StoreDetail", {
@@ -775,27 +771,166 @@ sap.ui.define([
 
             },
 
-            showKeijoBusho: function (oEvent) {
-                this._busyDialog = new sap.m.BusyDialog({});
-                this._busyDialog.open();
-                var that = this;
+            onShowKeijoBusho: function (oEvent) {
 
-                var filter = [ new sap.ui.model.Filter("Kokrs", sap.ui.model.FilterOperator.EQ, this._KaishaCd) ];
-                var oModel = this.getView().getBindingContext().getModel();
-                oModel.read("/ProfitCenterSet", {
-                    filter: filter,
-                    success: (oData, response) => {
-                        debugger;
-                        that._busyDialog.close();
-                    },
+                var aFilters = [];
+                var filter = { field: "Kokrs", value: this._KaishaCd };
+                aFilters.push(filter);
 
-                    error: (oError) => {
-                        debugger;
-                        that._busyDialog.close();
+                this._showCustomSearchHelpDialog(oEvent,
+                    this._comm.getI18nMessage(this, "tab3_col1"),
+                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "ProfitCenterSet",
+                    "Prctr",
+                    aFilters);
+            },
+
+            onShowCreditAccount: function (oEvent) {
+                var aFilters = [];
+                var filter = { field: "Ktopl", value: this._KaishaCd };
+                aFilters.push(filter);
+                this._showCustomSearchHelpDialog(oEvent,
+                    this._comm.getI18nMessage(this, "tab3_col2_1"),
+                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "AccountSet",
+                    "Saknr",
+                    aFilters);
+            },
+
+            onShowNyknKamokuCd: function (oEvent) {
+                var aFilters = [];
+                var filter = { field: "Ktopl", value: this._KaishaCd };
+                aFilters.push(filter);
+                this._showCustomSearchHelpDialog(oEvent,
+                    this._comm.getI18nMessage(this, "tab3_col5"),
+                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "AccountSet",
+                    "Saknr",
+                    aFilters);
+            },
+
+            onShowKeihiFutanBusho: function(oEvent){
+                var aFilters = [];
+                var filter = { field: "Kokrs", value: this._KaishaCd };
+                aFilters.push(filter);
+                this._showCustomSearchHelpDialog(oEvent,
+                    this._comm.getI18nMessage(this, "tab3_col1"),
+                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "CostCenterSet",
+                    "Kostl",
+                    aFilters);
+            },
+
+            onShowInCashTax:function(oEvent){
+                var aFilters = []; 
+                this._showCustomSearchHelpDialog(oEvent,
+                    this._comm.getI18nMessage(this, "tab3_col7"),
+                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "TaxSet",
+                    "Mwskz",
+                    aFilters);
+            },
+
+            onShowShknKamokuCd: function (oEvent) {
+                var aFilters = [];
+                var filter = { field: "Ktopl", value: this._KaishaCd };
+                aFilters.push(filter);
+                this._showCustomSearchHelpDialog(oEvent,
+                    this._comm.getI18nMessage(this, "tab3_col5"),
+                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "AccountSet",
+                    "Saknr",
+                    aFilters);
+            },
+
+            onShowOutCashTax:function(oEvent){
+                var aFilters = []; 
+                this._showCustomSearchHelpDialog(oEvent,
+                    this._comm.getI18nMessage(this, "tab3_col7"),
+                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "TaxSet",
+                    "Mwskz",
+                    aFilters);
+            },
+
+
+            _showCustomSearchHelpDialog: function (oEvent, sTitle, sViewName, sEntitySet, sBindingField, aFilters) {
+                this._inputSource = oEvent.getSource();
+                this._aFilters = aFilters;
+                this._sEntitySet = sEntitySet;
+                this._sBindingField = sBindingField;
+                this.loadFragment({ name: sViewName }).then(function (oDialog) {
+                    oDialog.open();
+                    var oSmartFilter = this.byId("smartFilter");
+                    oSmartFilter.setEntitySet(this._sEntitySet);
+                    var oSmartTable = this.byId("smartTable");
+                    oSmartTable.setEntitySet(this._sEntitySet);
+                    this.byId("dialogSelect").setTitle(sTitle);
+                }.bind(this));
+            },
+
+            onRebingTable: function (oEvent) {
+                var binding = oEvent.getParameter("bindingParams");
+                var oFilter;
+                for (var o of this._aFilters) {
+                    oFilter = new sap.ui.model.Filter(o.field, sap.ui.model.FilterOperator.EQ, o.value);
+                    binding.filters.push(oFilter);
+                }
+            },
+
+            onSelectLine: function (oEvent) {
+                var data;
+                if (oEvent.sId === 'cellClick') {
+                    data = oEvent.mParameters.rowBindingContext.getObject();
+                } else {
+                    data = oEvent.getParameter("rowContext").getObject();
+                }
+
+                if (data && data[this._sBindingField]) {
+                    if (this._inputSource) {
+                        this._inputSource.setValue(data[this._sBindingField]);
+                        this._inputSource.fireChange({});
                     }
-                })
+                }
+
+                this.onCloseSearchDialog();
+            },
+
+            onCloseSearchDialog: function () {
+                this.byId("dialogSelect").close();
+                this.byId("dialogSelect").destroy();
+            },
+
+            _getAccountDesc:function(oEvent, sBindingPath){
+                var oInput = oEvent.getSource();
+                var account = oInput.getValue();
+                var oBindingContext = oInput.getParent().getRowBindingContext();
+                var sPath = oBindingContext.sPath + sBindingPath;
+                var oModel = oBindingContext.getModel();
+
+                var oDataModel = this.getView().getModel();
+                var sReadPath = "/AccountSet(Ktopl='" + this._KaishaCd + "',Saknr='" + account + "',Spras='J'" + ")";
+                oDataModel.read(sReadPath, {
+                    success: function (oData) {
+                        if(oData.Txt20 === undefined || oData.Txt20 === null || oData.Txt20 === ''){
+                            oInput.setValueState("Error");
+                        }else{
+                            oModel.setProperty(sPath, oData.Txt20);
+                            //oModel.refresh();
+                        }
+                    },
+                    error: function (oError) {
+                        oInput.setValueState("Error");
+                    }
+                }); 
+            },
+
+            onGetNyknKamokuNm: function(oEvent){
+                this._getAccountDesc(oEvent,"/NyknKamokuNm");
+            },
+
+            onGetShknKamokuNm: function(oEvent){
+                this._getAccountDesc(oEvent,"/ShknKamokuNm");
             }
-
-
         });
     });
