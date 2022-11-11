@@ -1,6 +1,6 @@
 <mvc:View xmlns:table="sap.ui.table" xmlns:f="sap.f" controllerName="com.shin.pstore.pstore.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
 
-    <Page id="mainPage" title="{i18n>appTitle}">
+    <Page id="mainPage" title="{i18n>appTitle}" titleLevel="H1">
         <content>
             <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding" stretchContentHeight="true">
                 <items>

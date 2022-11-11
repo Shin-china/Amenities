@@ -151,7 +151,22 @@ sap.ui.define([
             var oModel = oContext.getView().getModel("i18n").getResourceBundle();
             var sMsg = oModel.getText(sMsgProperty);
             return sMsg;
-        }
+        },
+
+        showCustomSearchHelpDialog: function (oContext,oEvent, sTitle, sViewName, sEntitySet, sBindingField, aFilters) {
+            oContext._inputSource = oEvent.getSource();
+            oContext._aFilters = aFilters;
+            oContext._sEntitySet = sEntitySet;
+            oContext._sBindingField = sBindingField;
+            oContext.loadFragment({ name: sViewName }).then(function (oDialog) {
+                oDialog.open();
+                var oSmartFilter = oContext.byId("smartFilter");
+                oSmartFilter.setEntitySet(oContext._sEntitySet);
+                var oSmartTable = oContext.byId("smartTable");
+                oSmartTable.setEntitySet(oContext._sEntitySet);
+                oContext.byId("dialogSelect").setTitle(sTitle);
+            }.bind(oContext));
+        },
 
     });
 });

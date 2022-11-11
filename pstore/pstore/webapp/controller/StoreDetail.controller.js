@@ -777,7 +777,9 @@ sap.ui.define([
                 var filter = { field: "Kokrs", value: this._KaishaCd };
                 aFilters.push(filter);
 
-                this._showCustomSearchHelpDialog(oEvent,
+                this._comm.showCustomSearchHelpDialog(
+                    this,
+                    oEvent,
                     this._comm.getI18nMessage(this, "tab3_col1"),
                     "com.shin.pstore.pstore.view.SearchHelp",
                     "ProfitCenterSet",
@@ -786,14 +788,14 @@ sap.ui.define([
             },
 
             onShowCreditAccount: function (oEvent) {
-                var aFilters = [];
-                var filter = { field: "Ktopl", value: this._KaishaCd };
-                aFilters.push(filter);
-                this._showCustomSearchHelpDialog(oEvent,
+                var aFilters = []; 
+                this._comm.showCustomSearchHelpDialog(
+                    this,
+                    oEvent,
                     this._comm.getI18nMessage(this, "tab3_col2_1"),
                     "com.shin.pstore.pstore.view.SearchHelp",
-                    "AccountSet",
-                    "Saknr",
+                    "B01AccountSet",
+                    "Hkont",
                     aFilters);
             },
 
@@ -801,7 +803,9 @@ sap.ui.define([
                 var aFilters = [];
                 var filter = { field: "Ktopl", value: this._KaishaCd };
                 aFilters.push(filter);
-                this._showCustomSearchHelpDialog(oEvent,
+                this._comm.showCustomSearchHelpDialog(
+                    this,
+                    oEvent,
                     this._comm.getI18nMessage(this, "tab3_col5"),
                     "com.shin.pstore.pstore.view.SearchHelp",
                     "AccountSet",
@@ -813,7 +817,9 @@ sap.ui.define([
                 var aFilters = [];
                 var filter = { field: "Kokrs", value: this._KaishaCd };
                 aFilters.push(filter);
-                this._showCustomSearchHelpDialog(oEvent,
+                this._comm.showCustomSearchHelpDialog(
+                    this,
+                    oEvent,
                     this._comm.getI18nMessage(this, "tab3_col1"),
                     "com.shin.pstore.pstore.view.SearchHelp",
                     "CostCenterSet",
@@ -823,7 +829,9 @@ sap.ui.define([
 
             onShowInCashTax:function(oEvent){
                 var aFilters = []; 
-                this._showCustomSearchHelpDialog(oEvent,
+                this._comm.showCustomSearchHelpDialog(
+                    this,
+                    oEvent,
                     this._comm.getI18nMessage(this, "tab3_col7"),
                     "com.shin.pstore.pstore.view.SearchHelp",
                     "TaxSet",
@@ -835,7 +843,9 @@ sap.ui.define([
                 var aFilters = [];
                 var filter = { field: "Ktopl", value: this._KaishaCd };
                 aFilters.push(filter);
-                this._showCustomSearchHelpDialog(oEvent,
+                this._comm.showCustomSearchHelpDialog(
+                    this,
+                    oEvent,
                     this._comm.getI18nMessage(this, "tab3_col5"),
                     "com.shin.pstore.pstore.view.SearchHelp",
                     "AccountSet",
@@ -845,28 +855,14 @@ sap.ui.define([
 
             onShowOutCashTax:function(oEvent){
                 var aFilters = []; 
-                this._showCustomSearchHelpDialog(oEvent,
+                this._comm.showCustomSearchHelpDialog(
+                    this,
+                    oEvent,
                     this._comm.getI18nMessage(this, "tab3_col7"),
                     "com.shin.pstore.pstore.view.SearchHelp",
                     "TaxSet",
                     "Mwskz",
                     aFilters);
-            },
-
-
-            _showCustomSearchHelpDialog: function (oEvent, sTitle, sViewName, sEntitySet, sBindingField, aFilters) {
-                this._inputSource = oEvent.getSource();
-                this._aFilters = aFilters;
-                this._sEntitySet = sEntitySet;
-                this._sBindingField = sBindingField;
-                this.loadFragment({ name: sViewName }).then(function (oDialog) {
-                    oDialog.open();
-                    var oSmartFilter = this.byId("smartFilter");
-                    oSmartFilter.setEntitySet(this._sEntitySet);
-                    var oSmartTable = this.byId("smartTable");
-                    oSmartTable.setEntitySet(this._sEntitySet);
-                    this.byId("dialogSelect").setTitle(sTitle);
-                }.bind(this));
             },
 
             onRebingTable: function (oEvent) {

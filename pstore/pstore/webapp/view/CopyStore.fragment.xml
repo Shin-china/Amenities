@@ -8,39 +8,11 @@
             <form:SimpleForm id="copyForm" columnsL="1" columnsXL="1" columnsM="1" editable="true">
                 <form:content>
                     <Label id="lbl01" text="{i18n>tab1_col02}" labelFor="inputTab1Col02" />
-                    <Input id="inputTab1Col02" maxLength="4" required="true" showSuggestion="true" suggestionRows="{/CompanySet}">
-                        <suggestionColumns>
-                            <Column id="cCol1">
-                                <Label id="lblCcol1" text="{i18n>tab1_col02}" />
-                            </Column>
-                            <Column id="cCol2">
-                                <Label id="lblCcol2" text="{i18n>tab1_col03}" />
-                            </Column>
-                        </suggestionColumns>
-                        <suggestionRows>
-                            <ColumnListItem id="clstItem1">
-                                <Label id="txtCItem1" text="{Bukrs}" />
-                                <Label id="txtCItem2" text="{Butxt}" />
-                            </ColumnListItem>
-                        </suggestionRows>
+                    <Input id="inputTab1Col02" maxLength="4" required="true" showValueHelp="true" valueHelpRequest="onShowCompanyHelp">
                     </Input>
 
                     <Label id="lbl02" text="{i18n>tab1_col05}" labelFor="inputTab1Col05" />
-                    <Input id="inputTab1Col05" maxLength="4" required="true" showSuggestion="true" suggestionRows="{/CostCenterSet}">
-                        <suggestionColumns>
-                            <Column id="cCol3">
-                                <Label id="lblCcol3" text="{i18n>tab1_col05}" />
-                            </Column>
-                            <Column id="sCol4">
-                                <Label id="lblCcol4" text="{i18n>tab1_col06}" />
-                            </Column>
-                        </suggestionColumns>
-                        <suggestionRows>
-                            <ColumnListItem id="lstItem2">
-                                <Label id="txtCItem3" text="{Kostl}" />
-                                <Label id="txtCItem4" text="{Ktext}" />
-                            </ColumnListItem>
-                        </suggestionRows>
+                    <Input id="inputTab1Col05" maxLength="4" required="true" showValueHelp="true" valueHelpRequest="onShowStoreCodeHelp">
                     </Input>
 
                     <Label id="lbl03" text="{i18n>tab1_col04}" labelFor="inputTab1Col04" />
@@ -50,7 +22,7 @@
         </content>
 
         <endButton>
-            <Button id="btnClose" text="{i18n>cancel}" type="Transparent" press="onCloseCopyDialog" />
+            <Button id="btnCloseCopy" text="{i18n>cancel}" type="Transparent" press="onCloseCopyDialog" />
         </endButton>
     </Dialog>
 </c:FragmentDefinition>

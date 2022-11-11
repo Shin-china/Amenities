@@ -13,7 +13,7 @@
         </content>
 
         <endButton>
-            <Button id="btnClose" text="{i18n>no}" type="Transparent" press="onCloseGenerateDialog" />
+            <Button id="btnCloseGenerate" text="{i18n>no}" type="Transparent" press="onCloseGenerateDialog" />
         </endButton>
     </Dialog>
 </c:FragmentDefinition>

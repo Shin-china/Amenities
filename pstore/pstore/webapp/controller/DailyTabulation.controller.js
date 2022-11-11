@@ -378,6 +378,62 @@ sap.ui.define([
 
         onExportPdf: function () {
 
-        }
+        },
+
+        onShowCompanyHelp: function(oEvent){
+            var aFilters = []; 
+            this._comm.showCustomSearchHelpDialog(
+                this,
+                oEvent,
+                this._comm.getI18nMessage(this, "tab1_col02"),
+                "com.shin.pstore.pstore.view.SearchHelp",
+                "CompanySet",
+                "Bukrs",
+                aFilters);            
+        },
+
+        onShowStoreCodeHelp: function(oEvent){
+            var aFilters = []; 
+            this._comm.showCustomSearchHelpDialog(
+                this,
+                oEvent,
+                this._comm.getI18nMessage(this, "tab1_col02"),
+                "com.shin.pstore.pstore.view.SearchHelp",
+                "StoreCodeSet",
+                "TenpoCd",
+                aFilters);            
+        },
+
+        onRebingTable: function (oEvent) {
+            var binding = oEvent.getParameter("bindingParams");
+            var oFilter;
+            for (var o of this._aFilters) {
+                oFilter = new sap.ui.model.Filter(o.field, sap.ui.model.FilterOperator.EQ, o.value);
+                binding.filters.push(oFilter);
+            }
+        },
+
+        onSelectLine: function (oEvent) {
+            var data;
+            if (oEvent.sId === 'cellClick') {
+                data = oEvent.mParameters.rowBindingContext.getObject();
+            } else {
+                data = oEvent.getParameter("rowContext").getObject();
+            }
+
+            if (data && data[this._sBindingField]) {
+                if (this._inputSource) {
+                    this._inputSource.setValue(data[this._sBindingField]);
+                    this._inputSource.fireChange({});
+                }
+            }
+
+            this.onCloseSearchDialog();
+        },
+
+        onCloseSearchDialog: function () {
+            this.byId("dialogSelect").close();
+            this.byId("dialogSelect").destroy();
+        },
     });
 });

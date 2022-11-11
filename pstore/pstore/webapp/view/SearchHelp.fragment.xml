@@ -3,7 +3,7 @@
     <Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" >
 
         <content>
-          <smartfilterbar:SmartFilterBar id="smartFilter" liveMode="true"></smartfilterbar:SmartFilterBar>  
+          <smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="true" liveMode="true"></smartfilterbar:SmartFilterBar>  
 
           <smarttable:SmartTable id="smartTable" 
                                  enableAutoBinding="true"

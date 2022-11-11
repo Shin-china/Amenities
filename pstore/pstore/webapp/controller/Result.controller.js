@@ -90,8 +90,8 @@ sap.ui.define([
                             EigyoBi: oData.EigyoBi,
                             Stgrd: sStgrd,
                             Budat: dBudat,
-                            Belnr: '1000130094',//oData.Belnr,
-                            Gjahr: '2022'//oData.Gjahr
+                            Belnr: oData.Belnr,
+                            Gjahr: oData.Gjahr
                         },
                         success: function(oData, oResponse){ 
                             completeCount++;
