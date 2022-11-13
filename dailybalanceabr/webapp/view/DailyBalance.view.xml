@@ -1,4 +1,4 @@
-<mvc:View controllerName="FICO.dailybalanceabr.controller.DailyBalanceCreate" displayBlock="true"
+<mvc:View controllerName="FICO.dailybalanceabr.controller.DailyBalance" displayBlock="true"
 	xmlns="sap.m"
 	xmlns:uitable="sap.ui.table"
 	xmlns:mvc="sap.ui.core.mvc"
@@ -18,17 +18,17 @@
 									<l:VerticalLayout class="sapUiLargeMarginEnd sapUiSmallMarginTopBottom">
 										<ObjectStatus title="{i18n>KAISHA_CD}" text="{local>/dailyBalance/0/KAISHA_CD}" class="sapUiTinyMarginTopBottom" />
 										<ObjectStatus title="{i18n>TENPO_CD}" text="{local>/dailyBalance/0/TENPO_CD}" class="sapUiTinyMarginTopBottom" />
-										<ObjectStatus title="{i18n>EIGYO_BI}" text="{local>/dailyBalance/0/EIGYO_BI}" class="sapUiTinyMarginTopBottom"/>
+										<ObjectStatus title="{i18n>EIGYO_BI}" text="{path:'local>/dailyBalance/0/EIGYO_BI', formatter:'.formatter.formtDate_8'}" class="sapUiTinyMarginTopBottom"/>
 									</l:VerticalLayout>
 									<l:VerticalLayout class="sapUiLargeMarginBegin sapUiLargeMarginEnd">
                                         <form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" 
                                             labelSpanL="3" labelSpanM="4" emptySpanL="2" emptySpanM="2" breakpointM="100" columnsL="1">
-                                            <Label text="{i18n>KIHYOSHA_NM}"/>
-											<Input value="{local>/dailyBalance/0/KIHYOSHA_NM}"/>
-                                            <Label text="{i18n>TENKI}"/>
+                                            <Label text="{i18n>KIHYOSHA_NM}" required="true" />
+											<Input id="idUser" value="{local>/dailyBalance/0/KIHYOSHA_NM}" change="onUserChange"/>
+                                            <Label text="{i18n>TENKI}" required="true"/>
 											<!-- <Input value="{local>/dailyBalance/0/TENKI}" showValueHelp="true"/> -->
 											<Select id="idSelectWeather" showSecondaryValues="true" width="14rem" class="sapUiSmallMarginEnd"
-												change="onSelectWeather"
+												change="onSelectWeather" forceSelection="false"
 												items="{
 													path: 'local>/FI0005',
 													sorter: { path: 'Value1' },
@@ -470,9 +470,8 @@
 												<Label text="{i18n>Ticket}" />
 												<uitable:template>
                                                     <!-- <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/> -->
-													<Select id="idSelectTicket" width="6rem" class="sapUiSmallMarginEnd"
+													<Select id="idSelectTicket" width="6rem" class="sapUiSmallMarginEnd" forceSelection="false"
 														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}">
-														<core:Item key="" text=""/>
 														<core:Item key="ムビ" text="ムビ"/>
 														<core:Item key="紙" text="紙"/>
 														<core:Item key="無" text="無"/>
@@ -898,8 +897,10 @@
 	<footer>
 		<OverflowToolbar id="otbFooter">
 			<ToolbarSpacer/>
-			<Button type="Transparent" text="{i18n>PreSave}" press="onBalanceSave"/>
+			<Button type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')"/>
+            <Button id="idChange" type="Transparent" text="{i18n>Change}" press="onChangePress"/>
 			<Button type="Transparent" text="{i18n>Apply}" press="onBalanceApply"/>
+            <Button id="idPosting" type="Transparent" text="{i18n>Posting}" press="onBalanceSave('Posting')"/>
 			<Button type="Transparent" text="{i18n>Suspend}" press="onSuspend"/>
 		</OverflowToolbar>
 	</footer>

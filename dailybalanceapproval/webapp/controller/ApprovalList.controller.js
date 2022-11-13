@@ -14,8 +14,13 @@ sap.ui.define([
 
         return BaseController.extend("FICO.dailybalanceapproval.controller.ApprovalList", {
             onInit: function () {
-                
+                this._LocalData = this.getOwnerComponent().getModel("local");
+                this._oDataModel = this.getOwnerComponent().getModel();
+			    this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+                this._abrModel = this.getOwnerComponent().getModel("abr");
             },
+
+            
 
             // onAfterRendering: function(){
             //     var oSplitApp = this.getView().byId("oSplitApp");
@@ -129,7 +134,8 @@ sap.ui.define([
                 var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(1);
                 var sPath = oEvent.getSource().getBindingContext().getPath();
                 sPath = sPath.substr(1);
-                this.getRouter().navTo("DailyBalanceABR", {layout: oNextUIState.layout});
-            }
+                this.getRouter().navTo("DailyBalanceABR", {layout: oNextUIState.layout, path:sPath});
+            },
+            
         });
     });

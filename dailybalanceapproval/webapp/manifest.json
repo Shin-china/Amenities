@@ -24,6 +24,15 @@
             "annotations": [],
             "localUri": "localService/metadata.xml"
         }
+      },
+      "ZZDAILYBALANCEABR_SRV": {
+        "uri": "/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV",
+        "type": "OData",
+        "settings": {
+            "odataVersion": "2.0",
+            "annotations": [],
+            "localUri": "localService/metadata.xml"
+        }
       }
     }
   },
@@ -55,7 +64,10 @@
         "sap.ui.comp": {},
         "sap.ui.generic.app": {},
         "sap.ui.table": {},
-        "sap.ushell": {}
+        "sap.ushell": {},
+        "sap.ui.unified": {},
+        "sap.uxap": {},
+        "sap.suite.ui.commons": {}
       }
     },
     "contentDensities": {
@@ -69,8 +81,19 @@
           "bundleName": "FICO.dailybalanceapproval.i18n.i18n"
         }
       },
+      "i18n_abr": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "FICO.dailybalanceapproval.i18n.abr.i18n"
+        }
+      },
       "": {
         "dataSource": "ZZDAILYBALANCEAPPROVAL_SRV",
+        "preload": true,
+        "settings": {}
+      },
+      "abr": {
+        "dataSource": "ZZDAILYBALANCEABR_SRV",
         "preload": true,
         "settings": {}
       }
@@ -101,7 +124,7 @@
         },
         {
           "name": "DailyBalanceABR",
-          "pattern": "DailyBalanceABR/{layout}",
+          "pattern": "DailyBalanceABR/{layout}/{path}",
           "target": [
             "ApprovalList",
             "DailyBalanceABR"
@@ -110,12 +133,11 @@
       ],
       "targets": {
         "ApprovalList": {
-          "viewType": "XML",
           "viewName": "ApprovalList",
           "controlAggregation": "beginColumnPages"
         },
         "DailyBalanceABR": {
-          "viewType": "XML",
+          "viewPath": "FICO.dailybalanceapproval.view.abr",
           "viewName": "DailyBalanceABR",
           "controlAggregation": "midColumnPages"
         }

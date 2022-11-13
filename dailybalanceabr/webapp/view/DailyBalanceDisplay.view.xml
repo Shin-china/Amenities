@@ -23,10 +23,19 @@
 									<l:VerticalLayout class="sapUiLargeMarginBegin sapUiLargeMarginEnd">
                                         <form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" 
                                             labelSpanL="3" labelSpanM="4" emptySpanL="2" emptySpanM="2" breakpointM="100" columnsL="1">
-                                            <Label text="{i18n>KIHYOSHA_NM}:"/>
-											<Input value="{KIHYOSHA_NM}"/>
-                                            <Label text="{i18n>TENKI}:"/>
-											<Input value="{TENKI}" showValueHelp="true"/>
+                                            <Label text="{i18n>KIHYOSHA_NM}"/>
+											<Input value="{local>/dailyBalance/0/KIHYOSHA_NM}"/>
+                                            <Label text="{i18n>TENKI}"/>
+											<!-- <Input value="{local>/dailyBalance/0/TENKI}" showValueHelp="true"/> -->
+											<Select id="idSelectWeather" showSecondaryValues="true" width="14rem" class="sapUiSmallMarginEnd"
+												change="onSelectWeather"
+												items="{
+													path: 'local>/FI0005',
+													sorter: { path: 'Value1' },
+													templateShareable:false
+												}">
+												<core:ListItem key="{local>Value1}" text="{local>Value1}" tooltip="{local>Value1}"/>
+											</Select>
                                         </form:SimpleForm>
 									</l:VerticalLayout>
 								</FlexBox>

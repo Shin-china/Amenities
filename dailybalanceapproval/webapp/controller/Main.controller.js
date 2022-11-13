@@ -21,6 +21,8 @@ sap.ui.define([
                 this.oRouter = this.getOwnerComponent().getRouter();
                 // this.oRouter.attachRouteMatched(this.onRouteMatched, this);
                 this.oRouter.attachBeforeRouteMatched(this.onBeforeRouteMatched, this);
+
+                this.getConfiguration();
             },
     
             onBeforeRouteMatched: function(oEvent) {
@@ -37,6 +39,95 @@ sap.ui.define([
                 if (sLayout) {
                     this._LocalData.setProperty("/layout", sLayout);
                 }
+            },
+
+            //获取配置参数
+            getConfiguration: function () {
+                var mParameters = {
+                    success: this.configurationProcess.bind(this),
+                    error: function (oError) {
+                        this._LocalData.setProperty("/busy", false, false);
+                    }.bind(this)
+                };
+                this.getOwnerComponent().getModel("abr").read("/ZzConfigurationSet", mParameters);
+            },
+
+            configurationProcess: function (oData) {
+                var aFI0004 = [],
+                    aFI0005 = [],
+                    aReversalReason = [],
+                    aCompany = [],
+                    aShop = [],
+                    aAccount = [],
+                    aTax = [];
+                oData.results.forEach(function(line){
+                    switch (line.ZID) {
+                        //天气
+                        case "FI0005":
+                            aFI0005.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1
+                            });
+                            break;
+                        //"準備金明細
+                        case "FI0004":
+                            aFI0004.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1,
+                                Value2: line.ZVALUE2,
+                                Value3: line.ZVALUE3,
+                                Value4: line.ZVALUE4,
+                                Value5: line.ZVALUE5,
+                                Value6: line.ZVALUE6,
+                                Remark: line.REMARK
+                            });
+                            break;
+                        //冲销原因
+                        case "VH0001":
+                            aReversalReason.push({
+                                Key1: line.ZKEY1,
+                                Value1: line.ZVALUE1
+                            });
+                            break;
+                        //公司代码
+                        case "VH0002":
+                            aCompany.push({
+                                Key1: line.ZKEY1,
+                                Value1: line.ZVALUE1
+                            });
+                            break;
+                        //店铺
+                        case "VH0003":
+                            aShop.push({
+                                Key1: line.ZKEY1,
+                                Key2: line.ZKEY2,
+                                Value1: line.ZVALUE1
+                            });
+                            break;
+                        //科目
+                        case "VH0004":
+                            aAccount.push({
+                                Key1: line.ZKEY1,//科目
+                                Key2: line.ZKEY2,//公司代码
+                                Value1: line.ZVALUE1
+                            });
+                            break;
+                        //税码
+                        case "VH0005":
+                            aTax.push({
+                                Key1: line.ZKEY1,
+                                Value1: line.ZVALUE1
+                            });
+                            break;
+                    }
+                }.bind(this));
+                this._LocalData.setProperty("/FI0005", aFI0005);
+                this._LocalData.setProperty("/FI0004", aFI0004);
+                this._LocalData.setProperty("/ReversalReasonVH", aReversalReason);
+                this._LocalData.setProperty("/CompanyVH", aCompany);
+                this._LocalData.setProperty("/ShopVH", aShop);
+                this._LocalData.setProperty("/AccountVH", aAccount);
+                this._LocalData.setProperty("/TaxVH", aTax);
             },
     
             // onRouteMatched: function (oEvent) {

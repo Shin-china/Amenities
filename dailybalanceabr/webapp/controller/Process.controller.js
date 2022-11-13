@@ -4,9 +4,10 @@ sap.ui.define([
     "sap/m/Button",
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
-    "./messages"
+    "./messages",
+    "sap/ui/model/Filter",
 ],
-    function (BaseController, formatter, Button, MessageBox, JSONModel, messages) {
+    function (BaseController, formatter, Button, MessageBox, JSONModel, messages, Filter) {
         "use strict";
         return BaseController.extend("FICO.dailybalanceabr.controller.Process", {
             formatter: formatter,
@@ -33,25 +34,37 @@ sap.ui.define([
                 this._oDataModel.refresh(true,true);
                 var mBindingParams = oEvent.getParameter("bindingParams");
                 mBindingParams.parameters["expand"] = "to_Header,to_ZzCashIncome,to_ZzCashPayment,to_ZzTreasuryCash";
-                var oFilter = oEvent.getParameter("bindingParams").filters;
-            },
+                var aFilter = oEvent.getParameter("bindingParams").filters;
 
-            onNavDisplayView: function (oEvent) {
-                this.setBusy(true);
-                //localmodel中当前行的绑定路径
-                var sPath = oEvent.getSource().getBindingContext().getPath();
-                sPath = sPath.substr(1);
-                this.getRouter().navTo("DailyBalanceDisplay",{
-                    contextPath: sPath
+                var aFilters = [];
+                var dFrom = this.byId("idDateRange").getFrom();
+                var dTo = this.byId("idDateRange").getTo();
+                if (dTo && dFrom) {
+                    dFrom = this.formatter.date_8(dFrom);
+                    dTo = this.formatter.date_8(dTo);
+                    aFilters.push(new Filter("EIGYO_BI", "BT", dFrom, dTo)); 
+                }
+
+                var oNewFilter = new Filter({
+                    filters:aFilters,
+                    and:true
                 });
+                if (aFilters.length > 0) {
+                    aFilter.push(oNewFilter);
+                }
             },
 
-
-            onNavCreateView: function (oEvent) {
-                //localmodel中当前行的绑定路径
-                // var sPath = oEvent.getSource().getBindingContext("local").getPath();
-                // sPath = sPath.substring(sPath.length - 1);
-                this.getRouter().navTo("DailyBalanceCreate", {});
+            onNavDailyBalanceView: function (oEvent,sView) {
+                this.setBusy(true);
+                
+                var oUrl = {view: sView};
+                if (sView == "Display") {
+                    //localmodel中当前行的绑定路径
+                    var sPath = oEvent.getSource().getBindingContext().getPath();
+                    sPath = sPath.substr(1);
+                    oUrl.contextPath = sPath;
+                }
+                this.getRouter().navTo("DailyBalance",oUrl);
             },
 
             onCreatePress: function (oEvent, sButton) {
@@ -76,6 +89,7 @@ sap.ui.define([
                         messages.showError(this._ResourceBundle.getText("noSelect"));
                         return;
                     }
+
                 }
                 this.byId("idProcessPage").setBusy(true);
                 if (!this.pDialog) {
@@ -85,16 +99,33 @@ sap.ui.define([
                 } 
 
                 this.pDialog.then(function(oDialog) {
+                    this.byId("idCompany").setValueState("None");
+                    this.byId("idShop").setValueState("None");
+                    this.byId("idDP1").setValueState("None");
+                    if (sButton === "Reference") {
+                        var oTable = this.byId("reportTable");
+                        var oBinding = oTable.getBinding();
+                        var sPath = oBinding.aKeys[oTable.getSelectedIndex()];
+                        var oHeader = this._oDataModel.getProperty("/" + sPath);
+                        this.byId("idCompany").setValue(oHeader.KAISHA_CD);
+                        this.byId("idShop").setValue(oHeader.TENPO_CD);
+                        this.byId("idDP1").setValue(oHeader.EIGYO_BI);
+                    }
+                    
                     var beginButton = new Button({
                         type: "Emphasized",
                         text: this._ResourceBundle.getText("Create"),
                         //登录按钮
                         press: function () {
                             if (sButton === "Create") {
-                                this.createButton();
-                            } else if (sButton === "Reference")
+                                var isError = this.createButton();
+                                if (!isError) {
+                                    oDialog.close();
+                                }
+                            } else if (sButton === "Reference") {
                                 this.refrenceButton();
-                            oDialog.close();
+                                oDialog.close();
+                            }
                         }.bind(this)
                     });
                     var endButton = new Button({
@@ -115,14 +146,38 @@ sap.ui.define([
                 }.bind(this));
             },
 
-            onConfirmBox: function (oEVent, sMessage) {
-                MessageBox.confirm(this._ResourceBundle.getText(sMessage));
+            createButton: function () {
+                if (this.requiredCheck()) {
+                    return true;
+                }
+                this.setLocalModel();
+                this.getRouter().navTo("DailyBalance",{view:"Create"});
             },
 
-            createButton: function () {
-                // this.initialLocalModel.call(this);
-                this.setLocalModel();
-                this.getRouter().navTo("DailyBalanceCreate");
+            requiredCheck: function () {
+                var isError = false;
+                var oCompany = this.byId("idCompany");
+                var oShop = this.byId("idShop");
+                var oDatePicker = this.byId("idDP1");
+                if (oCompany.getValue() == "") {
+                    oCompany.setValueState("Warning");
+                    isError = true;
+                }
+                if (oShop.getValue() == "") {
+                    oShop.setValueState("Warning");
+                    isError = true;
+                }
+                if (oDatePicker.getValue() == "") {
+                    oDatePicker.setValueState("Warning");
+                    isError = true;
+                }
+                return isError;
+            },
+
+            onDatePickerChange: function (oEvent) {
+                if (oEvent.getParameter("value") != "") {
+                    oEvent.getSource().setValueState("None");
+                }
             },
 
             refrenceButton: function () {
@@ -132,6 +187,71 @@ sap.ui.define([
                 this.getRouter().navTo("DailyBalanceDisplay",{
                     contextPath: sPath
                 });
+            },
+
+            onConfirmBox: function (oEvent, sMessage) {
+                var sTitle = this._ResourceBundle.getText("ConfirmTitle");
+                var sText = this._ResourceBundle.getText(sMessage);
+                // MessageBox.confirm(this._ResourceBundle.getText(sMessage));
+                MessageBox.confirm(sText, {
+                    title: sTitle,
+                    icon: MessageBox.Icon.WARNING,
+                    styleClass: "sapUiSizeCompact",
+                    actions: [
+                        MessageBox.Action.YES,
+                        MessageBox.Action.NO
+                    ],
+                    onClose: function (sResult) {
+                        if (sResult === MessageBox.Action.YES) {
+                            this.onBalanceDelete();
+                        }
+                    }.bind(this)
+                });
+            },
+
+            onBalanceDelete: function () {
+                var postDocs = this.prepareBalanceDeleteBody();
+                postDocs.forEach(function (line, index) {
+                    this.postDelet(line, index, "Delete");
+                }.bind(this));
+            },
+
+            prepareBalanceDeleteBody: function() {
+                var postDocs = [];	
+                var oTable = this.byId("reportTable");
+                var listItems = oTable.getSelectedIndices();
+                //得到选中行的flag
+                listItems.forEach(function (sSelected) {
+                    let key = oTable.getContextByIndex(sSelected).getPath();
+                    let lineData = this._oDataModel.getProperty(key); 
+                    postDocs.push({
+                        KAISHA_CD: lineData.KAISHA_CD,
+                        KIHYO_NO: lineData.KIHYO_NO,
+                    })            
+                }.bind(this));
+                return postDocs;
+            },
+
+            postDelet: function (postData, i, sAction) {
+                this.byId("idProcessPage").setBusy(true);
+                var mParameters = {
+                    groupId: "ProcessDelete" + Math.floor(i / 100),
+                    changeSetId: i,
+                    success: function (oData) {
+                        this.byId("smartFilterBar").search();
+                        messages.showText(oData.Message);
+                        this.byId("idProcessPage").setBusy(false);
+                    }.bind(this),
+                    error: function (oError) {  
+                        messages.showError(messages.parseErrors(oError));
+                        this.byId("idProcessPage").setBusy(false);
+                    }.bind(this),
+                };
+                this.getOwnerComponent().getModel().setHeaders({"button":sAction});
+                //复杂结构
+                this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
+                this.byId("idProcessPage").setBusyIndicatorDelay(0);
+                this.byId("idProcessPage").setBusy(true);
             },
 
             setLocalModel: function () {

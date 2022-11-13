@@ -95,7 +95,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"EIGYO_BI", "leadingProperty":"EIGYO_BI", "sortProperty":"EIGYO_BI", "filterProperty": "EIGYO_BI"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{EIGYO_BI}"/>
+                                <Text text="{path:'EIGYO_BI', formatter:'.formatter.formtDate_8'}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>TENPO_CDT1}" sortProperty="TENPO_CD" filterProperty="TENPO_CD" visible="true">

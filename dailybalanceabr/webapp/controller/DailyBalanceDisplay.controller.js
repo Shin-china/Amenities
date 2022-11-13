@@ -23,7 +23,6 @@ sap.ui.define([
             },
 
             //当路径导航到此页面时，设置页面的数据绑定
-            // When the path navigates to this page, the data binding of the page is set
             _onRouteMatched : function (oEvent) {
                 this.setBusy(false)
             	var oArgs, oView;

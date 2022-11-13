@@ -20,6 +20,19 @@ sap.ui.define([
                     busy: false,
                     hasUIChanges: false,
                     errors: "",
+                    isCreate:true,
+                    actionButtonsInfo: {
+                        midColumn:{
+                            closeColumn: null,
+                            exitFullScreen: null,
+                            fullScreen: "MidColumnFullScreen"
+                        },
+                        endColumn:{
+                            closeColumn: null,
+                            exitFullScreen: null,
+                            fullScreen: null
+                        }
+                    },
                     filterField:[
                         {
                             field:"type",
@@ -78,6 +91,10 @@ sap.ui.define([
                 var oModel = new JSONModel(Device);
                 oModel.setDefaultBindingMode("OneWay");
                 return oModel;
-        }
+            },
+            createInitModel: function () {
+                var oModel = new JSONModel(sap.ui.require.toUrl("FICO/dailybalanceapproval/model/CreateInit.json"));
+                return oModel;
+            }
     };
 });

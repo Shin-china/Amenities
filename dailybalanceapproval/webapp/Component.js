@@ -34,6 +34,8 @@ sap.ui.define([
 
                 // set the local model
 			    this.setModel(models.createLocalModel(), "local");
+
+                this.setModel(models.createInitModel(),"init");
             },
 
             getHelper: function () {

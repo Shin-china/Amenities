@@ -19,7 +19,7 @@
                             <smartFilterBar:ControlConfiguration key="KAISHA_CD" visibleInAdvancedArea="true" label="{i18n>KAISHA_CD}" index="0"/>
                             <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" controlType="date" index="1">
                                 <smartFilterBar:customControl>
-                                    <DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
+                                    <DateRangeSelection id="idDateRange" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration key="NIKKEIHYO_STATUS_CD" visibleInAdvancedArea="true" label="{i18n>NIKKEIHYO_STATUS_CD}" index="2"/>
@@ -49,7 +49,7 @@
                     <t:rowActionTemplate>
                         <t:RowAction>
                             <t:items>
-                                <t:RowActionItem type="Navigation" press="onNavDisplayView"/>
+                                <t:RowActionItem type="Navigation" press=".onNavDailyBalanceView($event, 'Display')"/>
                             </t:items>
                         </t:RowAction>
                     </t:rowActionTemplate>
@@ -83,7 +83,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"EIGYO_BI", "leadingProperty":"EIGYO_BI", "sortProperty":"EIGYO_BI", "filterProperty": "EIGYO_BI"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{EIGYO_BI}"/>
+                                <Text text="{path:'EIGYO_BI', formatter:'.formatter.formtDate_8'}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="7rem" label="{i18n>TENPO_CD}" sortProperty="TENPO_CD" filterProperty="TENPO_CD" visible="true">
@@ -100,6 +100,14 @@
                             </t:customData>
                             <t:template>
                                 <Text text="{TENPO_NM}" wrapping="false" tooltip="{TENPO_NM}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>NIKKEIHYO_STATUS}" sortProperty="NIKKEIHYO_STATUS" filterProperty="NIKKEIHYO_STATUS" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NIKKEIHYO_STATUS", "leadingProperty":"NIKKEIHYO_STATUS", "sortProperty":"NIKKEIHYO_STATUS", "filterProperty": "NIKKEIHYO_STATUS"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{NIKKEIHYO_STATUS}" wrapping="false" tooltip="{NIKKEIHYO_STATUS}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>TENPO_KAKUNIN}" sortProperty="TENPO_KAKUNIN" filterProperty="TENPO_KAKUNIN" visible="true">
@@ -134,14 +142,14 @@
                                 <Text text="{REG_USER}"/>
                             </t:template>
                         </t:Column>
-                        <!-- <t:Column width="6rem" label="{i18n>REG_USERNAME}" sortProperty="REG_USERNAME" filterProperty="REG_USERNAME" visible="true">
+                        <t:Column width="8rem" label="{i18n>REG_USERNAME}" sortProperty="REG_USERNAME" filterProperty="REG_USERNAME" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"REG_USERNAME", "leadingProperty":"REG_USERNAME", "sortProperty":"REG_USERNAME", "filterProperty": "REG_USERNAME"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{REG_USERNAME}"/>
+                                <Text text="{REG_USERNAME}" wrapping="false" tooltip="{REG_USERNAME}"/>
                             </t:template>
-                        </t:Column> -->
+                        </t:Column>
                         <t:Column width="6rem" label="{i18n>KIHYOSHA_NM}" sortProperty="KIHYOSHA_NM" filterProperty="KIHYOSHA_NM" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"KIHYOSHA_NM", "leadingProperty":"KIHYOSHA_NM", "sortProperty":"KIHYOSHA_NM", "filterProperty": "KIHYOSHA_NM"}'/>
@@ -174,14 +182,14 @@
                                 <Text text="{UPD_USER}"/>
                             </t:template>
                         </t:Column>
-                        <!-- <t:Column width="6rem" label="{i18n>UPD_USERNAME}" sortProperty="UPD_USERNAME" filterProperty="UPD_USERNAME" visible="true">
+                        <t:Column width="8rem" label="{i18n>UPD_USERNAME}" sortProperty="UPD_USERNAME" filterProperty="UPD_USERNAME" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"UPD_USERNAME", "leadingProperty":"UPD_USERNAME", "sortProperty":"UPD_USERNAME", "filterProperty": "UPD_USERNAME"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{UPD_USERNAME}"/>
+                                <Text text="{UPD_USERNAME}" wrapping="false" tooltip="{UPD_USERNAME}"/>
                             </t:template>
-                        </t:Column> -->
+                        </t:Column>
                         <t:Column width="6rem" label="{i18n>SHONIN_DT_BUTYOU}" sortProperty="SHONIN_DT_BUTYOU" filterProperty="SHONIN_DT_BUTYOU" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"SHONIN_DT_BUTYOU", "leadingProperty":"SHONIN_DT_BUTYOU", "sortProperty":"SHONIN_DT_BUTYOU", "filterProperty": "SHONIN_DT_BUTYOU"}'/>

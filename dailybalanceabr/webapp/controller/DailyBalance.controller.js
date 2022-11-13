@@ -3,8 +3,9 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"sap/ui/core/UIComponent",
 	"../model/formatter",
-    "./messages"
-], function (BaseController, History, UIComponent, formatter, messages) {
+    "./messages",
+    "sap/m/MessageToast"
+], function (BaseController, History, UIComponent, formatter, messages, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("FICO.dailybalanceabr.controller.DailyBalance", {
@@ -15,24 +16,31 @@ sap.ui.define([
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+            var oRouter = this.getRouter();
+            oRouter.getRoute("DailyBalance").attachMatched(this._onRouteMatched, this);
+            this.InitModel = this.getOwnerComponent().getModel("init");
 		},
 
-		getRouter: function () {
-			return UIComponent.getRouterFor(this);
-		},
+        //当路径导航到此页面时，设置页面的数据绑定
+        _onRouteMatched : function (oEvent) {
+            this.setBusy(false)
+            //localmodel中当前行的绑定路径
+            var oArgs = oEvent.getParameter("arguments");
+            if (oArgs.view == "Display") { 
+                this.byId("idChange").setVisible(true);
+                this.byId("idPosting").setVisible(true);
 
-		onNavBack: function () {
-			var oHistory, sPreviousHash;
-
-			oHistory = History.getInstance();
-			sPreviousHash = oHistory.getPreviousHash();
-
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				this.getRouter().navTo("RouteMain", {}, true /*no history*/ );
-			}
-		},
+                var oHeader = this._oDataModel.getProperty("/" + oArgs.contextPath);
+                this.byId("idDailyBalanceCreate").setTitle(oHeader.KIHYO_NO);
+                this.initialLocalModel_dis(oHeader);
+                this.tableConverted_dis(oArgs.contextPath);
+            } else {
+                this.byId("idDailyBalanceCreate").setTitle(this._ResourceBundle.getText("DailyBalanceCreatePage"));
+                this.byId("idChange").setVisible(false);
+                this.byId("idPosting").setVisible(false);
+            }
+        },
 
         onAddLine: function (oEvent, sTableId) {
             var sPath = "";
@@ -67,6 +75,122 @@ sap.ui.define([
             });
             oTable.removeSelections();
             this._LocalData.refresh();
+        },
+
+        onMulti: function (oEvent, sParam) {
+            var value = oEvent.getSource().getValue();
+            try {
+                value = this.formatter.accMul(value, sParam);
+            } catch (e) {}
+            var sPath = oEvent.getSource().getBindingContext("local").getPath();
+            this._LocalData.setProperty(sPath + "/Amount",value);
+            var sTablePath = "/" + sPath.split("/")[1];
+            var oTable = this._LocalData.getProperty(sTablePath);
+            var total = "";
+            oTable.Item.forEach(function (line) {
+                total = this.formatter.accAdd(total,line.Amount);
+            }.bind(this));
+            var sTotalPath = "/" + sPath.split("/")[1] + "/Total";
+            this._LocalData.setProperty(sTotalPath, total);
+
+            this.onCurrencyTable4ValueChange();
+        },
+
+        // 日记表数据保存
+        onBalanceSave: function (sAction) {
+            if (this.chekcRequired()) {
+                MessageToast.show(this._ResourceBundle.getText("inputRequired"));
+                return;
+            }
+            var postDoc = this.prepareBalanceSaveBody();
+            postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
+            delete postDoc.__metadata;
+            this.postBalanceSave(postDoc,sAction);
+        },
+
+        //申请
+        onBalanceApply: function () {
+            var postDoc = this.prepareBalanceApplyBody();
+            delete postDoc.__metadata;
+            this.postBalanceApply(postDoc);
+        },
+
+        // 准备保存需要的数据
+        prepareBalanceSaveBody: function() {
+            var aDailyBalance = this._LocalData.getProperty("/dailyBalance");
+            aDailyBalance = JSON.parse(JSON.stringify(aDailyBalance));
+            // 1.2.3.4.5
+            var postDoc = aDailyBalance[0];
+            // 获取并转换数据
+            postDoc = this.convertTables(postDoc);
+            //その他現金収入 その他現金支出
+            this.getCashTable(postDoc);
+            //金庫内現金内訳
+            this.getTreasuryCash(postDoc);
+            return postDoc;
+        },
+
+        //准备申请需要的数据
+        prepareBalanceApplyBody: function () {
+            var aDailyBalance = this._LocalData.getProperty("/dailyBalance");
+            var postDoc = {};
+            postDoc.KAISHA_CD = aDailyBalance[0].KAISHA_CD;
+            postDoc.KIHYO_NO = aDailyBalance[0].KIHYO_NO;
+            return postDoc;
+        },
+
+        postBalanceSave: function (postData, sAction) {
+            var i = 1;
+            var mParameters = {
+                groupId: "DailyBalanceSave" + Math.floor(i / 100),
+                changeSetId: i,
+                success: function (oData) {
+                    this.byId("idDailyBalanceCreate").setBusy(false);
+                    messages.showText(oData.Message);
+                    // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
+                }.bind(this),
+                error: function (oError) {
+                    this.byId("idDailyBalanceCreate").setBusy(false);
+                    messages.showError(messages.parseErrors(oError));
+                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Type", "E");
+                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Message", messages.parseErrors(oError));
+                }.bind(this),
+            };
+            this.getOwnerComponent().getModel().setHeaders({"button":sAction});
+            //复杂结构
+            this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
+            this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
+            this.byId("idDailyBalanceCreate").setBusy(true);
+        },
+
+        postBalanceApply: function (postData, i) {
+            i = 1;
+            var mParameters = {
+                groupId: "DailyBalanceApply" + Math.floor(i / 100),
+                changeSetId: i,
+                success: function (oData) {
+                    this.byId("idDailyBalanceCreate").setBusy(false);
+                    messages.showText(oData.Message);
+                    // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
+                }.bind(this),
+                error: function (oError) {
+                    this.byId("idDailyBalanceCreate").setBusy(false);
+                    messages.showError(messages.parseErrors(oError));
+                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Type", "E");
+                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Message", messages.parseErrors(oError));
+                }.bind(this),
+            };
+            this.getOwnerComponent().getModel().setHeaders({"button":"Apply"});
+            //复杂结构
+            this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
+            this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
+            this.byId("idDailyBalanceCreate").setBusy(true);
+        },
+        
+        onSelectTicket: function (oEvent) {
+            // this._LocalData.setProperty("/");
+            var sPath = oEvent.getSource().getParent().getBindingContext("local");
+            this._LocalData.setProperty(sPath + "/Ticket", oEvent.getSource().getSelectedKey());
         },
 
         convertTables: function (postDoc) {
@@ -404,25 +528,6 @@ sap.ui.define([
             this.salesDetialCalc();
         },
 
-        onMulti: function (oEvent, sParam) {
-            var value = oEvent.getSource().getValue();
-            try {
-                value = this.formatter.accMul(value, sParam);
-            } catch (e) {}
-            var sPath = oEvent.getSource().getBindingContext("local").getPath();
-            this._LocalData.setProperty(sPath + "/Amount",value);
-            var sTablePath = "/" + sPath.split("/")[1];
-            var oTable = this._LocalData.getProperty(sTablePath);
-            var total = "";
-            oTable.Item.forEach(function (line) {
-                total = this.formatter.accAdd(total,line.Amount);
-            }.bind(this));
-            var sTotalPath = "/" + sPath.split("/")[1] + "/Total";
-            this._LocalData.setProperty(sTotalPath, total);
-
-            this.onCurrencyTable4ValueChange();
-        },
-
         onTableColumnSum: function (oEvent,sId) {
             var oTable = this.byId(sId);
             var sTablePath = oTable.getBinding("rows").getPath();
@@ -436,7 +541,6 @@ sap.ui.define([
             
             this.onCurrencyTable4ValueChange();
         },
-
 
         onCurrencyTable4ValueChange: function () {
             var total1 = this._LocalData.getProperty("/CurrencyTable1/Total");
@@ -540,8 +644,6 @@ sap.ui.define([
             this.onNavBack();
         },
 
-
-
         tableConverted_dis: function (sKey) {
             var aHeaderKey = this._oDataModel.getProperty("/" + sKey + "/to_Header");
             var aCahsIncomKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzCashIncome");
@@ -566,6 +668,7 @@ sap.ui.define([
             this.setLocalModel_dis(oHeader);
 
             // 转换数据
+            // 用于参考，如果是参考创建就需要将之前的起票号码清除
             if (!this._LocalData.getProperty("/isCreate")) {
                 oHeader.KIHYO_NO = "";
             }
@@ -826,12 +929,45 @@ sap.ui.define([
             //準備金明細
             var aFI0004a = aFI0004.filter( line => line.Value2 === shop);
             aCurrencyTable3.forEach(function (line, index) {
-                line.Title = aFI0004a[index].Value4;
+                //aFI0004a中的条目数可能少于aCurrencyTable3
+                try {
+                    line.Title = aFI0004a[index].Value4;
+                } catch (e) {}
             });
             this._LocalData.setProperty("/CurrencyTable3/Item", aCurrencyTable3);
 
             
             this._LocalData.refresh();
+        },
+
+        onSelectWeather: function (oEvent) {
+            this._LocalData.setProperty("/dailyBalance/0/TENKI", this.byId("idSelectWeather").getSelectedKey());
+            this.changeValueState(oEvent);
+        },
+
+        oonUserChange: function (oEvent) {
+            this.changeValueState(oEvent);
+        },
+
+        changeValueState: function (oEvent) {
+            if (oEvent.getParameter("value") == "") {
+                oEvent.getSource().setValueState("Warning");
+            } else {
+                oEvent.getSource().setValueState("None");
+            }
+        },
+
+        chekcRequired: function () {
+            var isError = false;
+            if (this.byId("idUser").getValue() == "") {
+                this.byId("idUser").setValueState("Warning");
+                isError = true;
+            } 
+            if (this.byId("idSelectWeather").getSelectedKey() == "") {
+                this.byId("idSelectWeather").setValueState("Warning");
+                isError = true;
+            } 
+            return isError;
         }
 
         

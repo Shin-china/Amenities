@@ -74,7 +74,6 @@ sap.ui.define([
              // 日记表数据保存
              onReserve: function (sAction) {
                 var postDoc = this.prepareReserveBody();
-                return;
                 postDoc.forEach(function (line, index) {
                     this.postReserve(line, index);
                 }.bind(this));

@@ -31,7 +31,7 @@
             </f:header>
             <f:content>
                 <smartTable:SmartTable id="smartTable" smartFilterId="smartFilterBar" enableExport="false" showRowCount="true" useVariantManagement="false" entitySet="ZzApprovalListSet"
-                    useTablePersonalisation="false" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" 
+                    useTablePersonalisation="false" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" requestAtLeastFields="KAISHA_CD,NIKKEIHYO_KBN"
                     class="sapUiThinyMarginTop">
                     <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="1" selectionMode="None">
                         <t:rowActionTemplate>

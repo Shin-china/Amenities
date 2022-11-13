@@ -1,5 +1,4 @@
 sap.ui.define([
-    // "FICO/dailybalanceabr/controller/BaseController",
     "FICO/dailybalanceabr/controller/DailyBalance",
     "../model/formatter",
     "./messages"
@@ -14,59 +13,13 @@ sap.ui.define([
                 this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
                 this.postingTotal = "0";
-                //excel 整个表格或者一行？粘贴代码示例，需要测试调整
-                // ['paste'].forEach(function(event) {
-                //     document.addEventListener(event, function(e) {
-                //         // get all the rows from clipboard
-                //         var rows = e.clipboardData.getData('text/plain').split(/\+/);
-                //         // go through the rows and place them in your UI5 Model
-                //         for (var i = 0; i < rows.length; i++) {
-                //             var fields = rows[i].split(/\s+/);
-                //             if (fields[0] === "") {
-                //                 continue;
-                //             }
-                //             var MATNR = fields[0];
-                //             var QTD = fields[1];
-                //             var DISC = fields[2];
-                
-                //             var dataItem = {};
-                //             dataItem.MATNR = MATNR;
-                //             dataItem.KWMENG = QTD;
-                //             dataItem.DISCOUNT = DISC;
-                
-                //             //tabOrderItems is the data endpoint
-                //             ModelData.Add(tabOrderItems, dataItem);
-                //         }
-                
-                //     });
-                // });
                 var oRouter = this.getRouter();
                 oRouter.getRoute("DailyBalanceCreate").attachMatched(this._onRouteMatched, this);
             },
 
             //当路径导航到此页面时，设置页面的数据绑定
-            // When the path navigates to this page, the data binding of the page is set
             _onRouteMatched : function (oEvent) {
-                // this.byId("idProcessPage").setBusy(false);
                 this._LocalData.setProperty("/busy",false);
-            	// var oArgs, oView;
-            	//localmodel中当前行的绑定路径
-            	// oArgs = oEvent.getParameter("arguments");
-                
-                // this._LocalData.setProperty("/dailyBalance/0/KIHYO_NO", oArgs.oDialogInput.KIHYO_NO);
-            	// oView = this.getView();
-            	// oView.bindElement({
-            	// 	path : "/progressConfir/" + oArgs.contextPath,
-            	// 	model: "local",
-            	// 	events : {
-            	// 		dataRequested: function () {
-            	// 			oView.setBusy(true);
-            	// 		},
-            	// 		dataReceived: function () {
-            	// 			oView.setBusy(false);
-            	// 		}
-            	// 	}
-            	// });
             },
 
             // 日记表数据保存
@@ -154,10 +107,6 @@ sap.ui.define([
                 this.byId("idDailyBalanceCreate").setBusy(true);
             },
             
-            onSelectWeather: function () {
-                this._LocalData.setProperty("/dailyBalance/0/TENKI", this.byId("idSelectWeather").getSelectedKey());
-            },
-
             onSelectTicket: function (oEvent) {
                 // this._LocalData.setProperty("/");
                 var sPath = oEvent.getSource().getParent().getBindingContext("local");

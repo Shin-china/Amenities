@@ -21,8 +21,17 @@
                 "type": "OData",
                 "settings": {
                     "odataVersion": "2.0",
-                    "annotations": [],
+                    "annotations": [
+                        "annotation"
+                    ],
                     "localUri": "localService/metadata.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotation/annotation.xml",
+                "settings": {
+                    "localUri": "annotation/annotation.xml"
                 }
             }
         }
@@ -83,6 +92,10 @@
                     "defaultCountMode": "Inline",
                     "refreshAfterChange": false
                 }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
             }
         },
         "resources": {
@@ -100,7 +113,8 @@
                 "viewPath": "FICO.dailybalanceabr.view",
                 "controlAggregation": "pages",
                 "controlId": "app",
-                "clearControlAggregation": false
+                "clearControlAggregation": false,
+                "transition": "slide"
             },
             "routes": [
                 {
@@ -111,34 +125,20 @@
                     ]
                 },
                 {
-                    "pattern": "DailyBalanceCreate",
-                    "name": "DailyBalanceCreate",
-                    "target": "DailyBalanceCreate"
-                },
-                {
-                    "pattern": "DailyBalanceDisplay/{contextPath}",
-                    "name": "DailyBalanceDisplay",
-                    "target": "DailyBalanceDisplay"
+                    "pattern": "DailyBalance/:contextPath:/{view}",
+                    "name": "DailyBalance",
+                    "target": "DailyBalance"
                 }
             ],
             "targets": {
                 "TargetMain": {
                     "viewType": "XML",
-                    "transition": "slide",
                     "clearControlAggregation": false,
                     "viewId": "Main",
                     "viewName": "Main"
                 },
-                "DailyBalanceCreate": {
-                    "viewPath": "FICO.dailybalanceabr.view",
-                    "viewName": "DailyBalanceCreate",
-                    "transition": "slide",
-                    "viewLevel": 2
-                },
-                "DailyBalanceDisplay": {
-                    "viewPath": "FICO.dailybalanceabr.view",
-                    "viewName": "DailyBalanceDisplay",
-                    "transition": "slide",
+                "DailyBalance": {
+                    "viewName": "DailyBalance",
                     "viewLevel": 2
                 }
             }
