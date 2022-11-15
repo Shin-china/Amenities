@@ -17,7 +17,7 @@
                 <HBox>
                     <Label text="{i18n>EIGYO_BI}" class="dialogLabel" required="true"/>
                     <DatePicker id="idDP1" placeholder="Enter Date" width="14rem" class="sapUiSmallMarginEnd" enabled="{local>/isCreate}"
-                        change="onDatePickerChange"/>
+                        change="onDatePickerChange" displayFormat="yyyy/MM/dd"/>
                 </HBox>
             </VBox>
         </content>

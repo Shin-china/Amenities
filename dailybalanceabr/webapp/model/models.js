@@ -17,7 +17,8 @@ sap.ui.define([
             // 初始化本地数据集
             _initialLocalData: function () {
                 var localData = {
-                    DailyBalanceEditable:false,
+                    processBusy:false,
+                    viewEditable:false,
                     labelWidth:"16rem",
                     busy: false,
                     hasUIChanges: false,

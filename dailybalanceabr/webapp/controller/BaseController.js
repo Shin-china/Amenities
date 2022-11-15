@@ -7,30 +7,38 @@ sap.ui.define([
 	"sap/ui/model/Sorter",
 ], function (Controller, History, UIComponent, formatter, Filter, Sorter) {
 	"use strict";
+    // items第一个字段为搜索帮助字段，第二个字段为描述，这样便于统一操作
 	var mValueHelp = new Map([
 		["Company",{
 			helpModel:"CompanyVH",
-			valuePath:"KAISHA_CD",
 			headerTexts:["KAISHA_CD","KAISHA_NM"],
 			items:["Key1","Value1"]
 		}],
 		["Shop",{
 			helpModel:"ShopVH",
-			valuePath:"TENPO_CD",
-			headerTexts:["TENPO_CD","KAISHA_CD","TENPO_NM"],
-			items:["Key1","Key2","Value1"]
+            
+			headerTexts:["TENPO_CD","TENPO_NM","KAISHA_CD"],
+			items:["Key1","Value1","Key2"]
 		}],
 		["Account",{
 			helpModel:"AccountVH",
-			// valuePath:"Supplier",
 			headerTexts:["Account","AccountDesc","AccountDesc"],
 			items:["Key1","Value1","Key2"]
 		}],
 		["Tax",{
 			helpModel:"TaxVH",
-			// valuePath:"Material",
 			headerTexts:["Tax","TaxDesc"],
 			items:["Key1","Value1"]
+		}],
+        ["Profit",{
+			helpModel:"ProfitVH",
+			headerTexts:["prctr","ltext","datbi"],
+			items:["Key1","Value1", "Key3"]
+		}],
+        ["Cost",{
+			helpModel:"CostVH",
+			headerTexts:["kostl","ltext","datbi"],
+			items:["Key1","Value1", "Key3"]
 		}]
 	]);
 	return Controller.extend("FICO.dailybalanceabr.controller.BaseController", {
@@ -58,11 +66,13 @@ sap.ui.define([
 			}
 		},
 
-		onValueHelp: function (oEvent, propertyKey) {
+		onValueHelp: function (oEvent, propertyKey, additionalField) {
             var oView = this.getView();
             this.oInput = oEvent.getSource();
+            // table之类的表绑定，可以获取到类似rows items的绑定
             var oBindingModel = oEvent.getSource().getBindingContext("local");
             var sRowPath;
+            // 单个字段的直接绑定，可以获取到完整的路径
             var sProperty = oEvent.getSource().getBindingInfo("value").binding.getPath();
             if (oBindingModel) {
                 sRowPath = oBindingModel.getPath() + "/" + sProperty;
@@ -71,7 +81,7 @@ sap.ui.define([
             }
 
             //filter
-            if (propertyKey == "Account") {
+            if (propertyKey == "Account" || propertyKey == "Profit" || propertyKey == "Cost") {
                 var aFilter = [];
                 aFilter.push(new Filter("Key2", "Contains", this._LocalData.getProperty("/dailyBalance/0/KAISHA_CD")));
                 var oFilter = new Filter({
@@ -105,6 +115,8 @@ sap.ui.define([
                 if (!valueHelpParameters) {
                     return;
                 }
+                //给附加字段填充值
+                valueHelpParameters.additionalField = additionalField;
 
                 //解除confirm事件的绑定，因为会多次点击，如果不解除绑定则会绑定多次，会多次进入事件，且除第一次之外，其他没有传入参数
                 oValueHelpDialog.detachConfirm(this._handleValueHelpClose);
@@ -224,12 +236,17 @@ sap.ui.define([
                 var sRowPath = obj.path;//数据所在行的绑定路径
                 var sValueHelpPath = oSelectedItem.getBindingContextPath();
                 var sValueHelpTextPath = oSelectedItem.getBindingContextPath();
-                var sProperty = obj.valueHelpParameters.valuePath;
                 sValueHelpPath = sValueHelpPath + "/" + obj.valueHelpParameters.items[0];
                 sValueHelpTextPath = sValueHelpTextPath + "/" + obj.valueHelpParameters.items[1];
-                // that._LocalData.setProperty(sRowPath + "/" + sProperty, that._LocalData.getProperty(sValueHelpPath));
                 that._LocalData.setProperty(sRowPath, that._LocalData.getProperty(sValueHelpPath));
                 // //除了搜索帮助字段本身，还可以填充一些其他关联的字段，比如描述
+                if (obj.valueHelpParameters.additionalField) {
+                    var aPath = sRowPath.split("/");
+                    aPath.pop();
+                    var sAdditionalPath = aPath.join("/");
+                    sAdditionalPath = sAdditionalPath + "/" + obj.valueHelpParameters.additionalField;
+                    that._LocalData.setProperty(sAdditionalPath, that._LocalData.getProperty(sValueHelpTextPath));
+                }
                 // if (obj.isHead) {
                 //     // 获取几个抬头字段的描述
                 //     that._LocalData.setProperty(sRowPath + "/" + sProperty + "name", that._LocalData.getProperty(sValueHelpTextPath));

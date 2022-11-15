@@ -11,8 +11,13 @@
 	<edmx:DataServices>
 		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm"
 			Namespace="dailybalanceabr.annotation.annotation.ZZDAILYBALANCEABR_SRV">
+
+			<Annotations Target="Metadata.ZzShopDailyBalance/KAISHA_CD">
+				<Annotation Term="Common.FilterDefaultValue" String="1000"/>
+			</Annotations>
+
 			<Annotations Target="Metadata.ZzCompanyVH/Bukrs">
-				<Annotation Term="Common.Label" String="{@i18n&gt;KAISHA_NM}"/>
+				<Annotation Term="Common.Label" String="{@i18n&gt;KAISHA_CD}"/>
 			</Annotations>
 			<Annotations Target="Metadata.ZzCompanyVH/Butxt">
 				<Annotation Term="Common.Label" String="{@i18n&gt;KAISHA_NM}"/>
@@ -41,7 +46,7 @@
 				<Annotation Term="Common.Label" String="{@i18n&gt;NIKKEIHYO_STATUS_CD}"/>
 			</Annotations>
 			<Annotations Target="Metadata.ZzDocStatusVH/ZVALUE2">
-				<Annotation Term="Common.Label" String="{@i18n&gt;NIKKEIHYO_STATUS}"/>
+				<Annotation Term="Common.Label" String="{@i18n&gt;NIKKEIHYO_STATUS_NM}"/>
 			</Annotations>
 			<Annotations Target="Metadata.ZzShopDailyBalance/NIKKEIHYO_STATUS_CD">
 				<Annotation Term="Common.ValueList">

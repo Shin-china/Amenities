@@ -24,10 +24,11 @@ sap.ui.define([
 
         //当路径导航到此页面时，设置页面的数据绑定
         _onRouteMatched : function (oEvent) {
-            this.setBusy(false)
+            this._LocalData.setProperty("/processBusy", false);
             //localmodel中当前行的绑定路径
             var oArgs = oEvent.getParameter("arguments");
             if (oArgs.view == "Display") { 
+                this._LocalData.setProperty("viewEditable", false);
                 this.byId("idChange").setVisible(true);
                 this.byId("idPosting").setVisible(true);
 
@@ -36,10 +37,12 @@ sap.ui.define([
                 this.initialLocalModel_dis(oHeader);
                 this.tableConverted_dis(oArgs.contextPath);
             } else {
+                this._LocalData.setProperty("viewEditable", true);
                 this.byId("idDailyBalanceCreate").setTitle(this._ResourceBundle.getText("DailyBalanceCreatePage"));
                 this.byId("idChange").setVisible(false);
                 this.byId("idPosting").setVisible(false);
             }
+            this.byId("idSelectWeather").setSelectedKey("");
         },
 
         onAddLine: function (oEvent, sTableId) {
@@ -146,6 +149,8 @@ sap.ui.define([
                 changeSetId: i,
                 success: function (oData) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
+                    this._LocalData.setProperty("/dailyBalance/0/KIHYO_NO", oData.KIHYO_NO);
+                    this.byId("idDailyBalanceCreate").setTitle(oData.KIHYO_NO);
                     messages.showText(oData.Message);
                     // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
                 }.bind(this),
@@ -421,12 +426,12 @@ sap.ui.define([
                     "BILLIARD_URIAGE",
                     "JITEN_TVG_URIAGE",
                     "KYOWA_TVG_URIAGE",
-                    "LOCKER_DAI_URIAG",
+                    "LOCKER_DAI_URIAGE",
                     "KARAOKE_URIAGE",
                     "FK_URIAGE8",
                     "FK_URIAGE10",
                     "NYUJORYO_URIAGE",
-                    "HANSOKUHIN_URIAG",
+                    "HANSOKUHIN_URIAGE",
                     "KOKA_URIAGE",
                     "HAIBUN_URIAGE",
                     "JIHANKI_URIAGE",
@@ -968,6 +973,19 @@ sap.ui.define([
                 isError = true;
             } 
             return isError;
+        },
+
+        onChangePress: function (oEvent) {
+            var oButton = oEvent.getSource();
+            var isEdit = this._LocalData.getProperty("/viewEditable");
+            if (isEdit) {
+                this._LocalData.setProperty("/viewEditable", false);
+                oButton.setText(this._ResourceBundle.getText("ChangeButton"));
+
+            } else {
+                this._LocalData.setProperty("/viewEditable", true);
+                oButton.setText(this._ResourceBundle.getText("DisplayButton"));
+            }
         }
 
         

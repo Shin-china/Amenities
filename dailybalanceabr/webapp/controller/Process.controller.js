@@ -27,6 +27,21 @@ sap.ui.define([
                 }.bind(this));
 
                 this.getConfiguration.call(this);
+
+                //filter 默认值
+                var oDateRange = this.byId("idDateRange");
+                var currentDate = new Date();
+                var dateFrom = new Date();
+                var dateTo = new Date();
+                if (currentDate.getDate() == 1) {
+                    dateFrom.setMonth(dateFrom.getMonth() - 1);
+                } else {
+                    dateFrom.setDate(1);
+                    dateTo.setMonth(dateTo.getMonth() + 1) ;
+                    dateTo.setDate(0);
+                }
+                oDateRange.setFrom(dateFrom);
+                oDateRange.setTo(dateTo);
             },
 
             onBeforeRebindTable: function(oEvent) {
@@ -52,6 +67,10 @@ sap.ui.define([
                 if (aFilters.length > 0) {
                     aFilter.push(oNewFilter);
                 }
+
+                this.byId("idCol1").setVisible(false);
+                this.byId("idCol2").setVisible(false);
+                this.byId("idCol3").setVisible(false);
             },
 
             onNavDailyBalanceView: function (oEvent,sView) {
@@ -91,7 +110,7 @@ sap.ui.define([
                     }
 
                 }
-                this.byId("idProcessPage").setBusy(true);
+                this._LocalData.setProperty("/processBusy", true);
                 if (!this.pDialog) {
                     this.pDialog = this.loadFragment({
                         name: "FICO.dailybalanceabr.view.fragment.CreateDialog"
@@ -118,10 +137,7 @@ sap.ui.define([
                         //登录按钮
                         press: function () {
                             if (sButton === "Create") {
-                                var isError = this.createButton();
-                                if (!isError) {
-                                    oDialog.close();
-                                }
+                                this.createButton(oDialog);
                             } else if (sButton === "Reference") {
                                 this.refrenceButton();
                                 oDialog.close();
@@ -146,12 +162,27 @@ sap.ui.define([
                 }.bind(this));
             },
 
-            createButton: function () {
+            createButton: function (oDialog) {
                 if (this.requiredCheck()) {
                     return true;
                 }
-                this.setLocalModel();
-                this.getRouter().navTo("DailyBalance",{view:"Create"});
+
+                this.checkError().then(function (res) {
+                    if(res.TYPE) {
+                        if (res.TYPE == "E") {
+                            MessageBox.error(res.MESSAGE);
+                            return;
+                        } else {
+                            this.getLastRecord();
+                            this.setLocalModel();
+                            this.getRouter().navTo("DailyBalance",{view:"Create"});
+                            oDialog.close();
+                        }
+                    } else {
+                        MessageBox.error(messages.parseErrors(res));
+                        return;
+                    }
+                }.bind(this));
             },
 
             requiredCheck: function () {
@@ -170,8 +201,75 @@ sap.ui.define([
                 if (oDatePicker.getValue() == "") {
                     oDatePicker.setValueState("Warning");
                     isError = true;
+                } else if (new Date(oDatePicker.getValue()) > new Date()){
+                    isError = true;
+                    oDatePicker.setValueState("Warning");
+                    oDatePicker.setValueStateText(this._ResourceBundle.getText("msg2"));
                 }
+
+                var aShop = this._LocalData.getProperty("/ShopVH");
+                var sCompany = oCompany.getValue();
+                var sShop = oShop.getValue();
+                var aShopTemp = aShop.filter( line => line.Key1 == sShop && line.Key2 == sCompany);
+                if (aShopTemp.length == 0) {
+                    MessageBox.error(this._ResourceBundle.getText("msg1"));                    
+                    isError = true;
+                }
+
                 return isError;
+            },
+
+            checkError: function() {
+                var i = 1;
+                var sCompany = this.byId("idCompany").getValue();
+                var sShop = this.byId("idShop").getValue();
+                var sDate = this.byId("idDP1").getValue();
+                sDate = this.formatter.date_8(sDate);
+                var postData = {
+                    "KAISHA_CD": sCompany,
+                    "TENPO_CD": sShop,
+                    "EIGYO_BI": sDate
+                };
+                var promise = new Promise (function (resolve, reject) {
+                    var mParameters = {
+                        groupId: "checkError" + Math.floor(i / 100),
+                        changeSetId: i,
+                        success: function (oData) {
+                            resolve(oData);
+                        }.bind(this),
+                        error: function (oError) {  
+                            resolve(oError);
+                            // messages.showError(messages.parseErrors(oError));
+                        }.bind(this),
+                    };
+                    this.getOwnerComponent().getModel().create("/ZzCheckErrorSet", postData, mParameters);
+                }.bind(this));
+                return promise;
+            },
+
+            // 获取前日金额
+            getLastRecord: function () {
+                var aFilters = [];
+                aFilters.push(new Filter("KAISHA_CD", "EQ", this.byId("idCompany").getValue())); 
+                aFilters.push(new Filter("TENPO_CD", "EQ", this.byId("idShop").getValue())); 
+                var sDate = this.byId("idDP1").getValue();
+                aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate))); 
+                var promise = new Promise( function (resolve, reject) {
+                    var mParameters = {
+                        filters: aFilters,
+                        success: function (oData) {
+                            resolve();
+                            if (oData.results.length > 0) {
+                                this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HONZITUKURIKOSI);
+                            }
+                        }.bind(this),
+                        error: function (oError) {
+                            reject();
+                        }.bind(this)
+                    };
+                    this.getOwnerComponent().getModel().read("/ZzShopDailyBalanceSet", mParameters);
+                }.bind(this));
+
             },
 
             onDatePickerChange: function (oEvent) {
@@ -192,7 +290,6 @@ sap.ui.define([
             onConfirmBox: function (oEvent, sMessage) {
                 var sTitle = this._ResourceBundle.getText("ConfirmTitle");
                 var sText = this._ResourceBundle.getText(sMessage);
-                // MessageBox.confirm(this._ResourceBundle.getText(sMessage));
                 MessageBox.confirm(sText, {
                     title: sTitle,
                     icon: MessageBox.Icon.WARNING,
@@ -203,7 +300,11 @@ sap.ui.define([
                     ],
                     onClose: function (sResult) {
                         if (sResult === MessageBox.Action.YES) {
-                            this.onBalanceDelete();
+                            if (sMessage == "DeleteConfirmMsg") {
+                                this.onBalanceDelete();
+                            } else if (sMessage == "PostingConfirmMsg") {
+                                this.onBatchPosting("Posting");
+                            }
                         }
                     }.bind(this)
                 });
@@ -213,6 +314,14 @@ sap.ui.define([
                 var postDocs = this.prepareBalanceDeleteBody();
                 postDocs.forEach(function (line, index) {
                     this.postDelet(line, index, "Delete");
+                }.bind(this));
+            },
+
+            // 批量过账
+            onBatchPosting: function (sAction) {
+                var postDocs = this.prepareBatchPostingBody();
+                postDocs.forEach(function (line, index) {
+                    this.postBatchPosting(line, index, sAction);
                 }.bind(this));
             },
 
@@ -229,6 +338,51 @@ sap.ui.define([
                         KIHYO_NO: lineData.KIHYO_NO,
                     })            
                 }.bind(this));
+                return postDocs;
+            },
+
+            //批量过账
+            prepareBatchPostingBody: function () {
+                var postDocs = [];	
+                var oTable = this.byId("reportTable");
+                //获取选中的行
+                var listItems = oTable.getSelectedIndices();
+                //得到选中行的flag
+                listItems.forEach(function (sSelected) {
+                    let sKey = oTable.getContextByIndex(sSelected).getPath();
+                    let lineData = this._oDataModel.getProperty(sKey); 
+
+                    var aHeaderKey = this._oDataModel.getProperty(sKey + "/to_Header");
+                    var aCahsIncomKey = this._oDataModel.getProperty(sKey + "/to_ZzCashIncome");
+                    var aCahsPaymentKey = this._oDataModel.getProperty(sKey + "/to_ZzCashPayment");
+                    var aTreasuryCashKey = this._oDataModel.getProperty(sKey + "/to_ZzTreasuryCash");
+
+                    var aHeader = [], aCahsIncome = [], aCahsPayment = [], aTreasuryCash = [];
+                    aHeader.push(this._oDataModel.getProperty("/" + aHeaderKey[0]));
+                    aCahsIncomKey.forEach(function (path) {
+                        var item = this._oDataModel.getProperty("/" + path);
+                        delete item.__metadata;
+                        aCahsIncome.push(item);
+                    }.bind(this));
+                    aCahsPaymentKey.forEach(function (path) {
+                        var item = this._oDataModel.getProperty("/" + path);
+                        delete item.__metadata;
+                        aCahsPayment.push(item);
+                    }.bind(this));
+                    aTreasuryCash.push(this._oDataModel.getProperty("/" + aTreasuryCashKey[0]));
+
+                    lineData = JSON.parse(JSON.stringify(lineData));
+                    lineData.EIGYO_BI = this.formatter.date_8(lineData.EIGYO_BI);
+                    lineData = aHeader[0];
+                    delete lineData.__metadata;
+                    lineData.key = sKey;
+                    lineData.to_ZzCashIncome = aCahsIncome;
+                    lineData.to_ZzCashPayment = aCahsPayment;
+                    lineData.to_ZzTreasuryCash = aTreasuryCash;
+
+                    postDocs.push(lineData);
+                }.bind(this));
+
                 return postDocs;
             },
 
@@ -254,6 +408,32 @@ sap.ui.define([
                 this.byId("idProcessPage").setBusy(true);
             },
 
+            postBatchPosting: function (postData, i, sAction) {
+                var sPath = postData.key;
+                delete postData.key;
+                this.byId("idProcessPage").setBusy(true);
+                var mParameters = {
+                    groupId: "BatchPosting" + Math.floor(i / 100),
+                    changeSetId: i,
+                    success: function (oData) {
+                        this.byId("idCol1").setVisible(true);
+                        this.byId("idCol2").setVisible(true);
+                        this.byId("idCol3").setVisible(true);
+                        this.byId("idProcessPage").setBusy(false);
+                        this._oDataModel.setProperty(sPath + "/Type", "S");
+                        this._oDataModel.setProperty(sPath + "/Message", oData.Message);
+                    }.bind(this),
+                    error: function (oError) {  
+                        // messages.showError(messages.parseErrors(oError));
+                        this._oDataModel.setProperty(sPath + "/Type", "E");
+                        this._oDataModel.setProperty(sPath + "/Message", messages.parseErrors(oError));
+                        this.byId("idProcessPage").setBusy(false);
+                    }.bind(this),
+                };
+                this.getOwnerComponent().getModel().setHeaders({"button":sAction});
+                //复杂结构
+                this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
+            },
             setLocalModel: function () {
                 // 获取dialog中的参数
                 var sCompany = this.byId("idCompany").getValue();
@@ -348,7 +528,9 @@ sap.ui.define([
                     aCompany = [],
                     aShop = [],
                     aAccount = [],
-                    aTax = [];
+                    aTax = [],
+                    aProfit = [],
+                    aCost = [];
                 oData.results.forEach(function(line){
                     switch (line.ZID) {
                         //天气
@@ -408,6 +590,24 @@ sap.ui.define([
                                 Value1: line.ZVALUE1
                             });
                             break;
+                        //利润中心
+                        case "VH0006":
+                            aProfit.push({
+                                Key1: line.ZKEY1,
+                                Value1: line.ZVALUE1,
+                                Key2: line.ZKEY2,
+                                Key3: line.ZKEY3
+                            });
+                            break;
+                        //成本中心
+                        case "VH0007":
+                            aCost.push({
+                                Key1: line.ZKEY1,
+                                Value1: line.ZVALUE1,
+                                Key2: line.ZKEY2,
+                                Key3: line.ZKEY3
+                            });
+                            break;
                     }
                 }.bind(this));
                 this._LocalData.setProperty("/FI0005", aFI0005);
@@ -417,6 +617,8 @@ sap.ui.define([
                 this._LocalData.setProperty("/ShopVH", aShop);
                 this._LocalData.setProperty("/AccountVH", aAccount);
                 this._LocalData.setProperty("/TaxVH", aTax);
+                this._LocalData.setProperty("/ProfitVH", aProfit);
+                this._LocalData.setProperty("/CostVH", aCost);
             },
 
             setPageBusy: function (isBusy) {

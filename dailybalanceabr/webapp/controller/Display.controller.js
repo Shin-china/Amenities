@@ -141,7 +141,7 @@ sap.ui.define([
             },
 
             postReserve: function (postData, i) {
-                this.buId("idDisplayPage").setBusy(true);
+                this.byId("idDisplayPage").setBusy(true);
                 var mParameters = {
                     groupId: "DailyBalanceReserve" + Math.floor(i / 100),
                     changeSetId: i,
@@ -149,7 +149,7 @@ sap.ui.define([
                         this.byId("idCol1").setVisible(true);
                         this.byId("idCol2").setVisible(true);
                         this.byId("idCol3").setVisible(true);
-                        this.buId("idDisplayPage").setBusy(false);
+                        this.byId("idDisplayPage").setBusy(false);
                     }.bind(this),
                     error: function (oError) {  
                         // messages.showError(messages.parseErrors(oError));

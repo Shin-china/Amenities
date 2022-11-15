@@ -24,11 +24,11 @@
                                         <form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" 
                                             labelSpanL="3" labelSpanM="4" emptySpanL="2" emptySpanM="2" breakpointM="100" columnsL="1">
                                             <Label text="{i18n>KIHYOSHA_NM}" required="true" />
-											<Input id="idUser" value="{local>/dailyBalance/0/KIHYOSHA_NM}" change="onUserChange"/>
+											<Input id="idUser" value="{local>/dailyBalance/0/KIHYOSHA_NM}" change="onUserChange" editable="{local>/viewEditable}"/>
                                             <Label text="{i18n>TENKI}" required="true"/>
 											<!-- <Input value="{local>/dailyBalance/0/TENKI}" showValueHelp="true"/> -->
 											<Select id="idSelectWeather" showSecondaryValues="true" width="14rem" class="sapUiSmallMarginEnd"
-												change="onSelectWeather" forceSelection="false"
+												change="onSelectWeather" forceSelection="false" editable="{local>/viewEditable}"
 												items="{
 													path: 'local>/FI0005',
 													sorter: { path: 'Value1' },
@@ -53,75 +53,75 @@
 									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" singleContainerFullSize="false"
 										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="400" columnsL="2">
 										<Label text="{i18n>Title1}" />
-										<Input value="{local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN}" />
+										<Input value="{local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN}" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Title2}" />
-										<Input value="{local>/dailyBalance/0/GNK_NYUKIN_SOGAKU}" change="resultCalc" />
+										<Input value="{local>/dailyBalance/0/GNK_NYUKIN_SOGAKU}" change="resultCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Title3}" />
-										<Input value="{local>/dailyBalance/0/RYOGAEKIN_UKEIRE}" change="resultCalc"/>
+										<Input value="{local>/dailyBalance/0/RYOGAEKIN_UKEIRE}" change="resultCalc" editable="{local>/viewEditable}"/>
 									</form:SimpleForm>
 									<!-- 1 売上 -->
 									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false"
 										labelSpanL="4" labelSpanM="4" emptySpanL="3" emptySpanM="3" breakpointM="100">
 										<core:Title text="{i18n>Title4a}" />
 										<Label text="{i18n>Field1}" />
-										<Input value="{local>/dailyBalance/0/INSHOKU_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/INSHOKU_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field2}" />
-										<Input value="{local>/dailyBalance/0/BENTO_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/BENTO_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field3}" />
-										<Input value="{local>/dailyBalance/0/GAME_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/GAME_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field4}" />
-										<Input value="{local>/dailyBalance/0/LANE_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/LANE_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field5}" />
-										<Input value="{local>/dailyBalance/0/SHOES_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/SHOES_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field6}" />
-										<Input value="{local>/dailyBalance/0/PRO_SHOP_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/PRO_SHOP_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field7}" />
-										<Input value="{local>/dailyBalance/0/BILLIARD_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/BILLIARD_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field8}" />
-										<Input value="{local>/dailyBalance/0/JITEN_TVG_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/JITEN_TVG_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field9}" />
-										<Input value="{local>/dailyBalance/0/KYOWA_TVG_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/KYOWA_TVG_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field10}" />
-										<Input value="{local>/dailyBalance/0/LOCKER_DAI_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/LOCKER_DAI_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field11}" />
-										<Input value="{local>/dailyBalance/0/KARAOKE_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/KARAOKE_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field12}" />
-										<Input value="{local>/dailyBalance/0/FK_URIAGE8}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/FK_URIAGE8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field13}" />
-										<Input value="{local>/dailyBalance/0/FK_URIAGE10}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/FK_URIAGE10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field14}" />
-										<Input value="{local>/dailyBalance/0/NYUJORYO_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/NYUJORYO_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field15}" />
-										<Input value="{local>/dailyBalance/0/HANSOKUHIN_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/HANSOKUHIN_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<core:Title text="" />
 										<Label text="{i18n>Field16}" />
-										<Input value="{local>/dailyBalance/0/KOKA_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/KOKA_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field17}" />
-										<Input value="{local>/dailyBalance/0/HAIBUN_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/HAIBUN_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field18}" />
-										<Input value="{local>/dailyBalance/0/JIHANKI_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/JIHANKI_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field19}" />
-										<Input value="{local>/dailyBalance/0/BUPPAN_URIAGE8}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/BUPPAN_URIAGE8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field20}" />
-										<Input value="{local>/dailyBalance/0/BUPPAN_URIAGE10}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/BUPPAN_URIAGE10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field21}" />
-										<Input value="{local>/dailyBalance/0/REJI_URIAGE}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/REJI_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field22}" />
-										<Input value="{local>/dailyBalance/0/EVENT_URIAGEA8}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/EVENT_URIAGEA8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field23}" />
-										<Input value="{local>/dailyBalance/0/EVENT_URIAGEB8}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/EVENT_URIAGEB8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field24}" />
-										<Input value="{local>/dailyBalance/0/EVENT_URIAGEA10}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/EVENT_URIAGEA10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field25}" />
-										<Input value="{local>/dailyBalance/0/EVENT_URIAGEB10}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/EVENT_URIAGEB10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field26}" />
-										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEA8}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEA8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field27}" />
-										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEB8}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEB8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field28}" />
-										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEA10}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEA10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field29}" />
-										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEB10}" change="onDailyBalanceCalc"/>
+										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEB10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Field30}" />
 										<Input value="{local>/dailyBalance/0/URIAGE_NEBIKI}" enabled="false"/>
 										<Label text="{i18n>Field31}" />
@@ -185,19 +185,22 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
-													<Input value="{local>Quantity}" change=".onTable6Calc('/table6')" enabled="{path:'local>Id', formatter:'.formatter.setTable6Enabled'}"/>
+													<Input value="{local>Quantity}" change=".onTable6Calc('/table6')" enabled="{path:'local>Id', formatter:'.formatter.setTable6Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="12rem">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable6Calc('/table6')" enabled="{path:'local>Id', formatter:'.formatter.setTable6Enabled'}"/>
+													<Input value="{local>Amount}" change=".onTable6Calc('/table6')" enabled="{path:'local>Id', formatter:'.formatter.setTable6Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="20rem">
 												<Label text="{i18n>Remark}" />
 												<uitable:template>
-													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable6Visible'}"/>
+													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable6Visible'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											
@@ -235,19 +238,22 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
-													<Input value="{local>Quantity}" change=".onTable6Calc('/table7')" enabled="{path:'local>Id', formatter:'.formatter.setTable7Enabled'}"/>
+													<Input value="{local>Quantity}" change=".onTable6Calc('/table7')" enabled="{path:'local>Id', formatter:'.formatter.setTable7Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="12rem">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable6Calc('/table7')" enabled="{path:'local>Id', formatter:'.formatter.setTable7Enabled'}"/>
+													<Input value="{local>Amount}" change=".onTable6Calc('/table7')" enabled="{path:'local>Id', formatter:'.formatter.setTable7Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="16rem">
 												<Label text="{i18n>Remark}" />
 												<uitable:template>
-													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable7Visible'}"/>
+													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable7Visible'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -284,19 +290,22 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
-													<Input value="{local>Quantity}" change=".onTable6Calc('/table8')" enabled="{path:'local>Id', formatter:'.formatter.setTable8Enabled'}"/>
+													<Input value="{local>Quantity}" change=".onTable6Calc('/table8')" enabled="{path:'local>Id', formatter:'.formatter.setTable8Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="12rem">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable6Calc('/table8')" enabled="{path:'local>Id', formatter:'.formatter.setTable8Enabled'}"/>
+													<Input value="{local>Amount}" change=".onTable6Calc('/table8')" enabled="{path:'local>Id', formatter:'.formatter.setTable8Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="16rem">
 												<Label text="{i18n>Remark}" />
 												<uitable:template>
-													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable8Visible'}"/>
+													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable8Visible'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -318,55 +327,60 @@
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6rem">
+											<uitable:Column width="12rem">
 												<Label text="{i18n>FieldTitle}" />
 												<uitable:template>
-                                                    <Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"/>
+                                                    <Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable9Calc('/table9')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"/>
+													<Input value="{local>Amount}" change=".onTable9Calc('/table9')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>ShopD}" />
 												<uitable:template>
-													<Input value="{local>ShopD}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>ShopD}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>AccountD}" />
 												<uitable:template>
 													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>TaxD}" />
 												<uitable:template>
 													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>ShopC}" />
 												<uitable:template>
-													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>AccountC}" />
 												<uitable:template>
-													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>TaxC}" />
 												<uitable:template>
 													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -388,57 +402,59 @@
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6rem">
+											<uitable:Column width="12rem">
 												<Label text="{i18n>FieldTitle}" />
 												<uitable:template>
-													<Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable10Enabled'}"/>
+													<Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable10Enabled'}" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable9Calc('/table10')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"/>
+													<Input value="{local>Amount}" change=".onTable9Calc('/table10')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>ShopD}" />
 												<uitable:template>
 													<Input value="{local>ShopD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>AccountD}" />
 												<uitable:template>
 													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>TaxD}" />
 												<uitable:template>
 													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>ShopC}" />
 												<uitable:template>
-													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"/>
+													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>AccountC}" />
 												<uitable:template>
 													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
 												<Label text="{i18n>TaxC}" />
 												<uitable:template>
 													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -460,18 +476,18 @@
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6rem">
+											<uitable:Column width="12rem">
 												<Label text="{i18n>WorksTitle}" />
 												<uitable:template>
-                                                    <Input value="{local>WorksTitle}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}"/>
+                                                    <Input value="{local>WorksTitle}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6rem">
+											<uitable:Column width="9rem">
 												<Label text="{i18n>Ticket}" />
 												<uitable:template>
                                                     <!-- <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/> -->
 													<Select id="idSelectTicket" width="6rem" class="sapUiSmallMarginEnd" forceSelection="false"
-														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}">
+														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}" editable="{local>/viewEditable}">
 														<core:Item key="ムビ" text="ムビ"/>
 														<core:Item key="紙" text="紙"/>
 														<core:Item key="無" text="無"/>
@@ -482,19 +498,22 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
-													<Input value="{local>Quantity}" change=".onTable6Calc('/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/>
+													<Input value="{local>Quantity}" change=".onTable6Calc('/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="12rem">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable6Calc('/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/>
+													<Input value="{local>Amount}" change=".onTable6Calc('/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="16rem">
 												<Label text="{i18n>Supply}" />
 												<uitable:template>
-													<Input value="{local>Supply}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}"/>
+													<Input value="{local>Supply}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}"
+														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -520,7 +539,7 @@
 												<Label text="{i18n>Shop}" />
 												<uitable:template>
                                                     <Input value="{local>Shop}" enabled="{path:'local>Id', formatter:'.formatter.setTable12Enabled'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
@@ -532,45 +551,45 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
-													<Input value="{local>Quantity}"/>
+													<Input value="{local>Quantity}" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="12rem">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
-													<Input value="{local>Amount}" change="onTable12AmountChange"/>
+													<Input value="{local>Amount}" change="onTable12AmountChange" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="16rem">
 												<Label text="{i18n>Remark}" />
 												<uitable:template>
-													<Input value="{local>Remark}"/>
+													<Input value="{local>Remark}" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
 									</uitable:Table>
 									<HBox>
 										<Text width="{local>/labelWidth}" text="{i18n>Title4o}" class="paddingTop"/>
-										<Input value="{local>/dailyBalance/0/HONZITUKURIKOSI}" enabled="false"/>
+										<Input value="{local>/dailyBalance/0/HONZITUKURIKOSI}" enabled="false" editable="{local>/viewEditable}"/>
 									</HBox>
 									<!-- Ⅴ送付金予定額 -->
 									<Text text="{i18n>Title4p}"/>
 									<Text text="{i18n>Title4p1}" class="paddingLeft"/>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p2}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/ZNJT_HNSH_SFKN_RKI}"/>
+										<Input value="{local>/dailyBalance/0/ZNJT_HNSH_SFKN_RKI}" editable="{local>/viewEditable}"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p3}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/HNJTS_SOFUKIN}"/>
+										<Input value="{local>/dailyBalance/0/HNJTS_SOFUKIN}" editable="{local>/viewEditable}"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p4}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/RYOGAEKIN_MODOSHI}"/>
+										<Input value="{local>/dailyBalance/0/RYOGAEKIN_MODOSHI}" editable="{local>/viewEditable}"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p5}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/GANKIN_ZOUGAKU}"/>
+										<Input value="{local>/dailyBalance/0/GANKIN_ZOUGAKU}" editable="{local>/viewEditable}"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p6}" class="paddingLeft paddingTop"/>
@@ -579,7 +598,7 @@
 									<!-- Ⅵ元金金額 -->
 									<HBox>
 										<Text width="{local>/labelWidth}" text="{i18n>Title4q}" class="paddingTop"/>
-										<Input value="{local>/dailyBalance/0/GANKIN_AMT}"/>
+										<Input value="{local>/dailyBalance/0/GANKIN_AMT}" editable="{local>/viewEditable}"/>
 									</HBox>
 									<!-- Ⅶ アムエリア振替(Ⅳ-Ⅵ) -->
 									<HBox>
@@ -599,19 +618,19 @@
                                     <!-- 元金過不足内訳・金額 -->
                                     <HBox>
                                         <Text width="{local>/labelWidth}" text="{i18n>Title4s}" class="paddingTop"/>
-                                        <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}"/>
+                                        <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}" editable="{local>/viewEditable}"/>
                                     </HBox>
                                     <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
                                     <!-- 元金過不足詳細・全角50文字以内 -->
                                     <HBox>
                                         <Text width="{local>/labelWidth}" text="{i18n>Title4t}" class="paddingTop"/>
-                                        <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}"/>
+                                        <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}" editable="{local>/viewEditable}"/>
                                     </HBox>
                                     <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
-                                    <TextArea value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_BIKOU}" maxLength="50" width="50%"/>
+                                    <TextArea value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_BIKOU}" maxLength="50" width="50%" editable="{local>/viewEditable}"/>
                                     
                                     <Text width="{local>/labelWidth}" text="{i18n>Remark}" class="paddingTop"/>
-                                    <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="50%" height="8rem"/>
+                                    <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
                                 </VBox>
                             </uxap:blocks>
                         </uxap:ObjectPageSubSection>
@@ -665,15 +684,15 @@
 									<items>
 										<ColumnListItem>
 											<cells>
-                                                <Input value="{local>KEIJO_BUSHO}" />
-                                                <Input value="{local>DRKAMOKU_CD}" />
-                                                <Input value="{local>NYKN_SAKI}" />
-                                                <Input value="{local>NYKN_TEKIYO}" />
-                                                <Input value="{local>NYKN_KINGAKU}" change="collectionIncome"/>
-                                                <Input value="{local>NYKN_KAMOKU_CD}" />
-                                                <Input value="{local>NYKN_KAMOKU_NM}" />
-                                                <Input value="{local>ZEI_CD}" />
-                                                <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" />
+                                                <Input value="{local>KEIJO_BUSHO}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>NYKN_SAKI}" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>NYKN_TEKIYO}" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>NYKN_KINGAKU}" change="collectionIncome" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>NYKN_KAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'NYKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>NYKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
+                                                <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" editable="{local>/viewEditable}"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -727,14 +746,14 @@
 									<items>
 										<ColumnListItem>
 											<cells>
-                                                <Input value="{local>KEIHI_FUTAN_BUSHO}" />
-                                                <Input value="{local>SHKN_SAKI}" />
-                                                <Input value="{local>SHKN_TEKIYO}" />
-                                                <Input value="{local>SHKN_KINGAKU}" change="collectionPayment"/>
-                                                <Input value="{local>SHKN_KAMOKU_CD}" />
-                                                <Input value="{local>SHKN_KAMOKU_NM}" />
-                                                <Input value="{local>ZEI_CD}" />
-                                                <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" />
+                                                <Input value="{local>KEIHI_FUTAN_BUSHO}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Cost')" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>SHKN_SAKI}" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>SHKN_TEKIYO}" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>SHKN_KINGAKU}" change="collectionPayment" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>SHKN_KAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'SHKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>SHKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
+                                                <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" editable="{local>/viewEditable}"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -770,7 +789,7 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{local>Quantity}" change=".onMulti($event, ${local>Monetary})"/>
+                                                        <Input value="{local>Quantity}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column >
@@ -806,7 +825,7 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{local>Quantity}" change=".onMulti($event, ${local>Monetary})"/>
+                                                        <Input value="{local>Quantity}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column >
@@ -849,7 +868,7 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>Amount}" />
                                                     <uitable:template>
-                                                        <Input value="{local>Amount}" change=".onTableColumnSum($event,'idCurrencyTable3')"/>
+                                                        <Input value="{local>Amount}" change=".onTableColumnSum($event,'idCurrencyTable3')" editable="{local>/viewEditable}"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                             </uitable:columns>
@@ -881,7 +900,7 @@
                                             <uitable:Column width="40%">
                                                 <Label text="{i18n>Amount}"/>
                                                 <uitable:template>
-                                                    <Input value="{local>Amount}" enabled="{local>Enabled}" change="onCurrencyTable4ValueChange"/>
+                                                    <Input value="{local>Amount}" enabled="{local>Enabled}" change="onCurrencyTable4ValueChange" editable="{local>/viewEditable}"/>
                                                 </uitable:template>
                                             </uitable:Column>
                                         </uitable:columns>
@@ -897,8 +916,8 @@
 	<footer>
 		<OverflowToolbar id="otbFooter">
 			<ToolbarSpacer/>
-			<Button type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')"/>
-            <Button id="idChange" type="Transparent" text="{i18n>Change}" press="onChangePress"/>
+			<Button id="idSave" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')"/>
+            <Button id="idChange" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress"/>
 			<Button type="Transparent" text="{i18n>Apply}" press="onBalanceApply"/>
             <Button id="idPosting" type="Transparent" text="{i18n>Posting}" press="onBalanceSave('Posting')"/>
 			<Button type="Transparent" text="{i18n>Suspend}" press="onSuspend"/>
