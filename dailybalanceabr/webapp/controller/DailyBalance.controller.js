@@ -28,7 +28,7 @@ sap.ui.define([
             //localmodel中当前行的绑定路径
             var oArgs = oEvent.getParameter("arguments");
             if (oArgs.view == "Display") { 
-                this._LocalData.setProperty("viewEditable", false);
+                this._LocalData.setProperty("/viewEditable", false);
                 this.byId("idChange").setVisible(true);
                 this.byId("idPosting").setVisible(true);
 
@@ -37,7 +37,7 @@ sap.ui.define([
                 this.initialLocalModel_dis(oHeader);
                 this.tableConverted_dis(oArgs.contextPath);
             } else {
-                this._LocalData.setProperty("viewEditable", true);
+                this._LocalData.setProperty("/viewEditable", true);
                 this.byId("idDailyBalanceCreate").setTitle(this._ResourceBundle.getText("DailyBalanceCreatePage"));
                 this.byId("idChange").setVisible(false);
                 this.byId("idPosting").setVisible(false);

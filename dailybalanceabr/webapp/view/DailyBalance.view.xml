@@ -131,24 +131,24 @@
 										columnsM="2"
 										columnsL="2"
 										columnsXL="2"
-										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="100">
+										labelSpanL="3" labelSpanM="3" emptySpanL="2" emptySpanM="2" breakpointM="100">
 										<!-- 2 売上収入内訳 -->
 										<core:Title text="{i18n>Title4b}" />
 										<Label text="{i18n>Field33}">
 											<layoutData>
-												<form:ColumnElementData cellsSmall="3"/>
+												<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 											</layoutData>
 										</Label>
 										<Input value="{local>/dailyBalance/0/GENKIN_URIAGE}" enabled="false"/>
 										<Label text="{i18n>Field34}" >
 											<layoutData>
-												<form:ColumnElementData cellsSmall="3"/>
+												<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 											</layoutData>
 										</Label>
 										<Input value="{local>/dailyBalance/0/KAKEURI_TO}" enabled="false"/>
 										<Label text="{i18n>Field35}" >
 											<layoutData>
-												<form:ColumnElementData cellsSmall="3"/>
+												<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 											</layoutData>
 										</Label>
 										<Input value="{local>/dailyBalance/0/URAG_SHNY_UCHWK_KI}" enabled="false"/>
