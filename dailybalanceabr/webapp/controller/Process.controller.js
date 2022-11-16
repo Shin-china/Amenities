@@ -487,6 +487,18 @@ sap.ui.define([
                     this._LocalData.setProperty("/CurrencyTable3/Item", aCurrencyTable3);
                 }
 
+                //掛売上（クレジット、電子マネー、QR決済）
+                var aFI0007 = this._LocalData.getProperty("/FI0007");
+                var aTable8 = this._LocalData.getProperty("/table8");
+                if (aFI0007.length > 0) {
+                    aTable8.forEach(function (line, index) {
+                        try {
+                            line.Title = aFI0007[index].Value4;
+                        } catch (e) {}
+                    });
+                    this._LocalData.setProperty("/table8", aTable8);
+                }
+
                 this._LocalData.setProperty("/table12/0/Shop", sShop);
                 this._LocalData.refresh();
             },
@@ -524,6 +536,7 @@ sap.ui.define([
             configurationProcess: function (oData) {
                 var aFI0004 = [],
                     aFI0005 = [],
+                    aFI0007 = [],
                     aReversalReason = [],
                     aCompany = [],
                     aShop = [],
@@ -543,6 +556,19 @@ sap.ui.define([
                         //"準備金明細
                         case "FI0004":
                             aFI0004.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1,
+                                Value2: line.ZVALUE2,
+                                Value3: line.ZVALUE3,
+                                Value4: line.ZVALUE4,
+                                Value5: line.ZVALUE5,
+                                Value6: line.ZVALUE6,
+                                Remark: line.REMARK
+                            });
+                            break;
+                        //"掛売上（クレジット、電子マネー、QR決済）
+                        case "FI0007":
+                            aFI0007.push({
                                 Seq: line.ZSEQ,
                                 Value1: line.ZVALUE1,
                                 Value2: line.ZVALUE2,
@@ -612,6 +638,7 @@ sap.ui.define([
                 }.bind(this));
                 this._LocalData.setProperty("/FI0005", aFI0005);
                 this._LocalData.setProperty("/FI0004", aFI0004);
+                this._LocalData.setProperty("/FI0007", aFI0007);
                 this._LocalData.setProperty("/ReversalReasonVH", aReversalReason);
                 this._LocalData.setProperty("/CompanyVH", aCompany);
                 this._LocalData.setProperty("/ShopVH", aShop);

@@ -26,9 +26,9 @@
                                             <Label text="{i18n>KIHYOSHA_NM}" required="true" />
 											<Input id="idUser" value="{local>/dailyBalance/0/KIHYOSHA_NM}" change="onUserChange" editable="{local>/viewEditable}"/>
                                             <Label text="{i18n>TENKI}" required="true"/>
-											<!-- <Input value="{local>/dailyBalance/0/TENKI}" showValueHelp="true"/> -->
+											<!-- <Input value="{local>/dailyBalance/0/TENKI}" editable="false" visible="{= !${local>/viewEditable}}"/> -->
 											<Select id="idSelectWeather" showSecondaryValues="true" width="14rem" class="sapUiSmallMarginEnd"
-												change="onSelectWeather" forceSelection="false" editable="{local>/viewEditable}"
+												change="onSelectWeather"  forceSelection="false" editable="{local>/viewEditable}"
 												items="{
 													path: 'local>/FI0005',
 													sorter: { path: 'Value1' },
@@ -218,7 +218,7 @@
 										visibleRowCount="5">
 										<uitable:columns>
 											<uitable:Column width="4rem">
-												<Label text="{i18n>No}" />
+												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
@@ -270,7 +270,7 @@
 										visibleRowCount="9">
 										<uitable:columns>
 											<uitable:Column width="4rem">
-												<Label text="{i18n>No}" />
+												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
@@ -281,7 +281,7 @@
 													<Text text="{local>Shop}" wrapping="false" class="writeSpace"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6rem">
+											<uitable:Column width="8rem">
 												<Label text="{i18n>FieldTitle}" />
 												<uitable:template>
 													<Text text="{local>Title}" wrapping="false" class="writeSpace"/>
@@ -322,7 +322,7 @@
 										visibleRowCount="4">
 										<uitable:columns>
 											<uitable:Column width="4rem">
-												<Label text="{i18n>No}" />
+												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
@@ -397,7 +397,7 @@
 										visibleRowCount="4">
 										<uitable:columns>
 											<uitable:Column width="4rem">
-												<Label text="{i18n>No}" />
+												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
@@ -471,7 +471,7 @@
 										visibleRowCount="16">
 										<uitable:columns>
 											<uitable:Column width="4rem">
-												<Label text="{i18n>No}" />
+												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
@@ -486,8 +486,9 @@
 												<Label text="{i18n>Ticket}" />
 												<uitable:template>
                                                     <!-- <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/> -->
-													<Select id="idSelectTicket" width="6rem" class="sapUiSmallMarginEnd" forceSelection="false"
+													<Select id="idSelectTicket" width="6rem" class="sapUiSmallMarginEnd" forceSelection="false" selectedKey="{local>Ticket}"
 														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}" editable="{local>/viewEditable}">
+														<core:Item key="" text=""/>
 														<core:Item key="ムビ" text="ムビ"/>
 														<core:Item key="紙" text="紙"/>
 														<core:Item key="無" text="無"/>
@@ -530,7 +531,7 @@
 										visibleRowCount="2">
 										<uitable:columns>
 											<uitable:Column width="4rem">
-												<Label text="{i18n>No}" />
+												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
@@ -624,7 +625,7 @@
                                     <!-- 元金過不足詳細・全角50文字以内 -->
                                     <HBox>
                                         <Text width="{local>/labelWidth}" text="{i18n>Title4t}" class="paddingTop"/>
-                                        <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}" editable="{local>/viewEditable}"/>
+                                        <!-- <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}" editable="{local>/viewEditable}"/> -->
                                     </HBox>
                                     <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
                                     <TextArea value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_BIKOU}" maxLength="50" width="50%" editable="{local>/viewEditable}"/>
@@ -854,7 +855,7 @@
                                             </uitable:extension>
                                             <uitable:columns>
                                                 <uitable:Column >
-                                                    <Label text="{i18n>No}" />
+                                                    <Label text="{i18n>Number}" />
                                                     <uitable:template>
                                                         <Text text="{local>No}"/>
                                                     </uitable:template>
@@ -905,6 +906,9 @@
                                             </uitable:Column>
                                         </uitable:columns>
                                     </uitable:Table>
+									<!-- 備考2 -->
+									<Text width="{local>/labelWidth}" text="{i18n>Remark}" class="paddingTop"/>
+									<TextArea id="idBIKOU2" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
                                 </VBox>
                             </uxap:blocks>
                         </uxap:ObjectPageSubSection>
@@ -918,7 +922,7 @@
 			<ToolbarSpacer/>
 			<Button id="idSave" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')"/>
             <Button id="idChange" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress"/>
-			<Button type="Transparent" text="{i18n>Apply}" press="onBalanceApply"/>
+			<Button type="Transparent" text="{i18n>Apply}" press="onApplyConfirm"/>
             <Button id="idPosting" type="Transparent" text="{i18n>Posting}" press="onBalanceSave('Posting')"/>
 			<Button type="Transparent" text="{i18n>Suspend}" press="onSuspend"/>
 		</OverflowToolbar>

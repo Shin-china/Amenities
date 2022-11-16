@@ -148,7 +148,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"SHINSEI_DT", "leadingProperty":"SHINSEI_DT", "sortProperty":"SHINSEI_DT", "filterProperty": "SHINSEI_DT"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'SHINSEI_DT', formatter:'.formatter.allZeroToBlank'}"/>
+                                <Text text="{path:'SHINSEI_DT', formatter:'.formatter.formtDate_8'}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>SHINSEI_TM}" sortProperty="SHINSEI_TM" filterProperty="SHINSEI_TM" visible="true">
@@ -156,7 +156,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"SHINSEI_TM", "leadingProperty":"SHINSEI_TM", "sortProperty":"SHINSEI_TM", "filterProperty": "SHINSEI_TM"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'SHINSEI_TM', formatter:'.formatter.allZeroToBlank'}"/>
+                                <Text text="{path:'SHINSEI_TM', formatter:'.formatter.formTime_8'}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>REG_USER}" sortProperty="REG_USER" filterProperty="REG_USER" visible="true">
@@ -188,7 +188,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"LAST_SHINSEI_DT", "leadingProperty":"LAST_SHINSEI_DT", "sortProperty":"LAST_SHINSEI_DT", "filterProperty": "LAST_SHINSEI_DT"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'LAST_SHINSEI_DT', formatter:'.formatter.allZeroToBlank'}"/>
+                                <Text text="{path:'LAST_SHINSEI_DT', formatter:'.formatter.formtDate_8'}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>LAST_SHINSEI_TM}" sortProperty="LAST_SHINSEI_TM" filterProperty="LAST_SHINSEI_TM" visible="true">
@@ -196,7 +196,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"LAST_SHINSEI_TM", "leadingProperty":"LAST_SHINSEI_TM", "sortProperty":"LAST_SHINSEI_TM", "filterProperty": "LAST_SHINSEI_TM"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'LAST_SHINSEI_TM', formatter:'.formatter.allZeroToBlank'}"/>
+                                <Text text="{path:'LAST_SHINSEI_TM', formatter:'.formatter.formTime_8'}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>UPD_USER}" sortProperty="UPD_USER" filterProperty="UPD_USER" visible="true">
@@ -220,7 +220,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"SHONIN_DT_BUTYOU", "leadingProperty":"SHONIN_DT_BUTYOU", "sortProperty":"SHONIN_DT_BUTYOU", "filterProperty": "SHONIN_DT_BUTYOU"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'SHONIN_DT_BUTYOU', formatter:'.formatter.allZeroToBlank'}"/>
+                                <Text text="{path:'SHONIN_DT_BUTYOU', formatter:'.formatter.formtDate_8'}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>SHONIN_TM_BUTYOU}" sortProperty="SHONIN_TM_BUTYOU" filterProperty="SHONIN_TM_BUTYOU" visible="true">
@@ -228,7 +228,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"SHONIN_TM_BUTYOU", "leadingProperty":"SHONIN_TM_BUTYOU", "sortProperty":"SHONIN_TM_BUTYOU", "filterProperty": "SHONIN_TM_BUTYOU"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'SHONIN_TM_BUTYOU', formatter:'.formatter.allZeroToBlank'}"/>
+                                <Text text="{path:'SHONIN_TM_BUTYOU', formatter:'.formatter.formTime_8'}"/>
                             </t:template>
                         </t:Column>
 

@@ -22,7 +22,7 @@ sap.ui.define([
 		}],
 		["Account",{
 			helpModel:"AccountVH",
-			headerTexts:["Account","AccountDesc","AccountDesc"],
+			headerTexts:["Account","AccountDesc","KAISHA_CD"],
 			items:["Key1","Value1","Key2"]
 		}],
 		["Tax",{

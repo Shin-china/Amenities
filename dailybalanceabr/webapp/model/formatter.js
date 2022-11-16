@@ -81,6 +81,16 @@ sap.ui.define([
 			}
 			return value;
 		},
+
+		formTime_8: function (value) {
+			if (value) {
+				if	(Number(value) === 0) {
+					return "";
+				}
+				return value.substr(0,2) + ":" + value.substr(2,2) + ":" + value.substr(4,2);
+            }
+            return value;
+		},
 		
 		dateTime: function (date,time) {
 			/*eslint no-unused-expressions: ["error", { "allowTernary": true }]*/

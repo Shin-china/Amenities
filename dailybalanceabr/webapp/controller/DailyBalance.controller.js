@@ -4,8 +4,9 @@ sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"../model/formatter",
     "./messages",
-    "sap/m/MessageToast"
-], function (BaseController, History, UIComponent, formatter, messages, MessageToast) {
+    "sap/m/MessageToast",
+    "sap/m/Button"
+], function (BaseController, History, UIComponent, formatter, messages, MessageToast, Button) {
 	"use strict";
 
 	return BaseController.extend("FICO.dailybalanceabr.controller.DailyBalance", {
@@ -25,15 +26,18 @@ sap.ui.define([
         //当路径导航到此页面时，设置页面的数据绑定
         _onRouteMatched : function (oEvent) {
             this._LocalData.setProperty("/processBusy", false);
+            this.byId("idUser").setValueState("None");
             //localmodel中当前行的绑定路径
             var oArgs = oEvent.getParameter("arguments");
             if (oArgs.view == "Display") { 
                 this._LocalData.setProperty("/viewEditable", false);
                 this.byId("idChange").setVisible(true);
+                this.byId("idChange").setText(this._ResourceBundle.getText("ChangeButton"));
                 this.byId("idPosting").setVisible(true);
 
                 var oHeader = this._oDataModel.getProperty("/" + oArgs.contextPath);
                 this.byId("idDailyBalanceCreate").setTitle(oHeader.KIHYO_NO);
+                // this.byId("idSelectWeather").setForceSelection(false);
                 this.initialLocalModel_dis(oHeader);
                 this.tableConverted_dis(oArgs.contextPath);
             } else {
@@ -41,18 +45,25 @@ sap.ui.define([
                 this.byId("idDailyBalanceCreate").setTitle(this._ResourceBundle.getText("DailyBalanceCreatePage"));
                 this.byId("idChange").setVisible(false);
                 this.byId("idPosting").setVisible(false);
+                // this.byId("idSelectWeather").setForceSelection(false);
             }
-            this.byId("idSelectWeather").setSelectedKey("");
+            // this.byId("idSelectWeather").setSelectedKey("雪");
         },
 
         onAddLine: function (oEvent, sTableId) {
             var sPath = "";
+            var iMaxLength = 0;
             if (sTableId == "idCashIncomeTable") {
                 sPath = "/CashIncome";
+                iMaxLength = 15;
             } else if (sTableId == "idCashPaymentTable") {
                 sPath = "/CashPayment";
+                iMaxLength = 25;
             }
             var aCashModel = this._LocalData.getProperty(sPath);
+            if (aCashModel.length >= iMaxLength) {
+                return;
+            }
             aCashModel.push({});
             this._LocalData.refresh();
         },
@@ -111,6 +122,37 @@ sap.ui.define([
             this.postBalanceSave(postDoc,sAction);
         },
 
+        //申请 确认
+        onApplyConfirm: function() {
+            if (!this.pDialog) {
+                this.pDialog = this.loadFragment({
+                    name: "FICO.dailybalanceabr.view.fragment.ApplyConfirm"
+                });
+            } 
+            this.pDialog.then(function(oDialog) {
+                var beginButton = new Button({
+                    type: "Emphasized",
+                    text: this._ResourceBundle.getText("Yes"),
+                    //登录按钮
+                    press: function () {
+                        this.onBalanceApply();
+                        oDialog.close();
+                    }.bind(this)
+                });
+                var endButton = new Button({
+                    text: this._ResourceBundle.getText("No"),
+                    press: function () {
+                        oDialog.close();
+                    }.bind(this)
+                });
+                // 添加按钮
+                if (oDialog.getButtons().length === 0){
+                    oDialog.addButton(beginButton);
+                    oDialog.addButton(endButton);
+                }
+                oDialog.open();
+            }.bind(this));
+        },
         //申请
         onBalanceApply: function () {
             var postDoc = this.prepareBalanceApplyBody();
@@ -410,6 +452,8 @@ sap.ui.define([
                 convertedTable[aField4[index]] = line.Amount;
             });
 
+            convertedTable.BIKOU2 = this.byId("idBIKOU2").getValue();
+
             postDoc.to_ZzTreasuryCash = [convertedTable];
             return postDoc;
         },
@@ -679,6 +723,7 @@ sap.ui.define([
 
             //获取数据
             var oHeader = this._oDataModel.getProperty("/" + aHeaderKey[0]);
+            oHeader = JSON.parse(JSON.stringify(oHeader));
             var aCahsIncome = [], aCahsPayment = [];
             aCahsIncomKey.forEach(function (path) {
                 var item = this._oDataModel.getProperty("/" + path);
@@ -700,6 +745,7 @@ sap.ui.define([
                 oHeader.KIHYO_NO = "";
             }
             this._LocalData.setProperty("/dailyBalance", [oHeader]);
+            this.byId("idSelectWeather").setSelectedKey(oHeader.TENKI);
             var table6 = this._LocalData.getProperty("/table6");
             table6.forEach(function (line, index) {
                 switch (index) {
@@ -736,9 +782,9 @@ sap.ui.define([
             this.convertTable11_dis(oHeader);
             //12 委託販売
             this.convertTable12_dis(oHeader);
-            //
+            //その他現金収入/その他現金支出
             this.getCashTable_dis(aCahsIncome, aCahsPayment);
-            //
+            //金庫内現金内訳
             this.getTreasuryCash_dis(oTreasuryCash);
 
             this._LocalData.refresh();
@@ -771,6 +817,31 @@ sap.ui.define([
                 }
                 line.ShopC = oHeader.TENPO_CD;
             });
+
+            var shop = oHeader.TENPO_CD;
+            var aFI0004 = this._LocalData.getProperty("/FI0004");
+            var aCurrencyTable3 = this._LocalData.getProperty("/CurrencyTable3/Item");
+            //準備金明細
+            var aFI0004a = aFI0004.filter( line => line.Value2 === shop);
+            aCurrencyTable3.forEach(function (line, index) {
+                //aFI0004a中的条目数可能少于aCurrencyTable3
+                try {
+                    line.Title = aFI0004a[index].Value4;
+                } catch (e) {}
+            });
+            this._LocalData.setProperty("/CurrencyTable3/Item", aCurrencyTable3);
+
+            //掛売上（クレジット、電子マネー、QR決済）
+            var aFI0007 = this._LocalData.getProperty("/FI0007");
+            var aTable8 = this._LocalData.getProperty("/table8");
+            if (aFI0007.length > 0) {
+                aTable8.forEach(function (line, index) {
+                    try {
+                        line.Title = aFI0007[index].Value4;
+                    } catch (e) {}
+                });
+                this._LocalData.setProperty("/table8", aTable8);
+            }
 
             this._LocalData.setProperty("/table12/0/Shop", oHeader.TENPO_CD);
             this._LocalData.refresh();
@@ -910,13 +981,15 @@ sap.ui.define([
                 "YUUKOU_MAISUU_100EN", "YUUKOU_MAISUU_50EN", "YUUKOU_MAISUU_10EN", "YUUKOU_MAISUU_5EN", "YUUKOU_MAISUU_1EN"];
             aTable1.forEach(function (line, index) {
                 line.Quantity = oTreasuryCash[aField1[index]];
-            });
+                line.Amount = this.formatter.accMul(line.Monetary, line.Quantity);
+            }.bind(this));
             this._LocalData.setProperty("/CurrencyTable1/Total",oTreasuryCash.YUUKOU_GKI_AMT);
             //破損貨幣明細
             var aField2 = ["HASON_MAISUU_1MAN", "HASON_MAISUU_5SEN", "HASON_MAISUU_2SEN", "HASON_MAISUU_SEN", "HASON_MAISUU_500EN"];
             aTable2.forEach(function (line, index) {
                 line.Quantity = oTreasuryCash[aField2[index]];
-            });
+                line.Amount = this.formatter.accMul(line.Monetary, line.Quantity);
+            }.bind(this));
             this._LocalData.setProperty("/CurrencyTable2/Total", oTreasuryCash.HASON_GKI_AMT);
             //準備金明細
             var aField3 = ["ZYUNBIKIN_AMT_1", "ZYUNBIKIN_AMT_2", "ZYUNBIKIN_AMT_3", "ZYUNBIKIN_AMT_4", "ZYUNBIKIN_AMT_5", "ZYUNBIKIN_AMT_6"];
@@ -930,11 +1003,12 @@ sap.ui.define([
             aTable4.forEach(function (line, index) {
                 line.Amount = oTreasuryCash[aField4[index]];
             });
+
+            this.byId("idBIKOU2").setValue(oTreasuryCash.BIKOU2);
         },
     
 
         initialLocalModel_dis: function (oHeader) {
-            var shop = oHeader.TENPO_CD;
             //清空日记表
             this._LocalData.setProperty("/dailyBalance",[{}]);
             this._LocalData.setProperty("/table6", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table6"))));
@@ -950,19 +1024,6 @@ sap.ui.define([
             this._LocalData.setProperty("/CurrencyTable2", JSON.parse(JSON.stringify(this.InitModel.getProperty("/CurrencyTable2"))));
             this._LocalData.setProperty("/CurrencyTable3", JSON.parse(JSON.stringify(this.InitModel.getProperty("/CurrencyTable3"))));
             this._LocalData.setProperty("/CurrencyTable4", JSON.parse(JSON.stringify(this.InitModel.getProperty("/CurrencyTable4"))));
-
-            var aFI0004 = this._LocalData.getProperty("/FI0004");
-            var aCurrencyTable3 = this._LocalData.getProperty("/CurrencyTable3/Item");
-            //準備金明細
-            var aFI0004a = aFI0004.filter( line => line.Value2 === shop);
-            aCurrencyTable3.forEach(function (line, index) {
-                //aFI0004a中的条目数可能少于aCurrencyTable3
-                try {
-                    line.Title = aFI0004a[index].Value4;
-                } catch (e) {}
-            });
-            this._LocalData.setProperty("/CurrencyTable3/Item", aCurrencyTable3);
-
             
             this._LocalData.refresh();
         },
@@ -998,6 +1059,7 @@ sap.ui.define([
         },
 
         onChangePress: function (oEvent) {
+
             var oButton = oEvent.getSource();
             var isEdit = this._LocalData.getProperty("/viewEditable");
             if (isEdit) {
