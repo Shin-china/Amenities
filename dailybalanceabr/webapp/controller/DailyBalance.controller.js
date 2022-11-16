@@ -553,7 +553,7 @@ sap.ui.define([
             var total3 = this._LocalData.getProperty("/CurrencyTable3/Total");
             var aCurrencyTable4 = this._LocalData.getProperty("/CurrencyTable4");
             //本日繰越高
-            var amount1 = this._LocalData.getProperty("/dailyBalance/HONZITUKURIKOSI");
+            var amount1 = this._LocalData.getProperty("/dailyBalance/0/HONZITUKURIKOSI");
             if (!amount1) {
                 amount1 = "0";
             }
@@ -566,7 +566,7 @@ sap.ui.define([
 
             //本日繰越高(日計表1枚目参照）
             aCurrencyTable4[4].Amount = amount1;
-            //翌日規程元金金額
+            //差額 [Ⅻ]-[Ⅳ]
             aCurrencyTable4[6].Amount = this.formatter.accSub(aCurrencyTable4[3].Amount, aCurrencyTable4[4].Amount);
             this._LocalData.refresh();
             
@@ -625,7 +625,7 @@ sap.ui.define([
             this.resultCalc();
             this._LocalData.refresh();
         },
-
+        // Ⅳ本日繰越高
         resultCalc: function () {
             //前日繰越元金
             var value1 = this._LocalData.getProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN");
@@ -642,6 +642,28 @@ sap.ui.define([
             result = this.formatter.accAdd(result, value3);
             result = this.formatter.accAdd(result, value4);
             this._LocalData.setProperty("/dailyBalance/0/HONZITUKURIKOSI", result);
+            //本日繰越高(日計表1枚目参照） [Ⅳ]
+            this._LocalData.setProperty("/CurrencyTable4/4/Amount", result);
+            //翌日金庫内現金総額  [Ⅻ]
+            var value5 = this._LocalData.getProperty("/CurrencyTable4/3/Amount");
+            //差額 [Ⅻ]-[Ⅳ]
+            result = this.formatter.accSub(value5, result);
+            this._LocalData.setProperty("/CurrencyTable4/6/Amount", result);
+            //Ⅶアムエリア振替(Ⅳ-Ⅵ)
+            this.resultCalc1();
+            this._LocalData.refresh();
+        },
+
+        //Ⅶアムエリア振替(Ⅳ-Ⅵ)
+        resultCalc1: function() {
+            //Ⅵ元金金額
+            var value1 = this._LocalData.getProperty("/dailyBalance/0/GANKIN_AMT");
+            //Ⅳ本日繰越高(アム閉店時現金有高)
+            var value2 = this._LocalData.getProperty("/dailyBalance/0/HONZITUKURIKOSI");
+
+            var result = "0";
+            result = this.formatter.accSub(value2, value1);
+            this._LocalData.setProperty("/dailyBalance/0/AMAREA_FURIKAE", result);
             this._LocalData.refresh();
         },
 

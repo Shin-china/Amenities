@@ -130,10 +130,15 @@ sap.ui.define([
                     aData.push(lineData);
                 }
                 var sSTGRD = this.byId("idSelectReversalReason").getSelectedKey();
+                var sDate = this.byId("idDP1").getValue();
+                if (sDate) {
+                    sDate = this.formatter.date_8(sDate);
+                }
                 aData.forEach(function (line) {
                     var oPostDoc = JSON.parse(JSON.stringify(line));
                     delete oPostDoc.__metadata;
                     oPostDoc.STGRD = sSTGRD;
+                    oPostDoc.BUDAT = sDate;
                     postDocs.push(oPostDoc);
                 });
                 

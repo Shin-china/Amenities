@@ -53,7 +53,7 @@
 									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" singleContainerFullSize="false"
 										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="400" columnsL="2">
 										<Label text="{i18n>Title1}" />
-										<Input value="{local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN}" editable="{local>/viewEditable}"/>
+										<Input value="{local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN}" change="resultCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Title2}" />
 										<Input value="{local>/dailyBalance/0/GNK_NYUKIN_SOGAKU}" change="resultCalc" editable="{local>/viewEditable}"/>
 										<Label text="{i18n>Title3}" />
@@ -598,7 +598,7 @@
 									<!-- Ⅵ元金金額 -->
 									<HBox>
 										<Text width="{local>/labelWidth}" text="{i18n>Title4q}" class="paddingTop"/>
-										<Input value="{local>/dailyBalance/0/GANKIN_AMT}" editable="{local>/viewEditable}"/>
+										<Input value="{local>/dailyBalance/0/GANKIN_AMT}" change="resultCalc1" editable="{local>/viewEditable}"/>
 									</HBox>
 									<!-- Ⅶ アムエリア振替(Ⅳ-Ⅵ) -->
 									<HBox>
