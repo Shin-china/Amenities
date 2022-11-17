@@ -1,0 +1,35 @@
+<mvc:View
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    controllerName="com.shin.pstore.pstore.controller.Result"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table"
+    xmlns:f="sap.f"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <f:DynamicPage id="dynamicPage2">
+        <f:header>
+            <f:DynamicPageHeader id="pageHeader">
+                <f:content>
+                    <smartfilterbar:SmartFilterBar id="docFilter" persistencyKey="docFilterPersistent" entitySet="AccountDocSet" showClearOnFB="true" showGoOnFB="true" liveMode="true" />
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smarttable:SmartTable id="table2" entitySet="AccountDocSet" persistencyKey="docPersistent" enableAutoBinding="true" width="100%" height="80%" showRowCount="true" smartFilterId="docFilter" tableType="Table">
+                <smarttable:customToolbar>
+                    <OverflowToolbar id="overFlowToolbar">
+                        <ToolbarSpacer id="toolbarSpacer" />
+                        <Button id="btnShowCancelDialog" text="{i18n>tab2_btn01}" type="Attention" press="onShowCancelDialog" />
+                    </OverflowToolbar>
+                </smarttable:customToolbar>
+
+                <table:Table id="tableResultInside" threshold="20" visibleRowCountMode="Auto"  fixedColumnCount="5" />
+            </smarttable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

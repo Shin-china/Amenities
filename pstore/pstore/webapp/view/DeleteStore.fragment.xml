@@ -1,0 +1,19 @@
+<c:FragmentDefinition xmlns="sap.m" xmlns:c="sap.ui.core">
+    <Dialog id="deleteDialog" contentWidth="30%" title="{i18n>confirm_title}">
+        <beginButton>
+            <Button id="btnDeleteStore" text="{i18n>yes}" type="Critical" press="onDeleteStore" />
+        </beginButton>
+
+        <content>
+            <HBox id="hbox" class="sapUiMediumMargin">
+                <items>
+                    <Text id="alertContent" text="{i18n>delete_store_confirm}"></Text>
+                </items>
+            </HBox>
+        </content>
+
+        <endButton>
+            <Button id="btnCloseDelete" text="{i18n>no}" type="Transparent" press="onCloseDeleteDialog" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>
