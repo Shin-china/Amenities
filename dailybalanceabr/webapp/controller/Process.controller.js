@@ -102,10 +102,10 @@ sap.ui.define([
                     //参考只能选择一条
                     var oTable = this.byId("reportTable");
                     if (oTable.getSelectedIndices().length > 1) {
-                        messages.showError(this._ResourceBundle.getText("tooManySelect"));
+                        messages.showText(this._ResourceBundle.getText("tooManySelect"));
                         return;
                     } else if (oTable.getSelectedIndices().length == 0) {
-                        messages.showError(this._ResourceBundle.getText("noSelect"));
+                        messages.showText(this._ResourceBundle.getText("noSelect"));
                         return;
                     }
 
@@ -256,6 +256,7 @@ sap.ui.define([
                 aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate))); 
                 var promise = new Promise( function (resolve, reject) {
                     var mParameters = {
+                        refreshAfterChange: false,
                         filters: aFilters,
                         success: function (oData) {
                             resolve();
@@ -288,6 +289,13 @@ sap.ui.define([
             },
 
             onConfirmBox: function (oEvent, sMessage) {
+                //至少选择一条
+                var oTable = this.byId("reportTable");
+                if (oTable.getSelectedIndices().length == 0) {
+                    messages.showText(this._ResourceBundle.getText("noSelect"));
+                    return;
+                }
+
                 var sTitle = this._ResourceBundle.getText("ConfirmTitle");
                 var sText = this._ResourceBundle.getText(sMessage);
                 MessageBox.confirm(sText, {

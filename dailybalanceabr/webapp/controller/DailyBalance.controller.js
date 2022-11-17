@@ -1,12 +1,11 @@
 sap.ui.define([
 	"FICO/dailybalanceabr/controller/BaseController",
-	"sap/ui/core/routing/History",
-	"sap/ui/core/UIComponent",
 	"../model/formatter",
     "./messages",
     "sap/m/MessageToast",
-    "sap/m/Button"
-], function (BaseController, History, UIComponent, formatter, messages, MessageToast, Button) {
+    "sap/m/Button",
+    "sap/m/MessageBox",
+], function (BaseController, formatter, messages, MessageToast, Button, MessageBox) {
 	"use strict";
 
 	return BaseController.extend("FICO.dailybalanceabr.controller.DailyBalance", {
@@ -41,13 +40,13 @@ sap.ui.define([
                 this.initialLocalModel_dis(oHeader);
                 this.tableConverted_dis(oArgs.contextPath);
             } else {
+                this.resultCalc();
                 this._LocalData.setProperty("/viewEditable", true);
                 this.byId("idDailyBalanceCreate").setTitle(this._ResourceBundle.getText("DailyBalanceCreatePage"));
                 this.byId("idChange").setVisible(false);
                 this.byId("idPosting").setVisible(false);
                 // this.byId("idSelectWeather").setForceSelection(false);
             }
-            // this.byId("idSelectWeather").setSelectedKey("雪");
         },
 
         onAddLine: function (oEvent, sTableId) {
@@ -112,14 +111,42 @@ sap.ui.define([
 
         // 日记表数据保存
         onBalanceSave: function (sAction) {
-            if (this.chekcRequired()) {
+            if (this.checkRequired()) {
                 MessageToast.show(this._ResourceBundle.getText("inputRequired"));
                 return;
             }
-            var postDoc = this.prepareBalanceSaveBody();
-            postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
-            delete postDoc.__metadata;
-            this.postBalanceSave(postDoc,sAction);
+
+            if (sAction == "Posting") {
+                this.onConfirmBox(sAction);
+            } else {
+                var postDoc = this.prepareBalanceSaveBody();
+                postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
+                delete postDoc.__metadata;
+                this.postBalanceSave(postDoc,sAction);
+            }
+
+        },
+
+        onConfirmBox: function (sAction) {
+            var sTitle = this._ResourceBundle.getText("ConfirmTitle");
+            var sText = this._ResourceBundle.getText("PostingConfirmMsg");
+            MessageBox.confirm(sText, {
+                title: sTitle,
+                icon: MessageBox.Icon.WARNING,
+                styleClass: "sapUiSizeCompact",
+                actions: [
+                    MessageBox.Action.YES,
+                    MessageBox.Action.NO
+                ],
+                onClose: function (sResult) {
+                    if (sResult === MessageBox.Action.YES) {
+                        var postDoc = this.prepareBalanceSaveBody();
+                        postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
+                        delete postDoc.__metadata;
+                        this.postBalanceSave(postDoc,sAction);
+                    }
+                }.bind(this)
+            });
         },
 
         //申请 确认
@@ -335,6 +362,9 @@ sap.ui.define([
                     //借方税 DRTAX
                     sProperty = sTableName + "_DRTAX_" + tableNo + "_" + line.Id;
                     convertedTable[sProperty] = line.TaxD;
+                    //贷方税 DRTAX
+                    sProperty = sTableName + "_CRTAX_" + tableNo + "_" + line.Id;
+                    convertedTable[sProperty] = line.TaxC;
                 //合计
                 } else {
                     //金額 AMT
@@ -711,8 +741,28 @@ sap.ui.define([
             this._LocalData.refresh();
         },
 
+        //Ⅴ送付金予定額
+        resultCalc2: function () {
+            //前日までの本社送付金累計
+            var value1 = this._LocalData.getProperty("/dailyBalance/0/ZNJT_HNSH_SFKN_RKI");
+            //本日送付金
+            var value2 = this._LocalData.getProperty("/dailyBalance/0/HNJTS_SOFUKIN");
+            //両替金戻し（Ⅱで非入金時）
+            var value3 = this._LocalData.getProperty("/dailyBalance/0/RYOGAEKIN_MODOSHI");
+            //元金増額（減額は－）
+            var value4 = this._LocalData.getProperty("/dailyBalance/0/GANKIN_ZOUGAKU");
+            //送付金予定額
+            var result = "0";
+            result = this.formatter.accAdd(value1, value2);
+            result = this.formatter.accAdd(result, value3);
+            result = this.formatter.accAdd(result, value4);
+
+            this._LocalData.setProperty("/dailyBalance/0/SOFUKIN_YOTEIGAKU", result)
+            this._LocalData.refresh();
+        },
+
         onSuspend: function () {
-            this.onNavBack();
+            this.onNavBackAndReresh();
         },
 
         tableConverted_dis: function (sKey) {
@@ -894,6 +944,9 @@ sap.ui.define([
                     //借方税 DRTAX
                     sProperty = sTableName + "_DRTAX_" + tableNo + "_" + line.Id;
                     line.TaxD = oHeader[sProperty];
+                    //贷方税 CRTAX
+                    sProperty = sTableName + "_CRTAX_" + tableNo + "_" + line.Id;
+                    line.TaxC = oHeader[sProperty];
                 //合计
                 } else {
                     //金額 AMT
@@ -1033,7 +1086,7 @@ sap.ui.define([
             this.changeValueState(oEvent);
         },
 
-        oonUserChange: function (oEvent) {
+        onUserChange: function (oEvent) {
             this.changeValueState(oEvent);
         },
 
@@ -1045,7 +1098,7 @@ sap.ui.define([
             }
         },
 
-        chekcRequired: function () {
+        checkRequired: function () {
             var isError = false;
             if (this.byId("idUser").getValue() == "") {
                 this.byId("idUser").setValueState("Warning");
@@ -1070,7 +1123,18 @@ sap.ui.define([
                 this._LocalData.setProperty("/viewEditable", true);
                 oButton.setText(this._ResourceBundle.getText("DisplayButton"));
             }
+        },
+
+        onCashCheckBox: function (oEvent) {
+            var sPath = oEvent.getSource().getBindingContext("local").sPath;
+            this._LocalData.setProperty(sPath + "/JIDOUTENKIFUYO", oEvent.getParameter("selected"));
+        },
+
+        onNavBackAndReresh: function () {
+            this.byId("smartFilterBar").search();
+            this.onNavBack();
         }
+        
 
         
 	});

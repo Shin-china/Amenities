@@ -14,14 +14,34 @@ sap.ui.define([
                 this._LocalData = this.getOwnerComponent().getModel("local");
                 this._oDataModel = this.getOwnerComponent().getModel();
                 this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+                //filter 默认值
+                var oDateRange = this.byId("idDateRange");
+                var currentDate = new Date();
+                var dateFrom = new Date();
+                var dateTo = new Date();
+                if (currentDate.getDate() == 1) {
+                    dateFrom.setMonth(dateFrom.getMonth() - 1);
+                } else {
+                    dateFrom.setDate(1);
+                    dateTo.setMonth(dateTo.getMonth() + 1) ;
+                    dateTo.setDate(0);
+                }
+                oDateRange.setFrom(dateFrom);
+                oDateRange.setTo(dateTo);
             },
 
             onBeforeRebindTable: function(oEvent) {
                 var oFilter = oEvent.getParameter("bindingParams").filters;
                 var oNewFilter, aNewFilter = [];
-                if (this.byId("DatePicker").getValue() !== "") {
-                    aNewFilter.push(new Filter("EIGYO_BI", "EQ", this.byId("DatePicker").getValue())); 
+                var dFrom = this.byId("idDateRange").getFrom();
+                var dTo = this.byId("idDateRange").getTo();
+                if (dTo && dFrom) {
+                    dFrom = this.formatter.date_8(dFrom);
+                    dTo = this.formatter.date_8(dTo);
+                    aNewFilter.push(new Filter("EIGYO_BI", "BT", dFrom, dTo)); 
                 }
+
                 oNewFilter = new Filter({
                     filters:aNewFilter,
                     and:true
@@ -36,6 +56,13 @@ sap.ui.define([
             },
 
             onReversePress: function () {
+                //至少选择一条
+                var oTable = this.byId("reportTable");
+                if (oTable.getSelectedIndices().length == 0) {
+                    messages.showText(this._ResourceBundle.getText("noSelect"));
+                    return;
+                }
+
                 this.byId("idDisplayPage").setBusy(true);
                 if (!this.pDialog) {
                     this.pDialog = this.loadFragment({

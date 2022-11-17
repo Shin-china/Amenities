@@ -42,6 +42,26 @@
 				</Annotation>
 			</Annotations>
 
+			<Annotations Target="Metadata.ZzDailyBalanceDisplay/KAISHA_CD">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzCompanyVHSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<!--<Record Type="Common.ValueListParameterDisplayOnly">-->
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="KAISHA_CD"/>
+									<PropertyValue Property="ValueListProperty" String="Bukrs"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Butxt"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
 			<Annotations Target="Metadata.ZzDocStatusVH/ZVALUE1">
 				<Annotation Term="Common.Label" String="{@i18n&gt;NIKKEIHYO_STATUS_CD}"/>
 			</Annotations>
@@ -78,6 +98,28 @@
 				<Annotation Term="Common.Label" String="{@i18n&gt;TENPO_NM}"/>
 			</Annotations>
 			<Annotations Target="Metadata.ZzShopDailyBalance/TENPO_CD">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzShopVHSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="KOKRS"/>
+								</Record>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="TENPO_CD"/>
+									<PropertyValue Property="ValueListProperty" String="TENPO_CD"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="TENPO_NM"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="Metadata.ZzDailyBalanceDisplay/TENPO_CD">
 				<Annotation Term="Common.ValueList">
 					<Record Type="Common.ValueListType">
 						<PropertyValue Property="CollectionPath" String="ZzShopVHSet"/>

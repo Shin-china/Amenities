@@ -20,7 +20,7 @@
                             <smartFilterBar:ControlConfiguration key="KAISHA_CD" visibleInAdvancedArea="true" label="{i18n>KAISHA_CD}" index="2" />
                             <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" index="3">
                                 <smartFilterBar:customControl>
-                                    <DatePicker id="DatePicker" valueFormat="yyyyMMdd" displayFormat="yyyy-MM-dd"/>
+                                    <DateRangeSelection id="idDateRange" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd"/>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration key="TENPO_CD" visibleInAdvancedArea="true" label="{i18n>TENPO_CD}" index="4" />
@@ -159,7 +159,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"USNAM", "leadingProperty":"USNAM", "sortProperty":"USNAM", "filterProperty": "USNAM"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{USNAM}"/>
+                                <Text text="{USNAM}" />
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>USNAM_TEXTT1}" sortProperty="USNAM_TEXT" filterProperty="USNAM_TEXT" visible="true">
@@ -167,7 +167,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"USNAM_TEXT", "leadingProperty":"USNAM_TEXT", "sortProperty":"USNAM_TEXT", "filterProperty": "USNAM_TEXT"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{USNAM_TEXT}"/>
+                                <Text text="{USNAM_TEXT}" tooltip="{USNAM_TEXT}" wrapping="false"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="8rem" label="{i18n>STBLGT1}" sortProperty="STBLG" filterProperty="STBLG" visible="true">

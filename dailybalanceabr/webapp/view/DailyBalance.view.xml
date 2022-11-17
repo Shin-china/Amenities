@@ -6,7 +6,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:l="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form">
-	<Page id="idDailyBalanceCreate" showNavButton="true" navButtonPress="onNavBack" title="{i18n>DailyBalanceCreatePage}">
+	<Page id="idDailyBalanceCreate" showNavButton="true" navButtonPress="onNavBackAndReresh" title="{i18n>DailyBalanceCreatePage}">
 		<content>
 		<uxap:ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
 			<uxap:sections>
@@ -578,19 +578,19 @@
 									<Text text="{i18n>Title4p1}" class="paddingLeft"/>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p2}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/ZNJT_HNSH_SFKN_RKI}" editable="{local>/viewEditable}"/>
+										<Input value="{local>/dailyBalance/0/ZNJT_HNSH_SFKN_RKI}" change="resultCalc2" editable="{local>/viewEditable}"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p3}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/HNJTS_SOFUKIN}" editable="{local>/viewEditable}"/>
+										<Input value="{local>/dailyBalance/0/HNJTS_SOFUKIN}" change="resultCalc2" editable="{local>/viewEditable}"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p4}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/RYOGAEKIN_MODOSHI}" editable="{local>/viewEditable}"/>
+										<Input value="{local>/dailyBalance/0/RYOGAEKIN_MODOSHI}" change="resultCalc2" editable="{local>/viewEditable}"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p5}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/GANKIN_ZOUGAKU}" editable="{local>/viewEditable}"/>
+										<Input value="{local>/dailyBalance/0/GANKIN_ZOUGAKU}" change="resultCalc2" editable="{local>/viewEditable}"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n>Title4p6}" class="paddingLeft paddingTop"/>
@@ -693,7 +693,7 @@
                                                 <Input value="{local>NYKN_KAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'NYKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
-                                                <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" editable="{local>/viewEditable}"/>
+                                                <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" select="onCashCheckBox" editable="{local>/viewEditable}"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -754,7 +754,7 @@
                                                 <Input value="{local>SHKN_KAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'SHKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>SHKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
-                                                <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" editable="{local>/viewEditable}"/>
+                                                <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" select="onCashCheckBox" editable="{local>/viewEditable}"/>
 											</cells>
 										</ColumnListItem>
 									</items>
