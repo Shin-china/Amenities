@@ -7,11 +7,11 @@ sap.ui.define([
     "../model/formatter"
 ], function (
     Controller,
-	UIComponent,
-	Common,
-	DateFormat,
-	MessageToast,
-	formatter
+    UIComponent,
+    Common,
+    DateFormat,
+    MessageToast,
+    formatter
 ) {
     "use strict";
 
@@ -48,7 +48,7 @@ sap.ui.define([
                 return;
             }
 
-            if(aIndex.length > 1){
+            if (aIndex.length > 1) {
                 MessageToast.show(this._comm.getI18nMessage(this, "select_one_row"));
                 return;
             }
@@ -146,10 +146,10 @@ sap.ui.define([
                 d.Fi1007 = {};
                 o.d = d;
 
-                var oModel = this.getOwnerComponent().getModel(); 
-                
+                var oModel = this.getOwnerComponent().getModel();
+
                 oModel.create("/StoreSet", o, {
-                    success: function (oData, oResponse) { 
+                    success: function (oData, oResponse) {
                         that._busyDialog.close();
                         that._comm.closeDialog(that, "addDialog");
 
@@ -175,8 +175,8 @@ sap.ui.define([
 
         onCopyStore: function () {
             var oTable = this.byId("table1").getTable();
-            var aIndex = oTable.getSelectedIndices(); 
-                   
+            var aIndex = oTable.getSelectedIndices();
+
             var oBindingData = oTable.getContextByIndex(aIndex[0]).getObject();
             var checkOk = this.checkCreateInput();
             if (checkOk) {
@@ -204,11 +204,11 @@ sap.ui.define([
                 d.PlanCashSet = [];
                 d.Fi1007 = {};
                 o.d = d;
-                
-                var oModel = this.getOwnerComponent().getModel(); 
-                
+
+                var oModel = this.getOwnerComponent().getModel();
+
                 oModel.create("/StoreSet", o, {
-                    success: function (oData, oResponse) { 
+                    success: function (oData, oResponse) {
                         that._busyDialog.close();
                         that._comm.closeDialog(that, "copyDialog");
 
@@ -219,7 +219,7 @@ sap.ui.define([
                             oMessage.MessageSet = oData.MessageSet.results;
                             oDialog.setModel(new sap.ui.model.json.JSONModel(oMessage), "log");
                             oDialog.open();
-                            
+
                         });
 
                     },
@@ -229,7 +229,7 @@ sap.ui.define([
                     }
                 });
 
-                oModel.refresh(true); 
+                oModel.refresh(true);
             }
         },
 
@@ -249,13 +249,13 @@ sap.ui.define([
 
             var oMessage = {}, completeCount = 0, that = this;
             var oModel = this.getOwnerComponent().getModel();
-        
+
 
             var p = new Promise(function (resolve, reject) {
                 for (var i = 0; i < aIndex.length; i++) {
-                    var oContext = oTable.getContextByIndex(aIndex[i]); 
+                    var oContext = oTable.getContextByIndex(aIndex[i]);
                     var oData = oContext.getObject();
-                    var o= {}, d = {};
+                    var o = {}, d = {};
                     d.KaishaCd = oData.KaishaCd;
                     d.TenpoCd = oData.TenpoCd;
                     d.EigyoBi = oData.EigyoBi;
@@ -291,7 +291,7 @@ sap.ui.define([
 
                 that.loadFragment({
                     name: "com.shin.pstore.pstore.view.ShowLog"
-                }).then(function(o){
+                }).then(function (o) {
                     o.setModel(new sap.ui.model.json.JSONModel(oMessage), "log");
                     o.open();
                 });
@@ -321,13 +321,13 @@ sap.ui.define([
 
             var oMessage = {}, completeCount = 0, that = this;
             var oModel = this.getOwnerComponent().getModel();
-        
+
 
             var p = new Promise(function (resolve, reject) {
                 for (var i = 0; i < aIndex.length; i++) {
-                    var oContext = oTable.getContextByIndex(aIndex[i]); 
+                    var oContext = oTable.getContextByIndex(aIndex[i]);
                     var oData = oContext.getObject();
-                    var o= {}, d = {};
+                    var o = {}, d = {};
                     d.KaishaCd = oData.KaishaCd;
                     d.TenpoCd = oData.TenpoCd;
                     d.EigyoBi = oData.EigyoBi;
@@ -363,7 +363,7 @@ sap.ui.define([
 
                 that.loadFragment({
                     name: "com.shin.pstore.pstore.view.ShowLog"
-                }).then(function(o){
+                }).then(function (o) {
                     o.setModel(new sap.ui.model.json.JSONModel(oMessage), "log");
                     o.open();
                 });
@@ -377,11 +377,19 @@ sap.ui.define([
         },
 
         onExportPdf: function () {
+            var oTable = this.byId("table1").getTable();
+            var aIndex = oTable.getSelectedIndices();
 
+            for (var i = 0; i < aIndex.length; i++) {
+                var oContext = oTable.getContextByIndex(aIndex[i]);
+                var oData = oContext.getObject();
+                var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + oData.KaishaCd + "',TenpoCd='" + oData.TenpoCd + "',KihyoNo='" + oData.KihyoNo + "')/$value";
+                window.open(sUrl, "_blank");
+            }
         },
 
-        onShowCompanyHelp: function(oEvent){
-            var aFilters = []; 
+        onShowCompanyHelp: function (oEvent) {
+            var aFilters = [];
             this._comm.showCustomSearchHelpDialog(
                 this,
                 oEvent,
@@ -389,11 +397,11 @@ sap.ui.define([
                 "com.shin.pstore.pstore.view.SearchHelp",
                 "CompanySet",
                 "Bukrs",
-                aFilters);            
+                aFilters);
         },
 
-        onShowStoreCodeHelp: function(oEvent){
-            var aFilters = []; 
+        onShowStoreCodeHelp: function (oEvent) {
+            var aFilters = [];
             this._comm.showCustomSearchHelpDialog(
                 this,
                 oEvent,
@@ -401,7 +409,7 @@ sap.ui.define([
                 "com.shin.pstore.pstore.view.SearchHelp",
                 "StoreCodeSet",
                 "TenpoCd",
-                aFilters);            
+                aFilters);
         },
 
         onRebingTable: function (oEvent) {

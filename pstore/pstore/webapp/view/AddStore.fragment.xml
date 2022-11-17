@@ -1,4 +1,4 @@
-<c:FragmentDefinition xmlns:smartfield="sap.ui.comp.smartfield" xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:c="sap.ui.core">
+<c:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:c="sap.ui.core">
     <Dialog id="addDialog" contentWidth="30%" title="{i18n>add_dialog_title}">
         <beginButton>
             <Button id="btnAddStore" text="{i18n>tab1_btn01}" type="Emphasized" press="onAddStore" />

@@ -1,4 +1,4 @@
-<c:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:c="sap.ui.core">
+<c:FragmentDefinition xmlns="sap.m" xmlns:c="sap.ui.core">
     <Dialog id="generateDialog" contentWidth="30%" title="{i18n>confirm_title}">
         <beginButton>
             <Button id="btnGenerate" text="{i18n>yes}" type="Emphasized" press="onGenerateDoc" />
