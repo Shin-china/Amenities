@@ -11,10 +11,18 @@
     xmlns:t="sap.ui.table">
 
     <f:DynamicPage id="idProcessPage" headerExpanded="true" showFooter="true" busy="{local>/processBusy}">
+        <f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<sv:SmartVariantManagement id="__SVM01" showShare="true" persistencyKey="dailybalanceFilter" showExecuteOnSelection="true"
+						entitySet="ZzShopDailyBalanceSet"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
         <f:header>
             <f:DynamicPageHeader pinnable="true">
                 <f:content>
-                    <smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="salespriceFilterBar" entitySet="ZzShopDailyBalanceSet" useToolbar="false">
+                    <smartFilterBar:SmartFilterBar id="smartFilterBar" smartVariant="__SVM01" persistencyKey="salespriceFilterBar" entitySet="ZzShopDailyBalanceSet" useToolbar="false">
                         <smartFilterBar:controlConfiguration>
                             <smartFilterBar:ControlConfiguration key="KAISHA_CD" visibleInAdvancedArea="true" label="{i18n>KAISHA_CD}" mandatory="mandatory" index="0"/>
                             <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" controlType="date" mandatory="mandatory" index="1">
@@ -32,7 +40,7 @@
         <f:content>
 
             <smartTable:SmartTable id="smartTable" smartFilterId="smartFilterBar" enableExport="false" entitySet="ZzShopDailyBalanceSet"  showRowCount="true" 
-                useVariantManagement="true"  beforeRebindTable="onBeforeRebindTable"
+                smartVariant="__SVM01" useVariantManagement="true"  beforeRebindTable="onBeforeRebindTable"
                 useTablePersonalisation="true" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" class="sapUiThinyMarginTop"
                 requestAtLeastFields="to_Header,to_ZzCashIncome,to_ZzCashPayment,to_ZzTreasuryCash">
                 <smartTable:customToolbar>
