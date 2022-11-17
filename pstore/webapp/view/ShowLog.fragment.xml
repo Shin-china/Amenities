@@ -1,0 +1,29 @@
+<c:FragmentDefinition xmlns:table="sap.ui.table" xmlns="sap.m" xmlns:c="sap.ui.core">
+    <Dialog id="showLogDialog" contentWidth="50%" title="{i18n>log_title}">
+        <content>
+            <table:Table id="logTable" rows="{log>/MessageSet}" selectionMode="None">
+                <table:columns>
+                    <table:Column id="logCol1" width="10%">
+                        <Label id="lblLogCol1" text="{i18n>status}" />
+
+                        <table:template>
+                            <c:Icon id="statusIcon" color="{path: 'log>Type', formatter: '.formatter.logStateFormat'}" src="{ path: 'log>Type', formatter: '.formatter.logStatusFormat' }" />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column id="logCol2" width="90%">
+                        <Label id="lblLogCol2" text="{i18n>message}" />
+
+                        <table:template>
+                            <Text id="txtLogCol2" text="{log>Description}" />
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </content>
+
+        <endButton>
+            <Button id="btnCloseLog" text="{i18n>cancel}" type="Transparent" press="onCloseLogDialog" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

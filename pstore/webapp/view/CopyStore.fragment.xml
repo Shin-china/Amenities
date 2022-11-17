@@ -1,0 +1,28 @@
+<c:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:c="sap.ui.core">
+    <Dialog id="copyDialog" contentWidth="30%" title="{i18n>copy_dialog_title}">
+        <beginButton>
+            <Button id="btnCopyStore" text="{i18n>tab1_btn02}" type="Emphasized" press="onCopyStore" />
+        </beginButton>
+
+        <content>
+            <form:SimpleForm id="copyForm" columnsL="1" columnsXL="1" columnsM="1" editable="true">
+                <form:content>
+                    <Label id="lbl01" text="{i18n>tab1_col02}" labelFor="inputTab1Col02" />
+                    <Input id="inputTab1Col02" maxLength="4" required="true" showValueHelp="true" valueHelpRequest="onShowCompanyHelp">
+                    </Input>
+
+                    <Label id="lbl02" text="{i18n>tab1_col05}" labelFor="inputTab1Col05" />
+                    <Input id="inputTab1Col05" maxLength="4" required="true" showValueHelp="true" valueHelpRequest="onShowStoreCodeHelp">
+                    </Input>
+
+                    <Label id="lbl03" text="{i18n>tab1_col04}" labelFor="inputTab1Col04" />
+                    <DatePicker id="inputTab1Col04" required="true" displayFormat="yyyy/MM/dd" />
+                </form:content>
+            </form:SimpleForm>
+        </content>
+
+        <endButton>
+            <Button id="btnCloseCopy" text="{i18n>cancel}" type="Transparent" press="onCloseCopyDialog" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

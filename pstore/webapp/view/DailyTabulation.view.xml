@@ -1,0 +1,47 @@
+<mvc:View
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    controllerName="com.shin.pstore.pstore.controller.DailyTabulation"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:f="sap.f"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <f:DynamicPage id="dynamicPage1" showFooter="true">
+        <f:header>
+            <f:DynamicPageHeader id="pageHeader">
+                <f:content>
+                    <smartfilterbar:SmartFilterBar id="storeFilter" persistencyKey="storeFilterPersistent" entitySet="StoreSet" showClearOnFB="true" showGoOnFB="true" liveMode="true" />
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smarttable:SmartTable id="table1" entitySet="StoreSet" placeToolbarInTable="true" persistencyKey="storePersistent" enableAutoBinding="true" width="100%" height="80%" showRowCount="true" smartFilterId="storeFilter" tableType="Table">
+                <smarttable:customToolbar>
+                    <OverflowToolbar id="overFlowToolbar">
+                        <ToolbarSpacer id="toolbarSpacer" />
+                        <Button id="btnShowAddDialog" text="{i18n>tab1_btn01}" type="Transparent" press="onShowAddDialog" />
+                        <Button id="btnShowCopyDialog" text="{i18n>tab1_btn02}" type="Transparent" press="onShowCopyDialog" />
+                        <Button id="btnShowDeleteDialog" text="{i18n>tab1_btn03}" type="Attention" press="onShowDeleteDialog" />
+                        <Button id="btnShowGenerateDialog" text="{i18n>tab1_btn04}" type="Transparent" press="onShowGenerateDialog" />
+                        <Button id="btnExportPdf" text="{i18n>tab1_btn05}" type="Transparent" press="onExportPdf" />
+                    </OverflowToolbar>
+                </smarttable:customToolbar>
+
+                <table:Table id="tableInside" rowActionCount="1" visibleRowCountMode="Auto" threshold="10" fixedColumnCount="5">
+                    <table:rowActionTemplate>
+                        <table:RowAction id="tab1RowAction" >
+                            <table:items>
+                                <table:RowActionItem id="tab1RowActionItem" type="Navigation" icon="sap-icon://navigation-right-arrow" press="onNavigate" />
+                            </table:items>
+                        </table:RowAction>
+                    </table:rowActionTemplate>
+                </table:Table>
+            </smarttable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
