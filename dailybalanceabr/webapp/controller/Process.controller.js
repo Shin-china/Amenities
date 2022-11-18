@@ -400,7 +400,7 @@ sap.ui.define([
                     groupId: "ProcessDelete" + Math.floor(i / 100),
                     changeSetId: i,
                     success: function (oData) {
-                        this.byId("smartFilterBar").search();
+                        this.byId("smartFilterBarProcess").search();
                         messages.showText(oData.Message);
                         this.byId("idProcessPage").setBusy(false);
                     }.bind(this),
