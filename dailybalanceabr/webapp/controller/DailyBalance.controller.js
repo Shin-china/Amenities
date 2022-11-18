@@ -1131,7 +1131,10 @@ sap.ui.define([
         },
 
         onNavBackAndReresh: function () {
-            this.byId("smartFilterBar").search();
+            var filterbarDOM = $( "div[id$='smartFilterBarProcess']" );
+            try {
+                sap.ui.getCore().byId(filterbarDOM[filterbarDOM.length - 1].id).search();
+            } catch (e) {}
             this.onNavBack();
         }
         
