@@ -6,10 +6,10 @@
         {"Id":"4", "Title":"合計", "Quantity":"", "Amount":"", "Remark":""}
     ],
     "table7": [
-        {"Id":"1", "No":"1", "Shop":"990", "Title":"オレンジ", "Quantity":"", "Amount":"", "Remark":""},
-        {"Id":"2", "No":"2", "Shop":"990", "Title":"グリーン", "Quantity":"", "Amount":"", "Remark":""},
-        {"Id":"3", "No":"3", "Shop":"930", "Title":"社割", "Quantity":"", "Amount":"", "Remark":""},
-        {"Id":"4", "No":"4", "Shop":"170", "Title":"先行劇場券", "Quantity":"", "Amount":"", "Remark":""},
+        {"Id":"1", "No":"1", "Shop":"990", "Title":"オレンジ券", "Quantity":"", "Amount":"", "Remark":""},
+        {"Id":"2", "No":"2", "Shop":"990", "Title":"グリーン券", "Quantity":"", "Amount":"", "Remark":""},
+        {"Id":"3", "No":"3", "Shop":"930", "Title":"社員割引", "Quantity":"", "Amount":"", "Remark":""},
+        {"Id":"4", "No":"4", "Shop":"170", "Title":"劇場前売券", "Quantity":"", "Amount":"", "Remark":""},
         {"Id":"5", "No":"", "Shop":"", "Title":"合計", "Quantity":"", "Amount":"", "Remark":""}
     ],
     "table8": [

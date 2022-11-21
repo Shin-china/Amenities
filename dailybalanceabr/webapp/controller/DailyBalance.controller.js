@@ -1135,9 +1135,18 @@ sap.ui.define([
                 sap.ui.getCore().byId(filterbarDOM[filterbarDOM.length - 1].id).search();
             } catch (e) {}
             this.onNavBack();
-        }
+        },
         
-
+        onAccountText: function (oEvent, sTextProperty) {
+            var sAccount = oEvent.getParameter("value");
+            var sCompany = this._LocalData.getProperty("/dailyBalance/0/KAISHA_CD");
+            var aAccount = this._LocalData.getProperty("/AccountVH");
+            var aAccountFiltered = aAccount.filter( e => e.Key1 == sAccount && e.Key2 == sCompany);
+            var sPath = oEvent.getSource().getBindingContext("local").sPath;
+            if (aAccountFiltered.length > 0) {
+                this._LocalData.setProperty(sPath + "/" + sTextProperty, aAccountFiltered[0].Value1)
+            }
+        }
         
 	});
 

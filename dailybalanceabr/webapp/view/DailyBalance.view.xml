@@ -690,7 +690,7 @@
                                                 <Input value="{local>NYKN_SAKI}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_TEKIYO}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_KINGAKU}" change="collectionIncome" editable="{local>/viewEditable}"/>
-                                                <Input value="{local>NYKN_KAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'NYKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>NYKN_KAMOKU_CD}" showValueHelp="true" change=".onAccountText($event, 'NYKN_KAMOKU_NM')" valueHelpRequest=".onValueHelp($event, 'Account', 'NYKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
                                                 <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" select="onCashCheckBox" editable="{local>/viewEditable}"/>
@@ -751,7 +751,7 @@
                                                 <Input value="{local>SHKN_SAKI}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>SHKN_TEKIYO}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>SHKN_KINGAKU}" change="collectionPayment" editable="{local>/viewEditable}"/>
-                                                <Input value="{local>SHKN_KAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'SHKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>SHKN_KAMOKU_CD}" showValueHelp="true" change=".onAccountText($event, 'SHKN_KAMOKU_NM')" valueHelpRequest=".onValueHelp($event, 'Account', 'SHKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>SHKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
                                                 <CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" select="onCashCheckBox" editable="{local>/viewEditable}"/>
