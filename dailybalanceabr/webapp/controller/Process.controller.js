@@ -644,6 +644,7 @@ sap.ui.define([
                             break;
                     }
                 }.bind(this));
+                aFI0005.splice(0, 0, {Seq:"", Value1:""});
                 this._LocalData.setProperty("/FI0005", aFI0005);
                 this._LocalData.setProperty("/FI0004", aFI0004);
                 this._LocalData.setProperty("/FI0007", aFI0007);

@@ -24,6 +24,7 @@ sap.ui.define([
 
         //当路径导航到此页面时，设置页面的数据绑定
         _onRouteMatched : function (oEvent) {
+            this.byId("idSelectWeather").setSelectedKey("");
             this._LocalData.setProperty("/processBusy", false);
             this.byId("idUser").setValueState("None");
             //localmodel中当前行的绑定路径
@@ -36,7 +37,6 @@ sap.ui.define([
 
                 var oHeader = this._oDataModel.getProperty("/" + oArgs.contextPath);
                 this.byId("idDailyBalanceCreate").setTitle(oHeader.KIHYO_NO);
-                // this.byId("idSelectWeather").setForceSelection(false);
                 this.initialLocalModel_dis(oHeader);
                 this.tableConverted_dis(oArgs.contextPath);
             } else {
@@ -45,7 +45,6 @@ sap.ui.define([
                 this.byId("idDailyBalanceCreate").setTitle(this._ResourceBundle.getText("DailyBalanceCreatePage"));
                 this.byId("idChange").setVisible(false);
                 this.byId("idPosting").setVisible(false);
-                // this.byId("idSelectWeather").setForceSelection(false);
             }
         },
 

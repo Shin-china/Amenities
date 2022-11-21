@@ -11,10 +11,18 @@
     xmlns:t="sap.ui.table">
 
     <f:DynamicPage id="idDisplayPage" headerExpanded="true">
+        <f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<sv:SmartVariantManagement id="__SVM02" showShare="true" persistencyKey="dailybalanceDisplaySV" showExecuteOnSelection="true"
+						entitySet="ZzShopDailyBalanceSet"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
         <f:header>
             <f:DynamicPageHeader pinnable="true">
                 <f:content>
-                    <smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="DisplayFilterBar" entitySet="ZzDailyBalanceDisplaySet" useToolbar="false">
+                    <smartFilterBar:SmartFilterBar id="smartFilterBar" smartVariant="__SVM02" persistencyKey="DisplayFilterBar" entitySet="ZzDailyBalanceDisplaySet" useToolbar="false">
                         <smartFilterBar:controlConfiguration>
                             <smartFilterBar:ControlConfiguration key="KIHYO_NO" visibleInAdvancedArea="true" label="{i18n>KIHYO_NO}" index="1"/>
                             <smartFilterBar:ControlConfiguration key="KAISHA_CD" visibleInAdvancedArea="true" label="{i18n>KAISHA_CD}" index="2" />
@@ -30,7 +38,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="smartTable" smartFilterId="smartFilterBar" entitySet="ZzDailyBalanceDisplaySet" showRowCount="true" useVariantManagement="true" 
+            <smartTable:SmartTable id="smartTable" smartVariant="__SVM02" smartFilterId="smartFilterBar" entitySet="ZzDailyBalanceDisplaySet" showRowCount="true" useVariantManagement="true" 
                 useTablePersonalisation="true" persistencyKey="DisplayTable" enableAutoBinding="false" placeToolbarInTable="true"
                 beforeRebindTable="onBeforeRebindTable" requestAtLeastFields="FLAG">
                 <smartTable:customToolbar>

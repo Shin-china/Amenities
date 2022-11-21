@@ -1,9 +1,8 @@
-<mvc:View controllerName="FICO.dailybalanceabr.controller.Main" displayBlock="true" xmlns:core="sap.ui.core" xmlns="sap.m"
-	xmlns:layout="sap.ui.layout" xmlns:t="sap.ui.table" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.f">
+<mvc:View controllerName="FICO.dailybalanceabr.controller.Main" displayBlock="true" xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
 	<Page showHeader="false" showFooter="false" title="{i18n>title}">
 		<content>
-			<IconTabBar id="idIconTabBar" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding" applyContentPadding="false"
-			stretchContentHeight="true">
+			<IconTabBar id="idIconTabBar" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding" applyContentPadding="false" stretchContentHeight="true">
 				<items>
 					<IconTabFilter text="{i18n>Process}" key="view1">
 						<mvc:XMLView viewName="FICO.dailybalanceabr.view.Process" height="100%"/>

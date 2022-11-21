@@ -14,7 +14,7 @@
         <f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
-					<sv:SmartVariantManagement id="__SVM01" showShare="true" persistencyKey="dailybalanceFilter" showExecuteOnSelection="true"
+					<sv:SmartVariantManagement id="__SVM01" showShare="true" persistencyKey="dailybalanceProcessSV" showExecuteOnSelection="true"
 						entitySet="ZzShopDailyBalanceSet"/>
 				</f:heading>
 			</f:DynamicPageTitle>
