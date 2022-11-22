@@ -551,7 +551,8 @@ sap.ui.define([
                     aAccount = [],
                     aTax = [],
                     aProfit = [],
-                    aCost = [];
+                    aCost = [],
+                    aFI0006 = [];
                 oData.results.forEach(function(line){
                     switch (line.ZID) {
                         //天气
@@ -642,6 +643,15 @@ sap.ui.define([
                                 Key3: line.ZKEY3
                             });
                             break;
+                        //成本中心
+                        case "FI0006":
+                            aFI0006.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1,
+                                Value2: line.ZVALUE2,
+                                Value3: line.ZVALUE3
+                            });
+                            break;
                     }
                 }.bind(this));
                 aFI0005.splice(0, 0, {Seq:"", Value1:""});
@@ -655,6 +665,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/TaxVH", aTax);
                 this._LocalData.setProperty("/ProfitVH", aProfit);
                 this._LocalData.setProperty("/CostVH", aCost);
+                this._LocalData.setProperty("/FI0006", aFI0006);
             },
 
             setPageBusy: function (isBusy) {

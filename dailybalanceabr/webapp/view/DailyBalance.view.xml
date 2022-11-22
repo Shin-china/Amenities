@@ -648,8 +648,8 @@
 										<OverflowToolbar>
 											<content>
 												<ToolbarSpacer />
-												<Button text="{i18n>Delete}" press=".onDeleteLine($event,'idCashIncomeTable')"/>
-												<Button text="{i18n>AddLine}" press=".onAddLine($event,'idCashIncomeTable')"/>
+												<Button text="{i18n>Delete}" press=".onDeleteLine($event,'idCashIncomeTable')" enabled="{local>/viewEditable}"/>
+												<Button text="{i18n>AddLine}" press=".onAddLine($event,'idCashIncomeTable')" enabled="{local>/viewEditable}"/>
 											</content>
 										</OverflowToolbar>
 									</headerToolbar>
@@ -686,7 +686,7 @@
 										<ColumnListItem>
 											<cells>
                                                 <Input value="{local>KEIJO_BUSHO}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"/>
-                                                <Input value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')" editable="{local>/viewEditable}"/>
+                                                <Input value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_SAKI}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_TEKIYO}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_KINGAKU}" change="collectionIncome" editable="{local>/viewEditable}"/>
@@ -713,8 +713,8 @@
 										<OverflowToolbar>
 											<content>
 												<ToolbarSpacer />
-												<Button text="{i18n>Delete}" press=".onDeleteLine($event,'idCashPaymentTable')"/>
-												<Button text="{i18n>AddLine}" press=".onAddLine($event,'idCashPaymentTable')"/>
+												<Button text="{i18n>Delete}" press=".onDeleteLine($event,'idCashPaymentTable')" enabled="{local>/viewEditable}"/>
+												<Button text="{i18n>AddLine}" press=".onAddLine($event,'idCashPaymentTable')" enabled="{local>/viewEditable}"/>
 											</content>
 										</OverflowToolbar>
 									</headerToolbar>

@@ -70,7 +70,7 @@ sap.ui.define([
 		// Toast形式展示消息
 		showText: function (sText) {
 			MessageToast.show(sText, {
-				width: (sText.length + 2) + "rem"
+				width: (sText.length + 6) + "rem"
 			});
 		},
 

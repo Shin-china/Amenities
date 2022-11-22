@@ -142,10 +142,57 @@ sap.ui.define([
                         var postDoc = this.prepareBalanceSaveBody();
                         postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
                         delete postDoc.__metadata;
+                        this.postingTips(postDoc);
                         this.postBalanceSave(postDoc,sAction);
                     }
                 }.bind(this)
             });
+        },
+
+        postingTips: function (postDoc) {
+            var aIndex = [];
+            var sTips = ""
+            var sMessage = "";
+            var aCash = postDoc.to_ZzCashIncome;
+            aCash.forEach( function (line, index) {
+                if (line.JIDOUTENKIFUYO) {
+                    aIndex.push(index + 1);
+                }
+            });
+            aIndex.forEach(function (rowIndex, index) {
+                sMessage = sMessage + rowIndex;
+                if (index < aIndex.length - 1) {
+                    sMessage = sMessage + "、";
+                }
+            });
+            if (sMessage) {
+                sTips = this._ResourceBundle.getText("msg3", [sMessage]);
+            }
+
+            aIndex = [];
+            sMessage = "";
+            aCash = postDoc.to_ZzCashPayment;
+            aCash.forEach( function (line, index) {
+                if (line.JIDOUTENKIFUYO) {
+                    aIndex.push(index + 1);
+                }
+            });
+            if (aIndex.length > 0 && sTips) {
+                sTips = sTips + "\n\r"
+            }
+            aIndex.forEach(function (rowIndex, index) {
+                sMessage = sMessage + rowIndex;
+                if (index < aIndex.length - 1) {
+                    sMessage = sMessage + "、";
+                }
+            });
+            if (sMessage) {
+                sTips = sTips + this._ResourceBundle.getText("msg4", [sMessage]);
+            }
+            if (sTips) {
+                messages.showText(sTips);
+            }
+            
         },
 
         //申请 确认
