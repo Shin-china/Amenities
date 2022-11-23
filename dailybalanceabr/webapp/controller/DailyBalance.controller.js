@@ -5,9 +5,14 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/m/Button",
     "sap/m/MessageBox",
-], function (BaseController, formatter, messages, MessageToast, Button, MessageBox) {
+    "sap/ui/core/message/Message",
+    "sap/ui/core/library",
+    "sap/ui/core/Fragment",
+    "sap/ui/model/json/JSONModel",
+], function (BaseController, formatter, messages, MessageToast, Button, MessageBox, Message, library, Fragment, JSONModel) {
 	"use strict";
-
+    // shortcut for sap.ui.core.MessageType
+	var MessageType = library.MessageType;
 	return BaseController.extend("FICO.dailybalanceabr.controller.DailyBalance", {
 
 		formatter : formatter,
@@ -16,6 +21,13 @@ sap.ui.define([
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+            var oMessageManager, oView;
+			oView = this.getView();
+            // set message model
+			oMessageManager = sap.ui.getCore().getMessageManager();
+            oView.setModel(oMessageManager.getMessageModel(), "messages");
+            oMessageManager.registerObject(oView, true);
 
             var oRouter = this.getRouter();
             oRouter.getRoute("DailyBalance").attachMatched(this._onRouteMatched, this);
@@ -271,7 +283,10 @@ sap.ui.define([
                 }.bind(this),
                 error: function (oError) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
-                    messages.showError(messages.parseErrors(oError));
+                    this.removeLeadingMessage();
+                    
+                    // messages.showError(messages.parseErrors(oError));
+                    // messages.addMessage(oError, this.getView().getModel("messages"));
                     // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Type", "E");
                     // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Message", messages.parseErrors(oError));
                 }.bind(this),
@@ -281,6 +296,18 @@ sap.ui.define([
             this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
             this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
             this.byId("idDailyBalanceCreate").setBusy(true);
+        },
+
+        removeLeadingMessage: function () {
+            var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
+            if (aMessages.length > 1) {
+                if (
+                    // 后端触发异常的方式会添加一个code为SY/530的leading message
+                    aMessages[0].getCode() == "SY/530"
+                ) {
+                    sap.ui.getCore().getMessageManager().removeMessages(aMessages[0]);
+                }
+            }
         },
 
         postBalanceApply: function (postData, i) {
@@ -1193,7 +1220,30 @@ sap.ui.define([
             if (aAccountFiltered.length > 0) {
                 this._LocalData.setProperty(sPath + "/" + sTextProperty, aAccountFiltered[0].Value1)
             }
-        }
+        },
+
+        onMessagePopoverPress : function (oEvent) {
+			var oSourceControl = oEvent.getSource();
+			this._getMessagePopover().then(function(oMessagePopover){
+				oMessagePopover.openBy(oSourceControl);
+			});
+		},
+        
+        _getMessagePopover: function () {
+			var oView = this.getView();
+
+			// create popover lazily (singleton)
+			if (!this._pMessagePopover) {
+				this._pMessagePopover = Fragment.load({
+					id: oView.getId(),
+					name: "FICO.dailybalanceabr.view.fragment.MessagePopover"
+				}).then(function (oMessagePopover) {
+					oView.addDependent(oMessagePopover);
+					return oMessagePopover;
+				});
+			}
+			return this._pMessagePopover;
+		}
         
 	});
 
