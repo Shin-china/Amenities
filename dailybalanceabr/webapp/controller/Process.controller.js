@@ -432,7 +432,9 @@ sap.ui.define([
                         this._oDataModel.setProperty(sPath + "/Message", oData.Message);
                     }.bind(this),
                     error: function (oError) {  
-                        // messages.showError(messages.parseErrors(oError));
+                        this.byId("idCol1").setVisible(true);
+                        this.byId("idCol2").setVisible(true);
+                        this.byId("idCol3").setVisible(true);
                         this._oDataModel.setProperty(sPath + "/Type", "E");
                         this._oDataModel.setProperty(sPath + "/Message", messages.parseErrors(oError));
                         this.byId("idProcessPage").setBusy(false);

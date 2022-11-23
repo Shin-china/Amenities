@@ -63,7 +63,6 @@ sap.ui.define([
                     return;
                 }
 
-                this.byId("idDisplayPage").setBusy(true);
                 if (!this.pDialog) {
                     this.pDialog = this.loadFragment({
                         name: "FICO.dailybalanceabr.view.fragment.ReverseDialog"
@@ -101,6 +100,7 @@ sap.ui.define([
              // 日记表数据保存
              onReserve: function (sAction) {
                 var postDoc = this.prepareReserveBody();
+                this.byId("idDisplayPage").setBusy(true);
                 postDoc.forEach(function (line, index) {
                     this.postReserve(line, index);
                 }.bind(this));
