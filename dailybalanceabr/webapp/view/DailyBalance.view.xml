@@ -949,10 +949,10 @@
 				type="Emphasized"
 				press="onMessagePopoverPress" />
 			<ToolbarSpacer/>
-			<Button id="idSave" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')"/>
-            <Button id="idChange" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress"/>
-			<Button type="Transparent" text="{i18n>Apply}" press="onApplyConfirm"/>
-            <Button id="idPosting" type="Transparent" text="{i18n>Posting}" press="onBalanceSave('Posting')"/>
+			<Button id="idSave" enabled="{local>/btSave}" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')"/>
+            <Button id="idChange" enabled="{local>/btChange}" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress"/>
+			<Button type="Transparent" enabled="{local>/btApply}" text="{i18n>Apply}" press="onApplyConfirm"/>
+            <Button id="idPosting" enabled="{local>/btPosting}" type="Transparent" text="{i18n>Posting}" press=".onBalanceSave('Posting')"/>
 			<Button type="Transparent" text="{i18n>Suspend}" press="onSuspend"/>
 		</OverflowToolbar>
 	</footer>

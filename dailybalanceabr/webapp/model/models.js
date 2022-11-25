@@ -26,7 +26,18 @@ sap.ui.define([
                     excelSet: [],
                     upload: [{}],
                     dailyBalance: [{}],
-                    isCreate:true
+                    isCreate:true,
+
+                    btCreate: false,
+                    btReference: false,
+                    btDelete: false,
+                    btSave: false,
+                    btChange: false,
+                    btApply: false,
+                    btDisplay: false,
+                    btPosting: false,
+                    btPrint: false,
+                    btReverse: false
                     
                 };
                 return localData;

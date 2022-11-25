@@ -28,6 +28,12 @@ sap.ui.define([
 
                 this.getConfiguration.call(this);
 
+                this._LocalData.setProperty("/processBusy", true);
+                this.getButtonAuth().then(function (oData) {
+                    this.setButtonStatus(oData);
+                    this._LocalData.setProperty("/processBusy", false);
+                }.bind(this));
+
                 //filter 默认值
                 var oDateRange = this.byId("idDateRange");
                 var currentDate = new Date();
@@ -670,9 +676,63 @@ sap.ui.define([
                 this._LocalData.setProperty("/FI0006", aFI0006);
             },
 
-            setPageBusy: function (isBusy) {
-                sap.ui.getCore().byId("idProcessPage").setBusy(isBusy);
-            } 
+            getButtonAuth: function () {
+                var promise = new Promise( function (resolve, reject) {
+                    var mParameters = {
+                        // success: this.setButtonStatus.bind(this),
+                        success: function(oData) {
+                            resolve(oData);
+                        },
+                        error: function (oError) {
+                            this._LocalData.setProperty("/busy", false, false);
+                        }.bind(this)
+                    };
+                    this.getOwnerComponent().getModel().read("/ZzButtonAuthSet", mParameters);
+                }.bind(this));
+                
+                return promise;
+            },
+
+            setButtonStatus: function (oData) {
+                if (oData.results) {
+                    var oButtonAuth = oData.results[0];
+                    //登録
+                    this._LocalData.setProperty("/btCreate", oButtonAuth.TOUROKU);
+                    //参照新規
+                    this._LocalData.setProperty("/btReference", oButtonAuth.COPY);
+                    //削除
+                    this._LocalData.setProperty("/btDelete", oButtonAuth.SAKUZYO);
+                    //仮保存
+                    this._LocalData.setProperty("/btPosting", oButtonAuth.KARIHOZON);
+                    //変更
+                    this._LocalData.setProperty("/btChange", oButtonAuth.HENKOU);
+                    //申請
+                    this._LocalData.setProperty("/btApply", oButtonAuth.SINSEI);
+                    //照会
+                    this._LocalData.setProperty("/btDisplay", oButtonAuth.SYOUKAI);
+                    //PDF作成
+                    this._LocalData.setProperty("/btPrint", oButtonAuth.PDFSAKUSEI);
+                    //仕訳作成
+                    this._LocalData.setProperty("/btPosting", oButtonAuth.SIWAKESAKUSEI);
+                    //一括取消
+                    this._LocalData.setProperty("/btReverse", oButtonAuth.TORIKESI);
+                } else {
+
+                }
+            },
+
+            onPrintPDF: function () {
+                var oTable = this.byId("smartTable").getTable();
+                var aIndex = oTable.getSelectedIndices();
+
+                for (var i = 0; i < aIndex.length; i++) {
+                    var oContext = oTable.getContextByIndex(aIndex[i]);
+                    var oData = oContext.getObject();
+                    var sUrl = "/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV/ZzExportSet(KAISHA_CD='" + oData.KAISHA_CD + "',KIHYO_NO='" + oData.KIHYO_NO + "')/$value";
+                    window.open(sUrl, "_blank");
+            }
+            }
+
             
         });
     });

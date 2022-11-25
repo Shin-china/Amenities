@@ -44,7 +44,7 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar width="100%">
                         <ToolbarSpacer />
-                        <Button type="Transparent" text="{i18n>Reverse}" press="onReversePress"/>
+                        <Button type="Transparent" enabled="{local>/btReverse}" text="{i18n>Reverse}" press="onReversePress"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <t:Table id="reportTable" visibleRowCountMode="Auto">
