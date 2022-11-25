@@ -31,10 +31,10 @@ server:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
           - path: /sap
-            url: http://58.246.235.222:8010
-            client: '300'
+            url: https://ad1-amenities.aee.hec.ondemand.com
+            client: '230'
     - name: fiori-tools-preview
-      afterMiddleware: fiori-tools-appreload
+      afterMiddleware: compression
       configuration:
         component: FICO.dailybalanceabr
         ui5Theme: sap_horizon

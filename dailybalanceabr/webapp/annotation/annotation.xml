@@ -2,7 +2,7 @@
     <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
         <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
     </edmx:Reference>
-	<edmx:Reference Uri="http://58.246.235.222:8010/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV$metadata">
+	<edmx:Reference Uri="https://ad1-amenities.aee.hec.ondemand.com/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV$metadata">
 		<edmx:Include Alias="Metadata" Namespace="ZZDAILYBALANCEABR_SRV"/>
 	</edmx:Reference>
 	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">

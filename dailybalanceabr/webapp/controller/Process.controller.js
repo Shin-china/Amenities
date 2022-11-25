@@ -694,7 +694,7 @@ sap.ui.define([
             },
 
             setButtonStatus: function (oData) {
-                if (oData.results) {
+                if (oData.results.length > 0) {
                     var oButtonAuth = oData.results[0];
                     //登録
                     this._LocalData.setProperty("/btCreate", oButtonAuth.TOUROKU);
@@ -703,7 +703,7 @@ sap.ui.define([
                     //削除
                     this._LocalData.setProperty("/btDelete", oButtonAuth.SAKUZYO);
                     //仮保存
-                    this._LocalData.setProperty("/btPosting", oButtonAuth.KARIHOZON);
+                    this._LocalData.setProperty("/btSave", oButtonAuth.KARIHOZON);
                     //変更
                     this._LocalData.setProperty("/btChange", oButtonAuth.HENKOU);
                     //申請
