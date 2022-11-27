@@ -419,7 +419,7 @@
 												<Label text="{i18n>ShopD}" />
 												<uitable:template>
 													<Input value="{local>ShopD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')" editable="{local>/viewEditable}"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">
@@ -540,7 +540,7 @@
 												<Label text="{i18n>Shop}" />
 												<uitable:template>
                                                     <Input value="{local>Shop}" enabled="{path:'local>Id', formatter:'.formatter.setTable12Enabled'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')" editable="{local>/viewEditable}"/>
+														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="10rem">

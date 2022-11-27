@@ -123,11 +123,11 @@
           ]
         },
         {
-          "name": "DailyBalanceABR",
-          "pattern": "DailyBalanceABR/{layout}/{path}",
+          "name": "DailyBalance",
+          "pattern": "DailyBalance/{layout}/{contextPath}",
           "target": [
             "ApprovalList",
-            "DailyBalanceABR"
+            "DailyBalance"
           ]
         }
       ],
@@ -136,9 +136,9 @@
           "viewName": "ApprovalList",
           "controlAggregation": "beginColumnPages"
         },
-        "DailyBalanceABR": {
+        "DailyBalance": {
           "viewPath": "FICO.dailybalanceapproval.view.abr",
-          "viewName": "DailyBalanceABR",
+          "viewName": "DailyBalance",
           "controlAggregation": "midColumnPages"
         }
       }

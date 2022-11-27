@@ -2,7 +2,7 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/routing/History",
 	"sap/ui/core/UIComponent",
-	"../model/formatter",
+	"../../model/abr/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/Sorter",
 ], function (Controller, History, UIComponent, formatter, Filter, Sorter) {
@@ -39,9 +39,14 @@ sap.ui.define([
 			helpModel:"CostVH",
 			headerTexts:["kostl","ltext","datbi"],
 			items:["Key1","Value1", "Key3"]
+		}],
+        ["FI0006",{
+			helpModel:"FI0006",
+			headerTexts:["Account","AccountDesc"],
+			items:["Value2","Value3"]
 		}]
 	]);
-	return Controller.extend("FICO.dailybalanceapproval.controller.abr.BaseController", {
+	return Controller.extend("FICO.dailybalanceabr.controller.BaseController", {
 
 		formatter : formatter,
 

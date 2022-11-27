@@ -134,8 +134,36 @@ sap.ui.define([
                 var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(1);
                 var sPath = oEvent.getSource().getBindingContext().getPath();
                 sPath = sPath.substr(1);
-                this.getRouter().navTo("DailyBalanceABR", {layout: oNextUIState.layout, path:sPath});
+                this.getDailyBalance(sPath).then(function (res) {
+
+                });
+                this.getRouter().navTo("DailyBalance", {layout: oNextUIState.layout, contextPath:sPath});
             },
+
+            getDailyBalance: function (sPath) {
+                sPath = "/" + sPath;
+                var oDetail = this._oDataModel.getProperty(sPath);
+                var aFilters = [];
+                aFilters.push(new Filter("KAISHA_CD", "EQ", oDetail.KAISHA_CD)); 
+                aFilters.push(new Filter("KIHYO_NO", "EQ", oDetail.KIHYO_NO)); 
+
+                var promise = new Promise (function (resolve, reject) {
+                    var mParameters = {
+                        groupId: "getDetail" + Math.floor(1 / 100),
+                        changeSetId: 1,
+                        filters: aFilters,
+                        expand: "to_Header,to_ZzCashIncome,to_ZzCashPayment,to_ZzTreasuryCash",
+                        success: function (oData) {
+                            resolve(oData);
+                        }.bind(this),
+                        error: function (oError) {  
+                            messages.showError(messages.parseErrors(oError));
+                        }.bind(this),
+                    };
+                    this.getOwnerComponent().getModel().read("/ZzShopDailyBalance", mParameters);
+                }.bind(this));
+                return promise;
+            }
             
         });
     });

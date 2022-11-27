@@ -730,7 +730,7 @@ sap.ui.define([
                     var oData = oContext.getObject();
                     var sUrl = "/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV/ZzExportSet(KAISHA_CD='" + oData.KAISHA_CD + "',KIHYO_NO='" + oData.KIHYO_NO + "')/$value";
                     window.open(sUrl, "_blank");
-            }
+                }
             }
 
             
