@@ -124,7 +124,7 @@
         },
         {
           "name": "DailyBalance",
-          "pattern": "DailyBalance/{layout}/{contextPath}",
+          "pattern": "DailyBalance/{layout}/:contextPath:",
           "target": [
             "ApprovalList",
             "DailyBalance"

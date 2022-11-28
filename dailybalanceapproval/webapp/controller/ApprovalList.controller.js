@@ -135,9 +135,9 @@ sap.ui.define([
                 var sPath = oEvent.getSource().getBindingContext().getPath();
                 sPath = sPath.substr(1);
                 this.getDailyBalance(sPath).then(function (res) {
-
-                });
-                this.getRouter().navTo("DailyBalance", {layout: oNextUIState.layout, contextPath:sPath});
+                    this.getRouter().navTo("DailyBalance", {layout: oNextUIState.layout, contextPath:sPath});
+                }.bind(this));
+                
             },
 
             getDailyBalance: function (sPath) {
@@ -152,7 +152,9 @@ sap.ui.define([
                         groupId: "getDetail" + Math.floor(1 / 100),
                         changeSetId: 1,
                         filters: aFilters,
-                        expand: "to_Header,to_ZzCashIncome,to_ZzCashPayment,to_ZzTreasuryCash",
+                        urlParameters: {
+                            $expand: "to_Header,to_ZzCashIncome,to_ZzCashPayment,to_ZzTreasuryCash"
+                        },
                         success: function (oData) {
                             resolve(oData);
                         }.bind(this),
@@ -160,7 +162,7 @@ sap.ui.define([
                             messages.showError(messages.parseErrors(oError));
                         }.bind(this),
                     };
-                    this.getOwnerComponent().getModel().read("/ZzShopDailyBalance", mParameters);
+                    this.getOwnerComponent().getModel("abr").read("/ZzShopDailyBalanceSet", mParameters);
                 }.bind(this));
                 return promise;
             }

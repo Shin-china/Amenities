@@ -19,8 +19,8 @@ sap.ui.define([
 
 		onInit: function () {
 			this._LocalData = this.getOwnerComponent().getModel("local");
-            this._oDataModel = this.getOwnerComponent().getModel();
-            this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            this._oDataModel = this.getOwnerComponent().getModel("abr");
+            this._ResourceBundle = this.getOwnerComponent().getModel("i18n_abr").getResourceBundle();
 
             var oMessageManager, oView;
 			oView = this.getView();
@@ -46,12 +46,11 @@ sap.ui.define([
             this._LocalData.setProperty("/viewEditable", false);
             this.byId("idChange").setVisible(true);
             this.byId("idChange").setText(this._ResourceBundle.getText("ChangeButton"));
-            this.byId("idPosting").setVisible(true);
-
-            var oHeader = this._oDataModel.getProperty("/" + oArgs.contextPath);
+            var sPath = "ZzShopDailyBalanceSet(" + oArgs.contextPath.split("(")[1];
+            var oHeader = this._oDataModel.getProperty("/" + sPath);
             this.byId("idDailyBalanceCreate").setTitle(oHeader.KIHYO_NO);
             this.initialLocalModel_dis(oHeader);
-            this.tableConverted_dis(oArgs.contextPath);
+            this.tableConverted_dis(sPath);
         },
 
         onAddLine: function (oEvent, sTableId) {
@@ -1246,20 +1245,52 @@ sap.ui.define([
             this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
             this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen","OneColumn");
             this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen",null);
-          },
-          handleExitFullScreen: function (oEvent) {
+        },
+        handleExitFullScreen: function (oEvent) {
             // this.bFocusFullScreenButton = true;
             var sNextLayout = this._LocalData.getProperty("/actionButtonsInfo/midColumn/exitFullScreen");
             sNextLayout = "TwoColumnsMidExpanded"
             this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
             this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen","MidColumnFullScreen");
             this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen",null);
-          },
-          handleClose: function () {
+        },
+        handleClose: function () {
             var sNextLayout = this._LocalData.getProperty("/actionButtonsInfo/midColumn/closeColumn");
             this.oRouter.navTo("ApprovalList", {layout: sNextLayout});
-          },
+        },
         
+        approvalAction:function () {
+            this.getApprovalData();
+        },
+
+        getApprovalData: function () {
+            var oRecord = this._LocalData.getProperty("/dailybalance/0");
+            var postData = {
+                KIHYO_NO: oRecord.KIHYO_NO
+            };
+            this.postAction(postData);
+        },
+
+        postAction: function (postData) {
+            var mParameters = {
+                groupId: "DailyBalanceApproval" + Math.floor(1 / 100),
+                changeSetId: 1,
+                success: function (oData) {
+                    this.byId("idDailyBalanceCreate").setBusy(false);
+                    messages.showText(oData.Message);
+                }.bind(this),
+                error: function (oError) {
+                    this.byId("idDailyBalanceCreate").setBusy(false);
+                    messages.showError(messages.parseErrors(oError));
+                }.bind(this),
+            };
+            this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02"});
+            this.getOwnerComponent().getModel().setHeaders({"button":"Apply"});
+
+            this.getOwnerComponent().getModel().create("/ZzApprovalListSet", postData, mParameters);
+            this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
+            this.byId("idDailyBalanceCreate").setBusy(true);
+        }
 	});
 
 });

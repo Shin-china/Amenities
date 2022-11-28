@@ -909,29 +909,6 @@
 									<!-- 備考2 -->
 									<Text width="{local>/labelWidth}" text="{i18n>Remark}" class="paddingTop"/>
 									<TextArea id="idBIKOU2" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
-
-										<form:Form
-											id="form"
-											editable="true"
-											title="UI Messages">
-											<form:layout>
-												<form:ResponsiveGridLayout />
-											</form:layout>
-											<form:formContainers>
-												<form:FormContainer>
-										<form:FormElement>
-										<form:label>
-											<Label text="Message Buttons test"/>
-										</form:label>
-										<form:fields>
-											<Input
-												id="dummy"
-												value="{local>/errors}"/>
-										</form:fields>
-									</form:FormElement>
-								</form:FormContainer>
-								</form:formContainers>
-							</form:Form>
                                 </VBox>
                             </uxap:blocks>
                         </uxap:ObjectPageSubSection>

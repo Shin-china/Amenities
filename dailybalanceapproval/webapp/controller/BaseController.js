@@ -8,29 +8,41 @@ sap.ui.define([
 ], function (Controller, History, UIComponent, formatter, Filter, Sorter) {
 	"use strict";
 	var mValueHelp = new Map([
-		["Company", {
-			helpModel: "CompanyVH",
-			valuePath: "KAISHA_CD",
-			headerTexts: ["KAISHA_CD", "KAISHA_NM"],
-			items: ["Key1", "Value1"]
+		["Company",{
+			helpModel:"CompanyVH",
+			headerTexts:["KAISHA_CD","KAISHA_NM"],
+			items:["Key1","Value1"]
 		}],
-		["Shop", {
-			helpModel: "ShopVH",
-			valuePath: "TENPO_CD",
-			headerTexts: ["TENPO_CD", "KAISHA_CD", "TENPO_NM"],
-			items: ["Key1", "Key2", "Value1"]
+		["Shop",{
+			helpModel:"ShopVH",
+            
+			headerTexts:["TENPO_CD","TENPO_NM","KAISHA_CD"],
+			items:["Key1","Value1","Key2"]
 		}],
-		["Account", {
-			helpModel: "AccountVH",
-			valuePath: "Supplier",
-			headerTexts: ["Account", "AccountDesc"],
-			items: ["Key1", "Value1"]
+		["Account",{
+			helpModel:"AccountVH",
+			headerTexts:["Account","AccountDesc","KAISHA_CD"],
+			items:["Key1","Value1","Key2"]
 		}],
-		["Material", {
-			helpModel: "MaterialVH",
-			valuePath: "Material",
-			headerTexts: ["MaterialT6I", "PlantT6I", "MaterialnameT6I", "ProductoldidT6I", "ColorT6I"],
-			items: ["Matnr", "Werks", "Maktx", "Bismt", "Normt"]
+		["Tax",{
+			helpModel:"TaxVH",
+			headerTexts:["Tax","TaxDesc"],
+			items:["Key1","Value1"]
+		}],
+        ["Profit",{
+			helpModel:"ProfitVH",
+			headerTexts:["prctr","ltext","datbi"],
+			items:["Key1","Value1", "Key3"]
+		}],
+        ["Cost",{
+			helpModel:"CostVH",
+			headerTexts:["kostl","ltext","datbi"],
+			items:["Key1","Value1", "Key3"]
+		}],
+        ["FI0006",{
+			helpModel:"FI0006",
+			headerTexts:["Account","AccountDesc"],
+			items:["Value2","Value3"]
 		}]
 	]);
 	return Controller.extend("FICO.dailybalanceapproval.controller.BaseController", {

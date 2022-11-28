@@ -55,11 +55,15 @@ sap.ui.define([
             configurationProcess: function (oData) {
                 var aFI0004 = [],
                     aFI0005 = [],
+                    aFI0007 = [],
                     aReversalReason = [],
                     aCompany = [],
                     aShop = [],
                     aAccount = [],
-                    aTax = [];
+                    aTax = [],
+                    aProfit = [],
+                    aCost = [],
+                    aFI0006 = [];
                 oData.results.forEach(function(line){
                     switch (line.ZID) {
                         //天气
@@ -72,6 +76,19 @@ sap.ui.define([
                         //"準備金明細
                         case "FI0004":
                             aFI0004.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1,
+                                Value2: line.ZVALUE2,
+                                Value3: line.ZVALUE3,
+                                Value4: line.ZVALUE4,
+                                Value5: line.ZVALUE5,
+                                Value6: line.ZVALUE6,
+                                Remark: line.REMARK
+                            });
+                            break;
+                        //"掛売上（クレジット、電子マネー、QR決済）
+                        case "FI0007":
+                            aFI0007.push({
                                 Seq: line.ZSEQ,
                                 Value1: line.ZVALUE1,
                                 Value2: line.ZVALUE2,
@@ -119,51 +136,48 @@ sap.ui.define([
                                 Value1: line.ZVALUE1
                             });
                             break;
+                        //利润中心
+                        case "VH0006":
+                            aProfit.push({
+                                Key1: line.ZKEY1,
+                                Value1: line.ZVALUE1,
+                                Key2: line.ZKEY2,
+                                Key3: line.ZKEY3
+                            });
+                            break;
+                        //成本中心
+                        case "VH0007":
+                            aCost.push({
+                                Key1: line.ZKEY1,
+                                Value1: line.ZVALUE1,
+                                Key2: line.ZKEY2,
+                                Key3: line.ZKEY3
+                            });
+                            break;
+                        //成本中心
+                        case "FI0006":
+                            aFI0006.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1,
+                                Value2: line.ZVALUE2,
+                                Value3: line.ZVALUE3
+                            });
+                            break;
                     }
                 }.bind(this));
+                aFI0005.splice(0, 0, {Seq:"", Value1:""});
                 this._LocalData.setProperty("/FI0005", aFI0005);
                 this._LocalData.setProperty("/FI0004", aFI0004);
+                this._LocalData.setProperty("/FI0007", aFI0007);
                 this._LocalData.setProperty("/ReversalReasonVH", aReversalReason);
                 this._LocalData.setProperty("/CompanyVH", aCompany);
                 this._LocalData.setProperty("/ShopVH", aShop);
                 this._LocalData.setProperty("/AccountVH", aAccount);
                 this._LocalData.setProperty("/TaxVH", aTax);
+                this._LocalData.setProperty("/ProfitVH", aProfit);
+                this._LocalData.setProperty("/CostVH", aCost);
+                this._LocalData.setProperty("/FI0006", aFI0006);
             },
     
-            // onRouteMatched: function (oEvent) {
-            //     var sRouteName = oEvent.getParameter("name"),
-            //         oArguments = oEvent.getParameter("arguments");
-    
-            //     this._updateUIElements();
-    
-            //     // Save the current route name
-            //     this.currentRouteName = sRouteName;
-            //     this.currentProduct = oArguments.product;
-            //     this.currentSupplier = oArguments.supplier;
-            // },
-    
-            // onStateChanged: function (oEvent) {
-            //     var bIsNavigationArrow = oEvent.getParameter("isNavigationArrow"),
-            //         sLayout = oEvent.getParameter("layout");
-    
-            //     this._updateUIElements();
-    
-            //     // Replace the URL with the new layout if a navigation arrow was used
-            //     if (bIsNavigationArrow) {
-            //         this.oRouter.navTo(this.currentRouteName, {layout: sLayout, product: this.currentProduct, supplier: this.currentSupplier}, true);
-            //     }
-            // },
-    
-            // // Update the close/fullscreen buttons visibility
-            // _updateUIElements: function () {
-            //     var oModel = this.getOwnerComponent().getModel();
-            //     var oUIState = this.getOwnerComponent().getHelper().getCurrentUIState();
-            //     oModel.setData(oUIState);
-            // },
-    
-            // onExit: function () {
-            //     this.oRouter.detachRouteMatched(this.onRouteMatched, this);
-            //     this.oRouter.detachBeforeRouteMatched(this.onBeforeRouteMatched, this);
-            // },
         });
     });

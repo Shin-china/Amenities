@@ -23,4 +23,4 @@ server:
       afterMiddleware: compression
       configuration:
         component: FICO.dailybalanceapproval
-        ui5Theme: sap_horizon
+        ui5Theme: sap_fiori_3
