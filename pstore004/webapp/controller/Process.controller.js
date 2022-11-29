@@ -485,7 +485,8 @@ sap.ui.define([
                 if (sShopTmp.length == 4 && sShopTmp.substr(0,1) == "0") {
                     sShopTmp = sShopTmp.substr(1);
                 }
-                var aFI0004a = aFI0004.filter( line => line.Value2 === sShopTmp);
+                // var aFI0004a = aFI0004.filter( line => line.Value2 === sShopTmp);
+                var aFI0004a = aFI0004;  
                 if (aFI0004a.length > 0) {
                     aCurrencyTable3.forEach(function (line, index) {
                         try {
