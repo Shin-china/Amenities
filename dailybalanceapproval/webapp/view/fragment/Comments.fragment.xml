@@ -1,0 +1,11 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog title="{i18n>commentsTitle}" >
+        <content>
+            <HBox alignContent="Center" justifyContent="Center">
+                <TextArea id="idComments" maxLength="300" height="8rem" width="16rem" class="sapUiSmallMargin"/>
+            </HBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>

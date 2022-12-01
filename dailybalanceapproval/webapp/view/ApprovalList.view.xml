@@ -2,20 +2,12 @@
     displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-    xmlns:uxap="sap.uxap"
 	xmlns:core="sap.ui.core"
-	xmlns:l="sap.ui.layout"
-	xmlns:form="sap.ui.layout.form"
     xmlns:f="sap.f"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:smartTable="sap.ui.comp.smarttable"
-    xmlns:sv="sap.ui.comp.smartvariants"
-    xmlns:smartField="sap.ui.comp.smartfield"
-    xmlns:smartform="sap.ui.comp.smartform"
-    xmlns:t="sap.ui.table"
-    xmlns:com="sap.suite.ui.commons"
-	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-        <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true">
+    xmlns:t="sap.ui.table">
+        <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{local>/busy}">
             <f:header>
                 <f:DynamicPageHeader pinnable="true">
                     <f:content>
@@ -23,7 +15,11 @@
                             <smartFilterBar:controlConfiguration>
                                 <smartFilterBar:ControlConfiguration key="NIKKEIHYO_KBN" visibleInAdvancedArea="true" label="{i18n>NIKKEIHYO_KBN}" index="1"/>
                                 <smartFilterBar:ControlConfiguration key="KIHYO_NO" visibleInAdvancedArea="true" label="{i18n>KIHYO_NO}" index="2" />
-                                <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" index="3"/>
+                                <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" index="3">
+                                    <smartFilterBar:customControl>
+                                        <DateRangeSelection id="idDateRange" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </f:content>
@@ -31,8 +27,8 @@
             </f:header>
             <f:content>
                 <smartTable:SmartTable id="smartTable" smartFilterId="smartFilterBar" enableExport="false" showRowCount="true" useVariantManagement="false" entitySet="ZzApprovalListSet"
-                    useTablePersonalisation="false" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true"
-                    requestAtLeastFields="KAISHA_CD,NIKKEIHYO_KBN_NM"
+                    useTablePersonalisation="false" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+                    requestAtLeastFields="KAISHA_CD,NIKKEIHYO_KBN_NM,EDIT,SAVE,ACCEPT,REJECT,CONFIRM,to_ZzApprovalHistory,TENPO_CD,TYPE,MESSAGE"
                     class="sapUiThinyMarginTop">
                     <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="1" selectionMode="None">
                         <t:rowActionTemplate>
@@ -43,7 +39,7 @@
                             </t:RowAction>
                         </t:rowActionTemplate>
                         <t:columns>
-                            <t:Column width="6rem" label="{i18n>NIKKEIHYO_KBN}" sortProperty="NIKKEIHYO_KBN">
+                            <t:Column width="8rem" label="{i18n>NIKKEIHYO_KBN}" sortProperty="NIKKEIHYO_KBN">
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"NIKKEIHYO_KBN", "leadingProperty":"NIKKEIHYO_KBN", "sortProperty":"NIKKEIHYO_KBN", "filterProperty": "NIKKEIHYO_KBN"}'/>
                                 </t:customData>
@@ -64,7 +60,7 @@
                                     <core:CustomData key="p13nData" value='\{"columnKey":"EIGYO_BI", "leadingProperty":"EIGYO_BI", "sortProperty":"EIGYO_BI", "filterProperty": "EIGYO_BI"}'/>
                                 </t:customData>
                                 <t:template>
-                                    <Text text="{EIGYO_BI}"/>
+                                    <Text text="{path:'EIGYO_BI', formatter:'.formatter.formtDate_8'}"/>
                                 </t:template>
                             </t:Column>
                         </t:columns>

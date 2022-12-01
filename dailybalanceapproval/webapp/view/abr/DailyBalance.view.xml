@@ -6,7 +6,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:l="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form">
-	<Page id="idDailyBalanceCreate" showNavButton="false" navButtonPress="onNavBackAndReresh" title="{i18n_abr>DailyBalanceCreatePage}">
+	<Page id="idDailyBalanceCreate" showNavButton="false" busy="{local>/busy}" title="{i18n_abr>DailyBalanceCreatePage}">
 		<content>
 		<uxap:ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
 			<uxap:headerTitle>
@@ -959,11 +959,11 @@
 				type="Emphasized"
 				press="onMessagePopoverPress" />
 			<ToolbarSpacer/>
-			<Button id="idSave" enabled="{local>/btSave}" type="Transparent" text="{i18n_abr>PreSave}" press=".onBalanceSave('Save')"/>
-            <Button id="idChange" enabled="{local>/btChange}" type="Transparent" text="{i18n_abr>PreSave}" press="onChangePress"/>
-			<Button type="Transparent" text="{i18n_abr>Approval}" press="approvalAction"/>
-			<Button type="Transparent" text="{i18n_abr>Reject}"/>
-			<Button type="Transparent" text="{i18n_abr>ShopConfirm}"/>
+			<Button id="idSave" enabled="{local>/btSave}" type="Default" text="{i18n_abr>PreSave}" press=".onBalanceSave('Save')" visible="{local>/saveVisible}"/>
+            <Button id="idChange" enabled="{local>/btChange}" type="Default" text="{i18n_abr>PreSave}" press="onChangePress" visible="{local>/editVisible}"/>
+			<Button type="Accept" text="{i18n_abr>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
+			<Button type="Reject" text="{i18n_abr>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
+			<Button id="idConfirm" type="Ghost" text="{i18n_abr>ShopConfirm}" visible="{local>/confirmVisible}"/>
 		</OverflowToolbar>
 	</footer>
 	</Page>

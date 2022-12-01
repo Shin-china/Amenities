@@ -21,6 +21,11 @@ sap.ui.define([
                     hasUIChanges: false,
                     errors: "",
                     isCreate:true,
+                    editVisible: false,
+                    saveVisible: false,
+                    acceptVisible: false,
+                    rejectVisible: false,
+                    confirmVisible: false,
                     actionButtonsInfo: {
                         midColumn:{
                             closeColumn: null,
@@ -32,7 +37,12 @@ sap.ui.define([
                             exitFullScreen: null,
                             fullScreen: null
                         }
-                    }
+                    },
+                    approvalHistory: [
+                        {name:"张三",position:"职员",time:"Date(1670818332000)",comment:"审批通过"},
+                        {name:"李四",position:"经理",time:"Date(1670904732000)",comment:"审批通过"},
+                        {name:"王五",position:"总经理",time:"Date(1670919132000)",comment:"审批通过"}
+                    ]
                 };
                 return localData;
             },

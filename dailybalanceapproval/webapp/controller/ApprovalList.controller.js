@@ -4,12 +4,14 @@ sap.ui.define([
 	"sap/ui/Device",
 	"sap/base/Log",
     "sap/ui/model/Filter",
-    "sap/ui/core/Element"
+    "sap/ui/core/Element",
+    "../model/formatter",
+    "sap/ui/core/routing/HashChanger"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (BaseController, MessageToast, Device, Log, Filter, Element) {
+    function (BaseController, MessageToast, Device, Log, Filter, Element, formatter, HashChanger) {
         "use strict";
 
         return BaseController.extend("FICO.dailybalanceapproval.controller.ApprovalList", {
@@ -20,124 +22,73 @@ sap.ui.define([
                 this._abrModel = this.getOwnerComponent().getModel("abr");
             },
 
-            
+            onBeforeRebindTable: function (oEvent) {
+                HashChanger.getInstance().replaceHash("");
+                this._LocalData.setProperty("/layout", "OneColumn");
 
-            // onAfterRendering: function(){
-            //     var oSplitApp = this.getView().byId("oSplitApp");
-            //     oSplitApp.getAggregation("_navMaster").addStyleClass("splitAppMasterStyle");
-            // },
+                var mBindingParams = oEvent.getParameter("bindingParams");
+                mBindingParams.parameters["expand"] = "to_ZzApprovalHistory";
 
-            // onExit: function () {
-            //     Device.orientation.detachHandler(this.onOrientationChange, this);
-            // },
-    
-            // onOrientationChange: function (mParams) {
-            //     var sMsg = "Orientation now is: " + (mParams.landscape ? "Landscape" : "Portrait");
-            //     MessageToast.show(sMsg, { duration: 5000 });
-            // },
-    
-            // onPressNavToDetail: function () {
-            //     this.getSplitAppObj().to(this.createId("detailDetail"));
-            // },
-    
-            // onPressDetailBack: function () {
-            //     this.getSplitAppObj().backDetail();
-            // },
-    
-            // onPressMasterBack: function () {
-            //     this.getSplitAppObj().backMaster();
-            // },
-    
-            // onPressGoToMaster: function () {
-            //     this.getSplitAppObj().toMaster(this.createId("master2"));
-            // },
-    
-            // onListItemPress: function (oEvent) {
-            //     var sToPageId = oEvent.getParameter("listItem").getCustomData()[0].getValue();
-    
-            //     this.getSplitAppObj().toDetail(this.createId(sToPageId));
-            // },
-    
-            // onPressModeBtn: function (oEvent) {
-            //     var sSplitAppMode = oEvent.getSource().getSelectedButton().getCustomData()[0].getValue();
-    
-            //     this.getSplitAppObj().setMode(sSplitAppMode);
-            //     MessageToast.show("Split Container mode is changed to: " + sSplitAppMode, { duration: 5000 });
-            // },
-    
-            // getSplitAppObj: function () {
-            //     var result = this.byId("SplitAppDemo");
-            //     if (!result) {
-            //         Log.info("SplitApp object can't be found");
-            //     }
-            //     return result;
-            // },
+                var aFilter = oEvent.getParameter("bindingParams").filters;
 
-            // _applyFilter: function(oFilter) {
-            //     // Get the table (last thing in the VBox) and apply the filter
-            //     // var aVBoxItems = this.byId("idVBox").getItems(),
-            //     //     oTable = aVBoxItems[aVBoxItems.length - 1];
-            //     var oTable = this.byId("uitable");
-    
-            //     oTable.getBinding("rows").filter(oFilter);
-            // },
-    
-            // handleFacetFilterReset: function(oEvent) {
-            //     var oFacetFilter = Element.registry.get(oEvent.getParameter("id")),
-            //         aFacetFilterLists = oFacetFilter.getLists();
-    
-            //     for (var i = 0; i < aFacetFilterLists.length; i++) {
-            //         aFacetFilterLists[i].setSelectedKeys();
-            //     }
-    
-            //     this._applyFilter([]);
-            // },
-    
-            // handleListClose: function(oEvent) {
-            //     // Get the Facet Filter lists and construct a (nested) filter for the binding
-            //     var oFacetFilter = oEvent.getSource().getParent();
-    
-            //     this._filterModel(oFacetFilter);
-            // },
-    
-            // handleConfirm: function (oEvent) {
-            //     // Get the Facet Filter lists and construct a (nested) filter for the binding
-            //     var oFacetFilter = oEvent.getSource();
-            //     this._filterModel(oFacetFilter);
-            //     MessageToast.show("confirm event fired");
-            // },
-    
-            // _filterModel: function(oFacetFilter) {
-            //     var mFacetFilterLists = oFacetFilter.getLists().filter(function(oList) {
-            //         return oList.getSelectedItems().length;
-            //     });
-    
-            //     if (mFacetFilterLists.length) {
-            //         // Build the nested filter with ORs between the values of each group and
-            //         // ANDs between each group
-            //         var oFilter = new Filter(mFacetFilterLists.map(function(oList) {
-            //             return new Filter(oList.getSelectedItems().map(function(oItem) {
-            //                 return new Filter(oList.getKey(), "EQ", oItem.getText());
-            //             }), false);
-            //         }), true);
-            //         this._applyFilter(oFilter);
-            //     } else {
-            //         this._applyFilter([]);
-            //     }
-            // },
+                var aFilters = [];
+                var dFrom = this.byId("idDateRange").getFrom();
+                var dTo = this.byId("idDateRange").getTo();
+                if (dTo && dFrom) {
+                    dFrom = this.formatter.date_8(dFrom);
+                    dTo = this.formatter.date_8(dTo);
+                    aFilters.push(new Filter("EIGYO_BI", "BT", dFrom, dTo)); 
+                }
+
+                var oNewFilter = new Filter({
+                    filters:aFilters,
+                    and:true
+                });
+                if (aFilters.length > 0) {
+                    aFilter.push(oNewFilter);
+                }
+            },
 
             onPressNavToDetail: function (oEvent) {
-                 //localmodel中当前行的绑定路径
-                //  var sPath = oEvent.getSource().getBindingContext("local").getPath();
-                //  this.byId("idSimpleForm1").bindElement("local>" + sPath);
-                //  this.byId("idDetialPage1").setVisible(true);
+                this._LocalData.setProperty("/busy", true);
                 var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(1);
                 var sPath = oEvent.getSource().getBindingContext().getPath();
+
+                var oRecord = this._oDataModel.getProperty(sPath);
+                // 设置店铺确认按钮可见性
+                this._LocalData.setProperty("/editVisible", oRecord.EDIT);
+                this._LocalData.setProperty("/saveVisible", oRecord.SAVE);
+                this._LocalData.setProperty("/acceptVisible", oRecord.ACCEPT);
+                this._LocalData.setProperty("/rejectVisible", oRecord.REJECT);
+                this._LocalData.setProperty("/confirmVisible", oRecord.CONFIRM);
+                
+                this.setApprovalHistory(oRecord);
+
                 sPath = sPath.substr(1);
                 this.getDailyBalance(sPath).then(function (res) {
                     this.getRouter().navTo("DailyBalance", {layout: oNextUIState.layout, contextPath:sPath});
                 }.bind(this));
                 
+            },
+
+            setApprovalHistory: function (oRecord) {
+                // 设置审批履历数据
+                var aApprovalHistory = [];
+                try {
+                    var aHistoryPath = oRecord.to_ZzApprovalHistory.__list;
+                    aHistoryPath.forEach(function (path) {
+                        var item = this._oDataModel.getProperty("/" + path);
+                        var sTime = this.formatter.dateTime(item.CREATE_DATE, item.CREATE_TIME);
+                        aApprovalHistory.push({
+                            user: item.CREATE_USER,
+                            name: item.USERNAME,
+                            time: new Date(sTime),
+                            comments: item.COMMENTS,
+                            action: item.ACTION
+                        });
+                    }, this)
+                } catch (error) {}
+                this._LocalData.setProperty("/approvalHistory", aApprovalHistory);
             },
 
             getDailyBalance: function (sPath) {
@@ -162,6 +113,7 @@ sap.ui.define([
                             messages.showError(messages.parseErrors(oError));
                         }.bind(this),
                     };
+                    this.getOwnerComponent().getModel("abr").setHeaders({"approval":"X"});
                     this.getOwnerComponent().getModel("abr").read("/ZzShopDailyBalanceSet", mParameters);
                 }.bind(this));
                 return promise;

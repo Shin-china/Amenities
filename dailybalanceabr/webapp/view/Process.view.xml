@@ -51,11 +51,12 @@
                         <Button type="Transparent" enabled="{local>/btPrint}" text="{i18n>Print}" press="onPrintPDF"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
-                <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="1">
+                <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="2">
                     <t:rowActionTemplate>
                         <t:RowAction>
                             <t:items>
                                 <t:RowActionItem type="Navigation" press=".onNavDailyBalanceView($event, 'Display')"/>
+                                <t:RowActionItem icon="sap-icon://customer-history" type="Custom" press="onPressHistory"/>
                             </t:items>
                         </t:RowAction>
                     </t:rowActionTemplate>

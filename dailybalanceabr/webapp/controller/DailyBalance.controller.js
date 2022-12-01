@@ -242,6 +242,8 @@ sap.ui.define([
         onBalanceApply: function () {
             var postDoc = this.prepareBalanceApplyBody();
             delete postDoc.__metadata;
+            // 获取申请是时的备注
+            postDoc.COMMENTS = this.byId("idApplyConfirm").getValue();
             this.postBalanceApply(postDoc);
         },
 

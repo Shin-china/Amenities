@@ -7,9 +7,10 @@ sap.ui.define([
         "sap/ui/Device",
         "FICO/dailybalanceapproval/model/models",
         "sap/f/FlexibleColumnLayoutSemanticHelper",
-        "sap/f/library"
+        "sap/f/library",
+        "sap/ui/core/routing/HashChanger"
     ],
-    function (UIComponent, Device, models, FlexibleColumnLayoutSemanticHelper, library) {
+    function (UIComponent, Device, models, FlexibleColumnLayoutSemanticHelper, library, HashChanger) {
         "use strict";
         var LayoutType = library.LayoutType;
         return UIComponent.extend("FICO.dailybalanceapproval.Component", {
@@ -23,6 +24,9 @@ sap.ui.define([
              * @override
              */
             init: function () {
+                // reset the routing hash
+                HashChanger.getInstance().replaceHash("");
+
                 // call the base component's init function
                 UIComponent.prototype.init.apply(this, arguments);
 

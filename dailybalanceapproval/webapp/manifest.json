@@ -21,7 +21,9 @@
         "type": "OData",
         "settings": {
             "odataVersion": "2.0",
-            "annotations": [],
+            "annotations": [
+              "annotation"
+            ],
             "localUri": "localService/metadata.xml"
         }
       },
@@ -32,6 +34,13 @@
             "odataVersion": "2.0",
             "annotations": [],
             "localUri": "localService/metadata.xml"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotation/annotation.xml",
+        "settings": {
+            "localUri": "annotation/annotation.xml"
         }
       }
     }
@@ -87,15 +96,27 @@
           "bundleName": "FICO.dailybalanceapproval.i18n.abr.i18n"
         }
       },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },
       "": {
         "dataSource": "ZZDAILYBALANCEAPPROVAL_SRV",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+      }
       },
       "abr": {
         "dataSource": "ZZDAILYBALANCEABR_SRV",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+      }
       }
     },
     "resources": {

@@ -8,7 +8,7 @@ sap.ui.define([
     "sap/ui/core/message/Message",
     "sap/ui/core/library",
     "sap/ui/core/Fragment",
-    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/json/JSONModel"
 ], function (BaseController, formatter, messages, MessageToast, Button, MessageBox, Message, library, Fragment, JSONModel) {
 	"use strict";
     // shortcut for sap.ui.core.MessageType
@@ -33,11 +33,14 @@ sap.ui.define([
             this.oRouter.getRoute("DailyBalance").attachMatched(this._onRouteMatched, this);
             this.InitModel = this.getOwnerComponent().getModel("init");
 
+            this.insertHistorySection();
+
             
 		},
 
         //当路径导航到此页面时，设置页面的数据绑定
         _onRouteMatched : function (oEvent) {
+            this._LocalData.setProperty("/busy", false);
             this.byId("idSelectWeather").setSelectedKey("");
             this._LocalData.setProperty("/processBusy", false);
             this.byId("idUser").setValueState("None");
@@ -1239,57 +1242,110 @@ sap.ui.define([
 		},
 
         handleFullScreen: function (oEvent) {
-            // this.bFocusFullScreenButton = true;
-            var sNextLayout = this._LocalData.getProperty("/actionButtonsInfo/midColumn/fullScreen");
-            sNextLayout = "MidColumnFullScreen"
+            var sNextLayout = "MidColumnFullScreen"
             this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
+            // 用以控制第二页面全屏的按钮
             this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen","OneColumn");
             this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen",null);
         },
         handleExitFullScreen: function (oEvent) {
-            // this.bFocusFullScreenButton = true;
-            var sNextLayout = this._LocalData.getProperty("/actionButtonsInfo/midColumn/exitFullScreen");
-            sNextLayout = "TwoColumnsMidExpanded"
+            var sNextLayout = "TwoColumnsMidExpanded"
             this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
+            // 用以控制第二页面全屏的按钮
             this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen","MidColumnFullScreen");
             this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen",null);
         },
         handleClose: function () {
-            var sNextLayout = this._LocalData.getProperty("/actionButtonsInfo/midColumn/closeColumn");
+            var sNextLayout = "OneColumn";
             this.oRouter.navTo("ApprovalList", {layout: sNextLayout});
         },
+
+        onApprovalConfirm: function(sAction) {
+            if (!this.pDialog) {
+                this.pDialog = this.loadFragment({
+                    name: "FICO.dailybalanceapproval.view.fragment.Comments"
+                });
+            } 
+            this.pDialog.then(function(oDialog) {
+                var beginButton = new Button({
+                    type: "Emphasized",
+                    text: this._ResourceBundle.getText("Yes"),
+                    //登录按钮
+                    press: function () {
+                        var postData = this.getApprovalData();
+                        this.postAction(postData, sAction);
+                        oDialog.close();
+                    }.bind(this)
+                });
+                var endButton = new Button({
+                    text: this._ResourceBundle.getText("No"),
+                    press: function () {
+                        oDialog.close();
+                    }.bind(this)
+                });
+                // 添加按钮
+                if (oDialog.getButtons().length === 0){
+                    oDialog.addButton(beginButton);
+                    oDialog.addButton(endButton);
+                }
+                oDialog.open();
+            }.bind(this));
+        },
         
-        approvalAction:function () {
-            this.getApprovalData();
+        approvalAction:function (sAction) {
+            // var postData = this.getApprovalData();
+            // this.postAction(postData, sAction);
+            this.onApprovalConfirm(sAction);
         },
 
         getApprovalData: function () {
-            var oRecord = this._LocalData.getProperty("/dailybalance/0");
+            var oRecord = this._LocalData.getProperty("/dailyBalance/0");
             var postData = {
-                KIHYO_NO: oRecord.KIHYO_NO
+                KIHYO_NO: oRecord.KIHYO_NO,
+                COMMENTS: this.byId("idComments").getValue()
             };
-            this.postAction(postData);
+            return postData
         },
 
-        postAction: function (postData) {
+        postAction: function (postData, sAction) {
             var mParameters = {
                 groupId: "DailyBalanceApproval" + Math.floor(1 / 100),
                 changeSetId: 1,
                 success: function (oData) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
-                    messages.showText(oData.Message);
+                    messages.showText(oData.MESSAGE);
                 }.bind(this),
                 error: function (oError) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
                     messages.showError(messages.parseErrors(oError));
                 }.bind(this),
             };
-            this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02"});
-            this.getOwnerComponent().getModel().setHeaders({"button":"Apply"});
+            this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02", "action":sAction});
 
             this.getOwnerComponent().getModel().create("/ZzApprovalListSet", postData, mParameters);
             this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
             this.byId("idDailyBalanceCreate").setBusy(true);
+        },
+
+        insertHistorySection: function () {
+            var oView = this.getView();
+            var oPage = this.byId("ObjectPageLayout");
+			// create popover lazily (singleton)
+			if (!this.HistorySection) {
+                this.HistorySection = this.loadFragment({
+                    id: oView.getId(),
+                    name: "FICO.dailybalanceapproval.view.fragment.ApprovalHistory"
+                }).then(function (oHistorySection) {
+                    oPage.insertSection(oHistorySection, 10);
+				});
+				// this.HistorySection = Fragment.load({
+				// 	id: oView.getId(),
+				// 	name: "FICO.dailybalanceapproval.view.fragment.ApprovalHistory",
+                //     controller: this
+				// }).then(function (oHistorySection) {
+                //     oPage.insertSection(oHistorySection, 10);
+				// });
+			}
         }
 	});
 

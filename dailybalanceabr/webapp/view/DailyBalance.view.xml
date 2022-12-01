@@ -6,7 +6,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:l="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form">
-	<Page id="idDailyBalanceCreate" showNavButton="true" navButtonPress="onNavBackAndReresh" title="{i18n>DailyBalanceCreatePage}">
+	<Page id="idDailyBalanceCreate" showNavButton="true" navButtonPress="onNavBackAndReresh" title="{i18n>DailyBalanceCreatePage}" enableScrolling="true">
 		<content>
 		<uxap:ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
 			<uxap:sections>

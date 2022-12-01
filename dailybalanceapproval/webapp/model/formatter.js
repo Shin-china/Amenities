@@ -86,7 +86,7 @@ sap.ui.define([
 			/*eslint no-unused-expressions: ["error", { "allowTernary": true }]*/
 			if (date) {
 				var oDateFormat = DateFormat.getDateTimeInstance({
-					pattern: "yyyy/MM/dd"
+					pattern: "yyyy-MM-dd"
 				});
 				date = oDateFormat.format(new Date(date));
 			}
@@ -102,7 +102,7 @@ sap.ui.define([
 			}
 			var dateTime;
 			date ? (dateTime = date) : (dateTime = dateTime);
-			time ? (dateTime = dateTime + " " + time) : (dateTime = dateTime);
+			time ? (dateTime = dateTime + "T" + time) : (dateTime = dateTime);
 			return dateTime;
 		},
 
@@ -113,7 +113,7 @@ sap.ui.define([
 					pattern: "yyyy-MM-dd"
 				});
 				var deliveryDateString = oDateFormat.format(deliveryDate, false);
-				return new Date(deliveryDateString);
+				return deliveryDateString;
 			}
 			return v;
 		},

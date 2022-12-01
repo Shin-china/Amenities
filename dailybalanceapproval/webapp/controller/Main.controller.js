@@ -36,8 +36,8 @@ sap.ui.define([
                 }
     
                 //Update the layout of the FlexibleColumnLayout
-                if (sLayout) {
-                    this._LocalData.setProperty("/layout", sLayout);
+                if (sLayout) {this._LocalData.setProperty("/layout", sLayout);
+                    
                 }
             },
 

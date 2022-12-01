@@ -1,0 +1,30 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap" 
+    xmlns:com="sap.suite.ui.commons">
+    <uxap:ObjectPageSection titleUppercase="false" title="{i18n>historySection}">
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection title="{i18n>historySection}">
+                <uxap:blocks>
+                    <com:Timeline id="idTimeline" lazyLoading="true" growingThreshold="10" showIcons="false" 
+                        showItemFilter="false" showSearch="false" showTimeFilter="false" enableScroll="false" 
+                        textHeight="3" content="{local>/approvalHistory}">
+                        <com:content>
+                            <com:TimelineItem userName="{local>name}" title="{local>user}" dateTime="{local>time}">
+                                <com:embeddedControl>
+                                    <VBox>
+                                        <ObjectStatus text="{path:'local>action', formatter:'.formatter.approvalText'}" 
+                                            state="{path:'local>action', formatter:'.formatter.approvalStatus'}" 
+                                            icon="{path:'local>action', formatter:'.formatter.approvalIcon'}" />
+                                        <Text text="{local>comments}"/>
+                                    </VBox>
+                                </com:embeddedControl>
+                            </com:TimelineItem>
+                        </com:content>
+                    </com:Timeline>
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+</core:FragmentDefinition>
