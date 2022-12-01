@@ -1,0 +1,153 @@
+{
+  "_version": "1.42.0",
+  "sap.app": {
+      "id": "FICO.pstore004",
+      "type": "application",
+      "i18n": "i18n/i18n.properties",
+      "applicationVersion": {
+          "version": "0.0.1"
+      },
+      "title": "{{appTitle}}",
+      "description": "{{appDescription}}",
+      "resources": "resources.json",
+      "sourceTemplate": {
+          "id": "@sap/generator-fiori:basic",
+          "version": "1.7.6",
+          "toolsId": "bc298797-c776-44d0-985a-d2c1d3a108db"
+      },
+      "dataSources": {
+          "ZZAMAREA_SRV": {
+              "uri": "/sap/opu/odata/sap/ZZAMAREA_SRV",
+              "type": "OData",
+              "settings": {
+                  "odataVersion": "2.0",
+                  "annotations": [
+                      "annotation"
+                  ],
+                  "localUri": "localService/metadata.xml"
+              }
+          },
+          "annotation": {
+              "type": "ODataAnnotation",
+              "uri": "annotation/annotation.xml",
+              "settings": {
+                  "localUri": "annotation/annotation.xml"
+              }
+          }
+      }
+  },
+  "sap.ui": {
+      "technology": "UI5",
+      "icons": {
+          "icon": "",
+          "favIcon": "",
+          "phone": "",
+          "phone@2": "",
+          "tablet": "",
+          "tablet@2": ""
+      },
+      "deviceTypes": {
+          "desktop": true,
+          "tablet": true,
+          "phone": true
+      }
+  },
+  "sap.ui5": {
+      "flexEnabled": false,
+      "dependencies": {
+          "minUI5Version": "1.102.1",
+          "libs": {
+              "sap.m": {},
+              "sap.ui.core": {},
+              "sap.f": {},
+              "sap.suite.ui.generic.template": {},
+              "sap.ui.comp": {},
+              "sap.ui.generic.app": {},
+              "sap.ui.table": {},
+              "sap.ushell": {}
+          }
+      },
+      "contentDensities": {
+          "compact": true,
+          "cozy": true
+      },
+      "models": {
+          "i18n": {
+              "type": "sap.ui.model.resource.ResourceModel",
+              "settings": {
+                  "bundleName": "FICO.pstore004.i18n.i18n",
+                  "supportedLocales": [
+                      "",
+                      "en",
+                      "ja"
+                  ],
+                  "fallbackLocale": ""
+              }
+          },
+          "": {
+              "preload": true,
+              "dataSource": "ZZAMAREA_SRV",
+              "settings": {
+                  "defaultBindingMode": "TwoWay",
+                  "defaultCountMode": "Inline",
+                  "refreshAfterChange": false
+              }
+          },
+          "@i18n": {
+              "type": "sap.ui.model.resource.ResourceModel",
+              "uri": "i18n/i18n.properties"
+          }
+      },
+      "resources": {
+          "css": [
+              {
+                  "uri": "css/style.css"
+              }
+          ]
+      },
+      "routing": {
+          "config": {
+              "routerClass": "sap.m.routing.Router",
+              "viewType": "XML",
+              "async": true,
+              "viewPath": "FICO.pstore004.view",
+              "controlAggregation": "pages",
+              "controlId": "app",
+              "clearControlAggregation": false,
+              "transition": "slide"
+          },
+          "routes": [
+              {
+                  "name": "RouteMain",
+                  "pattern": ":?query:",
+                  "target": [
+                      "TargetMain"
+                  ]
+              },
+              {
+                  "pattern": "DailyBalance/:contextPath:/{view}",
+                  "name": "DailyBalance",
+                  "target": "DailyBalance"
+              }
+          ],
+          "targets": {
+              "TargetMain": {
+                  "viewType": "XML",
+                  "clearControlAggregation": false,
+                  "viewId": "Main",
+                  "viewName": "Main"
+              },
+              "DailyBalance": {
+                  "viewName": "DailyBalance",
+                  "viewLevel": 2
+              }
+          }
+      },
+      "rootView": {
+          "viewName": "FICO.pstore004.view.App",
+          "type": "XML",
+          "async": true,
+          "id": "App"
+      }
+  }
+}
