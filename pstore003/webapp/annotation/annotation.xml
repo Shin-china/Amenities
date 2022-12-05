@@ -1,0 +1,149 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+	<edmx:Reference Uri="http://58.246.235.222:8010/sap/opu/odata/sap/ZZPSTORE003_SRV$metadata">
+		<edmx:Include Alias="Metadata" Namespace="ZZPSTORE003_SRV"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm"
+			Namespace="dailybalanceabr.annotation.annotation.ZZPSTORE003_SRV">
+
+			<Annotations Target="Metadata.ZzShopDailyBalance/KAISHA_CD">
+				<Annotation Term="Common.FilterDefaultValue" String="1000"/>
+			</Annotations>
+
+			<Annotations Target="Metadata.ZzCompanyVH/Bukrs">
+				<Annotation Term="Common.Label" String="{@i18n&gt;KAISHA_CD}"/>
+			</Annotations>
+			<Annotations Target="Metadata.ZzCompanyVH/Butxt">
+				<Annotation Term="Common.Label" String="{@i18n&gt;KAISHA_NM}"/>
+			</Annotations>
+			<Annotations Target="Metadata.ZzShopDailyBalance/KAISHA_CD">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzCompanyVHSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<!--<Record Type="Common.ValueListParameterDisplayOnly">-->
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="KAISHA_CD"/>
+									<PropertyValue Property="ValueListProperty" String="Bukrs"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Butxt"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="Metadata.ZzDailyBalanceDisplay/KAISHA_CD">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzCompanyVHSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<!--<Record Type="Common.ValueListParameterDisplayOnly">-->
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="KAISHA_CD"/>
+									<PropertyValue Property="ValueListProperty" String="Bukrs"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Butxt"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="Metadata.ZzDocStatusVH/ZVALUE1">
+				<Annotation Term="Common.Label" String="{@i18n&gt;NIKKEIHYO_STATUS_CD}"/>
+			</Annotations>
+			<Annotations Target="Metadata.ZzDocStatusVH/ZVALUE2">
+				<Annotation Term="Common.Label" String="{@i18n&gt;NIKKEIHYO_STATUS_NM}"/>
+			</Annotations>
+			<Annotations Target="Metadata.ZzShopDailyBalance/NIKKEIHYO_STATUS_CD">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzDocStatusVHSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<!--<Record Type="Common.ValueListParameterDisplayOnly">-->
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="NIKKEIHYO_STATUS_CD"/>
+									<PropertyValue Property="ValueListProperty" String="ZVALUE1"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ZVALUE2"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="Metadata.ZzShopVH/KOKRS">
+				<Annotation Term="Common.Label" String="{@i18n&gt;KAISHA_CD}"/>
+			</Annotations>
+			<Annotations Target="Metadata.ZzShopVH/TENPO_CD">
+				<Annotation Term="Common.Label" String="{@i18n&gt;TENPO_CD}"/>
+			</Annotations>
+			<Annotations Target="Metadata.ZzShopVH/TENPO_NM">
+				<Annotation Term="Common.Label" String="{@i18n&gt;TENPO_NM}"/>
+			</Annotations>
+			<Annotations Target="Metadata.ZzShopDailyBalance/TENPO_CD">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzShopVHSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="KOKRS"/>
+								</Record>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="TENPO_CD"/>
+									<PropertyValue Property="ValueListProperty" String="TENPO_CD"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="TENPO_NM"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="Metadata.ZzDailyBalanceDisplay/TENPO_CD">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzShopVHSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="KOKRS"/>
+								</Record>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="TENPO_CD"/>
+									<PropertyValue Property="ValueListProperty" String="TENPO_CD"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="TENPO_NM"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="Metadata.ZzDailyBalanceHeader/GNK_NYUKIN_SOGAKU">
+				<Annotation Term="Measures.ISOCurrency" Path="CURRENCY" />
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

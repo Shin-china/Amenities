@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "2.5"
+metadata:
+  name: pstore003
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: https://ad1-amenities.aee.hec.ondemand.com:443
+          client: "230"
+        app:
+          name: Zpstore003
+          description: 本部日計表
+          package: z001
+          transport: RD1K908369
