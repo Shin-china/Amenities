@@ -17,7 +17,7 @@ builder:
           url: https://ad1-amenities.aee.hec.ondemand.com
           client: "230"
         app:
-          name: zdailybalanceapproval
+          name: ZAPPROVAL
           description: DailyBalanceApproval
           package: z001
           transport: RD1K908406

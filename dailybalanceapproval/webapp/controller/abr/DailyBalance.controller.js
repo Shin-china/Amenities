@@ -1382,7 +1382,7 @@ sap.ui.define([
                 changeSetId: 1,
                 refreshAfterChange:true,
                 success: function (oData) {
-                    dthis.byId("idDailyBalanceCreate").setBusy(false);
+                    this.byId("idDailyBalanceCreate").setBusy(false);
                     messages.showText(oData.MESSAGE);
                     HashChanger.getInstance().replaceHash("");
                 }.bind(this),
