@@ -47,13 +47,15 @@ sap.ui.define([
             //localmodel中当前行的绑定路径
             var oArgs = oEvent.getParameter("arguments");
             this._LocalData.setProperty("/viewEditable", false);
-            this.byId("idChange").setVisible(true);
+            this.byId("idChange").setVisible(this._LocalData.getProperty("/editVisible"));
             this.byId("idChange").setText(this._ResourceBundle.getText("ChangeButton"));
             var sPath = "ZzShopDailyBalanceSet(" + oArgs.contextPath.split("(")[1];
             var oHeader = this._oDataModel.getProperty("/" + sPath);
             this.byId("idDailyBalanceCreate").setTitle(oHeader.KIHYO_NO);
             this.initialLocalModel_dis(oHeader);
             this.tableConverted_dis(sPath);
+
+            sap.ui.getCore().getMessageManager().removeAllMessages();
         },
 
         onAddLine: function (oEvent, sTableId) {
@@ -266,6 +268,7 @@ sap.ui.define([
         },
 
         postBalanceSave: function (postData, sAction) {
+            this.convertToString(postData);
             var i = 1;
             var mParameters = {
                 groupId: "DailyBalanceSave" + Math.floor(i / 100),
@@ -294,6 +297,23 @@ sap.ui.define([
             this.byId("idDailyBalanceCreate").setBusy(true);
         },
 
+        convertToString: function (obj) {
+            if (obj instanceof Object) {
+                for (var item in obj) {
+                    if (obj[item] instanceof Object) {
+                        this.convertToString(obj[item]);
+                    } else {
+                        if (typeof obj[item] != "boolean" && !(obj[item] instanceof Date)) {
+                            if (obj[item] == null || obj[item] == undefined) {
+                                obj[item] = "";
+                            } else {
+                                obj[item] = obj[item].toString();
+                            }
+                        }
+                    }
+                }
+            }
+        },
         removeLeadingMessage: function () {
             var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
             if (aMessages.length > 1) {
@@ -1118,6 +1138,7 @@ sap.ui.define([
             aTable3.forEach(function (line, index) {
                 line.Amount = oTreasuryCash[aField3[index]];
             });
+            this._LocalData.setProperty("/CurrencyTable3/Total", oTreasuryCash.ZYUNBIKIN_GKI_AMT);
             oTreasuryCash.ZYUNBIKIN_GKI_AMT = this._LocalData.getProperty("/CurrencyTable3/Total");
             //送金予定明細
             var aField4 = ["YOKUZITUSOHUKIN", "YOKUZITURYOUGAEKIN", "YOKUZITUNYUUKIN", "YOKUZITUKINKONAI", "HONZITUKURIKOSI_SANSYO",
@@ -1207,14 +1228,58 @@ sap.ui.define([
             this.onNavBack();
         },
         
+        onCheckInValueHelp: function(oEvent, valueHelpPath) {
+            var sValue = oEvent.getParameter("value");
+            var sCompany = this._LocalData.getProperty("/dailyBalance/0/KAISHA_CD");
+            var aValueHelp = this._LocalData.getProperty("/" + valueHelpPath);
+            if (valueHelpPath == "AccountVH" || valueHelpPath == "ProfitVH" || valueHelpPath == "CostVH") {
+                var aFiltered = aValueHelp.filter( e => e.Key1 == sValue && e.Key2 == sCompany);
+            } else {
+                var aFiltered = aValueHelp.filter( e => e.Key1 == sValue);
+            }
+            var sPath = oEvent.getSource().getBindingContext("local").sPath;
+            sPath = sPath + "/" + oEvent.getSource().getBindingInfo("value").binding.getPath();
+
+            var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
+            var targetMessage = aMessages.filter(e => e.target == sPath);
+            sap.ui.getCore().getMessageManager().removeMessages(targetMessage);
+            if (aFiltered.length == 0) {
+                if (sValue != "") {
+                    var oMessage = new Message({
+                        message: "無効なエントリ",
+                        type: "Error",
+                        target: sPath,
+                        processor: this.getView().getModel("local")
+                    });
+                    sap.ui.getCore().getMessageManager().addMessages(oMessage);
+                }
+            }
+        },
+
         onAccountText: function (oEvent, sTextProperty) {
             var sAccount = oEvent.getParameter("value");
             var sCompany = this._LocalData.getProperty("/dailyBalance/0/KAISHA_CD");
             var aAccount = this._LocalData.getProperty("/AccountVH");
             var aAccountFiltered = aAccount.filter( e => e.Key1 == sAccount && e.Key2 == sCompany);
             var sPath = oEvent.getSource().getBindingContext("local").sPath;
+
+            var sTargetPath = sPath + "/" + oEvent.getSource().getBindingInfo("value").binding.getPath();
+            var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
+            var targetMessage = aMessages.filter(e => e.target == sTargetPath);
+            sap.ui.getCore().getMessageManager().removeMessages(targetMessage);
+
             if (aAccountFiltered.length > 0) {
                 this._LocalData.setProperty(sPath + "/" + sTextProperty, aAccountFiltered[0].Value1)
+            } else {
+                if (sAccount != "") {
+                    var oMessage = new Message({
+                        message: "無効なエントリ",
+                        type: "Error",
+                        target: sTargetPath,
+                        processor: this.getView().getModel("local")
+                    });
+                    sap.ui.getCore().getMessageManager().addMessages(oMessage);
+                }
             }
         },
 

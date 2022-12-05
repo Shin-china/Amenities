@@ -50,7 +50,7 @@ sap.ui.define([
             },
 
             onPressNavToDetail: function (oEvent) {
-                this._LocalData.setProperty("/busy", true);
+                // this._LocalData.setProperty("/busy", true);
                 var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(1);
                 var sPath = oEvent.getSource().getBindingContext().getPath();
 
@@ -61,6 +61,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/acceptVisible", oRecord.ACCEPT);
                 this._LocalData.setProperty("/rejectVisible", oRecord.REJECT);
                 this._LocalData.setProperty("/confirmVisible", oRecord.CONFIRM);
+                this._LocalData.refresh();
                 
                 this.setApprovalHistory(oRecord);
 

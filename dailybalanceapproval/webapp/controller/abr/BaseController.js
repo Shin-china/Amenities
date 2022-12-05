@@ -51,7 +51,6 @@ sap.ui.define([
 		formatter : formatter,
 
 		onInit: function () {
-			DailyBalance
 		},
 
 		getRouter: function () {
@@ -71,7 +70,16 @@ sap.ui.define([
 			}
 		},
 
+        clearMessage: function (oSource) {
+            var sTargetPath = oSource.getBindingContext("local") + "/" + oSource.getBindingInfo("value").binding.getPath();
+            var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
+            var targetMessage = aMessages.filter(e => e.target == sTargetPath);
+            sap.ui.getCore().getMessageManager().removeMessages(targetMessage);
+            this._LocalData.setProperty(sTargetPath, "");
+        },
+
 		onValueHelp: function (oEvent, propertyKey, additionalField) {
+            this.clearMessage(oEvent.getSource());
             var oView = this.getView();
             this.oInput = oEvent.getSource();
             // table之类的表绑定，可以获取到类似rows items的绑定
