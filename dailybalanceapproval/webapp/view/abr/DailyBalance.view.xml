@@ -952,7 +952,7 @@
             <Button id="idChange" type="Default" text="{i18n_abr>PreSave}" press="onChangePress" visible="{local>/editVisible}"/>
 			<Button type="Accept" text="{i18n_abr>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
 			<Button type="Reject" text="{i18n_abr>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
-			<Button id="idConfirm" type="Ghost" text="{i18n_abr>ShopConfirm}" visible="{local>/confirmVisible}"/>
+			<Button id="idConfirm" type="Ghost" text="{i18n_abr>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>
 		</OverflowToolbar>
 	</footer>
 	</Page>

@@ -55,6 +55,8 @@ sap.ui.define([
             this.initialLocalModel_dis(oHeader);
             this.tableConverted_dis(sPath);
 
+            this.Node = this.getOwnerComponent().getModel().getProperty("/" + oArgs.contextPath).NODE;
+
             sap.ui.getCore().getMessageManager().removeAllMessages();
         },
 
@@ -1367,6 +1369,7 @@ sap.ui.define([
             var oRecord = this._LocalData.getProperty("/dailyBalance/0");
             var postData = {
                 KIHYO_NO: oRecord.KIHYO_NO,
+                NODE: this.Node,
                 COMMENTS: this.byId("idComments").getValue()
             };
             return postData
