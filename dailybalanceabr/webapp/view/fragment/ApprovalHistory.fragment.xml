@@ -9,7 +9,7 @@
                         showItemFilter="false" showSearch="false" showTimeFilter="false" enableScroll="false" 
                         textHeight="3" content="{local>/approvalHistory}">
                         <com:content>
-                            <com:TimelineItem userName="{local>name}" title="{local>user}" dateTime="{local>time}">
+                            <com:TimelineItem userName="{local>name}" title="{local>nodename}" dateTime="{local>time}">
                                 <com:embeddedControl>
                                     <VBox>
                                         <ObjectStatus text="{path:'local>action', formatter:'.formatter.approvalText'}" 

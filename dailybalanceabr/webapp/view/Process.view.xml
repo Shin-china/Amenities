@@ -187,7 +187,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"KIHYOSHA_NM", "leadingProperty":"KIHYOSHA_NM", "sortProperty":"KIHYOSHA_NM", "filterProperty": "KIHYOSHA_NM"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{KIHYOSHA_NM}"/>
+                                <Text text="{KIHYOSHA_NM}" wrapping="false" tooltip="{KIHYOSHA_NM}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>LAST_SHINSEI_DT}" sortProperty="LAST_SHINSEI_DT" filterProperty="LAST_SHINSEI_DT" visible="true">

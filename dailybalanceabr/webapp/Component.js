@@ -5,9 +5,10 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "FICO/dailybalanceabr/model/models"
+        "FICO/dailybalanceabr/model/models",
+        "sap/ui/core/routing/HashChanger"
     ],
-    function (UIComponent, Device, models) {
+    function (UIComponent, Device, models, HashChanger) {
         "use strict";
 
         return UIComponent.extend("FICO.dailybalanceabr.Component", {
@@ -21,6 +22,9 @@ sap.ui.define([
              * @override
              */
             init: function () {
+                // reset the routing hash
+                HashChanger.getInstance().replaceHash("");
+                
                 // call the base component's init function
                 UIComponent.prototype.init.apply(this, arguments);
 

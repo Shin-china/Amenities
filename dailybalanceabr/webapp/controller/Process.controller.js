@@ -203,7 +203,8 @@ sap.ui.define([
                                 name: item.USERNAME,
                                 time: new Date(sTime),
                                 comments: item.COMMENTS,
-                                action: item.ACTION
+                                action: item.ACTION,
+                                nodename: item.NODENAME
                             });
                         }, this)
                     } catch (error) {}
