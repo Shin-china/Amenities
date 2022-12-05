@@ -8,8 +8,9 @@ sap.ui.define([
     "sap/ui/core/message/Message",
     "sap/ui/core/library",
     "sap/ui/core/Fragment",
-    "sap/ui/model/json/JSONModel"
-], function (BaseController, formatter, messages, MessageToast, Button, MessageBox, Message, library, Fragment, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/core/routing/HashChanger"
+], function (BaseController, formatter, messages, MessageToast, Button, MessageBox, Message, library, Fragment, JSONModel, HashChanger) {
 	"use strict";
     // shortcut for sap.ui.core.MessageType
 	var MessageType = library.MessageType;
@@ -1379,13 +1380,16 @@ sap.ui.define([
             var mParameters = {
                 groupId: "DailyBalanceApproval" + Math.floor(1 / 100),
                 changeSetId: 1,
+                refreshAfterChange:true,
                 success: function (oData) {
-                    this.byId("idDailyBalanceCreate").setBusy(false);
+                    dthis.byId("idDailyBalanceCreate").setBusy(false);
                     messages.showText(oData.MESSAGE);
+                    HashChanger.getInstance().replaceHash("");
                 }.bind(this),
                 error: function (oError) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
                     messages.showError(messages.parseErrors(oError));
+                    HashChanger.getInstance().replaceHash("");
                 }.bind(this),
             };
             this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02", "action":sAction});
