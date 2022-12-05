@@ -1,1 +1,20 @@
 /* Enter your custom styles here */
+.writeSpace {
+	white-space: pre;
+}
+.paddingTop {
+	padding-top: 6px;
+}
+.paddingLeft {
+	padding-left: 2rem;
+}
+#Label1,#Label2,#Label3 {
+	padding-top: 6px;
+	padding-left: 1rem;
+	width: 6rem;
+}
+.dialogLabel {
+	padding-top: 6px;
+	padding-left: 1rem;
+	width: 7rem;
+}

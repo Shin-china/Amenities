@@ -39,6 +39,11 @@ sap.ui.define([
 			helpModel:"CostVH",
 			headerTexts:["kostl","ltext","datbi"],
 			items:["Key1","Value1", "Key3"]
+		}],
+        ["FI0006",{
+			helpModel:"FI0006",
+			headerTexts:["Account","AccountDesc"],
+			items:["Value2","Value3"]
 		}]
 	]);
 	return Controller.extend("FICO.pstore004.controller.BaseController", {
