@@ -36,6 +36,15 @@
             "localUri": "localService/metadata.xml"
         }
       },
+      "ZZPSTORE_SRV": {
+        "uri": "/sap/opu/odata/sap/ZZPSTORE_SRV",
+        "type": "OData",
+        "settings": {
+            "odataVersion": "2.0",
+            "localUri": "localService/metadata.xml"
+        }
+      },
+
       "annotation": {
         "type": "ODataAnnotation",
         "uri": "annotation/annotation.xml",
@@ -96,6 +105,12 @@
           "bundleName": "FICO.dailybalanceapproval.i18n.abr.i18n"
         }
       },
+      "i18n_pstore": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "FICO.dailybalanceapproval.i18n.pstore.i18n"
+        }
+      },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
@@ -107,7 +122,7 @@
           "defaultBindingMode": "TwoWay",
           "defaultCountMode": "Inline",
           "refreshAfterChange": false
-      }
+        }
       },
       "abr": {
         "dataSource": "ZZDAILYBALANCEABR_SRV",
@@ -116,7 +131,16 @@
           "defaultBindingMode": "TwoWay",
           "defaultCountMode": "Inline",
           "refreshAfterChange": false
-      }
+        }
+      },
+      "pstore": {
+        "dataSource": "ZZPSTORE_SRV",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        }
       }
     },
     "resources": {
@@ -150,6 +174,13 @@
             "ApprovalList",
             "DailyBalance"
           ]
+        },
+        {
+          "name": "StoreDetail",
+          "pattern": "/StoreDetail/{path}?mode={mode}",
+          "target": [
+              "TargetStoreDetail"
+          ]
         }
       ],
       "targets": {
@@ -161,6 +192,13 @@
           "viewPath": "FICO.dailybalanceapproval.view.abr",
           "viewName": "DailyBalance",
           "controlAggregation": "midColumnPages"
+        },
+        "TargetStoreDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "StoreDetail",
+          "viewName": "StoreDetail"
         }
       }
     },

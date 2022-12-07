@@ -66,10 +66,15 @@ sap.ui.define([
                 this.setApprovalHistory(oRecord);
 
                 sPath = sPath.substr(1);
+                //获取ABR店铺数据 导航到ABR店铺界面
                 this.getDailyBalance(sPath).then(function (res) {
                     this.getRouter().navTo("DailyBalance", {layout: oNextUIState.layout, contextPath:sPath});
                 }.bind(this));
-                
+
+                //获取P店铺数据 导航到P店铺界面
+                this.getPstore(sPath).then(function (res) {
+
+                }.bind(this));
             },
 
             setApprovalHistory: function (oRecord) {
@@ -93,6 +98,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/approvalHistory", aApprovalHistory);
             },
 
+            // 获取ABR店铺日计表数据
             getDailyBalance: function (sPath) {
                 sPath = "/" + sPath;
                 var oDetail = this._oDataModel.getProperty(sPath);
@@ -117,6 +123,30 @@ sap.ui.define([
                     };
                     this.getOwnerComponent().getModel("abr").setHeaders({"approval":"X"});
                     this.getOwnerComponent().getModel("abr").read("/ZzShopDailyBalanceSet", mParameters);
+                }.bind(this));
+                return promise;
+            },
+            //获取P店铺日计表数据
+            getPstore: function (sPath) {
+                sPath = "/" + sPath;
+                var oDetail = this._oDataModel.getProperty(sPath);
+                var aFilters = [];
+                aFilters.push(new Filter("KaishaCd", "EQ", oDetail.KAISHA_CD)); 
+                aFilters.push(new Filter("KihyoNo", "EQ", oDetail.KIHYO_NO)); 
+
+                var promise = new Promise (function (resolve, reject) {
+                    var mParameters = {
+                        groupId: "getDetail" + Math.floor(1 / 100),
+                        changeSetId: 1,
+                        filters: aFilters,
+                        success: function (oData) {
+                            resolve(oData);
+                        }.bind(this),
+                        error: function (oError) {  
+                            messages.showError(messages.parseErrors(oError));
+                        }.bind(this),
+                    };
+                    this.getOwnerComponent().getModel("pstore").read("/StoreSet", mParameters);
                 }.bind(this));
                 return promise;
             }
