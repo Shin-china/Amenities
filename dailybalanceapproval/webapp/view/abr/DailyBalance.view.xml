@@ -11,6 +11,22 @@
 		<uxap:ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
 			<uxap:headerTitle>
                 <uxap:ObjectPageDynamicHeaderTitle>
+					<uxap:expandedHeading>
+						<VBox>
+							<Title text="{local>/dailyBalance/0/NIKKEIHYO_KBN_NM}" wrapping="true"/>
+							<Title text="{local>/dailyBalance/0/KIHYO_NO}" wrapping="true"/>
+						</VBox>
+					</uxap:expandedHeading>
+					<uxap:snappedHeading>
+						<!-- <FlexBox fitContainer="true" alignItems="Center">
+							<Title text="{local>/dailyBalance/0/NIKKEIHYO_KBN_NM}" wrapping="true"/>
+							<Title text="{local>/dailyBalance/0/KIHYO_NO}" wrapping="true"/>
+						</FlexBox> -->
+						<VBox >
+							<Title text="{local>/dailyBalance/0/NIKKEIHYO_KBN_NM}" wrapping="true"/>
+							<Title text="{local>/dailyBalance/0/KIHYO_NO}" wrapping="true"/>
+						</VBox>
+					</uxap:snappedHeading>
                     <uxap:navigationActions>
                         <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
                         <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
@@ -161,7 +177,7 @@
 												<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
 											</layoutData>
 										</Label>
-										<Input value="{[ath:'local>/dailyBalance/0/URAG_SHNY_UCHWK_KI', type:'sap.ui.model.type.Float', formatOptions:{emptyString:0}}" enabled="false"/>
+										<Input value="{path:'local>/dailyBalance/0/URAG_SHNY_UCHWK_KI', type:'sap.ui.model.type.Float', formatOptions:{emptyString:0}}" enabled="false" textAlign="Right"/>
 										<core:Title text="" />
 										<!-- 3 その他現金収入合計 -->
 										<core:Title text="{i18n_abr>Title4c}" />

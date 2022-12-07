@@ -20,6 +20,7 @@ sap.ui.define([
                     busy: false,
                     hasUIChanges: false,
                     errors: "",
+                    labelWidth:"16rem",
                     isCreate:true,
                     editVisible: false,
                     saveVisible: false,

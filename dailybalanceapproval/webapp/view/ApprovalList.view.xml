@@ -6,16 +6,27 @@
     xmlns:f="sap.f"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
     xmlns:t="sap.ui.table">
         <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{local>/busy}">
+            <f:title>
+                <f:DynamicPageTitle>
+                    <f:heading>
+                        <sv:SmartVariantManagement id="__SVM01" showShare="true" persistencyKey="dailybalanceProcessSV" showExecuteOnSelection="true"
+                            entitySet="ZzShopDailyBalanceSet"/>
+                    </f:heading>
+                </f:DynamicPageTitle>
+            </f:title>
             <f:header>
-                <f:DynamicPageHeader pinnable="true">
+                <f:DynamicPageHeader pinnable="true" >
                     <f:content>
-                        <smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="salespriceFilterBar" entitySet="ZzApprovalListSet" useToolbar="false">
+                        <smartFilterBar:SmartFilterBar id="smartFilterBar" smartVariant="__SVM01" persistencyKey="salespriceFilterBar" entitySet="ZzApprovalListSet" useToolbar="false">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration key="NIKKEIHYO_KBN" visibleInAdvancedArea="true" label="{i18n>NIKKEIHYO_KBN}" index="1"/>
-                                <smartFilterBar:ControlConfiguration key="KIHYO_NO" visibleInAdvancedArea="true" label="{i18n>KIHYO_NO}" index="2" />
-                                <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" index="3">
+                                <smartFilterBar:ControlConfiguration key="KAISHA_CD" visibleInAdvancedArea="true" label="{i18n>KAISHA_CD}" index="1"/>
+                                <smartFilterBar:ControlConfiguration key="NIKKEIHYO_KBN" visibleInAdvancedArea="true" label="{i18n>NIKKEIHYO_KBN}" index="2"/>
+                                <smartFilterBar:ControlConfiguration key="TENPO_CD" visibleInAdvancedArea="true" label="{i18n>TENPO_CD}" index="3"/>
+                                <smartFilterBar:ControlConfiguration key="KIHYO_NO" visibleInAdvancedArea="true" label="{i18n>KIHYO_NO}" index="4" />
+                                <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" index="5">
                                     <smartFilterBar:customControl>
                                         <DateRangeSelection id="idDateRange" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd"/>
                                     </smartFilterBar:customControl>
@@ -28,7 +39,7 @@
             <f:content>
                 <smartTable:SmartTable id="smartTable" smartFilterId="smartFilterBar" enableExport="false" showRowCount="true" useVariantManagement="false" entitySet="ZzApprovalListSet"
                     useTablePersonalisation="false" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
-                    requestAtLeastFields="KAISHA_CD,NIKKEIHYO_KBN_NM,EDIT,SAVE,ACCEPT,REJECT,CONFIRM,to_ZzApprovalHistory,TENPO_CD,TYPE,MESSAGE,NODE"
+                    requestAtLeastFields="KAISHA_CD,NIKKEIHYO_KBN_NM,EDIT,SAVE,ACCEPT,REJECT,CONFIRM,to_ZzApprovalHistory,TENPO_CD,TYPE,MESSAGE,NODE,NODENAME"
                     class="sapUiThinyMarginTop">
                     <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="1" selectionMode="None">
                         <t:rowActionTemplate>

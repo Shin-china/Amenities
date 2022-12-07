@@ -52,7 +52,7 @@ sap.ui.define([
             this.byId("idChange").setText(this._ResourceBundle.getText("ChangeButton"));
             var sPath = "ZzShopDailyBalanceSet(" + oArgs.contextPath.split("(")[1];
             var oHeader = this._oDataModel.getProperty("/" + sPath);
-            this.byId("idDailyBalanceCreate").setTitle(oHeader.KIHYO_NO);
+            this.byId("idDailyBalanceCreate").setTitle(this.getOwnerComponent().getModel().getProperty("/" + oArgs.contextPath).NODENAME);
             this.initialLocalModel_dis(oHeader);
             this.tableConverted_dis(sPath);
 
@@ -287,15 +287,11 @@ sap.ui.define([
                     this.byId("idDailyBalanceCreate").setBusy(false);
                     this.removeLeadingMessage();
                     
-                    // messages.showError(messages.parseErrors(oError));
-                    // messages.addMessage(oError, this.getView().getModel("messages"));
-                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Type", "E");
-                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Message", messages.parseErrors(oError));
                 }.bind(this),
             };
-            this.getOwnerComponent().getModel().setHeaders({"button":sAction});
+            this.getOwnerComponent().getModel('abr').setHeaders({"button":sAction});
             //复杂结构
-            this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
+            this.getOwnerComponent().getModel('abr').create("/ZzShopDailyBalanceSet", postData, mParameters);
             this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
             this.byId("idDailyBalanceCreate").setBusy(true);
         },
@@ -1300,7 +1296,7 @@ sap.ui.define([
 			if (!this._pMessagePopover) {
 				this._pMessagePopover = Fragment.load({
 					id: oView.getId(),
-					name: "FICO.dailybalanceabr.view.fragment.MessagePopover"
+					name: "FICO.dailybalanceapproval.view.fragment.MessagePopover"
 				}).then(function (oMessagePopover) {
 					oView.addDependent(oMessagePopover);
 					return oMessagePopover;
@@ -1328,7 +1324,7 @@ sap.ui.define([
             this.oRouter.navTo("ApprovalList", {layout: sNextLayout});
         },
 
-        onApprovalConfirm: function(sAction) {
+        onApprovalConfirm: function() {
             if (!this.pDialog) {
                 this.pDialog = this.loadFragment({
                     name: "FICO.dailybalanceapproval.view.fragment.Comments"
@@ -1341,7 +1337,7 @@ sap.ui.define([
                     //登录按钮
                     press: function () {
                         var postData = this.getApprovalData();
-                        this.postAction(postData, sAction);
+                        this.postAction(postData);
                         oDialog.close();
                     }.bind(this)
                 });
@@ -1361,9 +1357,8 @@ sap.ui.define([
         },
         
         approvalAction:function (sAction) {
-            // var postData = this.getApprovalData();
-            // this.postAction(postData, sAction);
-            this.onApprovalConfirm(sAction);
+            this.sAction = sAction;
+            this.onApprovalConfirm();
         },
 
         getApprovalData: function () {
@@ -1376,7 +1371,7 @@ sap.ui.define([
             return postData
         },
 
-        postAction: function (postData, sAction) {
+        postAction: function (postData) {
             var mParameters = {
                 groupId: "DailyBalanceApproval" + Math.floor(1 / 100),
                 changeSetId: 1,
@@ -1392,7 +1387,7 @@ sap.ui.define([
                     HashChanger.getInstance().replaceHash("");
                 }.bind(this),
             };
-            this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02", "action":sAction});
+            this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02", "action":this.sAction});
 
             this.getOwnerComponent().getModel().create("/ZzApprovalListSet", postData, mParameters);
             this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
