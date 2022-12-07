@@ -1,4 +1,4 @@
-<mvc:View controllerName="FICO.pstore004.controller.Process" displayBlock="true"
+<mvc:View controllerName="pstore003.controller.Process" displayBlock="true"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
     xmlns:f="sap.f"

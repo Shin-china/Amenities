@@ -46,7 +46,7 @@ sap.ui.define([
 			items:["Value2","Value3"]
 		}]
 	]);
-	return Controller.extend("FICO.pstore004.controller.BaseController", {
+	return Controller.extend("pstore003.controller.BaseController", {
 
 		formatter : formatter,
 
@@ -100,7 +100,7 @@ sap.ui.define([
             if (!this._pValueHelpDialog) {
                 this._pValueHelpDialog = this.loadFragment({
                     id: oView.getId(),
-                    name: "FICO.pstore004.view.fragment.ValueHelpDialog",
+                    name: "pstore003.view.fragment.ValueHelpDialog",
                     controller: this
                 }).then(function (oValueHelpDialog) {
                     //将dialgo添加到view的addDependent聚合中

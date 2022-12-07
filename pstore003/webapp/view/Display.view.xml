@@ -1,0 +1,202 @@
+<mvc:View controllerName="pstore003.controller.Display" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartform="sap.ui.comp.smartform"
+    xmlns:t="sap.ui.table">
+
+    <f:DynamicPage id="idDisplayPage" headerExpanded="true">
+        <f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<sv:SmartVariantManagement id="__SVM02" showShare="true" persistencyKey="dailybalanceDisplaySV" showExecuteOnSelection="true"
+						entitySet="ZzShopDailyBalanceSet"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar id="smartFilterBar" smartVariant="__SVM02" persistencyKey="DisplayFilterBar" entitySet="ZzDailyBalanceDisplaySet" useToolbar="false">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration key="KIHYO_NO" visibleInAdvancedArea="true" label="{i18n>KIHYO_NO}" index="1"/>
+                            <smartFilterBar:ControlConfiguration key="KAISHA_CD" visibleInAdvancedArea="true" label="{i18n>KAISHA_CD}" index="2" />
+                            <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" index="3">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection id="idDateRange" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration key="TENPO_CD" visibleInAdvancedArea="true" label="{i18n>TENPO_CD}" index="4" />
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable id="smartTable" smartVariant="__SVM02" smartFilterId="smartFilterBar" entitySet="ZzDailyBalanceDisplaySet" showRowCount="true" useVariantManagement="true" 
+                useTablePersonalisation="true" persistencyKey="DisplayTable" enableAutoBinding="false" placeToolbarInTable="true"
+                beforeRebindTable="onBeforeRebindTable" requestAtLeastFields="FLAG">
+                <smartTable:customToolbar>
+                    <OverflowToolbar width="100%">
+                        <ToolbarSpacer />
+                        <Button type="Transparent" text="{i18n>Reverse}" press="onReversePress"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <t:Table id="reportTable" visibleRowCountMode="Auto">
+                    <t:columns>
+                        <t:Column id="idCol1" visible="false" width="6rem" label="{i18n>STATUS}" sortProperty="TYPE" hAlign="Center">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"STATUS", "leadingProperty":"STATUS"}'/>
+                            </t:customData>
+                            <t:template>
+                                <ObjectStatus state="{path:'TYPE', formatter:'.formatter.setState'}" icon="sap-icon://status-negative"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="idCol2" visible="false" width="5rem" label="{i18n>RESULT}" sortProperty="TYPE">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TYPE", "leadingProperty":"TYPE"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'TYPE', formatter:'.formatter.setResult'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="idCol3" visible="false" width="10rem" label="{i18n>MESSAGE}" sortProperty="MESSAGE" autoResizable="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MESSAGE", "leadingProperty":"MESSAGE"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{MESSAGE}" maxLines="2" tooltip="{MESSAGE}"/>
+                            </t:template>
+                        </t:Column>
+                        
+                        <t:Column width="6rem" label="{i18n>KIHYO_NOT1}" sortProperty="KIHYO_NO" filterProperty="KIHYO_NO" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KIHYO_NO", "leadingProperty":"KIHYO_NO", "sortProperty":"KIHYO_NO", "filterProperty": "KIHYO_NO"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KIHYO_NO}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>KAISHA_CDT1}" sortProperty="KAISHA_CD" filterProperty="KAISHA_CD" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_CD", "leadingProperty":"KAISHA_CD", "sortProperty":"KAISHA_CD", "filterProperty": "KAISHA_CD"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KAISHA_CD}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>KAISHA_NMT1}" sortProperty="KAISHA_NM" filterProperty="KAISHA_NM" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_NM", "leadingProperty":"KAISHA_NM", "sortProperty":"KAISHA_NM", "filterProperty": "KAISHA_NM"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KAISHA_NM}" tooltip="{KAISHA_NM}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>EIGYO_BIT1}" sortProperty="EIGYO_BI" filterProperty="EIGYO_BI" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"EIGYO_BI", "leadingProperty":"EIGYO_BI", "sortProperty":"EIGYO_BI", "filterProperty": "EIGYO_BI"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'EIGYO_BI', formatter:'.formatter.formtDate_8'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>TENPO_CDT1}" sortProperty="TENPO_CD" filterProperty="TENPO_CD" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TENPO_CD", "leadingProperty":"TENPO_CD", "sortProperty":"TENPO_CD", "filterProperty": "TENPO_CD"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{TENPO_CD}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>TENPO_NMT1}" sortProperty="TENPO_NM" filterProperty="TENPO_NM" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TENPO_NM", "leadingProperty":"TENPO_NM", "sortProperty":"TENPO_NM", "filterProperty": "TENPO_NM"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{TENPO_NM}" tooltip="{TENPO_NM}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>BELNRT1}" sortProperty="BELNR" filterProperty="BELNR" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BELNR", "leadingProperty":"BELNR", "sortProperty":"BELNR", "filterProperty": "BELNR"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BELNR}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>GJAHRT1}" sortProperty="GJAHR" filterProperty="GJAHR" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"GJAHR", "leadingProperty":"GJAHR", "sortProperty":"GJAHR", "filterProperty": "GJAHR"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{GJAHR}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>BLARTT1}" sortProperty="BLART" filterProperty="BLART" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BLART", "leadingProperty":"BLART", "sortProperty":"BLART", "filterProperty": "BLART"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BLART}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="12rem" label="{i18n>BKTXTT1}" sortProperty="BKTXT" filterProperty="BKTXT" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BKTXT", "leadingProperty":"BKTXT", "sortProperty":"BKTXT", "filterProperty": "BKTXT"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BKTXT}" tooltip="{BKTXT}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>CPUDTT1}" sortProperty="CPUDT" filterProperty="CPUDT" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CPUDT", "leadingProperty":"CPUDT", "sortProperty":"CPUDT", "filterProperty": "CPUDT"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'CPUDT', formatter:'.formatter.formtDate_8'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>USNAMT1}" sortProperty="USNAM" filterProperty="USNAM" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"USNAM", "leadingProperty":"USNAM", "sortProperty":"USNAM", "filterProperty": "USNAM"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{USNAM}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>USNAM_TEXTT1}" sortProperty="USNAM_TEXT" filterProperty="USNAM_TEXT" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"USNAM_TEXT", "leadingProperty":"USNAM_TEXT", "sortProperty":"USNAM_TEXT", "filterProperty": "USNAM_TEXT"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{USNAM_TEXT}" tooltip="{USNAM_TEXT}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>STBLGT1}" sortProperty="STBLG" filterProperty="STBLG" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"STBLG", "leadingProperty":"STBLG", "sortProperty":"STBLG", "filterProperty": "STBLG"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{STBLG}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>STJAHT1}" sortProperty="STJAH" filterProperty="STJAH" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"STJAH", "leadingProperty":"STJAH", "sortProperty":"STJAH", "filterProperty": "STJAH"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'STJAH', formatter:'.formatter.allZeroToBlank'}"/>
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

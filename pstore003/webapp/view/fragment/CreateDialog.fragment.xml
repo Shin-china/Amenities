@@ -1,0 +1,25 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog>
+        <content>
+            <VBox>
+                <HBox>
+                    <Label text="{i18n>KAISHA_CD}" class="dialogLabel" required="true"/>
+                    <Input id="idCompany" value="{local>/dailyBalance/0/KAISHA_CD}" showValueHelp="true" width="14rem" class="sapUiSmallMarginEnd" enabled="{local>/isCreate}"
+                        valueHelpRequest=".onValueHelp($event, 'Company')"/>
+                </HBox>
+                <HBox>
+                    <Label text="{i18n>TENPO_CD}" class="dialogLabel" required="true"/>
+                    <Input id="idShop" value="{local>/dailyBalance/0/TENPO_CD}" showValueHelp="true" width="14rem" class="sapUiSmallMarginEnd" enabled="{local>/isCreate}"
+                        valueHelpRequest=".onValueHelp($event, 'Shop')"/>
+                </HBox>
+                <HBox>
+                    <Label text="{i18n>EIGYO_BI}" class="dialogLabel" required="true"/>
+                    <DatePicker id="idDP1" placeholder="Enter Date" width="14rem" class="sapUiSmallMarginEnd" enabled="{local>/isCreate}"
+                        change="onDatePickerChange" displayFormat="yyyy/MM/dd"/>
+                </HBox>
+            </VBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>

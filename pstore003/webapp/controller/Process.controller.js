@@ -1,5 +1,5 @@
 sap.ui.define([
-    "FICO/pstore004/controller/BaseController",
+    "pstore003/controller/BaseController",
     "../model/formatter",
     "sap/m/Button",
     "sap/m/MessageBox",
@@ -9,13 +9,13 @@ sap.ui.define([
 ],
     function (BaseController, formatter, Button, MessageBox, JSONModel, messages, Filter) {
         "use strict";
-        return BaseController.extend("FICO.pstore004.controller.Process", {
+        return BaseController.extend("pstore003.controller.Process", {
             formatter: formatter,
             onInit: function () {
                 this._LocalData = this.getOwnerComponent().getModel("local");
                 this._oDataModel = this.getOwnerComponent().getModel();
 			    this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-                this.InitModel = new JSONModel(sap.ui.require.toUrl("FICO/pstore004/model/CreateInit.json"));
+                this.InitModel = new JSONModel(sap.ui.require.toUrl("pstore003/model/CreateInit.json"));
                 
                 this._oDataModel.attachBatchRequestCompleted(function(oEvent){
                     this.setBusy(false);
@@ -119,7 +119,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/processBusy", true);
                 if (!this.pDialog) {
                     this.pDialog = this.loadFragment({
-                        name: "FICO.pstore004.view.fragment.CreateDialog"
+                        name: "pstore003.view.fragment.CreateDialog"
                     });
                 } 
 
@@ -492,7 +492,7 @@ sap.ui.define([
                     sShopTmp = sShopTmp.substr(1);
                 }
                 // var aFI0004a = aFI0004.filter( line => line.Value2 === sShopTmp);
-                var aFI0004a = aFI0004;  
+                var aFI0004a = aFI0004;
                 if (aFI0004a.length > 0) {
                     aCurrencyTable3.forEach(function (line, index) {
                         try {
@@ -624,8 +624,7 @@ sap.ui.define([
                                 Key2: line.ZKEY2,//公司代码
                                 Value1: line.ZVALUE1
                             });
-                            break; 
-
+                            break;
                         //税码
                         case "VH0005":
                             aTax.push({
