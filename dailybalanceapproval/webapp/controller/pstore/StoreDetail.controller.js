@@ -5,7 +5,10 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/format/NumberFormat",
     "FICO/dailybalanceapproval/utils/Common",
-    "../../model/pstore/formatter"
+    "../../model/pstore/formatter",
+    "sap/m/Button",
+    "../messages",
+    "sap/ui/core/routing/HashChanger"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -16,12 +19,17 @@ sap.ui.define([
         JSONModel,
         NumberFormat,
         Common,
-        formatter) {
+        formatter,
+        Button,
+        messages,
+        HashChanger
+        ) {
         "use strict";
 
         return Controller.extend("com.shin.pstore.pstore.controller.pstore.StoreDetail", {
             formatter: formatter,
             onInit: function () {
+                this._LocalData = this.getOwnerComponent().getModel("local");
                 if (!this._viewState) {
                     this._viewState = {};
                 }
@@ -33,9 +41,12 @@ sap.ui.define([
                 this._oRouter = UIComponent.getRouterFor(this);
                 this._oRouter.getRoute("StoreDetail").attachPatternMatched(this._onDetailMatched, this);
 
+                this.insertHistorySection();
+
             },
 
             _onDetailMatched: function (oEvent) {
+                this.byId("detailPage").setTitle(this._LocalData.getProperty("/NodeName"));
                 this._path = oEvent.getParameter("arguments").path;
                 var mode = oEvent.getParameter("arguments").mode;
                 var sPath = "/" + this._path;
@@ -70,10 +81,11 @@ sap.ui.define([
 
                 var that = this;
 
-                var oModel = this.getView().getModel();
+                var oModel = this.getView().getModel("pstore");
 
                 oView.bindElement({
                     path: sPath,
+                    model:"pstore",
                     parameters: {
                         expand: "GoodsSet,EffectiveCashSet,LossCashSet,PlanCashSet"
                     },
@@ -85,8 +97,8 @@ sap.ui.define([
                             that._EigyoBi = oData.EigyoBi;
                             that._KihyoNo = oData.KihyoNo; 
                             var title = that._comm.getI18nMessage(that, "detail_title");
-                            title = title.concat(" " + oData.KihyoNo);
-                            that.byId("detailPage").setTitle(title);
+                            // title = title.concat(" " + oData.KihyoNo);
+                            // that.byId("detailPage").setTitle(title);
 
                             that._sum.PUriage = oData.PUriage;
                             that._sum.SUriage = oData.SUriage;
@@ -159,7 +171,7 @@ sap.ui.define([
                 oView.setModel(viewStateModel, "viewState");
 
                 this.byId("btnMessagePopover").setVisible(false);
-
+                this._LocalData.setProperty("/detailPageBusy",false);
             },
 
             checkEditData: function () {
@@ -814,7 +826,7 @@ sap.ui.define([
                     this,
                     oEvent,
                     this._comm.getI18nMessage(this, "tab3_col1"),
-                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
                     "ProfitCenterSet",
                     "Prctr",
                     aFilters);
@@ -826,7 +838,7 @@ sap.ui.define([
                     this,
                     oEvent,
                     this._comm.getI18nMessage(this, "tab3_col2_1"),
-                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
                     "B01AccountSet",
                     "Hkont",
                     aFilters);
@@ -840,7 +852,7 @@ sap.ui.define([
                     this,
                     oEvent,
                     this._comm.getI18nMessage(this, "tab3_col5"),
-                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
                     "AccountSet",
                     "Saknr",
                     aFilters);
@@ -854,7 +866,7 @@ sap.ui.define([
                     this,
                     oEvent,
                     this._comm.getI18nMessage(this, "tab3_col1"),
-                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
                     "CostCenterSet",
                     "Kostl",
                     aFilters);
@@ -867,7 +879,7 @@ sap.ui.define([
                     this,
                     oEvent,
                     this._comm.getI18nMessage(this, "tab3_col7"),
-                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
                     "TaxSet",
                     "Mwskz",
                     aFilters);
@@ -881,7 +893,7 @@ sap.ui.define([
                     this,
                     oEvent,
                     this._comm.getI18nMessage(this, "tab3_col5"),
-                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
                     "AccountSet",
                     "Saknr",
                     aFilters);
@@ -894,7 +906,7 @@ sap.ui.define([
                     this,
                     oEvent,
                     this._comm.getI18nMessage(this, "tab3_col7"),
-                    "com.shin.pstore.pstore.view.SearchHelp",
+                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
                     "TaxSet",
                     "Mwskz",
                     aFilters);
@@ -939,7 +951,7 @@ sap.ui.define([
                 var sPath = oBindingContext.sPath + sBindingPath;
                 var oModel = oBindingContext.getModel();
 
-                var oDataModel = this.getView().getModel();
+                var oDataModel = this.getView().getModel("pstore");
                 var sReadPath = "/AccountSet(Ktopl='" + this._KaishaCd + "',Saknr='" + account + "',Spras='J'" + ")";
                 oDataModel.read(sReadPath, {
                     success: function (oData) {
@@ -981,7 +993,113 @@ sap.ui.define([
                         oSource.setValue("0");
                     }
                 }
-            }
+            },
+
+            onApprovalConfirm: function() {
+                if (!this.pDialog) {
+                    this.pDialog = this.loadFragment({
+                        name: "FICO.dailybalanceapproval.view.fragment.Comments"
+                    });
+                } 
+                this.pDialog.then(function(oDialog) {
+                    var beginButton = new Button({
+                        type: "Emphasized",
+                        text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("Yes"),
+                        //登录按钮
+                        press: function () {
+                            var postData = this.getApprovalData();
+                            this.postAction(postData);
+                            oDialog.close();
+                        }.bind(this)
+                    });
+                    var endButton = new Button({
+                        text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("No"),
+                        press: function () {
+                            oDialog.close();
+                        }.bind(this)
+                    });
+                    // 添加按钮
+                    if (oDialog.getButtons().length === 0){
+                        oDialog.addButton(beginButton);
+                        oDialog.addButton(endButton);
+                    }
+                    oDialog.open();
+                }.bind(this));
+            },
+
+            approvalAction:function (sAction) {
+                this.sAction = sAction;
+                this.onApprovalConfirm();
+            },
+    
+            getApprovalData: function () {
+                var sPath = this.getView().getElementBinding("pstore").getPath();
+                var oRecord = this.getOwnerComponent().getModel("pstore").getProperty(sPath);
+                var postData = {
+                    KIHYO_NO: oRecord.KihyoNo,
+                    NODE: this._LocalData.getProperty("/Node"),
+                    COMMENTS: this.byId("idComments").getValue()
+                };
+                return postData
+            },
+    
+            postAction: function (postData) {
+                var mParameters = {
+                    groupId: "DailyBalanceApproval" + Math.floor(1 / 100),
+                    changeSetId: 1,
+                    refreshAfterChange:true,
+                    success: function (oData) {
+                        this.byId("detailPage").setBusy(false);
+                        messages.showText(oData.MESSAGE);
+                        HashChanger.getInstance().replaceHash("");
+                    }.bind(this),
+                    error: function (oError) {
+                        this.byId("detailPage").setBusy(false);
+                        messages.showError(messages.parseErrors(oError));
+                        HashChanger.getInstance().replaceHash("");
+                    }.bind(this),
+                };
+                this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02", "action":this.sAction});
+    
+                this.getOwnerComponent().getModel().create("/ZzApprovalListSet", postData, mParameters);
+                this.byId("detailPage").setBusyIndicatorDelay(0);
+                this.byId("detailPage").setBusy(true);
+            },
+
+            insertHistorySection: function () {
+                var oView = this.getView();
+                var oPage = this.byId("objectPageLayout");
+                // create popover lazily (singleton)
+                if (!this.HistorySection) {
+                    this.HistorySection = this.loadFragment({
+                        id: oView.getId(),
+                        name: "FICO.dailybalanceapproval.view.fragment.ApprovalHistory"
+                    }).then(function (oHistorySection) {
+                        oPage.insertSection(oHistorySection, 10);
+                    });
+                }
+            },
+
+            handleFullScreen: function (oEvent) {
+                var sNextLayout = "MidColumnFullScreen";
+                var sPath = this.getView().getObjectBinding("pstore").getPath().substring(1);
+                this._oRouter.navTo("StoreDetail", {layout: sNextLayout, path:sPath, mode: "C"});
+                // 用以控制第二页面全屏的按钮
+                this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen","OneColumn");
+                this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen",null);
+            },
+            handleExitFullScreen: function (oEvent) {
+                var sNextLayout = "TwoColumnsMidExpanded";
+                var sPath = this.getView().getObjectBinding("pstore").getPath().substring(1);
+                this._oRouter.navTo("StoreDetail", {layout: sNextLayout, path:sPath, mode: "C"});
+                // 用以控制第二页面全屏的按钮
+                this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen","MidColumnFullScreen");
+                this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen",null);
+            },
+            handleClose: function () {
+                var sNextLayout = "OneColumn";
+                this._oRouter.navTo("ApprovalList", {layout: sNextLayout});
+            },
 
         });
     });

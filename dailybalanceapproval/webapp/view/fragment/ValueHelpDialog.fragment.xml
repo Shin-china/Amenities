@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+        contentWidth="25rem"
+        contentHeight="30rem"
+		id="valueHelpDialog"
+		noDataText="No Data Found" 
+		draggable="true"
+		resizable="true"
+		cancel="._handleValueHelpClose">
+	</TableSelectDialog>
+</core:FragmentDefinition>

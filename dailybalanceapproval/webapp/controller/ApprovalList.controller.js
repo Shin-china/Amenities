@@ -49,7 +49,7 @@ sap.ui.define([
                 }
             },
 
-            onPressNavToDetail: function (oEvent) {
+            onPressNavToDetail: function (oEvent, sType) {
                 // this._LocalData.setProperty("/busy", true);
                 var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(1);
                 var sPath = oEvent.getSource().getBindingContext().getPath();
@@ -65,16 +65,35 @@ sap.ui.define([
                 
                 this.setApprovalHistory(oRecord);
 
+                //设置当前节点
+                this._LocalData.setProperty("/Node", oRecord.NODE);
+                this._LocalData.setProperty("/NodeName", oRecord.NODENAME);
+                this._LocalData.setProperty("/TypeName", oRecord.NIKKEIHYO_KBN_NM);
+
+                // this._LocalData.setProperty("/detailPageBusy",true);
+
                 sPath = sPath.substr(1);
-                //获取ABR店铺数据 导航到ABR店铺界面
-                this.getDailyBalance(sPath).then(function (res) {
-                    this.getRouter().navTo("DailyBalance", {layout: oNextUIState.layout, contextPath:sPath});
-                }.bind(this));
-
-                //获取P店铺数据 导航到P店铺界面
-                this.getPstore(sPath).then(function (res) {
-
-                }.bind(this));
+                switch (oRecord.NIKKEIHYO_KBN) {
+                    case "1":
+                        //获取P店铺数据 导航到P店铺界面
+                        this.getPstore(sPath).then(function (res) {
+                            try {
+                                var sPstorePath = res.results[0].__metadata.uri.split("ZZPSTORE_SRV/")[1];
+                                this.getRouter().navTo("StoreDetail", {
+                                    layout: oNextUIState.layout,
+                                    path: sPstorePath,
+                                    mode: "C"
+                                });
+                            } catch (e) {}
+                        }.bind(this));
+                        break;
+                    case "2":
+                        //获取ABR店铺数据 导航到ABR店铺界面
+                        this.getDailyBalance(sPath).then(function (res) {
+                            this.getRouter().navTo("DailyBalance", {layout: oNextUIState.layout, contextPath:sPath});
+                        }.bind(this));
+                        break;
+                }
             },
 
             setApprovalHistory: function (oRecord) {
@@ -146,6 +165,7 @@ sap.ui.define([
                             messages.showError(messages.parseErrors(oError));
                         }.bind(this),
                     };
+                    this.getOwnerComponent().getModel("pstore").setHeaders({"approval":"X"});
                     this.getOwnerComponent().getModel("pstore").read("/StoreSet", mParameters);
                 }.bind(this));
                 return promise;

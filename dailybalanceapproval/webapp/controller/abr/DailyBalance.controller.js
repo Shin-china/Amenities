@@ -1,7 +1,7 @@
 sap.ui.define([
 	"FICO/dailybalanceapproval/controller/abr/BaseController",
 	"../../model/abr/formatter",
-    "./messages",
+    "../messages",
     "sap/m/MessageToast",
     "sap/m/Button",
     "sap/m/MessageBox",
@@ -41,24 +41,32 @@ sap.ui.define([
 
         //当路径导航到此页面时，设置页面的数据绑定
         _onRouteMatched : function (oEvent) {
-            this._LocalData.setProperty("/busy", false);
-            this.byId("idSelectWeather").setSelectedKey("");
-            this._LocalData.setProperty("/processBusy", false);
-            this.byId("idUser").setValueState("None");
+            // set title
+            this.byId("idDailyBalanceCreate").setTitle(this._LocalData.getProperty("/NodeName"));
+
             //localmodel中当前行的绑定路径
             var oArgs = oEvent.getParameter("arguments");
             this._LocalData.setProperty("/viewEditable", false);
             this.byId("idChange").setVisible(this._LocalData.getProperty("/editVisible"));
             this.byId("idChange").setText(this._ResourceBundle.getText("ChangeButton"));
-            var sPath = "ZzShopDailyBalanceSet(" + oArgs.contextPath.split("(")[1];
-            var oHeader = this._oDataModel.getProperty("/" + sPath);
-            this.byId("idDailyBalanceCreate").setTitle(this.getOwnerComponent().getModel().getProperty("/" + oArgs.contextPath).NODENAME);
-            this.initialLocalModel_dis(oHeader);
-            this.tableConverted_dis(sPath);
 
-            this.Node = this.getOwnerComponent().getModel().getProperty("/" + oArgs.contextPath).NODE;
+            if (oArgs.contextPath) {
+                // 转换数据
+                var sPath = "ZzShopDailyBalanceSet(" + oArgs.contextPath.split("(")[1];
+                var oHeader = this._oDataModel.getProperty("/" + sPath);
+                this.initialLocalModel_dis(oHeader);
+                this.tableConverted_dis(sPath);
+            }
+
+            // this.Node = this.getOwnerComponent().getModel().getProperty("/" + oArgs.contextPath).NODE;
 
             sap.ui.getCore().getMessageManager().removeAllMessages();
+
+            //每次进入详细页面，默认会保存上一次的section，滚动到页头第一个section
+            var oPageLayout = this.byId("ObjectPageLayout");
+            oPageLayout.scrollToSection(this.byId("section0").getId());
+
+            this._LocalData.setProperty("/detailPageBusy",false);
         },
 
         onAddLine: function (oEvent, sTableId) {
@@ -103,6 +111,7 @@ sap.ui.define([
         },
 
         onMulti: function (oEvent, sParam) {
+            this.setValueToZero(oEvent);
             var value = oEvent.getSource().getValue();
             try {
                 value = this.formatter.accMul(value, sParam);
@@ -279,7 +288,7 @@ sap.ui.define([
                 success: function (oData) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
                     this._LocalData.setProperty("/dailyBalance/0/KIHYO_NO", oData.KIHYO_NO);
-                    this.byId("idDailyBalanceCreate").setTitle(oData.KIHYO_NO);
+                    // this.byId("idDailyBalanceCreate").setTitle(oData.KIHYO_NO);
                     messages.showText(oData.Message);
                     // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
                 }.bind(this),
@@ -447,6 +456,9 @@ sap.ui.define([
                     //借方科目 DRKAMOKU
                     sProperty = sTableName + "_DRKAMOKU_" + tableNo + "_" + line.Id;
                     convertedTable[sProperty] = line.AccountD;
+                    //借方科目描述 DRKAMOKUNM
+                    sProperty = sTableName + "_DRKAMOKUNM_" + tableNo + "_" + line.Id;
+                    convertedTable[sProperty] = line.AccountDDesc;
                     //借方税 DRTAX
                     sProperty = sTableName + "_DRTAX_" + tableNo + "_" + line.Id;
                     convertedTable[sProperty] = line.TaxD;
@@ -577,7 +589,8 @@ sap.ui.define([
         },
         
         //dailyBalanceCalc
-        onDailyBalanceCalc: function () {
+        onDailyBalanceCalc: function (oEvent) {
+            this.setValueToZero(oEvent)
             var aFields = [
                     "INSHOKU_URIAGE",
                     "BENTO_URIAGE",
@@ -627,7 +640,8 @@ sap.ui.define([
         
 
         //table6 table7 table8 table11 共用
-        onTable6Calc: function (sTablePath) {
+        onTable6Calc: function (oEvent,sTablePath) {
+            this.setValueToZero(oEvent);
             var aTable = this._LocalData.getProperty(sTablePath);
             var total1 = "0";
             var total2 = "0";
@@ -655,7 +669,8 @@ sap.ui.define([
             this._LocalData.refresh();
         },
         //table9 table10 共用
-        onTable9Calc: function (sTablePath) {
+        onTable9Calc: function (oEvent,sTablePath) {
+            this.setValueToZero(oEvent);
             var aTable = this._LocalData.getProperty(sTablePath);
             var total1 = "0";
             aTable.forEach(function (line, index) {
@@ -690,12 +705,14 @@ sap.ui.define([
             this._LocalData.refresh();
         },
 
-        onTable12AmountChange: function () {
+        onTable12AmountChange: function (oEvent) {
+            this.setValueToZero(oEvent);
             this.sumTable7ToTable12();
             this.salesDetialCalc();
         },
 
         onTableColumnSum: function (oEvent,sId) {
+            this.setValueToZero(oEvent);
             var oTable = this.byId(sId);
             var sTablePath = oTable.getBinding("rows").getPath();
             var aTable = this._LocalData.getProperty(sTablePath);
@@ -709,7 +726,8 @@ sap.ui.define([
             this.onCurrencyTable4ValueChange();
         },
 
-        onCurrencyTable4ValueChange: function () {
+        onCurrencyTable4ValueChange: function (oEvent) {
+            this.setValueToZero(oEvent);
             var total1 = this._LocalData.getProperty("/CurrencyTable1/Total");
             var total2 = this._LocalData.getProperty("/CurrencyTable2/Total");
             var total3 = this._LocalData.getProperty("/CurrencyTable3/Total");
@@ -751,7 +769,8 @@ sap.ui.define([
             this._LocalData.refresh();
         },
 
-        collectionIncome: function () {
+        collectionIncome: function (oEvent) {
+            this.setValueToZero(oEvent);
             var aTable = this._LocalData.getProperty("/CashIncome");
             var total = "0";
             aTable.forEach(function (line) {
@@ -769,7 +788,8 @@ sap.ui.define([
             this.resultCalc();
             this._LocalData.refresh();
         },
-        collectionPayment: function () {
+        collectionPayment: function (oEvent) {
+            this.setValueToZero(oEvent);
             var aTable = this._LocalData.getProperty("/CashPayment");
             var total = "0";
             aTable.forEach(function (line) {
@@ -788,7 +808,8 @@ sap.ui.define([
             this._LocalData.refresh();
         },
         // Ⅳ本日繰越高
-        resultCalc: function () {
+        resultCalc: function (oEvent) {
+            this.setValueToZero(oEvent);
             //前日繰越元金
             var value1 = this._LocalData.getProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN");
             //銀行入金総額
@@ -1029,6 +1050,9 @@ sap.ui.define([
                     //借方科目 DRKAMOKU
                     sProperty = sTableName + "_DRKAMOKU_" + tableNo + "_" + line.Id;
                     line.AccountD = oHeader[sProperty];
+                    //借方科目描述 DRKAMOKUNM
+                    sProperty = sTableName + "_DRKAMOKUNM_" + tableNo + "_" + line.Id;
+                    line.AccountDDesc = oHeader[sProperty];
                     //借方税 DRTAX
                     sProperty = sTableName + "_DRTAX_" + tableNo + "_" + line.Id;
                     line.TaxD = oHeader[sProperty];
@@ -1305,31 +1329,14 @@ sap.ui.define([
 			return this._pMessagePopover;
 		},
 
-        handleFullScreen: function (oEvent) {
-            var sNextLayout = "MidColumnFullScreen"
-            this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
-            // 用以控制第二页面全屏的按钮
-            this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen","OneColumn");
-            this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen",null);
-        },
-        handleExitFullScreen: function (oEvent) {
-            var sNextLayout = "TwoColumnsMidExpanded"
-            this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
-            // 用以控制第二页面全屏的按钮
-            this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen","MidColumnFullScreen");
-            this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen",null);
-        },
-        handleClose: function () {
-            var sNextLayout = "OneColumn";
-            this.oRouter.navTo("ApprovalList", {layout: sNextLayout});
-        },
-
         onApprovalConfirm: function() {
             if (!this.pDialog) {
                 this.pDialog = this.loadFragment({
                     name: "FICO.dailybalanceapproval.view.fragment.Comments"
                 });
-            } 
+            } else {
+                this.byId("idComments").setValue("");
+            }
             this.pDialog.then(function(oDialog) {
                 var beginButton = new Button({
                     type: "Emphasized",
@@ -1356,6 +1363,25 @@ sap.ui.define([
             }.bind(this));
         },
         
+        handleFullScreen: function (oEvent) {
+            var sNextLayout = "MidColumnFullScreen"
+            this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
+            // 用以控制第二页面全屏的按钮
+            this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen","OneColumn");
+            this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen",null);
+        },
+        handleExitFullScreen: function (oEvent) {
+            var sNextLayout = "TwoColumnsMidExpanded"
+            this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
+            // 用以控制第二页面全屏的按钮
+            this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen","MidColumnFullScreen");
+            this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen",null);
+        },
+        handleClose: function () {
+            var sNextLayout = "OneColumn";
+            this.oRouter.navTo("ApprovalList", {layout: sNextLayout});
+        },
+
         approvalAction:function (sAction) {
             this.sAction = sAction;
             this.onApprovalConfirm();
@@ -1365,7 +1391,7 @@ sap.ui.define([
             var oRecord = this._LocalData.getProperty("/dailyBalance/0");
             var postData = {
                 KIHYO_NO: oRecord.KIHYO_NO,
-                NODE: this.Node,
+                NODE: this._LocalData.getProperty("/Node"),
                 COMMENTS: this.byId("idComments").getValue()
             };
             return postData
@@ -1405,15 +1431,17 @@ sap.ui.define([
                 }).then(function (oHistorySection) {
                     oPage.insertSection(oHistorySection, 10);
 				});
-				// this.HistorySection = Fragment.load({
-				// 	id: oView.getId(),
-				// 	name: "FICO.dailybalanceapproval.view.fragment.ApprovalHistory",
-                //     controller: this
-				// }).then(function (oHistorySection) {
-                //     oPage.insertSection(oHistorySection, 10);
-				// });
 			}
+        },
+
+        setValueToZero: function (oEvent) {
+            if (oEvent) {
+                if (oEvent.getSource().getValue().trim() == "" ) {
+                    oEvent.getSource().setValue("0");
+                }
+            }
         }
+
 	});
 
 });

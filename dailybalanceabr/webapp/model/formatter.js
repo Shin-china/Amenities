@@ -306,6 +306,13 @@ sap.ui.define([
 			}
 		},
 
+		isUndefinedToZero: function (value) {
+			if (!value) {
+				return "0";
+			}
+			return value;
+		},
+
         accAdd : function(arg1, arg2) {
             if (!Number(arg1)) {
                 arg1 = 0;

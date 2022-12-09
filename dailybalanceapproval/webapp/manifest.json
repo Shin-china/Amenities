@@ -177,8 +177,9 @@
         },
         {
           "name": "StoreDetail",
-          "pattern": "/StoreDetail/{path}?mode={mode}",
+          "pattern": "StoreDetail/{layout}/{path}?mode={mode}",
           "target": [
+              "ApprovalList",
               "TargetStoreDetail"
           ]
         }
@@ -191,14 +192,14 @@
         "DailyBalance": {
           "viewPath": "FICO.dailybalanceapproval.view.abr",
           "viewName": "DailyBalance",
+          "clearControlAggregation": true,
           "controlAggregation": "midColumnPages"
         },
         "TargetStoreDetail": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "StoreDetail",
-          "viewName": "StoreDetail"
+          "viewPath": "FICO.dailybalanceapproval.view.pstore",
+          "viewName": "StoreDetail",
+          "clearControlAggregation": true,
+          "controlAggregation": "midColumnPages"
         }
       }
     },

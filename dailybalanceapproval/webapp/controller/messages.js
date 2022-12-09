@@ -1,7 +1,7 @@
 /**
  * 消息处理
  **/
-sap.ui.define([
+ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
 ], function (MessageBox, MessageToast) {
@@ -38,6 +38,23 @@ sap.ui.define([
 			}
 		},
 
+		addMessage: function(oError, oModel) {
+			var aMessages = [];
+			var response = JSON.parse(oError.responseText);
+			var errordetails = response.error.innererror.errordetails;
+			try {
+				// oModel.getProperty("")
+				errordetails.forEach(function (error) {
+					aMessages.push({
+						type: "Error",
+						message: error.message
+					});
+				});
+				oModel.setProperty("/messages", aMessages);
+			} catch (error) {}
+			
+		},
+
 		// 错误类信息弹框
 		showError: function (sText) {
 			MessageBox.error(sText, {
@@ -70,7 +87,7 @@ sap.ui.define([
 		// Toast形式展示消息
 		showText: function (sText) {
 			MessageToast.show(sText, {
-				width: (sText.length + 2) + "rem"
+				width: (sText.length + 6) + "rem"
 			});
 		},
 

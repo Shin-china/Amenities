@@ -78,7 +78,7 @@ sap.ui.define([
                 oRouter.navTo("RouteMain", {}, true);
             }
 
-            context.getView().getModel().refresh();
+            context.getView().getModel("pstore").refresh();
         },
 
         convertFrontendDateToOdata: function (value) {
@@ -158,7 +158,7 @@ sap.ui.define([
         },
 
         getI18nMessage(oContext, sMsgProperty){
-            var oModel = oContext.getView().getModel("i18n").getResourceBundle();
+            var oModel = oContext.getView().getModel("i18n_pstore").getResourceBundle();
             var sMsg = oModel.getText(sMsgProperty);
             return sMsg;
         },

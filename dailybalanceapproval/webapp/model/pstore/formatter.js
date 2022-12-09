@@ -196,6 +196,43 @@ sap.ui.define([
             }
 
             return sValue;
-        }
+        },
+
+        approvalStatus: function (value) {
+			switch (value) {
+				case "I":
+					return "Information";
+				case "P":
+					return "Success";
+				case "R":
+					return "Error";
+				default:
+					return "None";
+			}
+		},
+		approvalIcon: function (value) {
+			switch (value) {
+				case "I":
+					return "sap-icon://information";
+				case "P":
+					return "sap-icon://sys-enter-2";
+				case "R":
+					return "sap-icon://error";
+				default:
+					return "";
+			}
+		},
+		approvalText: function (value) {
+			switch (value) {
+				case "I":
+					return "申請";
+				case "P":
+					return "承認済み";
+				case "R":
+					return "承認拒否";
+				default:
+					return "";
+			}
+		},
     };
 });

@@ -75,7 +75,11 @@ sap.ui.define([
             if (aCashModel.length >= iMaxLength) {
                 return;
             }
-            aCashModel.push({});
+            if (sTableId == "idCashIncomeTable") {
+                aCashModel.push({"NYKN_KINGAKU":"0"});
+            } else if (sTableId == "idCashPaymentTable") {
+                aCashModel.push({"SHKN_KINGAKU":"0"});
+            }
             this._LocalData.refresh();
         },
 
@@ -103,6 +107,7 @@ sap.ui.define([
         },
 
         onMulti: function (oEvent, sParam) {
+            this.setValueToZero(oEvent);
             var value = oEvent.getSource().getValue();
             try {
                 value = this.formatter.accMul(value, sParam);
@@ -128,9 +133,16 @@ sap.ui.define([
                 return;
             }
 
+            var oDailyBalance = this._LocalData.getProperty("/dailyBalance")[0];
             if (sAction == "Posting") {
+                // cehck button
+                if(!this.checkButtonEnable(oDailyBalance.NIKKEIHYO_STATUS_CD, "posting")) {return;}
+
                 this.onConfirmBox(sAction);
             } else {
+                // cehck button
+                if(!this.checkButtonEnable(oDailyBalance.NIKKEIHYO_STATUS_CD, "save")) {return;}
+
                 var postDoc = this.prepareBalanceSaveBody();
                 postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
                 delete postDoc.__metadata;
@@ -210,11 +222,16 @@ sap.ui.define([
 
         //申请 确认
         onApplyConfirm: function() {
+            var oDailyBalance = this._LocalData.getProperty("/dailyBalance")[0];
+            if(!this.checkButtonEnable(oDailyBalance.NIKKEIHYO_STATUS_CD, "apply")) {return;}
+
             if (!this.pDialog) {
                 this.pDialog = this.loadFragment({
                     name: "FICO.dailybalanceabr.view.fragment.ApplyConfirm"
                 });
-            } 
+            } else{
+                this.byId("idApplyConfirm").setValue("");
+            }
             this.pDialog.then(function(oDialog) {
                 var beginButton = new Button({
                     type: "Emphasized",
@@ -282,6 +299,7 @@ sap.ui.define([
                 success: function (oData) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
                     this._LocalData.setProperty("/dailyBalance/0/KIHYO_NO", oData.KIHYO_NO);
+                    this._LocalData.setProperty("/dailyBalance/0/NIKKEIHYO_STATUS_CD", oData.NIKKEIHYO_STATUS_CD);
                     this.byId("idDailyBalanceCreate").setTitle(oData.KIHYO_NO);
                     messages.showText(oData.Message);
                     // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
@@ -321,7 +339,7 @@ sap.ui.define([
             }
         },
 
-        removeLeadingMessage: function () {
+        removeLeadingMessage: function () {postBalanceApply
             var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
             if (aMessages.length > 1) {
                 if (
@@ -339,6 +357,7 @@ sap.ui.define([
                 groupId: "DailyBalanceApply" + Math.floor(i / 100),
                 changeSetId: i,
                 success: function (oData) {
+                    this._LocalData.setProperty("/dailyBalance/0/NIKKEIHYO_STATUS_CD", oData.NIKKEIHYO_STATUS_CD);
                     this.byId("idDailyBalanceCreate").setBusy(false);
                     messages.showText(oData.Message);
                     // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
@@ -455,6 +474,9 @@ sap.ui.define([
                     //借方科目 DRKAMOKU
                     sProperty = sTableName + "_DRKAMOKU_" + tableNo + "_" + line.Id;
                     convertedTable[sProperty] = line.AccountD;
+                    //借方科目描述 DRKAMOKUNM
+                    sProperty = sTableName + "_DRKAMOKUNM_" + tableNo + "_" + line.Id;
+                    convertedTable[sProperty] = line.AccountDDesc;
                     //借方税 DRTAX
                     sProperty = sTableName + "_DRTAX_" + tableNo + "_" + line.Id;
                     convertedTable[sProperty] = line.TaxD;
@@ -585,7 +607,8 @@ sap.ui.define([
         },
         
         //dailyBalanceCalc
-        onDailyBalanceCalc: function () {
+        onDailyBalanceCalc: function (oEvent) {
+            this.setValueToZero(oEvent);
             var aFields = [
                     "INSHOKU_URIAGE",
                     "BENTO_URIAGE",
@@ -635,7 +658,8 @@ sap.ui.define([
         
 
         //table6 table7 table8 table11 共用
-        onTable6Calc: function (sTablePath) {
+        onTable6Calc: function (oEvent,sTablePath) {
+            this.setValueToZero(oEvent);
             var aTable = this._LocalData.getProperty(sTablePath);
             var total1 = "0";
             var total2 = "0";
@@ -663,7 +687,8 @@ sap.ui.define([
             this._LocalData.refresh();
         },
         //table9 table10 共用
-        onTable9Calc: function (sTablePath) {
+        onTable9Calc: function (oEvent,sTablePath) {
+            this.setValueToZero(oEvent);
             var aTable = this._LocalData.getProperty(sTablePath);
             var total1 = "0";
             aTable.forEach(function (line, index) {
@@ -698,12 +723,14 @@ sap.ui.define([
             this._LocalData.refresh();
         },
 
-        onTable12AmountChange: function () {
+        onTable12AmountChange: function (oEvent) {
+            this.setValueToZero(oEvent);
             this.sumTable7ToTable12();
             this.salesDetialCalc();
         },
 
         onTableColumnSum: function (oEvent,sId) {
+            this.setValueToZero(oEvent);
             var oTable = this.byId(sId);
             var sTablePath = oTable.getBinding("rows").getPath();
             var aTable = this._LocalData.getProperty(sTablePath);
@@ -717,7 +744,8 @@ sap.ui.define([
             this.onCurrencyTable4ValueChange();
         },
 
-        onCurrencyTable4ValueChange: function () {
+        onCurrencyTable4ValueChange: function (oEvent) {
+            this.setValueToZero(oEvent);
             var total1 = this._LocalData.getProperty("/CurrencyTable1/Total");
             var total2 = this._LocalData.getProperty("/CurrencyTable2/Total");
             var total3 = this._LocalData.getProperty("/CurrencyTable3/Total");
@@ -759,7 +787,8 @@ sap.ui.define([
             this._LocalData.refresh();
         },
 
-        collectionIncome: function () {
+        collectionIncome: function (oEvent) {
+            this.setValueToZero(oEvent);
             var aTable = this._LocalData.getProperty("/CashIncome");
             var total = "0";
             aTable.forEach(function (line) {
@@ -777,7 +806,8 @@ sap.ui.define([
             this.resultCalc();
             this._LocalData.refresh();
         },
-        collectionPayment: function () {
+        collectionPayment: function (oEvent) {
+            this.setValueToZero(oEvent);
             var aTable = this._LocalData.getProperty("/CashPayment");
             var total = "0";
             aTable.forEach(function (line) {
@@ -796,7 +826,8 @@ sap.ui.define([
             this._LocalData.refresh();
         },
         // Ⅳ本日繰越高
-        resultCalc: function () {
+        resultCalc: function (oEvent) {
+            this.setValueToZero(oEvent);
             //前日繰越元金
             var value1 = this._LocalData.getProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN");
             //銀行入金総額
@@ -1037,6 +1068,9 @@ sap.ui.define([
                     //借方科目 DRKAMOKU
                     sProperty = sTableName + "_DRKAMOKU_" + tableNo + "_" + line.Id;
                     line.AccountD = oHeader[sProperty];
+                    //借方科目描述 DRKAMOKUNM
+                    sProperty = sTableName + "_DRKAMOKUNM_" + tableNo + "_" + line.Id;
+                    line.AccountDDesc = oHeader[sProperty];
                     //借方税 DRTAX
                     sProperty = sTableName + "_DRTAX_" + tableNo + "_" + line.Id;
                     line.TaxD = oHeader[sProperty];
@@ -1209,6 +1243,8 @@ sap.ui.define([
         },
 
         onChangePress: function (oEvent) {
+            var oDailyBalance = this._LocalData.getProperty("/dailyBalance")[0];
+            if(!this.checkButtonEnable(oDailyBalance.NIKKEIHYO_STATUS_CD, "change")) {return;}
 
             var oButton = oEvent.getSource();
             var isEdit = this._LocalData.getProperty("/viewEditable");
@@ -1311,7 +1347,47 @@ sap.ui.define([
 				});
 			}
 			return this._pMessagePopover;
-		}
+		},
+
+        //详细界面要限制的按钮：保存，变更，申请，凭证做成
+        checkButtonEnable: function (sDocumentStatus, sAction) {
+            if (!sDocumentStatus) {
+                sDocumentStatus = "";
+            }
+            var oButtonMap = {
+                //未保存
+                "":{"save":true, "change":false, "apply":false, "posting":false},
+                //仮保存
+                "1":{"save":true, "change":true, "apply":true, "posting":false},
+                //申請中
+                "2":{"save":false, "change":false, "apply":false, "posting":false},
+                //申請済
+                "3":{"save":false, "change":false, "apply":false, "posting":false},
+                //承認済
+                "4":{"save":false, "change":false, "apply":false, "posting":true},
+                //否認
+                "5":{"save":true, "change":true, "apply":true, "posting":false},
+                //再申請
+                "6":{"save":false, "change":false, "apply":false, "posting":false},
+                //仕訳作成済
+                "7":{"save":false, "change":false, "apply":false, "posting":false},
+                //取消済
+                "8":{"save":false, "change":false, "apply":false, "posting":false},
+            };
+            if (!oButtonMap[sDocumentStatus][sAction]) {
+                messages.showError(this._ResourceBundle.getText("msg5"));
+                return false;
+            }
+            return true;
+        },
+
+        setValueToZero: function (oEvent) {
+            if (oEvent) {
+                if (oEvent.getSource().getValue().trim() == "" ) {
+                    oEvent.getSource().setValue("0");
+                }
+            }
+        }
         
 	});
 

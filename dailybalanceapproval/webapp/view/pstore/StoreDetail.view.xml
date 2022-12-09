@@ -2,7 +2,7 @@
     xmlns:smartfield="sap.ui.comp.smartfield"
     xmlns:form="sap.ui.layout.form"
     xmlns:uxap="sap.uxap"
-    controllerName="com.shin.pstore.pstore.controller.pstore.StoreDetail"
+    controllerName="FICO.dailybalanceapproval.controller.pstore.StoreDetail"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:table="sap.ui.table"
@@ -11,21 +11,31 @@
     height="100%"
     busyIndicatorDelay="0"
 >
-    <Page id="detailPage" showHeader="true" showNavButton="true" navButtonPress="onStop">
+    <Page id="detailPage" showHeader="true" showNavButton="true" navButtonPress="onStop" busy="{local>/detailPageBusy}" busyIndicatorDelay="0">
         <content>
             <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false" selectedSection="section1" showTitleInHeaderContent="false" showFooter="true">
-                <!-- <uxap:headerTitle>
-                <uxap:ObjectPageDynamicHeaderTitle id="headerTitle">
-                    <uxap:expandedContent>
-                        <Text id="expandTitle" text="{i18n_pstore>detail_title}" /> 
-                    </uxap:expandedContent>
+                <uxap:headerTitle>
+                    <uxap:ObjectPageDynamicHeaderTitle>
+                        <uxap:expandedHeading>
+                            <VBox>
+                                <Title text="{local>/TypeName}" wrapping="true"/>
+                                <Title text="{pstore>KihyoNo}" wrapping="true"/>
+                            </VBox>
+                        </uxap:expandedHeading>
+                        <uxap:snappedHeading>
+                            <VBox >
+                                <Title text="{local>/TypeName}" wrapping="true"/>
+                                <Title text="{pstore>KihyoNo}" wrapping="true"/>
+                            </VBox>
+                        </uxap:snappedHeading>
+                        <uxap:navigationActions>
+                            <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                            <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+                            <OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose"  tooltip="Close middle column" visible="true"/>
+                        </uxap:navigationActions>
 
-                    <uxap:snappedContent>
-                        <Text id="snapTitle" text="{i18n_pstore>detail_title}" /> 
-                    </uxap:snappedContent>
-                </uxap:ObjectPageDynamicHeaderTitle>
-             </uxap:headerTitle>  -->
-
+                    </uxap:ObjectPageDynamicHeaderTitle>
+                </uxap:headerTitle>
                 <uxap:sections>
                     <uxap:ObjectPageSection id="section1" showTitle="true" title="{i18n_pstore>section1_title}" selectedSubSection="subsection1">
                         <uxap:ObjectPageSubSection id="subsection1">
@@ -36,7 +46,7 @@
                                     </layoutData>
                                 </Label>
 
-                                <Text id="txtKaishaCd" text="{KaishaCd}">
+                                <Text id="txtKaishaCd" text="{pstore>KaishaCd}">
                                     <layoutData>
                                         <l:GridData id="gd2" span="XL4 L4 M12 S12" />
                                     </layoutData>
@@ -48,10 +58,10 @@
                                     </layoutData>
                                 </Label>
 
-                                <Input id="txtKihyoshaName" editable="{viewState>/editable}" value="{KihyoshaName}" required="true">
+                                <Input id="txtKihyoshaName" editable="{viewState>/editable}" value="{pstore>KihyoshaName}" required="true">
                                     <layoutData>
                                         <l:GridData id="gd4" span="XL4 L4 M12 S12" />
-                                    </layoutData>
+                                    </layoutData> 
                                 </Input>
 
                                 <!-- <smartfield:SmartField id="txtKihyoshaName" editable="{viewState>/editable}" value="{KihyoshaName}" mandatory="true">
@@ -66,7 +76,7 @@
                                     </layoutData>
                                 </Label>
 
-                                <Text id="txtTenpoCd" text="{TenpoCd}">
+                                <Text id="txtTenpoCd" text="{pstore>TenpoCd}">
                                     <layoutData>
                                         <l:GridData id="gd6" span="XL4 L4 M12 S12" />
                                     </layoutData>
@@ -81,7 +91,7 @@
                                 <Text
                                     id="txtEigyoBi"
                                     text="{
-                                        path: 'EigyoBi',
+                                        path: 'pstore>EigyoBi',
                                         type: 'sap.ui.model.type.Date',
                                         formatOptions: {
                                         pattern: 'yyyy/MM/dd'
@@ -114,7 +124,7 @@
 
                                     <Input
                                         id="txtZnjtsKrkshGankin"
-                                        value="{parts:[{path:'ZnjtsKrkshGankin'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>ZnjtsKrkshGankin'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -135,7 +145,7 @@
 
                                     <Input
                                         id="txtGnkNyukinSogaku"
-                                        value="{parts:[{path:'GnkNyukinSogaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>GnkNyukinSogaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -155,7 +165,7 @@
 
                                     <Input
                                         id="txtRyogaekinUkeire"
-                                        value="{parts:[{path:'RyogaekinUkeire'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>RyogaekinUkeire'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -178,7 +188,7 @@
                                         <l:GridData id="gd18" span="XL4 L4 M12 S12" />
                                     </layoutData>
                                 </Input> -->
-                                    <smartfield:SmartField id="txtKamokuSetei1" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei1" value="{pstore>KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd18" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -194,7 +204,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtPMeter" value="{parts:[{path:'PMeter'}, {path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                    <Input id="txtPMeter" value="{parts:[{path:'pstore>PMeter'}, {path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}" maxLength="11" textAlign="Right" editable="{viewState>/editable}">
                                         <layoutData>
                                             <l:GridData id="gd20" span="XL4 L4 M12 S12" />
@@ -207,7 +217,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtSMeter" value="{parts:[{path:'SMeter'}, {path:'Waers'}], type: 'sap.ui.model.type.Currency',
+                                    <Input id="txtSMeter" value="{parts:[{path:'pstore>SMeter'}, {path:'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}" maxLength="11" textAlign="Right" editable="{viewState>/editable}">
                                         <layoutData>
                                             <l:GridData id="gd22" span="XL4 L4 M12 S12" />
@@ -222,7 +232,7 @@
 
                                     <Input
                                         id="txtPGenkinUriage"
-                                        value="{parts:[{path:'PGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>PGenkinUriage'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         textAlign="Right"
                                         maxLength="14"
@@ -242,7 +252,7 @@
 
                                     <Input
                                         id="txtSGenkinUriage"
-                                        value="{parts:[{path:'SGenkinUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>SGenkinUriage'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -262,7 +272,7 @@
 
                                     <Input
                                         id="txtPCardUriage"
-                                        value="{parts:[{path:'PCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>PCardUriage'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -282,7 +292,7 @@
 
                                     <Input
                                         id="txtSCardUriage"
-                                        value="{parts:[{path:'SCardUriage'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>SCardUriage'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -306,7 +316,7 @@
                                     </layoutData>
                                 </Input> -->
 
-                                    <smartfield:SmartField id="txtKamokuSetei2" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei2" value="{pstore>KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd32" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -324,7 +334,7 @@
                                     </layoutData>
                                 </Input> -->
 
-                                    <smartfield:SmartField id="txtKamokuSetei3" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei3" value="{pstore>KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd34" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -402,7 +412,7 @@
 
                                     <Input
                                         id="txtHanbaiAmt"
-                                        value="{parts:[{path:'HanbaiAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>HanbaiAmt'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -426,7 +436,7 @@
                                     </layoutData>
                                 </Input> -->
 
-                                    <smartfield:SmartField id="txtKamokuSetei4" value="{KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei4" value="{pstore>KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd46" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -440,7 +450,7 @@
 
                                     <Input
                                         id="txtSekisanAmt"
-                                        value="{parts:[{path:'SekisanAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>SekisanAmt'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -464,7 +474,7 @@
                                     </layoutData>
                                 </Input> -->
 
-                                    <smartfield:SmartField id="txtKamokuSetei5" value="{KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei5" value="{pstore>KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd50" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -512,11 +522,11 @@
                             </uxap:ObjectPageSubSection>
 
                             <uxap:ObjectPageSubSection id="subsection6">
-                                <table:Table id="tabGoods" editable="true" rows="{GoodsSet}" visibleRowCount="8" selectionMode="None">
+                                <table:Table id="tabGoods" editable="true" rows="{pstore>GoodsSet}" visibleRowCount="8" selectionMode="None">
                                     <table:extension>
                                         <HBox id="hbox2" alignContent="Center" alignItems="Center">
                                             <Label id="lblHacyuNo" labelFor="txtHacyuNo" text="{i18n_pstore>sec6_f1}" />
-                                            <Input id="txtHacyuNo" value="{HacyuNo}" maxLength="10" editable="{viewState>/editable}" />
+                                            <Input id="txtHacyuNo" value="{pstore>/HacyuNo}" maxLength="10" editable="{viewState>/editable}" />
                                         </HBox>
                                     </table:extension>
 
@@ -524,14 +534,14 @@
                                         <table:Column id="tab1Col1">
                                             <Text id="txtTab1Col1" />
                                             <table:template>
-                                                <Text id="txtHyojibasho" text="{Hyojibasho}" />
+                                                <Text id="txtHyojibasho" text="{pstore>Hyojibasho}" />
                                             </table:template>
                                         </table:Column>
 
                                         <table:Column id="tab1Col2">
                                             <Text id="txtTab1Col2" />
                                             <table:template>
-                                                <Text id="txtDesc" text="{Desc}" />
+                                                <Text id="txtDesc" text="{pstore>Desc}" />
                                             </table:template>
                                         </table:Column>
 
@@ -539,21 +549,21 @@
                                             <Text id="txtTab1Col3" text="{i18n_pstore>sec6_f2}" />
                                             <table:template>
                                                 <!-- <Input id="txtSyohinCd" value="{SyohinCd}" maxLength="5" visible="{Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" /> -->
-                                                <smartfield:SmartField id="txtSyohinCd" value="{SyohinCd}" maxLength="5" visible="{Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" />
+                                                <smartfield:SmartField id="txtSyohinCd" value="{pstore>SyohinCd}" maxLength="5" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" />
                                             </table:template>
                                         </table:Column>
 
                                         <table:Column id="tab1Col4">
                                             <Text id="txtTab1Col4" text="{i18n_pstore>sec6_f3}" />
                                             <table:template>
-                                                <Input id="txtSyohinZenjtsZan" maxLength="8" textAlign="Right" value="{path:'SyohinZenjtsZan',type: 'sap.ui.model.type.Float'}" visible="{Visible}" editable="{viewState>/editable}" change="onLineAmountChange" />
+                                                <Input id="txtSyohinZenjtsZan" maxLength="8" textAlign="Right" value="{path:'pstore>SyohinZenjtsZan',type: 'sap.ui.model.type.Float'}" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onLineAmountChange" />
                                             </table:template>
                                         </table:Column>
 
                                         <table:Column id="tab1Col5">
                                             <Text id="txtTab1Col5" text="{i18n_pstore>sec6_f4}" />
                                             <table:template>
-                                                <Input id="txtSyohinShirSu" maxLength="8" textAlign="Right" value="{path:'SyohinShirSu', type: 'sap.ui.model.type.Float'}" visible="{Visible}" editable="{viewState>/editable}" change="onLineAmountChange" />
+                                                <Input id="txtSyohinShirSu" maxLength="8" textAlign="Right" value="{path:'pstore>SyohinShirSu', type: 'sap.ui.model.type.Float'}" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onLineAmountChange" />
                                             </table:template>
                                         </table:Column>
 
@@ -562,7 +572,7 @@
                                             <table:template>
                                                 <Input
                                                     id="txtSyohinSyukoSu" 
-                                                    value="{parts:[{path: 'SyohinZenjtsZan'},{path: 'SyohinShirSu'},{path: 'SyohinHonjtsZan'}], 
+                                                    value="{parts:[{path: 'pstore>SyohinZenjtsZan'},{path: 'pstore>SyohinShirSu'},{path: 'pstore>SyohinHonjtsZan'}], 
                                             formatter:'.formatter.formatGoodsOutbound'}"
                                                     visible="{Visible}"
                                                     maxLength="8"
@@ -576,7 +586,7 @@
                                         <table:Column id="tab1Col7">
                                             <Text id="txtTab1Col7" text="{i18n_pstore>sec6_f6}" />
                                             <table:template>
-                                                <Input id="txtSyohinHonjtsZan" maxLength="8" textAlign="Right" value="{path:'SyohinHonjtsZan', type: 'sap.ui.model.type.Float'}" visible="{Visible}" editable="{viewState>/editable}" change="onSetDefaultValue"/>
+                                                <Input id="txtSyohinHonjtsZan" maxLength="8" textAlign="Right" value="{path:'pstore>SyohinHonjtsZan', type: 'sap.ui.model.type.Float'}" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onSetDefaultValue"/>
                                             </table:template>
                                         </table:Column>
 
@@ -585,11 +595,11 @@
                                             <table:template>
                                                 <Input
                                                     id="txtSyohinShirAmt"
-                                                    value="{parts:[{path: 'Waers'},{path: 'SyohinShirSu'},{path:'SyohinTanka'}], 
+                                                    value="{parts:[{path: 'pstore>Waers'},{path: 'pstore>SyohinShirSu'},{path:'pstore>SyohinTanka'}], 
                                             formatter:'.formatter.formatGoodsTodayRemainAmount'}"
                                                     maxLength="14"
                                                     textAlign="Right"
-                                                    visible="{Visible}"
+                                                    visible="{pstore>Visible}"
                                                     editable="false"
                                                 />
                                             </table:template>
@@ -600,11 +610,11 @@
                                             <table:template>
                                                 <Input
                                                     id="txtSyohinTanka"
-                                                    value="{parts:[{path:'SyohinTanka'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                                    value="{parts:[{path:'pstore>SyohinTanka'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                                     maxLength="14"
                                                     textAlign="Right"
-                                                    visible="{Visible}"
+                                                    visible="{pstore>Visible}"
                                                     editable="false"
                                                 />
                                             </table:template>
@@ -694,7 +704,7 @@
 
                                     <Input
                                         id="txtZnjtsHnshSfknRk"
-                                        value="{parts:[{path:'ZnjtsHnshSfknRk'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>ZnjtsHnshSfknRk'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -714,7 +724,7 @@
 
                                     <Input
                                         id="txtRyogaekinModoshi"
-                                        value="{parts:[{path:'RyogaekinModoshi'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>RyogaekinModoshi'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -747,7 +757,7 @@
 
                                     <Input
                                         id="txtKiteiGankinAmt"
-                                        value="{parts:[{path:'KiteiGankinAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>KiteiGankinAmt'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -786,7 +796,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtGnknKfskUchwk" value="{parts:[{path:'GnknKfskUchwk'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                    <Input id="txtGnknKfskUchwk" value="{parts:[{path:'pstore>GnknKfskUchwk'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}" maxLength="14" textAlign="Right" editable="{viewState>/editable}" change="onSetDefaultValue">
                                         <layoutData>
                                             <l:GridData id="gd76" span="XL4 L4 M12 S12" />
@@ -799,7 +809,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtGnknKfskShosai" value="{GnknKfskShosai}" maxLength="50" editable="{viewState>/editable}">
+                                    <Input id="txtGnknKfskShosai" value="{pstore>GnknKfskShosai}" maxLength="50" editable="{viewState>/editable}">
                                         <layoutData>
                                             <l:GridData id="gd86" span="XL4 L4 M12 S12" />
                                         </layoutData>
@@ -811,7 +821,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <TextArea id="txtBiko1" value="{Biko1}" maxLength="300" rows="5" editable="{viewState>/editable}">
+                                    <TextArea id="txtBiko1" value="{pstore>Biko1}" maxLength="300" rows="5" editable="{viewState>/editable}">
                                         <layoutData>
                                             <l:GridData id="gd88" span="XL9 L9 M12 S12" />
                                         </layoutData>
@@ -1033,7 +1043,7 @@
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection id="subsection13">
                                 <HBox>
-                                    <table:Table id="tabEffectiveCash" selectionMode="None" rows="{EffectiveCashSet}" visibleRowCount="10" rowsUpdated="onEffectiveCashManChange">
+                                    <table:Table id="tabEffectiveCash" selectionMode="None" rows="{pstore>EffectiveCashSet}" visibleRowCount="10" rowsUpdated="onEffectiveCashManChange">
                                         <table:extension>
                                             <Text id="txtTab5Header" text="{i18n_pstore>sub13_title}" />
                                         </table:extension>
@@ -1043,7 +1053,7 @@
                                                 <Label id="lblTab5Desc" text="{i18n_pstore>sub13_col1}" />
 
                                                 <table:template>
-                                                    <Text id="txtTab5Desc" text="{Desc}" />
+                                                    <Text id="txtTab5Desc" text="{pstore>Desc}" />
                                                 </table:template>
                                             </table:Column>
 
@@ -1051,7 +1061,7 @@
                                                 <Label id="lblTab5Man" text="{i18n_pstore>sub13_col2}" />
 
                                                 <table:template>
-                                                    <Input id="txtTab5Man" maxLength="5" textAlign="Right" editable="{viewState>/editable}" value="{path:'Man', type: 'sap.ui.model.type.Float'}"  change="onSetDefaultValue"/>
+                                                    <Input id="txtTab5Man" maxLength="5" textAlign="Right" editable="{viewState>/editable}" value="{path:'pstore>Man', type: 'sap.ui.model.type.Float'}"  change="onSetDefaultValue"/>
                                                 </table:template>
                                             </table:Column>
 
@@ -1063,7 +1073,7 @@
                                                         id="txtTab5Amount"
                                                         editable="false"
                                                         textAlign="Right"
-                                                        value="{parts:[{path:'Desc'},{path:'Man'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                                        value="{parts:[{path:'pstore>Desc'},{path:'pstore>Man'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                                 formatOptions: {showMeasure: false}, formatter:'.formatter.formatEffectiveCash'}"
                                                     />
                                                 </table:template>
@@ -1088,7 +1098,7 @@
                                         </table:footer>
                                     </table:Table>
 
-                                    <table:Table id="tabLossCash" selectionMode="None" rows="{LossCashSet}" visibleRowCount="5" editable="{viewState>/editable}" rowsUpdated="onLossCashManChange">
+                                    <table:Table id="tabLossCash" selectionMode="None" rows="{pstore>LossCashSet}" visibleRowCount="5" editable="{viewState>/editable}" rowsUpdated="onLossCashManChange">
                                         <table:extension>
                                             <Text id="txtTab6Header" text="{i18n_pstore>sub14_title}" />
                                         </table:extension>
@@ -1098,7 +1108,7 @@
                                                 <Label id="lblTab6Desc" text="{i18n_pstore>sub14_col1}" />
 
                                                 <table:template>
-                                                    <Text id="txtTab6Desc" text="{Desc}" />
+                                                    <Text id="txtTab6Desc" text="{pstore>Desc}" />
                                                 </table:template>
                                             </table:Column>
 
@@ -1106,7 +1116,7 @@
                                                 <Label id="lblTab6Man" text="{i18n_pstore>sub14_col2}" />
 
                                                 <table:template>
-                                                    <Input id="txtTab6Man" maxLength="5" textAlign="Right" editable="{viewState>/editable}" value="{path:'Man', type: 'sap.ui.model.type.Float'}" change="onSetDefaultValue"/>
+                                                    <Input id="txtTab6Man" maxLength="5" textAlign="Right" editable="{viewState>/editable}" value="{path:'pstore>Man', type: 'sap.ui.model.type.Float'}" change="onSetDefaultValue"/>
                                                 </table:template>
                                             </table:Column>
 
@@ -1117,7 +1127,7 @@
                                                     <Input
                                                         id="txtTab6Amount"
                                                         editable="false"
-                                                        value="{parts:[{path:'Desc'},{path:'Man'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                                        value="{parts:[{path:'pstore>Desc'},{path:'pstore>Man'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                                 formatOptions: {showMeasure: false}, formatter:'.formatter.formatEffectiveCash'}"
                                                         textAlign="Right"
                                                         change="onSetDefaultValue"
@@ -1142,7 +1152,7 @@
                                         </table:footer>
                                     </table:Table>
 
-                                    <table:Table id="tabPlanCash" selectionMode="None" rows="{PlanCashSet}" rowsUpdated="onPlanCashAmountChange" visibleRowCount="6" editable="{viewState>/editable}">
+                                    <table:Table id="tabPlanCash" selectionMode="None" rows="{pstore>PlanCashSet}" rowsUpdated="onPlanCashAmountChange" visibleRowCount="6" editable="{viewState>/editable}">
                                         <table:extension>
                                             <Text id="txtTab7Header" text="{i18n_pstore>sub15_title}" />
                                         </table:extension>
@@ -1152,7 +1162,7 @@
                                                 <Label id="lblTab7Seq" labelFor="txtTab7Seq" text="{i18n_pstore>sub15_col1}" />
 
                                                 <table:template>
-                                                    <Text id="txtTab7Seq" text="{Seq}" />
+                                                    <Text id="txtTab7Seq" text="{pstore>Seq}" />
                                                 </table:template>
                                             </table:Column>
 
@@ -1160,7 +1170,7 @@
                                                 <Label id="lblTab7Desc" labelFor="txtTab7Desc" text="{i18n_pstore>sub15_col2}" />
 
                                                 <table:template>
-                                                    <Text id="txtTab7Desc" text="{Desc}" />
+                                                    <Text id="txtTab7Desc" text="{pstore>Desc}" />
                                                 </table:template>
                                             </table:Column>
 
@@ -1172,7 +1182,7 @@
                                                         id="txtTab7Amount"
                                                         visible="{Visible}"
                                                         editable="{viewState>/editable}"
-                                                        value="{parts:[{path:'Amount'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                                        value="{parts:[{path:'pstore>Amount'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                                         maxLength="14"
                                                         textAlign="Right"
@@ -1371,10 +1381,10 @@
 
                     <ToolbarSpacer id="pageToolbarSpacer" />
                     <Button id="btnSave" text="{i18n_pstore>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
-                    <Button id="btnChange" text="{i18n_pstore>footer_f2}" enabled="{= ${viewState>/editable} === false &amp;&amp; ${Editable} === true}" press="onChange" />
-                    <Button id="btnRequest" text="{i18n_pstore>footer_f3}" enabled="{= ${Requestable} === true}" press="onRequest" />
-                    <Button id="btnGenerate" text="{i18n_pstore>footer_f4}" enabled="{= ${Accountable} === true}" type="Transparent" press="onGenerate" />
-                    <Button id="btnStop" text="{i18n_pstore>footer_f5}" type="Transparent" press="onStop" />
+                    <Button id="btnChange" text="{i18n_pstore>footer_f2}" enabled="{= ${viewState>/editable} === false &amp;&amp; ${pstore>Editable} === true}" press="onChange" />
+                    <Button type="Accept" text="{i18n_abr>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
+                    <Button type="Reject" text="{i18n_abr>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
+                    <Button id="idConfirm" type="Ghost" text="{i18n_abr>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>
                 </content>
             </OverflowToolbar>
         </footer>

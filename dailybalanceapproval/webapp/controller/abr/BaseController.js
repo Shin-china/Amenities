@@ -108,7 +108,7 @@ sap.ui.define([
             if (!this._pValueHelpDialog) {
                 this._pValueHelpDialog = this.loadFragment({
                     id: oView.getId(),
-                    name: "FICO.dailybalanceabr.view.fragment.ValueHelpDialog",
+                    name: "FICO.dailybalanceapproval.view.fragment.ValueHelpDialog",
                     controller: this
                 }).then(function (oValueHelpDialog) {
                     //将dialgo添加到view的addDependent聚合中
