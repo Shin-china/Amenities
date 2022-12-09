@@ -1,0 +1,29 @@
+<c:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:c="sap.ui.core">
+    <Dialog id="cancelDialog" contentWidth="30%" title="{i18n>tab2_dialog_title}" afterClose="onDestroy">
+        <beginButton>
+            <Button id="btnCancelDoc" text="{i18n>dialog2_btn1}" type="Attention" press="onCancelDoc" />
+        </beginButton>
+
+        <content>
+            <form:SimpleForm id="cancelForm" columnsL="1" columnsXL="1" columnsM="1" editable="true">
+
+                <form:content> 
+                        <Label id="lbl01" text="{i18n>dialog2_f1}" labelFor="inputTab1Col02" />
+                        <Select id="selectStgrd" required="true" showSecondaryValues="true" items="{ path: '/CancelReasonSet' }">
+                            <items>
+                                <c:ListItem id="item" key="{Stgrd}" text="{Stgrd}"  additionalText="{Txt40}" /> 
+                            </items>
+                        </Select>
+ 
+                        <Label id="lbl02" text="{i18n>dialog2_f2}" labelFor="inputTab1Col05" />
+                        <DatePicker id="datePostingDate" displayFormat="yyyy-MM-dd" />      
+                </form:content>
+
+            </form:SimpleForm>
+        </content>
+
+        <endButton>
+            <Button id="btnClose" text="{i18n>cancel}" type="Transparent" press="onCloseCancelDialog" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

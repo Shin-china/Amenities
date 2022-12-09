@@ -1,0 +1,17 @@
+<mvc:View controllerName="com.shin.pstore.pstore.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+
+    <Page showHeader="false" showFooter="false" id="mainPage" title="{i18n>appTitle}">
+		<content>
+			<IconTabBar id="idIconTabBar" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding" applyContentPadding="false" stretchContentHeight="true">
+				<items>
+					<IconTabFilter id="iconTabFilter1" text="{i18n>tab1}">
+						<mvc:XMLView id="dailyTabulationView" viewName="com.shin.pstore.pstore.view.DailyTabulation" height="100%"/>
+					</IconTabFilter>
+					<IconTabFilter id="iconTabFilter2" text="{i18n>tab2}" visible="{auth>/List}">
+						<mvc:XMLView id="resultView" viewName="com.shin.pstore.pstore.view.Result" height="100%"/>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+	</Page>
+</mvc:View>

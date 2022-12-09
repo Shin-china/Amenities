@@ -1,0 +1,195 @@
+<mvc:View xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" controllerName="com.shin.pstore.pstore.controller.DailyTabulation"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:core="sap.ui.core" displayBlock="true" busyIndicatorDelay="0">
+    <f:DynamicPage id="dynamicPage1" showFooter="true" headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" showShare="true" persistencyKey="DaiylTabulationSV" showExecuteOnSelection="true" entitySet="StoreSet" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="pageHeader" pinnable="true">
+                <f:content>
+                    <smartfilterbar:SmartFilterBar id="storeFilter" smartVariant="__SVM01" persistencyKey="storeFilterPersistent" entitySet="StoreSet" useToolbar="false">
+                        <smartfilterbar:controlConfiguration>
+                            <smartfilterbar:ControlConfiguration key="KaishaCd" visibleInAdvancedArea="true" mandatory="mandatory" index="0"/>
+
+                            <smartfilterbar:ControlConfiguration key="EigyoBi" visibleInAdvancedArea="true" mandatory="mandatory" index="1">
+                                <smartfilterbar:defaultFilterValues>
+                                    <smartfilterbar:SelectOption id="sSel" sign="I" operator="BT" low="{filter>/StartDate}" high="{filter>/EndDate}" />
+                                </smartfilterbar:defaultFilterValues>
+                            </smartfilterbar:ControlConfiguration>
+                            <smartfilterbar:ControlConfiguration key="NikkeihyoStatusCd" visibleInAdvancedArea="true" index="2"/>
+                            <smartfilterbar:ControlConfiguration key="TenpoCd" visibleInAdvancedArea="true" mandatory="mandatory" index="3" />
+                        </smartfilterbar:controlConfiguration>
+                    </smartfilterbar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smarttable:SmartTable id="table1" smartVariant="__SVM01" entitySet="StoreSet" placeToolbarInTable="true" persistencyKey="storePersistent" 
+            enableAutoBinding="false" showRowCount="true" smartFilterId="storeFilter" tableType="Table">
+                <smarttable:customToolbar>
+                    <OverflowToolbar id="overFlowToolbar">
+                        <ToolbarSpacer id="toolbarSpacer" />
+                        <Button id="btnShowAddDialog" text="{i18n>tab1_btn01}" enabled="{auth>/Add}" type="Transparent" press="onShowAddDialog" />
+                        <Button id="btnShowCopyDialog" text="{i18n>tab1_btn02}" enabled="{auth>/Copy}" type="Transparent" press="onShowCopyDialog" />
+                        <Button id="btnShowDeleteDialog" text="{i18n>tab1_btn03}" enabled="{auth>/Delete}" type="Transparent" press="onShowDeleteDialog" />
+                        <Button id="btnShowGenerateDialog" text="{i18n>tab1_btn04}" enabled="{auth>/Account}" type="Transparent" press="onShowGenerateDialog" />
+                        <Button id="btnExportPdf" text="{i18n>tab1_btn05}" enabled="{auth>/Export}" type="Transparent" press="onExportPdf" />
+                    </OverflowToolbar>
+                </smarttable:customToolbar>
+
+                <table:Table id="tableInside" rowActionCount="1" visibleRowCountMode="Auto">
+                    <table:rowActionTemplate>
+                        <table:RowAction id="tab1RowAction">
+                            <table:items>
+                                <table:RowActionItem id="tab1RowActionItem" type="Navigation" icon="sap-icon://navigation-right-arrow" press="onNavigate" />
+                            </table:items>
+                        </table:RowAction>
+                    </table:rowActionTemplate>
+                    <table:columns>
+                        <table:Column width="6rem" label="{i18n>tab1_col01}" sortProperty="KihyoNo" filterProperty="KihyoNo" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KihyoNo", "leadingProperty":"KihyoNo", "sortProperty":"KihyoNo", "filterProperty": "KihyoNo"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{KihyoNo}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col02}" sortProperty="KaishaCd" filterProperty="KaishaCd" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KaishaCd", "leadingProperty":"KaishaCd", "sortProperty":"KaishaCd", "filterProperty": "KaishaCd"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{KaishaCd}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>tab1_col03}" sortProperty="KaishaNm" filterProperty="KaishaNm" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KaishaNm", "leadingProperty":"KaishaNm", "sortProperty":"KaishaNm", "filterProperty": "KaishaNm"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{KaishaNm}" wrapping="false" tooltip="{KaishaNm}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col04}" sortProperty="EigyoBi" filterProperty="EigyoBi" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"EigyoBi", "leadingProperty":"EigyoBi", "sortProperty":"EigyoBi", "filterProperty": "EigyoBi"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'EigyoBi', formatter: '.formatter.date'}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col05}" sortProperty="TenpoCd" filterProperty="TenpoCd" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TenpoCd", "leadingProperty":"TenpoCd", "sortProperty":"TenpoCd", "filterProperty": "TenpoCd"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{TenpoCd}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>tab1_col06}" sortProperty="TenpoName" filterProperty="TenpoName" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TenpoName", "leadingProperty":"TenpoName", "sortProperty":"TenpoName", "filterProperty": "TenpoName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{TenpoName}" wrapping="false" tooltip="{TenpoName}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col07}" sortProperty="NikkeihyoStatus" filterProperty="NikkeihyoStatus" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NikkeihyoStatus", "leadingProperty":"NikkeihyoStatus", "sortProperty":"NikkeihyoStatus", "filterProperty": "NikkeihyoStatus"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{NikkeihyoStatus}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col08}" sortProperty="TenpoKakunin" filterProperty="TenpoKakunin" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TenpoKakunin", "leadingProperty":"TenpoKakunin", "sortProperty":"TenpoKakunin", "filterProperty": "TenpoKakunin"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{TenpoKakunin}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col09}" sortProperty="ShinseiDt" filterProperty="ShinseiDt" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ShinseiDt", "leadingProperty":"ShinseiDt", "sortProperty":"ShinseiDt", "filterProperty": "ShinseiDt"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'ShinseiDt', formatter: '.formatter.date'}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col10}" sortProperty="RegUser" filterProperty="RegUser" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"RegUser", "leadingProperty":"RegUser", "sortProperty":"RegUser", "filterProperty": "RegUser"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{RegUser}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>tab1_col11}" sortProperty="RegUserName" filterProperty="RegUserName" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"RegUserName", "leadingProperty":"RegUserName", "sortProperty":"RegUserName", "filterProperty": "RegUserName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{RegUserName}" wrapping="false" tooltip="{RegUserName}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>tab1_col12}" sortProperty="KihyoshaName" filterProperty="KihyoshaName" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KihyoshaName", "leadingProperty":"KihyoshaName", "sortProperty":"KihyoshaName", "filterProperty": "KihyoshaName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{KihyoshaName}" wrapping="false" tooltip="{KihyoshaName}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col13}" sortProperty="LastShinseiDt" filterProperty="LastShinseiDt" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"LastShinseiDt", "leadingProperty":"LastShinseiDt", "sortProperty":"LastShinseiDt", "filterProperty": "LastShinseiDt"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{LastShinseiDt}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col14}" sortProperty="UpdUser" filterProperty="UpdUser" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"UpdUser", "leadingProperty":"UpdUser", "sortProperty":"UpdUser", "filterProperty": "UpdUser"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{UpdUser}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>tab1_col15}" sortProperty="UpdUserName" filterProperty="UpdUserName" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"UpdUserName", "leadingProperty":"UpdUserName", "sortProperty":"UpdUserName", "filterProperty": "UpdUserName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{UpdUserName}" wrapping="false" tooltip="{UpdUserName}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab1_col16}" sortProperty="ShoninDtButyou" filterProperty="ShoninDtButyou" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ShoninDtButyou", "leadingProperty":"ShoninDtButyou", "sortProperty":"ShoninDtButyou", "filterProperty": "ShoninDtButyou"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'ShoninDtButyou', formatter: '.formatter.date'}"/>
+                            </table:template>
+                        </table:Column>
+
+
+                    </table:columns>
+                </table:Table>
+            </smarttable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

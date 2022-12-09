@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog id="applyConfirmDialog" title="{i18n>DialogTitle4}" >
+        <content>
+            <HBox alignContent="Center" justifyContent="Center">
+                <TextArea id="idApplyConfirm" maxLength="300" height="8rem" width="16rem" class="sapUiSmallMargin"/>
+            </HBox>
+        </content>
+        <beginButton>
+            <Button id="btnApplyConfirm" text="{i18n>yes_1}" type="Emphasized" press="onApplyConfirm" />
+        </beginButton>
+        <endButton>
+            <Button id="btnCloseApplyConfirm" text="{i18n>cancel}" type="Transparent" press="onCloseApplyConfirmDialog" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
