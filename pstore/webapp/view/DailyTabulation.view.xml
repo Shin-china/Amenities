@@ -158,7 +158,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"LastShinseiDt", "leadingProperty":"LastShinseiDt", "sortProperty":"LastShinseiDt", "filterProperty": "LastShinseiDt"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{LastShinseiDt}"/>
+                                <Text text="{path:'LastShinseiDt', formatter: '.formatter.date'}"/>
+                                <!-- <Text text="{LastShinseiDt}"/> -->
                             </table:template>
                         </table:Column>
                         <table:Column width="6rem" label="{i18n>tab1_col14}" sortProperty="UpdUser" filterProperty="UpdUser" visible="true">
