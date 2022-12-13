@@ -64,12 +64,6 @@
                                     </layoutData> 
                                 </Input>
 
-                                <!-- <smartfield:SmartField id="txtKihyoshaName" editable="{viewState>/editable}" value="{KihyoshaName}" mandatory="true">
-                                <smartfield:layoutData>
-                                    <l:GridData id="gd4" span="XL4 L4 M12 S12" />
-                                </smartfield:layoutData>
-                            </smartfield:SmartField> -->
-
                                 <Label id="lblTenpoCd" labelFor="txtTenpoCd" text="{i18n_pstore>store}">
                                     <layoutData>
                                         <l:GridData id="gd5" span="XL2 L2 M12 S12" linebreakL="true" linebreakXL="true" />
@@ -183,16 +177,16 @@
                                         </layoutData>
                                     </Label>
 
-                                    <!-- <Input id="txtKamokuSetei1" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
-                                    <layoutData>
-                                        <l:GridData id="gd18" span="XL4 L4 M12 S12" />
-                                    </layoutData>
-                                </Input> -->
-                                    <smartfield:SmartField id="txtKamokuSetei1" value="{pstore>KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
+                                    <Input id="txtKamokuSetei1" value="{pstore>KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
+                                        <layoutData>
+                                            <l:GridData id="gd18" span="XL4 L4 M12 S12" />
+                                        </layoutData>
+                                    </Input>
+                                    <!-- <smartfield:SmartField id="txtKamokuSetei1" value="{pstore>KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd18" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
-                                    </smartfield:SmartField>
+                                    </smartfield:SmartField> -->
                                 </form:SimpleForm>
                             </uxap:ObjectPageSubSection>
 
@@ -310,17 +304,17 @@
                                         </layoutData>
                                     </Label>
 
-                                    <!-- <Input id="txtKamokuSetei2" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
-                                    <layoutData>
-                                        <l:GridData id="gd32" span="XL4 L4 M12 S12" />
-                                    </layoutData>
-                                </Input> -->
+                                    <Input id="txtKamokuSetei2" value="{pstore>KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
+                                        <layoutData>
+                                            <l:GridData id="gd32" span="XL4 L4 M12 S12" />
+                                        </layoutData>
+                                    </Input>
 
-                                    <smartfield:SmartField id="txtKamokuSetei2" value="{pstore>KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
+                                    <!-- <smartfield:SmartField id="txtKamokuSetei2" value="{pstore>KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd32" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
-                                    </smartfield:SmartField>
+                                    </smartfield:SmartField> -->
 
                                     <Label id="lblKamokuSetei3" labelFor="txtKamokuSetei3" text="{i18n_pstore>sec3_f8}">
                                         <layoutData>
@@ -328,17 +322,17 @@
                                         </layoutData>
                                     </Label>
 
-                                    <!-- <Input id="txtKamokuSetei3" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
-                                    <layoutData>
-                                        <l:GridData id="gd34" span="XL4 L4 M12 S12" />
-                                    </layoutData>
-                                </Input> -->
+                                    <Input id="txtKamokuSetei3" value="{pstore>KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
+                                        <layoutData>
+                                            <l:GridData id="gd34" span="XL4 L4 M12 S12" />
+                                        </layoutData>
+                                    </Input>
 
-                                    <smartfield:SmartField id="txtKamokuSetei3" value="{pstore>KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
+                                    <!-- <smartfield:SmartField id="txtKamokuSetei3" value="{pstore>KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd34" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
-                                    </smartfield:SmartField>
+                                    </smartfield:SmartField> -->
 
                                     <Label id="lblPUriage" labelFor="txtPUriage" text="{i18n_pstore>sec3_f9}">
                                         <layoutData>
@@ -430,17 +424,17 @@
                                         </layoutData>
                                     </Label>
 
-                                    <!-- <Input id="txtKamokuSetei4" value="{KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
-                                    <layoutData>
-                                        <l:GridData id="gd46" span="XL4 L4 M12 S12" />
-                                    </layoutData>
-                                </Input> -->
+                                    <Input id="txtKamokuSetei4" value="{pstore>KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
+                                        <layoutData>
+                                            <l:GridData id="gd46" span="XL4 L4 M12 S12" />
+                                        </layoutData>
+                                    </Input>
 
-                                    <smartfield:SmartField id="txtKamokuSetei4" value="{pstore>KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
+                                    <!-- <smartfield:SmartField id="txtKamokuSetei4" value="{pstore>KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd46" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
-                                    </smartfield:SmartField>
+                                    </smartfield:SmartField> -->
 
                                     <Label id="lblSekisanAmt" labelFor="txtSekisanAmt" text="{i18n_pstore>sec4_f3}">
                                         <layoutData>
@@ -468,17 +462,17 @@
                                         </layoutData>
                                     </Label>
 
-                                    <!-- <Input id="txtKamokuSetei5" value="{KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
-                                    <layoutData>
-                                        <l:GridData id="gd50" span="XL4 L4 M12 S12" />
-                                    </layoutData>
-                                </Input> -->
+                                    <Input id="txtKamokuSetei5" value="{pstore>KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
+                                        <layoutData>
+                                            <l:GridData id="gd50" span="XL4 L4 M12 S12" />
+                                        </layoutData>
+                                    </Input>
 
-                                    <smartfield:SmartField id="txtKamokuSetei5" value="{pstore>KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
+                                    <!-- <smartfield:SmartField id="txtKamokuSetei5" value="{pstore>KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd50" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
-                                    </smartfield:SmartField>
+                                    </smartfield:SmartField> -->
 
                                     <Label id="lblKadoHanbaiGokei" labelFor="txtKadoHanbaiGokei" text="{i18n_pstore>sec4_f5}">
                                         <layoutData>
@@ -526,7 +520,7 @@
                                     <table:extension>
                                         <HBox id="hbox2" alignContent="Center" alignItems="Center">
                                             <Label id="lblHacyuNo" labelFor="txtHacyuNo" text="{i18n_pstore>sec6_f1}" />
-                                            <Input id="txtHacyuNo" value="{pstore>/HacyuNo}" maxLength="10" editable="{viewState>/editable}" />
+                                            <Input id="txtHacyuNo" value="{pstore>HacyuNo}" maxLength="10" editable="{viewState>/editable}" />
                                         </HBox>
                                     </table:extension>
 
@@ -548,8 +542,8 @@
                                         <table:Column id="tab1Col3">
                                             <Text id="txtTab1Col3" text="{i18n_pstore>sec6_f2}" />
                                             <table:template>
-                                                <!-- <Input id="txtSyohinCd" value="{SyohinCd}" maxLength="5" visible="{Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" /> -->
-                                                <smartfield:SmartField id="txtSyohinCd" value="{pstore>SyohinCd}" maxLength="5" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" />
+                                                <Input id="txtSyohinCd" value="{pstore>SyohinCd}" maxLength="5" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" />
+                                                <!-- <smartfield:SmartField id="txtSyohinCd" value="{pstore>/SyohinCd}" maxLength="5" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" /> -->
                                             </table:template>
                                         </table:Column>
 
@@ -1220,7 +1214,7 @@
 
                                     <Input
                                         id="txtYokuzitusohukin"
-                                        value="{parts:[{path:'Fi1007/Yokuzitusohukin'},{path: 'Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>Fi1007/Yokuzitusohukin'},{path: 'pstore>Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -1240,7 +1234,7 @@
 
                                     <Input
                                         id="txtYokuzituryougaekin"
-                                        value="{parts:[{path:'Fi1007/Yokuzituryougaekin'},{path: 'Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>Fi1007/Yokuzituryougaekin'},{path: 'pstore>Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -1317,7 +1311,7 @@
 
                                     <Input
                                         id="txtYokuzitukiteimotokin"
-                                        value="{parts:[{path:'Fi1007/Yokuzitukiteimotokin'},{path: 'Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>Fi1007/Yokuzitukiteimotokin'},{path: 'pstore>Fi1007/Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -1354,7 +1348,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <TextArea id="txtBikou2" maxLength="300" value="{Fi1007/Bikou2}" editable="{viewState>/editable}" rows="5">
+                                    <TextArea id="txtBikou2" maxLength="300" value="{pstore>Fi1007/Bikou2}" editable="{viewState>/editable}" rows="5">
                                         <layoutData>
                                             <l:GridData id="gd110" spanXL="10" spanL="10" spanM="12" spanS="12" />
                                         </layoutData>
@@ -1380,8 +1374,8 @@
                     />
 
                     <ToolbarSpacer id="pageToolbarSpacer" />
-                    <Button id="btnSave" text="{i18n_pstore>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
-                    <Button id="btnChange" text="{i18n_pstore>footer_f2}" enabled="{= ${viewState>/editable} === false &amp;&amp; ${pstore>Editable} === true}" press="onChange" />
+                    <Button id="btnSave" text="{i18n_pstore>footer_f1}" enabled="{viewState>/editable}" press="onSave" visible="{local>/saveVisible}"/>
+                    <Button id="btnChange" text="{i18n_pstore>footer_f2}" press="onChange" visible="{local>/editVisible}"/>
                     <Button type="Accept" text="{i18n_abr>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
                     <Button type="Reject" text="{i18n_abr>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
                     <Button id="idConfirm" type="Ghost" text="{i18n_abr>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>

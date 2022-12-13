@@ -29,6 +29,7 @@ sap.ui.define([
         return Controller.extend("com.shin.pstore.pstore.controller.pstore.StoreDetail", {
             formatter: formatter,
             onInit: function () {
+                this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
                 this._LocalData = this.getOwnerComponent().getModel("local");
                 if (!this._viewState) {
                     this._viewState = {};
@@ -172,6 +173,10 @@ sap.ui.define([
 
                 this.byId("btnMessagePopover").setVisible(false);
                 this._LocalData.setProperty("/detailPageBusy",false);
+
+                this.byId("btnChange").setText(this._ResourceBundle.getText("ChangeButton"));
+                this._viewState.editable = false;
+                this.getView().getModel("viewState").refresh();
             },
 
             checkEditData: function () {
@@ -194,7 +199,7 @@ sap.ui.define([
                 this._busyDialog.open();
                 var that = this;
 
-                var elem = this.getView().getBindingContext();
+                var elem = this.getView().getBindingContext("pstore");
                 var oModel = elem.getModel();
                 var d = elem.getObject();
 
@@ -244,7 +249,13 @@ sap.ui.define([
             },
 
             onChange: function () {
-                this._viewState.editable = true;
+                if (this._viewState.editable) {
+                    this.byId("btnChange").setText(this._ResourceBundle.getText("ChangeButton"));
+                    this._viewState.editable = false;
+                } else {
+                    this.byId("btnChange").setText(this._ResourceBundle.getText("DisplayButton"));
+                    this._viewState.editable = true;
+                }
                 this.getView().getModel("viewState").refresh();
                 //this._comm.showMessagePopoverFor(this, "Message", "btnMessagePopover")
             },
@@ -254,7 +265,7 @@ sap.ui.define([
                 this._busyDialog.open();
                 var that = this;
 
-                var elem = this.getView().getBindingContext();
+                var elem = this.getView().getBindingContext("pstore");
                 var oModel = elem.getModel();
                 var d = elem.getObject();
 
@@ -304,7 +315,7 @@ sap.ui.define([
                 this._busyDialog.open();
                 var that = this;
 
-                var elem = this.getView().getBindingContext();
+                var elem = this.getView().getBindingContext("pstore");
                 var oModel = elem.getModel();
                 var d = elem.getObject();
 
@@ -449,7 +460,7 @@ sap.ui.define([
 
             onSyohinCdChange: function (oEvent) {
                 var oSource = oEvent.getSource()
-                var oContext = oSource.getBindingContext();
+                var oContext = oSource.getBindingContext("pstore");
                 var sValue = oEvent.mParameters.newValue.toUpperCase();
                 oSource.setValue(sValue);
 
@@ -481,7 +492,7 @@ sap.ui.define([
                 var aItems = this.byId("tabGoods").getRows();
                 var amount = 0, waers = '', lineAmount = 0;
                 for (var item of aItems) {
-                    var data = item.getBindingContext().getObject();
+                    var data = item.getBindingContext("pstore").getObject();
                     var qty = Number(data.SyohinShirSu);
                     lineAmount = Math.round(qty * Number(data.SyohinTanka), 0);
                     amount += lineAmount;
@@ -512,9 +523,9 @@ sap.ui.define([
                 var aItems = oContext.byId(sTableId).getRows();
                 var amount = 0, waers = '', lineAmount = 0;
                 for (var item of aItems) {
-                    var oBindingContext = item.getBindingContext();
+                    var oBindingContext = item.getBindingContext("pstore");
                     if (oBindingContext) {
-                        var data = item.getBindingContext().getObject();
+                        var data = item.getBindingContext("pstore").getObject();
                         lineAmount = oCurrencyParse.parse(data.Desc) * Number(data.Man);
                         amount += lineAmount;
                         waers = (waers === '') ? data.Waers : 'JPY';
@@ -540,8 +551,8 @@ sap.ui.define([
                         oBindingContext = item.getBindingContext(sBindingPath);
                         // data = item.getBindingContext(sBindingPath).getObject();
                     } else {
-                        oBindingContext = item.getBindingContext();
-                        // data = item.getBindingContext().getObject();
+                        oBindingContext = item.getBindingContext("pstore");
+                        // data = item.getBindingContext("pstore").getObject();
                     }
 
                     if (oBindingContext) {
@@ -1059,7 +1070,7 @@ sap.ui.define([
                         HashChanger.getInstance().replaceHash("");
                     }.bind(this),
                 };
-                this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02", "action":this.sAction});
+                this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI01", "action":this.sAction});
     
                 this.getOwnerComponent().getModel().create("/ZzApprovalListSet", postData, mParameters);
                 this.byId("detailPage").setBusyIndicatorDelay(0);

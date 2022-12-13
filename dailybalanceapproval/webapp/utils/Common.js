@@ -102,7 +102,7 @@ sap.ui.define([
             var arr = [];
             var rows = oContext.byId(sTableId).getRows();
             for (var r of rows) {
-                var item = r.getBindingContext().getObject();
+                var item = r.getBindingContext("pstore").getObject();
                 delete item.__metadata;
 
                 if (convertFields != null && convertFields.length > 0) {
@@ -170,6 +170,9 @@ sap.ui.define([
             oContext._sBindingField = sBindingField;
             oContext.loadFragment({ name: sViewName }).then(function (oDialog) {
                 oDialog.open();
+                var oView = this.getView();
+                oView.setModel(this.getOwnerComponent().getModel("pstore"));
+                oView.byId("smartTable").rebindTable();
                 var oSmartFilter = oContext.byId("smartFilter");
                 oSmartFilter.setEntitySet(oContext._sEntitySet);
                 var oSmartTable = oContext.byId("smartTable");

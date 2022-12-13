@@ -1,213 +1,222 @@
 {
-  "_version": "1.45.0",
-  "sap.app": {
-    "id": "FICO.dailybalanceapproval",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
+    "_version": "1.45.0",
+    "sap.app": {
+        "id": "FICO.dailybalanceapproval",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.8.0",
+            "toolsId": "28e38431-9c00-42d8-b722-f58afd55a0fb"
+        },
+        "dataSources": {
+            "ZZDAILYBALANCEAPPROVAL_SRV": {
+                "uri": "/sap/opu/odata/sap/ZZDAILYBALANCEAPPROVAL_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "ZZDAILYBALANCEABR_SRV": {
+                "uri": "/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "ZZPSTORE_SRV": {
+                "uri": "/sap/opu/odata/sap/ZZPSTORE_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [
+                        "ZZPSTORE_SRV_Annotation"
+                    ],
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "ZZPSTORE_SRV_Annotation": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZZPSTORE_ANNOTATION_ANNO_MDL',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZZPSTORE_SRV_Annotation.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotation/annotation.xml",
+                "settings": {
+                    "localUri": "annotation/annotation.xml"
+                }
+            }
+        }
     },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "resources": "resources.json",
-    "sourceTemplate": {
-      "id": "@sap/generator-fiori:basic",
-      "version": "1.8.0",
-      "toolsId": "28e38431-9c00-42d8-b722-f58afd55a0fb"
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
     },
-    "dataSources": {
-      "ZZDAILYBALANCEAPPROVAL_SRV": {
-        "uri": "/sap/opu/odata/sap/ZZDAILYBALANCEAPPROVAL_SRV",
-        "type": "OData",
-        "settings": {
-            "odataVersion": "2.0",
-            "annotations": [
-              "annotation"
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.108.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {},
+                "sap.ui.unified": {},
+                "sap.uxap": {},
+                "sap.suite.ui.commons": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "FICO.dailybalanceapproval.i18n.i18n"
+                }
+            },
+            "i18n_abr": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "FICO.dailybalanceapproval.i18n.abr.i18n"
+                }
+            },
+            "i18n_pstore": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "FICO.dailybalanceapproval.i18n.pstore.i18n"
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "ZZDAILYBALANCEAPPROVAL_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
+                }
+            },
+            "abr": {
+                "dataSource": "ZZDAILYBALANCEABR_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
+                }
+            },
+            "pstore": {
+                "dataSource": "ZZPSTORE_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "FICO.dailybalanceapproval.view",
+                "controlId": "fcl",
+                "transition": "slide"
+            },
+            "routes": [
+                {
+                    "name": "ApprovalList",
+                    "pattern": "",
+                    "target": [
+                        "ApprovalList"
+                    ]
+                },
+                {
+                    "name": "DailyBalance",
+                    "pattern": "DailyBalance/{layout}/:contextPath:",
+                    "target": [
+                        "ApprovalList",
+                        "DailyBalance"
+                    ]
+                },
+                {
+                    "name": "StoreDetail",
+                    "pattern": "StoreDetail/{layout}/{path}?mode={mode}",
+                    "target": [
+                        "ApprovalList",
+                        "TargetStoreDetail"
+                    ]
+                }
             ],
-            "localUri": "localService/metadata.xml"
+            "targets": {
+                "ApprovalList": {
+                    "viewName": "ApprovalList",
+                    "controlAggregation": "beginColumnPages"
+                },
+                "DailyBalance": {
+                    "viewPath": "FICO.dailybalanceapproval.view.abr",
+                    "viewName": "DailyBalance",
+                    "clearControlAggregation": true,
+                    "controlAggregation": "midColumnPages"
+                },
+                "TargetStoreDetail": {
+                    "viewPath": "FICO.dailybalanceapproval.view.pstore",
+                    "viewName": "StoreDetail",
+                    "clearControlAggregation": true,
+                    "controlAggregation": "midColumnPages"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "FICO.dailybalanceapproval.view.Main",
+            "type": "XML",
+            "async": true,
+            "id": "Main"
         }
-      },
-      "ZZDAILYBALANCEABR_SRV": {
-        "uri": "/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV",
-        "type": "OData",
-        "settings": {
-            "odataVersion": "2.0",
-            "annotations": [],
-            "localUri": "localService/metadata.xml"
-        }
-      },
-      "ZZPSTORE_SRV": {
-        "uri": "/sap/opu/odata/sap/ZZPSTORE_SRV",
-        "type": "OData",
-        "settings": {
-            "odataVersion": "2.0",
-            "localUri": "localService/metadata.xml"
-        }
-      },
-
-      "annotation": {
-        "type": "ODataAnnotation",
-        "uri": "annotation/annotation.xml",
-        "settings": {
-            "localUri": "annotation/annotation.xml"
-        }
-      }
     }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    }
-  },
-  "sap.ui5": {
-    "flexEnabled": false,
-    "dependencies": {
-      "minUI5Version": "1.108.0",
-      "libs": {
-        "sap.m": {},
-        "sap.ui.core": {},
-        "sap.f": {},
-        "sap.suite.ui.generic.template": {},
-        "sap.ui.comp": {},
-        "sap.ui.generic.app": {},
-        "sap.ui.table": {},
-        "sap.ushell": {},
-        "sap.ui.unified": {},
-        "sap.uxap": {},
-        "sap.suite.ui.commons": {}
-      }
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "FICO.dailybalanceapproval.i18n.i18n"
-        }
-      },
-      "i18n_abr": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "FICO.dailybalanceapproval.i18n.abr.i18n"
-        }
-      },
-      "i18n_pstore": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "FICO.dailybalanceapproval.i18n.pstore.i18n"
-        }
-      },
-      "@i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties"
-      },
-      "": {
-        "dataSource": "ZZDAILYBALANCEAPPROVAL_SRV",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false
-        }
-      },
-      "abr": {
-        "dataSource": "ZZDAILYBALANCEABR_SRV",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false
-        }
-      },
-      "pstore": {
-        "dataSource": "ZZPSTORE_SRV",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false
-        }
-      }
-    },
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
-        }
-      ]
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "async": true,
-        "viewPath": "FICO.dailybalanceapproval.view",
-        "controlId": "fcl",
-        "transition": "slide"
-      },
-      "routes": [
-        {
-          "name": "ApprovalList",
-          "pattern": "",
-          "target": [
-            "ApprovalList"
-          ]
-        },
-        {
-          "name": "DailyBalance",
-          "pattern": "DailyBalance/{layout}/:contextPath:",
-          "target": [
-            "ApprovalList",
-            "DailyBalance"
-          ]
-        },
-        {
-          "name": "StoreDetail",
-          "pattern": "StoreDetail/{layout}/{path}?mode={mode}",
-          "target": [
-              "ApprovalList",
-              "TargetStoreDetail"
-          ]
-        }
-      ],
-      "targets": {
-        "ApprovalList": {
-          "viewName": "ApprovalList",
-          "controlAggregation": "beginColumnPages"
-        },
-        "DailyBalance": {
-          "viewPath": "FICO.dailybalanceapproval.view.abr",
-          "viewName": "DailyBalance",
-          "clearControlAggregation": true,
-          "controlAggregation": "midColumnPages"
-        },
-        "TargetStoreDetail": {
-          "viewPath": "FICO.dailybalanceapproval.view.pstore",
-          "viewName": "StoreDetail",
-          "clearControlAggregation": true,
-          "controlAggregation": "midColumnPages"
-        }
-      }
-    },
-    "rootView": {
-      "viewName": "FICO.dailybalanceapproval.view.Main",
-      "type": "XML",
-      "async": true,
-      "id": "Main"
-    }
-  }
 }
