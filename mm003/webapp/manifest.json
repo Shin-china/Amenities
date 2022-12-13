@@ -1,0 +1,161 @@
+{
+  "_version": "1.45.0",
+  "sap.app": {
+    "id": "mm003",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.8.1",
+      "toolsId": "6ea5af5d-1def-4e72-a50d-c679eff63105"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZZPURCHASEAPPROVAL_SRV": {
+        "uri": "/sap/opu/odata/sap/ZZPURCHASEAPPROVAL_SRV",
+        "type": "OData",
+        "settings": {
+            "odataVersion": "2.0",
+            "annotations": [
+              "annotation"
+            ],
+            "localUri": "localService/metadata.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.108.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "mm003.i18n.i18n"
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },
+      "": {
+        "dataSource": "ZZPURCHASEAPPROVAL_SRV",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+      }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "mm003.view",
+        "controlId": "fcl",
+        "transition": "slide",
+        "clearTarget" : "true"
+      },
+      "routes": [
+        {
+          "name": "List",
+          "pattern": "",
+          "target": [
+            "List"
+          ]
+        },
+        {
+          "name": "Item",
+          "pattern": "Item/{layout}/:contextPath:",
+          "target": [
+            "List",
+            "Item"
+          ]
+        },
+        {
+          "name": "PoItem",
+          "pattern": "PoItem/{layout}/:contextPath:",
+          "target": [
+            "List",
+            "PoItem"
+          ]
+        }
+      ],
+      "targets": {
+        "List": {
+          "viewName": "List",
+          "controlAggregation": "beginColumnPages"
+        },
+        "Item": {
+          "viewName": "Item",
+          "controlAggregation": "midColumnPages"
+        },
+        "PoItem": {
+          "viewName": "PoItem",
+          "controlAggregation": "midColumnPages"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "mm003.view.Main",
+      "type": "XML",
+      "async": true,
+      "id": "Main"
+    }
+  }
+}

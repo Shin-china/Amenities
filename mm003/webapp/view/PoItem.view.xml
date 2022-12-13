@@ -1,0 +1,156 @@
+<mvc:View 
+        controllerName="mm003.controller.PoItem"
+		xmlns="sap.ui.table"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns:m="sap.m"
+		height="100%" 
+		xmlns:f="sap.f"
+	    xmlns:form="sap.ui.layout.form"
+		xmlns:l="sap.ui.layout"
+		xmlns:core="sap.ui.core"   
+		xmlns:semantic="sap.m.semantic"
+		xmlns:smartTable="sap.ui.comp.smarttable"
+		displayBlock="true"
+		xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+		<m:Page id="DetailPage2" showNavButton="false" busy="{local>/busy}" title="購買発注">
+			<form:SimpleForm editable="true" entitySet="ZzHeaderSet">
+				<m:Label text="購買発注"/>
+				<m:Text id="getValue" text="{local>/item/0/EBELN}"/>
+			</form:SimpleForm>
+
+			<m:IconTabBar
+				id="idIconTabBarMulti2"
+				expanded="{device>/isNoPhone}"
+				class="sapUiResponsiveContentPadding">
+				<m:items>
+					<m:IconTabFilter id="_IDGenIconTabFilter4" icon="sap-icon://hint" key="info">
+						<form:SimpleForm id="_IDGenSimpleForm3" editable="true">
+							<core:Title text="基本データ" />
+							<!-- <m:Label id="_IDGenLabel18" text="基本データ" textAlign="Begin"/> -->
+							<!-- <m:Text id="jb" text="{/InputValue}" textAlign="Begin"/> -->
+
+							<m:Label id="_IDGenLabel19" text="会社コード"/>
+							<m:Text id="hscode" text="{local>/item/0/BUKRS}" />
+
+							<m:Label id="_IDGenLabel20" text="伝票タイプ"/>
+							<m:Text id="cptype" text="{local>/item/0/BSART}" />
+
+							<m:Label id="_IDGenLabel21" text="購買組織"/>
+							<m:Text id="gmzz" text="{local>/item/0/EKORG}" />
+
+							<m:Label id="_IDGenLabel22" text="購買グループ"/>
+							<m:Text id="gmgroup" text="{local>/item/0/EKGRP}" />
+
+							<m:Label id="_IDGenLabel23" text="仕入先"/>
+							<m:Text id="srx2" text="{local>/item/0/LIFNR}" />
+
+							<m:Label id="_IDGenLabel24" text="通貨コード"/>
+							<m:Text id="thcode" text="{local>/item/0/WAERS}" />
+
+							<m:Label id="_IDGenLabel25" text="登録者"/>
+							<m:Text id="dlz" text="{local>/item/0/ERNAM}" />
+						</form:SimpleForm>
+
+						<m:content>
+							<Table
+								id="table3" selectionMode="MultiToggle" rows="{local>/Items}" visibleRowCount="7" showColumnVisibilityMenu="{ui>/showVisibilityMenuEntry}"
+								enableColumnFreeze="{ui>/showFreezeMenuEntry}" enableCellFilter="{ui>/enableCellFilter}" columnSelect="onColumnSelect"
+								cellContextmenu="onProductIdCellContextMenu" ariaLabelledBy="title">
+
+								<extension>
+									<m:OverflowToolbar id="_IDGenOverflowToolbar2" style="Clear">
+										<m:Title id="title2" text="明細"/>
+										<m:ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+									</m:OverflowToolbar>
+								</extension>
+								<columns>
+									<Column id="mx2" width="3rem" sortProperty="mx" filterProperty="mx" showFilterMenuEntry="true" showSortMenuEntry="true">
+										<m:Label id="_IDGenLabel26" text="明細" />
+										<template>
+											<m:Text id="_IDGenText19" text="{local>EBELP}" wrapping="false" />
+										</template>
+									</Column>
+									<Column id="srx3" filterProperty="srx" sortProperty="srx" width="6rem">
+										<m:Label id="_IDGenLabel27" text="勘定設定カテゴリー" />
+										<template>
+											<m:Text id="_IDGenText20" text="{local>KNTTP}" wrapping="false" />
+										</template>
+									</Column>
+									<Column id="dp2" width="6rem" columnMenuOpen="onColumnMenuOpen">
+										<m:Label id="_IDGenLabel28" text="品目" />
+										<template>
+											<m:Text id="_IDGenText21" text="{local>MATNR}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="pm2" width="6rem" sortProperty="pm">
+										<m:Label id="_IDGenLabel29" text="テキスト" />
+										<template>
+											<m:Text id="_IDGenText22" text="{local>MATNR}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn9" width="6rem">
+										<m:Label id="_IDGenLabel30" text="数量" />
+										<template>
+											<m:Text id="_IDGenText23" text="{local>MENGE}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn10" width="3rem">
+										<m:Label id="_IDGenLabel31" text="単位" />
+										<template>
+											<m:Text id="_IDGenText24" text="{local>BPRME}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn11" width="6rem">
+										<m:Label id="_IDGenLabel32" text="単価" />
+										<template>
+											<m:Text id="_IDGenText25" text="{local>NETPR}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn12" width="6rem">
+										<m:Label id="_IDGenLabel33" text="品目グループ" />
+										<template>
+											<m:Text id="_IDGenText26" text="{local>MATKL}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn13" width="6rem">
+										<m:Label id="_IDGenLabel34" text="納入日付" />
+										<template>
+											<m:Text id="_IDGenText27" text="{srje}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn14" width="6rem">
+										<m:Label id="_IDGenLabel35" text="保管場所" />
+										<template>
+											<m:Text id="_IDGenText28" text="{local>LGORT}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn15" width="6rem">
+										<m:Label id="_IDGenLabel36" text="プラント" />
+										<template>
+											<m:Text id="_IDGenText29" text="{local>WERKS}" wrapping="false" /> 
+										</template>
+									</Column>
+								</columns>
+							</Table>
+						</m:content>
+
+					</m:IconTabFilter>
+
+					<m:IconTabFilter id="_IDGenIconTabFilter5" icon="sap-icon://notes" key="notes" >
+						<m:Text id="_IDGenText30" text="承認コメント" class="sapUiTinyMarginTop"/>
+						<m:TextArea id="idComments" value="" growing="true" growingMaxLines="7"  width="100%"/>
+					</m:IconTabFilter>
+				</m:items>
+			</m:IconTabBar>
+			<m:footer>
+				<m:OverflowToolbar id="otbFooter">
+					<m:Button icon="sap-icon://alert" text="{= ${messages>/}.length }" visible="{= ${messages>/}.length > 0 }" type="Emphasized" press="onMessagePopoverPress" />
+					<m:Button id="Accept" type="Accept" text="承認" press=".onApprovalConfirm('Accept')" />
+					<m:Button id="Reject" type="Reject" text="却下" press=".onApprovalConfirm('Reject')" />
+					<m:Button id="Return" type="Ghost" text="差戻" press=".onApprovalConfirm('Return')"/>
+				</m:OverflowToolbar>
+			</m:footer>
+		</m:Page>
+</mvc:View>
