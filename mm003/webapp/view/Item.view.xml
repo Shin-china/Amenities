@@ -1,0 +1,191 @@
+<mvc:View 
+        controllerName="mm003.controller.Item"
+		xmlns="sap.ui.table"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns:m="sap.m"
+		height="100%" 
+		xmlns:f="sap.f"
+	    xmlns:form="sap.ui.layout.form"
+		xmlns:l="sap.ui.layout"
+		xmlns:core="sap.ui.core"   
+		xmlns:semantic="sap.m.semantic"
+		xmlns:smartTable="sap.ui.comp.smarttable"
+		displayBlock="true"
+		xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+		<m:Page id="DetailPage1" showNavButton="false" busy="{local>/busy}" title="購買稟議承認" >
+			<form:SimpleForm id="_IDGenSimpleForm1" editable="true" entitySet="ZzHeaderSet">
+				<m:Label id="_IDGenLabel1" text="購買依頼"/>
+				<m:Text id="getValue" text="{local>/item/0/EBELN}"/>
+				<m:Label id="_IDGenLabel2" text="件名"/>
+				<m:Text id="getProperty" text="{local>/item/0/ZJM}"
+				/>
+			</form:SimpleForm>
+
+			<m:IconTabBar
+				id="idIconTabBarMulti"
+				expanded="{device>/isNoPhone}"
+				class="sapUiResponsiveContentPadding">
+				<m:items>
+					<m:IconTabFilter id="_IDGenIconTabFilter1" icon="sap-icon://hint" key="info">
+						<m:content>
+							<Table
+								id="table"
+								selectionMode="MultiToggle"
+								rows="{local>/Total}"
+								visibleRowCount="7"
+								showColumnVisibilityMenu="{ui>/showVisibilityMenuEntry}"
+								enableColumnFreeze="{ui>/showFreezeMenuEntry}"
+								enableCellFilter="{ui>/enableCellFilter}"
+								columnSelect="onColumnSelect"
+								cellContextmenu="onProductIdCellContextMenu"
+								ariaLabelledBy="title">
+
+								<columns>
+									<Column
+										id="name"
+										width="11rem"
+										sortProperty="Name"
+										filterProperty="Name"
+										showFilterMenuEntry="true"
+										showSortMenuEntry="true">
+										<m:Label id="_IDGenLabel3" text="仕入先" />
+										<template>
+											<m:Text id="_IDGenText3" text="{local>LIFNR}" wrapping="false" />
+										</template>
+									</Column>
+									<Column id="productId" filterProperty="ProductId" sortProperty="ProductId" width="11rem">
+										<m:Label id="_IDGenLabel4" text="税抜小計金額" />
+										<template>
+											<m:Text id="_IDGenText4" text="{local>ZNETVALUE}" wrapping="false" />
+										</template>
+									</Column>
+									<Column id="image" width="11rem" columnMenuOpen="onColumnMenuOpen">
+										<m:Label id="_IDGenLabel5" text="消費税(10%)" />
+										<template>
+											<m:Text id="_IDGenText5" text="{local>ZCONSUMTAX}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="quantity" width="11rem"  sortProperty="Quantity">
+										<m:Label id="_IDGenLabel6" text="税込小計金額" />
+										<template>
+											<m:Text id="_IDGenText6" text="{local>ZSUBTOTAL}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn3" width="11rem">
+										<m:Label id="_IDGenLabel7" text="税込見積小計" />
+										<template>
+											<m:Text id="_IDGenText7" text="{local>ZESTVAT}" wrapping="false" /> 
+										</template>
+									</Column>
+								</columns>
+							</Table>
+						</m:content>
+
+						<m:content>
+							<Table id="table2" class="sapUxAPObjectPageSubSectionAlignContent" width="auto" rows="{local>/Items}">
+								<extension>
+									<m:OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear">
+										<m:Title id="title" text="明細"/>
+										<m:ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+									</m:OverflowToolbar>
+								</extension>
+
+								<columns>
+									<Column id="mx" width="6rem" sortProperty="mx" filterProperty="mx" showFilterMenuEntry="true" showSortMenuEntry="true">
+										<m:Label id="_IDGenLabel8" text="明細" />
+										<template>
+											<m:Text id="_IDGenText8" text="{local>EBELP}" wrapping="false" />
+										</template>
+									</Column>
+									<Column
+										id="srx"
+										filterProperty="srx"
+										sortProperty="srx"
+										width="6rem">
+										<m:Label id="_IDGenLabel9" text="仕入先" />
+										<template>
+											<m:Text id="_IDGenText9" text="{local>LIFNR}" wrapping="false" />
+										</template>
+									</Column>
+									<Column
+										id="dp"
+										width="6rem"
+										columnMenuOpen="onColumnMenuOpen">
+										<m:Label id="_IDGenLabel10" text="店舗" />
+										<template>
+											<m:Text id="_IDGenText10" text="{local>LGORT}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column
+										id="pm"
+										width="6rem" 
+										sortProperty="pm">
+										<m:Label id="_IDGenLabel11" text="品名" />
+										<template>
+											<m:Text id="_IDGenText11" text="{local>MATNR}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn4" width="6rem">
+										<m:Label id="_IDGenLabel12" text="数量" />
+										<template>
+											<m:Text id="_IDGenText12" text="{local>MENGE}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn5" width="6rem">
+										<m:Label id="_IDGenLabel13" text="単価" />
+										<template>
+											<m:Text id="_IDGenText13" text="{PRICE}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn6" width="6rem">
+										<m:Label id="_IDGenLabel14" text="税抜金額" />
+										<template>
+											<m:Text id="_IDGenText14" text="{local>PREIS}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn7" width="6rem">
+										<m:Label id="_IDGenLabel15" text="消費税" />
+										<template>
+											<m:Text id="_IDGenText15" text="{local>ZVAT}" wrapping="false" /> 
+										</template>
+									</Column>
+									<Column id="_IDGenColumn8" width="6rem">
+										<m:Label id="_IDGenLabel16" text="税込金額" />
+										<template>
+											<m:Text id="_IDGenText16" text="{local>ZSUBTOTAL}" wrapping="false" /> 
+										</template>
+									</Column>
+								</columns>
+							</Table>
+						</m:content>
+
+					</m:IconTabFilter>
+					<m:IconTabFilter id="_IDGenIconTabFilter2"
+						icon="sap-icon://attachment"
+						key="attachments"
+						count="0">
+						<m:Text id="_IDGenText17" text="Attachments go here ..." />
+					</m:IconTabFilter>
+					<m:IconTabFilter id="_IDGenIconTabFilter3"
+						icon="sap-icon://notes"
+						key="notes" 
+						>
+
+						<m:Text text="承認コメント" class="sapUiTinyMarginTop"/>
+						<m:TextArea id="TextArea1" value="" growing="true" growingMaxLines="7"  width="100%"/>
+					</m:IconTabFilter>
+
+				</m:items>
+			</m:IconTabBar>
+			<m:footer>
+				<m:OverflowToolbar id="otbFooter">
+					<m:Button icon="sap-icon://alert" text="{= ${messages>/}.length }" visible="{= ${messages>/}.length > 0 }" type="Emphasized" press="onMessagePopoverPress" />
+					<m:Button id="Accept" type="Accept" text="承認" press=".onApprovalConfirm('Accept')" />
+					<m:Button id="Reject" type="Reject" text="却下" press=".onApprovalConfirm('Reject')" />
+					<m:Button id="Return" type="Ghost" text="差戻" press=".onApprovalConfirm('Return')"/>
+				</m:OverflowToolbar>
+			</m:footer>
+		</m:Page>
+</mvc:View>
