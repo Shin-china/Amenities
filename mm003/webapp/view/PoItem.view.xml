@@ -9,12 +9,13 @@
 	    xmlns:form="sap.ui.layout.form"
 		xmlns:l="sap.ui.layout"
 		xmlns:core="sap.ui.core"   
+		xmlns:com="sap.suite.ui.commons"
 		xmlns:semantic="sap.m.semantic"
 		xmlns:smartTable="sap.ui.comp.smarttable"
 		displayBlock="true"
 		xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 
-		<m:Page id="DetailPage2" showNavButton="false" busy="{local>/busy}" title="購買発注">
+		<m:Page id="DetailPage2" showNavButton="false" busy="{local>/page2Busy}" title="購買発注">
 			<form:SimpleForm editable="true" entitySet="ZzHeaderSet">
 				<m:Label text="購買発注"/>
 				<m:Text id="getValue" text="{local>/item/0/EBELN}"/>
@@ -27,7 +28,8 @@
 				<m:items>
 					<m:IconTabFilter id="_IDGenIconTabFilter4" icon="sap-icon://hint" key="info">
 						<form:SimpleForm id="_IDGenSimpleForm3" editable="true">
-							<core:Title text="基本データ" />
+							<!-- <core:Title text="基本データ" /> -->
+							<m:Label text="基本データ"/>
 							<!-- <m:Label id="_IDGenLabel18" text="基本データ" textAlign="Begin"/> -->
 							<!-- <m:Text id="jb" text="{/InputValue}" textAlign="Begin"/> -->
 
@@ -142,13 +144,34 @@
 						<m:Text id="_IDGenText30" text="承認コメント" class="sapUiTinyMarginTop"/>
 						<m:TextArea id="idComments" value="" growing="true" growingMaxLines="7"  width="100%"/>
 					</m:IconTabFilter>
+
+					<m:IconTabFilter id="_IDGenIconTabFilter6" icon="sap-icon://customer-history" key="history" >
+
+						<m:Text text="{i18n>historySection}"/>
+							<com:Timeline id="idTimelinePo" lazyLoading="true" growingThreshold="10" showIcons="false" 
+								showItemFilter="false" showSearch="false" showTimeFilter="false" enableScroll="false" 
+								textHeight="3" content="{local>/approvalHistory}">
+								<com:content>
+									<com:TimelineItem userName="{local>name}" title="{local>nodename}" dateTime="{local>time}">
+										<com:embeddedControl>
+											<m:VBox>
+												<m:ObjectStatus text="{path:'local>action', formatter:'.formatter.approvalText'}" 
+													state="{path:'local>action', formatter:'.formatter.approvalStatus'}" 
+													icon="{path:'local>action', formatter:'.formatter.approvalIcon'}" />
+												<m:Text text="{local>comments}"/>
+											</m:VBox>
+										</com:embeddedControl>
+									</com:TimelineItem>
+								</com:content>
+							</com:Timeline>
+					</m:IconTabFilter>
 				</m:items>
 			</m:IconTabBar>
 			<m:footer>
 				<m:OverflowToolbar id="otbFooter">
 					<m:Button icon="sap-icon://alert" text="{= ${messages>/}.length }" visible="{= ${messages>/}.length > 0 }" type="Emphasized" press="onMessagePopoverPress" />
+					<m:ToolbarSpacer/>
 					<m:Button id="Accept" type="Accept" text="承認" press=".onApprovalConfirm('Accept')" />
-					<m:Button id="Reject" type="Reject" text="却下" press=".onApprovalConfirm('Reject')" />
 					<m:Button id="Return" type="Ghost" text="差戻" press=".onApprovalConfirm('Return')"/>
 				</m:OverflowToolbar>
 			</m:footer>

@@ -3,23 +3,29 @@ sap.ui.define(
       "sap/ui/core/mvc/Controller",
       "sap/m/MessageBox",
       "./messages",
-      "sap/ui/core/UIComponent",
+      "../model/formatter",
       "sap/ui/core/routing/HashChanger"
     ],
-    function(BaseController,MessageBox, messages,HashChanger) {
+    function(BaseController,MessageBox, messages,formatter,HashChanger) {
       "use strict";
   
       return BaseController.extend("mm003.controller.Item", {
+
+        formatter : formatter,
+
         onInit: function () {
             this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
             var oMessageManager, oView;
             oView = this.getView();
-                  // set message model
+
+            // set message model
             oMessageManager = sap.ui.getCore().getMessageManager();
             oView.setModel(oMessageManager.getMessageModel(), "messages");
             oMessageManager.registerObject(oView, true);
+
             var oRouter = this.getOwnerComponent().getRouter();
             oRouter.getRoute("Item").attachMatched(this._onRouteMatched, this);
 		    },
@@ -28,39 +34,28 @@ sap.ui.define(
         _onRouteMatched : function (oEvent) {
             //localmodel中当前行的绑定路径
             var oArgs = oEvent.getParameter("arguments");
-            // if (oArgs.view == "Display") { 
-            //     this._LocalData.setProperty("/viewEditable", false);
-            //     this.byId("idChange").setVisible(true);
-            //     this.byId("idChange").setText(this._ResourceBundle.getText("ChangeButton"));
-            //     this.byId("idPosting").setVisible(true);
-
-                var oHeader = this._oDataModel.getProperty("/" + oArgs.contextPath);
-                // this.byId("getValue").setText(ebeln);
-            //     this.initialLocalModel_dis(oHeader);
-                this.tableConverted_dis(oArgs.contextPath);
-            // } else {
-            //     this.resultCalc();
-            //     this._LocalData.setProperty("/viewEditable", true);
-            //     this.byId("idDailyBalanceCreate").setTitle(this._ResourceBundle.getText("DailyBalanceCreatePage"));
-            //     this.byId("idChange").setVisible(false);
-            //     this.byId("idPosting").setVisible(false);
-            // }
-            // sap.ui.getCore().getMessageManager().removeAllMessages();
+            var oHeader = this._oDataModel.getProperty("/" + oArgs.contextPath);
+            this.tableConverted_dis(oArgs.contextPath);
             this._LocalData.setProperty("/item", [oHeader]);
-            this._LocalData.refresh();
+
+            sap.ui.getCore().getMessageManager().removeAllMessages();
+
+            //每次进入详细页面，默认会保存上一次的section，滚动到页头第一个section
+            // var oPageLayout = this.byId("idIconTabBarMulti");
+            // oPageLayout.scrollToSection(this.byId("IDGenIconTabFilter1").getId());
+
+            this._LocalData.setProperty("/page1Busy",false);
         },
         tableConverted_dis: function (sKey) {
           var aItemsKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzItems");
           var aTotalKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzTotal");
-          // var aCahsIncomKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzCashIncome");
-          // var aCahsPaymentKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzCashPayment");
-          // var aTreasuryCashKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzTreasuryCash");
-
+          var aApprovalHistoryKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzApprovalHistory");
           //获取数据
           // var oHeader = this._oDataModel.getProperty("/" + aItemsKey[0]);
           // oHeader = JSON.parse(JSON.stringify(oHeader));
           var aItems = [];
           var aTotal = [];
+          var aApprovalHistory = [];
 
           aItemsKey.forEach(function (path) {
               var item = this._oDataModel.getProperty("/" + path);
@@ -72,56 +67,27 @@ sap.ui.define(
             var item = this._oDataModel.getProperty("/" + path);
             delete item.__metadata;
             aTotal.push(item);
-        }.bind(this));
-          // var aCahsIncome = [], aCahsPayment = [];
-          // aCahsIncomKey.forEach(function (path) {
-          //     var item = this._oDataModel.getProperty("/" + path);
-          //     delete item.__metadata;
-          //     aCahsIncome.push(item);
-          // }.bind(this));
-          // aCahsPaymentKey.forEach(function (path) {
-          //     var item = this._oDataModel.getProperty("/" + path);
-          //     delete item.__metadata;
-          //     aCahsPayment.push(item);
-          // }.bind(this));
-          // var oTreasuryCash = this._oDataModel.getProperty("/" + aTreasuryCashKey[0]);
+          }.bind(this));
 
-          // this.setLocalModel_dis(oHeader);
-
-          // 转换数据
-          // 用于参考，如果是参考创建就需要将之前的起票号码清除
-          // if (!this._LocalData.getProperty("/isCreate")) {
-          //     oHeader.KIHYO_NO = "";
-          // }
-          // this._LocalData.setProperty("/item", [oHeader]);
+          aApprovalHistoryKey.forEach(function (path) {
+            var item = this._oDataModel.getProperty("/" + path);
+            var sTime = this.formatter.dateTime(item.CREATE_DATE, item.CREATE_TIME);
+            aApprovalHistory.push({
+                // user: item.CREATE_USER,
+                name: item.USERNAME,
+                time: new Date(sTime),
+                comments: item.COMMENTS,
+                action: item.ACTION,
+                nodename: item.NODENAME
+            });
+          }, this);
+          
           this._LocalData.setProperty("/Items",aItems);
           this._LocalData.setProperty("/Total",aTotal);
-          // this.byId("idSelectWeather").setSelectedKey(oHeader.TENKI);
-          // var table6 = this._LocalData.getProperty("/table6");
-          // table6.forEach(function (line, index) {
-          //     switch (index) {
-          //         case 0://特会員
-          //             line.Quantity = oHeader.TOKKAIIN_KENSUU6;
-          //             line.Amount = oHeader.TOKKAIIN_AMT6;
-          //             line.Remark = oHeader.TOKKAIIN_BIKOU6;
-          //             break;
-          //         case 1://販シニア
-          //             line.Quantity = oHeader.HANSINIA_KENSUU6;
-          //             line.Amount = oHeader.HANSINIA_AMT6;
-          //             line.Remark = oHeader.HANSINIA_BIKOU6;
-          //             break;
-          //         case 2://その他
-          //             line.Quantity = oHeader.SONOTA_KENSUU6;
-          //             line.Amount = oHeader.SONOTA_AMT6;
-          //             line.Remark = oHeader.SONOTA_BIKOU6;
-          //             break;
-          //         case 3://合計
-          //             line.Quantity = oHeader.NEBIKI_GKI_KENSUU6;
-          //             line.Amount = oHeader.NEBIKI_GKI_AMT6;
-          //     }
-          // }.bind(this));
+          this._LocalData.setProperty("/approvalHistory",aApprovalHistory);
           this._LocalData.refresh();
         },
+
         onApprovalConfirm: function(sAction) {
           var sTitle = this._ResourceBundle.getText("ConfirmTitle");
           var sText = this._ResourceBundle.getText(sAction);
@@ -162,7 +128,8 @@ sap.ui.define(
           this.getOwnerComponent().getModel().setHeaders({"action":this.sAction});
 
           this.getOwnerComponent().getModel().create("/ZzHeaderSet", postData, mParameters);
-          // this.byId("DetailPage2").setBusyIndicatorDelay(0);
+          this.byId("DetailPage1").setBusyIndicatorDelay(0);
+          this.byId("DetailPage1").setBusy(true);
         },
 
         getApprovalData: function () {
@@ -173,7 +140,7 @@ sap.ui.define(
               COMMENTS: this.byId("TextArea1").getValue()
           };
           return postData
-        },
+        }
       });
     }
   );

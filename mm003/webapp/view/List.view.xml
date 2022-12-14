@@ -1,4 +1,5 @@
-<mvc:View controllerName="mm003.controller.List" displayBlock="true"
+<mvc:View controllerName="mm003.controller.List" 
+    displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
@@ -19,7 +20,6 @@
             <f:header>
                 <f:DynamicPageHeader pinnable="true">
                     <f:content>
-                        <!-- <smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="salespriceFilterBar" entitySet="ZzHeaderSet" useToolbar="false"> -->
                         <smartFilterBar:SmartFilterBar id="smartFilterBarProcess" smartVariant="__SVM01" persistencyKey="salespriceFilterBar" entitySet="ZzHeaderSet" useToolbar="false">
                             <smartFilterBar:controlConfiguration>
                                 <smartFilterBar:ControlConfiguration key="EBELN" visibleInAdvancedArea="true" label="{i18n>EBELN}" index="1"/>
@@ -35,9 +35,9 @@
                     requestAtLeastFields="EBELN,TYPE"
                     class="sapUiThinyMarginTop"> -->
                 <smartTable:SmartTable id="smartTable" smartFilterId="smartFilterBarProcess" enableExport="false" entitySet="ZzHeaderSet"  showRowCount="true" 
-                smartVariant="__SVM01" useVariantManagement="true"  beforeRebindTable="onBeforeRebindTable"
-                useTablePersonalisation="true" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" class="sapUiThinyMarginTop"
-                requestAtLeastFields="ZJM,BUKRS,BSART,EKORG,EKGRP,LIFNR,WAERS,ERNAM,to_ZzItems,to_ZzTotal">
+                    smartVariant="__SVM01" useVariantManagement="true"  beforeRebindTable="onBeforeRebindTable"
+                    useTablePersonalisation="true" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" class="sapUiThinyMarginTop"
+                    requestAtLeastFields="ZJM,BUKRS,BSART,EKORG,EKGRP,LIFNR,WAERS,ERNAM,ACCEPT,REJECT,to_ZzItems,to_ZzTotal,to_ZzApprovalHistory">
                     <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="1" selectionMode="None">
                         <t:rowActionTemplate>
                             <t:RowAction>
