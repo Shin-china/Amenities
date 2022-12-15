@@ -1,0 +1,51 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:core="sap.ui.core" 
+    xmlns:smartTable="sap.ui.comp.smarttable" 
+    xmlns:t="sap.ui.table">
+    <Dialog contentWidth="40rem" title="{i18n>ApprovalHistorytitle}">
+        <content>
+            <smartTable:SmartTable id="smartTableApprovalStatus" smartFilterId="smartFilterBar" showRowCount="true" persistencyKey="salespriceTable" enableExport="false"
+                enableAutoBinding="true" placeToolbarInTable="false" showVariantManagement="false" showTablePersonalisation="false" class="sapUiThinyMarginTop" 
+                entitySet="ZzApprovalNodeStatusSet" width="auto"
+                beforeRebindTable="onApprovalStatusBeforeRebind">
+                <t:Table id="reportTable" visibleRowCountMode="Auto" selectionMode="None">
+                    <t:columns>
+                        <t:Column width="6rem" label="{i18n>Approver}" sortProperty="Approver" filterProperty="Approver" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Approver", "leadingProperty":"Approver", "sortProperty":"Approver", "filterProperty": "Approver"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Approver}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>Approvaldate}" sortProperty="Approvaldate" filterProperty="Approvaldate" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Approvaldate", "leadingProperty":"Approvaldate", "sortProperty":"Approvaldate", "filterProperty": "Approvaldate"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Approvaldate}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>Postion}" sortProperty="Postion" filterProperty="Postion" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Postion", "leadingProperty":"Postion", "sortProperty":"Postion", "filterProperty": "Postion"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Postion}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Status", "leadingProperty":"Status", "sortProperty":"Status", "filterProperty": "Status"}' />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Status}" />
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>
