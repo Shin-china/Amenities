@@ -37,7 +37,7 @@
                 <smartTable:SmartTable id="smartTable" smartFilterId="smartFilterBarProcess" enableExport="false" entitySet="ZzHeaderSet"  showRowCount="true" 
                     smartVariant="__SVM01" useVariantManagement="true"  beforeRebindTable="onBeforeRebindTable"
                     useTablePersonalisation="true" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" class="sapUiThinyMarginTop"
-                    requestAtLeastFields="ZJM,BUKRS,BSART,EKORG,EKGRP,LIFNR,WAERS,ERNAM,ACCEPT,REJECT,to_ZzItems,to_ZzTotal,to_ZzApprovalHistory">
+                    requestAtLeastFields="ZBANFN,ZJM,BUKRS,BSART,EKORG,EKGRP,LIFNR,WAERS,ERNAM,ACCEPT,REJECT,to_ZzItems,to_ZzTotal,to_ZzApprovalHistory">
                     <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="1" selectionMode="None">
                         <t:rowActionTemplate>
                             <t:RowAction>

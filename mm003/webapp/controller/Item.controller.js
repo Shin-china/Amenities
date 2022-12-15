@@ -1,12 +1,13 @@
 sap.ui.define(
-    [
+    [  
       "sap/ui/core/mvc/Controller",
       "sap/m/MessageBox",
       "./messages",
       "../model/formatter",
-      "sap/ui/core/routing/HashChanger"
+      "sap/ui/core/routing/HashChanger",
+      "sap/ui/model/Filter"
     ],
-    function(BaseController,MessageBox, messages,formatter,HashChanger) {
+    function(BaseController,MessageBox, messages,formatter,HashChanger,Filter) {
       "use strict";
   
       return BaseController.extend("mm003.controller.Item", {
@@ -36,6 +37,7 @@ sap.ui.define(
             var oArgs = oEvent.getParameter("arguments");
             var oHeader = this._oDataModel.getProperty("/" + oArgs.contextPath);
             this.tableConverted_dis(oArgs.contextPath);
+            this.getAttachment(oHeader);
             this._LocalData.setProperty("/item", [oHeader]);
 
             sap.ui.getCore().getMessageManager().removeAllMessages();
@@ -86,6 +88,55 @@ sap.ui.define(
           this._LocalData.setProperty("/Total",aTotal);
           this._LocalData.setProperty("/approvalHistory",aApprovalHistory);
           this._LocalData.refresh();
+        },
+
+
+        getAttachment: function(oRecord) {
+          // var that = this;
+          var oNewFilter,
+            aNewFilters = [];
+          // var sZbanfn1 = this.getModel("local").getProperty("/Zbanfn");
+          // var sZbanfn2 = this.getModel("local").getProperty("/ZzHeader/Zbanfn");
+          var sZbanfn = oRecord.ZBANFN;
+    
+          // if (sZbanfn2 !== "" || sZbanfn2 !== null) {
+          // 	sZbanfn = sZbanfn2;
+          // } else {
+          // 	sZbanfn = sZbanfn1;
+          // }
+    
+          aNewFilters.push(new Filter("Objectid", sap.ui.model.FilterOperator.EQ, sZbanfn));
+          aNewFilters.push(new Filter("Objtype", sap.ui.model.FilterOperator.EQ, "01"));
+    
+          oNewFilter = new Filter({
+            filters: aNewFilters,
+            and: true
+          });
+    
+          var oParam = {
+            filters: aNewFilters,
+            success: function(oData) {
+              var aAtta = [];
+              aAtta = oData.results;
+              this._LocalData.setProperty("/ZzAttachment", aAtta);
+              this._LocalData.refresh();
+            }.bind(this),
+            error: function(oError) {
+              var sErrorMessage;
+              if (oError.statusCode === "500") {
+    
+              }
+              try {
+                var oJsonMessage = JSON.parse(oError.responseText);
+                sErrorMessage = oJsonMessage.error.message.value;
+              } catch (e) {
+                sErrorMessage = oError.responseText;
+              }
+    
+            }.bind(this)
+          };
+          this.getOwnerComponent().getModel("Attachment").read("/UploadSet", oParam);
+    
         },
 
         onApprovalConfirm: function(sAction) {
@@ -140,7 +191,23 @@ sap.ui.define(
               COMMENTS: this.byId("TextArea1").getValue()
           };
           return postData
+        },
+        
+        onAttachmentPress: function(oEvent) {
+
+          var Zbanfn = this._LocalData.getProperty("/item/0/ZBANFN");
+
+          // var Zbanfn = this.getModel("local").getProperty("/ZzHeader/Zbanfn");
+          var fileName = oEvent.getSource().getProperty("title");
+          var url = "/sap/opu/odata/SAP/ZUI5_FILE_UPLOAD_N_SRV";
+          if (fileName !== undefined && fileName != null) {
+            url = url + "/UploadSet(Objtype='01',Objectid=" + "'" + Zbanfn + "'" + ",Filename=" + "'" + fileName + "'" + ")/$value";
+            window.open(url, "_blank");
+          }
+    
         }
+
+
       });
     }
   );

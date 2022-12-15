@@ -1,4 +1,5 @@
 <mvc:View 
+        xmlns:ux="sap.uxap"
         controllerName="mm003.controller.Item"
 		xmlns="sap.ui.table"
 		xmlns:mvc="sap.ui.core.mvc"
@@ -165,9 +166,15 @@
 					</m:IconTabFilter>
 					<m:IconTabFilter id="_IDGenIconTabFilter2"
 						icon="sap-icon://attachment"
-						key="attachments"
-						count="0">
-						<m:Text id="_IDGenText17" text="Attachments go here ..." />
+						key="attachments">
+						<!-- <m:Text id="_IDGenText17" text="Attachments go here1 ..." /> -->
+
+						<m:List id="list" enableBusyIndicator="true" headerText="" growing="true"
+							items="{ path:'local>/ZzAttachment'}" itemPress="onAttachmentPress1" busy="{settings>/appProperties/busy}" select="onAttachmentPress">
+							<m:StandardListItem type="Active" title="{local>Filename}" icon="sap-icon://document-text" iconDensityAware="false" iconInset="false" press="onAttachmentPress" detailPresss="onAttachmentPress" />
+							<!--<StandardListItem title="{Lifnr}" description="{ProductId}" icon="{ProductPicUrl}" iconDensityAware="false" iconInset="false"/>-->
+						</m:List>
+						
 					</m:IconTabFilter>
 					<m:IconTabFilter id="_IDGenIconTabFilter3" icon="sap-icon://notes" key="notes" >
 

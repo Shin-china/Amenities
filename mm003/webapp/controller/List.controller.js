@@ -1,11 +1,12 @@
 sap.ui.define(
-    [
+    [   
+        "mm003/controller/Base",
         "sap/ui/core/mvc/Controller",
         "sap/ui/model/Filter",
         "../model/formatter",
         "sap/ui/core/routing/HashChanger"
     ],
-    function(BaseController,Filter,formatter,HashChanger) {
+    function(Base,BaseController,Filter,formatter,HashChanger) {
       "use strict";
   
       return BaseController.extend("mm003.controller.List", {
@@ -51,6 +52,8 @@ sap.ui.define(
                 this.getItem(sPath).then(function (res) {
                     this.getOwnerComponent().getRouter().navTo("Item", {layout: oNextUIState.layout, contextPath:sPath});
                 }.bind(this));
+
+                // this.getAttachment();
             }   
         },
         // 获取item数据

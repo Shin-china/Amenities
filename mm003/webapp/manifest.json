@@ -35,7 +35,15 @@
             ],
             "localUri": "localService/metadata.xml"
         }
-      }
+      },
+			"ZUI5_FILE_UPLOAD_N_SRV": {
+				"uri": "/sap/opu/odata/SAP/ZUI5_FILE_UPLOAD_N_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
     }
   },
   "sap.ui": {
@@ -92,7 +100,18 @@
           "defaultCountMode": "Inline",
           "refreshAfterChange": false
       }
-      }
+      },
+			"Attachment": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Inline",
+					"preload": true
+				},
+				"dataSource": "ZUI5_FILE_UPLOAD_N_SRV",
+				"preload": true
+			}
     },
     "resources": {
       "css": [
