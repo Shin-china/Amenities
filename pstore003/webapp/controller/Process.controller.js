@@ -723,7 +723,101 @@ sap.ui.define([
 
             setPageBusy: function (isBusy) {
                 sap.ui.getCore().byId("idProcessPage").setBusy(isBusy);
-            } 
+            },
+            
+            onPrintPDF: function () {
+                var oTable = this.byId("smartTable").getTable();
+                var aIndex = oTable.getSelectedIndices();
+                // check button
+                var isError = false;
+                aIndex.forEach(function (selectedIndex) {
+                    if (isError) {return;}
+                    var oItem = oTable.getContextByIndex(selectedIndex).getObject();
+                    isError = !this.checkButtonEnable(oItem.NIKKEIHYO_STATUS_CD, "pdf")
+                }.bind(this));
+                if (isError) {return;}
+
+                for (var i = 0; i < aIndex.length; i++) {
+                    var oContext = oTable.getContextByIndex(aIndex[i]);
+                    var oData = oContext.getObject();
+                    var sUrl = "/sap/opu/odata/sap/ZZPSTORE003_SRV/ZzExportSet(KAISHA_CD='" + oData.KAISHA_CD + "',KIHYO_NO='" + oData.KIHYO_NO + "')/$value";
+                    // window.open(sUrl, "_blank");
+                    var sShop = oData.TENPO_CD;
+                    if (sShop.length == 3) {
+                        sShop = "0" + sShop;
+                    }
+                    var sFielName = "Amenities_本部_" + sShop + "_" + oData.EIGYO_BI + oData.NIKKEIHYO_STATUS;
+                    this.download(sUrl, sFielName);
+                }
+            },
+
+            getBlob: function (url) {
+                return new Promise(resolve => {
+                  const xhr = new XMLHttpRequest();
+            
+                  xhr.open('GET', url, true);
+                  xhr.responseType = 'blob';
+                  xhr.onload = () => {
+                    if (xhr.status === 200) {
+                      resolve(xhr.response);
+                    }
+                  };
+            
+                  xhr.send();
+                });
+            },
+            saveAs: function (blob, filename) {
+                if (window.navigator.msSaveOrOpenBlob) {
+                  navigator.msSaveBlob(blob, filename);
+                } else {
+                  const link = document.createElement('a');
+                  const body = document.querySelector('body');
+            
+                  link.href = window.URL.createObjectURL(blob);
+                  link.download = filename;
+            
+                  // fix Firefox
+                  link.style.display = 'none';
+                  body.appendChild(link);
+            
+                  link.click();
+                  body.removeChild(link);
+            
+                  window.URL.revokeObjectURL(link.href);
+                }
+            },
+            download: function (url, sFielName) {
+                this.getBlob(url).then(blob => {
+                  this.saveAs(blob, sFielName);
+                });
+            },
+
+            //第一界面要限制的按钮：参照新规，删除，凭证做成，pdf打印
+            checkButtonEnable: function (sDocumentStatus, sAction) {
+                var oButtonMap = {
+                    //仮保存
+                    "1":{"refrence":false, "delete":true, "posting":false, "pdf":true},
+                    //申請中
+                    "2":{"refrence":false, "delete":false, "posting":false, "pdf":true},
+                    //申請済
+                    "3":{"refrence":false, "delete":false, "posting":false, "pdf":true},
+                    //承認済
+                    "4":{"refrence":false, "delete":false, "posting":true, "pdf":true},
+                    //否認
+                    "5":{"refrence":false, "delete":false, "posting":false, "pdf":true},
+                    //再申請
+                    "6":{"refrence":false, "delete":false, "posting":false, "pdf":true},
+                    //仕訳作成済
+                    "7":{"refrence":false, "delete":false, "posting":false, "pdf":true},
+                    //取消済
+                    "8":{"refrence":true, "delete":false, "posting":false, "pdf":false}
+                };
+                if (!oButtonMap[sDocumentStatus][sAction]) {
+                    messages.showError(this._ResourceBundle.getText("msg5"));
+                    return false;
+                }
+                return true;
+            }  
             
         });
     });

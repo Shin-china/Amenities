@@ -143,10 +143,12 @@
         },
         "Item": {
           "viewName": "Item",
+          "clearControlAggregation": true,
           "controlAggregation": "midColumnPages"
         },
         "PoItem": {
           "viewName": "PoItem",
+          "clearControlAggregation": true,
           "controlAggregation": "midColumnPages"
         }
       }
