@@ -1,0 +1,121 @@
+<core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
+	xmlns:f="sap.f" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
+	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" title="Select:{i18n>Werks}">
+		<!--<content>-->
+		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Werks" liveMode="true" showGoOnFB="true"
+			showFilterConfiguration="true" entitySet="HT001wSet">
+			<smartfilterbar:controlConfiguration>
+				<smartfilterbar:ControlConfiguration index="1" key="Werks" visibleInAdvancedArea="true" label="{i18n>Werks}"/>
+				<smartfilterbar:ControlConfiguration index="2" key="Name1" visibleInAdvancedArea="true" label="{i18n>Name1}"/>
+			</smartfilterbar:controlConfiguration>
+		</smartfilterbar:SmartFilterBar>
+		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
+			beforeRebindTable="onRebingTable" entitySet="HT001wSet">
+			<table:Table id="internalTable" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLine"
+				cellClick="onSelectLine">
+				<table:columns>
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Werks" filterProperty="Werks">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Werks", "leadingProperty":"Werks", "sortProperty": "Werks", "filterProperty": "Werks"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Werks}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Werks}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="15rem" visible="true" autoResizable="true" sortProperty="Name1" filterProperty="Name1">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Name1", "leadingProperty":"Name1", "sortProperty": "Name1", "filterProperty": "Name1"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Name1}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Name1}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Sort2" filterProperty="Sort2">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Sort2", "leadingProperty":"Sort2", "sortProperty": "Sort2", "filterProperty": "Sort2"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Sort2}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Sort2}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Sort1" filterProperty="Sort1">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Sort1", "leadingProperty":"Sort1", "sortProperty": "Sort1", "filterProperty": "Sort1"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Sort1}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Sort1}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="City1" filterProperty="City1">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"City1", "leadingProperty":"City1", "sortProperty": "City1", "filterProperty": "City1"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>City1}"/>
+						</table:label>
+						<table:template>
+							<Label text="{City1}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Name2" filterProperty="Name2">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Name2", "leadingProperty":"Name2", "sortProperty": "Name2", "filterProperty": "Name2"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Name2}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Name2}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Nation" filterProperty="Nation">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Nation", "leadingProperty":"Nation", "sortProperty": "Nation", "filterProperty": "Nation"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Nation}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Nation}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+		</smarttable:SmartTable>
+		<!--</content>-->
+		<endButton>
+			<Button id="btnClose" text="{i18n>BUTTON_CLOSE}" type="Transparent" press="onCloseSearchDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

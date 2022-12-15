@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
+	xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
+	<Dialog id="dialogSelect1" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true">
+		<content>
+			<smartfilterbar:SmartFilterBar id="smartFilter1" enableBasicSearch="true" liveMode="true"></smartfilterbar:SmartFilterBar>
+			<smarttable:SmartTable id="smartTable1" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
+				beforeRebindTable="onRebingTable">
+				<table:Table id="internalTable1" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLine"
+					cellClick="onSelectLine"></table:Table>
+			</smarttable:SmartTable>
+		</content>
+		<endButton>
+			<Button id="btnClose" text="{i18n>BUTTON_CLOSE}" type="Transparent" press="onCloseSearchDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

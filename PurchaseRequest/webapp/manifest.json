@@ -1,0 +1,209 @@
+{
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "MMPurchaseRequest",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "sourceTemplate": {
+            "id": "servicecatalog.connectivityComponent",
+            "version": "0.0.0",
+            "toolsId": "f9b7e58e-c5e1-4d2d-a724-f2eecdb64f67"
+        },
+        "dataSources": {
+            "ZZPURCHASEREQUEST_SRV": {
+                "uri": "/sap/opu/odata/sap/ZZPURCHASEREQUEST_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml",
+                    "annotations": [
+                        "annotation0"
+                    ]
+                }
+            },
+            "annotation0": {
+                "type": "ODataAnnotation",
+                "uri": "annotation0.xml",
+                "settings": {
+                    "localUri": "annotation0.xml"
+                }
+            },
+            "ZUI5_FILE_UPLOAD_N_SRV": {
+                "uri": "/sap/opu/odata/SAP/ZUI5_FILE_UPLOAD_N_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "mainService_Annotation": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI5_FILE_UPLOAD_ANNO_ANNO_MDL',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/mainService_Annotation.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize"
+        ]
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "MMPurchaseRequest.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        },
+        "dependencies": {
+            "minUI5Version": "1.65.6",
+            "libs": {
+                "sap.collaboration": {},
+                "sap.m": {},
+                "sap.ui.comp": {},
+                "sap.ui.core": {},
+                "sap.ui.layout": {},
+                "sap.ushell": {},
+                "sap.uxap": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "MMPurchaseRequest.i18n.i18n"
+                }
+            },
+            "local": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "localModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "preload": false
+            },
+            "": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "preload": true
+                },
+                "dataSource": "ZZPURCHASEREQUEST_SRV",
+                "preload": true
+            },
+            "Attachment": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "preload": true
+                },
+                "dataSource": "ZUI5_FILE_UPLOAD_N_SRV",
+                "preload": true
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "MMPurchaseRequest.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteApp",
+                    "pattern": "RouteApp",
+                    "target": [
+                        "TargetApp"
+                    ]
+                },
+                {
+                    "pattern": "",
+                    "name": "Main",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "Main"
+                    ]
+                },
+                {
+                    "name": "Detail",
+                    "pattern": "Detail",
+                    "greedy": false,
+                    "target": [
+                        "Detail"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetApp": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewName": "App",
+                    "viewLevel": 1
+                },
+                "Main": {
+                    "viewType": "XML",
+                    "viewName": "Main",
+                    "viewLevel": 2
+                },
+                "Detail": {
+                    "viewPath": "MMPurchaseRequest.view",
+                    "viewType": "XML",
+                    "viewName": "Detail",
+                    "viewLevel": 2
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zmmpr/webapp",
+        "_version": "1.1.0"
+    }
+}

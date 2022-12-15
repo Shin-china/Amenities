@@ -1,0 +1,68 @@
+{
+  "projectType": [
+    "sap.watt.saptoolsets.fiori.project.ui5template.smartProject",
+    "sap.watt.uitools.ide.fiori",
+    "sap.watt.uitools.ide.web",
+    "com.watt.common.builder.sapui5clientbuild"
+  ],
+  "generation": [
+    {
+      "templateId": "ui5template.basicSAPUI5ApplicationProjectCommon",
+      "templateVersion": "1.32.0",
+      "dateTimeStamp": "Sat, 12 Nov 2022 14:17:57 GMT"
+    },
+    {
+      "templateId": "ui5template.basicSAPUI5ApplicationProject",
+      "templateVersion": "1.40.12",
+      "dateTimeStamp": "Sat, 12 Nov 2022 14:17:57 GMT"
+    },
+    {
+      "templateId": "ui5template.basicSAPUI5ApplicationComponent",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Sat, 12 Nov 2022 14:21:12 GMT"
+    },
+    {
+      "templateId": "servicecatalog.connectivityComponent",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Sat, 12 Nov 2022 14:30:09 GMT"
+    }
+  ],
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,fr,de",
+    "defaultLanguage": "en",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  },
+  "basevalidator": {
+    "services": {
+      "xml": "fioriXmlAnalysis",
+      "js": "fioriJsValidator"
+    }
+  },
+  "codeCheckingTriggers": {
+    "notifyBeforePush": true,
+    "notifyBeforePushLevel": "Error",
+    "blockPush": false,
+    "blockPushLevel": "Error"
+  },
+  "build": {
+    "buildRequired": false,
+    "sourceFolder": "webapp",
+    "targetFolder": "dist",
+    "excludedFolders": [],
+    "excludedFiles": [],
+    "lastBuildDateTime": "Fri, 09 Dec 2022 10:12:57 GMT"
+  },
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/ZZPURCHASEREQUEST_SRV",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "deploy": {
+    "destination": "RD1",
+    "name": "ZMMPR"
+  }
+}

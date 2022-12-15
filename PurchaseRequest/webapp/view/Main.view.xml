@@ -1,0 +1,44 @@
+<mvc:View controllerName="MMPurchaseRequest.controller.Main" displayBlock="true" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.f"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:sv="sap.ui.comp.smartvariants"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table" xmlns:html="http://www.w3.org/1999/xhtml">
+	<f:DynamicPage id="page" busy="{settings>/appProperties/busy}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<sv:SmartVariantManagement id="__SVM01" persistencyKey="purchaseRequestSVM" showShare="true" showExecuteOnSelection="true"
+						entitySet="ZzPRHeaderSet"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content>
+					<smartFilterBar:SmartFilterBar id="smartFilterBar" smartVariant="__SVM01" useToolbar="false" entitySet="ZzPRHeaderSet"
+						persistencyKey="purchaseRequestFilterBar" search="onGo" filterChange="onFilterBarChange">
+						<smartFilterBar:controlConfiguration>
+							<!--	<smartFilterBar:ControlConfiguration key="Zbanfn" visibleInAdvancedArea="true" label="{i18n>Zbanfn}" index="3" filterType="single"
+								enabled="false" visible="true"/>-->
+							<!--<smartFilterBar:ControlConfiguration key="Banfn" visibleInAdvancedArea="true" label="{i18n>Banfn}" index="2" filterType="single"/>-->
+							<smartFilterBar:ControlConfiguration key="Banfn" visibleInAdvancedArea="true" label="{i18n>Banfn}" index="2" filterType="single">
+								<smartFilterBar:customControl>
+									<Input id="Banfn" value="{local>/Banfn}" width="10rem" required="true" showValueHelp="true" valueHelpRequest="onShowBanfnHelp"/>
+								</smartFilterBar:customControl>
+							</smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration key="Zzoption" visibleInAdvancedArea="true" label="{i18n>Zzoption}" index="1" filterType="single"
+								mandatory="mandatory" controlType="input">
+								<smartFilterBar:customControl>
+									<ComboBox showSecondaryValues="true" id="ComboBox_ZzOption" selectedKey="1">
+										<core:ListItem key="1" text="{i18n>Create}"/>
+										<core:ListItem key="2" text="{i18n>CreateReference}"/>
+										<core:ListItem key="3" text="{i18n>Change}"/>
+										<core:ListItem key="4" text="{i18n>Display}"/>
+									</ComboBox>
+								</smartFilterBar:customControl>
+							</smartFilterBar:ControlConfiguration>
+						</smartFilterBar:controlConfiguration>
+					</smartFilterBar:SmartFilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+	</f:DynamicPage>
+</mvc:View>

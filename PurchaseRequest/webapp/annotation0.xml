@@ -1,0 +1,179 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzPRHeader/Zbanfn">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzSHZbanfnSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Zbanfn"/>
+									<PropertyValue Property="ValueListProperty" String="Zbanfn"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Bukrs"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Ekgrp"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Bsart"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Zjm"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Ernam"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Zspzt"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Loekz"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzPRHeader/Bukrs">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="HT001Set"/>
+						<PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Bukrs"/>
+									<PropertyValue Property="ValueListProperty" String="Bukrs"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Butxt"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzPRHeader/Banfn">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Banfn}"/>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzSHZbanfnSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Banfn"/>
+									<PropertyValue Property="ValueListProperty" String="Banfn">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Banfn}"/>
+									</PropertyValue>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Bukrs">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Bukrs}"/>
+									</PropertyValue>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Ekgrp">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Ekgrp}"/>
+									</PropertyValue>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Bsart">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Bsart}"/>
+									</PropertyValue>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Zjm">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Zjm}"/>
+									</PropertyValue>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Zspzt">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Zspzt}"/>
+									</PropertyValue>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Loekz">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Loekz}"/>
+									</PropertyValue>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Ernam">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Ernam}"/>
+									</PropertyValue>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Badat">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Badat}"/>
+									</PropertyValue>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Zbanfn"/>
+									<PropertyValue Property="ValueListProperty" String="Zbanfn">
+										<Annotation Term="Common.Label" String="{@i18n&gt;Zbanfn}"/>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Banfn}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Badat">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Badat}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Banfn">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Banfn}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Bsart">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Bsart}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Bukrs">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Bukrs}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Ekgrp">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Ekgrp}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Ernam">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Ernam}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Loekz">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Loekz}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Zbanfn">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Zbanfn}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Zjm">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Zjm}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Zspzt">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Zspzt}"/>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

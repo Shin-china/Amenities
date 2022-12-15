@@ -1,0 +1,81 @@
+<core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
+	xmlns:f="sap.f" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
+	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" title="Select:{i18n>Kostl}">
+		<!--<content>-->
+		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Kostl" liveMode="true" showGoOnFB="true"
+			showFilterConfiguration="true" entitySet="KostnSet">
+			<smartfilterbar:controlConfiguration>
+				<smartfilterbar:ControlConfiguration index="1" key="Kostl" visibleInAdvancedArea="true" label="{i18n>Kostl}"/>
+				<smartfilterbar:ControlConfiguration index="2" key="Bukrs" visibleInAdvancedArea="true" label="{i18n>Bukrs}"/>
+				<smartfilterbar:ControlConfiguration index="3" key="Spras" visibleInAdvancedArea="true" label="{i18n>Spras}"/>
+				<smartfilterbar:ControlConfiguration index="4" key="Mctxt" visibleInAdvancedArea="true" label="{i18n>Mctxt}"/>
+			</smartfilterbar:controlConfiguration>
+		</smartfilterbar:SmartFilterBar>
+		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
+			beforeRebindTable="onRebingTable" entitySet="KostnSet">
+			<table:Table id="internalTable" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLine"
+				cellClick="onSelectLine">
+				<table:columns>
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Kostl" filterProperty="Kostl">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Kostl", "leadingProperty":"Kostl", "sortProperty": "Kostl", "filterProperty": "Kostl"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Kostl}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Kostl}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Bukrs" filterProperty="Bukrs">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Bukrs", "leadingProperty":"Bukrs", "sortProperty": "Bukrs", "filterProperty": "Bukrs"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Bukrs}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Bukrs}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Sort1" filterProperty="Spras">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Spras", "leadingProperty":"Spras", "sortProperty": "Spras", "filterProperty": "Spras"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Spras}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Spras}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Name2" filterProperty="Mctxt">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Mctxt", "leadingProperty":"Mctxt", "sortProperty": "Mctxt", "filterProperty": "Mctxt"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Mctxt}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Mctxt}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+		</smarttable:SmartTable>
+		<!--</content>-->
+		<endButton>
+			<Button id="btnClose" text="{i18n>BUTTON_CLOSE}" type="Transparent" press="onCloseSearchDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

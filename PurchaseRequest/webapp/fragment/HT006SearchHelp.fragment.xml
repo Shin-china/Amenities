@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
+	xmlns:f="sap.f" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
+	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" title="Select:{i18n>Msehi}">
+		<!--<content>-->
+		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Msehi" liveMode="true" showGoOnFB="true"
+			showFilterConfiguration="true" entitySet="HT006Set">
+			<smartfilterbar:controlConfiguration>
+				<smartfilterbar:ControlConfiguration index="1" key="Msehi" visibleInAdvancedArea="true" label="{i18n>Msehi}"/>
+				<smartfilterbar:ControlConfiguration index="2" key="Msehl" visibleInAdvancedArea="true" label="{i18n>Msehl}"/>
+			</smartfilterbar:controlConfiguration>
+		</smartfilterbar:SmartFilterBar>
+		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
+			beforeRebindTable="onRebingTable" entitySet="HT006Set">
+			<table:Table id="internalTable" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLine"
+				cellClick="onSelectLine">
+				<table:columns>
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Msehi" filterProperty="Bukrs">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Msehi", "leadingProperty":"Msehi", "sortProperty": "Msehi", "filterProperty": "Msehi"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Msehi}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Msehi}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+				<table:columns>
+					<table:Column width="15rem" visible="true" autoResizable="true" sortProperty="Msehl" filterProperty="Msehl">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Msehl", "leadingProperty":"Msehl", "sortProperty": "Msehl", "filterProperty": "Msehl"}'/>
+						</table:customData>
+						<table:label>
+							<Label text="{i18n>Msehl}"/>
+						</table:label>
+						<table:template>
+							<Label text="{Msehl}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+		</smarttable:SmartTable>
+		<!--</content>-->
+		<endButton>
+			<Button id="btnClose" text="{i18n>BUTTON_CLOSE}" type="Transparent" press="onCloseSearchDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

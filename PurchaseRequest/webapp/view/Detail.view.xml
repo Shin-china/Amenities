@@ -1,0 +1,464 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="MMPurchaseRequest.controller.Detail"
+	xmlns:ux="sap.uxap" xmlns:form="sap.ui.layout.form" xmlns:t="sap.ui.table" xmlns:f="sap.f" xmlns:List="sap.m.sample.ListDeletion.List"
+	xmlns:CustomData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:layout="sap.ui.layout"
+	xmlns:form1="sap.ui.comp.smartform" xmlns:smartField="sap.ui.comp.smartfield" xmlns:html="http://www.w3.org/1999/xhtml">
+	<ux:ObjectPageLayout showHeaderContent="true" showFooter="true">
+		<ux:headerTitle>
+			<ux:ObjectPageHeader objectTitle="{local>/ZzTitle}" isObjectIconAlwaysVisible="true" isObjectTitleAlwaysVisible="true"
+				isObjectSubtitleAlwaysVisible="false">
+				<ux:actions>
+					<ux:ObjectPageHeaderActionButton icon="sap-icon://nav-back" text="{i18n>bBack}" tooltip="{i18n>bBack}" hideText="false" press=".onNavBack"/>
+				</ux:actions>
+				<ux:actions>
+					<ux:ObjectPageHeaderActionButton icon="sap-icon://save" text="{i18n>bSave}" tooltip="{i18n>bSave}" hideText="false" press="_getPostData"
+						enabled="{local>/editCreate}"/>
+					<!--press=".onSave"-->
+				</ux:actions>
+				<ux:actions>
+					<ux:ObjectPageHeaderActionButton icon="sap-icon://attachment" text="{i18n>bAddAttachment}" tooltip="{i18n>bAddAttachment}" hideText="false"
+						press=".onAddAttachment" enabled="{local>/editCreate}" visible="true"/>
+				</ux:actions>
+				<ux:actions>
+					<ux:ObjectPageHeaderActionButton icon="sap-icon://pdf-attachment" text="{i18n>bPDFPrint}" tooltip="{i18n>bPDFPrint}" hideText="false"
+						press=".onPDFPrint" visible="true"/>
+				</ux:actions>
+				<ux:actions>
+					<ux:ObjectPageHeaderActionButton icon="sap-icon://approvals" text="{i18n>bSendToApprove}" tooltip="{i18n>bSendToApprove}" hideText="false"
+						press=".onSendToApprove1" enabled="{local>/editCreate}"/>
+				</ux:actions>
+				<ux:actions>
+					<ux:ObjectPageHeaderActionButton icon="sap-icon://delete" text="{i18n>bDelete}" tooltip="{i18n>bDelete}" hideText="false" press=".onDelete"
+						enabled="{local>/editCreate}"/>
+				</ux:actions>
+			</ux:ObjectPageHeader>
+		</ux:headerTitle>
+		<ux:sections>
+			<ux:ObjectPageSection title="{i18n>header}">
+				<ux:subSections>
+					<ux:ObjectPageSubSection>
+						<ux:blocks>
+							<VBox>
+								<form:Form busy="{settings>/appProperties/busy}">
+									<form:layout>
+										<form:ResponsiveGridLayout columnsL="6" columnsM="6" columnsXL="6" emptySpanL="0" emptySpanM="0" emptySpanS="0"/>
+									</form:layout>
+									<form:formContainers>
+										<form:FormContainer>
+											<form:formElements>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Bukrs1" text="{i18n>Bukrs}" required="true"/>
+															<Input id="Bukrs" editable="{local>/editCreate}" value="{local>/ZzHeader/Bukrs}" width="10rem" required="true" showValueHelp="true"
+																valueHelpRequest="onShowCompanyHelp"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Name_text1" text="{i18n>Name_text}"/>
+															<Input id="Name_text" editable="false" value="{local>/ZzHeader/Name_text}" width="10rem"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+											</form:formElements>
+										</form:FormContainer>
+										<form:FormContainer>
+											<form:formElements>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Ekgrp1" text="{i18n>Ekgrp}" required="true"/>
+															<Input id="Ekgrp" editable="{local>/editCreate}" value="{local>/ZzHeader/Ekgrp}" width="10rem" required="true" showValueHelp="true"
+																valueHelpRequest="onShowEkgrpHelp"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Banfn1" text="{i18n>Banfn}"/>
+															<Input id="Banfn" editable="false" value="{local>/ZzHeader/Banfn}" width="10rem"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+											</form:formElements>
+										</form:FormContainer>
+										<form:FormContainer>
+											<form:formElements>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Bsart1" text="{i18n>Bsart}" required="true"/>
+															<Input id="Bsart" editable="{local>/editCreate}" value="{local>/ZzHeader/Bsart}" width="10rem" required="true" showValueHelp="true"
+																valueHelpRequest="onShowBsartHelp"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Zspzt" text="{i18n>Zspzt}"/>
+															<Input id="ZspztText" editable="false" value="{local>/ZzHeader/ZspztText}" width="10rem"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+											</form:formElements>
+										</form:FormContainer>
+										<form:FormContainer>
+											<form:formElements>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Badat" text="{i18n>Badat}"/>
+															<DatePicker value="{local>/ZzHeader/Badat}" valueFormat="yyyy-MM-dd" displayFormat="short" enabled="{local>/editCreate}"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Loekz1" text="{i18n>Loekz}"/>
+															<CheckBox text="" valueState="Error" selected="{local>/ZzHeader/Loekz}" editable="false"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+											</form:formElements>
+										</form:FormContainer>
+										<form:FormContainer>
+											<form:formElements>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Zspqx" text="{i18n>Zspqx}"/>
+															<DatePicker value="{local>/ZzHeader/Zspqx}" valueFormat="yyyy-MM-dd" displayFormat="short" enabled="{local>/editCreate}"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Zbanfn1" text="{i18n>Zbanfn}"/>
+															<Input id="Zbanfn" editable="false" value="{local>/ZzHeader/Zbanfn}" width="10rem"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+											</form:formElements>
+										</form:FormContainer>
+										<form:FormContainer>
+											<form:formElements>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label id="Zsprq1" text="{i18n>Zsprq}"/>
+															<DatePicker value="{local>/ZzHeader/Zsprq}" valueFormat="yyyy-MM-dd" displayFormat="short" enabled="false"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
+											</form:formElements>
+										</form:FormContainer>
+									</form:formContainers>
+								</form:Form>
+								<form:Form busy="{settings>/appProperties/busy}">
+									<form:layout>
+										<form:ResponsiveGridLayout columnsL="1" columnsM="1" columnsXL="1" emptySpanL="0" emptySpanM="0" emptySpanS="0" labelSpanL="1"
+											labelSpanM="2" labelSpanXL="12" labelSpanS="1" adjustLabelSpan="false"/>
+									</form:layout>
+									<form:formContainers>
+										<form:FormContainer>
+											<form:FormElement>
+												<form:fields>
+													<VBox>
+														<Label text="{i18n>Zjm}" required="true"/>
+														<Input id="Zjm" editable="{local>/editCreate}" value="{local>/ZzHeader/Zjm}"/>
+													</VBox>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:fields>
+													<VBox>
+														<Label text="{i18n>Zsqly}"/>
+														<TextArea id="Zsqly" editable="{local>/editCreate}" value="{local>/ZzHeader/Zsqly}" rows="4" width="100%"/>
+													</VBox>
+												</form:fields>
+											</form:FormElement>
+										</form:FormContainer>
+									</form:formContainers>
+								</form:Form>
+							</VBox>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+			<ux:ObjectPageSection title="{i18n>item}">
+				<ux:subSections>
+					<ux:ObjectPageSubSection>
+						<ux:blocks>
+							<t:Table id="tableItem" rows="{ path:'local>/ZzItem' }" class="sapUiSizeCompact" threshold="20" visibleRowCount="15" selectionMode="Single"
+								editable="true" selectionBehavior="Row" busy="{settings>/appProperties/busy}">
+								<t:extension>
+									<OverflowToolbar>
+										<Text text="{/logInfo}"/>
+										<ToolbarSpacer/>
+										<Button icon="sap-icon://add" text="{i18n>bAddRow}" press="onAddRow" enabled="{local>/editCreate}"/>
+									</OverflowToolbar>
+								</t:extension>
+								<t:columns>
+									<t:Column width="4rem">
+										<Label text="{i18n>Delete}"/>
+										<t:template>
+											<Button icon="sap-icon://delete" press="onDeleteRow" type="Reject" enabled="{local>/editCreate}"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="6rem" sortProperty="Zbnfpo">
+										<Label text="{i18n>Zbnfpo}" required="true"/>
+										<t:template>
+											<Input id="Zbnfpo" editable="{local>/editCreate}" value="{local>Zbnfpo}" required="true"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="6rem" sortProperty="Knttp">
+										<Label text="{i18n>Knttp}" required="true"/>
+										<t:template>
+											<Input id="Knttp" editable="{local>/editCreate}" value="{local>Knttp}" required="true"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="6rem" sortProperty="Werks">
+										<Label text="{i18n>Werks}" required="true"/>
+										<t:template>
+											<Input id="Werks" editable="{local>/editCreate}" value="{local>Werks}" required="false" showValueHelp="true"
+												valueHelpRequest="onShowWerksHelp"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="6rem" sortProperty="Lgort">
+										<Label text="{i18n>Lgort}" required="true"/>
+										<t:template>
+											<Input id="Lgort" editable="{local>/editCreate}" value="{local>Lgort}" required="true" showValueHelp="true"
+												valueHelpRequest="onShowLgortHelp"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Matnr">
+										<Label text="{i18n>Matnr}" required="false"/>
+										<t:template>
+											<Input id="Matnr" editable="{local>/editCreate}" value="{local>Matnr}" required="false" showValueHelp="true"
+												valueHelpRequest="onShowMatnrHelp" change="onItemChange"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="15rem" sortProperty="Txz01">
+										<Label text="{i18n>Txz01}"/>
+										<t:template>
+											<Input id="Txz01" editable="{local>/editCreate}" value="{local>Txz01}" required="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Matkl">
+										<Label text="{i18n>Matkl}" required="true"/>
+										<t:template>
+											<Input id="Matkl" editable="{local>/editCreate}" value="{local>Matkl}" required="true" showValueHelp="true"
+												valueHelpRequest="onShowMatklHelp"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Menge">
+										<Label text="{i18n>Menge}" required="true"/>
+										<t:template>
+											<Input id="Menge" editable="{local>/editCreate}" value="{local>Menge}" required="true" textAlign="Right" change="onItemChange"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="6rem" sortProperty="Meins" resizable="true">
+										<Label text="{i18n>Meins}"/>
+										<t:template>
+											<Input id="Meins" editable="{local>/editCreate}" value="{local>Meins}" showValueHelp="true" valueHelpRequest="onShowMeinsHelp"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Preis">
+										<Label text="{i18n>Preis}" required="true"/>
+										<t:template>
+											<Input id="Preis" editable="{local>/editCreate}" value="{local>Preis}" required="true" textAlign="Right" change="onItemChange"/>
+											<!--<Input id="Preis" editable="{local>/editCreate}" value="{path:'local>Preis',formatter:'.formatter.amountFormat'}" required="true" textAlign="Right" change="onItemChange"/>-->
+										</t:template>
+									</t:Column>
+									<t:Column width="6rem" sortProperty="Waers" resizable="true">
+										<Label text="{i18n>Waers}"/>
+										<t:template>
+											<Input id="Waers" editable="{local>/editCreate}" value="{local>Waers}" change="onItemChange"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="6rem" sortProperty="Peinh">
+										<Label text="{i18n>Peinh}"/>
+										<t:template>
+											<Input id="Peinh" editable="{local>/editCreate}" value="{local>Peinh}" change="onItemChange"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Zconsumtax">
+										<Label text="{i18n>Zconsumtax}" required="false"/>
+										<t:template>
+											<Input id="Zconsumtax" editable="false" value="{local>Zconsumtax}" required="false" textAlign="Right" change="onItemChange"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Zsubtotal">
+										<Label text="{i18n>Zsubtotal}" required="false"/>
+										<t:template>
+											<Input id="Zsubtotal" editable="false" value="{local>Zsubtotal}" required="false" textAlign="Right" change="onItemChange"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Lifnr">
+										<Label text="{i18n>Lifnr}" required="true"/>
+										<t:template>
+											<Input id="Lifnr" editable="{local>/editCreate}" value="{local>Lifnr}" required="false" change="onItemChange" showValueHelp="true"
+												valueHelpRequest="onShowLifnrHelp"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="15rem" sortProperty="Lifnrname" visible="true">
+										<Label text="{i18n>Lifnrname}"/>
+										<t:template>
+											<!--<Text id="Lifnrname" text="{local>Lifnrname}"/>-->
+											<Input id="Lifnrname" editable="false" value="{local>Lifnrname}" required="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Lfdat">
+										<Label text="{i18n>Lfdat}" required="true"/>
+										<t:template>
+											<!--<Input id="Datab" editable="true" value="{local>Datab, formatter: '.formatter.convertDate'}"/>-->
+											<DatePicker value="{local>Lfdat}" valueFormat="yyyy-MM-dd" displayFormat="short" enabled="{local>/editCreate}"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Saknr">
+										<Label text="{i18n>Saknr}" required="false"/>
+										<t:template>
+											<Input id="Saknr" editable="{local>/editCreate}" value="{local>Saknr}" required="false" showValueHelp="true"
+												valueHelpRequest="onShowSaknrHelp"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Kostl">
+										<Label text="{i18n>Kostl}" required="false"/>
+										<t:template>
+											<Input id="Kostl" editable="{local>/editCreate}" value="{local>Kostl}" required="false" showValueHelp="true"
+												valueHelpRequest="onShowKostlHelp"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Zremarks">
+										<Label text="{i18n>Zremarks}" required="false"/>
+										<t:template>
+											<Input id="Zremarks" editable="{local>/editCreate}" value="{local>Zremarks}" required="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Zzhje">
+										<Label text="{i18n>Zzhje}" required="false"/>
+										<t:template>
+											<Input id="Zzhje" editable="{local>/editCreate}" value="{local>Zzhje}" required="false" textAlign="Right" change="onItemChange"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="10rem" sortProperty="Zvat">
+										<Label text="{i18n>Zvat}" required="false"/>
+										<t:template>
+											<Input id="Zvat" editable="false" value="{local>Zvat}" required="false" textAlign="Right" change="onItemChange"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="6rem" sortProperty="Loekz">
+										<Label text="{i18n>Loekz}"/>
+										<t:template>
+											<CheckBox id="Loekz" editable="{local>/editCreate}" selected="{local>Loekz}" select="onDelCheckBoxSelect"/>
+										</t:template>
+									</t:Column>
+									<!--	<t:Column width="10rem" sortProperty="Ebeln">
+										<Label text="{i18n>Ebeln}" required="false"/>
+										<t:template>
+											<Text id="Ebeln" text="{local>Ebeln}"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="5rem" sortProperty="Ebelp" visible="true">
+										<Label text="{i18n>Ebelp}"/>
+										<t:template>
+											<Text id="Ebelp" text="{local>Ebelp}"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="5rem" sortProperty="Msgtype">
+										<Label text="{i18n>Msgtype}"/>
+										<t:template>
+											<Text id="Msgtype" text="{local>Msgtype}"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="15rem" sortProperty="Message" visible="true">
+										<Label text="{i18n>Message}"/>
+										<t:template>
+											<Text id="Message" text="{local>Message}"/>
+										</t:template>
+									</t:Column>-->
+								</t:columns>
+							</t:Table>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+			<ux:ObjectPageSection title="{i18n>SUM}">
+				<ux:subSections>
+					<ux:ObjectPageSubSection>
+						<ux:blocks>
+							<t:Table id="tableItemSum" rows="{ path:'local>/ZzSum' }" class="sapUiSizeCompact" threshold="20" visibleRowCount="10" selectionMode="None"
+								editable="true" selectionBehavior="Row" busy="{settings>/appProperties/busy}">
+								<!--	<t:extension>
+									<OverflowToolbar>
+										<Text text="{/logInfo}"/>
+										<ToolbarSpacer/>
+										<Button icon="sap-icon://add" text="{i18n>bAddRow}" press="onAddRow" enabled="{local>/editCreate}"/>
+									</OverflowToolbar>
+								</t:extension>-->
+								<t:columns>
+									<t:Column width="12rem" sortProperty="Lifnr">
+										<Label text="{i18n>Lifnr}"/>
+										<t:template>
+											<Input id="Lifnr1" editable="false" value="{local>Lifnr}"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="6rem" sortProperty="Waers">
+										<Label text="{i18n>Waers}"/>
+										<t:template>
+											<Input id="Waers1" editable="false" value="{local>Waers}"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="12rem" sortProperty="Znetvalue">
+										<Label text="{i18n>Znetvalue}" required="false"/>
+										<t:template>
+											<Input id="Znetvalue" editable="false" value="{local>Znetvalue}" required="false" textAlign="Right"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="12rem" sortProperty="Zsubtotal">
+										<Label text="{i18n>ZsubtotalSum}" required="false"/>
+										<t:template>
+											<Input id="Zsubtotal1" editable="false" value="{local>Zsubtotal}" required="false" textAlign="Right"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="12rem" sortProperty="Zconsumtax">
+										<Label text="{i18n>ZconsumtaxSum}" required="false"/>
+										<t:template>
+											<Input id="Zconsumtax1" editable="false" value="{local>Zconsumtax}" required="false" textAlign="Right"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="12rem" sortProperty="Zestvat">
+										<Label text="{i18n>Zestvat}" required="false"/>
+										<t:template>
+											<Input id="Zestvat" editable="{local>/editCreate}" value="{local>Zestvat}" required="false" textAlign="Right" change="onItemChangeSum"/>
+										</t:template>
+									</t:Column>
+								</t:columns>
+							</t:Table>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+			<ux:ObjectPageSection title="{i18n>attachment}">
+				<ux:subSections>
+					<ux:ObjectPageSubSection>
+						<ux:blocks>
+							<List id="list" mode="Delete" delete="onAttachmentDelete" enableBusyIndicator="true" headerText="" growing="true"
+								items="{ path:'local>/ZzAttachment'}" itemPress="onAttachmentPress1" busy="{settings>/appProperties/busy}" select="onAttachmentPress">
+								<StandardListItem type="Active" title="{local>Filename}" icon="sap-icon://document-text" iconDensityAware="false" iconInset="false" press="onAttachmentPress" detailPresss="onAttachmentPress" />
+								<!--<StandardListItem title="{Lifnr}" description="{ProductId}" icon="{ProductPicUrl}" iconDensityAware="false" iconInset="false"/>-->
+							</List>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+		</ux:sections>
+	</ux:ObjectPageLayout>
+	<!--</Page>-->
+</mvc:View>
