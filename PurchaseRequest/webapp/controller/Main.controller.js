@@ -9,19 +9,40 @@ sap.ui.define([
 	"sap/m/MenuItem",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/FilterOperator"
-], function(Base, formatter, Filter, MessageBox, MessageToast, MenuItem, JSONModel, FilterOperator) {
+], function (Base, formatter, Filter, MessageBox, MessageToast, MenuItem, JSONModel, FilterOperator) {
 	"use strict";
 
 	return Base.extend("MMPurchaseRequest.controller.Main", {
 		formatter: formatter,
 
-		onInit: function() {
-
+		onInit: function () {
+			this._firstMatched = true;
+			this.getRouter().getRoute("Main").attachPatternMatched(this._onMasterMatched, this);
 		},
 
+		_onMasterMatched: function () {
+			var startupParams = this.getOwnerComponent().getComponentData().startupParameters; // get Startup params from Owner Component
+			if ((startupParams.prnumber && startupParams.prnumber[0])) {
+				if (this._firstMatched) {
+					this._firstMatched = false;
+				} else {
+					return;
+				}
+				if (startupParams.model[0] == "change") {
+					this.getView().byId("ComboBox_ZzOption").setSelectedKey("3");
+				} else if (startupParams.model[0] == "display") {
+					this.getView().byId("ComboBox_ZzOption").setSelectedKey("4");
+				}
+				this.getModel("local").setProperty("/Banfn", startupParams.prnumber[0]);
+				this.getView().byId("smartFilterBar").search();
+				// this.getRouter().navTo("object", {
+				// 	supplierID: startupParams.supplierID[0]  // read Supplier ID. Every parameter is placed in an array therefore [0] holds the value
+				// }, true);
+			} 
+		},
 		/*		onBeforeExport: function(oEvt) {
 					var mExcelSettings = oEvt.getParameter("exportSettings");
-
+	
 					mExcelSettings.workbook.columns.forEach(function(oColumn) {
 						switch (oColumn.property) {
 							case "CreationDate":
@@ -29,11 +50,11 @@ sap.ui.define([
 								oColumn.type = sap.ui.export.EdmType.Date;
 						}
 					});
-
+	
 					mExcelSettings.fileName = this.getI18nBundle().getText("title") + new Date().getTime();
 				},
 		*/
-		onGo: function() {
+		onGo: function () {
 			var that = this;
 			var aFilters;
 			var oNewFilter,
@@ -102,23 +123,23 @@ sap.ui.define([
 			}
 
 			this.getInitData(aFilters).then(
-				function(oData) {
+				function (oData) {
 					that.gotoDetailPage(oData);
 				}
 			).catch(
-				function(err) {
+				function (err) {
 					MessageBox.error(err);
 				}
 			).finally(
-				function() {
+				function () {
 					that.setBusy(false);
 				}
 			);
 		},
 
-		getInitData: function(aFilters) {
+		getInitData: function (aFilters) {
 			var that = this;
-			var promise = new Promise(function(resolve, reject) {
+			var promise = new Promise(function (resolve, reject) {
 
 				var afilter = [];
 				afilter.push(new Filter('Zzoption', sap.ui.model.FilterOperator.EQ, "1"));
@@ -129,10 +150,10 @@ sap.ui.define([
 					urlParameters: {
 						$expand: "to_ZzPRItem,to_ZzPRSum"
 					},
-					success: function(oData) {
+					success: function (oData) {
 						resolve(oData);
 					}.bind(that),
-					error: function(oError) {
+					error: function (oError) {
 						var sErrorMessage;
 						if (oError.statusCode === "500") {
 							MessageBox.error(oError.responseText);
@@ -153,7 +174,7 @@ sap.ui.define([
 
 		},
 
-		gotoDetailPage: function(oData) {
+		gotoDetailPage: function (oData) {
 			if (oData.results.length === 0) {
 				MessageBox.error(this.getI18nBundle().getText("msgNoData"));
 				return;
@@ -189,7 +210,7 @@ sap.ui.define([
 			};
 
 			var aItems = oData.results[0].to_ZzPRItem.results;
-			aItems.forEach(function(item, index, array) {
+			aItems.forEach(function (item, index, array) {
 				array[index].Lfdat = formatter.convertDate(item.Lfdat);
 				//array[index].Zbnfpo = array[index].Zbnfpo.toString().replace(/\b(0+)/gi, "");
 				array[index].Menge = formatter.amountFormat(array[index].Menge);
@@ -202,7 +223,7 @@ sap.ui.define([
 			});
 
 			var aSum = oData.results[0].to_ZzPRSum.results;
-			aSum.forEach(function(item, index, array) {
+			aSum.forEach(function (item, index, array) {
 				array[index].Znetvalue = formatter.amountFormat(array[index].Znetvalue);
 				array[index].Zconsumtax = formatter.amountFormat(array[index].Zconsumtax);
 				array[index].Zsubtotal = formatter.amountFormat(array[index].Zsubtotal);
@@ -251,7 +272,7 @@ sap.ui.define([
 			this.getRouter().navTo("Detail");
 		},
 
-		onFilterBarChange: function(sValue) {
+		onFilterBarChange: function (sValue) {
 			//MessageBox.error(sValue.getParameters().getParameters().id.toString() + sValue.getParameters().getParameters().newValue.toString());
 			//var oValue = sValue.getParameters();
 			//var oPara;
@@ -259,12 +280,12 @@ sap.ui.define([
 			//MessageBox.error(sValue.getParameters().getParameters().newValue.toString());
 		},
 
-		setBusy: function(bFlag) {
+		setBusy: function (bFlag) {
 			this.getModel("settings").setProperty("/appProperties/busy", bFlag);
 			this.getModel("settings").refresh();
 		},
 
-		onShowBanfnHelp: function(oEvent) {
+		onShowBanfnHelp: function (oEvent) {
 			var aFilters = [];
 
 			this.showCustomSearchHelpDialog(
@@ -277,14 +298,14 @@ sap.ui.define([
 				aFilters);
 		},
 
-		showCustomSearchHelpDialog: function(oContext, oEvent, sTitle, sViewName, sEntitySet, sBindingField, aFilters) {
+		showCustomSearchHelpDialog: function (oContext, oEvent, sTitle, sViewName, sEntitySet, sBindingField, aFilters) {
 			oContext._inputSource = oEvent.getSource();
 			//oContext._aFilters = aFilters;
 			oContext._sEntitySet = sEntitySet;
 			oContext._sBindingField = sBindingField;
 			oContext.loadFragment({
 				name: sViewName
-			}).then(function(oDialog) {
+			}).then(function (oDialog) {
 				oDialog.open();
 				//var oSmartFilter = oContext.byId("smartFilter");
 				//oSmartFilter.setEntitySet(oContext._sEntitySet);
@@ -294,7 +315,7 @@ sap.ui.define([
 			}.bind(oContext));
 		},
 
-		onSelectLineBanfn: function(oEvent) {
+		onSelectLineBanfn: function (oEvent) {
 			var data;
 			if (oEvent.sId === 'cellClick') {
 				data = oEvent.mParameters.rowBindingContext.getObject();
@@ -315,7 +336,7 @@ sap.ui.define([
 			this.onCloseSearchDialog();
 		},
 
-		onCloseSearchDialog: function() {
+		onCloseSearchDialog: function () {
 			this.byId("dialogSelect").close();
 			this.byId("dialogSelect").destroy();
 		}
