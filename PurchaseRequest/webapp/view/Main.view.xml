@@ -31,7 +31,7 @@
 										<core:ListItem key="1" text="{i18n>Create}"/>
 										<core:ListItem key="2" text="{i18n>CreateReference}"/>
 										<core:ListItem key="3" text="{i18n>Change}"/>
-										<core:ListItem key="4" text="{i18n>Display}"/>
+										<!-- <core:ListItem key="4" text="{i18n>Display}"/> -->
 									</ComboBox>
 								</smartFilterBar:customControl>
 							</smartFilterBar:ControlConfiguration>

@@ -1,0 +1,26 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:com="sap.suite.ui.commons">
+>
+	<Dialog title="{i18n>approvalHistory}">
+		<content>
+			<com:Timeline id="idTimeline" lazyLoading="true" growingThreshold="10" showIcons="false" 
+                        showItemFilter="false" showSearch="false" showTimeFilter="false" enableScroll="false" 
+                        textHeight="3" content="{local>/approvalHistory}">
+                        <com:content>
+                            <com:TimelineItem userName="{local>name}" title="{local>nodename}" dateTime="{local>time}">
+                                <com:embeddedControl>
+                                    <VBox>
+                                        <ObjectStatus text="{path:'local>action', formatter:'.formatter.approvalText'}" 
+                                            state="{path:'local>action', formatter:'.formatter.approvalStatus'}" 
+                                            icon="{path:'local>action', formatter:'.formatter.approvalIcon'}" />
+                                        <Text text="{local>comments}"/>
+                                    </VBox>
+                                </com:embeddedControl>
+                            </com:TimelineItem>
+                        </com:content>
+                    </com:Timeline>
+		</content>
+	</Dialog>
+</c:FragmentDefinition>

@@ -174,6 +174,51 @@
 			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Zspzt">
 				<Annotation Term="Common.Label" String="{@i18n&gt;Zspzt}"/>
 			</Annotations>
+
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Zspzt">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzApprovalStatusVHSet"/>
+						<PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Zspzt"/>
+									<PropertyValue Property="ValueListProperty" String="Status"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Ddtext"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzUserNameVH/User">
+				<Annotation Term="Common.Label" String="{@i18n&gt;User}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzUserNameVH/Username">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Username}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Ernam">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ZzUserNameVHSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Ernam"/>
+									<PropertyValue Property="ValueListProperty" String="User"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Username"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

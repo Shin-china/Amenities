@@ -1,0 +1,17 @@
+<mvc:View controllerName="MMPurchaseRequest.controller.Home" displayBlock="true" xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc" busyIndicatorDelay="0">
+	<Page showHeader="false" showFooter="false" title="{i18n>title}">
+		<content>
+			<IconTabBar id="idIconTabBar" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding" applyContentPadding="false" stretchContentHeight="true">
+				<items>
+					<IconTabFilter text="{i18n>page1}" key="view1">
+						<mvc:XMLView viewName="MMPurchaseRequest.view.Main" height="100%"/>
+					</IconTabFilter>
+					<IconTabFilter text="{i18n>page2}" key="view2" visible="{local>/btDisplay}">
+						<mvc:XMLView viewName="MMPurchaseRequest.view.Display" height="100%"/>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+	</Page>
+</mvc:View>

@@ -191,6 +191,20 @@
 					</ux:ObjectPageSubSection>
 				</ux:subSections>
 			</ux:ObjectPageSection>
+			<!-- <ux:ObjectPageSection title="{i18n>itemTotal}">
+				<ux:subSections>
+					<ux:ObjectPageSubSection>
+						<ux:blocks>
+							<HBox>
+								<ObjectStatus title="{i18n>total1}" text="{local>/total1}" class="sapUiSmallMargin"/>
+								<ObjectStatus title="{i18n>total2}" text="{local>/total2}" class="sapUiSmallMargin"/>
+								<ObjectStatus title="{i18n>total3}" text="{local>/total3}" class="sapUiSmallMargin"/>
+								<ObjectStatus title="{i18n>total4}" text="{local>/total4}" class="sapUiSmallMargin"/>
+							</HBox>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection> -->
 			<ux:ObjectPageSection title="{i18n>item}">
 				<ux:subSections>
 					<ux:ObjectPageSubSection>
@@ -200,6 +214,10 @@
 								<t:extension>
 									<OverflowToolbar>
 										<Text text="{/logInfo}"/>
+										<ObjectStatus title="{i18n>total1}" text="{local>/total1}" class="sapUiSmallMarginEnd"/>
+										<ObjectStatus title="{i18n>total2}" text="{local>/total2}" class="sapUiSmallMarginEnd"/>
+										<ObjectStatus title="{i18n>total3}" text="{local>/total3}" class="sapUiSmallMarginEnd"/>
+										<ObjectStatus title="{i18n>total4}" text="{local>/total4}" class="sapUiSmallMarginEnd"/>
 										<ToolbarSpacer/>
 										<Button icon="sap-icon://add" text="{i18n>bAddRow}" press="onAddRow" enabled="{local>/editCreate}"/>
 									</OverflowToolbar>

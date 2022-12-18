@@ -23,7 +23,7 @@
 		</smartfilterbar:SmartFilterBar>
 		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
 			beforeRebindTable="onRebingTable" entitySet="ZzSHZbanfnSet" requestAtLeastFields="Zbanfn,Zspzt">
-			<table:Table id="internalTable" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLineBanfn"
+			<table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowSelectionChange="onSelectLineBanfn"
 				cellClick="onSelectLineBanfn">
 				<table:columns>
 					<table:Column width="8rem" visible="true" autoResizable="true" sortProperty="Banfn" filterProperty="Banfn">
@@ -90,11 +90,11 @@
 							<Label text="{i18n>Zjm}"/>
 						</table:label>
 						<table:template>
-							<Label text="{Zjm}"/>
+							<Label text="{Zjm}" tooltip="{Zjm}"/>
 						</table:template>
 					</table:Column>
 				</table:columns>
-				<table:columns>
+				<!-- <table:columns>
 					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Zspzt" filterProperty="Zspzt">
 						<table:customData>
 							<core:CustomData key="p13nData"
@@ -107,7 +107,20 @@
 							<Label text="{Zspzt}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
+				</table:columns> -->
+				<table:columns>
+                        <table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Ddtext" filterProperty="Ddtext">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Ddtext", "leadingProperty":"Ddtext", "sortProperty": "Ddtext", "filterProperty": "Ddtext"}' />
+                            </table:customData>
+                            <table:label>
+                                <Label text="{i18n>Ddtext}" />
+                            </table:label>
+                            <table:template>
+                                <Label text="{Ddtext}" />
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
 				<table:columns>
 					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Loekz" filterProperty="Loekz">
 						<table:customData>
@@ -136,6 +149,19 @@
 						</table:template>
 					</table:Column>
 				</table:columns>
+				<table:columns>
+                        <table:Column width="8rem" visible="true" autoResizable="true" sortProperty="NameText" filterProperty="NameText">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NameText", "leadingProperty":"NameText", "sortProperty": "NameText", "filterProperty": "NameText"}' />
+                            </table:customData>
+                            <table:label>
+                                <Label text="{i18n>NameText}" />
+                            </table:label>
+                            <table:template>
+                                <Label text="{NameText}" tooltip="{NameText}"/>
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
 				<table:columns>
 					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Badat" filterProperty="Badat">
 						<table:customData>

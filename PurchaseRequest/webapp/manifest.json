@@ -164,6 +164,15 @@
                 },
                 {
                     "pattern": "",
+                    "name": "Home",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "Home"
+                    ]
+                },
+                {
+                    "pattern": "Main",
                     "name": "Main",
                     "titleTarget": "",
                     "greedy": false,
@@ -187,6 +196,11 @@
                     "clearControlAggregation": false,
                     "viewName": "App",
                     "viewLevel": 1
+                },
+                "Home": {
+                    "viewType": "XML",
+                    "viewName": "Home",
+                    "viewLevel": 2
                 },
                 "Main": {
                     "viewType": "XML",
