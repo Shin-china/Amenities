@@ -100,10 +100,12 @@ sap.ui.define([
                     this.initialLocalModel();
                     this._LocalData.setProperty("/isCreate", true);
                     this._LocalData.setProperty("/dailyBalance/0/KAISHA_CD", "1000");
+                    this._LocalData.setProperty("/isRefrence", false);
                 //参考
                 } else if (sButton === "Reference") {
                     sDialogTitle = this._ResourceBundle.getText("DialogTitle2");
                     this._LocalData.setProperty("/isCreate", false);
+                    this._LocalData.setProperty("/isRefrence", true);
 
                     //参考只能选择一条
                     var oTable = this.byId("reportTable");
@@ -142,15 +144,15 @@ sap.ui.define([
                         this.byId("idShop").setValue(oHeader.TENPO_CD);
                         this.byId("idDP1").setValue(oHeader.EIGYO_BI);
                     }
-                    
+                    this.sButton = sButton;
                     var beginButton = new Button({
                         type: "Emphasized",
                         text: this._ResourceBundle.getText("Create"),
                         //登录按钮
-                        press: function () {
-                            if (sButton === "Create") {
+                        press: function ( ) {
+                            if (this.sButton === "Create") {
                                 this.createButton(oDialog);
-                            } else if (sButton === "Reference") {
+                            } else if (this.sButton === "Reference") {
                                 this.refrenceButton();
                                 oDialog.close();
                             }
@@ -361,8 +363,9 @@ sap.ui.define([
                 var oTable = this.byId("reportTable");
                 var oBinding = oTable.getBinding();
                 var sPath = oBinding.aKeys[oTable.getSelectedIndex()];
-                this.getRouter().navTo("DailyBalanceDisplay",{
-                    contextPath: sPath
+                this.getRouter().navTo("DailyBalance",{
+                    contextPath: sPath,
+                    view:"Display"
                 });
             },
 
@@ -436,6 +439,7 @@ sap.ui.define([
                     postDocs.push({
                         KAISHA_CD: lineData.KAISHA_CD,
                         KIHYO_NO: lineData.KIHYO_NO,
+                        EIGYO_BI: lineData.EIGYO_BI
                     })            
                 }.bind(this));
                 return postDocs;
@@ -700,7 +704,8 @@ sap.ui.define([
                     aTax = [],
                     aProfit = [],
                     aCost = [],
-                    aFI0006 = [];
+                    aFI0006 = [],
+                    aFieldId = [];
                 oData.results.forEach(function(line){
                     switch (line.ZID) {
                         //天气
@@ -800,6 +805,13 @@ sap.ui.define([
                                 Value3: line.ZVALUE3
                             });
                             break;
+                        // 控制字段是否可编辑
+                        case "CF0001":
+                            aFieldId.push({
+                                Shop: line.ZVALUE1,
+                                FieldId: line.ZVALUE2,
+                            });
+                            break;
                     }
                 }.bind(this));
                 aFI0005.splice(0, 0, {Seq:"", Value1:""});
@@ -814,6 +826,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/ProfitVH", aProfit);
                 this._LocalData.setProperty("/CostVH", aCost);
                 this._LocalData.setProperty("/FI0006", aFI0006);
+                this._LocalData.setProperty("/FieldId", aFieldId);
             },
 
             getButtonAuth: function () {

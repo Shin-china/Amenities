@@ -48,9 +48,14 @@ sap.ui.define([
                 this.byId("idPosting").setVisible(true);
 
                 var oHeader = this._oDataModel.getProperty("/" + oArgs.contextPath);
-                this.byId("idDailyBalanceCreate").setTitle(oHeader.KIHYO_NO);
                 this.initialLocalModel_dis(oHeader);
                 this.tableConverted_dis(oArgs.contextPath);
+                if (this._LocalData.getProperty("/isRefrence")) {
+                    this.byId("idDailyBalanceCreate").setTitle(this._ResourceBundle.getText("DailyBalanceCreatePage"));
+                    this._LocalData.setProperty("/dailyBalance/0/NIKKEIHYO_STATUS_CD", "");
+                } else {
+                    this.byId("idDailyBalanceCreate").setTitle(oHeader.KIHYO_NO);
+                }
             } else {
                 this.resultCalc();
                 this._LocalData.setProperty("/viewEditable", true);
@@ -59,6 +64,9 @@ sap.ui.define([
                 this.byId("idPosting").setVisible(false);
             }
             sap.ui.getCore().getMessageManager().removeAllMessages();
+
+            // 设置字段可编辑
+            this.controlFieldEnabled();
         },
 
         onAddLine: function (oEvent, sTableId) {
@@ -1256,6 +1264,8 @@ sap.ui.define([
                 this._LocalData.setProperty("/viewEditable", true);
                 oButton.setText(this._ResourceBundle.getText("DisplayButton"));
             }
+            // 设置字段是否可编辑
+            this.controlFieldEnabled();
         },
 
         onCashCheckBox: function (oEvent) {
@@ -1312,7 +1322,7 @@ sap.ui.define([
             sap.ui.getCore().getMessageManager().removeMessages(targetMessage);
 
             if (aAccountFiltered.length > 0) {
-                this._LocalData.setProperty(sPath + "/" + sTextProperty, aAccountFiltered[0].Value1)
+                this._LocalData.setProperty(sPath + "/" + sTextProperty, aAccountFiltered[0].Value1);
             } else {
                 if (sAccount != "") {
                     var oMessage = new Message({
@@ -1322,6 +1332,8 @@ sap.ui.define([
                         processor: this.getView().getModel("local")
                     });
                     sap.ui.getCore().getMessageManager().addMessages(oMessage);
+                } else {
+                    this._LocalData.setProperty(sPath + "/" + sTextProperty, "");
                 }
             }
         },
@@ -1356,7 +1368,7 @@ sap.ui.define([
             }
             var oButtonMap = {
                 //未保存
-                "":{"save":true, "change":false, "apply":false, "posting":false},
+                "":{"save":true, "change":true, "apply":false, "posting":false},
                 //仮保存
                 "1":{"save":true, "change":true, "apply":true, "posting":false},
                 //申請中
@@ -1387,6 +1399,61 @@ sap.ui.define([
                     oEvent.getSource().setValue("0");
                 }
             }
+        },
+
+        controlFieldEnabled: function () {
+            this.initFieldEnabled();
+            var sShop = this._LocalData.getProperty("/dailyBalance/0/TENPO_CD");
+            var aFieldId = this._LocalData.getProperty("/FieldId");
+            aFieldId = aFieldId.filter(e => e.Shop == sShop);
+            aFieldId.forEach(function (item) {
+                // var str = "div[id$='" + item.FieldId + "']";
+                // var inputDOM = $( str );
+                // try {
+                //     var oInput = sap.ui.getCore().byId(inputDOM[inputDOM.length - 1].id);
+                //     oInput.setEditable(false);
+                // } catch (e) {}
+                this.byId(item.FieldId).setEnabled(false);
+
+            }.bind(this));
+        },
+        
+        initFieldEnabled: function () {
+            var aFieldId = [
+                "INSHOKU_URIAGE",
+                "KARAOKE_URIAGE",
+                "FK_URIAGE8",
+                "FK_URIAGE10",
+                "NYUJORYO_URIAGE",
+                "HANSOKUHIN_URIAGE",
+                "AMAREA_FURIKAE",
+                "KUAS_SAKUHINMEI",
+                "KUAS_KENSYU",
+                "KUAS_KENSUU",
+                "KUAS_AMT",
+                "KUAS_HAIKYUU",
+                "GAME_URIAGE",
+                "LANE_URIAGE",
+                "SHOES_URIAGE",
+                "PRO_SHOP_URIAGE",
+                "BILLIARD_URIAGE",
+                "JITEN_TVG_URIAGE",
+                "KYOWA_TVG_URIAGE",
+                "LOCKER_DAI_URIAGE",
+                "KOKA_URIAGE",
+                "HAIBUN_URIAGE",
+                "ZNJT_HNSH_SFKN_RKI",
+                "HNJTS_SOFUKIN",
+                "RYOGAEKIN_MODOSHI",
+                "GANKIN_ZOUGAKU",
+                "SOFUKIN_YOTEIGAKU",
+                "GANKIN_AMT",
+                "BENTO_URIAGE"
+            ];
+
+            aFieldId.forEach(function (fieldId) {
+                this.byId(fieldId).setEnabled(true);
+            }.bind(this));
         }
         
 	});

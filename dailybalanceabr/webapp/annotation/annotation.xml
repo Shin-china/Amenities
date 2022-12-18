@@ -140,10 +140,6 @@
 					</Record>
 				</Annotation>
 			</Annotations>
-
-			<Annotations Target="Metadata.ZzDailyBalanceHeader/GNK_NYUKIN_SOGAKU">
-				<Annotation Term="Measures.ISOCurrency" Path="CURRENCY" />
-			</Annotations>
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>
