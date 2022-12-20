@@ -1402,6 +1402,13 @@ sap.ui.define([
         },
 
         controlFieldEnabled: function () {
+            var aTableColumn = [
+                "KUAS_SAKUHINMEI",
+                "KUAS_KENSYU",
+                "KUAS_KENSUU",
+                "KUAS_AMT",
+                "KUAS_HAIKYUU"
+            ];
             this.initFieldEnabled();
             var sShop = this._LocalData.getProperty("/dailyBalance/0/TENPO_CD");
             var aFieldId = this._LocalData.getProperty("/FieldId");
@@ -1414,7 +1421,10 @@ sap.ui.define([
                 //     oInput.setEditable(false);
                 // } catch (e) {}
                 this.byId(item.FieldId).setEnabled(false);
-
+                // 表的列 因为Enabled属性有 formatter的处理，所以需要单独再处理一下
+                if (aTableColumn.includes(item.FieldId)) {
+                    this._LocalData.setProperty("/" + item.FieldId, false);
+                }
             }.bind(this));
         },
         
@@ -1426,7 +1436,6 @@ sap.ui.define([
                 "FK_URIAGE10",
                 "NYUJORYO_URIAGE",
                 "HANSOKUHIN_URIAGE",
-                "AMAREA_FURIKAE",
                 "KUAS_SAKUHINMEI",
                 "KUAS_KENSYU",
                 "KUAS_KENSUU",
@@ -1446,7 +1455,6 @@ sap.ui.define([
                 "HNJTS_SOFUKIN",
                 "RYOGAEKIN_MODOSHI",
                 "GANKIN_ZOUGAKU",
-                "SOFUKIN_YOTEIGAKU",
                 "GANKIN_AMT",
                 "BENTO_URIAGE"
             ];
@@ -1454,6 +1462,18 @@ sap.ui.define([
             aFieldId.forEach(function (fieldId) {
                 this.byId(fieldId).setEnabled(true);
             }.bind(this));
+
+            var aTableColumn = [
+                "KUAS_SAKUHINMEI",
+                "KUAS_KENSYU",
+                "KUAS_KENSUU",
+                "KUAS_AMT",
+                "KUAS_HAIKYUU"
+            ];
+
+            aTableColumn.forEach(function (fieldId) {
+                this._LocalData.setProperty("/" + fieldId, true);
+            }.bind(this))
         }
         
 	});

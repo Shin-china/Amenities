@@ -37,16 +37,6 @@ xmlns:t="sap.ui.table">
         <smartTable:SmartTable id="smartTable" smartVariant="__SVM01" smartFilterId="smartFilterBar" showRowCount="true" useVariantManagement="true"  entitySet="ZzApprovalListSet"
             useTablePersonalisation="true" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" class="sapUiThinyMarginTop"
             requestAtLeastFields="Prstatustext">
-            <smartTable:customToolbar>
-                <OverflowToolbar width="100%">
-                    <ToolbarSpacer />
-                    <Button  type="Transparent" text="{i18n>Create}"/>
-                    <Button  type="Transparent" text="{i18n>Reference}"/>
-                    <Button  type="Transparent" text="{i18n>Posting}"/>
-                    <Button  type="Transparent" text="{i18n>Print}"/>
-                    <!-- <OverflowToolbarButton icon="sap-icon://activate" tooltip="Apply UI state changes" press="applyUiState"/> -->
-                </OverflowToolbar>
-            </smartTable:customToolbar>
             <t:Table id="reportTable" visibleRowCountMode="Auto" rows="{local>/test}">
                 <t:columns>
                     <t:Column width="6rem" label="{i18n>Prnumber}" sortProperty="Prnumber" filterProperty="Prnumber" visible="true">
@@ -74,7 +64,7 @@ xmlns:t="sap.ui.table">
                             <Text text="{Purchasehroup}"/>
                         </t:template>
                     </t:Column>
-                    <t:Column width="6rem" label="{i18n>Prstatus}" sortProperty="Prstatus" filterProperty="Prstatus" visible="true">
+                    <t:Column width="10rem" label="{i18n>Prstatus}" sortProperty="Prstatus" filterProperty="Prstatus" visible="true">
                         <t:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"Prstatus", "leadingProperty":"Prstatus", "sortProperty":"Prstatus", "filterProperty": "Prstatus"}'/>
                         </t:customData>
@@ -98,7 +88,7 @@ xmlns:t="sap.ui.table">
                             <Text text="{path:'Lastdate', type:'sap.ui.model.type.Date'}"/>
                         </t:template>
                     </t:Column>
-                    <t:Column width="6rem" label="{i18n>APPROVEHISTORYT}">
+                    <t:Column width="6rem" label="{i18n>Approvalhistory}">
                         <!-- <t:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"APPROVEHISTORY", "leadingProperty":"APPROVEHISTORY", "sortProperty":"APPROVEHISTORY", "filterProperty": "APPROVEHISTORY"}'/>
                         </t:customData> -->

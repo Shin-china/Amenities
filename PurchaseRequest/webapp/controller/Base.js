@@ -4,13 +4,14 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"sap/ui/model/Filter",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/model/FilterOperator"
-], function(Controller, UIComponent, History, Filter, JSONModel, FilterOperator) {
+	"sap/ui/model/FilterOperator",
+	"../model/formatter",
+], function(Controller, UIComponent, History, Filter, JSONModel, FilterOperator, formatter) {
 	"use strict";
 	return Controller.extend("MMPurchaseRequest.controller.Base", {
 		//return Controller.extend("MM.purchasepricesingleprocess.controller.Base", {
 		onInit: function() {
-
+			
 		},
 
 		/**
@@ -115,7 +116,34 @@ sap.ui.define([
 			};
 			that.getModel("Attachment").read("/UploadSet", oParam);
 
-		}
+		},
+
+		accNumber: function () {
+			Number.prototype.add = function (arg) {
+				return formatter.accAdd(this, arg);
+			};
+			String.prototype.add = function (arg) {
+				return formatter.accAdd(this, arg);
+			};
+			Number.prototype.sub = function (arg) {
+				return formatter.accSub(this, arg);
+			};
+			String.prototype.sub = function (arg) {
+				return formatter.accSub(this, arg);
+			};
+			Number.prototype.mul = function (arg) {
+				return formatter.accMul(this, arg);
+			};
+			String.prototype.mul = function (arg) {
+				return formatter.accMul(this, arg);
+			};
+			Number.prototype.div = function (arg) {
+				return formatter.accDiv(this, arg);
+			};
+			String.prototype.div = function (arg) {
+				return formatter.accDiv(this, arg);
+			};
+		},
 
 	});
 });

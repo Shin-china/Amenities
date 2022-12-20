@@ -510,7 +510,8 @@
 											<uitable:Column width="12rem">
 												<Label text="{i18n>WorksTitle}" />
 												<uitable:template>
-                                                    <Input id="KUAS_SAKUHINMEI" value="{local>WorksTitle}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}" editable="{local>/viewEditable}"/>
+                                                    <Input id="KUAS_SAKUHINMEI" value="{local>WorksTitle}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}" editable="{local>/viewEditable}"
+														enabled="{local>/KUAS_SAKUHINMEI}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="9rem">
@@ -518,7 +519,7 @@
 												<uitable:template>
                                                     <!-- <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/> -->
 													<Select id="KUAS_KENSYU" width="6rem" class="sapUiSmallMarginEnd" forceSelection="false" selectedKey="{local>Ticket}"
-														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}" editable="{local>/viewEditable}">
+														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}" editable="{local>/viewEditable}" enabled="{local>/KUAS_KENSYU}">
 														<core:Item key="" text=""/>
 														<core:Item key="ムビ" text="ムビ"/>
 														<core:Item key="紙" text="紙"/>
@@ -530,14 +531,16 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
-													<Input id="KUAS_KENSUU" value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable6Calc($event,'/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
+													<Input id="KUAS_KENSUU" value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable6Calc($event,'/table11')" 
+														enabled="{parts:[{path:'local>Id'},{path:'local>/KUAS_KENSUU'}], formatter:'.formatter.setTable11Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="12rem">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
-													<Input id="KUAS_AMT" value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable6Calc($event,'/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
+													<Input id="KUAS_AMT" value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable6Calc($event,'/table11')" 
+														enabled="{parts:[{path:'local>Id'},{path:'local>/KUAS_AMT'}], formatter:'.formatter.setTable11Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
@@ -545,7 +548,7 @@
 												<Label text="{i18n>Supply}" />
 												<uitable:template>
 													<Input id="KUAS_HAIKYUU" value="{local>Supply}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}"
-														editable="{local>/viewEditable}"/>
+														editable="{local>/viewEditable}" enabled="{local>/KUAS_HAIKYUU}"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>

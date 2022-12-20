@@ -461,7 +461,11 @@ sap.ui.define([
             onSyohinCdChange: function (oEvent) {
                 var oSource = oEvent.getSource()
                 var oContext = oSource.getBindingContext("pstore");
-                var sValue = oEvent.mParameters.newValue.toUpperCase();
+                try {
+                    var sValue = oEvent.mParameters.newValue.toUpperCase();
+                } catch (error) {
+                    var sValue = oEvent.getSource().getValue();
+                }
                 oSource.setValue(sValue);
 
                 var oModel = oContext.getModel();
@@ -923,6 +927,57 @@ sap.ui.define([
                     aFilters);
             },
 
+            onKamokuSetei: function (oEvent, i) {
+                var sEntitySet = "";
+                var sTitle = "";
+                switch (i) {
+                    case "1":
+                        sEntitySet = "A01AccountSet";
+                        sTitle = "sec2_f4";
+                        break;
+                
+                    case "2":
+                        sEntitySet = "A02AccountSet";
+                        sTitle = "sec3_f7";
+                        break;
+                    case "3":
+                        sEntitySet = "A03AccountSet";
+                        sTitle = "sec3_f8";
+                        break;
+                    case "4":
+                        sEntitySet = "A04AccountSet";
+                        sTitle = "sec4_f2";
+                        break;
+                    case "5":
+                        sEntitySet = "A05AccountSet";
+                        sTitle = "sec4_f4";
+                        break;
+                }
+                var aFilters = [];
+                this._comm.showCustomSearchHelpDialog(
+                    this,
+                    oEvent,
+                    this._comm.getI18nMessage(this, sTitle),
+                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
+                    sEntitySet,
+                    "Hkont",
+                    aFilters);
+            },
+
+            onShowSyohinCd: function (oEvent) {
+                var aFilters = [];
+                aFilters.push({ field: "TenpoCd", value: this._TenpoCd });
+                this._comm.showCustomSearchHelpDialog(
+                    this,
+                    oEvent,
+                    this._comm.getI18nMessage(this, "sec6_f2"),
+                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
+                    "AGoodSet",
+                    "ShohinCd",
+                    aFilters);
+
+            },
+
             onRebingTable: function (oEvent) {
                 var binding = oEvent.getParameter("bindingParams");
                 var oFilter;
@@ -1011,7 +1066,9 @@ sap.ui.define([
                     this.pDialog = this.loadFragment({
                         name: "FICO.dailybalanceapproval.view.fragment.Comments"
                     });
-                } 
+                } else {
+                    this.byId("idComments").setValue("");
+                }
                 this.pDialog.then(function(oDialog) {
                     var beginButton = new Button({
                         type: "Emphasized",

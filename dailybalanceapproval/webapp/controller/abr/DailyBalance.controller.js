@@ -67,6 +67,9 @@ sap.ui.define([
             oPageLayout.scrollToSection(this.byId("section0").getId());
 
             this._LocalData.setProperty("/detailPageBusy",false);
+
+            // 设置字段可编辑
+            this.controlFieldEnabled();
         },
 
         onAddLine: function (oEvent, sTableId) {
@@ -1236,6 +1239,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/viewEditable", true);
                 oButton.setText(this._ResourceBundle.getText("DisplayButton"));
             }
+            this.controlFieldEnabled();
         },
 
         onCashCheckBox: function (oEvent) {
@@ -1302,6 +1306,8 @@ sap.ui.define([
                         processor: this.getView().getModel("local")
                     });
                     sap.ui.getCore().getMessageManager().addMessages(oMessage);
+                } else {
+                    this._LocalData.setProperty(sPath + "/" + sTextProperty, "");
                 }
             }
         },
@@ -1440,6 +1446,54 @@ sap.ui.define([
                     oEvent.getSource().setValue("0");
                 }
             }
+        },
+
+        controlFieldEnabled: function () {
+            this.initFieldEnabled();
+            var sShop = this._LocalData.getProperty("/dailyBalance/0/TENPO_CD");
+            var aFieldId = this._LocalData.getProperty("/FieldId");
+            aFieldId = aFieldId.filter(e => e.Shop == sShop);
+            aFieldId.forEach(function (item) {
+                this.byId(item.FieldId).setEnabled(false);
+            }.bind(this));
+        },
+        
+        initFieldEnabled: function () {
+            var aFieldId = [
+                "INSHOKU_URIAGE",
+                "KARAOKE_URIAGE",
+                "FK_URIAGE8",
+                "FK_URIAGE10",
+                "NYUJORYO_URIAGE",
+                "HANSOKUHIN_URIAGE",
+                "AMAREA_FURIKAE",
+                "KUAS_SAKUHINMEI",
+                "KUAS_KENSYU",
+                "KUAS_KENSUU",
+                "KUAS_AMT",
+                "KUAS_HAIKYUU",
+                "GAME_URIAGE",
+                "LANE_URIAGE",
+                "SHOES_URIAGE",
+                "PRO_SHOP_URIAGE",
+                "BILLIARD_URIAGE",
+                "JITEN_TVG_URIAGE",
+                "KYOWA_TVG_URIAGE",
+                "LOCKER_DAI_URIAGE",
+                "KOKA_URIAGE",
+                "HAIBUN_URIAGE",
+                "ZNJT_HNSH_SFKN_RKI",
+                "HNJTS_SOFUKIN",
+                "RYOGAEKIN_MODOSHI",
+                "GANKIN_ZOUGAKU",
+                "SOFUKIN_YOTEIGAKU",
+                "GANKIN_AMT",
+                "BENTO_URIAGE"
+            ];
+
+            aFieldId.forEach(function (fieldId) {
+                this.byId(fieldId).setEnabled(true);
+            }.bind(this));
         }
 
 	});

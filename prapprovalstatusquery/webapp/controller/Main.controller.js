@@ -93,6 +93,10 @@ sap.ui.define([
                     target: {
                         semanticObject: "ZF_MM_ADDON_PO_002",
                         action: "display"
+                    },
+                    params: {
+                        "model": "display",
+                        "prnumber": "3500010927"
                     }
                 })) || ""; 
                 //Generate a  URL for the second application

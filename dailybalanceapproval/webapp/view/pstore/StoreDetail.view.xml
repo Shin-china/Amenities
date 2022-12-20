@@ -177,7 +177,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtKamokuSetei1" value="{pstore>KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
+                                    <Input id="txtKamokuSetei1" value="{pstore>KamokuSetei1}" maxLength="10" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest=".onKamokuSetei($event, '1')">
                                         <layoutData>
                                             <l:GridData id="gd18" span="XL4 L4 M12 S12" />
                                         </layoutData>
@@ -304,7 +304,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtKamokuSetei2" value="{pstore>KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
+                                    <Input id="txtKamokuSetei2" value="{pstore>KamokuSetei2}" maxLength="10" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest=".onKamokuSetei($event, '2')">
                                         <layoutData>
                                             <l:GridData id="gd32" span="XL4 L4 M12 S12" />
                                         </layoutData>
@@ -322,7 +322,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtKamokuSetei3" value="{pstore>KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
+                                    <Input id="txtKamokuSetei3" value="{pstore>KamokuSetei3}" maxLength="10" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest=".onKamokuSetei($event, '3')">
                                         <layoutData>
                                             <l:GridData id="gd34" span="XL4 L4 M12 S12" />
                                         </layoutData>
@@ -424,7 +424,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtKamokuSetei4" value="{pstore>KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
+                                    <Input id="txtKamokuSetei4" value="{pstore>KamokuSetei4}" maxLength="10" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest=".onKamokuSetei($event, '4')">
                                         <layoutData>
                                             <l:GridData id="gd46" span="XL4 L4 M12 S12" />
                                         </layoutData>
@@ -462,7 +462,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtKamokuSetei5" value="{pstore>KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
+                                    <Input id="txtKamokuSetei5" value="{pstore>KamokuSetei5}" maxLength="10" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest=".onKamokuSetei($event, '5')">
                                         <layoutData>
                                             <l:GridData id="gd50" span="XL4 L4 M12 S12" />
                                         </layoutData>
@@ -542,7 +542,7 @@
                                         <table:Column id="tab1Col3">
                                             <Text id="txtTab1Col3" text="{i18n_pstore>sec6_f2}" />
                                             <table:template>
-                                                <Input id="txtSyohinCd" value="{pstore>SyohinCd}" maxLength="5" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" />
+                                                <Input id="txtSyohinCd" value="{pstore>SyohinCd}" showValueHelp="true" valueHelpRequest="onShowSyohinCd"  maxLength="5" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" />
                                                 <!-- <smartfield:SmartField id="txtSyohinCd" value="{pstore>/SyohinCd}" maxLength="5" visible="{pstore>Visible}" editable="{viewState>/editable}" change="onSyohinCdChange" /> -->
                                             </table:template>
                                         </table:Column>

@@ -2,7 +2,8 @@
 	xmlns:mvc="sap.ui.core.mvc" busyIndicatorDelay="0">
 	<Page showHeader="false" showFooter="false" title="{i18n>title}">
 		<content>
-			<IconTabBar id="idIconTabBar" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding" applyContentPadding="false" stretchContentHeight="true">
+			<IconTabBar id="idIconTabBar" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding" applyContentPadding="false" stretchContentHeight="true"
+				select="onSelect">
 				<items>
 					<IconTabFilter text="{i18n>page1}" key="view1">
 						<mvc:XMLView viewName="MMPurchaseRequest.view.Main" height="100%"/>
