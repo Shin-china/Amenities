@@ -14,13 +14,10 @@ builder:
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          #url: http://58.246.235.222:8010
-          #client: "300"
           url: https://ad1-amenities.aee.hec.ondemand.com
           client: "230"
         app:
           name: ZPSOTRE002
           description: Pstore
-          package: z001
-          #transport: ZZZK902054
-          transport: RD1K908369
+          package: Z001
+          transport: RD1K908455

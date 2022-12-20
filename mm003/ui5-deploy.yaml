@@ -14,9 +14,10 @@ builder:
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          url: https://ad1-amenities.aee.hec.ondemand.com:443
+          url: https://ad1-amenities.aee.hec.ondemand.com
+          client: "230"
         app:
           name: ZMM003
           description: 購買受信ボックス
-          package: z001
-          transport: RD1K908369
+          package: Z001
+          transport: RD1K908455

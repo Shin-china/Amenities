@@ -12,12 +12,12 @@
 		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm"
 			Namespace="dailybalanceabr.annotation.annotation.ZZPSTORE_SRV">
 
-			<Annotations Target="Metadata.AccountDoc/KaishaCd">
+			<!-- <Annotations Target="Metadata.AccountDoc/KaishaCd">
 				<Annotation Term="Common.FilterDefaultValue" String="1000"/>
 			</Annotations>
 			<Annotations Target="Metadata.Store/KaishaCd">
 				<Annotation Term="Common.FilterDefaultValue" String="1000"/>
-			</Annotations>
+			</Annotations> -->
 
 			<Annotations Target="Metadata.Company/Bukrs">
 				<Annotation Term="Common.Label" String="{@i18n&gt;tab1_col02}"/>

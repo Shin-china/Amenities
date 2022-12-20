@@ -180,7 +180,7 @@
 					<m:IconTabFilter id="_IDGenIconTabFilter3" icon="sap-icon://notes" key="notes" >
 
 						<m:Text text="承認コメント" class="sapUiTinyMarginTop"/>
-						<m:TextArea id="TextArea1" value="" growing="true" growingMaxLines="7"  width="100%"/>
+						<m:TextArea id="TextArea1" value="{local>/item/0/COMMENTS}" growing="true" growingMaxLines="7"  width="100%"/>
 					</m:IconTabFilter>
 					<m:IconTabFilter id="_IDGenIconTabFilter4" icon="sap-icon://customer-history" key="history" >
 
