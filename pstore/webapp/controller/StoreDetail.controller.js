@@ -851,7 +851,8 @@ sap.ui.define([
 
             onShowNyknKamokuCd: function (oEvent) {
                 var aFilters = [];
-                var filter = { field: "Ktopl", value: this._KaishaCd };
+                // var filter = { field: "Ktopl", value: this._KaishaCd };
+                var filter = { field: "Ktopl", value: "1000" };
                 aFilters.push(filter);
                 this._comm.showCustomSearchHelpDialog(
                     this,
@@ -892,7 +893,8 @@ sap.ui.define([
 
             onShowShknKamokuCd: function (oEvent) {
                 var aFilters = [];
-                var filter = { field: "Ktopl", value: this._KaishaCd };
+                // var filter = { field: "Ktopl", value: this._KaishaCd };
+                var filter = { field: "Ktopl", value: "1000" };
                 aFilters.push(filter);
                 this._comm.showCustomSearchHelpDialog(
                     this,
@@ -957,7 +959,8 @@ sap.ui.define([
                 var oModel = oBindingContext.getModel();
 
                 var oDataModel = this.getView().getModel();
-                var sReadPath = "/AccountSet(Ktopl='" + this._KaishaCd + "',Saknr='" + account + "',Spras='J'" + ")";
+                // var sReadPath = "/AccountSet(Ktopl='" + this._KaishaCd + "',Saknr='" + account + "',Spras='J'" + ")";
+                var sReadPath = "/AccountSet(Ktopl='" + "1000" + "',Saknr='" + account + "',Spras='J'" + ")";
                 oDataModel.read(sReadPath, {
                     success: function (oData) {
                         if (oData.Txt20 === undefined || oData.Txt20 === null || oData.Txt20 === '') {
