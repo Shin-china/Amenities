@@ -170,6 +170,11 @@ sap.ui.define([
 				return;
 			}
 
+			if (oHeader.Department === "") {
+				MessageBox.error(this.getI18nBundle().getText("msgDepartmentIsEmpty"));
+				return;
+			}
+
 			if (oHeader.Zjm === "") {
 				MessageBox.error(this.getI18nBundle().getText("msgZjmIsEmpty"));
 				return;
@@ -297,6 +302,7 @@ sap.ui.define([
 					Badat: (oHeader.Badat === "" || oHeader.Badat === null) ? null : this.convertDateToOdata(oHeader.Badat),
 					Zspqx: (oHeader.Zspqx === "" || oHeader.Zspqx === null) ? null : this.convertDateToOdata(oHeader.Zspqx),
 					Zsprq: (oHeader.Zsprq === "" || oHeader.Zsprq === null) ? null : this.convertDateToOdata(oHeader.Zsprq),
+					Department:oHeader.Department,
 					Zjm: oHeader.Zjm,
 					Zsqly: oHeader.Zsqly,
 					Zspzt: oHeader.Zspzt,
@@ -372,6 +378,8 @@ sap.ui.define([
 			var iPeinh = 1;
 			var iConsumtaxSum = 0;
 			//sValue.getSource().getBindingContext("local").getObject().Zbanfn
+			// 金额合计
+			this.itemSum(aItem);
 			aItem.forEach(function(oItem) {
 				if (oItem.Loekz === true || oItem.Loekz === "X") {
 
@@ -489,9 +497,40 @@ sap.ui.define([
 			this.getModel("local").refresh();
 		},
 
+		itemSum: function (aItem) {
+			var total1 = 0, total2 = 0, total3 = 0, total4 = 0;
+			aItem.forEach(function (item) {
+				var Menge = formatter.clearCommaToNumber(item.Menge);
+				var Preis = formatter.clearCommaToNumber(item.Preis);
+				var Peinh = formatter.clearCommaToNumber(item.Peinh);
+				var Zvat = formatter.clearCommaToNumber(item.Zvat);
+				var Zconsumtax = formatter.clearCommaToNumber(item.Zconsumtax);
+				var Zzhje = formatter.clearCommaToNumber(item.Zzhje);
+
+				//金额合计
+				//税抜総額
+				var amount1 = 0;
+				amount1 = this.formatter.accMul(Menge, Preis);
+				amount1 = this.formatter.accDiv(amount1, Peinh);
+				total1 = this.formatter.accAdd(total1, amount1);
+				//税込総額
+				total2 = this.formatter.accAdd(total2, Zvat);
+				//消費税総額
+				total3 = this.formatter.accAdd(total3, Zconsumtax);
+				//値引き後総額
+				total4 = this.formatter.accAdd(total4, Zzhje);
+			}.bind(this));
+			this.getModel("local").setProperty("/total1", formatter.amountFormat(total1));
+			this.getModel("local").setProperty("/total2", formatter.amountFormat(total2));
+			this.getModel("local").setProperty("/total3", formatter.amountFormat(total3));
+			this.getModel("local").setProperty("/total4", formatter.amountFormat(total4));
+			this.getModel("local").refresh();
+		},
+
 		onItemChangeSum: function(sValue) {
 			var aSum = this.getModel("local").getProperty("/ZzSum");
 			for (var i = 0; i < aSum.length; i++) {
+				aSum[i].Zestvat = formatter.clearCommaToNumber(aSum[i].Zestvat);
 				aSum[i].Zestvat = formatter.amountFormat(aSum[i].Zestvat);
 			}
 			this.getModel("local").setProperty("/ZzSum", aSum);
@@ -1117,6 +1156,19 @@ sap.ui.define([
 				"MMPurchaseRequest.fragment.KostnSearchHelp",
 				"KostnSet",
 				"Kostl",
+				aFilters);
+		},
+
+		onShowDepartmentHelp: function(oEvent) {
+			var aFilters = [];
+
+			this.showCustomSearchHelpDialog(
+				this,
+				oEvent,
+				this.getI18nBundle().getText("Department"),
+				"MMPurchaseRequest.fragment.DepartmentSearchHelp",
+				"ZzDepartmentVHSet",
+				"Department",
 				aFilters);
 		},
 

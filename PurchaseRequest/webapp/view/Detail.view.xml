@@ -156,6 +156,14 @@
 														</VBox>
 													</form:fields>
 												</form:FormElement>
+												<form:FormElement>
+													<form:fields>
+														<VBox>
+															<Label text="{i18n>Department}" required="true"/>
+															<Input value="{local>/ZzHeader/Department}" enabled="{local>/editCreate}" required="true" showValueHelp="true" valueHelpRequest="onShowDepartmentHelp"/>
+														</VBox>
+													</form:fields>
+												</form:FormElement>
 											</form:formElements>
 										</form:FormContainer>
 									</form:formContainers>

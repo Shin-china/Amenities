@@ -227,7 +227,9 @@ sap.ui.define([
 			var aItems = oData.results[0].to_ZzPRItem.results;
 			var total1 = 0, total2 = 0, total3 = 0, total4 = 0;
 			aItems.forEach(function (item, index, array) {
+				var Menge = item.Menge;
 				var Preis = item.Preis;
+				var Peinh = item.Peinh;
 				var Zvat = item.Zvat;
 				var Zconsumtax = item.Zconsumtax;
 				var Zzhje = item.Zzhje;
@@ -243,7 +245,10 @@ sap.ui.define([
 
 				//金额合计
 				//税抜総額
-				total1 = this.formatter.accAdd(total1, Preis);
+				var amount1 = 0;
+				amount1 = this.formatter.accMul(Menge, Preis);
+				amount1 = this.formatter.accDiv(amount1, Peinh);
+				total1 = this.formatter.accAdd(total1, amount1);
 				//税込総額
 				total2 = this.formatter.accAdd(total2, Zvat);
 				//消費税総額

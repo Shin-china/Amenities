@@ -46,7 +46,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" entitySet="ZzSHZbanfnSet"
+            <smarttable:SmartTable id="smartTable" enableAutoBinding="false" smartFilterId="smartFilter" tableType="Table" entitySet="ZzSHZbanfnSet"
                 requestAtLeastFields="Zbanfn,Zspzt">
                 <table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowActionCount="2">
                     <table:rowActionTemplate>

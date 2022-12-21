@@ -169,16 +169,16 @@ sap.ui.define([
             oContext._sEntitySet = sEntitySet;
             oContext._sBindingField = sBindingField;
             oContext.loadFragment({ name: sViewName }).then(function (oDialog) {
-                oDialog.open();
+                
                 var oView = this.getView();
-                oView.setModel(this.getOwnerComponent().getModel("pstore"));
-                oView.byId("smartTable").rebindTable();
                 var oSmartFilter = oContext.byId("smartFilter");
                 oSmartFilter.setEntitySet(oContext._sEntitySet);
                 var oSmartTable = oContext.byId("smartTable");
                 oSmartTable.setEntitySet(oContext._sEntitySet);
                 oContext.byId("dialogSelect").setTitle(sTitle);
+                oDialog.open();
             }.bind(oContext));
+
         },
 
         getFirstDayOfMonth: function(){

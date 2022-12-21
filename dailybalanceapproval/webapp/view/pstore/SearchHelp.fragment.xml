@@ -1,9 +1,9 @@
 <c:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" 
     xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:c="sap.ui.core">
-    <Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" afterClose="onDestroy" >
+    <Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" afterClose="onDestroy" beforeOpen="onDialogRebind">
 
         <content>
-          <smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="true" liveMode="true"></smartfilterbar:SmartFilterBar>  
+          <smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="true" liveMode="true" showFilterConfiguration="false" useToolbar="false"/>  
 
           <smarttable:SmartTable id="smartTable" 
                                  enableAutoBinding="true"
