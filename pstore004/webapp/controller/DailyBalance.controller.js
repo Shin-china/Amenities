@@ -3,9 +3,10 @@ sap.ui.define([
 	"../model/formatter",
     "./messages",
     "sap/m/MessageToast",
+    "sap/ui/core/format/NumberFormat",
     "sap/m/Button",
     "sap/m/MessageBox",
-], function (BaseController, formatter, messages, MessageToast, Button, MessageBox) {
+], function (BaseController, formatter, messages, MessageToast, NumberFormat, Button, MessageBox) {
 	"use strict";
 
 	return BaseController.extend("FICO.pstore004.controller.DailyBalance", {
@@ -90,7 +91,9 @@ sap.ui.define([
         },
 
         onMulti: function (oEvent, sParam) {
+            var oCurrencyParse = NumberFormat.getFloatInstance();
             var value = oEvent.getSource().getValue();
+            value = oCurrencyParse.parse(value);
             try {
                 value = this.formatter.accMul(value, sParam);
             } catch (e) {}
