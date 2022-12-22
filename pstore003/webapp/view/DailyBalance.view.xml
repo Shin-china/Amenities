@@ -44,603 +44,6 @@
 					</uxap:subSections>
 				</uxap:ObjectPageSection>
 
-				<uxap:ObjectPageSection titleUppercase="false" title="{i18n>Section1}">
-					<uxap:subSections>
-						<uxap:ObjectPageSubSection title="{i18n>Section1}">
-							<uxap:blocks>
-								<VBox class="sapUiSmallMargin">
-								<!-- <form:SimpleForm layout="ResponsiveGridLayout" columnsXL="2" editable="true" adjustLabelSpan="false" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="5" columnsL="2" columnsM="2"> -->
-									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" singleContainerFullSize="false"
-										labelSpanL="4" labelSpanM="3" emptySpanL="4" emptySpanM="2" breakpointM="400" columnsL="2">
-										<Label text="{i18n>Title1}" />
-										<Input value="{path:'local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
-										<Label text="{i18n>Title2}" />
-										<Input value="{path:'local>/dailyBalance/0/HNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="false" textAlign="Right"/>
-										<Label text="{i18n>Title3}" />
-										<Input value="{path:'local>/dailyBalance/0/KITEI_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
-										<Label text="{i18n>Title4}" />
-										<Input value="{path:'local>/dailyBalance/0/GNK_AZKR_YTIGK', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="false" textAlign="Right"/>
-									</form:SimpleForm>
-									<!-- 1 売上 -->
-							<!-- 		<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" 
-										labelSpanL="4" labelSpanM="4" emptySpanL="3" emptySpanM="3" breakpointM="100">
-										<core:Title text="{i18n>Title4a}" />
-										<Label text="{i18n>Field1}" />
-										<Input value="{local>/dailyBalance/0/INSHOKU_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field2}" />
-										<Input value="{local>/dailyBalance/0/BENTO_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field3}" />
-										<Input value="{local>/dailyBalance/0/GAME_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field4}" />
-										<Input value="{local>/dailyBalance/0/LANE_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field5}" />
-										<Input value="{local>/dailyBalance/0/SHOES_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field6}" />
-										<Input value="{local>/dailyBalance/0/PRO_SHOP_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field7}" />
-										<Input value="{local>/dailyBalance/0/BILLIARD_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field8}" />
-										<Input value="{local>/dailyBalance/0/JITEN_TVG_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field9}" />
-										<Input value="{local>/dailyBalance/0/KYOWA_TVG_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field10}" />
-										<Input value="{local>/dailyBalance/0/LOCKER_DAI_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field11}" />
-										<Input value="{local>/dailyBalance/0/KARAOKE_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field12}" />
-										<Input value="{local>/dailyBalance/0/FK_URIAGE8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field13}" />
-										<Input value="{local>/dailyBalance/0/FK_URIAGE10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field14}" />
-										<Input value="{local>/dailyBalance/0/NYUJORYO_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field15}" />
-										<Input value="{local>/dailyBalance/0/HANSOKUHIN_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<core:Title text="" />
-										<Label text="{i18n>Field16}" />
-										<Input value="{local>/dailyBalance/0/KOKA_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field17}" />
-										<Input value="{local>/dailyBalance/0/HAIBUN_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field18}" />
-										<Input value="{local>/dailyBalance/0/JIHANKI_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field19}" />
-										<Input value="{local>/dailyBalance/0/BUPPAN_URIAGE8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field20}" />
-										<Input value="{local>/dailyBalance/0/BUPPAN_URIAGE10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field21}" />
-										<Input value="{local>/dailyBalance/0/REJI_URIAGE}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field22}" />
-										<Input value="{local>/dailyBalance/0/EVENT_URIAGEA8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field23}" />
-										<Input value="{local>/dailyBalance/0/EVENT_URIAGEB8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field24}" />
-										<Input value="{local>/dailyBalance/0/EVENT_URIAGEA10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field25}" />
-										<Input value="{local>/dailyBalance/0/EVENT_URIAGEB10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field26}" />
-										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEA8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field27}" />
-										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEB8}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field28}" />
-										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEA10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field29}" />
-										<Input value="{local>/dailyBalance/0/SONOTA_URIAGEB10}" change="onDailyBalanceCalc" editable="{local>/viewEditable}"/>
-										<Label text="{i18n>Field30}" />
-										<Input value="{local>/dailyBalance/0/URIAGE_NEBIKI}" enabled="false"/>
-										<Label text="{i18n>Field31}" />
-										<Input value="{local>/dailyBalance/0/URIAGE_GOKEI}" enabled="false"/>
-									</form:SimpleForm>
-									<form:SimpleForm editable="true" layout="ColumnLayout" adjustLabelSpan="false"
-										columnsM="2"
-										columnsL="2"
-										columnsXL="2"
-										labelSpanL="3" labelSpanM="3" emptySpanL="2" emptySpanM="2" breakpointM="100">  -->
-										<!-- 2 売上収入内訳 -->
-									<!-- <core:Title text="{i18n>Title4b}" />
-										<Label text="{i18n>Field33}">
-											<layoutData>
-												<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
-											</layoutData>
-										</Label>
-										<Input value="{local>/dailyBalance/0/GENKIN_URIAGE}" enabled="false"/>
-										<Label text="{i18n>Field34}" >
-											<layoutData>
-												<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
-											</layoutData>
-										</Label>
-										<Input value="{local>/dailyBalance/0/KAKEURI_TO}" enabled="false"/>
-										<Label text="{i18n>Field35}" >
-											<layoutData>
-												<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
-											</layoutData>
-										</Label>
-										<Input value="{local>/dailyBalance/0/URAG_SHNY_UCHWK_KI}" enabled="false"/>
-										<core:Title text="" />  -->
-										<!-- 3 その他現金収入合計 -->
-								<!-- <core:Title text="{i18n>Title4c}" />
-										<Input value="{local>/dailyBalance/0/SNT_GNKN_SHNY_GKI}" enabled="false"/>
-										<core:Title text="" />    -->
-										<!-- 4 その他現金支出合計 -->
-								<!-- 	<core:Title text="{i18n>Title4d}" />	
-										<Input value="{local>/dailyBalance/0/SNT_GNKN_SHSHT_GKI}" enabled="false"/>
-										<core:Title text="" /> -->
-										<!-- 5 収支差額 -->
-								<!-- 	<core:Title text="{i18n>Title4e}" />
-										<Input value="{local>/dailyBalance/0/SHUSHI_SAGAKU}" enabled="false"/>
-									</form:SimpleForm> -->
-									<!-- Table 无法写在SimpleForm中，为了插入与上面SimpleForm格式一致的标题 所以这里有一个空SimpleForm -->
-									<!-- 6 販促値引 -->
-								<!-- <form:SimpleForm editable="true" layout="ColumnLayout" adjustLabelSpan="false"
-										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="100">
-										<core:Title text="{i18n>Title4f}" />
-									</form:SimpleForm>
-									<uitable:Table
-										rows="{local>/table6}"
-										selectionMode="None"
-										visibleRowCount="4">
-										<uitable:columns>
-											<uitable:Column width="15rem">
-												<Label text="" />
-												<uitable:template>
-													<Text text="{local>Title}" wrapping="false" class="writeSpace"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>Quantity}" />
-												<uitable:template>
-													<Input value="{local>Quantity}" change=".onTable6Calc('/table6')" enabled="{path:'local>Id', formatter:'.formatter.setTable6Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>Amount}" />
-												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable6Calc('/table6')" enabled="{path:'local>Id', formatter:'.formatter.setTable6Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="20rem">
-												<Label text="{i18n>Remark}" />
-												<uitable:template>
-													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable6Visible'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											
-										</uitable:columns>
-									</uitable:Table> -->
-									<!-- Table 无法写在SimpleForm中，为了插入与上面SimpleForm格式一致的标题 所以这里有一个空SimpleForm -->
-									<!-- 7 券売上（劇場前売券、社員割引等） -->
-							<!-- 	<form:SimpleForm editable="true" layout="ColumnLayout" adjustLabelSpan="false"
-										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="100">
-										<core:Title text="{i18n>Title4h}" />
-									</form:SimpleForm>
-									<uitable:Table
-										rows="{local>/table7}"
-										selectionMode="None"
-										visibleRowCount="5">
-										<uitable:columns>
-											<uitable:Column width="4rem">
-												<Label text="{i18n>Number}" />
-												<uitable:template>
-													<Text text="{local>No}" wrapping="false"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="6rem">
-												<Label text="{i18n>Shop}" />
-												<uitable:template>
-													<Text text="{local>Shop}" wrapping="false" class="writeSpace"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="6rem">
-												<Label text="{i18n>FieldTitle}" />
-												<uitable:template>
-													<Text text="{local>Title}" wrapping="false" class="writeSpace"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>Quantity}" />
-												<uitable:template>
-													<Input value="{local>Quantity}" change=".onTable6Calc('/table7')" enabled="{path:'local>Id', formatter:'.formatter.setTable7Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>Amount}" />
-												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable6Calc('/table7')" enabled="{path:'local>Id', formatter:'.formatter.setTable7Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="16rem">
-												<Label text="{i18n>Remark}" />
-												<uitable:template>
-													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable7Visible'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-										</uitable:columns>
-									</uitable:Table>  -->
-									<!-- Table 无法写在SimpleForm中，为了插入与上面SimpleForm格式一致的标题 所以这里有一个空SimpleForm -->
-									<!-- 8 掛売上（クレジット、電子マネー、QR決済） -->
-							<!-- 	<form:SimpleForm editable="true" layout="ColumnLayout" adjustLabelSpan="false"
-										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="100">
-										<core:Title text="{i18n>Title4i}" />
-									</form:SimpleForm>
-									<uitable:Table
-										rows="{local>/table8}"
-										selectionMode="None"
-										visibleRowCount="9">
-										<uitable:columns>
-											<uitable:Column width="4rem">
-												<Label text="{i18n>Number}" />
-												<uitable:template>
-													<Text text="{local>No}" wrapping="false"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="6rem">
-												<Label text="{i18n>Shop}" />
-												<uitable:template>
-													<Text text="{local>Shop}" wrapping="false" class="writeSpace"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="8rem">
-												<Label text="{i18n>FieldTitle}" />
-												<uitable:template>
-													<Text text="{local>Title}" wrapping="false" class="writeSpace"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>Quantity}" />
-												<uitable:template>
-													<Input value="{local>Quantity}" change=".onTable6Calc('/table8')" enabled="{path:'local>Id', formatter:'.formatter.setTable8Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>Amount}" />
-												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable6Calc('/table8')" enabled="{path:'local>Id', formatter:'.formatter.setTable8Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="16rem">
-												<Label text="{i18n>Remark}" />
-												<uitable:template>
-													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable8Visible'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-										</uitable:columns>
-									</uitable:Table>-->
-									<!-- Table 无法写在SimpleForm中，为了插入与上面SimpleForm格式一致的标题 所以这里有一个空SimpleForm -->
-									<!-- 9 掛売上（汎用：自店のみ） -->
-							<!-- 	<form:SimpleForm editable="true" layout="ColumnLayout" adjustLabelSpan="false"
-										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="100">
-										<core:Title text="{i18n>Title4j}" />
-									</form:SimpleForm>
-									<uitable:Table
-										rows="{local>/table9}"
-										selectionMode="None"
-										visibleRowCount="4">
-										<uitable:columns>
-											<uitable:Column width="4rem">
-												<Label text="{i18n>Number}" />
-												<uitable:template>
-													<Text text="{local>No}" wrapping="false"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>FieldTitle}" />
-												<uitable:template>
-                                                    <Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>Amount}" />
-												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable9Calc('/table9')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>ShopD}" />
-												<uitable:template>
-													<Input value="{local>ShopD}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountD}" />
-												<uitable:template>
-													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>TaxD}" />
-												<uitable:template>
-													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>ShopC}" />
-												<uitable:template>
-													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountC}" />
-												<uitable:template>
-													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>TaxC}" />
-												<uitable:template>
-													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-										</uitable:columns>
-									</uitable:Table>  -->
-									<!-- Table 无法写在SimpleForm中，为了插入与上面SimpleForm格式一致的标题 所以这里有一个空SimpleForm -->
-									<!-- 10 掛売上（汎用：他店のみ） -->
-							<!-- 	<form:SimpleForm editable="true" layout="ColumnLayout" adjustLabelSpan="false"
-										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="100">
-										<core:Title text="{i18n>Title4k}" />
-									</form:SimpleForm>
-									<uitable:Table
-										rows="{local>/table10}"
-										selectionMode="None"
-										visibleRowCount="4">
-										<uitable:columns>
-											<uitable:Column width="4rem">
-												<Label text="{i18n>Number}" />
-												<uitable:template>
-													<Text text="{local>No}" wrapping="false"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>FieldTitle}" />
-												<uitable:template>
-													<Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable10Enabled'}" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>Amount}" />
-												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable9Calc('/table10')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>ShopD}" />
-												<uitable:template>
-													<Input value="{local>ShopD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountD}" />
-												<uitable:template>
-													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>TaxD}" />
-												<uitable:template>
-													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>ShopC}" />
-												<uitable:template>
-													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountC}" />
-												<uitable:template>
-													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account')" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>TaxC}" />
-												<uitable:template>
-													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-										</uitable:columns>
-									</uitable:Table>  -->
-									<!-- Table 无法写在SimpleForm中，为了插入与上面SimpleForm格式一致的标题 所以这里有一个空SimpleForm -->
-									<!-- 11 掛売上（シネマ券） -->
-							<!-- <form:SimpleForm editable="true" layout="ColumnLayout" adjustLabelSpan="false"
-										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="100">
-										<core:Title text="{i18n>Title4l}" />
-									</form:SimpleForm> -->
-								<!-- 	<uitable:Table
-										rows="{local>/table11}"
-										selectionMode="None"
-										visibleRowCount="16">
-										<uitable:columns>
-											<uitable:Column width="4rem">
-												<Label text="{i18n>Number}" />
-												<uitable:template>
-													<Text text="{local>No}" wrapping="false"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>WorksTitle}" />
-												<uitable:template>
-                                                    <Input value="{local>WorksTitle}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="9rem">
-												<Label text="{i18n>Ticket}" />
-												<uitable:template> -->
-                                                    <!-- <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/> -->
-									 <!-- 			<Select id="idSelectTicket" width="6rem" class="sapUiSmallMarginEnd" forceSelection="false" selectedKey="{local>Ticket}"
-														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}" editable="{local>/viewEditable}">
-														<core:Item key="" text=""/>
-														<core:Item key="ムビ" text="ムビ"/>
-														<core:Item key="紙" text="紙"/>
-														<core:Item key="無" text="無"/>
-														<core:Item key="他" text="他"/>
-													</Select>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>Quantity}" />
-												<uitable:template>
-													<Input value="{local>Quantity}" change=".onTable6Calc('/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>Amount}" />
-												<uitable:template>
-													<Input value="{local>Amount}" change=".onTable6Calc('/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="16rem">
-												<Label text="{i18n>Supply}" />
-												<uitable:template>
-													<Input value="{local>Supply}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}"
-														editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-										</uitable:columns>
-									</uitable:Table> -->
-									<!-- Table 无法写在SimpleForm中，为了插入与上面SimpleForm格式一致的标题 所以这里有一个空SimpleForm -->
-									<!-- 12 委託販売 -->
-							<!-- 	<form:SimpleForm editable="true" layout="ColumnLayout" adjustLabelSpan="false"
-										labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="2" breakpointM="100">
-										<core:Title text="{i18n>Title4m}" />
-									</form:SimpleForm>   
-									<uitable:Table
-										rows="{local>/table12}"
-										selectionMode="None"
-										visibleRowCount="2">
-										<uitable:columns>
-											<uitable:Column width="4rem">
-												<Label text="{i18n>Number}" />
-												<uitable:template>
-													<Text text="{local>No}" wrapping="false"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="6rem">
-												<Label text="{i18n>Shop}" />
-												<uitable:template>
-                                                    <Input value="{local>Shop}" enabled="{path:'local>Id', formatter:'.formatter.setTable12Enabled'}"
-														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Shop')" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>FieldTitle}" />
-												<uitable:template>
-													<Text text="{local>Title}" wrapping="false" class="writeSpace"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>Quantity}" />
-												<uitable:template>
-													<Input value="{local>Quantity}" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>Amount}" />
-												<uitable:template>
-													<Input value="{local>Amount}" change="onTable12AmountChange" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="16rem">
-												<Label text="{i18n>Remark}" />
-												<uitable:template>
-													<Input value="{local>Remark}" editable="{local>/viewEditable}"/>
-												</uitable:template>
-											</uitable:Column>
-										</uitable:columns>
-									</uitable:Table>
-									<HBox>
-										<Text width="{local>/labelWidth}" text="{i18n>Title4o}" class="paddingTop"/>
-										<Input value="{local>/dailyBalance/0/HONZITUKURIKOSI}" enabled="false" editable="{local>/viewEditable}"/>
-									</HBox> -->
-									<!-- Ⅴ送付金予定額 -->
-							<!-- 		<Text text="{i18n>Title4p}"/>
-									<Text text="{i18n>Title4p1}" class="paddingLeft"/>
-									<HBox>
-										<Label width="{local>/labelWidth}" text="{i18n>Title4p2}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/ZNJT_HNSH_SFKN_RKI}" change="resultCalc2" editable="{local>/viewEditable}"/>
-									</HBox>
-									<HBox>
-										<Label width="{local>/labelWidth}" text="{i18n>Title4p3}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/HNJTS_SOFUKIN}" change="resultCalc2" editable="{local>/viewEditable}"/>
-									</HBox>
-									<HBox>
-										<Label width="{local>/labelWidth}" text="{i18n>Title4p4}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/RYOGAEKIN_MODOSHI}" change="resultCalc2" editable="{local>/viewEditable}"/>
-									</HBox>
-									<HBox>
-										<Label width="{local>/labelWidth}" text="{i18n>Title4p5}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/GANKIN_ZOUGAKU}" change="resultCalc2" editable="{local>/viewEditable}"/>
-									</HBox>
-									<HBox>
-										<Label width="{local>/labelWidth}" text="{i18n>Title4p6}" class="paddingLeft paddingTop"/>
-										<Input value="{local>/dailyBalance/0/SOFUKIN_YOTEIGAKU}" enabled="false"/>
-									</HBox> -->
-									<!-- Ⅵ元金金額 -->
-									<!-- <HBox>
-										<Text width="{local>/labelWidth}" text="{i18n>Title4q}" class="paddingTop"/>
-										<Input value="{local>/dailyBalance/0/GANKIN_AMT}" change="resultCalc1" editable="{local>/viewEditable}"/>
-									</HBox> -->
-									<!-- Ⅶ アムエリア振替(Ⅳ-Ⅵ) -->
-									<!-- <HBox>
-										<Text width="{local>/labelWidth}" text="{i18n>Title4r}" class="paddingTop"/>
-										<Input value="{local>/dailyBalance/0/AMAREA_FURIKAE}" enabled="false"/>
-									</HBox>   -->
-									
-									
-								</VBox>
-							</uxap:blocks>
-						</uxap:ObjectPageSubSection>
-					</uxap:subSections>
-				</uxap:ObjectPageSection>
-                <uxap:ObjectPageSection titleUppercase="false" title="{i18n>Section5}">
-                    <uxap:subSections>
-						<uxap:ObjectPageSubSection title="{i18n>Section5}">
-							<uxap:blocks>
-                                <VBox>
-                                    <!-- 元金過不足内訳・金額 -->
-                                    <HBox>
-                                        <Text width="{local>/labelWidth}" text="{i18n>Title4s}" class="paddingTop"/>
-                                        <Input value="{path:'local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" editable="{local>/viewEditable}" textAlign="Right"/>
-                                    </HBox>
-                                    <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
-                                    <!-- 元金過不足詳細・全角50文字以内 -->
-                                    <HBox>
-                                        <Text width="{local>/labelWidth}" text="{i18n>Title4t}" class="paddingTop"/>
-                                        <!-- <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}" editable="{local>/viewEditable}"/> -->
-                                    </HBox>
-                                    <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
-                                    <TextArea value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_BIKOU}" maxLength="50" width="50%" editable="{local>/viewEditable}"/>
-                                    
-                                    <Text width="{local>/labelWidth}" text="{i18n>Remark}" class="paddingTop"/>
-                                    <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
-                                </VBox>
-                            </uxap:blocks>
-                        </uxap:ObjectPageSubSection>
-                    </uxap:subSections>
-                </uxap:ObjectPageSection>
 				<uxap:ObjectPageSection titleUppercase="false" title="{i18n>Section2}">
 					<uxap:subSections>
 						<!-- その他現金収入 -->
@@ -653,8 +56,8 @@
 											<OverflowToolbar>
 												<content>
 													<ToolbarSpacer />
-													<Button text="{i18n>Delete}" press=".onDeleteLine($event,'idCashIncomeTable')"/>
-													<Button text="{i18n>AddLine}" press=".onAddLine($event,'idCashIncomeTable')"/>
+													<Button text="{i18n>Delete}" press=".onDeleteLine($event,'idCashIncomeTable')" enabled="{local>/viewEditable}"/>
+													<Button text="{i18n>AddLine}" press=".onAddLine($event,'idCashIncomeTable')" enabled="{local>/viewEditable}"/>
 												</content>
 											</OverflowToolbar>
 										</headerToolbar>
@@ -703,7 +106,7 @@
 											</ColumnListItem>
 										</items>
 									</Table>
-                                    <!-- 入金合計 -->
+									<!-- 入金合計 -->
                                     <HBox justifyContent="Center">
                                         <Text width="{local>/labelWidth}" text="{i18n>Title4c}" class="paddingTop"/>
 										<Text width="{local>/labelWidth}" text="{path:'local>/dailyBalance/0/SNT_GNKN_SHNY_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" class="paddingTop"/>
@@ -726,8 +129,8 @@
 											<OverflowToolbar>
 												<content>
 													<ToolbarSpacer />
-													<Button text="{i18n>Delete}" press=".onDeleteLine($event,'idCashPaymentTable')"/>
-													<Button text="{i18n>AddLine}" press=".onAddLine($event,'idCashPaymentTable')"/>
+													<Button text="{i18n>Delete}" press=".onDeleteLine($event,'idCashPaymentTable')" enabled="{local>/viewEditable}"/>
+													<Button text="{i18n>AddLine}" press=".onAddLine($event,'idCashPaymentTable')" enabled="{local>/viewEditable}"/>
 												</content>
 											</OverflowToolbar>
 										</headerToolbar>
@@ -772,7 +175,7 @@
 											</ColumnListItem>
 										</items>
 									</Table>
-                                    <!-- 出金合計 -->
+									<!-- 出金合計 -->
                                     <HBox justifyContent="Center">
                                         <Text width="{local>/labelWidth}" text="{i18n>Title4d}" class="paddingTop"/>
 										<Text width="{local>/labelWidth}" text="{path:'local>/dailyBalance/0/SNT_GNKN_SHSHT_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" class="paddingTop"/>
@@ -783,6 +186,62 @@
 						</uxap:ObjectPageSubSection>
 					</uxap:subSections>
 				</uxap:ObjectPageSection>
+
+				<uxap:ObjectPageSection titleUppercase="false" title="{i18n>Section1}">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection title="{i18n>Section1}">
+							<uxap:blocks>
+								<VBox class="sapUiSmallMargin">
+								<!-- <form:SimpleForm layout="ResponsiveGridLayout" columnsXL="2" editable="true" adjustLabelSpan="false" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="5" columnsL="2" columnsM="2"> -->
+									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" singleContainerFullSize="false"
+										labelSpanL="4" labelSpanM="3" emptySpanL="4" emptySpanM="2" breakpointM="400" columnsL="2">
+										<Label text="{i18n>Title1}" />
+										<Input value="{path:'local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<!-- 入金合計 -->
+										<Label text="{i18n>Title4c}" />
+										<Input value="{path:'local>/dailyBalance/0/SNT_GNKN_SHNY_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
+										<!-- 出金合計 -->
+										<Label text="{i18n>Title4d}" />
+										<Input value="{path:'local>/dailyBalance/0/SNT_GNKN_SHSHT_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
+										<Label text="{i18n>Title2}" />
+										<Input value="{path:'local>/dailyBalance/0/HNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
+										<Label text="{i18n>Title3}" />
+										<Input value="{path:'local>/dailyBalance/0/KITEI_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Label text="{i18n>Title4}" />
+										<Input value="{path:'local>/dailyBalance/0/GNK_AZKR_YTIGK', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
+									</form:SimpleForm>
+								</VBox>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+                <uxap:ObjectPageSection titleUppercase="false" title="{i18n>Section5}">
+                    <uxap:subSections>
+						<uxap:ObjectPageSubSection title="{i18n>Section5}">
+							<uxap:blocks>
+                                <VBox>
+                                    <!-- 元金過不足内訳・金額 -->
+                                    <HBox>
+                                        <Text width="{local>/labelWidth}" text="{i18n>Title4s}" class="paddingTop"/>
+                                        <Input value="{path:'local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" editable="{local>/viewEditable}" textAlign="Right"/>
+                                    </HBox>
+                                    <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
+                                    <!-- 元金過不足詳細・全角50文字以内 -->
+                                    <HBox>
+                                        <Text width="{local>/labelWidth}" text="{i18n>Title4t}" class="paddingTop"/>
+                                        <!-- <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}" editable="{local>/viewEditable}"/> -->
+                                    </HBox>
+                                    <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
+                                    <TextArea value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_BIKOU}" maxLength="50" width="50%" editable="{local>/viewEditable}"/>
+                                    
+                                    <Text width="{local>/labelWidth}" text="{i18n>Remark}" class="paddingTop"/>
+                                    <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
+                                </VBox>
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                    </uxap:subSections>
+                </uxap:ObjectPageSection>
+				
                 <!-- 翌日金庫内現金内訳 -->
                 <uxap:ObjectPageSection titleUppercase="false" title="{i18n>Section4}">
 					<uxap:subSections>
@@ -810,13 +269,14 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}"  textAlign="Right"/>
+                                                        <Input value="{local>Quantity}" maxLength="5" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}"  textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
-                                                <uitable:Column >
+                                                <uitable:Column>
                                                     <Label text="{i18n>AmountT5}" />
                                                     <uitable:template>
-                                                        <Text text="{path:'local>Amount', formatter:'.formatter.formatFloat'}" textAlign="Right"/>
+                                                        <!-- <Text text="{path:'local>Amount', formatter:'.formatter.formatFloat'}" textAlign="Right"/> -->
+														<Input value="{path:'local>Amount', formatter:'.formatter.formatFloat'}" enabled="false" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                             </uitable:columns>
@@ -846,14 +306,15 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                        <Input value="{local>Quantity}" maxLength="5" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column >
                                                     <Label text="{i18n>AmountT5}" />
                                                     <uitable:template>
-                                                        <Text text="{path:'local>Amount', formatter:'.formatter.formatFloat'}" textAlign="Right"/>
-                                                    </uitable:template>
+                                                        <!-- <Text text="{path:'local>Amount', formatter:'.formatter.formatFloat'}" textAlign="Right"/> -->
+														<Input value="{path:'local>Amount', formatter:'.formatter.formatFloat'}" enabled="false"  textAlign="Right"/>
+													</uitable:template>
                                                 </uitable:Column>
                                             </uitable:columns>
                                             <uitable:footer>
@@ -940,10 +401,10 @@
 	<footer>
 		<OverflowToolbar id="otbFooter">
 			<ToolbarSpacer/>
-			<Button id="idSave" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')"/>
-            <Button id="idChange" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress"/>
-			<Button type="Transparent" text="{i18n>Apply}" press="onApplyConfirm"/>
-            <Button id="idPosting" type="Transparent" text="{i18n>Posting}" press="onBalanceSave('Posting')"/>
+			<Button id="idSave" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')" enabled="{local>/viewEditable}"/>
+            <Button id="idChange" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress" enabled="{local>/btChange}"/>
+			<Button type="Transparent" text="{i18n>Apply}" press="onApplyConfirm" enabled="{local>/btApply}"/>
+            <Button id="idPosting" type="Transparent" text="{i18n>Posting}" press="onBalanceSave('Posting')" enabled="{local>/btPosting}"/>
 			<Button type="Transparent" text="{i18n>Suspend}" press="onSuspend"/>
 		</OverflowToolbar>
 	</footer>

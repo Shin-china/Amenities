@@ -302,6 +302,20 @@ sap.ui.define([
                     return;
                 }
 
+                //check action
+                var aSelectedIndex = oTable.getSelectedIndices();
+                var isError = false;
+                aSelectedIndex.forEach(function (selectedIndex) {
+                    if (isError) {return;}
+                    var oItem = oTable.getContextByIndex(selectedIndex).getObject();
+                    if (sMessage == "DeleteConfirmMsg") {
+                        isError = !this.checkButtonEnable(oItem.NIKKEIHYO_STATUS_CD, "delete")
+                    } else if (sMessage == "PostingConfirmMsg") {
+                        isError = !this.checkButtonEnable(oItem.NIKKEIHYO_STATUS_CD, "posting")
+                    }
+                }.bind(this));
+                if (isError) {return;}
+
                 var sTitle = this._ResourceBundle.getText("ConfirmTitle");
                 var sText = this._ResourceBundle.getText(sMessage);
                 MessageBox.confirm(sText, {
