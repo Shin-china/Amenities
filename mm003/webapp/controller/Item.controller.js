@@ -79,8 +79,8 @@ sap.ui.define(
                 name: item.USERNAME,
                 time: new Date(sTime),
                 comments: item.COMMENTS,
-                action: item.ACTION,
-                nodename: item.NODENAME
+                action: item.ACTION
+                // nodename: item.NODENAME
             });
           }, this);
           

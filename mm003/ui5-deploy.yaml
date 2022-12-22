@@ -19,5 +19,5 @@ builder:
         app:
           name: ZMM003
           description: 購買受信ボックス
-          package: Z001
+          package: z001
           transport: RD1K908455
