@@ -84,10 +84,15 @@ sap.ui.define([
                             that._TenpoCd = oData.TenpoCd;
                             that._EigyoBi = oData.EigyoBi;
                             that._KihyoNo = oData.KihyoNo; 
-                            var title = that._comm.getI18nMessage(that, "detail_title");
-                            title = title.concat(" " + oData.KihyoNo);
+                            // var title = that._comm.getI18nMessage(that, "detail_title");
+                            // title = title.concat(" " + oData.KihyoNo);
+                            var title
+                            if (mode === 'C') {
+                                title = that._comm.getI18nMessage(that, "detail_title");
+                            } else {
+                                title = oData.KihyoNo;
+                            }
                             that.byId("detailPage").setTitle(title);
-
                             that._sum.PUriage = oData.PUriage;
                             that._sum.SUriage = oData.SUriage;
                             that._sum.GenkinUragGokei = oData.GenkinUragGokei;

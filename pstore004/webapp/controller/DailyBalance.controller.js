@@ -87,6 +87,8 @@ sap.ui.define([
                 aCahsModel.splice(element,1);
             });
             oTable.removeSelections();
+            this.collectionIncome();
+            this.collectionPayment();
             this._LocalData.refresh();
         },
 
