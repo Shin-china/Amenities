@@ -378,31 +378,56 @@ sap.ui.define([
                 oContext.byId(sTabName).setFirstVisibleRow(index);
             },
 
-            _deleteRow: function (oContext, sModelName, sTabName, sBindingProperty, oEvent = null) {
-                var indices = oContext.byId(sTabName).getSelectedIndices();
-                var oModel = oContext.getView().getModel(sModelName);
-                oContext[sBindingProperty] = oModel.getData();
-                for (var i of indices) {
-                    var oSelObj = oContext.byId(sTabName).getContextByIndex(i).getObject();
-                    var sMeisaiNo = oSelObj.MeisaiNo;
-
-                    if (sMeisaiNo) {
-                        for (var j = 0; j < oContext[sBindingProperty].length; j++) {
-                            if (oContext[sBindingProperty][j].MeisaiNo === sMeisaiNo) {
-                                oContext[sBindingProperty][j].Loekz = true;
-                            }
-                        }
-                    }
-                }
-
-                oModel.refresh();
-
-                var filter = [];
-                filter.push(new sap.ui.model.Filter("Loekz", sap.ui.model.FilterOperator.EQ, false));
-
-                oContext.byId(sTabName).getBinding("rows").filter(new sap.ui.model.Filter(filter, true));
-
+            onCashCheckBox: function (oEvent) {
+                // var sPath = oEvent.getSource().getBindingContext("local").sPath;
+                // this._LocalData.setProperty(sPath + "/Jidoutenkifuyo", oEvent.getParameter("selected"));
             },
+
+            _deleteRow: function (oContext, sModelName, sTabName, sBindingProperty, oEvent) {
+                // var sPath = "";
+                var oTable = this.byId(sTabName);
+                var aSelectedPaths = oTable.getSelectedContextPaths();
+                var aSelectedIndex = [];
+                aSelectedPaths.forEach( element => {
+                    aSelectedIndex.push(parseInt(element.substring(1)));
+                });
+                var oModel = oContext.getView().getModel(sModelName);
+                var aCahsModel = oModel.getData();
+                
+                aSelectedIndex.sort();
+                aSelectedIndex.reverse();
+                aSelectedIndex.forEach( element => {
+                    aCahsModel.splice(element,1);
+                });
+                oTable.removeSelections();
+                oModel.refresh();
+            },
+
+            // _deleteRow: function (oContext, sModelName, sTabName, sBindingProperty, oEvent) {
+            //     var indices = oContext.byId(sTabName).getSelectedIndices();
+            //     var oModel = oContext.getView().getModel(sModelName);
+            //     oContext[sBindingProperty] = oModel.getData();
+            //     for (var i of indices) {
+            //         var oSelObj = oContext.byId(sTabName).getContextByIndex(i).getObject();
+            //         var sMeisaiNo = oSelObj.MeisaiNo;
+
+            //         if (sMeisaiNo) {
+            //             for (var j = 0; j < oContext[sBindingProperty].length; j++) {
+            //                 if (oContext[sBindingProperty][j].MeisaiNo === sMeisaiNo) {
+            //                     oContext[sBindingProperty][j].Loekz = true;
+            //                 }
+            //             }
+            //         }
+            //     }
+
+            //     oModel.refresh();
+
+            //     var filter = [];
+            //     filter.push(new sap.ui.model.Filter("Loekz", sap.ui.model.FilterOperator.EQ, false));
+
+            //     oContext.byId(sTabName).getBinding("rows").filter(new sap.ui.model.Filter(filter, true));
+
+            // },
 
             onTabInCashAdd: function (oEvent) {
                 var oNewObj = {};
@@ -426,6 +451,7 @@ sap.ui.define([
 
             onTabInCashDelete: function (oEvent) {
                 this._deleteRow(this, "InCash", "tabInCash", "_InCashSet", oEvent);
+                this.onTabInCashRowUpdate(oEvent);
             },
 
             onTabOutCashAdd: function (oEvent) {
@@ -449,6 +475,7 @@ sap.ui.define([
 
             onTabOutCashDelete: function (oEvent) {
                 this._deleteRow(this, "OutCash", "tabOutCash", "_OutCashSet", oEvent);
+                this.onTabOutCashRowUpdate(oEvent);
             },
 
             onMessagePopoverPress: function (oEvent) {
@@ -600,7 +627,8 @@ sap.ui.define([
             onTabInCashRowUpdate: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
                 //sum 6.
-                this._sum.SonotaNyukinKei = this._calcTableColumnSum(this, "InCash", "tabInCash", "NyknKingaku", null);
+                // this._sum.SonotaNyukinKei = this._calcTableColumnSum(this, "InCash", "tabInCash", "NyknKingaku", null);
+                this._sum.SonotaNyukinKei = this._collectionIncome(this, "InCash", "NyknKingaku");
 
                 //A:  3 + 5 + 6
                 this._sum.SyunyuGokei = this._calcCurrencySum(this._sum.GenkinUragGokei,
@@ -623,7 +651,8 @@ sap.ui.define([
             onTabOutCashRowUpdate: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
                 //sum 7.
-                this._sum.SonotaShunyuKei = this._calcTableColumnSum(this, "OutCash", "tabOutCash", "ShknKingaku", null);
+                // this._sum.SonotaShunyuKei = this._calcTableColumnSum(this, "OutCash", "tabOutCash", "ShknKingaku", null);
+                this._sum.SonotaShunyuKei = this._collectionIncome(this, "OutCash", "ShknKingaku");
 
                 //B: sum: 7 + 8
                 this._sum.ShishutsuGokei = this._calcCurrencySum(this._sum.SonotaShunyuKei, this._sum.KeihinShirdk);
@@ -641,6 +670,50 @@ sap.ui.define([
                 this.onCalcHnjtsKrkshdkUgki(oEvent);
             },
 
+            _collectionIncome: function (oContext, sBindingPath, sColumnId) {
+                // this.setValueToZero(oEvent);
+                var oModel = oContext.getView().getModel(sBindingPath);
+                var aTable = oModel.getData();
+                var total = "0";
+                aTable.forEach(function (line) {
+                    total = this.formatter.accAdd(total, line[sColumnId]);
+                }.bind(oContext));
+                return total;
+            },
+
+            _calcTableColumnSum: function (oContext, sBindingPath, sTableId, sColumnId, sSumFieldId) {
+                var oCurrencyParse = NumberFormat.getFloatInstance();
+                var aItems = oContext.byId(sTableId).getRows();
+                var amount = 0, waers = '', lineAmount = 0;
+                var oBindingContext, oData;
+                for (var item of aItems) {
+                    if (sBindingPath) {
+                        oBindingContext = item.getBindingContext(sBindingPath);
+                        // data = item.getBindingContext(sBindingPath).getObject();
+                    } else {
+                        oBindingContext = item.getBindingContext();
+                        // data = item.getBindingContext().getObject();
+                    }
+
+                    if (oBindingContext) {
+                        oData = oBindingContext.getObject();
+                        var colVal = "0";
+                        if (oData[sColumnId]) {
+                            colVal = oData[sColumnId].toString();
+                        }
+                        lineAmount = oCurrencyParse.parse(colVal);
+                        amount += lineAmount;
+                        waers = (waers === '') ? oData.Waers : 'JPY';
+                    }
+                }
+
+                if (sSumFieldId != null) {
+                    var oCurrencyFormat = NumberFormat.getCurrencyInstance({ showMeasure: false });
+                    this.byId(sSumFieldId).setText(oCurrencyFormat.format(amount, waers));
+                }
+
+                return amount;
+            },
             _calcFieldsSum(...fields) {
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var sum = 0;
