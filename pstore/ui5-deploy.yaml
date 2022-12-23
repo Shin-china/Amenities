@@ -19,5 +19,5 @@ builder:
         app:
           name: ZPSOTRE002
           description: Pstore
-          package: Z001
+          package: z001
           transport: RD1K908455

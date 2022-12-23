@@ -163,6 +163,14 @@ sap.ui.define([
             return oNumberFormat.format(sum);
         },
 
+        formatOutbound: function(input){
+            var qty = 0.00;
+            qty = Number(input);
+            var oNumberFormat = NumberFormat.getFloatInstance(); 
+            var amount = Math.round(qty);
+            return oNumberFormat.format(amount);
+        },
+
         formatGoodsTodayRemainAmount: function(waers,todayIn, price){
             var qty = 0.00;
             var oCurrencyFormat = NumberFormat.getCurrencyInstance({showMeasure: false});
