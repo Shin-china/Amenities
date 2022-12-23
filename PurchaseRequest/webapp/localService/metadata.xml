@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZUI5_FILE_UPLOAD_SRV" xml:lang="ja" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="Upload" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Objtype"/>
+                    <PropertyRef Name="Objectid"/>
+                    <PropertyRef Name="Filename"/>
+                </Key>
+                <Property Name="Aedat" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="変更日" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Objtype" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:updatable="false"/>
+                <Property Name="Objectid" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:updatable="false"/>
+                <Property Name="Filename" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:updatable="false"/>
+                <Property Name="Aezet" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="変更時刻" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Mimetype" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:updatable="false"/>
+                <Property Name="Filepath" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZUI5_FILE_UPLOAD_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="UploadSet" EntityType="ZUI5_FILE_UPLOAD_SRV.Upload" sap:updatable="false" sap:searchable="true" sap:content-version="1"/>
+                <FunctionImport Name="deleteFile" ReturnType="ZUI5_FILE_UPLOAD_SRV.Upload" EntitySet="UploadSet" m:HttpMethod="GET" sap:action-for="ZUI5_FILE_UPLOAD_SRV.Upload">
+                    <Parameter Name="Filename" Type="Edm.String" Mode="In"/>
+                    <Parameter Name="Objectid" Type="Edm.String" Mode="In"/>
+                    <Parameter Name="Objtype" Type="Edm.String" Mode="In"/>
+                </FunctionImport>
+            </EntityContainer>
+            <atom:link rel="self" href="https://ad1-amenities.aee.hec.ondemand.com/sap/opu/odata/SAP/ZUI5_FILE_UPLOAD_N_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://ad1-amenities.aee.hec.ondemand.com/sap/opu/odata/SAP/ZUI5_FILE_UPLOAD_N_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

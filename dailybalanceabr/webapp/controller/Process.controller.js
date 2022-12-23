@@ -187,10 +187,11 @@ sap.ui.define([
                             MessageBox.error(res.MESSAGE);
                             return;
                         } else {
-                            this.getLastRecord();
-                            this.setLocalModel();
-                            this.getRouter().navTo("DailyBalance",{view:"Create"});
-                            oDialog.close();
+                            this.getLastRecord().then(function (res) {
+                                this.setLocalModel();
+                                this.getRouter().navTo("DailyBalance",{view:"Create"});
+                                oDialog.close();
+                            }.bind(this));
                         }
                     } else {
                         MessageBox.error(messages.parseErrors(res));
@@ -350,6 +351,7 @@ sap.ui.define([
                     };
                     this.getOwnerComponent().getModel().read("/ZzShopDailyBalanceSet", mParameters);
                 }.bind(this));
+                return promise;
 
             },
 
@@ -360,13 +362,27 @@ sap.ui.define([
             },
 
             refrenceButton: function () {
-                var oTable = this.byId("reportTable");
-                var oBinding = oTable.getBinding();
-                var sPath = oBinding.aKeys[oTable.getSelectedIndex()];
-                this.getRouter().navTo("DailyBalance",{
-                    contextPath: sPath,
-                    view:"Display"
-                });
+                this.checkError().then(function (res) {
+                    if(res.TYPE) {
+                        if (res.TYPE == "E") {
+                            this._LocalData.setProperty("/processBusy", false);
+                            MessageBox.error(res.MESSAGE);
+                            return;
+                        } else {
+                            var oTable = this.byId("reportTable");
+                            var oBinding = oTable.getBinding();
+                            var sPath = oBinding.aKeys[oTable.getSelectedIndex()];
+                            this.getRouter().navTo("DailyBalance",{
+                                contextPath: sPath,
+                                view:"Display"
+                            });
+                        }
+                    } else {
+                        this._LocalData.setProperty("/processBusy", false);
+                        MessageBox.error(messages.parseErrors(res));
+                        return;
+                    }
+                }.bind(this));
             },
 
             onConfirmBox: function (oEvent, sMessage) {
@@ -705,7 +721,9 @@ sap.ui.define([
                     aProfit = [],
                     aCost = [],
                     aFI0006 = [],
-                    aFieldId = [];
+                    aFieldId = [],
+                    aFI0009 = [],
+                    aFI0010 = [];
                 oData.results.forEach(function(line){
                     switch (line.ZID) {
                         //天气
@@ -812,6 +830,32 @@ sap.ui.define([
                                 FieldId: line.ZVALUE2,
                             });
                             break;
+                        // 本日送付金(＝5収支差額:プラザコリア店舗）
+                        case "FI0009":
+                            aFI0009.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1,
+                                Value2: line.ZVALUE2,
+                                Value3: line.ZVALUE3,
+                                Value4: line.ZVALUE4,
+                                Value5: line.ZVALUE5,
+                                Value6: line.ZVALUE6,
+                                Remark: line.REMARK
+                            });
+                            break;
+                        // Ⅶアムエリア振替(＝5収支差額:ビレッジ店舗)
+                        case "FI0010":
+                            aFI0010.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1,
+                                Value2: line.ZVALUE2,
+                                Value3: line.ZVALUE3,
+                                Value4: line.ZVALUE4,
+                                Value5: line.ZVALUE5,
+                                Value6: line.ZVALUE6,
+                                Remark: line.REMARK
+                            });
+                            break;
                     }
                 }.bind(this));
                 aFI0005.splice(0, 0, {Seq:"", Value1:""});
@@ -827,6 +871,8 @@ sap.ui.define([
                 this._LocalData.setProperty("/CostVH", aCost);
                 this._LocalData.setProperty("/FI0006", aFI0006);
                 this._LocalData.setProperty("/FieldId", aFieldId);
+                this._LocalData.setProperty("/FI0009", aFI0009);
+                this._LocalData.setProperty("/FI0010", aFI0010);
             },
 
             getButtonAuth: function () {

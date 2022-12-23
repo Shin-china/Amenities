@@ -228,6 +228,7 @@ sap.ui.define([
                 d.Action = 'U';
 
                 o.d = d;
+                oModel.setHeaders({action:"approval"});
                 oModel.create('/StoreSet', o, {
                     success: function (oData, oResponse) {
                         var oMessage = {};

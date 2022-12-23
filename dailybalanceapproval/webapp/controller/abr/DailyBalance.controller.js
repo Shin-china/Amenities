@@ -9,8 +9,9 @@ sap.ui.define([
     "sap/ui/core/library",
     "sap/ui/core/Fragment",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/routing/HashChanger"
-], function (BaseController, formatter, messages, MessageToast, Button, MessageBox, Message, library, Fragment, JSONModel, HashChanger) {
+    "sap/ui/core/routing/HashChanger",
+    "sap/ui/core/format/NumberFormat",
+], function (BaseController, formatter, messages, MessageToast, Button, MessageBox, Message, library, Fragment, JSONModel, HashChanger, NumberFormat) {
 	"use strict";
     // shortcut for sap.ui.core.MessageType
 	var MessageType = library.MessageType;
@@ -18,6 +19,7 @@ sap.ui.define([
 
 		formatter : formatter,
 
+        // 审批用，与日记表可能有差异
 		onInit: function () {
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel("abr");
@@ -38,7 +40,8 @@ sap.ui.define([
 
             
 		},
-
+        
+        // 审批用，与日记表可能有差异
         //当路径导航到此页面时，设置页面的数据绑定
         _onRouteMatched : function (oEvent) {
             // set title
@@ -114,8 +117,10 @@ sap.ui.define([
         },
 
         onMulti: function (oEvent, sParam) {
+            var oFormat = NumberFormat.getFloatInstance();
             this.setValueToZero(oEvent);
             var value = oEvent.getSource().getValue();
+            value = oFormat.parse(value);
             try {
                 value = this.formatter.accMul(value, sParam);
             } catch (e) {}
@@ -133,6 +138,7 @@ sap.ui.define([
             this.onCurrencyTable4ValueChange();
         },
 
+        // 审批用，与日记表可能有差异
         // 日记表数据保存
         onBalanceSave: function (sAction) {
             if (this.checkRequired()) {
@@ -220,44 +226,6 @@ sap.ui.define([
             
         },
 
-        //申请 确认
-        onApplyConfirm: function() {
-            if (!this.pDialog) {
-                this.pDialog = this.loadFragment({
-                    name: "FICO.dailybalanceabr.view.fragment.ApplyConfirm"
-                });
-            } 
-            this.pDialog.then(function(oDialog) {
-                var beginButton = new Button({
-                    type: "Emphasized",
-                    text: this._ResourceBundle.getText("Yes"),
-                    //登录按钮
-                    press: function () {
-                        this.onBalanceApply();
-                        oDialog.close();
-                    }.bind(this)
-                });
-                var endButton = new Button({
-                    text: this._ResourceBundle.getText("No"),
-                    press: function () {
-                        oDialog.close();
-                    }.bind(this)
-                });
-                // 添加按钮
-                if (oDialog.getButtons().length === 0){
-                    oDialog.addButton(beginButton);
-                    oDialog.addButton(endButton);
-                }
-                oDialog.open();
-            }.bind(this));
-        },
-        //申请
-        onBalanceApply: function () {
-            var postDoc = this.prepareBalanceApplyBody();
-            delete postDoc.__metadata;
-            this.postBalanceApply(postDoc);
-        },
-
         // 准备保存需要的数据
         prepareBalanceSaveBody: function() {
             var aDailyBalance = this._LocalData.getProperty("/dailyBalance");
@@ -273,15 +241,6 @@ sap.ui.define([
             return postDoc;
         },
 
-        //准备申请需要的数据
-        prepareBalanceApplyBody: function () {
-            var aDailyBalance = this._LocalData.getProperty("/dailyBalance");
-            var postDoc = {};
-            postDoc.KAISHA_CD = aDailyBalance[0].KAISHA_CD;
-            postDoc.KIHYO_NO = aDailyBalance[0].KIHYO_NO;
-            return postDoc;
-        },
-
         postBalanceSave: function (postData, sAction) {
             this.convertToString(postData);
             var i = 1;
@@ -291,9 +250,7 @@ sap.ui.define([
                 success: function (oData) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
                     this._LocalData.setProperty("/dailyBalance/0/KIHYO_NO", oData.KIHYO_NO);
-                    // this.byId("idDailyBalanceCreate").setTitle(oData.KIHYO_NO);
                     messages.showText(oData.Message);
-                    // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
                 }.bind(this),
                 error: function (oError) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
@@ -337,30 +294,6 @@ sap.ui.define([
             }
         },
 
-        postBalanceApply: function (postData, i) {
-            i = 1;
-            var mParameters = {
-                groupId: "DailyBalanceApply" + Math.floor(i / 100),
-                changeSetId: i,
-                success: function (oData) {
-                    this.byId("idDailyBalanceCreate").setBusy(false);
-                    messages.showText(oData.Message);
-                    // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
-                }.bind(this),
-                error: function (oError) {
-                    this.byId("idDailyBalanceCreate").setBusy(false);
-                    messages.showError(messages.parseErrors(oError));
-                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Type", "E");
-                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Message", messages.parseErrors(oError));
-                }.bind(this),
-            };
-            this.getOwnerComponent().getModel().setHeaders({"button":"Apply"});
-            //复杂结构
-            this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
-            this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
-            this.byId("idDailyBalanceCreate").setBusy(true);
-        },
-        
         onSelectTicket: function (oEvent) {
             // this._LocalData.setProperty("/");
             var sPath = oEvent.getSource().getParent().getBindingContext("local");
@@ -641,7 +574,6 @@ sap.ui.define([
             this._LocalData.refresh();
         },
         
-
         //table6 table7 table8 table11 共用
         onTable6Calc: function (oEvent,sTablePath) {
             this.setValueToZero(oEvent);
@@ -1175,7 +1107,6 @@ sap.ui.define([
 
             this.byId("idBIKOU2").setValue(oTreasuryCash.BIKOU2);
         },
-    
 
         initialLocalModel_dis: function (oHeader) {
             //清空日记表
@@ -1335,111 +1266,6 @@ sap.ui.define([
 			return this._pMessagePopover;
 		},
 
-        onApprovalConfirm: function() {
-            if (!this.pDialog) {
-                this.pDialog = this.loadFragment({
-                    name: "FICO.dailybalanceapproval.view.fragment.Comments"
-                });
-            } else {
-                this.byId("idComments").setValue("");
-            }
-            this.pDialog.then(function(oDialog) {
-                var beginButton = new Button({
-                    type: "Emphasized",
-                    text: this._ResourceBundle.getText("Yes"),
-                    //登录按钮
-                    press: function () {
-                        var postData = this.getApprovalData();
-                        this.postAction(postData);
-                        oDialog.close();
-                    }.bind(this)
-                });
-                var endButton = new Button({
-                    text: this._ResourceBundle.getText("No"),
-                    press: function () {
-                        oDialog.close();
-                    }.bind(this)
-                });
-                // 添加按钮
-                if (oDialog.getButtons().length === 0){
-                    oDialog.addButton(beginButton);
-                    oDialog.addButton(endButton);
-                }
-                oDialog.open();
-            }.bind(this));
-        },
-        
-        handleFullScreen: function (oEvent) {
-            var sNextLayout = "MidColumnFullScreen"
-            this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
-            // 用以控制第二页面全屏的按钮
-            this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen","OneColumn");
-            this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen",null);
-        },
-        handleExitFullScreen: function (oEvent) {
-            var sNextLayout = "TwoColumnsMidExpanded"
-            this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
-            // 用以控制第二页面全屏的按钮
-            this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen","MidColumnFullScreen");
-            this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen",null);
-        },
-        handleClose: function () {
-            var sNextLayout = "OneColumn";
-            this.oRouter.navTo("ApprovalList", {layout: sNextLayout});
-        },
-
-        approvalAction:function (sAction) {
-            this.sAction = sAction;
-            this.onApprovalConfirm();
-        },
-
-        getApprovalData: function () {
-            var oRecord = this._LocalData.getProperty("/dailyBalance/0");
-            var postData = {
-                KIHYO_NO: oRecord.KIHYO_NO,
-                NODE: this._LocalData.getProperty("/Node"),
-                COMMENTS: this.byId("idComments").getValue()
-            };
-            return postData
-        },
-
-        postAction: function (postData) {
-            var mParameters = {
-                groupId: "DailyBalanceApproval" + Math.floor(1 / 100),
-                changeSetId: 1,
-                refreshAfterChange:true,
-                success: function (oData) {
-                    this.byId("idDailyBalanceCreate").setBusy(false);
-                    messages.showText(oData.MESSAGE);
-                    HashChanger.getInstance().replaceHash("");
-                }.bind(this),
-                error: function (oError) {
-                    this.byId("idDailyBalanceCreate").setBusy(false);
-                    messages.showError(messages.parseErrors(oError));
-                    HashChanger.getInstance().replaceHash("");
-                }.bind(this),
-            };
-            this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02", "action":this.sAction});
-
-            this.getOwnerComponent().getModel().create("/ZzApprovalListSet", postData, mParameters);
-            this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
-            this.byId("idDailyBalanceCreate").setBusy(true);
-        },
-
-        insertHistorySection: function () {
-            var oView = this.getView();
-            var oPage = this.byId("ObjectPageLayout");
-			// create popover lazily (singleton)
-			if (!this.HistorySection) {
-                this.HistorySection = this.loadFragment({
-                    id: oView.getId(),
-                    name: "FICO.dailybalanceapproval.view.fragment.ApprovalHistory"
-                }).then(function (oHistorySection) {
-                    oPage.insertSection(oHistorySection, 10);
-				});
-			}
-        },
-
         setValueToZero: function (oEvent) {
             if (oEvent) {
                 if (oEvent.getSource().getValue().trim() == "" ) {
@@ -1494,7 +1320,159 @@ sap.ui.define([
             aFieldId.forEach(function (fieldId) {
                 this.byId(fieldId).setEnabled(true);
             }.bind(this));
-        }
+        },
+
+        // 审批用
+        onApprovalConfirm: function() {
+            if (!this.pDialog) {
+                this.pDialog = this.loadFragment({
+                    name: "FICO.dailybalanceapproval.view.fragment.Comments"
+                });
+            } else {
+                this.byId("idComments").setValue("");
+            }
+            this.pDialog.then(function(oDialog) {
+                var beginButton = new Button({
+                    type: "Emphasized",
+                    text: this._ResourceBundle.getText("Yes"),
+                    //按钮
+                    press: function () {
+                        if (this._LocalData.getProperty("/Node") == "0010") {
+                            this.simulationPosting().then(function (res) {
+                                var postData = this.getApprovalData();
+                                this.postAction(postData);
+                            }.bind(this));
+                            oDialog.close();
+                        } else {
+                            var postData = this.getApprovalData();
+                            this.postAction(postData);
+                            oDialog.close();
+                        }
+                    }.bind(this)
+                });
+                var endButton = new Button({
+                    text: this._ResourceBundle.getText("No"),
+                    press: function () {
+                        oDialog.close();
+                    }.bind(this)
+                });
+                // 添加按钮
+                if (oDialog.getButtons().length === 0){
+                    oDialog.addButton(beginButton);
+                    oDialog.addButton(endButton);
+                }
+                oDialog.open();
+            }.bind(this));
+        },
+        // 审批用
+        simulationPosting: function () {
+            if (this.checkRequired()) {
+                MessageToast.show(this._ResourceBundle.getText("inputRequired"));
+                return;
+            }
+            var sAction = "Posting";
+            var postDoc = this.prepareBalanceSaveBody();
+            postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
+            delete postDoc.__metadata;
+
+            //simulation posting
+            var postData = postDoc;
+            this.convertToString(postData);
+            var promise = new Promise(function (resolve, reject) {
+                var i = 1;
+                var mParameters = {
+                    groupId: "DailyBalanceSave" + Math.floor(i / 100),
+                    changeSetId: i,
+                    success: function (oData) {
+                        this.byId("idDailyBalanceCreate").setBusy(false);
+                        resolve();
+                    }.bind(this),
+                    error: function (oError) {
+                        this.byId("idDailyBalanceCreate").setBusy(false);
+                        this.removeLeadingMessage();
+                    }.bind(this),
+                };
+                this.getOwnerComponent().getModel('abr').setHeaders({"button":sAction, "action":"approval"});
+                //复杂结构
+                this.getOwnerComponent().getModel('abr').create("/ZzShopDailyBalanceSet", postData, mParameters);
+                this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
+                this.byId("idDailyBalanceCreate").setBusy(true);
+            }.bind(this));
+            return promise;
+        },
+        // 审批用
+        handleFullScreen: function (oEvent) {
+            var sNextLayout = "MidColumnFullScreen"
+            this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
+            // 用以控制第二页面全屏的按钮
+            this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen","OneColumn");
+            this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen",null);
+        },
+        // 审批用
+        handleExitFullScreen: function (oEvent) {
+            var sNextLayout = "TwoColumnsMidExpanded"
+            this.oRouter.navTo("DailyBalance", {layout: sNextLayout});
+            // 用以控制第二页面全屏的按钮
+            this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen","MidColumnFullScreen");
+            this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen",null);
+        },
+        // 审批用
+        handleClose: function () {
+            var sNextLayout = "OneColumn";
+            this.oRouter.navTo("ApprovalList", {layout: sNextLayout});
+        },
+        // 审批用
+        approvalAction:function (sAction) {
+            this.sAction = sAction;
+            this.onApprovalConfirm();
+        },
+        // 审批用
+        getApprovalData: function () {
+            var oRecord = this._LocalData.getProperty("/dailyBalance/0");
+            var postData = {
+                KIHYO_NO: oRecord.KIHYO_NO,
+                NODE: this._LocalData.getProperty("/Node"),
+                COMMENTS: this.byId("idComments").getValue()
+            };
+            return postData
+        },
+        // 审批用
+        postAction: function (postData) {
+            var mParameters = {
+                groupId: "DailyBalanceApproval" + Math.floor(1 / 100),
+                changeSetId: 1,
+                refreshAfterChange:true,
+                success: function (oData) {
+                    this.byId("idDailyBalanceCreate").setBusy(false);
+                    messages.showText(oData.MESSAGE);
+                    HashChanger.getInstance().replaceHash("");
+                }.bind(this),
+                error: function (oError) {
+                    this.byId("idDailyBalanceCreate").setBusy(false);
+                    messages.showError(messages.parseErrors(oError));
+                    HashChanger.getInstance().replaceHash("");
+                }.bind(this),
+            };
+            this.getOwnerComponent().getModel().setHeaders({"objecttype":"FI02", "action":this.sAction});
+
+            this.getOwnerComponent().getModel().create("/ZzApprovalListSet", postData, mParameters);
+            this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
+            this.byId("idDailyBalanceCreate").setBusy(true);
+        },
+        // 审批用
+        insertHistorySection: function () {
+            var oView = this.getView();
+            var oPage = this.byId("ObjectPageLayout");
+			// create popover lazily (singleton)
+			if (!this.HistorySection) {
+                this.HistorySection = this.loadFragment({
+                    id: oView.getId(),
+                    name: "FICO.dailybalanceapproval.view.fragment.ApprovalHistory"
+                }).then(function (oHistorySection) {
+                    oPage.insertSection(oHistorySection, 10);
+				});
+			}
+        },
 
 	});
 

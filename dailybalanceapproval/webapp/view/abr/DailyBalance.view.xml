@@ -552,7 +552,7 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n_abr>Quantity}" />
 												<uitable:template>
-													<Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable6Calc($event,'/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
+													<Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onTable6Calc($event,'/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
@@ -606,7 +606,7 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n_abr>Quantity}" />
 												<uitable:template>
-													<Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="setValueToZero" editable="{local>/viewEditable}" textAlign="Right"/>
+													<Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change="setValueToZero" editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="12rem">
@@ -849,13 +849,13 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n_abr>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column >
                                                     <Label text="{i18n_abr>AmountT5}" />
                                                     <uitable:template>
-                                                        <Text text="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" textAlign="Right"/>
+                                                        <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                             </uitable:columns>
@@ -885,13 +885,13 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n_abr>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column>
                                                     <Label text="{i18n_abr>AmountT5}" />
                                                     <uitable:template>
-                                                        <Text text="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" textAlign="Right"/>
+                                                        <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                             </uitable:columns>
@@ -979,10 +979,10 @@
 	<footer>
 		<OverflowToolbar id="otbFooter">
 			<Button
-				icon="sap-icon://alert"
+				icon="sap-icon://error"
 				text="{= ${messages>/}.length }"
 				visible="{= ${messages>/}.length > 0 }"
-				type="Emphasized"
+				type="Negative"
 				press="onMessagePopoverPress" />
 			<ToolbarSpacer/>
 			<Button id="idSave" type="Default" text="{i18n_abr>PreSave}" press=".onBalanceSave('Save')" visible="{local>/saveVisible}"/>
