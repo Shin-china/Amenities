@@ -9,7 +9,8 @@ sap.ui.define([
     "sap/ui/core/library",
     "sap/ui/core/Fragment",
     "sap/ui/model/json/JSONModel",
-], function (BaseController, formatter, messages, MessageToast, Button, MessageBox, Message, library, Fragment, JSONModel) {
+    "sap/ui/core/format/NumberFormat",
+], function (BaseController, formatter, messages, MessageToast, Button, MessageBox, Message, library, Fragment, JSONModel, NumberFormat) {
 	"use strict";
     // shortcut for sap.ui.core.MessageType
 	var MessageType = library.MessageType;
@@ -41,6 +42,7 @@ sap.ui.define([
             this.byId("idUser").setValueState("None");
             //localmodel中当前行的绑定路径
             var oArgs = oEvent.getParameter("arguments");
+            // 显示界面
             if (oArgs.view == "Display") { 
                 this._LocalData.setProperty("/viewEditable", false);
                 this.byId("idChange").setVisible(true);
@@ -56,7 +58,9 @@ sap.ui.define([
                 } else {
                     this.byId("idDailyBalanceCreate").setTitle(oHeader.KIHYO_NO);
                 }
+            // 创建界面
             } else {
+                // 根据前日金额做一些计算
                 this.resultCalc();
                 this._LocalData.setProperty("/viewEditable", true);
                 this.byId("idDailyBalanceCreate").setTitle(this._ResourceBundle.getText("DailyBalanceCreatePage"));
@@ -115,8 +119,10 @@ sap.ui.define([
         },
 
         onMulti: function (oEvent, sParam) {
+            var oFormat = NumberFormat.getFloatInstance();
             this.setValueToZero(oEvent);
             var value = oEvent.getSource().getValue();
+            value = oFormat.parse(value);
             try {
                 value = this.formatter.accMul(value, sParam);
             } catch (e) {}
@@ -299,7 +305,6 @@ sap.ui.define([
 
         postBalanceSave: function (postData, sAction) {
             this.convertToString(postData);
-
             var i = 1;
             var mParameters = {
                 groupId: "DailyBalanceSave" + Math.floor(i / 100),
@@ -310,16 +315,10 @@ sap.ui.define([
                     this._LocalData.setProperty("/dailyBalance/0/NIKKEIHYO_STATUS_CD", oData.NIKKEIHYO_STATUS_CD);
                     this.byId("idDailyBalanceCreate").setTitle(oData.KIHYO_NO);
                     messages.showText(oData.Message);
-                    // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
                 }.bind(this),
                 error: function (oError) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
                     this.removeLeadingMessage();
-                    
-                    // messages.showError(messages.parseErrors(oError));
-                    // messages.addMessage(oError, this.getView().getModel("messages"));
-                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Type", "E");
-                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Message", messages.parseErrors(oError));
                 }.bind(this),
             };
             this.getOwnerComponent().getModel().setHeaders({"button":sAction});
@@ -778,7 +777,7 @@ sap.ui.define([
             
         },
 
-        // 明细界面的值都会影响结果
+        // 明细界面的值都会影响结果，所以所有计算都会调用
         salesDetialCalc: function () {
             //売上合計
             var value1 = this._LocalData.getProperty("/dailyBalance/0/URIAGE_GOKEI");
@@ -806,12 +805,16 @@ sap.ui.define([
             this._LocalData.setProperty("/dailyBalance/0/SNT_GNKN_SHNY_GKI", total)
             //その他現金支出合計
             var result = this._LocalData.getProperty("/dailyBalance/0/SNT_GNKN_SHSHT_GKI")
-            //収支差額
+            //収支差額 = 現金売上 + 収入合計 - 支出合計
             result = this.formatter.accSub(total, result);
+            // 現金売上
             var value = this._LocalData.getProperty("/dailyBalance/0/GENKIN_URIAGE");
             result = this.formatter.accAdd(value, result);
+            //収支差額
             this._LocalData.setProperty("/dailyBalance/0/SHUSHI_SAGAKU", result)
             this.resultCalc();
+            //将収支差額 设置为某些字段的默认值
+            this.setDefaultValue(result);
             this._LocalData.refresh();
         },
         collectionPayment: function (oEvent) {
@@ -825,31 +828,38 @@ sap.ui.define([
             this._LocalData.setProperty("/dailyBalance/0/SNT_GNKN_SHSHT_GKI", total)
             //その他現金収入合計
             var result = this._LocalData.getProperty("/dailyBalance/0/SNT_GNKN_SHNY_GKI")
-            //収支差額
+            //収支差額 = 現金売上 + 収入合計 - 支出合計
             result = this.formatter.accSub(result, total);
+            // 現金売上
             var value = this._LocalData.getProperty("/dailyBalance/0/GENKIN_URIAGE");
             result = this.formatter.accAdd(value, result);
+            //収支差額
             this._LocalData.setProperty("/dailyBalance/0/SHUSHI_SAGAKU", result)
             this.resultCalc();
+            // 将収支差額 设置为某些字段的默认值
+            this.setDefaultValue(result);
             this._LocalData.refresh();
         },
         // Ⅳ本日繰越高
         resultCalc: function (oEvent) {
             this.setValueToZero(oEvent);
-            //前日繰越元金
+            //Ⅰ前日繰越元金
             var value1 = this._LocalData.getProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN");
-            //銀行入金総額
+            //Ⅱ銀行入金総額
             var value2 = this._LocalData.getProperty("/dailyBalance/0/GNK_NYUKIN_SOGAKU");
-            //両替金受入
+            //Ⅲ両替金受入
             var value3 = this._LocalData.getProperty("/dailyBalance/0/RYOGAEKIN_UKEIRE");
             //収支差額
             var value4 = this._LocalData.getProperty("/dailyBalance/0/SHUSHI_SAGAKU");
+            // Ⅶアムエリア振替
+            var value6 = this._LocalData.getProperty("/dailyBalance/0/AMAREA_FURIKAE");
             //Ⅳ本日繰越高(アム閉店時現金有高)
             var result = "0";
-            //Ⅳ本日繰越高(アム閉店時現金有高) = 前日繰越元金 - 銀行入金総額 + 両替金受入 + 収支差額
+            //Ⅳ本日繰越高(アム閉店時現金有高) = Ⅰ前日繰越元金 - Ⅱ銀行入金総額 + Ⅲ両替金受入 + 5収支差額 -Ⅶアムエリア振替
             result = this.formatter.accSub(value1, value2);
             result = this.formatter.accAdd(result, value3);
             result = this.formatter.accAdd(result, value4);
+            result = this.formatter.accSub(result, value6);
             this._LocalData.setProperty("/dailyBalance/0/HONZITUKURIKOSI", result);
             //本日繰越高(日計表1枚目参照） [Ⅳ]
             this._LocalData.setProperty("/CurrencyTable4/4/Amount", result);
@@ -858,26 +868,40 @@ sap.ui.define([
             //差額 [Ⅻ]-[Ⅳ]
             result = this.formatter.accSub(value5, result);
             this._LocalData.setProperty("/CurrencyTable4/6/Amount", result);
-            //Ⅶアムエリア振替(Ⅳ-Ⅵ)
+            // 前日までの本社送付金累計(Ⅰ-Ⅵ)
             this.resultCalc1();
             this._LocalData.refresh();
         },
 
-        //Ⅶアムエリア振替(Ⅳ-Ⅵ)
-        resultCalc1: function() {
-            //Ⅵ元金金額
-            var value1 = this._LocalData.getProperty("/dailyBalance/0/GANKIN_AMT");
-            //Ⅳ本日繰越高(アム閉店時現金有高)
-            var value2 = this._LocalData.getProperty("/dailyBalance/0/HONZITUKURIKOSI");
+        // 前日までの本社送付金累計(Ⅰ-Ⅵ)
+        resultCalc1: function(oEvent) {
+            this.setValueToZero(oEvent);
 
+            //Ⅰ前日繰越元金
+            var value1 = this._LocalData.getProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN");
+            //Ⅵ元金金額
+            var value2 = this._LocalData.getProperty("/dailyBalance/0/GANKIN_AMT");
+
+            // 前日までの本社送付金累計(Ⅰ-Ⅵ)
             var result = "0";
-            result = this.formatter.accSub(value2, value1);
-            this._LocalData.setProperty("/dailyBalance/0/AMAREA_FURIKAE", result);
-            this._LocalData.refresh();
+            result = this.formatter.accSub(value1,value2);
+            this._LocalData.setProperty("/dailyBalance/0/ZNJT_HNSH_SFKN_RKI", result);
+
+
+            // //Ⅵ元金金額
+            // var value1 = this._LocalData.getProperty("/dailyBalance/0/GANKIN_AMT");
+            // //Ⅳ本日繰越高(アム閉店時現金有高)
+            // var value2 = this._LocalData.getProperty("/dailyBalance/0/HONZITUKURIKOSI");
+
+            // var result = "0";
+            // result = this.formatter.accSub(value2, value1);
+            // this._LocalData.setProperty("/dailyBalance/0/AMAREA_FURIKAE", result);
+            // this._LocalData.refresh();
         },
 
         //Ⅴ送付金予定額
-        resultCalc2: function () {
+        resultCalc2: function (oEvent) {
+            this.setValueToZero(oEvent);
             //前日までの本社送付金累計
             var value1 = this._LocalData.getProperty("/dailyBalance/0/ZNJT_HNSH_SFKN_RKI");
             //本日送付金
@@ -886,14 +910,29 @@ sap.ui.define([
             var value3 = this._LocalData.getProperty("/dailyBalance/0/RYOGAEKIN_MODOSHI");
             //元金増額（減額は－）
             var value4 = this._LocalData.getProperty("/dailyBalance/0/GANKIN_ZOUGAKU");
+
             //送付金予定額
             var result = "0";
             result = this.formatter.accAdd(value1, value2);
             result = this.formatter.accAdd(result, value3);
             result = this.formatter.accAdd(result, value4);
-
             this._LocalData.setProperty("/dailyBalance/0/SOFUKIN_YOTEIGAKU", result)
             this._LocalData.refresh();
+        },
+
+        // 给某些字段设置一些默认值
+        setDefaultValue: function (result) {
+            var sShop = this._LocalData.getProperty("/dailyBalance/0/TENPO_CD");
+            var aFI0009 = this._LocalData.getProperty("/FI0009");
+            var aFI0010 = this._LocalData.getProperty("/FI0010");
+            if (aFI0009.includes(sShop)) {
+                //本日送付金(＝5収支差額:プラザコリア店舗）
+                this._LocalData.setProperty("/dailyBalance/0/HNJTS_SOFUKIN", result);
+            }
+            if (aFI0010.includes(sShop)) {
+                //Ⅶアムエリア振替(＝5収支差額:ビレッジ店舗)
+                this._LocalData.setProperty("/dailyBalance/0/AMAREA_FURIKAE", result);
+            }
         },
 
         onSuspend: function () {
@@ -1182,7 +1221,7 @@ sap.ui.define([
                 line.Amount = this.formatter.accMul(line.Monetary, line.Quantity);
             }.bind(this));
             this._LocalData.setProperty("/CurrencyTable2/Total", oTreasuryCash.HASON_GKI_AMT);
-            //準備金明細
+            //準備金明細MessageManager
             var aField3 = ["ZYUNBIKIN_AMT_1", "ZYUNBIKIN_AMT_2", "ZYUNBIKIN_AMT_3", "ZYUNBIKIN_AMT_4", "ZYUNBIKIN_AMT_5", "ZYUNBIKIN_AMT_6"];
             aTable3.forEach(function (line, index) {
                 line.Amount = oTreasuryCash[aField3[index]];
@@ -1451,7 +1490,6 @@ sap.ui.define([
                 "LOCKER_DAI_URIAGE",
                 "KOKA_URIAGE",
                 "HAIBUN_URIAGE",
-                "ZNJT_HNSH_SFKN_RKI",
                 "HNJTS_SOFUKIN",
                 "RYOGAEKIN_MODOSHI",
                 "GANKIN_ZOUGAKU",

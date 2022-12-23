@@ -20,10 +20,12 @@
                 "type": "OData",
                 "settings": {
                     "odataVersion": "2.0",
-                    "localUri": "localService/metadata.xml",
                     "annotations": [
-                        "annotation0"
-                    ]
+                        "annotation0",
+                        "ZZPURCHASEREQUEST_SRV_Annotation",
+                        "ZZPURCHASEREQUEST_SRV_Annotation1"
+                    ],
+                    "localUri": "localService/metadata.xml"
                 }
             },
             "annotation0": {
@@ -38,6 +40,7 @@
                 "type": "OData",
                 "settings": {
                     "odataVersion": "2.0",
+                    "annotations": [],
                     "localUri": "localService/metadata.xml"
                 }
             },
@@ -46,6 +49,20 @@
                 "type": "ODataAnnotation",
                 "settings": {
                     "localUri": "localService/mainService_Annotation.xml"
+                }
+            },
+            "ZZPURCHASEREQUEST_SRV_Annotation": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZZPURCHASEREQUEST_ANNOTATION_ANN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZZPURCHASEREQUEST_SRV_Annotation.xml"
+                }
+            },
+            "ZZPURCHASEREQUEST_SRV_Annotation1": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZZPURCHASEREQUEST_ANNOTATION_AN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZZPURCHASEREQUEST_SRV_Annotation1.xml"
                 }
             }
         }
@@ -113,10 +130,9 @@
             "": {
                 "type": "sap.ui.model.odata.v2.ODataModel",
                 "settings": {
-                    "defaultOperationMode": "Server",
                     "defaultBindingMode": "TwoWay",
                     "defaultCountMode": "Inline",
-                    "preload": true
+                    "refreshAfterChange": false
                 },
                 "dataSource": "ZZPURCHASEREQUEST_SRV",
                 "preload": true
@@ -124,10 +140,9 @@
             "Attachment": {
                 "type": "sap.ui.model.odata.v2.ODataModel",
                 "settings": {
-                    "defaultOperationMode": "Server",
                     "defaultBindingMode": "TwoWay",
                     "defaultCountMode": "Inline",
-                    "preload": true
+                    "refreshAfterChange": false
                 },
                 "dataSource": "ZUI5_FILE_UPLOAD_N_SRV",
                 "preload": true

@@ -378,8 +378,6 @@ sap.ui.define([
 			var iPeinh = 1;
 			var iConsumtaxSum = 0;
 			//sValue.getSource().getBindingContext("local").getObject().Zbanfn
-			// 金额合计
-			this.itemSum(aItem);
 			aItem.forEach(function(oItem) {
 				if (oItem.Loekz === true || oItem.Loekz === "X") {
 
@@ -493,6 +491,8 @@ sap.ui.define([
 				aCalc[i].Zvat = formatter.amountFormat(aCalc[i].Zvat);
 
 			}
+			// 金额合计 add by zk 
+			this.itemSum(aItem);
 			this.getModel("local").setProperty("/ZzSum", aCalc);
 			this.getModel("local").refresh();
 		},
@@ -511,12 +511,15 @@ sap.ui.define([
 				//税抜総額
 				var amount1 = 0;
 				amount1 = this.formatter.accMul(Menge, Preis);
-				amount1 = this.formatter.accDiv(amount1, Peinh);
 				total1 = this.formatter.accAdd(total1, amount1);
 				//税込総額
-				total2 = this.formatter.accAdd(total2, Zvat);
+				amount1 = 0;
+				amount1 = this.formatter.accMul(Menge, Zvat);
+				total2 = this.formatter.accAdd(total2, amount1);
 				//消費税総額
-				total3 = this.formatter.accAdd(total3, Zconsumtax);
+				amount1 = 0;
+				amount1 = this.formatter.accMul(Menge, Zconsumtax);
+				total3 = this.formatter.accAdd(total3, amount1);
 				//値引き後総額
 				total4 = this.formatter.accAdd(total4, Zzhje);
 			}.bind(this));

@@ -19,7 +19,7 @@ sap.ui.define([
                 var localData = {
                     processBusy:false,
                     viewEditable:false,
-                    labelWidth:"16rem",
+                    labelWidth:"24rem",
                     busy: false,
                     hasUIChanges: false,
                     errors: "",
