@@ -103,7 +103,7 @@ sap.ui.define([
                 //参考
                 } else if (sButton === "Reference") {
                     sDialogTitle = this._ResourceBundle.getText("DialogTitle2");
-                    this._LocalData.setProperty("/isCreate", false);
+                    // this._LocalData.setProperty("/isCreate", false);
 
                     //参考只能选择一条
                     var oTable = this.byId("reportTable");

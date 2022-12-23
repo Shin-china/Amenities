@@ -120,9 +120,16 @@ sap.ui.define([
                 return;
             }
 
+            var oDailyBalance = this._LocalData.getProperty("/dailyBalance")[0];
             if (sAction == "Posting") {
+                // cehck button
+                if(!this.checkButtonEnable(oDailyBalance.NIKKEIHYO_STATUS_CD, "posting")) {return;}
+
                 this.onConfirmBox(sAction);
             } else {
+                // cehck button
+                if(!this.checkButtonEnable(oDailyBalance.NIKKEIHYO_STATUS_CD, "save")) {return;}
+
                 var postDoc = this.prepareBalanceSaveBody();
                 postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
                 delete postDoc.__metadata;
@@ -155,11 +162,16 @@ sap.ui.define([
 
         //申请 确认
         onApplyConfirm: function() {
+            var oDailyBalance = this._LocalData.getProperty("/dailyBalance")[0];
+            if(!this.checkButtonEnable(oDailyBalance.NIKKEIHYO_STATUS_CD, "apply")) {return;}
+
             if (!this.pDialog) {
                 this.pDialog = this.loadFragment({
                     name: "FICO.pstore004.view.fragment.ApplyConfirm"
                 });
-            } 
+            } else{
+                this.byId("idApplyConfirm").setValue("");
+            }
             this.pDialog.then(function(oDialog) {
                 var beginButton = new Button({
                     type: "Emphasized",
@@ -188,6 +200,8 @@ sap.ui.define([
         onBalanceApply: function () {
             var postDoc = this.prepareBalanceApplyBody();
             delete postDoc.__metadata;
+            // 获取申请是时的备注
+            postDoc.COMMENTS = this.byId("idApplyConfirm").getValue();
             this.postBalanceApply(postDoc);
         },
 
@@ -1121,6 +1135,8 @@ sap.ui.define([
         },
 
         onChangePress: function (oEvent) {
+            var oDailyBalance = this._LocalData.getProperty("/dailyBalance")[0];
+            if(!this.checkButtonEnable(oDailyBalance.NIKKEIHYO_STATUS_CD, "change")) {return;}
 
             var oButton = oEvent.getSource();
             var isEdit = this._LocalData.getProperty("/viewEditable");
@@ -1132,6 +1148,8 @@ sap.ui.define([
                 this._LocalData.setProperty("/viewEditable", true);
                 oButton.setText(this._ResourceBundle.getText("DisplayButton"));
             }
+            // 设置字段是否可编辑
+            this.controlFieldEnabled();
         },
 
         onCashCheckBox: function (oEvent) {
@@ -1145,7 +1163,39 @@ sap.ui.define([
                 sap.ui.getCore().byId(filterbarDOM[filterbarDOM.length - 1].id).search();
             } catch (e) {}
             this.onNavBack();
-        }
+        },
+
+        //详细界面要限制的按钮：保存，变更，申请，凭证做成
+        checkButtonEnable: function (sDocumentStatus, sAction) {
+            if (!sDocumentStatus) {
+                sDocumentStatus = "";
+            }
+            var oButtonMap = {
+                //未保存
+                "":{"save":true, "change":true, "apply":false, "posting":false},
+                //仮保存
+                "1":{"save":true, "change":true, "apply":true, "posting":false},
+                //申請中
+                "2":{"save":false, "change":false, "apply":false, "posting":false},
+                //申請済
+                "3":{"save":false, "change":false, "apply":false, "posting":false},
+                //承認済
+                "4":{"save":false, "change":false, "apply":false, "posting":true},
+                //否認
+                "5":{"save":true, "change":true, "apply":true, "posting":false},
+                //再申請
+                "6":{"save":false, "change":false, "apply":false, "posting":false},
+                //仕訳作成済
+                "7":{"save":false, "change":false, "apply":false, "posting":false},
+                //取消済
+                "8":{"save":false, "change":false, "apply":false, "posting":false},
+            };
+            if (!oButtonMap[sDocumentStatus][sAction]) {
+                messages.showError(this._ResourceBundle.getText("msg5"));
+                return false;
+            }
+            return true;
+        },
         
 
         
