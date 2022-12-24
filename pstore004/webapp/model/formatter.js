@@ -96,7 +96,7 @@ sap.ui.define([
 			/*eslint no-unused-expressions: ["error", { "allowTernary": true }]*/
 			if (date) {
 				var oDateFormat = DateFormat.getDateTimeInstance({
-					pattern: "yyyy/MM/dd"
+					pattern: "yyyy-MM-dd"
 				});
 				date = oDateFormat.format(new Date(date));
 			}
@@ -112,7 +112,7 @@ sap.ui.define([
 			}
 			var dateTime;
 			date ? (dateTime = date) : (dateTime = dateTime);
-			time ? (dateTime = dateTime + " " + time) : (dateTime = dateTime);
+			time ? (dateTime = dateTime + "T" + time) : (dateTime = dateTime);
 			return dateTime;
 		},
 
@@ -210,8 +210,11 @@ sap.ui.define([
 			return true;
 		},
 
-		setTable11Enabled: function (value) {
-			if (value === "16") {
+		setTable11Enabled: function (value1,value2) {
+			if (!value2) {
+				return false;
+			}
+			if (value1 === "16") {
 				return false;
 			}
 			return true;
@@ -267,6 +270,50 @@ sap.ui.define([
 		formatFloat: function (value) {
 			var sAmount	= (value) ? value.toString() : "0";
 			return NumberFormat.getFloatInstance().format(sAmount);
+		},
+
+		approvalStatus: function (value) {
+			switch (value) {
+				case "I":
+					return "Information";
+				case "P":
+					return "Success";
+				case "R":
+					return "Error";
+				default:
+					return "None";
+			}
+		},
+		approvalIcon: function (value) {
+			switch (value) {
+				case "I":
+					return "sap-icon://information";
+				case "P":
+					return "sap-icon://sys-enter-2";
+				case "R":
+					return "sap-icon://error";
+				default:
+					return "";
+			}
+		},
+		approvalText: function (value) {
+			switch (value) {
+				case "I":
+					return "申請";
+				case "P":
+					return "承認済み";
+				case "R":
+					return "承認拒否";
+				default:
+					return "";
+			}
+		},
+
+		isUndefinedToZero: function (value) {
+			if (!value) {
+				return "0";
+			}
+			return value;
 		},
 
         accAdd : function(arg1, arg2) {

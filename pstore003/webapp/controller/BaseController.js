@@ -51,7 +51,7 @@ sap.ui.define([
 		formatter : formatter,
 
 		onInit: function () {
-			DailyBalance
+			// DailyBalance
 		},
 
 		getRouter: function () {
@@ -70,6 +70,14 @@ sap.ui.define([
 				this.getRouter().navTo("RouteMain", {}, true /*no history*/ );
 			}
 		},
+
+        clearMessage: function (oSource) {
+            var sTargetPath = oSource.getBindingContext("local") + "/" + oSource.getBindingInfo("value").binding.getPath();
+            var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
+            var targetMessage = aMessages.filter(e => e.target == sTargetPath);
+            sap.ui.getCore().getMessageManager().removeMessages(targetMessage);
+            this._LocalData.setProperty(sTargetPath, "");
+        },
 
 		onValueHelp: function (oEvent, propertyKey, additionalField) {
             var oView = this.getView();

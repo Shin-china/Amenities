@@ -89,6 +89,8 @@ sap.ui.define([
                     sPath = sPath.substr(1);
                     oUrl.contextPath = sPath;
                 }
+                this._LocalData.setProperty("/isCreate", false);
+                this._LocalData.setProperty("/isRefrence", false);
                 this.getRouter().navTo("DailyBalance",oUrl);
             },
 
@@ -100,10 +102,13 @@ sap.ui.define([
                     this.initialLocalModel();
                     this._LocalData.setProperty("/isCreate", true);
                     this._LocalData.setProperty("/dailyBalance/0/KAISHA_CD", "1000");
+                    // this._LocalData.setProperty("/dailyBalance/0/EIGYO_BI", "");
+                    this._LocalData.setProperty("/isRefrence", false);
                 //参考
                 } else if (sButton === "Reference") {
                     sDialogTitle = this._ResourceBundle.getText("DialogTitle2");
-                    // this._LocalData.setProperty("/isCreate", false);
+                    this._LocalData.setProperty("/isCreate", false);
+                    this._LocalData.setProperty("/isRefrence", true);
 
                     //参考只能选择一条
                     var oTable = this.byId("reportTable");
@@ -132,19 +137,27 @@ sap.ui.define([
                         var oBinding = oTable.getBinding();
                         var sPath = oBinding.aKeys[oTable.getSelectedIndex()];
                         var oHeader = this._oDataModel.getProperty("/" + sPath);
+                        //check action
+                        // if(!this.checkButtonEnable(oHeader.NIKKEIHYO_STATUS_CD, "refrence")){
+                        //     this._LocalData.setProperty("/processBusy", false);
+                        //     return;
+                        // }
+
                         this.byId("idCompany").setValue(oHeader.KAISHA_CD);
                         this.byId("idShop").setValue(oHeader.TENPO_CD);
-                        this.byId("idDP1").setValue(oHeader.EIGYO_BI);
+                        this.byId("idDP1").setValue("");
+                    } else if (sButton === "Create") {
+                        this.byId("idDP1").setValue("");
                     }
-                    
+                    this.sButton = sButton;
                     var beginButton = new Button({
                         type: "Emphasized",
                         text: this._ResourceBundle.getText("Create"),
                         //登录按钮
                         press: function () {
-                            if (sButton === "Create") {
+                            if (this.sButton === "Create") {
                                 this.createButton(oDialog);
-                            } else if (sButton === "Reference") {
+                            } else if (this.sButton === "Reference") {
                                 this.refrenceButton();
                                 oDialog.close();
                             }
@@ -179,10 +192,11 @@ sap.ui.define([
                             MessageBox.error(res.MESSAGE);
                             return;
                         } else {
-                            this.getLastRecord();
-                            this.setLocalModel();
-                            this.getRouter().navTo("DailyBalance",{view:"Create"});
-                            oDialog.close();
+                            this.getLastRecord().then(function (res) {
+                                this.setLocalModel("Create");
+                                this.getRouter().navTo("DailyBalance",{view:"Create"});
+                                oDialog.close();
+                            }.bind(this));
                         }
                     } else {
                         MessageBox.error(messages.parseErrors(res));
@@ -190,7 +204,71 @@ sap.ui.define([
                     }
                 }.bind(this));
             },
+            onPressHistory: function(oEvent) {
+                var sObjectid = oEvent.getSource().getBindingContext().getObject().KIHYO_NO;
+                this.getApprovalHistory(sObjectid).then(function (res) {
+                    try {
+                        var aApprovalHistory = [];
+                        res.forEach(function (item) {
+                            var sTime = this.formatter.dateTime(item.CREATE_DATE, item.CREATE_TIME);
+                            aApprovalHistory.push({
+                                user: item.CREATE_USER,
+                                name: item.USERNAME,
+                                time: new Date(sTime),
+                                comments: item.COMMENTS,
+                                action: item.ACTION,
+                                nodename: item.NODENAME
+                            });
+                        }, this)
+                    } catch (error) {}
+                    this._LocalData.setProperty("/approvalHistory", aApprovalHistory);
+                    this.approvalHistoryDialog();
+                }.bind(this));
+            },
 
+            getApprovalHistory: function (sObjectid) {
+                var promise = new Promise( function (resolve, reject) {
+                    var mParameters = {
+                        refreshAfterChange: false,
+                        success: function (oData) {
+                            resolve(oData.results);
+                        }.bind(this),
+                        error: function (oError) {
+                            messages.showError(messages.parseErrors(oError));
+                        }.bind(this)
+                    };
+                    this.getOwnerComponent().getModel().setHeaders({"objectid":sObjectid});
+                    this.getOwnerComponent().getModel().read("/ZzApprovalHistorySet", mParameters);
+                }.bind(this));
+                return promise;
+            },
+            
+            // 显示审批履历
+            approvalHistoryDialog: function () {
+                this.byId("reportTable").setBusyIndicatorDelay(0);
+                this.byId("reportTable").setBusy(true);
+                var oView = this.getView();
+                if (!this.HistoryDialog) {
+                    this.HistoryDialog = this.loadFragment({
+                        id: oView.getId(),
+                        name: "FICO.pstore004.view.fragment.ApprovalHistory"
+                    })
+                }
+                this.HistoryDialog.then(function (oHistoryDialog) {
+                    var endButton = new Button({
+                        text: this._ResourceBundle.getText("Suspend"),
+                        press: function () {
+                            oHistoryDialog.close();
+                        }.bind(this)
+                    });
+                    // 添加按钮
+                    if (oHistoryDialog.getButtons().length === 0){
+                        oHistoryDialog.addButton(endButton);
+                    }
+                    oHistoryDialog.open();
+                    this.byId("reportTable").setBusy(false);
+                }.bind(this));
+            },
             requiredCheck: function () {
                 var isError = false;
                 var oCompany = this.byId("idCompany");
@@ -276,6 +354,7 @@ sap.ui.define([
                     };
                     this.getOwnerComponent().getModel().read("/ZzShopDailyBalanceSet", mParameters);
                 }.bind(this));
+                return promise;
 
             },
 
@@ -286,12 +365,28 @@ sap.ui.define([
             },
 
             refrenceButton: function () {
-                var oTable = this.byId("reportTable");
-                var oBinding = oTable.getBinding();
-                var sPath = oBinding.aKeys[oTable.getSelectedIndex()];
-                this.getRouter().navTo("DailyBalanceDisplay",{
-                    contextPath: sPath
-                });
+                this.checkError().then(function (res) {
+                    if(res.TYPE) {
+                        if (res.TYPE == "E") {
+                            this._LocalData.setProperty("/processBusy", false);
+                            MessageBox.error(res.MESSAGE);
+                            return;
+                        } else {
+                            var oTable = this.byId("reportTable");
+                            var oBinding = oTable.getBinding();
+                            var sPath = oBinding.aKeys[oTable.getSelectedIndex()];
+                            this.setLocalModel("Reference");
+                            this.getRouter().navTo("DailyBalance",{
+                                contextPath: sPath,
+                                view:"Display"
+                            });
+                        }
+                    } else {
+                        this._LocalData.setProperty("/processBusy", false);
+                        MessageBox.error(messages.parseErrors(res));
+                        return;
+                    }
+                }.bind(this));
             },
 
             onConfirmBox: function (oEvent, sMessage) {
@@ -315,7 +410,7 @@ sap.ui.define([
                     }
                 }.bind(this));
                 if (isError) {return;}
-                
+
                 var sTitle = this._ResourceBundle.getText("ConfirmTitle");
                 var sText = this._ResourceBundle.getText(sMessage);
                 MessageBox.confirm(sText, {
@@ -462,7 +557,7 @@ sap.ui.define([
                 //复杂结构
                 this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
             },
-            setLocalModel: function () {
+            setLocalModel: function (oButton) {
                 // 获取dialog中的参数
                 var sCompany = this.byId("idCompany").getValue();
                 var sShop = this.byId("idShop").getValue();
@@ -470,6 +565,13 @@ sap.ui.define([
                 this._LocalData.setProperty("/dailyBalance/0/KAISHA_CD", sCompany);
                 this._LocalData.setProperty("/dailyBalance/0/TENPO_CD", sShop);
                 this._LocalData.setProperty("/dailyBalance/0/EIGYO_BI", this.formatter.date(sDate));
+
+                if (oButton === "Reference") {
+                    this._LocalData.setProperty("/idCompany", sCompany);
+                    this._LocalData.setProperty("/idShop", sShop);
+                    this._LocalData.setProperty("/idDP1", this.formatter.date(sDate));
+                    return;
+                }
 
                 // 写入店铺code
                 var aTable8 = this._LocalData.getProperty("/table8");
@@ -506,7 +608,7 @@ sap.ui.define([
                     sShopTmp = sShopTmp.substr(1);
                 }
                 // var aFI0004a = aFI0004.filter( line => line.Value2 === sShopTmp);
-                var aFI0004a = aFI0004;  
+                var aFI0004a = aFI0004;
                 if (aFI0004a.length > 0) {
                     aCurrencyTable3.forEach(function (line, index) {
                         try {
@@ -638,8 +740,7 @@ sap.ui.define([
                                 Key2: line.ZKEY2,//公司代码
                                 Value1: line.ZVALUE1
                             });
-                            break; 
-
+                            break;
                         //税码
                         case "VH0005":
                             aTax.push({
@@ -739,6 +840,7 @@ sap.ui.define([
             setPageBusy: function (isBusy) {
                 sap.ui.getCore().byId("idProcessPage").setBusy(isBusy);
             },
+            
             onPrintPDF: function () {
                 var oTable = this.byId("smartTable").getTable();
                 var aIndex = oTable.getSelectedIndices();
