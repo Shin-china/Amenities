@@ -547,7 +547,9 @@ sap.ui.define([
                         this._oDataModel.setProperty(sPath + "/Message", oData.Message);
                     }.bind(this),
                     error: function (oError) {  
-                        // messages.showError(messages.parseErrors(oError));
+                        this.byId("idCol1").setVisible(true);
+                        this.byId("idCol2").setVisible(true);
+                        this.byId("idCol3").setVisible(true);
                         this._oDataModel.setProperty(sPath + "/Type", "E");
                         this._oDataModel.setProperty(sPath + "/Message", messages.parseErrors(oError));
                         this.byId("idProcessPage").setBusy(false);
@@ -636,7 +638,61 @@ sap.ui.define([
 
             initialLocalModel: function () {
                 //清空日记表
-                this._LocalData.setProperty("/dailyBalance",[{}]);
+                // 初始化为0
+                var aFields = [
+                    "GNK_NYUKIN_SOGAKU",
+                    "RYOGAEKIN_UKEIRE",
+                    "INSHOKU_URIAGE",
+                    "BENTO_URIAGE",
+                    "GAME_URIAGE",
+                    "LANE_URIAGE",
+                    "SHOES_URIAGE",
+                    "PRO_SHOP_URIAGE",
+                    "BILLIARD_URIAGE",
+                    "JITEN_TVG_URIAGE",
+                    "KYOWA_TVG_URIAGE",
+                    "LOCKER_DAI_URIAGE",
+                    "KARAOKE_URIAGE",
+                    "FK_URIAGE8",
+                    "FK_URIAGE10",
+                    "NYUJORYO_URIAGE",
+                    "HANSOKUHIN_URIAGE",
+                    "KOKA_URIAGE",
+                    "HAIBUN_URIAGE",
+                    "JIHANKI_URIAGE",
+                    "BUPPAN_URIAGE8",
+                    "BUPPAN_URIAGE10",
+                    "REJI_URIAGE",
+                    "EVENT_URIAGEA8",
+                    "EVENT_URIAGEB8",
+                    "EVENT_URIAGEA10",
+                    "EVENT_URIAGEB10",
+                    "SONOTA_URIAGEA8",
+                    "SONOTA_URIAGEB8",
+                    "SONOTA_URIAGEA10",
+                    "SONOTA_URIAGEB10",
+                    "URIAGE_NEBIKI",//売上値引
+                    "URIAGE_GOKEI",
+                    "GENKIN_URIAGE",
+                    "KAKEURI_TO",
+                    "URAG_SHNY_UCHWK_KI",
+                    "SNT_GNKN_SHNY_GKI",
+                    "SNT_GNKN_SHSHT_GKI",
+                    "SHUSHI_SAGAKU",
+                    "ZNJT_HNSH_SFKN_RKI",
+                    "HNJTS_SOFUKIN",
+                    "RYOGAEKIN_MODOSHI",
+                    "GANKIN_ZOUGAKU",
+                    "SOFUKIN_YOTEIGAKU",
+                    "GANKIN_AMT",
+                    "MOTOKINKAFUSOKU_AMT"
+                ];
+                //为了初始值为0
+                var oDailyBalance = {};
+                aFields.forEach(function (field) {
+                    oDailyBalance[field] = "0";
+                }.bind(this));
+                this._LocalData.setProperty("/dailyBalance",[oDailyBalance]);
                 this._LocalData.setProperty("/table6", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table6"))));
                 this._LocalData.setProperty("/table7", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table7"))));
                 this._LocalData.setProperty("/table8", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table8"))));
@@ -666,8 +722,8 @@ sap.ui.define([
 
             configurationProcess: function (oData) {
                 var aFI0004 = [],
-                    aFI0005 = [],
-                    aFI0007 = [],
+                    // aFI0005 = [],
+                    // aFI0007 = [],
                     aReversalReason = [],
                     aCompany = [],
                     aShop = [],
@@ -678,13 +734,13 @@ sap.ui.define([
                     aFI0006 = [];
                 oData.results.forEach(function(line){
                     switch (line.ZID) {
-                        //天气
-                        case "FI0005":
-                            aFI0005.push({
-                                Seq: line.ZSEQ,
-                                Value1: line.ZVALUE1
-                            });
-                            break;
+                        // //天气
+                        // case "FI0005":
+                        //     aFI0005.push({
+                        //         Seq: line.ZSEQ,
+                        //         Value1: line.ZVALUE1
+                        //     });
+                        //     break;
                         //"準備金明細
                         case "FI0004":
                             aFI0004.push({
@@ -698,19 +754,19 @@ sap.ui.define([
                                 Remark: line.REMARK
                             });
                             break;
-                        //"掛売上（クレジット、電子マネー、QR決済）
-                        case "FI0007":
-                            aFI0007.push({
-                                Seq: line.ZSEQ,
-                                Value1: line.ZVALUE1,
-                                Value2: line.ZVALUE2,
-                                Value3: line.ZVALUE3,
-                                Value4: line.ZVALUE4,
-                                Value5: line.ZVALUE5,
-                                Value6: line.ZVALUE6,
-                                Remark: line.REMARK
-                            });
-                            break;
+                        // //"掛売上（クレジット、電子マネー、QR決済）
+                        // case "FI0007":
+                        //     aFI0007.push({
+                        //         Seq: line.ZSEQ,
+                        //         Value1: line.ZVALUE1,
+                        //         Value2: line.ZVALUE2,
+                        //         Value3: line.ZVALUE3,
+                        //         Value4: line.ZVALUE4,
+                        //         Value5: line.ZVALUE5,
+                        //         Value6: line.ZVALUE6,
+                        //         Remark: line.REMARK
+                        //     });
+                        //     break;
                         //冲销原因
                         case "VH0001":
                             aReversalReason.push({
@@ -778,10 +834,10 @@ sap.ui.define([
                             break;
                     }
                 }.bind(this));
-                aFI0005.splice(0, 0, {Seq:"", Value1:""});
-                this._LocalData.setProperty("/FI0005", aFI0005);
+                // aFI0005.splice(0, 0, {Seq:"", Value1:""});
+                // this._LocalData.setProperty("/FI0005", aFI0005);
                 this._LocalData.setProperty("/FI0004", aFI0004);
-                this._LocalData.setProperty("/FI0007", aFI0007);
+                // this._LocalData.setProperty("/FI0007", aFI0007);
                 this._LocalData.setProperty("/ReversalReasonVH", aReversalReason);
                 this._LocalData.setProperty("/CompanyVH", aCompany);
                 this._LocalData.setProperty("/ShopVH", aShop);
