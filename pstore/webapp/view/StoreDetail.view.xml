@@ -1025,7 +1025,15 @@
                                                 <Label id="lblTab5Man" text="{i18n>sub13_col2}" />
 
                                                 <table:template>
-                                                    <Input id="txtTab5Man" maxLength="5" textAlign="Right" editable="{viewState>/editable}" value="{path:'Man', type: 'sap.ui.model.type.Float'}"  change="onSetDefaultValue"/>
+                                                    <Input id="txtTab5Man" 
+                                                           maxLength="5" 
+                                                           textAlign="Right" 
+                                                           editable="{viewState>/editable}" 
+                                                           value="{path:'Man'}" 
+                                                           change="onSetDefaultValue"/>
+                                                           <!-- value="{path:'Man', type: 'sap.ui.model.type.Float'}" -->
+
+                                                      
                                                 </table:template>
                                             </table:Column>
 
@@ -1082,7 +1090,13 @@
                                                 <Label id="lblTab6Man" text="{i18n>sub14_col2}" />
 
                                                 <table:template>
-                                                    <Input id="txtTab6Man" maxLength="5" textAlign="Right" editable="{viewState>/editable}" value="{path:'Man', type: 'sap.ui.model.type.Float'}" change="onSetDefaultValue"/>
+                                                    <Input id="txtTab6Man" 
+                                                           maxLength="5" 
+                                                           textAlign="Right" 
+                                                           editable="{viewState>/editable}" 
+                                                           value="{path:'Man'}" 
+                                                           change="onSetDefaultValue"/>
+                                                           <!-- value="{path:'Man', type: 'sap.ui.model.type.Float'}"  -->
                                                 </table:template>
                                             </table:Column>
 
