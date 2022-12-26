@@ -400,6 +400,13 @@
 	</content>
 	<footer>
 		<OverflowToolbar id="otbFooter">
+			<Button
+				id = "idMessagePopover"
+				icon="sap-icon://error"
+				text="{= ${messages>/}.length }"
+				visible="{= ${messages>/}.length > 0 }"
+				type="Negative"
+				press="onMessagePopoverPress" />
 			<ToolbarSpacer/>
 			<Button id="idSave" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')" enabled="{local>/viewEditable}"/>
             <Button id="idChange" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress" enabled="{local>/btChange}"/>
