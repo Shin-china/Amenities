@@ -156,7 +156,8 @@ sap.ui.define([
                         //登录按钮
                         press: function () {
                             if (this.sButton === "Create") {
-                                this.createButton(oDialog);
+                                // this.createButton(oDialog);
+                                this.createButton();
                             } else if (this.sButton === "Reference") {
                                 this.refrenceButton();
                                 oDialog.close();
@@ -181,7 +182,8 @@ sap.ui.define([
                 }.bind(this));
             },
 
-            createButton: function (oDialog) {
+            // createButton: function (oDialog) {
+            createButton: function () {
                 if (this.requiredCheck()) {
                     return true;
                 }
@@ -192,11 +194,13 @@ sap.ui.define([
                             MessageBox.error(res.MESSAGE);
                             return;
                         } else {
-                            this.getLastRecord().then(function (res) {
-                                this.setLocalModel("Create");
-                                this.getRouter().navTo("DailyBalance",{view:"Create"});
-                                oDialog.close();
-                            }.bind(this));
+                            // this.getLastRecord().then(function (res) {
+                            //     this.setLocalModel("Create");
+                            //     this.getRouter().navTo("DailyBalance",{view:"Create"});
+                            //     oDialog.close();
+                            // }.bind(this));
+                            this.setLocalModel("Create");
+                            this.getRouter().navTo("DailyBalance",{view:"Create"});
                         }
                     } else {
                         MessageBox.error(messages.parseErrors(res));
@@ -331,32 +335,32 @@ sap.ui.define([
                 return promise;
             },
 
-            // 获取前日金额
-            getLastRecord: function () {
-                var aFilters = [];
-                aFilters.push(new Filter("KAISHA_CD", "EQ", this.byId("idCompany").getValue())); 
-                aFilters.push(new Filter("TENPO_CD", "EQ", this.byId("idShop").getValue())); 
-                var sDate = this.byId("idDP1").getValue();
-                aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate))); 
-                var promise = new Promise( function (resolve, reject) {
-                    var mParameters = {
-                        refreshAfterChange: false,
-                        filters: aFilters,
-                        success: function (oData) {
-                            resolve();
-                            if (oData.results.length > 0) {
-                                this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HONZITUKURIKOSI);
-                            }
-                        }.bind(this),
-                        error: function (oError) {
-                            reject();
-                        }.bind(this)
-                    };
-                    this.getOwnerComponent().getModel().read("/ZzShopDailyBalanceSet", mParameters);
-                }.bind(this));
-                return promise;
+            // // 获取前日金额
+            // getLastRecord: function () {
+            //     var aFilters = [];
+            //     aFilters.push(new Filter("KAISHA_CD", "EQ", this.byId("idCompany").getValue())); 
+            //     aFilters.push(new Filter("TENPO_CD", "EQ", this.byId("idShop").getValue())); 
+            //     var sDate = this.byId("idDP1").getValue();
+            //     aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate))); 
+            //     var promise = new Promise( function (resolve, reject) {
+            //         var mParameters = {
+            //             refreshAfterChange: false,
+            //             filters: aFilters,
+            //             success: function (oData) {
+            //                 resolve();
+            //                 if (oData.results.length > 0) {
+            //                     this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN","");
+            //                 }
+            //             }.bind(this),
+            //             error: function (oError) {
+            //                 reject();
+            //             }.bind(this)
+            //         };
+            //         this.getOwnerComponent().getModel().read("/ZzShopDailyBalanceSet", mParameters);
+            //     }.bind(this));
+            //     return promise;
 
-            },
+            // },
 
             onDatePickerChange: function (oEvent) {
                 if (oEvent.getParameter("value") != "") {
@@ -575,32 +579,32 @@ sap.ui.define([
                     return;
                 }
 
-                // 写入店铺code
-                var aTable8 = this._LocalData.getProperty("/table8");
-                var aTable9 = this._LocalData.getProperty("/table9");
-                var aTable10 = this._LocalData.getProperty("/table10");
-                aTable8.forEach(function (line, index) {
-                    // 最后一行不处理
-                    if (index >= aTable8.length - 1) {
-                        return;
-                    }
-                    line.Shop = sShop;
-                });
-                aTable9.forEach(function (line, index) {
-                    // 最后一行不处理
-                    if (index >= aTable9.length - 1) {
-                        return;
-                    }
-                    line.ShopD = sShop;
-                    line.ShopC = sShop;
-                });
-                aTable10.forEach(function (line, index) {
-                    // 最后一行不处理
-                    if (index >= aTable10.length - 1) {
-                        return;
-                    }
-                    line.ShopC = sShop;
-                });
+                // // 写入店铺code
+                // var aTable8 = this._LocalData.getProperty("/table8");
+                // var aTable9 = this._LocalData.getProperty("/table9");
+                // var aTable10 = this._LocalData.getProperty("/table10");
+                // aTable8.forEach(function (line, index) {
+                //     // 最后一行不处理
+                //     if (index >= aTable8.length - 1) {
+                //         return;
+                //     }
+                //     line.Shop = sShop;
+                // });
+                // aTable9.forEach(function (line, index) {
+                //     // 最后一行不处理
+                //     if (index >= aTable9.length - 1) {
+                //         return;
+                //     }
+                //     line.ShopD = sShop;
+                //     line.ShopC = sShop;
+                // });
+                // aTable10.forEach(function (line, index) {
+                //     // 最后一行不处理
+                //     if (index >= aTable10.length - 1) {
+                //         return;
+                //     }
+                //     line.ShopC = sShop;
+                // });
 
                 var aFI0004 = this._LocalData.getProperty("/FI0004");
                 var aCurrencyTable3 = this._LocalData.getProperty("/CurrencyTable3/Item");
@@ -620,19 +624,19 @@ sap.ui.define([
                     this._LocalData.setProperty("/CurrencyTable3/Item", aCurrencyTable3);
                 }
 
-                //掛売上（クレジット、電子マネー、QR決済）
-                var aFI0007 = this._LocalData.getProperty("/FI0007");
-                var aTable8 = this._LocalData.getProperty("/table8");
-                if (aFI0007.length > 0) {
-                    aTable8.forEach(function (line, index) {
-                        try {
-                            line.Title = aFI0007[index].Value4;
-                        } catch (e) {}
-                    });
-                    this._LocalData.setProperty("/table8", aTable8);
-                }
+                // //掛売上（クレジット、電子マネー、QR決済）
+                // var aFI0007 = this._LocalData.getProperty("/FI0007");
+                // var aTable8 = this._LocalData.getProperty("/table8");
+                // if (aFI0007.length > 0) {
+                //     aTable8.forEach(function (line, index) {
+                //         try {
+                //             line.Title = aFI0007[index].Value4;
+                //         } catch (e) {}
+                //     });
+                //     this._LocalData.setProperty("/table8", aTable8);
+                // }
 
-                this._LocalData.setProperty("/table12/0/Shop", sShop);
+                // this._LocalData.setProperty("/table12/0/Shop", sShop);
                 this._LocalData.refresh();
             },
 
@@ -693,13 +697,13 @@ sap.ui.define([
                     oDailyBalance[field] = "0";
                 }.bind(this));
                 this._LocalData.setProperty("/dailyBalance",[oDailyBalance]);
-                this._LocalData.setProperty("/table6", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table6"))));
-                this._LocalData.setProperty("/table7", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table7"))));
-                this._LocalData.setProperty("/table8", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table8"))));
-                this._LocalData.setProperty("/table9", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table9"))));
-                this._LocalData.setProperty("/table10", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table10"))));
-                this._LocalData.setProperty("/table11", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table11"))));
-                this._LocalData.setProperty("/table12", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table12"))));
+                // this._LocalData.setProperty("/table6", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table6"))));
+                // this._LocalData.setProperty("/table7", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table7"))));
+                // this._LocalData.setProperty("/table8", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table8"))));
+                // this._LocalData.setProperty("/table9", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table9"))));
+                // this._LocalData.setProperty("/table10", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table10"))));
+                // this._LocalData.setProperty("/table11", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table11"))));
+                // this._LocalData.setProperty("/table12", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table12"))));
                 this._LocalData.setProperty("/CashIncome", JSON.parse(JSON.stringify(this.InitModel.getProperty("/CashIncome"))));
                 this._LocalData.setProperty("/CashPayment", JSON.parse(JSON.stringify(this.InitModel.getProperty("/CashPayment"))));
                 this._LocalData.setProperty("/CurrencyTable1", JSON.parse(JSON.stringify(this.InitModel.getProperty("/CurrencyTable1"))));

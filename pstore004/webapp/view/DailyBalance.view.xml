@@ -97,7 +97,7 @@
 													<Input value="{local>NYKN_SAKI}" editable="{local>/viewEditable}"/>
 													<Input value="{local>NYKN_TEKIYO}" editable="{local>/viewEditable}"/>
 													<Input value="{path:'local>NYKN_KINGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="collectionIncome" editable="{local>/viewEditable}" textAlign="Right"/>
-													<Input value="{local>NYKN_KAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'NYKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
+													<Input value="{local>NYKN_KAMOKU_CD}" showValueHelp="true" change=".onAccountText($event,'NYKN_KAMOKU_NM')" valueHelpRequest=".onValueHelp($event, 'Account', 'NYKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
 													<Input value="{local>NYKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
 													<Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
 													<CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" select="onCashCheckBox" editable="{local>/viewEditable}"/>
@@ -166,7 +166,7 @@
 													<Input value="{local>SHKN_SAKI}" editable="{local>/viewEditable}"/>
 													<Input value="{local>SHKN_TEKIYO}" editable="{local>/viewEditable}"/>
 													<Input value="{path:'local>SHKN_KINGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="collectionPayment" editable="{local>/viewEditable}" textAlign="Right"/>
-													<Input value="{local>SHKN_KAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'SHKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
+													<Input value="{local>SHKN_KAMOKU_CD}" showValueHelp="true" change=".onAccountText($event, 'SHKN_KAMOKU_NM')" valueHelpRequest=".onValueHelp($event, 'Account', 'SHKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
 													<Input value="{local>SHKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
 													<Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
 													<CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" select="onCashCheckBox" editable="{local>/viewEditable}"/>
@@ -400,6 +400,13 @@
 	</content>
 	<footer>
 		<OverflowToolbar id="otbFooter">
+			<Button
+				id = "idMessagePopover"
+				icon="sap-icon://error"
+				text="{= ${messages>/}.length }"
+				visible="{= ${messages>/}.length > 0 }"
+				type="Negative"
+				press="onMessagePopoverPress" />
 			<ToolbarSpacer/>
 			<Button id="idSave" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')" enabled="{local>/viewEditable}"/>
             <Button id="idChange" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress" enabled="{local>/btChange}"/>
