@@ -89,8 +89,20 @@ sap.ui.define([
                         break;
                     case "2":
                         //获取ABR店铺数据 导航到ABR店铺界面
-                        this.getDailyBalance(sPath).then(function (res) {
+                        this.getDailyBalance(sPath, "abr").then(function (res) {
                             this.getRouter().navTo("DailyBalance", {layout: oNextUIState.layout, contextPath:sPath});
+                        }.bind(this));
+                        break;
+                    case "3":
+                        //获取AMU数据 导航到AMU店铺界面
+                        this.getDailyBalance(sPath, "amu").then(function (res) {
+                            this.getRouter().navTo("DailyBalance_amu", {layout: oNextUIState.layout, contextPath:sPath});
+                        }.bind(this));
+                        break;
+                    case "4":
+                        //获取AMU数据 导航到AMU店铺界面
+                        this.getDailyBalance(sPath, "based").then(function (res) {
+                            this.getRouter().navTo("DailyBalance_based", {layout: oNextUIState.layout, contextPath:sPath});
                         }.bind(this));
                         break;
                 }
@@ -117,8 +129,8 @@ sap.ui.define([
                 this._LocalData.setProperty("/approvalHistory", aApprovalHistory);
             },
 
-            // 获取ABR店铺日计表数据
-            getDailyBalance: function (sPath) {
+            // 获取日计表数据
+            getDailyBalance: function (sPath, sModel) {
                 sPath = "/" + sPath;
                 var oDetail = this._oDataModel.getProperty(sPath);
                 var aFilters = [];
@@ -140,8 +152,8 @@ sap.ui.define([
                             messages.showError(messages.parseErrors(oError));
                         }.bind(this),
                     };
-                    this.getOwnerComponent().getModel("abr").setHeaders({"approval":"X"});
-                    this.getOwnerComponent().getModel("abr").read("/ZzShopDailyBalanceSet", mParameters);
+                    this.getOwnerComponent().getModel(sModel).setHeaders({"approval":"X"});
+                    this.getOwnerComponent().getModel(sModel).read("/ZzShopDailyBalanceSet", mParameters);
                 }.bind(this));
                 return promise;
             },

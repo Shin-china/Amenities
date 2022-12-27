@@ -887,6 +887,8 @@ sap.ui.define([
             result = this.formatter.accSub(value1,value2);
             this._LocalData.setProperty("/dailyBalance/0/ZNJT_HNSH_SFKN_RKI", result);
 
+            this.resultCalc2();
+
 
             // //Ⅵ元金金額
             // var value1 = this._LocalData.getProperty("/dailyBalance/0/GANKIN_AMT");
@@ -925,13 +927,18 @@ sap.ui.define([
             var sShop = this._LocalData.getProperty("/dailyBalance/0/TENPO_CD");
             var aFI0009 = this._LocalData.getProperty("/FI0009");
             var aFI0010 = this._LocalData.getProperty("/FI0010");
-            if (aFI0009.includes(sShop)) {
-                //本日送付金(＝5収支差額:プラザコリア店舗）
-                this._LocalData.setProperty("/dailyBalance/0/HNJTS_SOFUKIN", result);
+            if ( aFI0009.findIndex(e => e.Value1 == sShop) >= 0 ) {
+                 //本日送付金(＝5収支差額:プラザコリア店舗）
+                 this._LocalData.setProperty("/dailyBalance/0/HNJTS_SOFUKIN", result);
+                 //Ⅴ送付金予定額
+                 this.resultCalc2();
             }
-            if (aFI0010.includes(sShop)) {
+            if (aFI0010.findIndex(e => e.Value1 == sShop) >= 0) {
                 //Ⅶアムエリア振替(＝5収支差額:ビレッジ店舗)
                 this._LocalData.setProperty("/dailyBalance/0/AMAREA_FURIKAE", result);
+                // Ⅳ本日繰越高
+                this.resultCalc();
+
             }
         },
 

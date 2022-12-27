@@ -54,6 +54,28 @@
                     "localUri": "localService/ZZPSTORE_SRV_Annotation.xml"
                 }
             },
+            "ZZAMAREA_SRV": {
+                "uri": "/sap/opu/odata/sap/ZZAMAREA_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "ZZPSTORE003_SRV": {
+                "uri": "/sap/opu/odata/sap/ZZPSTORE003_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml"
+                }
+            },
             "annotation": {
                 "type": "ODataAnnotation",
                 "uri": "annotation/annotation.xml",
@@ -120,6 +142,18 @@
                     "bundleName": "FICO.dailybalanceapproval.i18n.pstore.i18n"
                 }
             },
+            "i18n_amu": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "FICO.dailybalanceapproval.i18n.amu.i18n"
+                }
+            },
+            "i18n_based": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "FICO.dailybalanceapproval.i18n.based.i18n"
+                }
+            },
             "@i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "uri": "i18n/i18n.properties"
@@ -144,6 +178,24 @@
             },
             "pstore": {
                 "dataSource": "ZZPSTORE_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
+                }
+            },
+            "amu": {
+                "dataSource": "ZZAMAREA_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
+                }
+            },
+            "based": {
+                "dataSource": "ZZPSTORE003_SRV",
                 "preload": true,
                 "settings": {
                     "defaultBindingMode": "TwoWay",
@@ -191,6 +243,16 @@
                         "ApprovalList",
                         "TargetStoreDetail"
                     ]
+                },
+                {
+                    "name": "DailyBalance_amu",
+                    "pattern": "DailyBalance_amu/{layout}/:contextPath:",
+                    "target": "DailyBalance_amu"
+                },
+                {
+                    "name": "DailyBalance_based",
+                    "pattern": "DailyBalance_based/{layout}/:contextPath:",
+                    "target": "DailyBalance_based"
                 }
             ],
             "targets": {
@@ -207,6 +269,18 @@
                 "TargetStoreDetail": {
                     "viewPath": "FICO.dailybalanceapproval.view.pstore",
                     "viewName": "StoreDetail",
+                    "clearControlAggregation": true,
+                    "controlAggregation": "midColumnPages"
+                },
+                "DailyBalance_amu": {
+                    "viewPath": "FICO.dailybalanceapproval.view.amu",
+                    "viewName": "DailyBalance_amu",
+                    "clearControlAggregation": true,
+                    "controlAggregation": "midColumnPages"
+                },
+                "DailyBalance_based": {
+                    "viewPath": "FICO.dailybalanceapproval.view.based",
+                    "viewName": "DailyBalance_based",
                     "clearControlAggregation": true,
                     "controlAggregation": "midColumnPages"
                 }

@@ -322,77 +322,77 @@
 										selectionMode="None"
 										visibleRowCount="4">
 										<uitable:columns>
-											<uitable:Column width="4rem">
-												<Label text="{i18n>Number}" />
+											<uitable:Column width="4%">
+												<Label text="{i18n>Number}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>FieldTitle}" />
+											<uitable:Column width="15%">
+												<Label text="{i18n>FieldTitle}" wrapping="true"/>
 												<uitable:template>
                                                     <Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>Amount}" />
+											<uitable:Column width="13%">
+												<Label text="{i18n>Amount}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable9Calc($event,'/table9')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>ShopD}" />
+											<uitable:Column width="6%">
+												<Label text="{i18n>ShopD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopD}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountD}" />
+											<uitable:Column width="10%">
+												<Label text="{i18n>AccountD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'AccountDDesc')" editable="{local>/viewEditable}"
 														change=".onAccountText($event,'AccountDDesc')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountDDesc}" />
+											<uitable:Column width="12%">
+												<Label text="{i18n>AccountDDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountDDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}" wrapping="false" tooltip="{local>AccountDDesc}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>TaxD}" />
+											<uitable:Column width="7%">
+												<Label text="{i18n>TaxD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"
 														change=".onCheckInValueHelp($event, 'TaxVH')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>ShopC}" />
+											<uitable:Column width="6%">
+												<Label text="{i18n>ShopC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountC}" />
+											<uitable:Column width="8%">
+												<Label text="{i18n>AccountC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountCDesc}" />
+											<uitable:Column width="12%">
+												<Label text="{i18n>AccountCDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountCDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}" wrapping="false" tooltip="{local>AccountCDesc}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>TaxC}" />
+											<uitable:Column width="7%">
+												<Label text="{i18n>TaxC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"
@@ -410,78 +410,78 @@
 									<uitable:Table
 										rows="{local>/table10}"
 										selectionMode="None"
-										visibleRowCount="4">
+										visibleRowCount="4%">
 										<uitable:columns>
 											<uitable:Column width="4rem">
-												<Label text="{i18n>Number}" />
+												<Label text="{i18n>Number}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n>FieldTitle}" />
+											<uitable:Column width="15%">
+												<Label text="{i18n>FieldTitle}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable10Enabled'}" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>Amount}" />
+											<uitable:Column width="13%">
+												<Label text="{i18n>Amount}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable9Calc($event,'/table10')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>ShopD}" />
+											<uitable:Column width="6%">
+												<Label text="{i18n>ShopD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopD}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"
 														change=".onCheckInValueHelp($event, 'ProfitVH')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountD}" />
+											<uitable:Column width="10%">
+												<Label text="{i18n>AccountD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'AccountDDesc')" editable="{local>/viewEditable}"
 														 change=".onAccountText($event,'AccountDDesc')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountDDesc}" />
+											<uitable:Column width="12%">
+												<Label text="{i18n>AccountDDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountDDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}" wrapping="false" tooltip="{local>AccountDDesc}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>TaxD}" />
+											<uitable:Column width="7%">
+												<Label text="{i18n>TaxD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"
 														change=".onCheckInValueHelp($event, 'TaxVH')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>ShopC}" />
+											<uitable:Column width="6%">
+												<Label text="{i18n>ShopC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountC}" />
+											<uitable:Column width="8%">
+												<Label text="{i18n>AccountC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>AccountCDesc}" />
+											<uitable:Column width="12%">
+												<Label text="{i18n>AccountCDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountCDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}" wrapping="false" tooltip="{local>AccountCDesc}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n>TaxC}" />
+											<uitable:Column width="7%">
+												<Label text="{i18n>TaxC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"
@@ -519,7 +519,7 @@
 												<uitable:template>
                                                     <!-- <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/> -->
 													<Select id="KUAS_KENSYU" width="6rem" class="sapUiSmallMarginEnd" forceSelection="false" selectedKey="{local>Ticket}"
-														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}" editable="{local>/viewEditable}" enabled="{local>/KUAS_KENSYU}">
+														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}" editable="{local>/viewEditable}" enabled="{local>/KUAS_KENSYU}">
 														<core:Item key="" text=""/>
 														<core:Item key="ムビ" text="ムビ"/>
 														<core:Item key="紙" text="紙"/>
@@ -641,7 +641,8 @@
 									<!-- Ⅶ アムエリア振替(Ⅳ-Ⅵ) -->
 									<HBox>
 										<Text width="{local>/labelWidth}" text="{i18n>Title4r}" class="paddingTop"/>
-										<Input id="AMAREA_FURIKAE" value="{path:'local>/dailyBalance/0/AMAREA_FURIKAE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="AMAREA_FURIKAE" value="{path:'local>/dailyBalance/0/AMAREA_FURIKAE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
+											change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 									</HBox>
 								</VBox>
 							</uxap:blocks>
@@ -656,7 +657,8 @@
                                     <!-- 元金過不足内訳・金額 -->
                                     <HBox>
                                         <Text width="{local>/labelWidth}" text="{i18n>Title4s}" class="paddingTop"/>
-                                        <Input value="{path:'local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" editable="{local>/viewEditable}" textAlign="Right"/>
+                                        <Input value="{path:'local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
+											change="setValueToZero" editable="{local>/viewEditable}" textAlign="Right"/>
                                     </HBox>
                                     <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
                                     <!-- 元金過不足詳細・全角50文字以内 -->
@@ -832,7 +834,7 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{groupingEnabled:false, minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column >
@@ -868,7 +870,7 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{groupingEnabled:false, minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column>

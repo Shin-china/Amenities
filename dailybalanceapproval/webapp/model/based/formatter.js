@@ -96,7 +96,7 @@ sap.ui.define([
 			/*eslint no-unused-expressions: ["error", { "allowTernary": true }]*/
 			if (date) {
 				var oDateFormat = DateFormat.getDateTimeInstance({
-					pattern: "yyyy/MM/dd"
+					pattern: "yyyy-MM-dd"
 				});
 				date = oDateFormat.format(new Date(date));
 			}
@@ -112,7 +112,7 @@ sap.ui.define([
 			}
 			var dateTime;
 			date ? (dateTime = date) : (dateTime = dateTime);
-			time ? (dateTime = dateTime + " " + time) : (dateTime = dateTime);
+			time ? (dateTime = dateTime + "T" + time) : (dateTime = dateTime);
 			return dateTime;
 		},
 
@@ -135,117 +135,6 @@ sap.ui.define([
 			return "None";
 		},
 		
-		setTable6Visible: function (value) {
-			if (value === "4") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable6Enabled: function (value) {
-			if (value === "4") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable7Visible: function (value) {
-			if (value === "5") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable7Enabled: function (value) {
-			if (value === "5") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable8Visible: function (value) {
-			if (value === "9") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable8Enabled: function (value) {
-			if (value === "9") {
-				return false;
-			}
-			return true;
-		},
-		setTable9Visible: function (value) {
-			if (value === "4") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable9Enabled: function (value) {
-			if (value === "4") {
-				return false;
-			}
-			return true;
-		},
-		setTable10Visible: function (value) {
-			if (value === "4") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable10Enabled: function (value) {
-			if (value === "4") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable11Visible: function (value) {
-			if (value === "16") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable11Enabled: function (value) {
-			if (value === "16") {
-				return false;
-			}
-			return true;
-		},
-
-        setTable12Enabled: function (value) {
-			if (value === "1") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable13Visible: function (value) {
-			if (value === "6" || value === "7") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable13Enabled: function (value) {
-			if (value === "6" || value === "7") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable13Enabled1: function (value) {
-			if (value === "5") {
-				return false;
-			}
-			return true;
-		},
-
-
 		toBoolean: function (value) {
 			if (value) {
 				return value === "" ? false : true;
@@ -267,6 +156,50 @@ sap.ui.define([
 		formatFloat: function (value) {
 			var sAmount	= (value) ? value.toString() : "0";
 			return NumberFormat.getFloatInstance().format(sAmount);
+		},
+
+		approvalStatus: function (value) {
+			switch (value) {
+				case "I":
+					return "Information";
+				case "P":
+					return "Success";
+				case "R":
+					return "Error";
+				default:
+					return "None";
+			}
+		},
+		approvalIcon: function (value) {
+			switch (value) {
+				case "I":
+					return "sap-icon://information";
+				case "P":
+					return "sap-icon://sys-enter-2";
+				case "R":
+					return "sap-icon://error";
+				default:
+					return "";
+			}
+		},
+		approvalText: function (value) {
+			switch (value) {
+				case "I":
+					return "申請";
+				case "P":
+					return "承認済み";
+				case "R":
+					return "承認拒否";
+				default:
+					return "";
+			}
+		},
+
+		isUndefinedToZero: function (value) {
+			if (!value) {
+				return "0";
+			}
+			return value;
 		},
 
         accAdd : function(arg1, arg2) {
@@ -369,6 +302,7 @@ sap.ui.define([
 			r2 = Number(s2.replace(".",""));
 			return r2 === 0 ? "0" : ((r1 / r2).mul(Math.pow(10, t2 - t1))).toString();
 		},
+
 		// 审批用
 		approvalStatus: function (value) {
 			switch (value) {

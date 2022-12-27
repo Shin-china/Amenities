@@ -50,7 +50,7 @@
                             </t:RowAction>
                         </t:rowActionTemplate>
                         <t:columns>
-                            <t:Column width="8rem" label="{i18n>NIKKEIHYO_KBN}" sortProperty="NIKKEIHYO_KBN">
+                            <t:Column width="9rem" label="{i18n>NIKKEIHYO_KBN}" sortProperty="NIKKEIHYO_KBN">
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"NIKKEIHYO_KBN", "leadingProperty":"NIKKEIHYO_KBN", "sortProperty":"NIKKEIHYO_KBN", "filterProperty": "NIKKEIHYO_KBN"}'/>
                                 </t:customData>

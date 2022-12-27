@@ -1,0 +1,49 @@
+{
+    "CashIncome":[],
+    "CashPayment":[],
+    "CurrencyTable1":{
+        "Item":[
+            {"Id":"1", "Monetary":"10000", "Quantity":"", "Amount":""},
+            {"Id":"2", "Monetary":"5000", "Quantity":"", "Amount":""},
+            {"Id":"3", "Monetary":"2000", "Quantity":"", "Amount":""},
+            {"Id":"4", "Monetary":"1000", "Quantity":"", "Amount":""},
+            {"Id":"5", "Monetary":"500", "Quantity":"", "Amount":""},
+            {"Id":"6", "Monetary":"100", "Quantity":"", "Amount":""},
+            {"Id":"7", "Monetary":"50", "Quantity":"", "Amount":""},
+            {"Id":"8", "Monetary":"10", "Quantity":"", "Amount":""},
+            {"Id":"9", "Monetary":"5", "Quantity":"", "Amount":""},
+            {"Id":"10", "Monetary":"1", "Quantity":"", "Amount":""}
+        ],
+        "Total":""
+    },
+    "CurrencyTable2":{
+        "Item":[
+            {"Id":"1", "Monetary":"10000", "Quantity":"", "Amount":""},
+            {"Id":"2", "Monetary":"5000", "Quantity":"", "Amount":""},
+            {"Id":"3", "Monetary":"2000", "Quantity":"", "Amount":""},
+            {"Id":"4", "Monetary":"1000", "Quantity":"", "Amount":""},
+            {"Id":"5", "Monetary":"500", "Quantity":"", "Amount":""}
+        ],
+        "Total":""
+    },
+    "CurrencyTable3":{
+        "Item":[
+            {"Id":"1", "No":"1", "Title":"", "Amount":""},
+            {"Id":"2", "No":"2", "Title":"", "Amount":""},
+            {"Id":"3", "No":"3", "Title":"", "Amount":""},
+            {"Id":"4", "No":"4", "Title":"", "Amount":""},
+            {"Id":"5", "No":"5", "Title":"", "Amount":""},
+            {"Id":"6", "No":"6", "Title":"", "Amount":""}
+        ],
+        "Total":""
+    },
+    "CurrencyTable4":[
+        {"Id":"1", "Enabled":true, "Title":"翌日本社送付金", "Amount":""},
+        {"Id":"2", "Enabled":true, "Title":"翌日両替金依頼額", "Amount":""},
+        {"Id":"3", "Enabled":false, "Title":"翌日銀行入金総額 [Ⅺ]", "Amount":""},
+        {"Id":"4", "Enabled":false, "Title":"翌日金庫内現金総額 [Ⅻ]\r\n[Ⅷ]+[Ⅸ]+[Ⅹ]+[Ⅺ]", "Amount":""},
+        {"Id":"5", "Enabled":false, "Title":"本日繰越高(日計表1枚目参照） [Ⅳ]", "Amount":""},
+        {"Id":"6", "Enabled":true, "Title":"翌日規程元金金額", "Amount":""},
+        {"Id":"7", "Enabled":false, "Title":"差額 [Ⅻ]-[Ⅳ]", "Amount":""}
+    ]
+}

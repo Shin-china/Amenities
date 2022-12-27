@@ -101,7 +101,7 @@ sap.ui.define([
 							this.getModel("local").setProperty("/ZzHeader/Message", oData.Message);
 							this.getModel("local").setProperty("/ZzHeader/Zspzt", oData.Zspzt);
 							this.getModel("local").setProperty("/ZzHeader/ZspztText", oData.ZspztText);
-							if (oData.Zspzt !== "0000") {
+							if (oData.Zspzt !== "0000" && oData.Zspzt !== "7777") {
 								this.getModel("local").setProperty("/editCreate", false);
 								this.getModel("local").setProperty("/editChange", false);
 							}
@@ -642,7 +642,7 @@ sap.ui.define([
 
 		onDeleteRow: function(oEvent) {
 			var oHeader = this.getModel("local").getProperty("/ZzHeader");
-			if (oHeader.Zspzt !== "0000") {
+			if (oHeader.Zspzt !== "0000" && oHeader.Zspzt !== "7777") {
 				MessageBox.error(this.getI18nBundle().getText("msginApproval"));
 				return;
 			}
@@ -663,7 +663,7 @@ sap.ui.define([
 
 		onDelCheckBoxSelect: function(oEvent) {
 			var oHeader = this.getModel("local").getProperty("/ZzHeader");
-			if (oHeader.Zspzt !== "0000") {
+			if (oHeader.Zspzt !== "0000" && oHeader.Zspzt !== "7777") {
 				MessageBox.error(this.getI18nBundle().getText("msginApproval"));
 				return;
 			}
@@ -706,7 +706,7 @@ sap.ui.define([
 				return;
 			}
 
-			if (oHeader.Zspzt !== "0000") {
+			if (oHeader.Zspzt !== "0000" && oHeader.Zspzt !== "7777") {
 				MessageBox.error(this.getI18nBundle().getText("msginApproval"));
 				return;
 			}
@@ -767,7 +767,7 @@ sap.ui.define([
 				return;
 			}
 
-			if (oHeader.Zspzt !== "0000") {
+			if (oHeader.Zspzt !== "0000" && oHeader.Zspzt !== "7777") {
 				MessageBox.error(this.getI18nBundle().getText("msginApproval"));
 				return;
 			}

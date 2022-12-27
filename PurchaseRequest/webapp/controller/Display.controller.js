@@ -204,6 +204,7 @@ sap.ui.define([
 				Badat: formatter.convertDate(oData.results[0].Badat),
 				Zspqx: formatter.convertDate(oData.results[0].Zspqx),
 				Zsprq: formatter.convertDate(oData.results[0].Zsprq),
+				Department: oData.results[0].Department,
 				Zjm: oData.results[0].Zjm,
 				Zsqly: oData.results[0].Zsqly,
 				Zspzt: oData.results[0].Zspzt,

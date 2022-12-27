@@ -282,7 +282,7 @@ sap.ui.define([
                 if (oDatePicker.getValue() == "") {
                     oDatePicker.setValueState("Warning");
                     isError = true;
-                } else if (new Date(oDatePicker.getValue()) > new Date()){
+                } else if (oDatePicker.getDateValue() > new Date()){
                     isError = true;
                     oDatePicker.setValueState("Warning");
                     oDatePicker.setValueStateText(this._ResourceBundle.getText("msg2"));
@@ -304,7 +304,7 @@ sap.ui.define([
                 var i = 1;
                 var sCompany = this.byId("idCompany").getValue();
                 var sShop = this.byId("idShop").getValue();
-                var sDate = this.byId("idDP1").getValue();
+                var sDate = this.byId("idDP1").getDateValue().toLocaleDateString("ja");
                 sDate = this.formatter.date_8(sDate);
                 var postData = {
                     "KAISHA_CD": sCompany,
@@ -333,7 +333,7 @@ sap.ui.define([
                 var aFilters = [];
                 aFilters.push(new Filter("KAISHA_CD", "EQ", this.byId("idCompany").getValue())); 
                 aFilters.push(new Filter("TENPO_CD", "EQ", this.byId("idShop").getValue())); 
-                var sDate = this.byId("idDP1").getValue();
+                var sDate = this.byId("idDP1").getDateValue().toLocaleDateString("ja");
                 aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate))); 
                 var promise = new Promise( function (resolve, reject) {
                     var mParameters = {
@@ -455,6 +455,7 @@ sap.ui.define([
                     postDocs.push({
                         KAISHA_CD: lineData.KAISHA_CD,
                         KIHYO_NO: lineData.KIHYO_NO,
+                        TENPO_CD: lineData.TENPO_CD,
                         EIGYO_BI: lineData.EIGYO_BI
                     })            
                 }.bind(this));
@@ -560,7 +561,7 @@ sap.ui.define([
                 // 获取dialog中的参数
                 var sCompany = this.byId("idCompany").getValue();
                 var sShop = this.byId("idShop").getValue();
-                var sDate = this.byId("idDP1").getValue();
+                var sDate = this.byId("idDP1").getDateValue().toLocaleDateString("ja");
                 this._LocalData.setProperty("/dailyBalance/0/KAISHA_CD", sCompany);
                 this._LocalData.setProperty("/dailyBalance/0/TENPO_CD", sShop);
                 this._LocalData.setProperty("/dailyBalance/0/EIGYO_BI", this.formatter.date(sDate));
@@ -674,7 +675,8 @@ sap.ui.define([
                     "GANKIN_ZOUGAKU",
                     "SOFUKIN_YOTEIGAKU",
                     "GANKIN_AMT",
-                    "MOTOKINKAFUSOKU_AMT"
+                    "MOTOKINKAFUSOKU_AMT",
+                    "AMAREA_FURIKAE"
                 ];
                 //为了初始值为0
                 var oDailyBalance = {};

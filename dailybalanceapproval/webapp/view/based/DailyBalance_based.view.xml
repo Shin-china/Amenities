@@ -1,0 +1,434 @@
+<mvc:View controllerName="FICO.dailybalanceapproval.controller.based.DailyBalance_based" displayBlock="true"
+	xmlns="sap.m"
+	xmlns:uitable="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:uxap="sap.uxap"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form">
+	<Page id="idDailyBalanceCreate" showNavButton="false" navButtonPress="onNavBackAndReresh" title="{i18n_based>DailyBalanceCreatePage}">
+		<content>
+		<uxap:ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
+			<uxap:headerTitle>
+                <uxap:ObjectPageDynamicHeaderTitle>
+					<uxap:expandedHeading>
+						<VBox>
+							<Title text="{local>/TypeName}" wrapping="true"/>
+							<Title text="{local>/dailyBalance/0/KIHYO_NO}" wrapping="true"/>
+						</VBox>
+					</uxap:expandedHeading>
+					<uxap:snappedHeading>
+						<VBox >
+							<Title text="{local>/TypeName}" wrapping="true"/>
+							<Title text="{local>/dailyBalance/0/KIHYO_NO}" wrapping="true"/>
+						</VBox>
+					</uxap:snappedHeading>
+                    <uxap:navigationActions>
+                        <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                        <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+                        <OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose"  tooltip="Close middle column" visible="true"/>
+                    </uxap:navigationActions>
+
+                </uxap:ObjectPageDynamicHeaderTitle>
+            </uxap:headerTitle>
+			<uxap:sections>
+				<uxap:ObjectPageSection titleUppercase="false" title="{i18n_based>Section0}">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection title="{i18n_based>Section0}">
+							<uxap:blocks>
+								<FlexBox wrap="Wrap" fitContainer="true" alignItems="Start">
+									<l:VerticalLayout class="sapUiLargeMarginEnd sapUiSmallMarginTopBottom">
+										<ObjectStatus title="{i18n_based>KAISHA_CD}" text="{local>/dailyBalance/0/KAISHA_CD}" class="sapUiTinyMarginTopBottom" />
+										<ObjectStatus title="{i18n_based>TENPO_CD}" text="{local>/dailyBalance/0/TENPO_CD}" class="sapUiTinyMarginTopBottom" />
+										<ObjectStatus title="{i18n_based>EIGYO_BI}" text="{path:'local>/dailyBalance/0/EIGYO_BI', formatter:'.formatter.formtDate_8'}" class="sapUiTinyMarginTopBottom"/>
+									</l:VerticalLayout>
+									<l:VerticalLayout class="sapUiLargeMarginBegin sapUiLargeMarginEnd">
+                                        <form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" 
+                                            labelSpanL="3" labelSpanM="4" emptySpanL="2" emptySpanM="2" breakpointM="100" columnsL="1">
+                                            <Label text="{i18n_based>KIHYOSHA_NM}" required="true" />
+											<Input id="idUser" value="{local>/dailyBalance/0/KIHYOSHA_NM}" change="onUserChange" editable="{local>/viewEditable}"/>
+											<!-- <Input value="{local>/dailyBalance/0/TENKI}" editable="false" visible="{= !${local>/viewEditable}}"/> -->
+                                            <!-- <Label text="{i18n_based>TENKI}" required="true"/>
+											<Select id="idSelectWeather" showSecondaryValues="true" width="14rem" class="sapUiSmallMarginEnd"
+												change="onSelectWeather"  forceSelection="false" editable="{local>/viewEditable}"
+												items="{
+													path: 'local>/FI0005',
+													sorter: { path: 'Value1' },
+													templateShareable:false
+												}">
+												<core:ListItem key="{local>Value1}" text="{local>Value1}" tooltip="{local>Value1}"/>
+											</Select> -->
+                                        </form:SimpleForm>
+									</l:VerticalLayout>
+								</FlexBox>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+
+				<uxap:ObjectPageSection titleUppercase="false" title="{i18n_based>Section2}">
+					<uxap:subSections>
+						<!-- その他現金収入 -->
+						<uxap:ObjectPageSubSection title="{i18n_based>Section2}">
+							<uxap:blocks>
+								<VBox>
+									<Table id="idCashIncomeTable" class="sapUxAPObjectPageSubSectionAlignContent" width="auto" items="{local>/CashIncome}"
+										mode="MultiSelect">
+										<headerToolbar>
+											<OverflowToolbar>
+												<content>
+													<ToolbarSpacer />
+													<Button text="{i18n_based>Delete}" press=".onDeleteLine($event,'idCashIncomeTable')" enabled="{local>/viewEditable}"/>
+													<Button text="{i18n_based>AddLine}" press=".onAddLine($event,'idCashIncomeTable')" enabled="{local>/viewEditable}"/>
+												</content>
+											</OverflowToolbar>
+										</headerToolbar>
+										<columns>
+											<Column width="6rem">
+												<Text text="{i18n_based>KEIJO_BUSHOT2}" />
+											</Column>
+											<Column width="10rem">
+												<Text text="{i18n_based>DRKAMOKU_CDT2}" />
+											</Column>
+											<Column width="12rem">
+												<Text text="{i18n_based>NYKN_SAKIT2}" />
+											</Column>
+											<Column width="12rem">
+												<Text text="{i18n_based>NYKN_TEKIYOT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>NYKN_KINGAKUT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>NYKN_KAMOKU_CDT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>NYKN_KAMOKU_NMT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>ZEI_CDT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>JIDOUTENKIFUYO}" />
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Input value="{local>KEIJO_BUSHO}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}" change=".onCheckInValueHelp($event, 'ProfitVH')"/>
+													<Input value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}" change=".onCheckInValueHelp($event, 'FI0006')"/>
+													<Input value="{local>NYKN_SAKI}" editable="{local>/viewEditable}"/>
+													<Input value="{local>NYKN_TEKIYO}" editable="{local>/viewEditable}"/>
+													<Input value="{path:'local>NYKN_KINGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="collectionIncome" editable="{local>/viewEditable}" textAlign="Right"/>
+													<Input value="{local>NYKN_KAMOKU_CD}" showValueHelp="true" change=".onAccountText($event,'NYKN_KAMOKU_NM')" valueHelpRequest=".onValueHelp($event, 'Account', 'NYKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
+													<Input value="{local>NYKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
+													<Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
+													<CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" select="onCashCheckBox" editable="{local>/viewEditable}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+									<!-- 入金合計 -->
+                                    <HBox justifyContent="Center">
+                                        <Text width="{local>/labelWidth}" text="{i18n_based>Title4c}" class="paddingTop"/>
+										<Text width="{local>/labelWidth}" text="{path:'local>/dailyBalance/0/SNT_GNKN_SHNY_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" class="paddingTop"/>
+                                        <!-- <Input value="{local>/dailyBalance/0/SNT_GNKN_SHNY_GKI}" editable="false"/> -->
+                                    </HBox>
+                                </VBox>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<!-- その他現金支出 -->
+				<uxap:ObjectPageSection titleUppercase="false" title="{i18n_based>Section3}">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection title="{i18n_based>Section3}">
+							<uxap:blocks>
+								<VBox >
+									<Table id="idCashPaymentTable" class="sapUxAPObjectPageSubSectionAlignContent" width="auto" items="{local>/CashPayment}" 
+										mode="MultiSelect">
+										<headerToolbar>
+											<OverflowToolbar>
+												<content>
+													<ToolbarSpacer />
+													<Button text="{i18n_based>Delete}" press=".onDeleteLine($event,'idCashPaymentTable')" enabled="{local>/viewEditable}"/>
+													<Button text="{i18n_based>AddLine}" press=".onAddLine($event,'idCashPaymentTable')" enabled="{local>/viewEditable}"/>
+												</content>
+											</OverflowToolbar>
+										</headerToolbar>
+										<columns>
+											<Column width="6rem">
+												<Text text="{i18n_based>KEIJO_BUSHOT2}" />
+											</Column>
+											<Column width="10rem">
+												<Text text="{i18n_based>SHKN_SAKIT2}" />
+											</Column>
+											<Column width="10rem">
+												<Text text="{i18n_based>SHKN_TEKIYOT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>SHKN_KINGAKUT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>SHKN_KAMOKU_CDT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>SHKN_KAMOKU_NMT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>ZEI_CDT2}" />
+											</Column>
+											<Column>
+												<Text text="{i18n_based>JIDOUTENKIFUYO}" />
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Input value="{local>KEIHI_FUTAN_BUSHO}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Cost')" change=".onCheckInValueHelp($event, 'CostVH')" editable="{local>/viewEditable}"/>
+													<Input value="{local>SHKN_SAKI}" editable="{local>/viewEditable}"/>
+													<Input value="{local>SHKN_TEKIYO}" editable="{local>/viewEditable}"/>
+													<Input value="{path:'local>SHKN_KINGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="collectionPayment" editable="{local>/viewEditable}" textAlign="Right"/>
+													<Input value="{local>SHKN_KAMOKU_CD}" showValueHelp="true" change=".onAccountText($event, 'SHKN_KAMOKU_NM')" valueHelpRequest=".onValueHelp($event, 'Account', 'SHKN_KAMOKU_NM')" editable="{local>/viewEditable}"/>
+													<Input value="{local>SHKN_KAMOKU_NM}" editable="{local>/viewEditable}"/>
+													<Input value="{local>ZEI_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"/>
+													<CheckBox selected="{path:'local>JIDOUTENKIFUYO', formatter:'.formatter.toBoolean'}" select="onCashCheckBox" editable="{local>/viewEditable}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+									<!-- 出金合計 -->
+                                    <HBox justifyContent="Center">
+                                        <Text width="{local>/labelWidth}" text="{i18n_based>Title4d}" class="paddingTop"/>
+										<Text width="{local>/labelWidth}" text="{path:'local>/dailyBalance/0/SNT_GNKN_SHSHT_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" class="paddingTop"/>
+                                        <!-- <Input value="{local>/dailyBalance/0/SNT_GNKN_SHSHT_GKI}" editable="false"/> -->
+                                    </HBox>
+								</VBox>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+
+				<uxap:ObjectPageSection titleUppercase="false" title="{i18n_based>Section1}">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection title="{i18n_based>Section1}">
+							<uxap:blocks>
+								<VBox class="sapUiSmallMargin">
+								<!-- <form:SimpleForm layout="ResponsiveGridLayout" columnsXL="2" editable="true" adjustLabelSpan="false" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="5" columnsL="2" columnsM="2"> -->
+									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" singleContainerFullSize="false"
+										labelSpanL="4" labelSpanM="3" emptySpanL="4" emptySpanM="2" breakpointM="400" columnsL="2">
+										<Label text="{i18n_based>Title1}" />
+										<Input value="{path:'local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<!-- 入金合計 -->
+										<Label text="{i18n_based>Title4c}" />
+										<Input value="{path:'local>/dailyBalance/0/SNT_GNKN_SHNY_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
+										<!-- 出金合計 -->
+										<Label text="{i18n_based>Title4d}" />
+										<Input value="{path:'local>/dailyBalance/0/SNT_GNKN_SHSHT_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
+										<Label text="{i18n_based>Title2}" />
+										<Input value="{path:'local>/dailyBalance/0/HNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
+										<Label text="{i18n_based>Title3}" />
+										<Input value="{path:'local>/dailyBalance/0/KITEI_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Label text="{i18n_based>Title4}" />
+										<Input value="{path:'local>/dailyBalance/0/GNK_AZKR_YTIGK', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
+									</form:SimpleForm>
+								</VBox>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+                <uxap:ObjectPageSection titleUppercase="false" title="{i18n_based>Section5}">
+                    <uxap:subSections>
+						<uxap:ObjectPageSubSection title="{i18n_based>Section5}">
+							<uxap:blocks>
+                                <VBox>
+                                    <!-- 元金過不足内訳・金額 -->
+                                    <HBox>
+                                        <Text width="{local>/labelWidth}" text="{i18n_based>Title4s}" class="paddingTop"/>
+                                        <Input value="{path:'local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" editable="{local>/viewEditable}" textAlign="Right"/>
+                                    </HBox>
+                                    <Text width="{local>/labelWidth}" text="{i18n_based>Title4s1}" class="paddingTop"/>
+                                    <!-- 元金過不足詳細・全角50文字以内 -->
+                                    <HBox>
+                                        <Text width="{local>/labelWidth}" text="{i18n_based>Title4t}" class="paddingTop"/>
+                                        <!-- <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}" editable="{local>/viewEditable}"/> -->
+                                    </HBox>
+                                    <Text width="{local>/labelWidth}" text="{i18n_based>Title4s1}" class="paddingTop"/>
+                                    <TextArea value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_BIKOU}" maxLength="50" width="50%" editable="{local>/viewEditable}"/>
+                                    
+                                    <Text width="{local>/labelWidth}" text="{i18n_based>Remark}" class="paddingTop"/>
+                                    <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
+                                </VBox>
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                    </uxap:subSections>
+                </uxap:ObjectPageSection>
+				
+                <!-- 翌日金庫内現金内訳 -->
+                <uxap:ObjectPageSection titleUppercase="false" title="{i18n_based>Section4}">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection title="{i18n_based>Section4}">
+							<uxap:blocks>
+                                <VBox>
+                                    <HBox>
+                                        <!-- 有効貨幣明細 -->
+                                        <uitable:Table
+                                            rows="{local>/CurrencyTable1/Item}"
+                                            selectionMode="None"
+                                            visibleRowCount="10">
+                                            <uitable:extension>
+                                                <OverflowToolbar style="Clear">
+                                                    <Title text="{i18n_based>Title5a}"/>
+                                                </OverflowToolbar>
+                                            </uitable:extension>
+                                            <uitable:columns>
+                                                <uitable:Column >
+                                                    <Label text="{i18n_based>MonetaryT5}" />
+                                                    <uitable:template>
+                                                        <Text text="{path:'local>Monetary', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                                                    </uitable:template>
+                                                </uitable:Column>
+                                                <uitable:Column >
+                                                    <Label text="{i18n_based>QuantityT5}" />
+                                                    <uitable:template>
+                                                        <Input value="{local>Quantity}" maxLength="5" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}"  textAlign="Right"/>
+                                                    </uitable:template>
+                                                </uitable:Column>
+                                                <uitable:Column>
+                                                    <Label text="{i18n_based>AmountT5}" />
+                                                    <uitable:template>
+                                                        <!-- <Text text="{path:'local>Amount', formatter:'.formatter.formatFloat'}" textAlign="Right"/> -->
+														<Input value="{path:'local>Amount', formatter:'.formatter.formatFloat'}" enabled="false" textAlign="Right"/>
+                                                    </uitable:template>
+                                                </uitable:Column>
+                                            </uitable:columns>
+                                            <uitable:footer>
+                                                <HBox justifyContent="End">
+                                                    <ObjectStatus title="{i18n_based>Total1}" text="{path:'local>/CurrencyTable1/Total', formatter:'.formatter.formatFloat'}" />
+                                                </HBox>
+                                            </uitable:footer>
+                                        </uitable:Table>
+                                        <!-- 破損貨幣明細 -->
+                                        <uitable:Table
+                                            rows="{local>/CurrencyTable2/Item}"
+                                            selectionMode="None"
+                                            visibleRowCount="5">
+                                            <uitable:extension>
+                                                <OverflowToolbar style="Clear">
+                                                    <Title text="{i18n_based>Title5b}"/>
+                                                </OverflowToolbar>
+                                            </uitable:extension>
+                                            <uitable:columns>
+                                                <uitable:Column >
+                                                    <Label text="{i18n_based>MonetaryT5}" />
+                                                    <uitable:template>
+                                                        <Text text="{path:'local>Monetary', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                                                    </uitable:template>
+                                                </uitable:Column>
+                                                <uitable:Column >
+                                                    <Label text="{i18n_based>QuantityT5}" />
+                                                    <uitable:template>
+                                                        <Input value="{local>Quantity}" maxLength="5" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                    </uitable:template>
+                                                </uitable:Column>
+                                                <uitable:Column >
+                                                    <Label text="{i18n_based>AmountT5}" />
+                                                    <uitable:template>
+                                                        <!-- <Text text="{path:'local>Amount', formatter:'.formatter.formatFloat'}" textAlign="Right"/> -->
+														<Input value="{path:'local>Amount', formatter:'.formatter.formatFloat'}" enabled="false"  textAlign="Right"/>
+													</uitable:template>
+                                                </uitable:Column>
+                                            </uitable:columns>
+                                            <uitable:footer>
+                                                <HBox justifyContent="End">
+                                                    <ObjectStatus title="{i18n_based>Total2}" text="{path:'local>/CurrencyTable2/Total', formatter:'.formatter.formatFloat'}" />
+                                                </HBox>
+                                            </uitable:footer>
+                                        </uitable:Table>
+                                        <!-- 準備金明細 -->
+                                        <uitable:Table
+                                            id="idCurrencyTable3"
+                                            rows="{local>/CurrencyTable3/Item}"
+                                            selectionMode="None"
+                                            visibleRowCount="6">
+                                            <uitable:extension>
+                                                <OverflowToolbar style="Clear">
+                                                    <Title text="{i18n_based>Title5c}"/>
+                                                </OverflowToolbar>
+                                            </uitable:extension>
+                                            <uitable:columns>
+                                                <uitable:Column >
+                                                    <Label text="{i18n_based>Number}" />
+                                                    <uitable:template>
+                                                        <Text text="{local>No}"/>
+                                                    </uitable:template>
+                                                </uitable:Column>
+                                                <uitable:Column >
+                                                    <Label text="{i18n_based>FieldTitle}" />
+                                                    <uitable:template>
+                                                        <Text text="{local>Title}"/>
+                                                    </uitable:template>
+                                                </uitable:Column>
+                                                <uitable:Column >
+                                                    <Label text="{i18n_based>Amount}" />
+                                                    <uitable:template>
+                                                        <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTableColumnSum($event,'idCurrencyTable3')" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                    </uitable:template>
+                                                </uitable:Column>
+                                            </uitable:columns>
+                                            <uitable:footer>
+                                                <HBox justifyContent="End">
+                                                    <ObjectStatus title="{i18n_based>Total3}" text="{path:'local>/CurrencyTable3/Total', formatter:'.formatter.formatFloat'}" />
+                                                </HBox>
+                                            </uitable:footer>
+                                        </uitable:Table>
+                                    </HBox>
+                                    <!-- 送金予定明細 -->
+                                    <uitable:Table
+                                        rows="{local>/CurrencyTable4}"
+                                        selectionMode="None"
+                                        visibleRowCount="7"
+                                        width="50%">
+                                        <uitable:extension>
+                                            <OverflowToolbar style="Clear">
+                                                <Title text="{i18n_based>Title5d}"/>
+                                            </OverflowToolbar>
+                                        </uitable:extension>
+                                        <uitable:columns>
+                                            <uitable:Column width="60%">
+                                                <Label text="" />
+                                                <uitable:template>
+                                                    <Text text="{local>Title}"/>
+                                                </uitable:template>
+                                            </uitable:Column>
+                                            <uitable:Column width="40%">
+                                                <Label text="{i18n_based>Amount}"/>
+                                                <uitable:template>
+                                                    <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="{local>Enabled}" change="onCurrencyTable4ValueChange" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                </uitable:template>
+                                            </uitable:Column>
+                                        </uitable:columns>
+                                    </uitable:Table>
+									<!-- 備考2 -->
+									<Text width="{local>/labelWidth}" text="{i18n_based>Remark}" class="paddingTop"/>
+									<TextArea id="idBIKOU2" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
+                                </VBox>
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                    </uxap:subSections>
+                </uxap:ObjectPageSection>
+			</uxap:sections>
+		</uxap:ObjectPageLayout>
+	</content>
+	<footer>
+		<OverflowToolbar id="otbFooter">
+			<ToolbarSpacer/>
+			<!-- <Button id="idSave" type="Transparent" text="{i18n_based>PreSave}" press=".onBalanceSave('Save')" enabled="{local>/viewEditable}"/>
+            <Button id="idChange" type="Transparent" text="{i18n_based>ChangeButton}" press="onChangePress" enabled="{local>/btChange}"/> -->
+			<Button type="Accept" text="{i18n>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
+			<Button type="Reject" text="{i18n>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
+			<Button id="idConfirm" type="Ghost" text="{i18n>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>
+		</OverflowToolbar>
+	</footer>
+	</Page>
+</mvc:View>

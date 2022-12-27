@@ -11,7 +11,7 @@
     height="100%"
     busyIndicatorDelay="0"
 >
-    <Page id="detailPage" showHeader="true" showNavButton="true" navButtonPress="onStop" busy="{local>/detailPageBusy}" busyIndicatorDelay="0">
+    <Page id="detailPage" showHeader="true" showNavButton="false" navButtonPress="onStop" busy="{local>/detailPageBusy}" busyIndicatorDelay="0">
         <content>
             <uxap:ObjectPageLayout id="objectPageLayout" showAnchorBarPopover="false" selectedSection="section1" showTitleInHeaderContent="false" showFooter="true">
                 <uxap:headerTitle>
@@ -1376,9 +1376,9 @@
                     <ToolbarSpacer id="pageToolbarSpacer" />
                     <Button id="btnSave" text="{i18n_pstore>footer_f1}" enabled="{viewState>/editable}" press="onSave" visible="{local>/saveVisible}"/>
                     <Button id="btnChange" text="{i18n_pstore>footer_f2}" press="onChange" visible="{local>/editVisible}"/>
-                    <Button type="Accept" text="{i18n_abr>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
-                    <Button type="Reject" text="{i18n_abr>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
-                    <Button id="idConfirm" type="Ghost" text="{i18n_abr>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>
+                    <Button type="Accept" text="{i18n>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
+                    <Button type="Reject" text="{i18n>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
+                    <Button id="idConfirm" type="Ghost" text="{i18n>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>
                 </content>
             </OverflowToolbar>
         </footer>

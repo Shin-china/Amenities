@@ -86,40 +86,40 @@
 										labelSpanL="4" labelSpanM="4" emptySpanL="3" emptySpanM="3" breakpointM="100">
 										<core:Title text="{i18n_abr>Title4a}" />
 										<Label text="{i18n_abr>Field1}" />
-										<Input value="{path:'local>/dailyBalance/0/INSHOKU_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="INSHOKU_URIAGE" value="{path:'local>/dailyBalance/0/INSHOKU_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field2}" />
-										<Input value="{path:'local>/dailyBalance/0/BENTO_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="BENTO_URIAGE" value="{path:'local>/dailyBalance/0/BENTO_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field3}" />
-										<Input value="{path:'local>/dailyBalance/0/GAME_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="GAME_URIAGE" value="{path:'local>/dailyBalance/0/GAME_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field4}" />
-										<Input value="{path:'local>/dailyBalance/0/LANE_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="LANE_URIAGE" value="{path:'local>/dailyBalance/0/LANE_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field5}" />
-										<Input value="{path:'local>/dailyBalance/0/SHOES_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="SHOES_URIAGE" value="{path:'local>/dailyBalance/0/SHOES_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field6}" />
-										<Input value="{path:'local>/dailyBalance/0/PRO_SHOP_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="PRO_SHOP_URIAGE" value="{path:'local>/dailyBalance/0/PRO_SHOP_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field7}" />
-										<Input value="{path:'local>/dailyBalance/0/BILLIARD_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="BILLIARD_URIAGE" value="{path:'local>/dailyBalance/0/BILLIARD_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field8}" />
-										<Input value="{path:'local>/dailyBalance/0/JITEN_TVG_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="JITEN_TVG_URIAGE" value="{path:'local>/dailyBalance/0/JITEN_TVG_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field9}" />
-										<Input value="{path:'local>/dailyBalance/0/KYOWA_TVG_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="KYOWA_TVG_URIAGE" value="{path:'local>/dailyBalance/0/KYOWA_TVG_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field10}" />
-										<Input value="{path:'local>/dailyBalance/0/LOCKER_DAI_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="LOCKER_DAI_URIAGE" value="{path:'local>/dailyBalance/0/LOCKER_DAI_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field11}" />
-										<Input value="{path:'local>/dailyBalance/0/KARAOKE_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="KARAOKE_URIAGE" value="{path:'local>/dailyBalance/0/KARAOKE_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field12}" />
-										<Input value="{path:'local>/dailyBalance/0/FK_URIAGE8', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="FK_URIAGE8" value="{path:'local>/dailyBalance/0/FK_URIAGE8', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field13}" />
-										<Input value="{path:'local>/dailyBalance/0/FK_URIAGE10', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="FK_URIAGE10" value="{path:'local>/dailyBalance/0/FK_URIAGE10', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field14}" />
-										<Input value="{path:'local>/dailyBalance/0/NYUJORYO_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="NYUJORYO_URIAGE" value="{path:'local>/dailyBalance/0/NYUJORYO_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field15}" />
-										<Input value="{path:'local>/dailyBalance/0/HANSOKUHIN_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="HANSOKUHIN_URIAGE" value="{path:'local>/dailyBalance/0/HANSOKUHIN_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<core:Title text="" />
 										<Label text="{i18n_abr>Field16}" />
-										<Input value="{path:'local>/dailyBalance/0/KOKA_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="KOKA_URIAGE" value="{path:'local>/dailyBalance/0/KOKA_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field17}" />
-										<Input value="{path:'local>/dailyBalance/0/HAIBUN_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="HAIBUN_URIAGE" value="{path:'local>/dailyBalance/0/HAIBUN_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field18}" />
 										<Input value="{path:'local>/dailyBalance/0/JIHANKI_URIAGE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onDailyBalanceCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<Label text="{i18n_abr>Field19}" />
@@ -344,77 +344,77 @@
 										selectionMode="None"
 										visibleRowCount="4">
 										<uitable:columns>
-											<uitable:Column width="4rem">
-												<Label text="{i18n_abr>Number}" />
+											<uitable:Column width="4%">
+												<Label text="{i18n_abr>Number}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n_abr>FieldTitle}" />
+											<uitable:Column width="15%">
+												<Label text="{i18n_abr>FieldTitle}" wrapping="true"/>
 												<uitable:template>
                                                     <Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>Amount}" />
+											<uitable:Column width="13%">
+												<Label text="{i18n_abr>Amount}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable9Calc($event,'/table9')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>ShopD}" />
+											<uitable:Column width="6%">
+												<Label text="{i18n_abr>ShopD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopD}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>AccountD}" />
+											<uitable:Column width="10%">
+												<Label text="{i18n_abr>AccountD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'AccountDDesc')" editable="{local>/viewEditable}"
 														change=".onAccountText($event,'AccountDDesc')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>AccountDDesc}" />
+											<uitable:Column width="12%">
+												<Label text="{i18n_abr>AccountDDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountDDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}" wrapping="false" tooltip="{local>AccountDDesc}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>TaxD}" />
+											<uitable:Column width="7%">
+												<Label text="{i18n_abr>TaxD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"
 														change=".onCheckInValueHelp($event, 'TaxVH')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>ShopC}" />
+											<uitable:Column width="6%">
+												<Label text="{i18n_abr>ShopC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>AccountC}" />
+											<uitable:Column width="8%">
+												<Label text="{i18n_abr>AccountC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>AccountCDesc}" />
+											<uitable:Column width="12%">
+												<Label text="{i18n_abr>AccountCDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountCDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}" wrapping="false" tooltip="{local>AccountCDesc}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>TaxC}" />
+											<uitable:Column width="7%">
+												<Label text="{i18n_abr>TaxC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"
@@ -432,78 +432,78 @@
 									<uitable:Table
 										rows="{local>/table10}"
 										selectionMode="None"
-										visibleRowCount="4">
+										visibleRowCount="4%">
 										<uitable:columns>
 											<uitable:Column width="4rem">
-												<Label text="{i18n_abr>Number}" />
+												<Label text="{i18n_abr>Number}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
-												<Label text="{i18n_abr>FieldTitle}" />
+											<uitable:Column width="15%">
+												<Label text="{i18n_abr>FieldTitle}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable10Enabled'}" editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>Amount}" />
+											<uitable:Column width="13%">
+												<Label text="{i18n_abr>Amount}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable9Calc($event,'/table10')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>ShopD}" />
+											<uitable:Column width="6%">
+												<Label text="{i18n_abr>ShopD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopD}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"
 														change=".onCheckInValueHelp($event, 'ProfitVH')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>AccountD}" />
+											<uitable:Column width="10%">
+												<Label text="{i18n_abr>AccountD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>AccountD}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Account', 'AccountDDesc')" editable="{local>/viewEditable}"
 														 change=".onAccountText($event,'AccountDDesc')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>AccountDDesc}" />
+											<uitable:Column width="12%">
+												<Label text="{i18n_abr>AccountDDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountDDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}" wrapping="false" tooltip="{local>AccountDDesc}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>TaxD}" />
+											<uitable:Column width="7%">
+												<Label text="{i18n_abr>TaxD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>TaxD}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"
 														change=".onCheckInValueHelp($event, 'TaxVH')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>ShopC}" />
+											<uitable:Column width="6%">
+												<Label text="{i18n_abr>ShopC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>AccountC}" />
+											<uitable:Column width="8%">
+												<Label text="{i18n_abr>AccountC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>AccountCDesc}" />
+											<uitable:Column width="12%">
+												<Label text="{i18n_abr>AccountCDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountCDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}" wrapping="false" tooltip="{local>AccountCDesc}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
-												<Label text="{i18n_abr>TaxC}" />
+											<uitable:Column width="7%">
+												<Label text="{i18n_abr>TaxC}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>TaxC}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
 														showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Tax')" editable="{local>/viewEditable}"
@@ -532,15 +532,16 @@
 											<uitable:Column width="12rem">
 												<Label text="{i18n_abr>WorksTitle}" />
 												<uitable:template>
-                                                    <Input value="{local>WorksTitle}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}" editable="{local>/viewEditable}"/>
+                                                    <Input id="KUAS_SAKUHINMEI" value="{local>WorksTitle}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}" editable="{local>/viewEditable}"
+														enabled="{local>/KUAS_SAKUHINMEI}"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="9rem">
 												<Label text="{i18n_abr>Ticket}" />
 												<uitable:template>
                                                     <!-- <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/> -->
-													<Select id="idSelectTicket" width="6rem" class="sapUiSmallMarginEnd" forceSelection="false" selectedKey="{local>Ticket}"
-														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}" editable="{local>/viewEditable}">
+													<Select id="KUAS_KENSYU" width="6rem" class="sapUiSmallMarginEnd" forceSelection="false" selectedKey="{local>Ticket}"
+														change="onSelectTicket" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}" editable="{local>/viewEditable}" enabled="{local>/KUAS_KENSYU}">
 														<core:Item key="" text=""/>
 														<core:Item key="ムビ" text="ムビ"/>
 														<core:Item key="紙" text="紙"/>
@@ -552,22 +553,24 @@
 											<uitable:Column width="10rem">
 												<Label text="{i18n_abr>Quantity}" />
 												<uitable:template>
-													<Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onTable6Calc($event,'/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
+													<Input id="KUAS_KENSUU" value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onTable6Calc($event,'/table11')" 
+														enabled="{parts:[{path:'local>Id'},{path:'local>/KUAS_KENSUU'}], formatter:'.formatter.setTable11Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="12rem">
 												<Label text="{i18n_abr>Amount}" />
 												<uitable:template>
-													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable6Calc($event,'/table11')" enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"
+													<Input id="KUAS_AMT" value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onTable6Calc($event,'/table11')" 
+														enabled="{parts:[{path:'local>Id'},{path:'local>/KUAS_AMT'}], formatter:'.formatter.setTable11Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
 											<uitable:Column width="16rem">
 												<Label text="{i18n_abr>Supply}" />
 												<uitable:template>
-													<Input value="{local>Supply}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}"
-														editable="{local>/viewEditable}"/>
+													<Input id="KUAS_HAIKYUU" value="{local>Supply}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}"
+														editable="{local>/viewEditable}" enabled="{local>/KUAS_HAIKYUU}"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -627,38 +630,41 @@
 										<Text width="{local>/labelWidth}" text="{i18n_abr>Title4o}" class="paddingTop"/>
 										<Input value="{path:'local>/dailyBalance/0/HONZITUKURIKOSI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="{local>/viewEditable}" textAlign="Right"/>
 									</HBox>
+									<Text text="{i18n_abr>Title4o1}" class="paddingLeft"/>
 									<!-- Ⅴ送付金予定額 -->
 									<Text text="{i18n_abr>Title4p}"/>
 									<Text text="{i18n_abr>Title4p1}" class="paddingLeft"/>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n_abr>Title4p2}" class="paddingLeft paddingTop"/>
-										<Input value="{path:'local>/dailyBalance/0/ZNJT_HNSH_SFKN_RKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc2" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input value="{path:'local>/dailyBalance/0/ZNJT_HNSH_SFKN_RKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" change="resultCalc2" editable="false" textAlign="Right"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n_abr>Title4p3}" class="paddingLeft paddingTop"/>
-										<Input value="{path:'local>/dailyBalance/0/HNJTS_SOFUKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc2" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="HNJTS_SOFUKIN" value="{path:'local>/dailyBalance/0/HNJTS_SOFUKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc2" editable="{local>/viewEditable}" textAlign="Right"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n_abr>Title4p4}" class="paddingLeft paddingTop"/>
-										<Input value="{path:'local>/dailyBalance/0/RYOGAEKIN_MODOSHI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc2" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="RYOGAEKIN_MODOSHI" value="{path:'local>/dailyBalance/0/RYOGAEKIN_MODOSHI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc2" editable="{local>/viewEditable}" textAlign="Right"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n_abr>Title4p5}" class="paddingLeft paddingTop"/>
-										<Input value="{path:'local>/dailyBalance/0/GANKIN_ZOUGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc2" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="GANKIN_ZOUGAKU" value="{path:'local>/dailyBalance/0/GANKIN_ZOUGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc2" editable="{local>/viewEditable}" textAlign="Right"/>
 									</HBox>
 									<HBox>
 										<Label width="{local>/labelWidth}" text="{i18n_abr>Title4p6}" class="paddingLeft paddingTop"/>
-										<Input value="{path:'local>/dailyBalance/0/SOFUKIN_YOTEIGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" textAlign="Right"/>
+										<Input id="SOFUKIN_YOTEIGAKU" value="{path:'local>/dailyBalance/0/SOFUKIN_YOTEIGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" textAlign="Right"/>
 									</HBox>
 									<!-- Ⅵ元金金額 -->
 									<HBox>
 										<Text width="{local>/labelWidth}" text="{i18n_abr>Title4q}" class="paddingTop"/>
-										<Input value="{path:'local>/dailyBalance/0/GANKIN_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc1" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input id="GANKIN_AMT" value="{path:'local>/dailyBalance/0/GANKIN_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc1" editable="{local>/viewEditable}" textAlign="Right"/>
 									</HBox>
+									<Text width="{local>/labelWidth}" text="{i18n_abr>Title4q1}" class="paddingLeft"/>
 									<!-- Ⅶ アムエリア振替(Ⅳ-Ⅵ) -->
 									<HBox>
 										<Text width="{local>/labelWidth}" text="{i18n_abr>Title4r}" class="paddingTop"/>
-										<Input value="{path:'local>/dailyBalance/0/AMAREA_FURIKAE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" textAlign="Right"/>
+										<Input id="AMAREA_FURIKAE" value="{path:'local>/dailyBalance/0/AMAREA_FURIKAE', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
+											change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 									</HBox>
 								</VBox>
 							</uxap:blocks>
@@ -673,7 +679,8 @@
                                     <!-- 元金過不足内訳・金額 -->
                                     <HBox>
                                         <Text width="{local>/labelWidth}" text="{i18n_abr>Title4s}" class="paddingTop"/>
-                                        <Input value="{path:'local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" editable="{local>/viewEditable}" textAlign="Right"/>
+                                        <Input value="{path:'local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
+											change="setValueToZero" editable="{local>/viewEditable}" textAlign="Right"/>
                                     </HBox>
                                     <Text width="{local>/labelWidth}" text="{i18n_abr>Title4s1}" class="paddingTop"/>
                                     <!-- 元金過不足詳細・全角50文字以内 -->
@@ -849,7 +856,7 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n_abr>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{groupingEnabled:false, minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column >
@@ -885,7 +892,7 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n_abr>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{groupingEnabled:false, minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column>
@@ -987,9 +994,9 @@
 			<ToolbarSpacer/>
 			<Button id="idSave" type="Default" text="{i18n_abr>PreSave}" press=".onBalanceSave('Save')" visible="{local>/saveVisible}"/>
             <Button id="idChange" type="Default" text="{i18n_abr>PreSave}" press="onChangePress" visible="{local>/editVisible}"/>
-			<Button type="Accept" text="{i18n_abr>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
-			<Button type="Reject" text="{i18n_abr>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
-			<Button id="idConfirm" type="Ghost" text="{i18n_abr>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>
+			<Button type="Accept" text="{i18n>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
+			<Button type="Reject" text="{i18n>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
+			<Button id="idConfirm" type="Ghost" text="{i18n>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>
 		</OverflowToolbar>
 	</footer>
 	</Page>

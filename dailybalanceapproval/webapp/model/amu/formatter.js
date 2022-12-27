@@ -135,117 +135,6 @@ sap.ui.define([
 			return "None";
 		},
 		
-		setTable6Visible: function (value) {
-			if (value === "4") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable6Enabled: function (value) {
-			if (value === "4") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable7Visible: function (value) {
-			if (value === "5") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable7Enabled: function (value) {
-			if (value === "5") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable8Visible: function (value) {
-			if (value === "9") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable8Enabled: function (value) {
-			if (value === "9") {
-				return false;
-			}
-			return true;
-		},
-		setTable9Visible: function (value) {
-			if (value === "4") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable9Enabled: function (value) {
-			if (value === "4") {
-				return false;
-			}
-			return true;
-		},
-		setTable10Visible: function (value) {
-			if (value === "4") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable10Enabled: function (value) {
-			if (value === "4") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable11Visible: function (value) {
-			if (value === "16") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable11Enabled: function (value) {
-			if (value === "16") {
-				return false;
-			}
-			return true;
-		},
-
-        setTable12Enabled: function (value) {
-			if (value === "1") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable13Visible: function (value) {
-			if (value === "6" || value === "7") {
-				return false;
-			} 
-			return true;
-		},
-
-		setTable13Enabled: function (value) {
-			if (value === "6" || value === "7") {
-				return false;
-			}
-			return true;
-		},
-
-		setTable13Enabled1: function (value) {
-			if (value === "5") {
-				return false;
-			}
-			return true;
-		},
-
-
 		toBoolean: function (value) {
 			if (value) {
 				return value === "" ? false : true;
@@ -369,6 +258,7 @@ sap.ui.define([
 			r2 = Number(s2.replace(".",""));
 			return r2 === 0 ? "0" : ((r1 / r2).mul(Math.pow(10, t2 - t1))).toString();
 		},
+
 		// 审批用
 		approvalStatus: function (value) {
 			switch (value) {
