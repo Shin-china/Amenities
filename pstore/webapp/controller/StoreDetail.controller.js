@@ -375,7 +375,7 @@ sap.ui.define([
                 oModel.refresh();
 
                 var index = oContext[sBindingProperty].length - 1;
-                oContext.byId(sTabName).setFirstVisibleRow(index);
+                // oContext.byId(sTabName).setFirstVisibleRow(index);
             },
 
             onCashCheckBox: function (oEvent) {
@@ -1029,10 +1029,11 @@ sap.ui.define([
                 this.byId("dialogSelect").destroy();
             },
 
-            _getAccountDesc: function (oEvent, sBindingPath) {
+            _getAccountDesc: function (oEvent, sBindingPath,sModelName) {
                 var oInput = oEvent.getSource();
                 var account = oInput.getValue();
-                var oBindingContext = oInput.getParent().getRowBindingContext();
+                // var oBindingContext = oInput.getParent().getRowBindingContext();
+                var oBindingContext = oInput.getParent().getBindingContext(sModelName);
                 var sPath = oBindingContext.sPath + sBindingPath;
                 var oModel = oBindingContext.getModel();
 
@@ -1056,11 +1057,11 @@ sap.ui.define([
             },
 
             onGetNyknKamokuNm: function (oEvent) {
-                this._getAccountDesc(oEvent, "/NyknKamokuNm");
+                this._getAccountDesc(oEvent, "/NyknKamokuNm", "InCash");
             },
 
             onGetShknKamokuNm: function (oEvent) {
-                this._getAccountDesc(oEvent, "/ShknKamokuNm");
+                this._getAccountDesc(oEvent, "/ShknKamokuNm", "OutCash");
             },
 
             onDestroy : function(oEvent){
