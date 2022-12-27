@@ -89,7 +89,7 @@
 									<Column id="pm2" width="6rem" sortProperty="pm">
 										<m:Label id="_IDGenLabel29" text="テキスト" />
 										<template>
-											<m:Text id="_IDGenText22" text="{local>MATNR}" wrapping="false" /> 
+											<m:Text id="_IDGenText22" text="{local>EMATN}" wrapping="false" /> 
 										</template>
 									</Column>
 									<Column id="_IDGenColumn9" width="6rem">
@@ -119,7 +119,7 @@
 									<Column id="_IDGenColumn13" width="6rem">
 										<m:Label id="_IDGenLabel34" text="納入日付" />
 										<template>
-											<m:Text id="_IDGenText27" text="{srje}" wrapping="false" /> 
+											<m:Text id="_IDGenText27" text="{local>EINDT}" wrapping="false" /> 
 										</template>
 									</Column>
 									<Column id="_IDGenColumn14" width="6rem">
