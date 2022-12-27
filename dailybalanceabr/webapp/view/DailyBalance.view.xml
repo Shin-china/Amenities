@@ -693,32 +693,32 @@
 										</OverflowToolbar>
 									</headerToolbar>
 									<columns>
-										<Column width="6rem">
-											<Text text="{i18n>KEIJO_BUSHOT2}" />
+										<Column width="8%">
+											<Text text="{i18n>KEIJO_BUSHOT2}"/>
 										</Column>
-										<Column width="10rem">
-											<Text text="{i18n>DRKAMOKU_CDT2}" />
+										<Column visible="false">
+											<Text text="{i18n>DRKAMOKU_CDT2}"/>
 										</Column>
-										<Column width="12rem">
-											<Text text="{i18n>NYKN_SAKIT2}" />
+										<Column width="15%">
+											<Text text="{i18n>NYKN_SAKIT2}"/>
 										</Column>
-										<Column width="12rem">
-											<Text text="{i18n>NYKN_TEKIYOT2}" />
+										<Column >
+											<Text text="{i18n>NYKN_TEKIYOT2}"/>
 										</Column>
-										<Column>
-											<Text text="{i18n>NYKN_KINGAKUT2}" />
+										<Column width="11%">
+											<Text text="{i18n>NYKN_KINGAKUT2}"/>
 										</Column>
-										<Column>
-											<Text text="{i18n>NYKN_KAMOKU_CDT2}"/>
+										<Column width="10%">
+											<Text text="{i18n>NYKN_KAMOKU_CDT2}" />
 										</Column>
-										<Column>
-											<Text text="{i18n>NYKN_KAMOKU_NMT2}" />
+										<Column width="15%">
+											<Text text="{i18n>NYKN_KAMOKU_NMT2}"/>
 										</Column>
-										<Column>
-											<Text text="{i18n>ZEI_CDT2}" />
+										<Column width="7%">
+											<Text text="{i18n>ZEI_CDT2}"/>
 										</Column>
-                                        <Column>
-											<Text text="{i18n>JIDOUTENKIFUYO}" />
+                                        <Column width="4%">
+											<Text text="{i18n>JIDOUTENKIFUYO}"/>
 										</Column>
 									</columns>
 									<items>
@@ -726,7 +726,7 @@
 											<cells>
                                                 <Input value="{local>KEIJO_BUSHO}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"
 													change=".onCheckInValueHelp($event, 'ProfitVH')"/>
-                                                <Input value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}"
+                                                <Input visible="false" value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}"
 													change=".onCheckInValueHelp($event, 'FI0006')"/>
                                                 <Input value="{local>NYKN_SAKI}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_TEKIYO}" editable="{local>/viewEditable}"/>
@@ -761,28 +761,28 @@
 										</OverflowToolbar>
 									</headerToolbar>
 									<columns>
-										<Column width="6rem">
+										<Column width="8%">
 											<Text text="{i18n>KEIJO_BUSHOT2}" />
 										</Column>
-										<Column width="10rem">
+										<Column width="15%">
 											<Text text="{i18n>SHKN_SAKIT2}" />
 										</Column>
-										<Column width="10rem">
+										<Column >
 											<Text text="{i18n>SHKN_TEKIYOT2}" />
 										</Column>
-										<Column>
+										<Column width="11%">
 											<Text text="{i18n>SHKN_KINGAKUT2}" />
 										</Column>
-										<Column>
+										<Column width="10%">
 											<Text text="{i18n>SHKN_KAMOKU_CDT2}" />
 										</Column>
-										<Column>
+										<Column width="15%">
 											<Text text="{i18n>SHKN_KAMOKU_NMT2}" />
 										</Column>
-										<Column>
+										<Column width="7%">
 											<Text text="{i18n>ZEI_CDT2}" />
 										</Column>
-                                        <Column>
+                                        <Column width="4%">
 											<Text text="{i18n>JIDOUTENKIFUYO}" />
 										</Column>
 									</columns>

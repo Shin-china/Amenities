@@ -715,31 +715,31 @@
 										</OverflowToolbar>
 									</headerToolbar>
 									<columns>
-										<Column width="6rem">
+										<Column width="8%">
 											<Text text="{i18n_abr>KEIJO_BUSHOT2}" />
 										</Column>
-										<Column width="10rem">
+										<Column visible="false">
 											<Text text="{i18n_abr>DRKAMOKU_CDT2}" />
 										</Column>
-										<Column width="12rem">
+										<Column width="15%">
 											<Text text="{i18n_abr>NYKN_SAKIT2}" />
 										</Column>
-										<Column width="12rem">
+										<Column>
 											<Text text="{i18n_abr>NYKN_TEKIYOT2}" />
 										</Column>
-										<Column>
+										<Column width="11%">
 											<Text text="{i18n_abr>NYKN_KINGAKUT2}" />
 										</Column>
-										<Column>
+										<Column width="10%">
 											<Text text="{i18n_abr>NYKN_KAMOKU_CDT2}"/>
 										</Column>
-										<Column>
+										<Column width="15%">
 											<Text text="{i18n_abr>NYKN_KAMOKU_NMT2}" />
 										</Column>
-										<Column>
+										<Column width="7%">
 											<Text text="{i18n_abr>ZEI_CDT2}" />
 										</Column>
-                                        <Column>
+                                        <Column width="4%">
 											<Text text="{i18n_abr>JIDOUTENKIFUYO}" />
 										</Column>
 									</columns>
@@ -748,7 +748,7 @@
 											<cells>
                                                 <Input value="{local>KEIJO_BUSHO}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"
 													change=".onCheckInValueHelp($event, 'ProfitVH')"/>
-                                                <Input value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}"
+                                                <Input visible="false" value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}"
 													change=".onCheckInValueHelp($event, 'FI0006')"/>
                                                 <Input value="{local>NYKN_SAKI}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_TEKIYO}" editable="{local>/viewEditable}"/>
@@ -783,28 +783,28 @@
 										</OverflowToolbar>
 									</headerToolbar>
 									<columns>
-										<Column width="6rem">
+										<Column width="8%">
 											<Text text="{i18n_abr>KEIJO_BUSHOT2}" />
 										</Column>
-										<Column width="10rem">
+										<Column width="15%">
 											<Text text="{i18n_abr>SHKN_SAKIT2}" />
 										</Column>
-										<Column width="10rem">
+										<Column>
 											<Text text="{i18n_abr>SHKN_TEKIYOT2}" />
 										</Column>
-										<Column>
+										<Column width="11%">
 											<Text text="{i18n_abr>SHKN_KINGAKUT2}" />
 										</Column>
-										<Column>
+										<Column width="10%">
 											<Text text="{i18n_abr>SHKN_KAMOKU_CDT2}" />
 										</Column>
-										<Column>
+										<Column width="15%">
 											<Text text="{i18n_abr>SHKN_KAMOKU_NMT2}" />
 										</Column>
-										<Column>
+										<Column width="7%">
 											<Text text="{i18n_abr>ZEI_CDT2}" />
 										</Column>
-                                        <Column>
+                                        <Column width="4%">
 											<Text text="{i18n_abr>JIDOUTENKIFUYO}" />
 										</Column>
 									</columns>
@@ -992,7 +992,7 @@
 				type="Negative"
 				press="onMessagePopoverPress" />
 			<ToolbarSpacer/>
-			<Button id="idSave" type="Default" text="{i18n_abr>PreSave}" press=".onBalanceSave('Save')" visible="{local>/saveVisible}"/>
+			<Button id="idSave" type="Default" text="{i18n_abr>PreSave}" press=".onBalanceSave('Approval')" visible="{local>/saveVisible}"/>
             <Button id="idChange" type="Default" text="{i18n_abr>PreSave}" press="onChangePress" visible="{local>/editVisible}"/>
 			<Button type="Accept" text="{i18n>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
 			<Button type="Reject" text="{i18n>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
