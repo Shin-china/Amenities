@@ -356,7 +356,7 @@ sap.ui.define([
             }
         },
 
-        removeLeadingMessage: function () {postBalanceApply
+        removeLeadingMessage: function () {
             var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
             if (aMessages.length > 1) {
                 if (
