@@ -262,7 +262,9 @@ sap.ui.define([
                     text: this._ResourceBundle.getText("Yes"),
                     //登录按钮
                     press: function () {
-                        this.onBalanceApply();
+                        this.simulationPosting().then(function (res) {
+                            this.onBalanceApply();
+                        }.bind(this));
                         oDialog.close();
                     }.bind(this)
                 });
@@ -279,6 +281,42 @@ sap.ui.define([
                 }
                 oDialog.open();
             }.bind(this));
+        },
+        // 审批用
+        simulationPosting: function () {
+            if (this.checkRequired()) {
+                MessageToast.show(this._ResourceBundle.getText("inputRequired"));
+                return;
+            }
+            var sAction = "Posting";
+            var postDoc = this.prepareBalanceSaveBody();
+            postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
+            delete postDoc.__metadata;
+
+            //simulation posting
+            var postData = postDoc;
+            this.convertToString(postData);
+            var promise = new Promise(function (resolve, reject) {
+                var i = 1;
+                var mParameters = {
+                    groupId: "DailyBalanceSave" + Math.floor(i / 100),
+                    changeSetId: i,
+                    success: function (oData) {
+                        this.byId("idDailyBalanceCreate").setBusy(false);
+                        resolve();
+                    }.bind(this),
+                    error: function (oError) {
+                        this.byId("idDailyBalanceCreate").setBusy(false);
+                        this.removeLeadingMessage();
+                    }.bind(this),
+                };
+                this.getOwnerComponent().getModel().setHeaders({"button":sAction, "action":"approval"});
+                //复杂结构
+                this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
+                this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
+                this.byId("idDailyBalanceCreate").setBusy(true);
+            }.bind(this));
+            return promise;
         },
         //申请
         onBalanceApply: function () {
