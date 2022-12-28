@@ -390,11 +390,11 @@
                                             <l:GridData id="gd43" span="XL2 L2 M12 S12" />
                                         </layoutData>
                                     </Label>
-
+                                    
                                     <Input
-                                        id="txtHanbaiAmt"
-                                        value="{parts:[{path:'HanbaiAmt'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-                                        ormatOptions: {showMeasure: false}}"
+                                        id="txtHanbaiAmt" 
+                                        value="{parts:[{path:'HanbaiAmt'},{path: 'Waers'}],type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
                                         editable="{viewState>/editable}"
@@ -420,7 +420,8 @@
                                             <l:GridData id="gd46" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
                                     </smartfield:SmartField>
-
+                                    
+                                    <!-- 精算額（カード会社） -->
                                     <Label id="lblSekisanAmt" labelFor="txtSekisanAmt" text="{i18n>sec4_f3}">
                                         <layoutData>
                                             <l:GridData id="gd47" span="XL2 L2 M12 S12" linebreakL="true" linebreakM="true" />
