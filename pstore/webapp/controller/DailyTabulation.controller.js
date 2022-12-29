@@ -448,7 +448,53 @@ sap.ui.define([
                 var oContext = oTable.getContextByIndex(aIndex[i]);
                 var oData = oContext.getObject();
                 var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + oData.KaishaCd + "',TenpoCd='" + oData.TenpoCd + "',KihyoNo='" + oData.KihyoNo + "')/$value";
-                window.open(sUrl, "_blank");
+                // window.open(sUrl, "_blank");
+                var sShop = oData.TenpoCd;
+                    if (sShop.length == 3) {
+                        sShop = "0" + sShop;
+                    }
+                    var sFielName = "Amenities_P店舗_" + sShop + "_" + this.formatter.date_8(oData.EigyoBi) + oData.NikkeihyoStatus;
+                    this.download(sUrl, sFielName);
+            }
+        },
+        download: function (url, sFielName) {
+            this.getBlob(url).then(blob => {
+              this.saveAs(blob, sFielName);
+            });
+        },
+        getBlob: function (url) {
+            return new Promise(resolve => {
+              const xhr = new XMLHttpRequest();
+        
+              xhr.open('GET', url, true);
+              xhr.responseType = 'blob';
+              xhr.onload = () => {
+                if (xhr.status === 200) {
+                  resolve(xhr.response);
+                }
+              };
+        
+              xhr.send();
+            });
+        },
+        saveAs: function (blob, filename) {
+            if (window.navigator.msSaveOrOpenBlob) {
+              navigator.msSaveBlob(blob, filename);
+            } else {
+              const link = document.createElement('a');
+              const body = document.querySelector('body');
+        
+              link.href = window.URL.createObjectURL(blob);
+              link.download = filename;
+        
+              // fix Firefox
+              link.style.display = 'none';
+              body.appendChild(link);
+        
+              link.click();
+              body.removeChild(link);
+        
+              window.URL.revokeObjectURL(link.href);
             }
         },
 
