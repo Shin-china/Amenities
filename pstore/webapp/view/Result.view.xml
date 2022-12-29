@@ -18,7 +18,14 @@
             <f:DynamicPageHeader id="pageHeader">
                 <f:content>
                     <smartfilterbar:SmartFilterBar id="docFilter" smartVariant="__SVM02" persistencyKey="docFilterPersistent" entitySet="AccountDocSet" useToolbar="false">
-
+                        <smartfilterbar:controlConfiguration>
+                            <smartfilterbar:ControlConfiguration key="KihyoNo" label="{i18n>KihyoNo}" visibleInAdvancedArea="true" index="0"/>
+                            <smartfilterbar:ControlConfiguration key="KaishaCd" label="{i18n>KaishaCd}" visibleInAdvancedArea="true" index="1"/>
+                            <smartfilterbar:ControlConfiguration key="EigyoBi" label="{i18n>EigyoBi}" visibleInAdvancedArea="true" index="2" />
+                            <smartfilterbar:ControlConfiguration key="TenpoCd" label="{i18n>TenpoCd}" visibleInAdvancedArea="true" index="3" />
+                            <smartfilterbar:ControlConfiguration key="Belnr" label="{i18n>Belnr}" visibleInAdvancedArea="true" index="4" />
+                            <smartfilterbar:ControlConfiguration key="Gjahr" label="{i18n>Gjahr}" visibleInAdvancedArea="true" index="5" />
+                        </smartfilterbar:controlConfiguration>
                     </smartfilterbar:SmartFilterBar>
                 </f:content>
             </f:DynamicPageHeader>

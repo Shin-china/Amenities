@@ -19,15 +19,15 @@
                 <f:content>
                     <smartfilterbar:SmartFilterBar id="storeFilter" smartVariant="__SVM01" persistencyKey="storeFilterPersistent" entitySet="StoreSet" useToolbar="false">
                         <smartfilterbar:controlConfiguration>
-                            <smartfilterbar:ControlConfiguration key="KaishaCd" visibleInAdvancedArea="true" mandatory="mandatory" index="0"/>
+                            <smartfilterbar:ControlConfiguration key="KaishaCd" label="{i18n>KaishaCd}" visibleInAdvancedArea="true" mandatory="mandatory" index="0"/>
 
-                            <smartfilterbar:ControlConfiguration key="EigyoBi" visibleInAdvancedArea="true" mandatory="mandatory" index="1">
+                            <smartfilterbar:ControlConfiguration key="EigyoBi" label="{i18n>EigyoBi}" visibleInAdvancedArea="true" mandatory="mandatory" index="1">
                                 <smartfilterbar:defaultFilterValues>
                                     <smartfilterbar:SelectOption id="sSel" sign="I" operator="BT" low="{filter>/StartDate}" high="{filter>/EndDate}" />
                                 </smartfilterbar:defaultFilterValues>
                             </smartfilterbar:ControlConfiguration>
-                            <smartfilterbar:ControlConfiguration key="NikkeihyoStatusCd" visibleInAdvancedArea="true" index="2"/>
-                            <smartfilterbar:ControlConfiguration key="TenpoCd" visibleInAdvancedArea="true" mandatory="mandatory" index="3" />
+                            <smartfilterbar:ControlConfiguration key="NikkeihyoStatusCd" label="{i18n>NikkeihyoStatusCd}" visibleInAdvancedArea="true" index="2"/>
+                            <smartfilterbar:ControlConfiguration key="TenpoCd" label="{i18n>TenpoCd}" visibleInAdvancedArea="true" mandatory="mandatory" index="3" />
                         </smartfilterbar:controlConfiguration>
                     </smartfilterbar:SmartFilterBar>
                 </f:content>
