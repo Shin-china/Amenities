@@ -350,7 +350,7 @@
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="15%">
+											<uitable:Column width="14%">
 												<Label text="{i18n_abr>FieldTitle}" wrapping="true"/>
 												<uitable:template>
                                                     <Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
@@ -364,7 +364,7 @@
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6%">
+											<uitable:Column width="9%">
 												<Label text="{i18n_abr>ShopD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopD}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
@@ -379,7 +379,7 @@
 														change=".onAccountText($event,'AccountDDesc')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12%">
+											<uitable:Column width="11%">
 												<Label text="{i18n_abr>AccountDDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountDDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}" wrapping="false" tooltip="{local>AccountDDesc}"/>
@@ -407,7 +407,7 @@
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12%">
+											<uitable:Column width="11%">
 												<Label text="{i18n_abr>AccountCDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountCDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}" wrapping="false" tooltip="{local>AccountCDesc}"/>
@@ -432,15 +432,15 @@
 									<uitable:Table
 										rows="{local>/table10}"
 										selectionMode="None"
-										visibleRowCount="4%">
+										visibleRowCount="4">
 										<uitable:columns>
-											<uitable:Column width="4rem">
+											<uitable:Column width="4%">
 												<Label text="{i18n_abr>Number}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="15%">
+											<uitable:Column>
 												<Label text="{i18n_abr>FieldTitle}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable10Enabled'}" editable="{local>/viewEditable}"/>
@@ -453,7 +453,7 @@
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6%">
+											<uitable:Column width="9%">
 												<Label text="{i18n_abr>ShopD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopD}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
@@ -469,7 +469,7 @@
 														 change=".onAccountText($event,'AccountDDesc')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12%">
+											<uitable:Column width="11%">
 												<Label text="{i18n_abr>AccountDDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountDDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}" wrapping="false" tooltip="{local>AccountDDesc}"/>
@@ -496,7 +496,7 @@
 													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12%">
+											<uitable:Column width="11%">
 												<Label text="{i18n_abr>AccountCDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountCDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}" wrapping="false" tooltip="{local>AccountCDesc}"/>
@@ -727,7 +727,7 @@
 										<Column>
 											<Text text="{i18n_abr>NYKN_TEKIYOT2}" />
 										</Column>
-										<Column width="11%">
+										<Column width="13%">
 											<Text text="{i18n_abr>NYKN_KINGAKUT2}" />
 										</Column>
 										<Column width="10%">
@@ -792,7 +792,7 @@
 										<Column>
 											<Text text="{i18n_abr>SHKN_TEKIYOT2}" />
 										</Column>
-										<Column width="11%">
+										<Column width="13%">
 											<Text text="{i18n_abr>SHKN_KINGAKUT2}" />
 										</Column>
 										<Column width="10%">

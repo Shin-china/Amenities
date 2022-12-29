@@ -7,7 +7,8 @@ sap.ui.define([
     "sap/m/Button",
     "sap/m/MessageBox",
     "sap/ui/core/routing/HashChanger",
-], function (BaseController, formatter, messages, MessageToast, NumberFormat, Button, MessageBox, HashChanger) {
+    "sap/ui/core/Fragment",
+], function (BaseController, formatter, messages, MessageToast, NumberFormat, Button, MessageBox, HashChanger, Fragment) {
 	"use strict";
 
 	return BaseController.extend("FICO.dailybalanceapproval.controller.amu.DailyBalance_amu", {
@@ -18,6 +19,13 @@ sap.ui.define([
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel("amu");
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n_amu").getResourceBundle();
+
+            var oMessageManager, oView;
+			oView = this.getView();
+            // set message model
+			oMessageManager = sap.ui.getCore().getMessageManager();
+            oView.setModel(oMessageManager.getMessageModel(), "messages");
+            oMessageManager.registerObject(oView, true);
 
             this.oRouter = this.getRouter();
             this.oRouter.getRoute("DailyBalance_amu").attachMatched(this._onRouteMatched, this);
@@ -48,7 +56,7 @@ sap.ui.define([
                 this.tableConverted_dis(sPath);
             }
 
-            // sap.ui.getCore().getMessageManager().removeAllMessages();
+            sap.ui.getCore().getMessageManager().removeAllMessages();
 
             //每次进入详细页面，默认会保存上一次的section，滚动到页头第一个section
             var oPageLayout = this.byId("ObjectPageLayout");
@@ -58,6 +66,8 @@ sap.ui.define([
 
             // 设置字段可编辑
             // this.controlFieldEnabled();
+
+            this._LocalData.setProperty("/detailPageBusy",false);
         },
 
         onAddLine: function (oEvent, sTableId) {
@@ -189,13 +199,10 @@ sap.ui.define([
                     this._LocalData.setProperty("/dailyBalance/0/KIHYO_NO", oData.KIHYO_NO);
                     this.byId("idDailyBalanceCreate").setTitle(oData.KIHYO_NO);
                     messages.showText(oData.Message);
-                    // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
                 }.bind(this),
                 error: function (oError) {
                     this.byId("idDailyBalanceCreate").setBusy(false);
-                    messages.showError(messages.parseErrors(oError));
-                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Type", "E");
-                    // this._LocalData.setProperty("/differenceConfirmDetail/" + i + "/Message", messages.parseErrors(oError));
+                    this.removeLeadingMessage();
                 }.bind(this),
             };
             this.getOwnerComponent().getModel("amu").setHeaders({"button":sAction});
@@ -560,6 +567,97 @@ sap.ui.define([
             }
         },
 
+        removeLeadingMessage: function () {
+            var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
+            if (aMessages.length > 1) {
+                if (
+                    // 后端触发异常的方式会添加一个code为SY/530的leading message
+                    aMessages[0].getCode() == "SY/530"
+                ) {
+                    sap.ui.getCore().getMessageManager().removeMessages(aMessages[0]);
+                }
+            }
+        },
+
+        onCheckInValueHelp: function(oEvent, valueHelpPath) {
+            var sValue = oEvent.getParameter("value");
+            var sCompany = this._LocalData.getProperty("/dailyBalance/0/KAISHA_CD");
+            var aValueHelp = this._LocalData.getProperty("/" + valueHelpPath);
+            if (valueHelpPath == "AccountVH" || valueHelpPath == "ProfitVH" || valueHelpPath == "CostVH") {
+                var aFiltered = aValueHelp.filter( e => e.Key1 == sValue && e.Key2 == sCompany);
+            } else {
+                var aFiltered = aValueHelp.filter( e => e.Key1 == sValue);
+            }
+            var sPath = oEvent.getSource().getBindingContext("local").sPath;
+            sPath = sPath + "/" + oEvent.getSource().getBindingInfo("value").binding.getPath();
+
+            var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
+            var targetMessage = aMessages.filter(e => e.target == sPath);
+            sap.ui.getCore().getMessageManager().removeMessages(targetMessage);
+            if (aFiltered.length == 0) {
+                if (sValue != "") {
+                    var oMessage = new Message({
+                        message: "無効なエントリ",
+                        type: "Error",
+                        target: sPath,
+                        processor: this.getView().getModel("local")
+                    });
+                    sap.ui.getCore().getMessageManager().addMessages(oMessage);
+                }
+            }
+        },
+        
+        onAccountText: function (oEvent, sTextProperty) {
+            var sAccount = oEvent.getParameter("value");
+            var sCompany = this._LocalData.getProperty("/dailyBalance/0/KAISHA_CD");
+            var aAccount = this._LocalData.getProperty("/AccountVH");
+            var aAccountFiltered = aAccount.filter( e => e.Key1 == sAccount && e.Key2 == sCompany);
+            var sPath = oEvent.getSource().getBindingContext("local").sPath;
+
+            var sTargetPath = sPath + "/" + oEvent.getSource().getBindingInfo("value").binding.getPath();
+            var aMessages = sap.ui.getCore().getMessageManager().getMessageModel().getData();
+            var targetMessage = aMessages.filter(e => e.target == sTargetPath);
+            sap.ui.getCore().getMessageManager().removeMessages(targetMessage);
+
+            if (aAccountFiltered.length > 0) {
+                this._LocalData.setProperty(sPath + "/" + sTextProperty, aAccountFiltered[0].Value1);
+            } else {
+                if (sAccount != "") {
+                    var oMessage = new Message({
+                        message: "無効なエントリ",
+                        type: "Error",
+                        target: sTargetPath,
+                        processor: this.getView().getModel("local")
+                    });
+                    sap.ui.getCore().getMessageManager().addMessages(oMessage);
+                } else {
+                    this._LocalData.setProperty(sPath + "/" + sTextProperty, "");
+                }
+            }
+        },
+
+        onMessagePopoverPress : function (oEvent) {
+			var oSourceControl = oEvent.getSource();
+			this._getMessagePopover().then(function(oMessagePopover){
+				oMessagePopover.openBy(oSourceControl);
+			});
+		},
+        
+        _getMessagePopover: function () {
+			var oView = this.getView();
+
+			// create popover lazily (singleton)
+			if (!this._pMessagePopover) {
+				this._pMessagePopover = Fragment.load({
+					id: oView.getId(),
+					name: "FICO.dailybalanceapproval.view.fragment.MessagePopover"
+				}).then(function (oMessagePopover) {
+					oView.addDependent(oMessagePopover);
+					return oMessagePopover;
+				});
+			}
+			return this._pMessagePopover;
+		},
 
         // 审批用
         onApprovalConfirm: function() {
@@ -577,12 +675,10 @@ sap.ui.define([
                     //按钮
                     press: function () {
                         if (this._LocalData.getProperty("/Node") == "0010") {
-                            // this.simulationPosting().then(function (res) {
-                            //     var postData = this.getApprovalData();
-                            //     this.postAction(postData);
-                            // }.bind(this));
-                            var postData = this.getApprovalData();
-                            this.postAction(postData);
+                            this.simulationPosting().then(function (res) {
+                                var postData = this.getApprovalData();
+                                this.postAction(postData);
+                            }.bind(this));
                             oDialog.close();
                         } else {
                             var postData = this.getApprovalData();
@@ -630,7 +726,7 @@ sap.ui.define([
                     }.bind(this),
                     error: function (oError) {
                         this.byId("idDailyBalanceCreate").setBusy(false);
-                        // this.removeLeadingMessage();
+                        this.removeLeadingMessage();
                     }.bind(this),
                 };
                 this.getOwnerComponent().getModel('amu').setHeaders({"button":sAction, "action":"approval"});

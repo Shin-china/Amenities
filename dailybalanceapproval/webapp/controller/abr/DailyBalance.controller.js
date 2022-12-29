@@ -89,7 +89,11 @@ sap.ui.define([
             if (aCashModel.length >= iMaxLength) {
                 return;
             }
-            aCashModel.push({});
+            if (sTableId == "idCashIncomeTable") {
+                aCashModel.push({"NYKN_KINGAKU":"0", "DRKAMOKU_CD":"111000"});
+            } else if (sTableId == "idCashPaymentTable") {
+                aCashModel.push({"SHKN_KINGAKU":"0"});
+            }
             this._LocalData.refresh();
         },
 
@@ -1319,12 +1323,23 @@ sap.ui.define([
         },
 
         controlFieldEnabled: function () {
+            var aTableColumn = [
+                "KUAS_SAKUHINMEI",
+                "KUAS_KENSYU",
+                "KUAS_KENSUU",
+                "KUAS_AMT",
+                "KUAS_HAIKYUU"
+            ];
             this.initFieldEnabled();
             var sShop = this._LocalData.getProperty("/dailyBalance/0/TENPO_CD");
             var aFieldId = this._LocalData.getProperty("/FieldId");
             aFieldId = aFieldId.filter(e => e.Shop == sShop);
             aFieldId.forEach(function (item) {
                 this.byId(item.FieldId).setEnabled(false);
+                // 表的列 因为Enabled属性有 formatter的处理，所以需要单独再处理一下
+                if (aTableColumn.includes(item.FieldId)) {
+                    this._LocalData.setProperty("/" + item.FieldId, false);
+                }
             }.bind(this));
         },
         
@@ -1336,7 +1351,6 @@ sap.ui.define([
                 "FK_URIAGE10",
                 "NYUJORYO_URIAGE",
                 "HANSOKUHIN_URIAGE",
-                "AMAREA_FURIKAE",
                 "KUAS_SAKUHINMEI",
                 "KUAS_KENSYU",
                 "KUAS_KENSUU",
@@ -1352,11 +1366,9 @@ sap.ui.define([
                 "LOCKER_DAI_URIAGE",
                 "KOKA_URIAGE",
                 "HAIBUN_URIAGE",
-                "ZNJT_HNSH_SFKN_RKI",
                 "HNJTS_SOFUKIN",
                 "RYOGAEKIN_MODOSHI",
                 "GANKIN_ZOUGAKU",
-                "SOFUKIN_YOTEIGAKU",
                 "GANKIN_AMT",
                 "BENTO_URIAGE"
             ];
@@ -1364,6 +1376,18 @@ sap.ui.define([
             aFieldId.forEach(function (fieldId) {
                 this.byId(fieldId).setEnabled(true);
             }.bind(this));
+
+            var aTableColumn = [
+                "KUAS_SAKUHINMEI",
+                "KUAS_KENSYU",
+                "KUAS_KENSUU",
+                "KUAS_AMT",
+                "KUAS_HAIKYUU"
+            ];
+
+            aTableColumn.forEach(function (fieldId) {
+                this._LocalData.setProperty("/" + fieldId, true);
+            }.bind(this))
         },
 
         // 审批用

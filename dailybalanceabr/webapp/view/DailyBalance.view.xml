@@ -328,7 +328,7 @@
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="15%">
+											<uitable:Column width="14%">
 												<Label text="{i18n>FieldTitle}" wrapping="true"/>
 												<uitable:template>
                                                     <Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
@@ -342,7 +342,7 @@
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6%">
+											<uitable:Column width="9%">
 												<Label text="{i18n>ShopD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopD}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}"
@@ -357,7 +357,7 @@
 														change=".onAccountText($event,'AccountDDesc')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12%">
+											<uitable:Column width="11%">
 												<Label text="{i18n>AccountDDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountDDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}" wrapping="false" tooltip="{local>AccountDDesc}"/>
@@ -385,7 +385,7 @@
 														editable="{local>/viewEditable}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12%">
+											<uitable:Column width="11%">
 												<Label text="{i18n>AccountCDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountCDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable9Visible'}" wrapping="false" tooltip="{local>AccountCDesc}"/>
@@ -410,15 +410,15 @@
 									<uitable:Table
 										rows="{local>/table10}"
 										selectionMode="None"
-										visibleRowCount="4%">
+										visibleRowCount="4">
 										<uitable:columns>
-											<uitable:Column width="4rem">
+											<uitable:Column width="4%">
 												<Label text="{i18n>Number}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="15%">
+											<uitable:Column width="14%">
 												<Label text="{i18n>FieldTitle}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable10Enabled'}" editable="{local>/viewEditable}"/>
@@ -430,8 +430,8 @@
 													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable9Calc($event,'/table10')" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
-											</uitable:Column>
-											<uitable:Column width="6%">
+											</uitable:Column>  
+											<uitable:Column width="9%">
 												<Label text="{i18n>ShopD}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>ShopD}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"
@@ -447,7 +447,7 @@
 														 change=".onAccountText($event,'AccountDDesc')"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12%">
+											<uitable:Column width="11%">
 												<Label text="{i18n>AccountDDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountDDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}" wrapping="false" tooltip="{local>AccountDDesc}"/>
@@ -474,7 +474,7 @@
 													<Input value="{local>AccountC}" enabled="false" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12%">
+											<uitable:Column width="11%">
 												<Label text="{i18n>AccountCDesc}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>AccountCDesc}" visible="{path:'local>Id', formatter:'.formatter.setTable10Visible'}" wrapping="false" tooltip="{local>AccountCDesc}"/>
@@ -696,16 +696,16 @@
 										<Column width="8%">
 											<Text text="{i18n>KEIJO_BUSHOT2}"/>
 										</Column>
-										<Column visible="false">
+										<!-- <Column visible="false">
 											<Text text="{i18n>DRKAMOKU_CDT2}"/>
-										</Column>
+										</Column> -->
 										<Column width="15%">
 											<Text text="{i18n>NYKN_SAKIT2}"/>
 										</Column>
 										<Column >
 											<Text text="{i18n>NYKN_TEKIYOT2}"/>
 										</Column>
-										<Column width="11%">
+										<Column width="13%">
 											<Text text="{i18n>NYKN_KINGAKUT2}"/>
 										</Column>
 										<Column width="10%">
@@ -726,8 +726,8 @@
 											<cells>
                                                 <Input value="{local>KEIJO_BUSHO}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"
 													change=".onCheckInValueHelp($event, 'ProfitVH')"/>
-                                                <Input visible="false" value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}"
-													change=".onCheckInValueHelp($event, 'FI0006')"/>
+                                                <!-- <Input visible="false" value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}"
+													change=".onCheckInValueHelp($event, 'FI0006')"/> -->
                                                 <Input value="{local>NYKN_SAKI}" editable="{local>/viewEditable}"/>
                                                 <Input value="{local>NYKN_TEKIYO}" editable="{local>/viewEditable}"/>
                                                 <Input value="{path:'local>NYKN_KINGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="collectionIncome" editable="{local>/viewEditable}" textAlign="Right"/>
@@ -770,7 +770,7 @@
 										<Column >
 											<Text text="{i18n>SHKN_TEKIYOT2}" />
 										</Column>
-										<Column width="11%">
+										<Column width="13%">
 											<Text text="{i18n>SHKN_KINGAKUT2}" />
 										</Column>
 										<Column width="10%">
@@ -834,7 +834,7 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{groupingEnabled:false, minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                        <Input maxLength="5" value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{groupingEnabled:false, minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column >
@@ -870,7 +870,7 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>QuantityT5}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{groupingEnabled:false, minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                        <Input maxLength="5" value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{groupingEnabled:false, minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onMulti($event, ${local>Monetary})" editable="{local>/viewEditable}" textAlign="Right"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                                 <uitable:Column>

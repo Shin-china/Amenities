@@ -125,6 +125,7 @@ sap.ui.define([
 
                             var oSumModel = new JSONModel(that._sum, "sum");
                             that.getView().setModel(oSumModel, "sum");
+                            that._LocalData.setProperty("/detailPageBusy",false);
                         },
                         change: function (oEvent) {
                             // Get the context binding object

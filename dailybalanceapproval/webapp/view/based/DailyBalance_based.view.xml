@@ -6,7 +6,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:l="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form">
-	<Page id="idDailyBalanceCreate" showNavButton="false" navButtonPress="onNavBackAndReresh" title="{i18n_based>DailyBalanceCreatePage}">
+	<Page id="idDailyBalanceCreate" showNavButton="false" navButtonPress="onNavBackAndReresh" title="{i18n_based>DailyBalanceCreatePage}" busy="{local>/detailPageBusy}" busyIndicatorDelay="0">
 		<content>
 		<uxap:ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
 			<uxap:headerTitle>
@@ -423,8 +423,13 @@
 	<footer>
 		<OverflowToolbar id="otbFooter">
 			<ToolbarSpacer/>
-			<!-- <Button id="idSave" type="Transparent" text="{i18n_based>PreSave}" press=".onBalanceSave('Save')" enabled="{local>/viewEditable}"/>
-            <Button id="idChange" type="Transparent" text="{i18n_based>ChangeButton}" press="onChangePress" enabled="{local>/btChange}"/> -->
+			<Button
+				id = "idMessagePopover"
+				icon="sap-icon://error"
+				text="{= ${messages>/}.length }"
+				visible="{= ${messages>/}.length > 0 }"
+				type="Negative"
+				press="onMessagePopoverPress" />
 			<Button type="Accept" text="{i18n>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
 			<Button type="Reject" text="{i18n>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
 			<Button id="idConfirm" type="Ghost" text="{i18n>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>

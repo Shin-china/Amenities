@@ -63,7 +63,10 @@ sap.ui.define([
                     aTax = [],
                     aProfit = [],
                     aCost = [],
-                    aFI0006 = [];
+                    aFI0006 = [],
+                    aFieldId = [],
+                    aFI0009 = [],
+                    aFI0010 = [];
                 oData.results.forEach(function(line){
                     switch (line.ZID) {
                         //天气
@@ -163,6 +166,39 @@ sap.ui.define([
                                 Value3: line.ZVALUE3
                             });
                             break;
+                        // 控制字段是否可编辑
+                        case "CF0001":
+                            aFieldId.push({
+                                Shop: line.ZVALUE1,
+                                FieldId: line.ZVALUE2,
+                            });
+                            break;
+                        // 本日送付金(＝5収支差額:プラザコリア店舗）
+                        case "FI0009":
+                            aFI0009.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1,
+                                Value2: line.ZVALUE2,
+                                Value3: line.ZVALUE3,
+                                Value4: line.ZVALUE4,
+                                Value5: line.ZVALUE5,
+                                Value6: line.ZVALUE6,
+                                Remark: line.REMARK
+                            });
+                            break;
+                        // Ⅶアムエリア振替(＝5収支差額:ビレッジ店舗)
+                        case "FI0010":
+                            aFI0010.push({
+                                Seq: line.ZSEQ,
+                                Value1: line.ZVALUE1,
+                                Value2: line.ZVALUE2,
+                                Value3: line.ZVALUE3,
+                                Value4: line.ZVALUE4,
+                                Value5: line.ZVALUE5,
+                                Value6: line.ZVALUE6,
+                                Remark: line.REMARK
+                            });
+                            break;
                     }
                 }.bind(this));
                 aFI0005.splice(0, 0, {Seq:"", Value1:""});
@@ -177,6 +213,9 @@ sap.ui.define([
                 this._LocalData.setProperty("/ProfitVH", aProfit);
                 this._LocalData.setProperty("/CostVH", aCost);
                 this._LocalData.setProperty("/FI0006", aFI0006);
+                this._LocalData.setProperty("/FieldId", aFieldId);
+                this._LocalData.setProperty("/FI0009", aFI0009);
+                this._LocalData.setProperty("/FI0010", aFI0010);
             },
     
         });

@@ -857,31 +857,31 @@
                                             </OverflowToolbar>
                                         </headerToolbar>
                                         <columns>
-                                            <Column >
+                                            <Column width="8%">
                                                 <Text text="{i18n>tab3_col1}" />
                                             </Column>
-                                            <Column >
+                                            <!-- <Column >
                                                 <Text text="{i18n>tab3_col2_1}" />
-                                            </Column>
-                                            <Column >
+                                            </Column> -->
+                                            <Column width="15%">
                                                 <Text text="{i18n>tab3_col2}" />
                                             </Column>
                                             <Column >
                                                 <Text text="{i18n>tab3_col3}" />
                                             </Column>
-                                            <Column>
+                                            <Column width="13%">
                                                 <Text text="{i18n>tab3_col4}" />
                                             </Column>
-                                            <Column>
+                                            <Column width="10%">
                                                 <Text text="{i18n>tab3_col5}" />
                                             </Column>
-                                            <Column>
+                                            <Column width="15%">
                                                 <Text text="{i18n>tab3_col6}" />
                                             </Column>
-                                            <Column>
+                                            <Column width="7%">
                                                 <Text text="{i18n>tab3_col7}" />
                                             </Column>
-                                            <Column>
+                                            <Column width="4%">
                                                 <Text text="{i18n>tab3_col8}" />
                                             </Column>
                                         </columns>
@@ -889,7 +889,7 @@
                                             <ColumnListItem>
                                                 <cells>
                                                     <Input id="txtTab3KeijoBusho" value="{InCash>KeijoBusho}" showValueHelp="true" valueHelpRequest="onShowKeijoBusho" editable="{viewState>/editable}"/>
-                                                    <Input id="txtTab3DrkamokuCd" value="{InCash>DrkamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowCreditAccount"/>
+                                                    <!-- <Input id="txtTab3DrkamokuCd" value="{InCash>DrkamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowCreditAccount"/> -->
                                                     <Input id="txtTab3NyknSaki" value="{InCash>NyknSaki}" editable="{viewState>/editable}"/>
                                                     <Input id="txtTab3NyknTekiyo" value="{InCash>NyknTekiyo}" editable="{viewState>/editable}"/>
                                                     <Input id="txtTab3NyknKingaku" value="{parts:[{path:'InCash>NyknKingaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
@@ -939,28 +939,28 @@
                                                 </OverflowToolbar>
                                             </headerToolbar>
                                             <columns>
-                                                <Column width="6rem">
+                                                <Column width="8%">
                                                     <Text text="{i18n>tab3_col1}" />
                                                 </Column>
-                                                <Column width="10rem">
+                                                <Column width="15%">
                                                     <Text text="{i18n>section4_col2}" />
                                                 </Column>
-                                                <Column width="10rem">
+                                                <Column >
                                                     <Text text="{i18n>tab3_col3}" />
                                                 </Column>
-                                                <Column>
+                                                <Column width="13%">
                                                     <Text text="{i18n>tab3_col4}" />
                                                 </Column>
-                                                <Column>
+                                                <Column width="10%">
                                                     <Text text="{i18n>tab3_col5}" />
                                                 </Column>
-                                                <Column>
+                                                <Column width="15%">
                                                     <Text text="{i18n>tab3_col6}" />
                                                 </Column>
-                                                <Column>
+                                                <Column width="7%">
                                                     <Text text="{i18n>tab3_col7}" />
                                                 </Column>
-                                                <Column>
+                                                <Column width="4%">
                                                     <Text text="{i18n>tab3_col8}" />
                                                 </Column>
                                             </columns>
@@ -1160,15 +1160,15 @@
                                                 <Label id="lblTab7Amount" labelFor="txtTab7Amount" text="{i18n>sub15_col3}" />
 
                                                 <table:template>
+                                                    <!-- constraints 参数会验证值，不符合时值不会更新到model，但是不知为何input控件不显示错误状态 -->
+                                                    <!-- change事件，自定义了错误消息，结合起来可以正常使用。另外如果只使用change不使用constraints，出现错误时值还是会更新model -->
                                                     <Input
                                                         id="txtTab7Amount"
                                                         visible="{Visible}"
                                                         editable="{viewState>/editable}"
-                                                        value="{parts:[{path:'Amount'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-                                                        formatOptions: {showMeasure: false}}"
-                                                        maxLength="14"
+                                                        value="{path:'Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
                                                         textAlign="Right"
-                                                        change="onSetDefaultValue" />
+                                                        change=".onInpuValidation($event,'15','2')"/>
                                                 </table:template>
                                             </table:Column>
                                         </table:columns>

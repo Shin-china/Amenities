@@ -210,8 +210,11 @@ sap.ui.define([
 			return true;
 		},
 
-		setTable11Enabled: function (value) {
-			if (value === "16") {
+		setTable11Enabled: function (value1,value2) {
+			if (!value2) {
+				return false;
+			}
+			if (value1 === "16") {
 				return false;
 			}
 			return true;

@@ -62,6 +62,8 @@ sap.ui.define([
             }
             sap.ui.getCore().getMessageManager().removeAllMessages();
 
+            this._LocalData.setProperty("/detailPageBusy",false);
+
         },
 
         onAddLine: function (oEvent, sTableId) {

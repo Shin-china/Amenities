@@ -70,7 +70,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/NodeName", oRecord.NODENAME);
                 this._LocalData.setProperty("/TypeName", oRecord.NIKKEIHYO_KBN_NM);
 
-                // this._LocalData.setProperty("/detailPageBusy",true);
+                this._LocalData.setProperty("/detailPageBusy",true);
 
                 sPath = sPath.substr(1);
                 switch (oRecord.NIKKEIHYO_KBN) {

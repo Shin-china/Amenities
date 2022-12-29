@@ -22,6 +22,7 @@ sap.ui.define([
         return Controller.extend("com.shin.pstore.pstore.controller.StoreDetail", {
             formatter: formatter,
             onInit: function () {
+                this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
                 if (!this._viewState) {
                     this._viewState = {};
                 }
@@ -437,7 +438,7 @@ sap.ui.define([
                 oNewObj.EigyoBi = this._EigyoBi;
                 oNewObj.KihyoNo = this._KihyoNo;
                 oNewObj.KeijoBusho = "";
-                oNewObj.DrkamokuCd = "";
+                oNewObj.DrkamokuCd = "111000";
                 oNewObj.NyknSaki = "";
                 oNewObj.NyknTekiyo = "";
                 oNewObj.Waers = 'JPY';
@@ -1080,7 +1081,37 @@ sap.ui.define([
                         oSource.setValue("0");
                     }
                 }
-            }
+            },
+
+            onInpuValidation: function (oEvent,precision,scale) {
+                this.onSetDefaultValue(oEvent);
+
+                var oFormat = NumberFormat.getFloatInstance();
+                var iIntager = precision - scale;
+                var oSource = oEvent.getSource();
+                var value = oEvent.getParameter("value");
+                if (value == "") {
+                    value = "0";
+                }
+                value = oFormat.parse(value);
+                // var value = oSource.getBindingContext().getObject().Amount;
+                oSource.setValueState("None");
+                if (isNaN(value)) {
+                    oSource.setValueState("Error");
+                    oSource.setValueStateText(this._ResourceBundle.getText("notNumber"));
+                } else {
+                    var aSplitNumber = value.toString().split(".");
+                    if (aSplitNumber[0].length > iIntager) {
+                        oSource.setValueState("Error");
+                        oSource.setValueStateText(this._ResourceBundle.getText("integerLengthError",[iIntager]));
+                    }
+                    if (aSplitNumber[1] && aSplitNumber[1].length > scale) {
+                        oSource.setValueState("Error");
+                        oSource.setValueStateText(this._ResourceBundle.getText("fractionLengthError",[scale]));
+                    }
+                }
+
+            },
 
         });
     });
