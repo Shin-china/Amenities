@@ -96,7 +96,7 @@ sap.ui.define([
                 return;
             }
             if (sTableId == "idCashIncomeTable") {
-                aCashModel.push({"NYKN_KINGAKU":"0"});
+                aCashModel.push({"NYKN_KINGAKU":"0", "DRKAMOKU_CD":"111000"});
             } else if (sTableId == "idCashPaymentTable") {
                 aCashModel.push({"SHKN_KINGAKU":"0"});
             }

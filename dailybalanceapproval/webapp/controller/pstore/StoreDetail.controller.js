@@ -26,10 +26,10 @@ sap.ui.define([
         ) {
         "use strict";
 
-        return Controller.extend("com.shin.pstore.pstore.controller.pstore.StoreDetail", {
+        return Controller.extend("FICO.dailybalanceapproval.controller.pstore.StoreDetail", {
             formatter: formatter,
             onInit: function () {
-                this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+                this._ResourceBundle = this.getOwnerComponent().getModel("i18n_pstore").getResourceBundle();
                 this._LocalData = this.getOwnerComponent().getModel("local");
                 if (!this._viewState) {
                     this._viewState = {};
@@ -175,7 +175,7 @@ sap.ui.define([
                 this.byId("btnMessagePopover").setVisible(false);
                 this._LocalData.setProperty("/detailPageBusy",false);
 
-                this.byId("btnChange").setText(this._ResourceBundle.getText("ChangeButton"));
+                this.byId("btnChange").setText(this._ResourceBundle.getText("footer_f2"));
                 this._viewState.editable = false;
                 this.getView().getModel("viewState").refresh();
             },
@@ -229,7 +229,6 @@ sap.ui.define([
                 d.Action = 'U';
 
                 o.d = d;
-                oModel.setHeaders({action:"approval"});
                 oModel.create('/StoreSet', o, {
                     success: function (oData, oResponse) {
                         var oMessage = {};
@@ -251,18 +250,25 @@ sap.ui.define([
             },
 
             onChange: function () {
-                if (this._viewState.editable) {
-                    this.byId("btnChange").setText(this._ResourceBundle.getText("ChangeButton"));
+                // this._viewState.editable = true;
+                // this.getView().getModel("viewState").refresh();
+
+                var isEdit = this._viewState.editable;
+                if (isEdit) {
                     this._viewState.editable = false;
+                    // this.setText( this._comm.getI18nMessage(this, "footer_f2_2"));
+                    this.byId("btnChange").setText( this._comm.getI18nMessage(this, "footer_f2"));
                 } else {
-                    this.byId("btnChange").setText(this._ResourceBundle.getText("DisplayButton"));
                     this._viewState.editable = true;
+                    this.byId("btnChange").setText( this._comm.getI18nMessage(this, "footer_f2_2"));
                 }
                 this.getView().getModel("viewState").refresh();
-                //this._comm.showMessagePopoverFor(this, "Message", "btnMessagePopover")
             },
 
             onRequest: function () {
+                this._comm.openDialog(this, "FICO.dailybalanceapproval.view.pstore.ApplyConfirm");
+            },
+            onApplyConfirm: function () {
                 this._busyDialog = new sap.m.BusyDialog({});
                 this._busyDialog.open();
                 var that = this;
@@ -288,7 +294,8 @@ sap.ui.define([
                 var o = {};
                 d.MessageSet = [];
                 d.Action = 'R';
-
+                // 获取申请是时的备注
+                d.COMMENTS = this.byId("idApplyConfirm").getValue();
                 o.d = d;
                 oModel.create('/StoreSet', o, {
                     success: function (oData, oResponse) {
@@ -305,8 +312,11 @@ sap.ui.define([
                         MessageToast.show('OData Error:' + oError.message);
                     }
                 });
+                this._comm.closeDialog(this, "applyConfirmDialog");
             },
-
+            onCloseApplyConfirmDialog: function () {
+                this._comm.closeDialog(this, "applyConfirmDialog");
+            },
             onGenerate: function () {
                 // var checkOk = this.checkEditData();
                 // if (!checkOk) {
@@ -378,34 +388,59 @@ sap.ui.define([
                 oModel.refresh();
 
                 var index = oContext[sBindingProperty].length - 1;
-                oContext.byId(sTabName).setFirstVisibleRow(index);
+                // oContext.byId(sTabName).setFirstVisibleRow(index);
             },
 
-            _deleteRow: function (oContext, sModelName, sTabName, sBindingProperty, oEvent = null) {
-                var indices = oContext.byId(sTabName).getSelectedIndices();
+            onCashCheckBox: function (oEvent) {
+                // var sPath = oEvent.getSource().getBindingContext("local").sPath;
+                // this._LocalData.setProperty(sPath + "/Jidoutenkifuyo", oEvent.getParameter("selected"));
+            },
+
+            _deleteRow: function (oContext, sModelName, sTabName, sBindingProperty, oEvent) {
+                // var sPath = "";
+                var oTable = this.byId(sTabName);
+                var aSelectedPaths = oTable.getSelectedContextPaths();
+                var aSelectedIndex = [];
+                aSelectedPaths.forEach( element => {
+                    aSelectedIndex.push(parseInt(element.substring(1)));
+                });
                 var oModel = oContext.getView().getModel(sModelName);
-                oContext[sBindingProperty] = oModel.getData();
-                for (var i of indices) {
-                    var oSelObj = oContext.byId(sTabName).getContextByIndex(i).getObject();
-                    var sMeisaiNo = oSelObj.MeisaiNo;
-
-                    if (sMeisaiNo) {
-                        for (var j = 0; j < oContext[sBindingProperty].length; j++) {
-                            if (oContext[sBindingProperty][j].MeisaiNo === sMeisaiNo) {
-                                oContext[sBindingProperty][j].Loekz = true;
-                            }
-                        }
-                    }
-                }
-
+                var aCahsModel = oModel.getData();
+                
+                aSelectedIndex.sort();
+                aSelectedIndex.reverse();
+                aSelectedIndex.forEach( element => {
+                    aCahsModel.splice(element,1);
+                });
+                oTable.removeSelections();
                 oModel.refresh();
-
-                var filter = [];
-                filter.push(new sap.ui.model.Filter("Loekz", sap.ui.model.FilterOperator.EQ, false));
-
-                oContext.byId(sTabName).getBinding("rows").filter(new sap.ui.model.Filter(filter, true));
-
             },
+
+            // _deleteRow: function (oContext, sModelName, sTabName, sBindingProperty, oEvent) {
+            //     var indices = oContext.byId(sTabName).getSelectedIndices();
+            //     var oModel = oContext.getView().getModel(sModelName);
+            //     oContext[sBindingProperty] = oModel.getData();
+            //     for (var i of indices) {
+            //         var oSelObj = oContext.byId(sTabName).getContextByIndex(i).getObject();
+            //         var sMeisaiNo = oSelObj.MeisaiNo;
+
+            //         if (sMeisaiNo) {
+            //             for (var j = 0; j < oContext[sBindingProperty].length; j++) {
+            //                 if (oContext[sBindingProperty][j].MeisaiNo === sMeisaiNo) {
+            //                     oContext[sBindingProperty][j].Loekz = true;
+            //                 }
+            //             }
+            //         }
+            //     }
+
+            //     oModel.refresh();
+
+            //     var filter = [];
+            //     filter.push(new sap.ui.model.Filter("Loekz", sap.ui.model.FilterOperator.EQ, false));
+
+            //     oContext.byId(sTabName).getBinding("rows").filter(new sap.ui.model.Filter(filter, true));
+
+            // },
 
             onTabInCashAdd: function (oEvent) {
                 var oNewObj = {};
@@ -415,7 +450,7 @@ sap.ui.define([
                 oNewObj.EigyoBi = this._EigyoBi;
                 oNewObj.KihyoNo = this._KihyoNo;
                 oNewObj.KeijoBusho = "";
-                oNewObj.DrkamokuCd = "";
+                oNewObj.DrkamokuCd = "111000";
                 oNewObj.NyknSaki = "";
                 oNewObj.NyknTekiyo = "";
                 oNewObj.Waers = 'JPY';
@@ -429,6 +464,7 @@ sap.ui.define([
 
             onTabInCashDelete: function (oEvent) {
                 this._deleteRow(this, "InCash", "tabInCash", "_InCashSet", oEvent);
+                this.onTabInCashRowUpdate(oEvent);
             },
 
             onTabOutCashAdd: function (oEvent) {
@@ -452,6 +488,7 @@ sap.ui.define([
 
             onTabOutCashDelete: function (oEvent) {
                 this._deleteRow(this, "OutCash", "tabOutCash", "_OutCashSet", oEvent);
+                this.onTabOutCashRowUpdate(oEvent);
             },
 
             onMessagePopoverPress: function (oEvent) {
@@ -463,11 +500,7 @@ sap.ui.define([
             onSyohinCdChange: function (oEvent) {
                 var oSource = oEvent.getSource()
                 var oContext = oSource.getBindingContext("pstore");
-                try {
-                    var sValue = oEvent.mParameters.newValue.toUpperCase();
-                } catch (error) {
-                    var sValue = oEvent.getSource().getValue();
-                }
+                var sValue = oEvent.mParameters.newValue.toUpperCase();
                 oSource.setValue(sValue);
 
                 var oModel = oContext.getModel();
@@ -558,7 +591,7 @@ sap.ui.define([
                         // data = item.getBindingContext(sBindingPath).getObject();
                     } else {
                         oBindingContext = item.getBindingContext("pstore");
-                        // data = item.getBindingContext("pstore").getObject();
+                        // data = item.getBindingContext().getObject();
                     }
 
                     if (oBindingContext) {
@@ -607,7 +640,8 @@ sap.ui.define([
             onTabInCashRowUpdate: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
                 //sum 6.
-                this._sum.SonotaNyukinKei = this._calcTableColumnSum(this, "InCash", "tabInCash", "NyknKingaku", null);
+                // this._sum.SonotaNyukinKei = this._calcTableColumnSum(this, "InCash", "tabInCash", "NyknKingaku", null);
+                this._sum.SonotaNyukinKei = this._collectionIncome(this, "InCash", "NyknKingaku");
 
                 //A:  3 + 5 + 6
                 this._sum.SyunyuGokei = this._calcCurrencySum(this._sum.GenkinUragGokei,
@@ -630,7 +664,8 @@ sap.ui.define([
             onTabOutCashRowUpdate: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
                 //sum 7.
-                this._sum.SonotaShunyuKei = this._calcTableColumnSum(this, "OutCash", "tabOutCash", "ShknKingaku", null);
+                // this._sum.SonotaShunyuKei = this._calcTableColumnSum(this, "OutCash", "tabOutCash", "ShknKingaku", null);
+                this._sum.SonotaShunyuKei = this._collectionIncome(this, "OutCash", "ShknKingaku");
 
                 //B: sum: 7 + 8
                 this._sum.ShishutsuGokei = this._calcCurrencySum(this._sum.SonotaShunyuKei, this._sum.KeihinShirdk);
@@ -648,6 +683,50 @@ sap.ui.define([
                 this.onCalcHnjtsKrkshdkUgki(oEvent);
             },
 
+            _collectionIncome: function (oContext, sBindingPath, sColumnId) {
+                // this.setValueToZero(oEvent);
+                var oModel = oContext.getView().getModel(sBindingPath);
+                var aTable = oModel.getData();
+                var total = "0";
+                aTable.forEach(function (line) {
+                    total = this.formatter.accAdd(total, line[sColumnId]);
+                }.bind(oContext));
+                return total;
+            },
+
+            _calcTableColumnSum: function (oContext, sBindingPath, sTableId, sColumnId, sSumFieldId) {
+                var oCurrencyParse = NumberFormat.getFloatInstance();
+                var aItems = oContext.byId(sTableId).getRows();
+                var amount = 0, waers = '', lineAmount = 0;
+                var oBindingContext, oData;
+                for (var item of aItems) {
+                    if (sBindingPath) {
+                        oBindingContext = item.getBindingContext(sBindingPath);
+                        // data = item.getBindingContext(sBindingPath).getObject();
+                    } else {
+                        oBindingContext = item.getBindingContext("pstore");
+                        // data = item.getBindingContext().getObject();
+                    }
+
+                    if (oBindingContext) {
+                        oData = oBindingContext.getObject();
+                        var colVal = "0";
+                        if (oData[sColumnId]) {
+                            colVal = oData[sColumnId].toString();
+                        }
+                        lineAmount = oCurrencyParse.parse(colVal);
+                        amount += lineAmount;
+                        waers = (waers === '') ? oData.Waers : 'JPY';
+                    }
+                }
+
+                if (sSumFieldId != null) {
+                    var oCurrencyFormat = NumberFormat.getCurrencyInstance({ showMeasure: false });
+                    this.byId(sSumFieldId).setText(oCurrencyFormat.format(amount, waers));
+                }
+
+                return amount;
+            },
             _calcFieldsSum(...fields) {
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var sum = 0;
@@ -863,7 +942,8 @@ sap.ui.define([
 
             onShowNyknKamokuCd: function (oEvent) {
                 var aFilters = [];
-                var filter = { field: "Ktopl", value: this._KaishaCd };
+                // var filter = { field: "Ktopl", value: this._KaishaCd };
+                var filter = { field: "Ktopl", value: "1000" };
                 aFilters.push(filter);
                 this._comm.showCustomSearchHelpDialog(
                     this,
@@ -904,7 +984,8 @@ sap.ui.define([
 
             onShowShknKamokuCd: function (oEvent) {
                 var aFilters = [];
-                var filter = { field: "Ktopl", value: this._KaishaCd };
+                // var filter = { field: "Ktopl", value: this._KaishaCd };
+                var filter = { field: "Ktopl", value: "1000" };
                 aFilters.push(filter);
                 this._comm.showCustomSearchHelpDialog(
                     this,
@@ -927,57 +1008,6 @@ sap.ui.define([
                     "TaxSet",
                     "Mwskz",
                     aFilters);
-            },
-
-            onKamokuSetei: function (oEvent, i) {
-                var sEntitySet = "";
-                var sTitle = "";
-                switch (i) {
-                    case "1":
-                        sEntitySet = "A01AccountSet";
-                        sTitle = "sec2_f4";
-                        break;
-                
-                    case "2":
-                        sEntitySet = "A02AccountSet";
-                        sTitle = "sec3_f7";
-                        break;
-                    case "3":
-                        sEntitySet = "A03AccountSet";
-                        sTitle = "sec3_f8";
-                        break;
-                    case "4":
-                        sEntitySet = "A04AccountSet";
-                        sTitle = "sec4_f2";
-                        break;
-                    case "5":
-                        sEntitySet = "A05AccountSet";
-                        sTitle = "sec4_f4";
-                        break;
-                }
-                var aFilters = [];
-                this._comm.showCustomSearchHelpDialog(
-                    this,
-                    oEvent,
-                    this._comm.getI18nMessage(this, sTitle),
-                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
-                    sEntitySet,
-                    "Hkont",
-                    aFilters);
-            },
-
-            onShowSyohinCd: function (oEvent) {
-                var aFilters = [];
-                aFilters.push({ field: "TenpoCd", value: this._TenpoCd });
-                this._comm.showCustomSearchHelpDialog(
-                    this,
-                    oEvent,
-                    this._comm.getI18nMessage(this, "sec6_f2"),
-                    "FICO.dailybalanceapproval.view.pstore.SearchHelp",
-                    "AGoodSet",
-                    "ShohinCd",
-                    aFilters);
-
             },
 
             onRebingTable: function (oEvent) {
@@ -1012,15 +1042,17 @@ sap.ui.define([
                 this.byId("dialogSelect").destroy();
             },
 
-            _getAccountDesc: function (oEvent, sBindingPath) {
+            _getAccountDesc: function (oEvent, sBindingPath,sModelName) {
                 var oInput = oEvent.getSource();
                 var account = oInput.getValue();
-                var oBindingContext = oInput.getParent().getRowBindingContext();
+                // var oBindingContext = oInput.getParent().getRowBindingContext();
+                var oBindingContext = oInput.getParent().getBindingContext(sModelName);
                 var sPath = oBindingContext.sPath + sBindingPath;
                 var oModel = oBindingContext.getModel();
 
                 var oDataModel = this.getView().getModel("pstore");
-                var sReadPath = "/AccountSet(Ktopl='" + this._KaishaCd + "',Saknr='" + account + "',Spras='J'" + ")";
+                // var sReadPath = "/AccountSet(Ktopl='" + this._KaishaCd + "',Saknr='" + account + "',Spras='J'" + ")";
+                var sReadPath = "/AccountSet(Ktopl='" + "1000" + "',Saknr='" + account + "',Spras='J'" + ")";
                 oDataModel.read(sReadPath, {
                     success: function (oData) {
                         if (oData.Txt20 === undefined || oData.Txt20 === null || oData.Txt20 === '') {
@@ -1038,11 +1070,11 @@ sap.ui.define([
             },
 
             onGetNyknKamokuNm: function (oEvent) {
-                this._getAccountDesc(oEvent, "/NyknKamokuNm");
+                this._getAccountDesc(oEvent, "/NyknKamokuNm", "InCash");
             },
 
             onGetShknKamokuNm: function (oEvent) {
-                this._getAccountDesc(oEvent, "/ShknKamokuNm");
+                this._getAccountDesc(oEvent, "/ShknKamokuNm", "OutCash");
             },
 
             onDestroy : function(oEvent){
@@ -1063,6 +1095,37 @@ sap.ui.define([
                 }
             },
 
+            onInpuValidation: function (oEvent,precision,scale) {
+                this.onSetDefaultValue(oEvent);
+
+                var oFormat = NumberFormat.getFloatInstance();
+                var iIntager = precision - scale;
+                var oSource = oEvent.getSource();
+                var value = oEvent.getParameter("value");
+                if (value == "") {
+                    value = "0";
+                }
+                value = oFormat.parse(value);
+                // var value = oSource.getBindingContext().getObject().Amount;
+                oSource.setValueState("None");
+                if (isNaN(value)) {
+                    oSource.setValueState("Error");
+                    oSource.setValueStateText(this._ResourceBundle.getText("notNumber"));
+                } else {
+                    var aSplitNumber = value.toString().split(".");
+                    if (aSplitNumber[0].length > iIntager) {
+                        oSource.setValueState("Error");
+                        oSource.setValueStateText(this._ResourceBundle.getText("integerLengthError",[iIntager]));
+                    }
+                    if (aSplitNumber[1] && aSplitNumber[1].length > scale) {
+                        oSource.setValueState("Error");
+                        oSource.setValueStateText(this._ResourceBundle.getText("fractionLengthError",[scale]));
+                    }
+                }
+
+            },
+
+            // 审批用
             onApprovalConfirm: function() {
                 if (!this.pDialog) {
                     this.pDialog = this.loadFragment({
@@ -1096,12 +1159,12 @@ sap.ui.define([
                     oDialog.open();
                 }.bind(this));
             },
-
+            // 审批用
             approvalAction:function (sAction) {
                 this.sAction = sAction;
                 this.onApprovalConfirm();
             },
-    
+            // 审批用
             getApprovalData: function () {
                 var sPath = this.getView().getElementBinding("pstore").getPath();
                 var oRecord = this.getOwnerComponent().getModel("pstore").getProperty(sPath);
@@ -1112,7 +1175,7 @@ sap.ui.define([
                 };
                 return postData
             },
-    
+            // 审批用
             postAction: function (postData) {
                 var mParameters = {
                     groupId: "DailyBalanceApproval" + Math.floor(1 / 100),
@@ -1135,7 +1198,7 @@ sap.ui.define([
                 this.byId("detailPage").setBusyIndicatorDelay(0);
                 this.byId("detailPage").setBusy(true);
             },
-
+            // 审批用
             insertHistorySection: function () {
                 var oView = this.getView();
                 var oPage = this.byId("objectPageLayout");
@@ -1149,7 +1212,94 @@ sap.ui.define([
                     });
                 }
             },
+            // 审批用
+            // simulationPosting: function () {
+            //     if (this.checkRequired()) {
+            //         MessageToast.show(this._ResourceBundle.getText("inputRequired"));
+            //         return;
+            //     }
+            //     var sAction = "Posting";
+            //     var postDoc = this.prepareBalanceSaveBody();
+            //     postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
+            //     delete postDoc.__metadata;
 
+            //     //simulation posting
+            //     var postData = postDoc;
+            //     this.convertToString(postData);
+            //     var promise = new Promise(function (resolve, reject) {
+            //         var i = 1;
+            //         var mParameters = {
+            //             groupId: "DailyBalanceSave" + Math.floor(i / 100),
+            //             changeSetId: i,
+            //             success: function (oData) {
+            //                 this.byId("idDailyBalanceCreate").setBusy(false);
+            //                 resolve();
+            //             }.bind(this),
+            //             error: function (oError) {
+            //                 this.byId("idDailyBalanceCreate").setBusy(false);
+            //                 this.removeLeadingMessage();
+            //             }.bind(this),
+            //         };
+            //         this.getOwnerComponent().getModel('abr').setHeaders({"button":sAction, "action":"approval"});
+            //         //复杂结构
+            //         this.getOwnerComponent().getModel('abr').create("/ZzShopDailyBalanceSet", postData, mParameters);
+            //         this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
+            //         this.byId("idDailyBalanceCreate").setBusy(true);
+            //     }.bind(this));
+            //     // return promise;
+
+                
+            //     this._busyDialog = new sap.m.BusyDialog({});
+            //     this._busyDialog.open();
+            //     var that = this;
+
+            //     var elem = this.getView().getBindingContext("pstore");
+            //     var oModel = elem.getModel();
+            //     var d = elem.getObject();
+
+            //     //Deep Entities
+            //     d.GoodsSet = []
+
+            //     d.EffectiveCashSet = [];
+            //     d.LossCashSet = [];
+            //     d.PlanCashSet = [];
+            //     d.InCashSet = [];
+            //     d.OutCashSet = [];
+            //     d.InCashSet = [];
+            //     d.OutCashSet = [];
+            //     delete d.__metadata;
+
+            //     d.Fi1007 = [];
+
+            //     var o = {};
+            //     d.MessageSet = [];
+            //     d.Action = 'G';
+
+            //     o.d = d;
+
+            //     var promise = new Promise(function (resolve, reject) {
+            //         oModel.setHeaders({"action":"approval"});
+            //         oModel.create('/StoreSet', o, {
+            //             success: function (oData, oResponse) {
+            //                 var oMessage = {};
+            //                 oMessage.MessageSet = oData.MessageSet.results;
+            //                 var logModel = new JSONModel(oMessage);
+            //                 that.getView().setModel(logModel, "log");
+            //                 that._busyDialog.close();
+            //                 that._comm.showMessagePopoverFor(that, "log", "/MessageSet", "btnMessagePopover")
+            //                 oModel.refresh();
+            //                 resolve();
+            //             },
+            //             error: function (oError) {
+            //                 that._busyDialog.close();
+            //                 MessageToast.show('OData Error:' + oError.message);
+            //                 reject();
+            //             }
+            //         });
+            //     }.bind(this));
+            //     return promise;
+            // },
+            // 审批用
             handleFullScreen: function (oEvent) {
                 var sNextLayout = "MidColumnFullScreen";
                 var sPath = this.getView().getObjectBinding("pstore").getPath().substring(1);
@@ -1158,6 +1308,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen","OneColumn");
                 this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen",null);
             },
+            // 审批用
             handleExitFullScreen: function (oEvent) {
                 var sNextLayout = "TwoColumnsMidExpanded";
                 var sPath = this.getView().getObjectBinding("pstore").getPath().substring(1);
@@ -1166,6 +1317,7 @@ sap.ui.define([
                 this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen","MidColumnFullScreen");
                 this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen",null);
             },
+            // 审批用
             handleClose: function () {
                 var sNextLayout = "OneColumn";
                 this._oRouter.navTo("ApprovalList", {layout: sNextLayout});

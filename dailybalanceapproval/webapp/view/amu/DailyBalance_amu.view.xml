@@ -83,39 +83,39 @@
 											</OverflowToolbar>
 										</headerToolbar>
 										<columns>
-											<Column width="6rem">
-												<Text text="{i18n_amu>KEIJO_BUSHOT2}" />
+											<Column width="8%">
+												<Text text="{i18n_amu>KEIJO_BUSHOT2}"/>
 											</Column>
-											<Column width="10rem">
-												<Text text="{i18n_amu>DRKAMOKU_CDT2}" />
+											<!-- <Column visible="false">
+												<Text text="{i18n_amu>DRKAMOKU_CDT2}"/>
+											</Column> -->
+											<Column width="15%">
+												<Text text="{i18n_amu>NYKN_SAKIT2}"/>
 											</Column>
-											<Column width="12rem">
-												<Text text="{i18n_amu>NYKN_SAKIT2}" />
+											<Column >
+												<Text text="{i18n_amu>NYKN_TEKIYOT2}"/>
 											</Column>
-											<Column width="12rem">
-												<Text text="{i18n_amu>NYKN_TEKIYOT2}" />
+											<Column width="13%">
+												<Text text="{i18n_amu>NYKN_KINGAKUT2}"/>
 											</Column>
-											<Column>
-												<Text text="{i18n_amu>NYKN_KINGAKUT2}" />
-											</Column>
-											<Column>
+											<Column width="10%">
 												<Text text="{i18n_amu>NYKN_KAMOKU_CDT2}" />
 											</Column>
-											<Column>
-												<Text text="{i18n_amu>NYKN_KAMOKU_NMT2}" />
+											<Column width="15%">
+												<Text text="{i18n_amu>NYKN_KAMOKU_NMT2}"/>
 											</Column>
-											<Column>
-												<Text text="{i18n_amu>ZEI_CDT2}" />
+											<Column width="7%">
+												<Text text="{i18n_amu>ZEI_CDT2}"/>
 											</Column>
-											<Column>
-												<Text text="{i18n_amu>JIDOUTENKIFUYO}" />
+											<Column width="4%">
+												<Text text="{i18n_amu>JIDOUTENKIFUYO}"/>
 											</Column>
 										</columns>
 										<items>
 											<ColumnListItem>
 												<cells>
 													<Input value="{local>KEIJO_BUSHO}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'Profit')" editable="{local>/viewEditable}"/>
-													<Input value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}"/>
+													<!-- <Input value="{local>DRKAMOKU_CD}" showValueHelp="true" valueHelpRequest=".onValueHelp($event, 'FI0006')" editable="{local>/viewEditable}"/> -->
 													<Input value="{local>NYKN_SAKI}" editable="{local>/viewEditable}"/>
 													<Input value="{local>NYKN_TEKIYO}" editable="{local>/viewEditable}"/>
 													<Input value="{path:'local>NYKN_KINGAKU', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="collectionIncome" editable="{local>/viewEditable}" textAlign="Right"/>
@@ -156,28 +156,28 @@
 											</OverflowToolbar>
 										</headerToolbar>
 										<columns>
-											<Column width="6rem">
+											<Column width="8%">
 												<Text text="{i18n_amu>KEIJO_BUSHOT2}" />
 											</Column>
-											<Column width="10rem">
+											<Column width="15%">
 												<Text text="{i18n_amu>SHKN_SAKIT2}" />
 											</Column>
-											<Column width="10rem">
+											<Column >
 												<Text text="{i18n_amu>SHKN_TEKIYOT2}" />
 											</Column>
-											<Column>
+											<Column width="13%">
 												<Text text="{i18n_amu>SHKN_KINGAKUT2}" />
 											</Column>
-											<Column>
+											<Column width="10%">
 												<Text text="{i18n_amu>SHKN_KAMOKU_CDT2}" />
 											</Column>
-											<Column>
+											<Column width="15%">
 												<Text text="{i18n_amu>SHKN_KAMOKU_NMT2}" />
 											</Column>
-											<Column>
+											<Column width="7%">
 												<Text text="{i18n_amu>ZEI_CDT2}" />
 											</Column>
-											<Column>
+											<Column width="4%">
 												<Text text="{i18n_amu>JIDOUTENKIFUYO}" />
 											</Column>
 										</columns>

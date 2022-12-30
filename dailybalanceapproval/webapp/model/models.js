@@ -30,8 +30,8 @@ sap.ui.define([
                     actionButtonsInfo: {
                         midColumn:{
                             closeColumn: null,
-                            exitFullScreen: null,
-                            fullScreen: "MidColumnFullScreen"
+                            exitFullScreen: "MidColumnFullScreen",
+                            fullScreen: null
                         },
                         endColumn:{
                             closeColumn: null,

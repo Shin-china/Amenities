@@ -84,7 +84,11 @@ sap.ui.define([
             if (aCashModel.length >= iMaxLength) {
                 return;
             }
-            aCashModel.push({});
+            if (sTableId == "idCashIncomeTable") {
+                aCashModel.push({"NYKN_KINGAKU":"0"});
+            } else if (sTableId == "idCashPaymentTable") {
+                aCashModel.push({"SHKN_KINGAKU":"0"});
+            }
             this._LocalData.refresh();
         },
 

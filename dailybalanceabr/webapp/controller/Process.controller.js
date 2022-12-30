@@ -81,6 +81,9 @@ sap.ui.define([
 
             onNavDailyBalanceView: function (oEvent,sView) {
                 this._LocalData.setProperty("/processBusy", true);
+
+                this._LocalData.setProperty("/isRefrence", false)
+                this._LocalData.setProperty("/isCreate", false)
                 
                 var oUrl = {view: sView};
                 if (sView == "Display") {

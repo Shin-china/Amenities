@@ -118,7 +118,7 @@
 
                                     <Input
                                         id="txtZnjtsKrkshGankin"
-                                        value="{parts:[{path:'pstore>ZnjtsKrkshGankin'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>ZnjtsKrkshGankin'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -139,7 +139,7 @@
 
                                     <Input
                                         id="txtGnkNyukinSogaku"
-                                        value="{parts:[{path:'pstore>GnkNyukinSogaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>GnkNyukinSogaku'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -159,7 +159,7 @@
 
                                     <Input
                                         id="txtRyogaekinUkeire"
-                                        value="{parts:[{path:'pstore>RyogaekinUkeire'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                        value="{parts:[{path:'pstore>RyogaekinUkeire'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
                                 formatOptions: {showMeasure: false}}"
                                         maxLength="14"
                                         textAlign="Right"
@@ -828,107 +828,80 @@
                     <uxap:ObjectPageSection id="section3" title="{i18n_pstore>section3_title}" showTitle="true">
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection id="subsection11">
-                                <table:Table id="tabInCash" rows="{path: 'InCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}" rowsUpdated="onTabInCashRowUpdate">
-                                    <table:extension>
-                                        <OverflowToolbar id="tab3Toolbar">
-                                            <content>
-                                                <ToolbarSpacer id="toolbarSpacer4" />
-                                                <Button id="btnTab3Add" text="{i18n_pstore>tab1_btn01}" enabled="{viewState>/editable}" press="onTabInCashAdd" />
-                                                <Button id="btnTab3Delete" text="{i18n_pstore>tab1_btn03}" enabled="{viewState>/editable}" type="Attention" press="onTabInCashDelete" />
-                                            </content>
-                                        </OverflowToolbar>
-                                    </table:extension>
+                                <VBox>
+                                    <!-- <table:Table id="tabInCash" rows="{path: 'InCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}" rowsUpdated="onTabInCashRowUpdate"> -->
+                                    <Table id="tabInCash" class="sapUxAPObjectPageSubSectionAlignContent" width="auto" items="{InCash>/}" mode="MultiSelect">
+                                        <headerToolbar>
+                                            <OverflowToolbar id="tab3Toolbar">
+                                                <content>
+                                                    <ToolbarSpacer id="toolbarSpacer4" />
+                                                    <Button id="btnTab3Delete" text="{i18n_pstore>tab1_btn03}" enabled="{viewState>/editable}" press="onTabInCashDelete" />
+                                                    <Button id="btnTab3Add" text="{i18n_pstore>tab1_btn06}" enabled="{viewState>/editable}" press="onTabInCashAdd" />
+                                                </content>
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+                                        <columns>
+                                            <Column width="8%">
+                                                <Text text="{i18n_pstore>tab3_col1}" />
+                                            </Column>
+                                            <!-- <Column >
+                                                <Text text="{i18n_pstore>tab3_col2_1}" />
+                                            </Column> -->
+                                            <Column width="15%">
+                                                <Text text="{i18n_pstore>tab3_col2}" />
+                                            </Column>
+                                            <Column >
+                                                <Text text="{i18n_pstore>tab3_col3}" />
+                                            </Column>
+                                            <Column width="13%">
+                                                <Text text="{i18n_pstore>tab3_col4}" />
+                                            </Column>
+                                            <Column width="10%">
+                                                <Text text="{i18n_pstore>tab3_col5}" />
+                                            </Column>
+                                            <Column width="15%">
+                                                <Text text="{i18n_pstore>tab3_col6}" />
+                                            </Column>
+                                            <Column width="7%">
+                                                <Text text="{i18n_pstore>tab3_col7}" />
+                                            </Column>
+                                            <Column width="4%">
+                                                <Text text="{i18n_pstore>tab3_col8}" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Input id="txtTab3KeijoBusho" value="{InCash>KeijoBusho}" showValueHelp="true" valueHelpRequest="onShowKeijoBusho" editable="{viewState>/editable}"/>
+                                                    <!-- <Input id="txtTab3DrkamokuCd" value="{InCash>DrkamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowCreditAccount"/> -->
+                                                    <Input id="txtTab3NyknSaki" value="{InCash>NyknSaki}" editable="{viewState>/editable}"/>
+                                                    <Input id="txtTab3NyknTekiyo" value="{InCash>NyknTekiyo}" editable="{viewState>/editable}"/>
+                                                    <Input id="txtTab3NyknKingaku" value="{parts:[{path:'InCash>NyknKingaku'},{path: 'InCash>Waers'}], type: 'sap.ui.model.type.Currency',
+                                                        formatOptions: {showMeasure: false}}" change="onTabInCashRowUpdate" editable="{viewState>/editable}" textAlign="Right"/>
+                                                    <Input id="txtTab3NyknKamokuCd" value="{InCash>NyknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowNyknKamokuCd" change="onGetNyknKamokuNm"/>
+                                                    <Input id="txtTab3NyknKamokuNm" value="{InCash>NyknKamokuNm}" editable="{viewState>/editable}"/>
+                                                    <Input id="txtTab3ZeiCd" value="{InCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowInCashTax"/>
+                                                    <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}" />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                    <!-- 入金合計 -->
+                                    <form:SimpleForm id="sfTabInCash" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" editable="{viewState>/editable}">
+                                        <Label id="lblInCashTotal" labelFor="txtInCashTotal" text="{i18n_pstore>tab3_total}">
+                                            <layoutData>
+                                                <l:GridData id="gd111" span="XL5 L5 M5" />
+                                            </layoutData>
+                                        </Label>
 
-                                    <table:columns>
-                                        <table:Column id="tab3Col1">
-                                            <Label id="lblTab3KeijoBusho" text="{i18n_pstore>tab3_col1}" />
-                                            <table:template>
-                                                <Input id="txtTab3KeijoBusho" maxLength="4" value="{InCash>KeijoBusho}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowKeijoBusho" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab3Col2">
-                                            <Label id="lblTab3DrkamokuCd" text="{i18n_pstore>tab3_col2_1}" />
-                                            <table:template>
-                                                <Input id="txtTab3DrkamokuCd" maxLength="10" value="{InCash>DrkamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowCreditAccount" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab3Col3">
-                                            <Label id="lblTab3NyknSaki" text="{i18n_pstore>tab3_col2}" />
-                                            <table:template>
-                                                <Input id="txtTab3NyknSaki" maxLength="22" value="{InCash>NyknSaki}" editable="{viewState>/editable}" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab3Col4">
-                                            <Label id="lblTab3NyknTekiyo" text="{i18n_pstore>tab3_col3}" />
-                                            <table:template>
-                                                <Input id="txtTab3NyknTekiyo" maxLength="42" value="{InCash>NyknTekiyo}" editable="{viewState>/editable}" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab3Col5">
-                                            <Label id="lblTab3NyknKingaku" text="{i18n_pstore>tab3_col4}" />
-                                            <table:template>
-                                                <Input
-                                                    id="txtTab3NyknKingaku"
-                                                    value="{parts:[{path:'InCash>NyknKingaku'},{path:'Waers'}], type: 'sap.ui.model.type.Currency',
-                                formatOptions: {showMeasure: false}}"
-                                                    maxLength="14"
-                                                    textAlign="Right"
-                                                    editable="{viewState>/editable}"
-                                                    change="onTabInCashRowUpdate"
-                                                />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab3Col6">
-                                            <Label id="lblTab3NyknKamokuCd" text="{i18n_pstore>tab3_col5}" />
-                                            <table:template>
-                                                <Input id="txtTab3NyknKamokuCd" maxLength="10" value="{InCash>NyknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowNyknKamokuCd" change="onGetNyknKamokuNm" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab3Col7">
-                                            <Label id="lblTab3NyknKamokuNm" text="{i18n_pstore>tab3_col6}" />
-                                            <table:template>
-                                                <Text id="txtTab3NyknKamokuNm" text="{InCash>NyknKamokuNm}" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab3Col8">
-                                            <Label id="lblTab3ZeiCd" text="{i18n_pstore>tab3_col7}" />
-                                            <table:template>
-                                                <Input id="txtTab3ZeiCd" maxLength="2" value="{InCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowInCashTax" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab3Col9">
-                                            <Label id="lblTab3Jidoutenkifuyo" text="{i18n_pstore>tab3_col8}" />
-                                            <table:template>
-                                                <CheckBox id="chkTab3Jidoutenkifuyo" selected="{InCash>Jidoutenkifuyo}" editable="{viewState>/editable}" />
-                                            </table:template>
-                                        </table:Column>
-                                    </table:columns>
-
-                                    <table:footer>
-                                        <form:SimpleForm id="sfTabInCash" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" editable="{viewState>/editable}">
-                                            <Label id="lblInCashTotal" labelFor="txtInCashTotal" text="{i18n_pstore>tab3_total}">
-                                                <layoutData>
-                                                    <l:GridData id="gd111" span="XL5 L5 M5" />
-                                                </layoutData>
-                                            </Label>
-
-                                            <Text id="txtInCashTotal" text="{parts:[{path:'sum>/SonotaNyukinKei'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
-                                formatOptions: {showMeasure: false}}">
-                                                <layoutData>
-                                                    <l:GridData id="gd112" span="XL7 L7 M7" />
-                                                </layoutData>
-                                            </Text>
-                                        </form:SimpleForm>
-                                    </table:footer>
-                                </table:Table>
+                                        <Text id="txtInCashTotal" text="{parts:[{path:'sum>/SonotaNyukinKei'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
+                                            formatOptions: {showMeasure: false}}">
+                                            <layoutData>
+                                                <l:GridData id="gd112" span="XL7 L7 M7" />
+                                            </layoutData>
+                                        </Text>
+                                    </form:SimpleForm>
+                                </VBox>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
@@ -936,99 +909,77 @@
                     <uxap:ObjectPageSection id="section4" title="{i18n_pstore>section4_title}" showTitle="true">
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection id="subsection12">
-                                <table:Table id="tabOutCash" rows="{path:'OutCash>/', filters: [{path: 'Loekz', operator: 'EQ', value1: false}]}" visibleRowCount="5" selectionMode="Single" editable="{viewState>/editable}" rowsUpdated="onTabOutCashRowUpdate">
-                                    <table:extension>
-                                        <OverflowToolbar id="tab4Toolbar">
-                                            <content>
-                                                <ToolbarSpacer id="toolbarSpacer5" />
-                                                <Button id="btnTab4Add" text="{i18n_pstore>tab1_btn01}" enabled="{viewState>/editable}" press="onTabOutCashAdd" />
-                                                <Button id="btnTab4Delete" text="{i18n_pstore>tab1_btn03}" enabled="{viewState>/editable}" type="Attention" press="onTabOutCashDelete" />
-                                            </content>
-                                        </OverflowToolbar>
-                                    </table:extension>
-
-                                    <table:columns>
-                                        <table:Column id="tab4Col1">
-                                            <Label id="lblTab4KeihiFutanBusho" text="{i18n_pstore>tab3_col1}" />
-                                            <table:template>
-                                                <Input id="txtTab4KeihiFutanBusho" maxLength="4" value="{OutCash>KeihiFutanBusho}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowKeihiFutanBusho" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab4Col2">
-                                            <Label id="lblTab4ShknSaki" text="{i18n_pstore>section4_col2}" />
-                                            <table:template>
-                                                <Input id="txtTab4ShknSaki" maxLength="22" value="{OutCash>ShknSaki}" editable="{viewState>/editable}" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab4Col3">
-                                            <Label id="lblTab4ShknTekiyo" text="{i18n_pstore>tab3_col3}" />
-                                            <table:template>
-                                                <Input id="txtTab4ShknTekiyo" maxLength="42" value="{OutCash>ShknTekiyo}" editable="{viewState>/editable}" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab4Col4">
-                                            <Label id="lblTab4ShknKingaku" text="{i18n_pstore>tab3_col4}" />
-                                            <table:template>
-                                                <Input
-                                                    id="txtTab4ShknKingaku"
-                                                    value="{parts:[{path:'OutCash>ShknKingaku'},{path: 'OutCash>Waers'}], type: 'sap.ui.model.type.Currency',
-                                formatOptions: {showMeasure: false}}"
-                                                    maxLength="14"
-                                                    textAlign="Right"
-                                                    editable="{viewState>/editable}"
-                                                    change="onTabOutCashRowUpdate"
-                                                />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab4Col5">
-                                            <Label id="lblTab4ShknKamokuCd" text="{i18n_pstore>tab3_col5}" />
-                                            <table:template>
-                                                <Input id="txtTab4ShknKamokuCd" maxLength="10" value="{OutCash>ShknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowShknKamokuCd" change="onGetShknKamokuNm" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab4Col6">
-                                            <Label id="lblTab4ShknKamokuNm" text="{i18n_pstore>tab3_col6}" />
-                                            <table:template>
-                                                <Text id="txtTab4ShknKamokuNm" text="{OutCash>ShknKamokuNm}" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab4Col7">
-                                            <Label id="lblTab4ZeiCd" text="{i18n_pstore>tab3_col7}" />
-                                            <table:template>
-                                                <Input id="txtTab4ZeiCd" maxLength="2" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowOutCashTax" />
-                                            </table:template>
-                                        </table:Column>
-
-                                        <table:Column id="tab4Col8">
-                                            <Label id="lblTab4Jidoutenkifuyo" text="{i18n_pstore>tab3_col8}" />
-                                            <table:template>
-                                                <CheckBox id="chkTab4Jidoutenkifuyo" selected="{OutCash>Jidoutenkifuyo}" editable="{viewState>/editable}" />
-                                            </table:template>
-                                        </table:Column>
-                                    </table:columns>
-                                    <table:footer>
+                                <uxap:blocks>
+                                    <VBox>
+                                        <Table id="tabOutCash" class="sapUxAPObjectPageSubSectionAlignContent" width="auto" items="{OutCash>/}" mode="MultiSelect">
+                                            <headerToolbar>
+                                                <OverflowToolbar id="tab4Toolbar">
+                                                    <content>
+                                                        <ToolbarSpacer id="toolbarSpacer5" />
+                                                        <Button id="btnTab4Delete" text="{i18n_pstore>tab1_btn03}" enabled="{viewState>/editable}" press="onTabOutCashDelete" />
+                                                        <Button id="btnTab4Add" text="{i18n_pstore>tab1_btn06}" enabled="{viewState>/editable}" press="onTabOutCashAdd" />
+                                                    </content>
+                                                </OverflowToolbar>
+                                            </headerToolbar>
+                                            <columns>
+                                                <Column width="8%">
+                                                    <Text text="{i18n_pstore>tab3_col1}" />
+                                                </Column>
+                                                <Column width="15%">
+                                                    <Text text="{i18n_pstore>section4_col2}" />
+                                                </Column>
+                                                <Column >
+                                                    <Text text="{i18n_pstore>tab3_col3}" />
+                                                </Column>
+                                                <Column width="13%">
+                                                    <Text text="{i18n_pstore>tab3_col4}" />
+                                                </Column>
+                                                <Column width="10%">
+                                                    <Text text="{i18n_pstore>tab3_col5}" />
+                                                </Column>
+                                                <Column width="15%">
+                                                    <Text text="{i18n_pstore>tab3_col6}" />
+                                                </Column>
+                                                <Column width="7%">
+                                                    <Text text="{i18n_pstore>tab3_col7}" />
+                                                </Column>
+                                                <Column width="4%">
+                                                    <Text text="{i18n_pstore>tab3_col8}" />
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Input id="txtTab4KeihiFutanBusho" value="{OutCash>KeihiFutanBusho}" showValueHelp="true" valueHelpRequest="onShowKeihiFutanBusho" editable="{viewState>/editable}"/>
+                                                        <Input id="txtTab4ShknSaki" value="{OutCash>ShknSaki}" editable="{viewState>/editable}"/>
+                                                        <Input id="txtTab4ShknTekiyo" value="{OutCash>ShknTekiyo}" editable="{viewState>/editable}"/>
+                                                        <Input id="txtTab4ShknKingaku" value="{parts:[{path:'OutCash>ShknKingaku'},{path: 'OutCash>Waers'}], type: 'sap.ui.model.type.Currency',
+                                                            formatOptions: {showMeasure: false}}" change="onTabOutCashRowUpdate" editable="{viewState>/editable}" textAlign="Right"/>
+                                                        <Input id="txtTab4ShknKamokuCd" value="{OutCash>ShknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowShknKamokuCd" change="onGetShknKamokuNm"/>
+                                                        <Input id="txtTab4ShknKamokuNm" value="{OutCash>ShknKamokuNm}" editable="{viewState>/editable}"/>
+                                                        <Input id="txtTab4ZeiCd" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowOutCashTax"/>
+                                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}" />
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                        <!-- 出金合計 -->
                                         <form:SimpleForm id="sfTabOutCash" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" editable="{viewState>/editable}">
-                                            <Label id="lblOutCashTotal" labelFor="txtInCashTotal" text="{i18n_pstore>tab2_total}">
+                                            <Label id="lblOutCashTotal" labelFor="txtOutCashTotal" text="{i18n_pstore>tab2_total}">
                                                 <layoutData>
                                                     <l:GridData id="gd113" span="XL5 L5 M5" />
                                                 </layoutData>
                                             </Label>
 
                                             <Text id="txtOutCashTotal" text="{parts:[{path:'sum>/SonotaShunyuKei'},{path:'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
-                                formatOptions: {showMeasure: false}}">
+                                                formatOptions: {showMeasure: false}}">
                                                 <layoutData>
                                                     <l:GridData id="gd114" span="XL7 L7 M7" />
                                                 </layoutData>
                                             </Text>
                                         </form:SimpleForm>
-                                    </table:footer>
-                                </table:Table>
+                                    </VBox>
+                                </uxap:blocks>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
@@ -1145,7 +1096,7 @@
                                             </FlexBox>
                                         </table:footer>
                                     </table:Table>
-
+                                    <!-- 準備金明細 -->
                                     <table:Table id="tabPlanCash" selectionMode="None" rows="{pstore>PlanCashSet}" rowsUpdated="onPlanCashAmountChange" visibleRowCount="6" editable="{viewState>/editable}">
                                         <table:extension>
                                             <Text id="txtTab7Header" text="{i18n_pstore>sub15_title}" />
@@ -1172,16 +1123,15 @@
                                                 <Label id="lblTab7Amount" labelFor="txtTab7Amount" text="{i18n_pstore>sub15_col3}" />
 
                                                 <table:template>
+                                                    <!-- constraints 参数会验证值，不符合时值不会更新到model，但是不知为何input控件不显示错误状态 -->
+                                                    <!-- change事件，自定义了错误消息，结合起来可以正常使用。另外如果只使用change不使用constraints，出现错误时值还是会更新model -->
                                                     <Input
                                                         id="txtTab7Amount"
                                                         visible="{Visible}"
                                                         editable="{viewState>/editable}"
-                                                        value="{parts:[{path:'pstore>Amount'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
-                                formatOptions: {showMeasure: false}}"
-                                                        maxLength="14"
+                                                        value="{path:'pstore>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
                                                         textAlign="Right"
-                                                        change="onSetDefaultValue"
-                                                    />
+                                                        change=".onInpuValidation($event,'15','2')"/>
                                                 </table:template>
                                             </table:Column>
                                         </table:columns>

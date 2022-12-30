@@ -972,7 +972,7 @@ sap.ui.define([
 
             // 转换数据
             // 用于参考，如果是参考创建就需要将之前的起票号码清除
-            if (!this._LocalData.getProperty("/isCreate")) {
+            if (this._LocalData.getProperty("/isRefrence")) {
                 oHeader.KIHYO_NO = "";
             }
             this._LocalData.setProperty("/dailyBalance", [oHeader]);

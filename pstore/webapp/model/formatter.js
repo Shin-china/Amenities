@@ -240,6 +240,12 @@ sap.ui.define([
             }
 
             return sValue;
-        }
+        },
+        toBoolean: function (value) {
+			if (value) {
+				return value === "" ? false : true;
+			}
+            return false
+		},
     };
 });

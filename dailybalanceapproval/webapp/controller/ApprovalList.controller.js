@@ -52,6 +52,7 @@ sap.ui.define([
             onPressNavToDetail: function (oEvent, sType) {
                 // this._LocalData.setProperty("/busy", true);
                 var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(1);
+                oNextUIState.layout = "MidColumnFullScreen";
                 var sPath = oEvent.getSource().getBindingContext().getPath();
 
                 var oRecord = this._oDataModel.getProperty(sPath);

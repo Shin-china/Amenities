@@ -81,7 +81,7 @@ sap.ui.define([
                 return;
             }
             if (sTableId == "idCashIncomeTable") {
-                aCashModel.push({"NYKN_KINGAKU":"0"});
+                aCashModel.push({"NYKN_KINGAKU":"0", "DRKAMOKU_CD":"111000"});
             } else if (sTableId == "idCashPaymentTable") {
                 aCashModel.push({"SHKN_KINGAKU":"0"});
             }
@@ -728,6 +728,7 @@ sap.ui.define([
             }
         },
 
+        // 审批用
         onApprovalConfirm: function() {
             if (!this.pDialog) {
                 this.pDialog = this.loadFragment({
