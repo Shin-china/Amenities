@@ -613,13 +613,16 @@
                                         </table:Column>
 
                                         <!-- 単価 -->
+                                                    <!-- value="{parts:[{path:'SyohinTanka'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
+                                                            formatOptions: {showMeasure: false},constraints:{precision:15,scale:2}}" -->
                                         <table:Column id="tab1Col9">
                                             <Text id="txtTab1Col9" text="{i18n>sec6_f8}" />
                                             <table:template>
                                                 <Input
-                                                    id="txtSyohinTanka"
-                                                    value="{parts:[{path:'SyohinTanka'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
-                                                            formatOptions: {showMeasure: false},constraints:{precision:15,scale:2}}"
+                                                    id="txtSyohinTanka" 
+                                                    value="{path:'SyohinTanka',type:'sap.ui.model.odata.type.Decimal', 
+                                                          formatOptions:{minFractionDigits:2,maxFractionDigits:2,emptyString:0}, 
+                                                          constraints:{precision:15,scale:2}}"        
                                                     maxLength="14"
                                                     textAlign="Right"
                                                     visible="{Visible}"
