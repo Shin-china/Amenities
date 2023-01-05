@@ -156,8 +156,8 @@ sap.ui.define([
                         //登录按钮
                         press: function () {
                             if (this.sButton === "Create") {
-                                // this.createButton(oDialog);
-                                this.createButton();
+                                this.createButton(oDialog);
+                                // this.createButton();
                             } else if (this.sButton === "Reference") {
                                 this.refrenceButton();
                                 oDialog.close();
@@ -182,8 +182,8 @@ sap.ui.define([
                 }.bind(this));
             },
 
-            // createButton: function (oDialog) {
-            createButton: function () {
+            createButton: function (oDialog) {
+            // createButton: function () {
                 if (this.requiredCheck()) {
                     return true;
                 }
@@ -194,13 +194,13 @@ sap.ui.define([
                             MessageBox.error(res.MESSAGE);
                             return;
                         } else {
-                            // this.getLastRecord().then(function (res) {
-                            //     this.setLocalModel("Create");
-                            //     this.getRouter().navTo("DailyBalance",{view:"Create"});
-                            //     oDialog.close();
-                            // }.bind(this));
-                            this.setLocalModel("Create");
-                            this.getRouter().navTo("DailyBalance",{view:"Create"});
+                            this.getLastRecord().then(function (res) {
+                                this.setLocalModel("Create");
+                                this.getRouter().navTo("DailyBalance",{view:"Create"});
+                                oDialog.close();
+                            }.bind(this));
+                            // this.setLocalModel("Create");
+                            // this.getRouter().navTo("DailyBalance",{view:"Create"});
                         }
                     } else {
                         MessageBox.error(messages.parseErrors(res));
@@ -335,32 +335,33 @@ sap.ui.define([
                 return promise;
             },
 
-            // // 获取前日金额
-            // getLastRecord: function () {
-            //     var aFilters = [];
-            //     aFilters.push(new Filter("KAISHA_CD", "EQ", this.byId("idCompany").getValue())); 
-            //     aFilters.push(new Filter("TENPO_CD", "EQ", this.byId("idShop").getValue())); 
-            //     var sDate = this.byId("idDP1").getValue();
-            //     aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate))); 
-            //     var promise = new Promise( function (resolve, reject) {
-            //         var mParameters = {
-            //             refreshAfterChange: false,
-            //             filters: aFilters,
-            //             success: function (oData) {
-            //                 resolve();
-            //                 if (oData.results.length > 0) {
-            //                     this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN","");
-            //                 }
-            //             }.bind(this),
-            //             error: function (oError) {
-            //                 reject();
-            //             }.bind(this)
-            //         };
-            //         this.getOwnerComponent().getModel().read("/ZzShopDailyBalanceSet", mParameters);
-            //     }.bind(this));
-            //     return promise;
+            // 获取前日金额
+            getLastRecord: function () {
+                var aFilters = [];
+                aFilters.push(new Filter("KAISHA_CD", "EQ", this.byId("idCompany").getValue())); 
+                aFilters.push(new Filter("TENPO_CD", "EQ", this.byId("idShop").getValue())); 
+                var sDate = this.byId("idDP1").getValue();
+                aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate))); 
+                var promise = new Promise( function (resolve, reject) {
+                    var mParameters = {
+                        refreshAfterChange: false,
+                        filters: aFilters,
+                        success: function (oData) {
+                            resolve();
+                            if (oData.results.length > 0) {
+                                
+                                this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HNJTS_KRKSH_GANKIN);
+                            }
+                        }.bind(this),
+                        error: function (oError) {
+                            reject();
+                        }.bind(this)
+                    };
+                    this.getOwnerComponent().getModel().read("/ZzShopDailyBalanceSet", mParameters);
+                }.bind(this));
+                return promise;
 
-            // },
+            },
 
             onDatePickerChange: function (oEvent) {
                 if (oEvent.getParameter("value") != "") {
