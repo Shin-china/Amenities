@@ -7,7 +7,7 @@
 					<IconTabFilter text="{i18n>Process}" key="view1">
 						<mvc:XMLView viewName="FICO.pstore004.view.Process" height="100%"/>
 					</IconTabFilter>
-					<IconTabFilter text="{i18n>Display}" key="view2">
+					<IconTabFilter text="{i18n>Display}" key="view2" visible="{local>/btDisplay}">
 						<mvc:XMLView viewName="FICO.pstore004.view.Display" height="100%"/>
 					</IconTabFilter>
 				</items>
