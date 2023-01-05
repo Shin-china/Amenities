@@ -101,7 +101,7 @@ sap.ui.define([
                     sDialogTitle = this._ResourceBundle.getText("DialogTitle1");
                     this.initialLocalModel();
                     this._LocalData.setProperty("/isCreate", true);
-                    this._LocalData.setProperty("/dailyBalance/0/KAISHA_CD", "1000");
+                    // this._LocalData.setProperty("/dailyBalance/0/KAISHA_CD", "1000");
                     // this._LocalData.setProperty("/dailyBalance/0/EIGYO_BI", "");
                     this._LocalData.setProperty("/isRefrence", false);
                 //参考
