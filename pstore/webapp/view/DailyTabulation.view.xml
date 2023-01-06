@@ -53,6 +53,7 @@
                         <table:RowAction id="tab1RowAction">
                             <table:items>
                                 <table:RowActionItem id="tab1RowActionItem" type="Navigation" icon="sap-icon://navigation-right-arrow" press="onNavigate" />
+                                <!-- <table:RowActionItem icon="sap-icon://customer-history" type="Custom" press="onPressHistory"/>  -->
                             </table:items>
                         </table:RowAction>
                     </table:rowActionTemplate>
