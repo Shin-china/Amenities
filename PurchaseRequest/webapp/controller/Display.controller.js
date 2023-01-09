@@ -85,26 +85,55 @@ sap.ui.define([
 				this.byId("smartTable").setBusy(false);
 			}.bind(this));
 		},
-		onNavDetail: function (oEvent) {
-			var oItem = oEvent.getSource().getBindingContext().getObject();
+		onNavDetail: function (oEvent, sOption) {
+			this._LocalData.setProperty("/sOption",sOption);
+			if (sOption == "2") {
+				//参考只能选择一条
+				var oTable = this.byId("internalTable");
+				if (oTable.getSelectedIndices().length > 1) {
+					messages.showText(this._ResourceBundle.getText("tooManySelect"));
+					return;
+				} else if (oTable.getSelectedIndices().length == 0) {
+					messages.showText(this._ResourceBundle.getText("noSelect"));
+					return;
+				}
+			}
+
+			if (sOption == "1" || sOption == "2") {
+				this._LocalData.setProperty("/viewModel", "C");
+			} else {
+				this._LocalData.setProperty("/viewModel", "D");
+			}
+
 			var that = this;
 			var aFilters;
 			var oNewFilter,
 				aNewFilters = [];
 
-			// var Osfb = this.getView().byId("smartFilterBar");
-			// var OsfbData = Osfb.getFilters();
-			// aFilters = OsfbData;
 			aFilters = [];
-			var sOption = "4";
 			aNewFilters.push(new Filter("Zzoption", FilterOperator.EQ, sOption));
 			this.getModel("local").setProperty("/Zzoption", sOption);
 			
-			this.getModel("local").setProperty("/ZzTitle", "購買依頼書照会");
-
-			var sZbanfn = oItem.Zbanfn;
-			var sBanfn = oItem.Banfn;
-			var sZspzt = oItem.Zspzt;
+			// this.getModel("local").setProperty("/ZzTitle", "購買依頼書照会");
+			var sZbanfn = "";
+			var sBanfn = "";
+			var sZspzt = "";
+			if (sOption == "4") {
+				var oItem = oEvent.getSource().getBindingContext().getObject();
+				sZbanfn = oItem.Zbanfn;
+				sBanfn = oItem.Banfn;
+				sZspzt = oItem.Zspzt;
+				if (sBanfn !== "") {
+					this._LocalData.setProperty("/changeVisible", false);
+				}
+			} else if (sOption == "2") {
+				var oBinding = oTable.getBinding();
+				var sPath = oBinding.aKeys[oTable.getSelectedIndex()];
+				var oItem = this._oDataModel.getProperty("/" + sPath);
+				sZbanfn = oItem.Zbanfn;
+				sBanfn = oItem.Banfn;
+				sZspzt = oItem.Zspzt;
+			}
 
 			if (sOption !== "1" && (sZbanfn === "" && sBanfn === "")) {
 				MessageBox.error(this.getI18nBundle().getText("msgSelectNoFirst"));
@@ -157,8 +186,8 @@ sap.ui.define([
 			var that = this;
 			var promise = new Promise(function (resolve, reject) {
 
-				var afilter = [];
-				afilter.push(new Filter('Zzoption', sap.ui.model.FilterOperator.EQ, "1"));
+				// var afilter = [];
+				// afilter.push(new Filter('Zzoption', sap.ui.model.FilterOperator.EQ, "1"));
 
 				var oParam = {
 					filters: aFilters,
@@ -190,9 +219,22 @@ sap.ui.define([
 
 		},
 		gotoDetailPage: function (oData) {
+			var sOption = this._LocalData.getProperty("/sOption");
 			if (oData.results.length === 0) {
 				MessageBox.error(this.getI18nBundle().getText("msgNoData"));
 				return;
+			}
+
+			// 控制数据是否可修改
+			this._LocalData.setProperty("/changeVisible", oData.results[0].Ischange);
+			switch (sOption) {
+				// 判断是否可参考
+				case "2":
+					if (!oData.results[0].Isrefrence) {
+						MessageBox.error(this.getI18nBundle().getText("notSameDepartment"));
+						return;
+					}
+					break;
 			}
 
 			var oHeader = {
@@ -304,5 +346,81 @@ sap.ui.define([
 			this.getModel("settings").setProperty("/appProperties/busy", bFlag);
 			this.getModel("settings").refresh();
 		},
+
+		onDeleteConfirm: function () {
+			var oTable = this.byId("internalTable");
+			if (oTable.getSelectedIndices().length == 0) {
+				messages.showText(this._ResourceBundle.getText("noSelect"));
+				return;
+			}
+			var listItems = oTable.getSelectedIndices();
+			var isError = false;
+			listItems.forEach(function (sSelected) {
+				let key = oTable.getContextByIndex(sSelected).getPath();
+				let lineData = this._oDataModel.getProperty(key); 
+				if (lineData.Banfn !== "") {
+					isError = true;
+				}
+			}.bind(this));
+			if (isError) {
+				messages.showText(this._ResourceBundle.getText("msgCantDelete"));
+				return;
+			}
+
+			MessageBox.warning(this.getI18nBundle().getText("msgDeleteConfirm"), {
+				actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+				emphasizedAction: MessageBox.Action.OK,
+				onClose: function(sAction) {
+					//MessageToast.show("Action selected: " + sAction);
+					if (sAction === "CANCEL") {
+						return;
+					} else {
+						this.onDelete();
+					}
+				}.bind(this)
+			});
+		},
+
+		onDelete: function () {
+			var postDoc = this.prepareDeleteBody();
+			postDoc.forEach(function (line, index) {
+				this.postDelete(line, index);
+			}.bind(this));
+		},
+
+		prepareDeleteBody: function() {
+			var postDocs = [];	
+			var oTable = this.byId("internalTable");
+
+			var listItems = oTable.getSelectedIndices();
+
+			listItems.forEach(function (sSelected) {
+				let key = oTable.getContextByIndex(sSelected).getPath();
+				let lineData = this._oDataModel.getProperty(key); 
+				postDocs.push(lineData);                    
+			}.bind(this));
+			return postDocs;
+		},
+		postDelete: function (postData, i) {
+			this.byId("idDisplayPage").setBusy(true);
+			var mParameters = {
+				groupId: "Delete" + Math.floor(i / 100),
+				changeSetId: i,
+				refreshAfterChange: true,
+				success: function (oData) {
+					// this.byId("idCol1").setVisible(true);
+					// this.byId("idCol2").setVisible(true);
+					// this.byId("idCol3").setVisible(true);
+					this.byId("idDisplayPage").setBusy(false);
+					messages.showText("Success");
+				}.bind(this),
+				error: function (oError) {  
+					messages.showError(messages.parseErrors(oError));
+					this.byId("idDisplayPage").setBusy(false);
+				}.bind(this),
+			};
+			//复杂结构
+			this.getOwnerComponent().getModel().create("/ZzSHZbanfnSet", postData, mParameters);
+		}
 	});
 });

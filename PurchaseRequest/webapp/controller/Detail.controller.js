@@ -20,9 +20,24 @@ sap.ui.define([
 		 * set message model and message manager
 		 */
 		onInit: function() {
+			this._LocalData = this.getOwnerComponent().getModel("local");
+			this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			// post data
 			this._postData = [];
 			//this.byId("page").setTitle("test");
+
+			var oRouter = this.getRouter();
+            oRouter.getRoute("Detail").attachMatched(this._onRouteMatched, this);
+		},
+
+		_onRouteMatched: function (oEvent) {
+			if ( this._LocalData.getProperty("/viewModel") == "C" ) {
+				this._LocalData.setProperty("/editCreate", true);
+			} else if ( this._LocalData.getProperty("/viewModel") == "D" ) {
+				this._LocalData.setProperty("/editCreate", false);
+				this.byId("idChange").setText(this._ResourceBundle.getText("ChangeButton"));
+			}
+			
 		},
 
 		onSave: function() {
@@ -1246,6 +1261,16 @@ sap.ui.define([
 
 		onClose: function() {
 			this.byId("uploadDialog").close();
+		},
+
+		onChangePress: function () {
+			if (this.getModel("local").getProperty("/editCreate")) {
+				this.getModel("local").setProperty("/editCreate", false);
+				this.byId("idChange").setText(this._ResourceBundle.getText("ChangeButton"));
+			} else {
+				this.getModel("local").setProperty("/editCreate", true);
+				this.byId("idChange").setText(this._ResourceBundle.getText("DisplayButton"));
+			}
 		}
 
 	});

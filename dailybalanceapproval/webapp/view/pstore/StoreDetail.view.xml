@@ -29,8 +29,8 @@
                             </VBox>
                         </uxap:snappedHeading>
                         <uxap:navigationActions>
-                            <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
-                            <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+                            <!-- <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                            <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/> -->
                             <OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose"  tooltip="Close middle column" visible="true"/>
                         </uxap:navigationActions>
 
@@ -604,8 +604,7 @@
                                             <table:template>
                                                 <Input
                                                     id="txtSyohinTanka"
-                                                    value="{parts:[{path:'pstore>SyohinTanka'},{path: 'pstore>Waers'}], type: 'sap.ui.model.type.Currency',
-                                formatOptions: {showMeasure: false}}"
+                                                    value="{path:'pstore>SyohinTanka', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:2,maxFractionDigits:2,emptyString:0}}"
                                                     maxLength="14"
                                                     textAlign="Right"
                                                     visible="{pstore>Visible}"

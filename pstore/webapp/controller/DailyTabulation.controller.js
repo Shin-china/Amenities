@@ -554,6 +554,69 @@ sap.ui.define([
             this.byId("dialogSelect").destroy();
         },
 
+        onPressHistory: function(oEvent) {
+            var sObjectid = oEvent.getSource().getBindingContext().getObject().KIHYO_NO;
+            this.getApprovalHistory(sObjectid).then(function (res) {
+                try {
+                    var aApprovalHistory = [];
+                    res.forEach(function (item) {
+                        var sTime = this.formatter.dateTime(item.CREATE_DATE, item.CREATE_TIME);
+                        aApprovalHistory.push({
+                            user: item.CREATE_USER,
+                            name: item.USERNAME,
+                            time: new Date(sTime),
+                            comments: item.COMMENTS,
+                            action: item.ACTION,
+                            nodename: item.NODENAME
+                        });
+                    }, this)
+                } catch (error) {}
+                this._LocalData.setProperty("/approvalHistory", aApprovalHistory);
+                this.approvalHistoryDialog();
+            }.bind(this));
+        },
+        getApprovalHistory: function (sObjectid) {
+            var promise = new Promise( function (resolve, reject) {
+                var mParameters = {
+                    refreshAfterChange: false,
+                    success: function (oData) {
+                        resolve(oData.results);
+                    }.bind(this),
+                    error: function (oError) {
+                        messages.showError(messages.parseErrors(oError));
+                    }.bind(this)
+                };
+                this.getOwnerComponent().getModel().setHeaders({"objectid":sObjectid});
+                this.getOwnerComponent().getModel().read("/ZzApprovalHistorySet", mParameters);
+            }.bind(this));
+            return promise;
+        },
+        // 显示审批履历
+        approvalHistoryDialog: function () {
+            this.byId("reportTable").setBusyIndicatorDelay(0);
+            this.byId("reportTable").setBusy(true);
+            var oView = this.getView();
+            if (!this.HistoryDialog) {
+                this.HistoryDialog = this.loadFragment({
+                    id: oView.getId(),
+                    name: "com.shin.pstore.pstore.view.ApprovalHistory"
+                })
+            }
+            this.HistoryDialog.then(function (oHistoryDialog) {
+                var endButton = new Button({
+                    text: this._ResourceBundle.getText("Suspend"),
+                    press: function () {
+                        oHistoryDialog.close();
+                    }.bind(this)
+                });
+                // 添加按钮
+                if (oHistoryDialog.getButtons().length === 0){
+                    oHistoryDialog.addButton(endButton);
+                }
+                oHistoryDialog.open();
+                this.byId("reportTable").setBusy(false);
+            }.bind(this));
+        },
         onDestroy : function(oEvent){
             var oSource = oEvent.getSource();
             if(oSource){

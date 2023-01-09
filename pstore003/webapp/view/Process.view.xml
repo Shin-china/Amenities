@@ -24,14 +24,14 @@
                 <f:content>
                     <smartFilterBar:SmartFilterBar id="smartFilterBarProcess" smartVariant="__SVM01" persistencyKey="salespriceFilterBar" entitySet="ZzShopDailyBalanceSet" useToolbar="false">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration key="KAISHA_CD" visibleInAdvancedArea="true" label="{i18n>KAISHA_CD}" mandatory="mandatory" index="0"/>
-                            <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" controlType="date" mandatory="mandatory" index="1">
+                            <smartFilterBar:ControlConfiguration key="KAISHA_CD" visibleInAdvancedArea="true" label="{i18n>KAISHA_CD}" mandatory="notMandatory" index="1"/>
+                            <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" controlType="date" mandatory="notMandatory" index="0">
                                 <smartFilterBar:customControl>
                                     <DateRangeSelection id="idDateRange" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd"/>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration key="NIKKEIHYO_STATUS_CD" visibleInAdvancedArea="true" label="{i18n>NIKKEIHYO_STATUS_CD}" index="2"/>
-                            <smartFilterBar:ControlConfiguration key="TENPO_CD" visibleInAdvancedArea="true" label="{i18n>TENPO_CD}" mandatory="mandatory" index="3"/>
+                            <smartFilterBar:ControlConfiguration key="NIKKEIHYO_STATUS_CD" visibleInAdvancedArea="true" label="{i18n>NIKKEIHYO_STATUS_CD}" index="3"/>
+                            <smartFilterBar:ControlConfiguration key="TENPO_CD" visibleInAdvancedArea="true" label="{i18n>TENPO_CD}" mandatory="notMandatory" index="2"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -88,30 +88,6 @@
                             </t:template>
                         </t:Column>
 
-                        <t:Column width="6rem" label="{i18n>KAISHA_CD}" sortProperty="KAISHA_CD" filterProperty="KAISHA_CD" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_CD", "leadingProperty":"KAISHA_CD", "sortProperty":"KAISHA_CD", "filterProperty": "KAISHA_CD"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{KAISHA_CD}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="7rem" label="{i18n>KIHYO_NO}" sortProperty="KIHYO_NO" filterProperty="KIHYO_NO" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KIHYO_NO", "leadingProperty":"KIHYO_NO", "sortProperty":"KIHYO_NO", "filterProperty": "KIHYO_NO"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{KIHYO_NO}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="10rem" label="{i18n>KAISHA_NM}" sortProperty="KAISHA_NM" filterProperty="KAISHA_NM" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_NM", "leadingProperty":"KAISHA_NM", "sortProperty":"KAISHA_NM", "filterProperty": "KAISHA_NM"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{KAISHA_NM}" wrapping="false" tooltip="{KAISHA_NM}"/>
-                            </t:template>
-                        </t:Column>
                         <t:Column width="6rem" label="{i18n>EIGYO_BI}" sortProperty="EIGYO_BI" filterProperty="EIGYO_BI" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"EIGYO_BI", "leadingProperty":"EIGYO_BI", "sortProperty":"EIGYO_BI", "filterProperty": "EIGYO_BI"}'/>
@@ -120,7 +96,7 @@
                                 <Text text="{path:'EIGYO_BI', formatter:'.formatter.formtDate_8'}"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="7rem" label="{i18n>TENPO_CD}" sortProperty="TENPO_CD" filterProperty="TENPO_CD" visible="true">
+                        <t:Column width="5rem" label="{i18n>TENPO_CD}" sortProperty="TENPO_CD" filterProperty="TENPO_CD" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"TENPO_CD", "leadingProperty":"TENPO_CD", "sortProperty":"TENPO_CD", "filterProperty": "TENPO_CD"}'/>
                             </t:customData>
@@ -136,60 +112,12 @@
                                 <Text text="{TENPO_NM}" wrapping="false" tooltip="{TENPO_NM}"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>NIKKEIHYO_STATUS}" sortProperty="NIKKEIHYO_STATUS" filterProperty="NIKKEIHYO_STATUS" visible="true">
+                        <t:Column width="8rem" label="{i18n>NIKKEIHYO_STATUS}" sortProperty="NIKKEIHYO_STATUS" filterProperty="NIKKEIHYO_STATUS" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"NIKKEIHYO_STATUS", "leadingProperty":"NIKKEIHYO_STATUS", "sortProperty":"NIKKEIHYO_STATUS", "filterProperty": "NIKKEIHYO_STATUS"}'/>
                             </t:customData>
                             <t:template>
                                 <Text text="{NIKKEIHYO_STATUS}" wrapping="false" tooltip="{NIKKEIHYO_STATUS}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="6rem" label="{i18n>TENPO_KAKUNIN}" sortProperty="TENPO_KAKUNIN" filterProperty="TENPO_KAKUNIN" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"TENPO_KAKUNIN", "leadingProperty":"TENPO_KAKUNIN", "sortProperty":"TENPO_KAKUNIN", "filterProperty": "TENPO_KAKUNIN"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{TENPO_KAKUNIN}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="6rem" label="{i18n>SHINSEI_DT}" sortProperty="SHINSEI_DT" filterProperty="SHINSEI_DT" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"SHINSEI_DT", "leadingProperty":"SHINSEI_DT", "sortProperty":"SHINSEI_DT", "filterProperty": "SHINSEI_DT"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{path:'SHINSEI_DT', formatter:'.formatter.formtDate_8'}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="6rem" label="{i18n>SHINSEI_TM}" sortProperty="SHINSEI_TM" filterProperty="SHINSEI_TM" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"SHINSEI_TM", "leadingProperty":"SHINSEI_TM", "sortProperty":"SHINSEI_TM", "filterProperty": "SHINSEI_TM"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{path:'SHINSEI_TM', formatter:'.formatter.formTime_8'}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="6rem" label="{i18n>REG_USER}" sortProperty="REG_USER" filterProperty="REG_USER" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"REG_USER", "leadingProperty":"REG_USER", "sortProperty":"REG_USER", "filterProperty": "REG_USER"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{REG_USER}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="8rem" label="{i18n>REG_USERNAME}" sortProperty="REG_USERNAME" filterProperty="REG_USERNAME" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"REG_USERNAME", "leadingProperty":"REG_USERNAME", "sortProperty":"REG_USERNAME", "filterProperty": "REG_USERNAME"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{REG_USERNAME}" wrapping="false" tooltip="{REG_USERNAME}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="6rem" label="{i18n>KIHYOSHA_NM}" sortProperty="KIHYOSHA_NM" filterProperty="KIHYOSHA_NM" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KIHYOSHA_NM", "leadingProperty":"KIHYOSHA_NM", "sortProperty":"KIHYOSHA_NM", "filterProperty": "KIHYOSHA_NM"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{KIHYOSHA_NM}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>LAST_SHINSEI_DT}" sortProperty="LAST_SHINSEI_DT" filterProperty="LAST_SHINSEI_DT" visible="true">
@@ -224,6 +152,56 @@
                                 <Text text="{UPD_USERNAME}" wrapping="false" tooltip="{UPD_USERNAME}"/>
                             </t:template>
                         </t:Column>
+                        <t:Column width="7rem" label="{i18n>KIHYO_NO}" sortProperty="KIHYO_NO" filterProperty="KIHYO_NO" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KIHYO_NO", "leadingProperty":"KIHYO_NO", "sortProperty":"KIHYO_NO", "filterProperty": "KIHYO_NO"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KIHYO_NO}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>KIHYOSHA_NM}" sortProperty="KIHYOSHA_NM" filterProperty="KIHYOSHA_NM" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KIHYOSHA_NM", "leadingProperty":"KIHYOSHA_NM", "sortProperty":"KIHYOSHA_NM", "filterProperty": "KIHYOSHA_NM"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KIHYOSHA_NM}" wrapping="false" tooltip="{KIHYOSHA_NM}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>SHINSEI_DT}" sortProperty="SHINSEI_DT" filterProperty="SHINSEI_DT" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SHINSEI_DT", "leadingProperty":"SHINSEI_DT", "sortProperty":"SHINSEI_DT", "filterProperty": "SHINSEI_DT"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'SHINSEI_DT', formatter:'.formatter.formtDate_8'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>SHINSEI_TM}" sortProperty="SHINSEI_TM" filterProperty="SHINSEI_TM" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SHINSEI_TM", "leadingProperty":"SHINSEI_TM", "sortProperty":"SHINSEI_TM", "filterProperty": "SHINSEI_TM"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'SHINSEI_TM', formatter:'.formatter.formTime_8'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>REG_USER}" sortProperty="REG_USER" filterProperty="REG_USER" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"REG_USER", "leadingProperty":"REG_USER", "sortProperty":"REG_USER", "filterProperty": "REG_USER"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{REG_USER}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{i18n>REG_USERNAME}" sortProperty="REG_USERNAME" filterProperty="REG_USERNAME" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"REG_USERNAME", "leadingProperty":"REG_USERNAME", "sortProperty":"REG_USERNAME", "filterProperty": "REG_USERNAME"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{REG_USERNAME}" wrapping="false" tooltip="{REG_USERNAME}"/>
+                            </t:template>
+                        </t:Column>
+                        
+                        
                         <t:Column width="6rem" label="{i18n>SHONIN_DT_BUTYOU}" sortProperty="SHONIN_DT_BUTYOU" filterProperty="SHONIN_DT_BUTYOU" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"SHONIN_DT_BUTYOU", "leadingProperty":"SHONIN_DT_BUTYOU", "sortProperty":"SHONIN_DT_BUTYOU", "filterProperty": "SHONIN_DT_BUTYOU"}'/>
@@ -238,6 +216,31 @@
                             </t:customData>
                             <t:template>
                                 <Text text="{path:'SHONIN_TM_BUTYOU', formatter:'.formatter.formTime_8'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>TENPO_KAKUNIN}" sortProperty="TENPO_KAKUNIN" filterProperty="TENPO_KAKUNIN" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TENPO_KAKUNIN", "leadingProperty":"TENPO_KAKUNIN", "sortProperty":"TENPO_KAKUNIN", "filterProperty": "TENPO_KAKUNIN"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{TENPO_KAKUNIN}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="5rem" label="{i18n>KAISHA_CD}" sortProperty="KAISHA_CD" filterProperty="KAISHA_CD" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_CD", "leadingProperty":"KAISHA_CD", "sortProperty":"KAISHA_CD", "filterProperty": "KAISHA_CD"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KAISHA_CD}"/>
+                            </t:template>
+                        </t:Column>
+                        
+                        <t:Column width="10rem" label="{i18n>KAISHA_NM}" sortProperty="KAISHA_NM" filterProperty="KAISHA_NM" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_NM", "leadingProperty":"KAISHA_NM", "sortProperty":"KAISHA_NM", "filterProperty": "KAISHA_NM"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KAISHA_NM}" wrapping="false" tooltip="{KAISHA_NM}"/>
                             </t:template>
                         </t:Column>
 

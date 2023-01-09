@@ -41,7 +41,7 @@
                     useTablePersonalisation="false" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
                     requestAtLeastFields="KAISHA_CD,NIKKEIHYO_KBN_NM,EDIT,SAVE,ACCEPT,REJECT,CONFIRM,to_ZzApprovalHistory,TENPO_CD,TYPE,MESSAGE,NODE,NODENAME"
                     class="sapUiThinyMarginTop">
-                    <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="1" selectionMode="None">
+                    <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="1" selectionMode="None" fixedColumnCount="3">
                         <t:rowActionTemplate>
                             <t:RowAction>
                                 <t:items>
@@ -50,12 +50,44 @@
                             </t:RowAction>
                         </t:rowActionTemplate>
                         <t:columns>
+                            <t:Column width="6rem" label="{i18n>EIGYO_BI}" sortProperty="EIGYO_BI">
+                                <t:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"EIGYO_BI", "leadingProperty":"EIGYO_BI", "sortProperty":"EIGYO_BI", "filterProperty": "EIGYO_BI"}'/>
+                                </t:customData>
+                                <t:template>
+                                    <Text text="{path:'EIGYO_BI', formatter:'.formatter.formtDate_8'}"/>
+                                </t:template>
+                            </t:Column>
                             <t:Column width="9rem" label="{i18n>NIKKEIHYO_KBN}" sortProperty="NIKKEIHYO_KBN">
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"NIKKEIHYO_KBN", "leadingProperty":"NIKKEIHYO_KBN", "sortProperty":"NIKKEIHYO_KBN", "filterProperty": "NIKKEIHYO_KBN"}'/>
                                 </t:customData>
                                 <t:template>
                                     <Text text="{NIKKEIHYO_KBN_NM}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6rem" label="{i18n>TENPO_CD}" sortProperty="TENPO_CD">
+                                <t:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"TENPO_CD", "leadingProperty":"TENPO_CD", "sortProperty":"TENPO_CD", "filterProperty": "TENPO_CD"}'/>
+                                </t:customData>
+                                <t:template>
+                                    <Text text="{TENPO_CD}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="12rem" label="{i18n>TENPO_NM}" sortProperty="TENPO_NM">
+                                <t:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"TENPO_NM", "leadingProperty":"TENPO_NM", "sortProperty":"TENPO_NM", "filterProperty": "TENPO_NM"}'/>
+                                </t:customData>
+                                <t:template>
+                                    <Text text="{TENPO_NM}" wrapping="false" tooltip="{TENPO_NM}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6rem" label="{i18n>NODENAME}" sortProperty="NODENAME">
+                                <t:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"NODENAME", "leadingProperty":"NODENAME", "sortProperty":"NODENAME", "filterProperty": "NODENAME"}'/>
+                                </t:customData>
+                                <t:template>
+                                    <Text text="{NODENAME}"/>
                                 </t:template>
                             </t:Column>
                             <t:Column width="6rem" label="{i18n>KIHYO_NO}" sortProperty="KIHYO_NO">
@@ -66,14 +98,7 @@
                                     <Text text="{KIHYO_NO}"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="6rem" label="{i18n>EIGYO_BI}" sortProperty="EIGYO_BI">
-                                <t:customData>
-                                    <core:CustomData key="p13nData" value='\{"columnKey":"EIGYO_BI", "leadingProperty":"EIGYO_BI", "sortProperty":"EIGYO_BI", "filterProperty": "EIGYO_BI"}'/>
-                                </t:customData>
-                                <t:template>
-                                    <Text text="{path:'EIGYO_BI', formatter:'.formatter.formtDate_8'}"/>
-                                </t:template>
-                            </t:Column>
+                            
                         </t:columns>
                     </t:Table>
                 </smartTable:SmartTable>

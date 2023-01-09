@@ -44,6 +44,7 @@ sap.ui.define([
                 var oView = this.getView();
                 this._InCashSet = [];
                 this._OutCashSet = [];
+                this._Error = false;
                 //汇总model
                 this._sum = {
                     "PUriage": 0, //1. a + b
@@ -179,8 +180,11 @@ sap.ui.define([
             },
 
             onSave: function () {
+                // that._comm.removeAllMessages();
+                // this._comm.showMessagePopoverFor(that, "log", "", "btnMessagePopover");
+                this.byId("btnMessagePopover").setVisible(false);
                 var checkOk = this.checkEditData();
-                if (!checkOk) {
+                if (!checkOk || this._Error == true) {
                     return;
                 }
 
@@ -515,6 +519,10 @@ sap.ui.define([
             //景品仕入高合计
             onLineAmountChange: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'6','0');
+                if (this._Error) {
+                    return;
+                };
 
                 var aItems = this.byId("tabGoods").getRows();
                 var amount = 0, waers = '', lineAmount = 0;
@@ -739,7 +747,12 @@ sap.ui.define([
             },
 
             onCalcPUriage: function (oEvent) {
+
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                };
                 //1. a + b
                 this._sum.PUriage = this._calcFieldsSum("txtPGenkinUriage", "txtPCardUriage");
 
@@ -769,6 +782,10 @@ sap.ui.define([
 
             onCalcSUriage: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                };
                 //2.c + d
                 this._sum.SUriage = this._calcFieldsSum("txtSGenkinUriage", "txtSCardUriage");
 
@@ -798,6 +815,10 @@ sap.ui.define([
 
             onCalcKadoHanbaiGokei: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                };
                 //sum 5.
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var fHanbaiAmt = this.byId("txtHanbaiAmt").getValue();
@@ -835,8 +856,10 @@ sap.ui.define([
                 return sVal;
             },
 
-            onCalcHnjtsKrkshdk: function (oEvent) { 
+            onCalcHnjtsKrkshdk:function (oEvent,precision,scale) {
                 this.onSetDefaultValue(oEvent);
+                // this.onInpuValidation(oEvent,'15','2');
+                this.onInpuValidation(oEvent,precision,scale);
                 
                 //Sum I - II + III + A - B
                 var oCurrencyParse = NumberFormat.getFloatInstance();
@@ -859,6 +882,10 @@ sap.ui.define([
 
             onCalcSofukinGokei: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                }; 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
                 var fZnjtsHnshSfknRk = this.byId("txtZnjtsHnshSfknRk").getValue();
                 var fRyogaekinModoshi = this.byId("txtRyogaekinModoshi").getValue();
@@ -875,6 +902,10 @@ sap.ui.define([
 
             onCalcHnjtsKrkshdkUgki: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                }; 
                 //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
@@ -884,6 +915,13 @@ sap.ui.define([
             },
 
             onCalcYokuzitunyuukin: function (oEvent) {
+
+                this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                };
+
                 this.onSetDefaultValue(oEvent);
                 //Sum XI
                 this._sum.Yokuzitunyuukin = this._calcFieldsSum("txtYokuzitusohukin", "txtYokuzituryougaekin");
@@ -1083,6 +1121,22 @@ sap.ui.define([
                 }
             },
 
+            onSetDefaultValuetab1Col7: function(oEvent){ 
+                this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'6','0');
+                if (this._Error) {
+                    return;
+                }; 
+            },
+
+            onSetDefaultValuetab: function(oEvent){ 
+                this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                }; 
+            },
+
             onInpuValidation: function (oEvent,precision,scale) {
                 this.onSetDefaultValue(oEvent);
 
@@ -1096,18 +1150,22 @@ sap.ui.define([
                 value = oFormat.parse(value);
                 // var value = oSource.getBindingContext().getObject().Amount;
                 oSource.setValueState("None");
+                this._Error = false;
                 if (isNaN(value)) {
                     oSource.setValueState("Error");
                     oSource.setValueStateText(this._ResourceBundle.getText("notNumber"));
+                    this._Error = true;
                 } else {
                     var aSplitNumber = value.toString().split(".");
                     if (aSplitNumber[0].length > iIntager) {
                         oSource.setValueState("Error");
                         oSource.setValueStateText(this._ResourceBundle.getText("integerLengthError",[iIntager]));
+                        this._Error = true;
                     }
                     if (aSplitNumber[1] && aSplitNumber[1].length > scale) {
                         oSource.setValueState("Error");
                         oSource.setValueStateText(this._ResourceBundle.getText("fractionLengthError",[scale]));
+                        this._Error = true;
                     }
                 }
 

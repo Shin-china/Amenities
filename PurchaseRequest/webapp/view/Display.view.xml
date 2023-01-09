@@ -40,6 +40,7 @@
                             <smartfilterbar:ControlConfiguration index="8" key="Ernam" visibleInAdvancedArea="true" label="{i18n>Ernam}" />
                             <smartfilterbar:ControlConfiguration index="9" key="Badat" visibleInAdvancedArea="true" label="{i18n>Badat}" />
                             <smartfilterbar:ControlConfiguration index="10" key="Zbanfn" visibleInAdvancedArea="true" label="{i18n>Zbanfn}" visible="false" />
+                            <smartfilterbar:ControlConfiguration index="11" key="Department" visibleInAdvancedArea="true" label="{i18n>Department}" />
                         </smartfilterbar:controlConfiguration>
                     </smartfilterbar:SmartFilterBar>
                 </f:content>
@@ -48,11 +49,20 @@
         <f:content>
             <smarttable:SmartTable id="smartTable" enableAutoBinding="false" smartFilterId="smartFilter" tableType="Table" entitySet="ZzSHZbanfnSet"
                 requestAtLeastFields="Zbanfn,Zspzt">
-                <table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowActionCount="2">
+                <smarttable:customToolbar>
+                    <OverflowToolbar width="100%">
+                        <ToolbarSpacer />
+                        <Button type="Transparent" text="{i18n>Create}" press=".onNavDetail($event,'1')"/>
+                        <Button type="Transparent" text="{i18n>CreateReference}" press=".onNavDetail($event,'2')"/>
+                        <Button type="Transparent" text="{i18n>Delete}" press="onDeleteConfirm"/>
+                        <!-- <Button type="Transparent" enabled="{local>/btDelete}" text="{i18n>Delete}" press=".onConfirmBox($event,'DeleteConfirmMsg')"/> -->
+                    </OverflowToolbar>
+                </smarttable:customToolbar>
+                <table:Table id="internalTable" visibleRowCountMode="Auto" rowActionCount="2">
                     <table:rowActionTemplate>
                         <table:RowAction>
                             <table:items>
-                                <table:RowActionItem type="Navigation" press="onNavDetail"/>
+                                <table:RowActionItem type="Navigation" press=".onNavDetail($event,'4')"/>
                                 <table:RowActionItem icon="sap-icon://customer-history" type="Custom" press="onPressHistory"/>
                             </table:items>
                         </table:RowAction>
@@ -149,19 +159,6 @@
                         </table:Column>
                     </table:columns>
                     <table:columns>
-                        <table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Loekz" filterProperty="Loekz">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Loekz", "leadingProperty":"Loekz", "sortProperty": "Loekz", "filterProperty": "Loekz"}' />
-                            </table:customData>
-                            <table:label>
-                                <Label text="{i18n>Loekz}" />
-                            </table:label>
-                            <table:template>
-                                <Label text="{Loekz}" />
-                            </table:template>
-                        </table:Column>
-                    </table:columns>
-                    <table:columns>
                         <table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Ernam" filterProperty="Ernam">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Ernam", "leadingProperty":"Ernam", "sortProperty": "Ernam", "filterProperty": "Ernam"}' />
@@ -188,6 +185,32 @@
                         </table:Column>
                     </table:columns>
                     <table:columns>
+                        <table:Column width="8rem" visible="true" autoResizable="true" sortProperty="Department" filterProperty="Department">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Department", "leadingProperty":"Department", "sortProperty": "Department", "filterProperty": "Department"}' />
+                            </table:customData>
+                            <table:label>
+                                <Label text="{i18n>Department}" />
+                            </table:label>
+                            <table:template>
+                                <Label text="{Department}" tooltip="{Department}"/>
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                    <table:columns>
+                        <table:Column width="8rem" visible="true" autoResizable="true" sortProperty="Departmenttext" filterProperty="Departmenttext">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Departmenttext", "leadingProperty":"Departmenttext", "sortProperty": "Departmenttext", "filterProperty": "Departmenttext"}' />
+                            </table:customData>
+                            <table:label>
+                                <Label text="{i18n>Departmenttext}" />
+                            </table:label>
+                            <table:template>
+                                <Label text="{Departmenttext}" tooltip="{Departmenttext}"/>
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                    <table:columns>
                         <table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Badat" filterProperty="Badat">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Badat", "leadingProperty":"Badat", "sortProperty": "Badat", "filterProperty": "Badat"}' />
@@ -198,6 +221,19 @@
                             <table:template>
                                 <!--<Label text="{Badat}"/>-->
                                 <Label text="{path:'Badat',formatter:'.formatter.convertDate'}" />
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                    <table:columns>
+                        <table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Loekz" filterProperty="Loekz">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Loekz", "leadingProperty":"Loekz", "sortProperty": "Loekz", "filterProperty": "Loekz"}' />
+                            </table:customData>
+                            <table:label>
+                                <Label text="{i18n>Loekz}" />
+                            </table:label>
+                            <table:template>
+                                <Label text="{Loekz}" />
                             </table:template>
                         </table:Column>
                     </table:columns>

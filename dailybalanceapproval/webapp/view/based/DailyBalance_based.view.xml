@@ -24,8 +24,8 @@
 						</VBox>
 					</uxap:snappedHeading>
                     <uxap:navigationActions>
-                        <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
-                        <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+                        <!-- <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                        <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/> -->
                         <OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose"  tooltip="Close middle column" visible="true"/>
                     </uxap:navigationActions>
 

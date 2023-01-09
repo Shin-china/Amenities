@@ -24,14 +24,14 @@
                 <f:content>
                     <smartFilterBar:SmartFilterBar id="smartFilterBar" smartVariant="__SVM02" persistencyKey="DisplayFilterBar" entitySet="ZzDailyBalanceDisplaySet" useToolbar="false">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration key="KIHYO_NO" visibleInAdvancedArea="true" label="{i18n>KIHYO_NO}" index="1"/>
+                            <smartFilterBar:ControlConfiguration key="KIHYO_NO" visibleInAdvancedArea="true" label="{i18n>KIHYO_NO}" index="4"/>
                             <smartFilterBar:ControlConfiguration key="KAISHA_CD" visibleInAdvancedArea="true" label="{i18n>KAISHA_CD}" index="2" />
-                            <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" index="3">
+                            <smartFilterBar:ControlConfiguration key="EIGYO_BI" visibleInAdvancedArea="true" label="{i18n>EIGYO_BI}" index="1">
                                 <smartFilterBar:customControl>
                                     <DateRangeSelection id="idDateRange" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd"/>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration key="TENPO_CD" visibleInAdvancedArea="true" label="{i18n>TENPO_CD}" index="4" />
+                            <smartFilterBar:ControlConfiguration key="TENPO_CD" visibleInAdvancedArea="true" label="{i18n>TENPO_CD}" index="3" />
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -74,30 +74,6 @@
                             </t:template>
                         </t:Column>
                         
-                        <t:Column width="6rem" label="{i18n>KIHYO_NOT1}" sortProperty="KIHYO_NO" filterProperty="KIHYO_NO" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KIHYO_NO", "leadingProperty":"KIHYO_NO", "sortProperty":"KIHYO_NO", "filterProperty": "KIHYO_NO"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{KIHYO_NO}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="6rem" label="{i18n>KAISHA_CDT1}" sortProperty="KAISHA_CD" filterProperty="KAISHA_CD" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_CD", "leadingProperty":"KAISHA_CD", "sortProperty":"KAISHA_CD", "filterProperty": "KAISHA_CD"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{KAISHA_CD}"/>
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="10rem" label="{i18n>KAISHA_NMT1}" sortProperty="KAISHA_NM" filterProperty="KAISHA_NM" visible="true">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_NM", "leadingProperty":"KAISHA_NM", "sortProperty":"KAISHA_NM", "filterProperty": "KAISHA_NM"}'/>
-                            </t:customData>
-                            <t:template>
-                                <Text text="{KAISHA_NM}" tooltip="{KAISHA_NM}" wrapping="false"/>
-                            </t:template>
-                        </t:Column>
                         <t:Column width="6rem" label="{i18n>EIGYO_BIT1}" sortProperty="EIGYO_BI" filterProperty="EIGYO_BI" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"EIGYO_BI", "leadingProperty":"EIGYO_BI", "sortProperty":"EIGYO_BI", "filterProperty": "EIGYO_BI"}'/>
@@ -106,7 +82,7 @@
                                 <Text text="{path:'EIGYO_BI', formatter:'.formatter.formtDate_8'}"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="6rem" label="{i18n>TENPO_CDT1}" sortProperty="TENPO_CD" filterProperty="TENPO_CD" visible="true">
+                        <t:Column width="5rem" label="{i18n>TENPO_CDT1}" sortProperty="TENPO_CD" filterProperty="TENPO_CD" visible="true">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"TENPO_CD", "leadingProperty":"TENPO_CD", "sortProperty":"TENPO_CD", "filterProperty": "TENPO_CD"}'/>
                             </t:customData>
@@ -138,20 +114,28 @@
                                 <Text text="{GJAHR}"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="6rem" label="{i18n>BLARTT1}" sortProperty="BLART" filterProperty="BLART" visible="true">
+                        <t:Column width="8rem" label="{i18n>STBLGT1}" sortProperty="STBLG" filterProperty="STBLG" visible="true">
                             <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"BLART", "leadingProperty":"BLART", "sortProperty":"BLART", "filterProperty": "BLART"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"STBLG", "leadingProperty":"STBLG", "sortProperty":"STBLG", "filterProperty": "STBLG"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{BLART}"/>
+                                <Text text="{STBLG}"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="12rem" label="{i18n>BKTXTT1}" sortProperty="BKTXT" filterProperty="BKTXT" visible="true">
+                        <t:Column width="10rem" label="{i18n>STJAHT1}" sortProperty="STJAH" filterProperty="STJAH" visible="true">
                             <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"BKTXT", "leadingProperty":"BKTXT", "sortProperty":"BKTXT", "filterProperty": "BKTXT"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"STJAH", "leadingProperty":"STJAH", "sortProperty":"STJAH", "filterProperty": "STJAH"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{BKTXT}" tooltip="{BKTXT}" wrapping="false"/>
+                                <Text text="{path:'STJAH', formatter:'.formatter.allZeroToBlank'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{i18n>KIHYO_NOT1}" sortProperty="KIHYO_NO" filterProperty="KIHYO_NO" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KIHYO_NO", "leadingProperty":"KIHYO_NO", "sortProperty":"KIHYO_NO", "filterProperty": "KIHYO_NO"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KIHYO_NO}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="6rem" label="{i18n>CPUDTT1}" sortProperty="CPUDT" filterProperty="CPUDT" visible="true">
@@ -178,20 +162,36 @@
                                 <Text text="{USNAM_TEXT}" tooltip="{USNAM_TEXT}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="8rem" label="{i18n>STBLGT1}" sortProperty="STBLG" filterProperty="STBLG" visible="true">
+                        <t:Column width="12rem" label="{i18n>BKTXTT1}" sortProperty="BKTXT" filterProperty="BKTXT" visible="true">
                             <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"STBLG", "leadingProperty":"STBLG", "sortProperty":"STBLG", "filterProperty": "STBLG"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BKTXT", "leadingProperty":"BKTXT", "sortProperty":"BKTXT", "filterProperty": "BKTXT"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{STBLG}"/>
+                                <Text text="{BKTXT}" tooltip="{BKTXT}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>STJAHT1}" sortProperty="STJAH" filterProperty="STJAH" visible="true">
+                        <t:Column width="6rem" label="{i18n>BLARTT1}" sortProperty="BLART" filterProperty="BLART" visible="true">
                             <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"STJAH", "leadingProperty":"STJAH", "sortProperty":"STJAH", "filterProperty": "STJAH"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BLART", "leadingProperty":"BLART", "sortProperty":"BLART", "filterProperty": "BLART"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'STJAH', formatter:'.formatter.allZeroToBlank'}"/>
+                                <Text text="{BLART}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="5rem" label="{i18n>KAISHA_CDT1}" sortProperty="KAISHA_CD" filterProperty="KAISHA_CD" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_CD", "leadingProperty":"KAISHA_CD", "sortProperty":"KAISHA_CD", "filterProperty": "KAISHA_CD"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KAISHA_CD}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>KAISHA_NMT1}" sortProperty="KAISHA_NM" filterProperty="KAISHA_NM" visible="true">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KAISHA_NM", "leadingProperty":"KAISHA_NM", "sortProperty":"KAISHA_NM", "filterProperty": "KAISHA_NM"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{KAISHA_NM}" tooltip="{KAISHA_NM}" wrapping="false"/>
                             </t:template>
                         </t:Column>
                     </t:columns>

@@ -39,6 +39,10 @@ sap.ui.define([
                 if (sLayout) {this._LocalData.setProperty("/layout", sLayout);
                     
                 }
+
+                // 用以控制第二页面全屏的按钮
+                this._LocalData.setProperty("/actionButtonsInfo/midColumn/exitFullScreen","OneColumn");
+                this._LocalData.setProperty("/actionButtonsInfo/midColumn/fullScreen",null);
             },
 
             //获取配置参数

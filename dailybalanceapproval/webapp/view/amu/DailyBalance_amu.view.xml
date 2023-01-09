@@ -24,8 +24,8 @@
 						</VBox>
 					</uxap:snappedHeading>
                     <uxap:navigationActions>
-                        <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
-                        <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+                        <!-- <OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                        <OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${local>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/> -->
                         <OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose"  tooltip="Close middle column" visible="true"/>
                     </uxap:navigationActions>
 
@@ -430,7 +430,7 @@
 				type="Negative"
 				press="onMessagePopoverPress" />
 			<ToolbarSpacer/>
-			<Button id="idSave" type="Transparent" text="{i18n_amu>PreSave}" press=".onBalanceSave('Save')" enabled="{local>/viewEditable}"/>
+			<Button id="idSave" type="Transparent" text="{i18n_amu>PreSave}" press=".onBalanceSave('Approval')" enabled="{local>/viewEditable}"/>
             <Button id="idChange" type="Transparent" text="{i18n_amu>ChangeButton}" press="onChangePress" enabled="{local>/btChange}"/>
 			<Button type="Accept" text="{i18n>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
 			<Button type="Reject" text="{i18n>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>

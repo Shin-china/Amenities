@@ -179,20 +179,11 @@
                 },
                 {
                     "pattern": "",
-                    "name": "Home",
+                    "name": "Display",
                     "titleTarget": "",
                     "greedy": false,
                     "target": [
-                        "Home"
-                    ]
-                },
-                {
-                    "pattern": "Main",
-                    "name": "Main",
-                    "titleTarget": "",
-                    "greedy": false,
-                    "target": [
-                        "Main"
+                        "Display"
                     ]
                 },
                 {
@@ -212,14 +203,9 @@
                     "viewName": "App",
                     "viewLevel": 1
                 },
-                "Home": {
+                "Display": {
                     "viewType": "XML",
-                    "viewName": "Home",
-                    "viewLevel": 2
-                },
-                "Main": {
-                    "viewType": "XML",
-                    "viewName": "Main",
+                    "viewName": "Display",
                     "viewLevel": 2
                 },
                 "Detail": {
