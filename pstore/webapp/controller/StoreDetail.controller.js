@@ -915,6 +915,13 @@ sap.ui.define([
             },
 
             onCalcYokuzitunyuukin: function (oEvent) {
+
+                this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                };
+
                 this.onSetDefaultValue(oEvent);
                 //Sum XI
                 this._sum.Yokuzitunyuukin = this._calcFieldsSum("txtYokuzitusohukin", "txtYokuzituryougaekin");
