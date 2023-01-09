@@ -31,6 +31,19 @@ sap.ui.define([
             return sIcon;
         },
 
+        formTime_8: function (value) {
+			if (value) {
+				var timeFormat = DateFormat.getTimeInstance({
+					pattern: "HH:mm:ss"
+				});
+				if (value.ms !== 0) {
+					return timeFormat.format(new Date(value.ms),true);
+				} 
+				return null;
+			}
+			return value;
+		},
+
         buttonTypeFormatter: function (aMessages) {
             var sHighestSeverityIcon;
 

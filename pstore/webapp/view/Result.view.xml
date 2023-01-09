@@ -19,12 +19,12 @@
                 <f:content>
                     <smartfilterbar:SmartFilterBar id="docFilter" smartVariant="__SVM02" persistencyKey="docFilterPersistent" entitySet="AccountDocSet" useToolbar="false">
                         <smartfilterbar:controlConfiguration>
-                            <smartfilterbar:ControlConfiguration key="KihyoNo" label="{i18n>KihyoNo}" visibleInAdvancedArea="true" index="0"/>
+                            <smartfilterbar:ControlConfiguration key="KihyoNo" label="{i18n>KihyoNo}" visibleInAdvancedArea="true" index="3"/>
                             <smartfilterbar:ControlConfiguration key="KaishaCd" label="{i18n>KaishaCd}" visibleInAdvancedArea="true" index="1"/>
-                            <smartfilterbar:ControlConfiguration key="EigyoBi" label="{i18n>EigyoBi}" visibleInAdvancedArea="true" index="2" />
-                            <smartfilterbar:ControlConfiguration key="TenpoCd" label="{i18n>TenpoCd}" visibleInAdvancedArea="true" index="3" />
-                            <smartfilterbar:ControlConfiguration key="Belnr" label="{i18n>Belnr}" visibleInAdvancedArea="true" index="4" />
-                            <smartfilterbar:ControlConfiguration key="Gjahr" label="{i18n>Gjahr}" visibleInAdvancedArea="true" index="5" />
+                            <smartfilterbar:ControlConfiguration key="EigyoBi" label="{i18n>EigyoBi}" visibleInAdvancedArea="true" index="0" />
+                            <smartfilterbar:ControlConfiguration key="TenpoCd" label="{i18n>TenpoCd}" visibleInAdvancedArea="true" index="2" />
+                            <!-- <smartfilterbar:ControlConfiguration key="Belnr" label="{i18n>Belnr}" visibleInAdvancedArea="true" index="4" />
+                            <smartfilterbar:ControlConfiguration key="Gjahr" label="{i18n>Gjahr}" visibleInAdvancedArea="true" index="5" /> -->
                         </smartfilterbar:controlConfiguration>
                     </smartfilterbar:SmartFilterBar>
                 </f:content>
@@ -42,30 +42,8 @@
 
                 <table:Table id="tableResultInside" threshold="20" visibleRowCountMode="Auto">
                     <table:columns>
-                        <table:Column width="6rem" label="{i18n>tab2_col01}" sortProperty="KihyoNo" filterProperty="KihyoNo" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KihyoNo", "leadingProperty":"KihyoNo", "sortProperty":"KihyoNo", "filterProperty": "KihyoNo"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text text="{KihyoNo}"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="6rem" label="{i18n>tab2_col02}" sortProperty="KaishaCd" filterProperty="KaishaCd" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KaishaCd", "leadingProperty":"KaishaCd", "sortProperty":"KaishaCd", "filterProperty": "KaishaCd"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text text="{KaishaCd}"/>
-                            </table:template>
-                        </table:Column>
-                        <table:Column width="12rem" label="{i18n>tab2_col03}" sortProperty="KaishaNm" filterProperty="KaishaNm" visible="true">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"KaishaNm", "leadingProperty":"KaishaNm", "sortProperty":"KaishaNm", "filterProperty": "KaishaNm"}'/>
-                            </table:customData>
-                            <table:template>
-                                <Text text="{KaishaNm}" wrapping="false" tooltip="{KaishaNm}"/>
-                            </table:template>
-                        </table:Column>
+                        
+                        
                         <table:Column width="6rem" label="{i18n>tab2_col04}" sortProperty="EigyoBi" filterProperty="EigyoBi" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"EigyoBi", "leadingProperty":"EigyoBi", "sortProperty":"EigyoBi", "filterProperty": "EigyoBi"}'/>
@@ -74,7 +52,7 @@
                                 <Text text="{path: 'EigyoBi', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { pattern: 'yyyy/MM/dd'}, constraints: { displayFormat: 'Date'}}"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>tab2_col05}" sortProperty="TenpoCd" filterProperty="TenpoCd" visible="true">
+                        <table:Column width="5rem" label="{i18n>tab2_col05}" sortProperty="TenpoCd" filterProperty="TenpoCd" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"TenpoCd", "leadingProperty":"TenpoCd", "sortProperty":"TenpoCd", "filterProperty": "TenpoCd"}'/>
                             </table:customData>
@@ -106,20 +84,28 @@
                                 <Text text="{Gjahr}"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>tab2_col09}" sortProperty="Blart" filterProperty="Blart" visible="true">
+                        <table:Column width="6rem" label="{i18n>tab2_col14}" sortProperty="Stblg" filterProperty="Stblg" visible="true">
                             <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Blart", "leadingProperty":"Blart", "sortProperty":"Blart", "filterProperty": "Blart"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Stblg", "leadingProperty":"Stblg", "sortProperty":"Stblg", "filterProperty": "Stblg"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{Blart}"/>
+                                <Text text="{Stblg}"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="10rem" label="{i18n>tab2_col10}" sortProperty="Bktxt" filterProperty="Bktxt" visible="true">
+                        <table:Column width="6rem" label="{i18n>tab2_col15}" sortProperty="Stjah" filterProperty="Stjah" visible="true">
                             <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Bktxt", "leadingProperty":"Bktxt", "sortProperty":"Bktxt", "filterProperty": "Bktxt"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Stjah", "leadingProperty":"Stjah", "sortProperty":"Stjah", "filterProperty": "Stjah"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{Bktxt}" wrapping="false" tooltip="{Bktxt}"/>
+                                <Text text="{path:'Stjah', formatter:'.formatter.formatFinancialYear'}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>tab2_col01}" sortProperty="KihyoNo" filterProperty="KihyoNo" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KihyoNo", "leadingProperty":"KihyoNo", "sortProperty":"KihyoNo", "filterProperty": "KihyoNo"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{KihyoNo}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="6rem" label="{i18n>tab2_col11}" sortProperty="Cpudt" filterProperty="Cpudt" visible="true">
@@ -146,20 +132,36 @@
                                 <Text text="{UsnamText}" wrapping="false" tooltip="{UsnamText}"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>tab2_col14}" sortProperty="Stblg" filterProperty="Stblg" visible="true">
+                        <table:Column width="10rem" label="{i18n>tab2_col10}" sortProperty="Bktxt" filterProperty="Bktxt" visible="true">
                             <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Stblg", "leadingProperty":"Stblg", "sortProperty":"Stblg", "filterProperty": "Stblg"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Bktxt", "leadingProperty":"Bktxt", "sortProperty":"Bktxt", "filterProperty": "Bktxt"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{Stblg}"/>
+                                <Text text="{Bktxt}" wrapping="false" tooltip="{Bktxt}"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>tab2_col15}" sortProperty="Stjah" filterProperty="Stjah" visible="true">
+                        <table:Column width="6rem" label="{i18n>tab2_col09}" sortProperty="Blart" filterProperty="Blart" visible="true">
                             <table:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"Stjah", "leadingProperty":"Stjah", "sortProperty":"Stjah", "filterProperty": "Stjah"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Blart", "leadingProperty":"Blart", "sortProperty":"Blart", "filterProperty": "Blart"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{path:'Stjah', formatter:'.formatter.formatFinancialYear'}"/>
+                                <Text text="{Blart}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="5rem" label="{i18n>tab2_col02}" sortProperty="KaishaCd" filterProperty="KaishaCd" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KaishaCd", "leadingProperty":"KaishaCd", "sortProperty":"KaishaCd", "filterProperty": "KaishaCd"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{KaishaCd}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>tab2_col03}" sortProperty="KaishaNm" filterProperty="KaishaNm" visible="true">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"KaishaNm", "leadingProperty":"KaishaNm", "sortProperty":"KaishaNm", "filterProperty": "KaishaNm"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{KaishaNm}" wrapping="false" tooltip="{KaishaNm}"/>
                             </table:template>
                         </table:Column>
                     </table:columns>
