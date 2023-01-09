@@ -260,6 +260,30 @@ sap.ui.define([
             }
             return value;
         },
+
+        dateTime: function (date,time) {
+			/*eslint no-unused-expressions: ["error", { "allowTernary": true }]*/
+			if (date) {
+				var oDateFormat = DateFormat.getDateTimeInstance({
+					pattern: "yyyy-MM-dd"
+				});
+				date = oDateFormat.format(new Date(date));
+			}
+			if (time) {
+				var timeFormat = DateFormat.getTimeInstance({
+					pattern: "HH:mm:ss"
+				});
+				if (time.ms !== 0) {
+					time = timeFormat.format(new Date(time.ms),true);
+				} else {
+					time = "";
+				}
+			}
+			var dateTime;
+			date ? (dateTime = date) : (dateTime = dateTime);
+			time ? (dateTime = dateTime + "T" + time) : (dateTime = dateTime);
+			return dateTime;
+		},
         accAdd : function(arg1, arg2) {
             if (!Number(arg1)) {
                 arg1 = 0;

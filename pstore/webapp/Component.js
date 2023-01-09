@@ -25,6 +25,9 @@ sap.ui.define([
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
+
+                //set the local model
+                this.setModel(models.createLocalModel(), "local");
             }
         });
     }

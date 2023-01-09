@@ -18,6 +18,13 @@ sap.ui.define([
                 var oModel = new JSONModel(Device);
                 oModel.setDefaultBindingMode("OneWay");
                 return oModel;
-        }
+        },
+
+        // 创建本地模型
+        createLocalModel: function () {
+            var oModel = new JSONModel({});
+            oModel.setSizeLimit(9999);
+            return oModel;
+        },
     };
 });

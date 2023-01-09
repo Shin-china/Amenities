@@ -5,7 +5,9 @@ sap.ui.define([
     "sap/ui/core/format/DateFormat",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
-    "../model/formatter"
+    "../model/formatter",
+    "./messages",
+    "sap/m/Button",
 ], function (
     Controller,
 	UIComponent,
@@ -13,13 +15,19 @@ sap.ui.define([
 	DateFormat,
 	JSONModel,
 	MessageToast,
-	formatter
+	formatter,
+    messages,
+    Button
 ) {
     "use strict";
 
     return Controller.extend("com.shin.pstore.pstore.controller.DailyTabulation", {
         formatter: formatter,
         onInit: function () {
+            this._LocalData = this.getOwnerComponent().getModel("local");
+            this._oDataModel = this.getOwnerComponent().getModel();
+            this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
             if (!this._comm) {
                 this._comm = new Common();
             }
@@ -555,7 +563,7 @@ sap.ui.define([
         },
 
         onPressHistory: function(oEvent) {
-            var sObjectid = oEvent.getSource().getBindingContext().getObject().KIHYO_NO;
+            var sObjectid = oEvent.getSource().getBindingContext().getObject().KihyoNo;
             this.getApprovalHistory(sObjectid).then(function (res) {
                 try {
                     var aApprovalHistory = [];
@@ -593,8 +601,8 @@ sap.ui.define([
         },
         // 显示审批履历
         approvalHistoryDialog: function () {
-            this.byId("reportTable").setBusyIndicatorDelay(0);
-            this.byId("reportTable").setBusy(true);
+            this.byId("dynamicPage1").setBusyIndicatorDelay(0);
+            this.byId("dynamicPage1").setBusy(true);
             var oView = this.getView();
             if (!this.HistoryDialog) {
                 this.HistoryDialog = this.loadFragment({
@@ -614,7 +622,7 @@ sap.ui.define([
                     oHistoryDialog.addButton(endButton);
                 }
                 oHistoryDialog.open();
-                this.byId("reportTable").setBusy(false);
+                this.byId("dynamicPage1").setBusy(false);
             }.bind(this));
         },
         onDestroy : function(oEvent){
