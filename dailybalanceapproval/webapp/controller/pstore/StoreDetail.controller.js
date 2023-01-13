@@ -47,6 +47,7 @@ sap.ui.define([
             },
 
             _onDetailMatched: function (oEvent) {
+                this.byId("txtKihyoshaName").setValueState("None");
                 this.byId("detailPage").setTitle(this._LocalData.getProperty("/NodeName"));
                 this._path = oEvent.getParameter("arguments").path;
                 var mode = oEvent.getParameter("arguments").mode;
@@ -191,6 +192,10 @@ sap.ui.define([
             },
 
             onSave: function () {
+                if (this.checkRequired()) {
+                    MessageToast.show(this._ResourceBundle.getText("inputRequired"));
+                    return;
+                }
                 var checkOk = this.checkEditData();
                 if (!checkOk) {
                     return;
@@ -229,6 +234,7 @@ sap.ui.define([
                 d.Action = 'U';
 
                 o.d = d;
+                oModel.setHeaders({"action":"approval"});
                 oModel.create('/StoreSet', o, {
                     success: function (oData, oResponse) {
                         var oMessage = {};
@@ -517,6 +523,7 @@ sap.ui.define([
                         oModel.setProperty(oContext.sPath + "/SyohinTanka", oData.ShohinTanka);
                         //更新景品仕入高合计
                         that.onLineAmountChange();
+                        that._goodsSource.setValueState("None");
                     },
                     error: function (oError) {
                         that._goodsSource.setValueState("Error");
@@ -528,6 +535,10 @@ sap.ui.define([
             //景品仕入高合计
             onLineAmountChange: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'6','0');
+                if (this._Error) {
+                    return;
+                };
 
                 var aItems = this.byId("tabGoods").getRows();
                 var amount = 0, waers = '', lineAmount = 0;
@@ -752,7 +763,12 @@ sap.ui.define([
             },
 
             onCalcPUriage: function (oEvent) {
+
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                };
                 //1. a + b
                 this._sum.PUriage = this._calcFieldsSum("txtPGenkinUriage", "txtPCardUriage");
 
@@ -782,6 +798,10 @@ sap.ui.define([
 
             onCalcSUriage: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                };
                 //2.c + d
                 this._sum.SUriage = this._calcFieldsSum("txtSGenkinUriage", "txtSCardUriage");
 
@@ -811,6 +831,10 @@ sap.ui.define([
 
             onCalcKadoHanbaiGokei: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                };
                 //sum 5.
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var fHanbaiAmt = this.byId("txtHanbaiAmt").getValue();
@@ -848,8 +872,9 @@ sap.ui.define([
                 return sVal;
             },
 
-            onCalcHnjtsKrkshdk: function (oEvent) { 
+            onCalcHnjtsKrkshdk:function (oEvent,precision,scale) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,precision,scale);
                 
                 //Sum I - II + III + A - B
                 var oCurrencyParse = NumberFormat.getFloatInstance();
@@ -872,6 +897,10 @@ sap.ui.define([
 
             onCalcSofukinGokei: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                }; 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
                 var fZnjtsHnshSfknRk = this.byId("txtZnjtsHnshSfknRk").getValue();
                 var fRyogaekinModoshi = this.byId("txtRyogaekinModoshi").getValue();
@@ -888,6 +917,10 @@ sap.ui.define([
 
             onCalcHnjtsKrkshdkUgki: function (oEvent) {
                 this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                }; 
                 //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
@@ -897,6 +930,13 @@ sap.ui.define([
             },
 
             onCalcYokuzitunyuukin: function (oEvent) {
+
+                this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                };
+
                 this.onSetDefaultValue(oEvent);
                 //Sum XI
                 this._sum.Yokuzitunyuukin = this._calcFieldsSum("txtYokuzitusohukin", "txtYokuzituryougaekin");
@@ -1137,6 +1177,9 @@ sap.ui.define([
             },
 
             onSetDefaultValue: function(oEvent){ 
+                if(!oEvent) {
+                    return;
+                }
                 var oSource = oEvent.getSource();
                 var name = oSource.getMetadata().getName();
                 if(name === 'sap.m.Input'){
@@ -1147,35 +1190,80 @@ sap.ui.define([
                 }
             },
 
+            onSetDefaultValuetab1Col7: function(oEvent){ 
+                if(!oEvent) {
+                    return;
+                }
+                this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'6','0');
+                if (this._Error) {
+                    return;
+                }; 
+            },
+
+            onSetDefaultValuetab: function(oEvent){ 
+                if(!oEvent) {
+                    return;
+                }
+                this.onSetDefaultValue(oEvent);
+                this.onInpuValidation(oEvent,'15','2');
+                if (this._Error) {
+                    return;
+                }; 
+            },
+
             onInpuValidation: function (oEvent,precision,scale) {
+                if(!oEvent) {
+                    return;
+                }
                 this.onSetDefaultValue(oEvent);
 
-                var oFormat = NumberFormat.getFloatInstance();
+                var oFormat = NumberFormat.getFloatInstance({
+                    //如果不设置 数值过大会解析成科学计数格式
+                    "parseAsString":true
+                });
                 var iIntager = precision - scale;
                 var oSource = oEvent.getSource();
                 var value = oEvent.getParameter("value");
                 if (value == "") {
                     value = "0";
                 }
-                value = oFormat.parse(value);
-                // var value = oSource.getBindingContext().getObject().Amount;
-                oSource.setValueState("None");
-                if (isNaN(value)) {
+                var parseValue = oFormat.parse(value);
+                try {
+                    oSource.setValueState("None");
+                } catch (error) {
+                    return;
+                }
+                this._Error = false;
+                if (isNaN(parseValue)) {
                     oSource.setValueState("Error");
                     oSource.setValueStateText(this._ResourceBundle.getText("notNumber"));
+                    this._Error = true;
                 } else {
-                    var aSplitNumber = value.toString().split(".");
+                    var aSplitNumber = parseValue.toString().split(".");
                     if (aSplitNumber[0].length > iIntager) {
                         oSource.setValueState("Error");
                         oSource.setValueStateText(this._ResourceBundle.getText("integerLengthError",[iIntager]));
+                        this._Error = true;
                     }
                     if (aSplitNumber[1] && aSplitNumber[1].length > scale) {
                         oSource.setValueState("Error");
                         oSource.setValueStateText(this._ResourceBundle.getText("fractionLengthError",[scale]));
+                        this._Error = true;
                     }
                 }
 
             },
+
+            checkRequired: function () {
+                var isError = false;
+                if (this.byId("txtKihyoshaName").getValue() == "") {
+                    this.byId("txtKihyoshaName").setValueState("Warning");
+                    isError = true;
+                } 
+                return isError;
+            },
+
 
             // 审批用
             onApprovalConfirm: function() {
@@ -1192,9 +1280,17 @@ sap.ui.define([
                         text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("Yes"),
                         //登录按钮
                         press: function () {
-                            var postData = this.getApprovalData();
-                            this.postAction(postData);
-                            oDialog.close();
+                            if (this._LocalData.getProperty("/Node") == "0010" && this.sAction == "Approval") {
+                                this.simulationPosting().then(function (res) {
+                                    var postData = this.getApprovalData();
+                                    this.postAction(postData);
+                                }.bind(this));
+                                oDialog.close();
+                            } else {
+                                var postData = this.getApprovalData();
+                                this.postAction(postData);
+                                oDialog.close();
+                            }
                         }.bind(this)
                     });
                     var endButton = new Button({
@@ -1264,93 +1360,62 @@ sap.ui.define([
                     });
                 }
             },
+
             // 审批用
-            // simulationPosting: function () {
-            //     if (this.checkRequired()) {
-            //         MessageToast.show(this._ResourceBundle.getText("inputRequired"));
-            //         return;
-            //     }
-            //     var sAction = "Posting";
-            //     var postDoc = this.prepareBalanceSaveBody();
-            //     postDoc.EIGYO_BI = this.formatter.date_8(postDoc.EIGYO_BI);
-            //     delete postDoc.__metadata;
-
-            //     //simulation posting
-            //     var postData = postDoc;
-            //     this.convertToString(postData);
-            //     var promise = new Promise(function (resolve, reject) {
-            //         var i = 1;
-            //         var mParameters = {
-            //             groupId: "DailyBalanceSave" + Math.floor(i / 100),
-            //             changeSetId: i,
-            //             success: function (oData) {
-            //                 this.byId("idDailyBalanceCreate").setBusy(false);
-            //                 resolve();
-            //             }.bind(this),
-            //             error: function (oError) {
-            //                 this.byId("idDailyBalanceCreate").setBusy(false);
-            //                 this.removeLeadingMessage();
-            //             }.bind(this),
-            //         };
-            //         this.getOwnerComponent().getModel('abr').setHeaders({"button":sAction, "action":"approval"});
-            //         //复杂结构
-            //         this.getOwnerComponent().getModel('abr').create("/ZzShopDailyBalanceSet", postData, mParameters);
-            //         this.byId("idDailyBalanceCreate").setBusyIndicatorDelay(0);
-            //         this.byId("idDailyBalanceCreate").setBusy(true);
-            //     }.bind(this));
-            //     // return promise;
-
+            simulationPosting: function () {
+                // var checkOk = this.checkEditData();
+                // if (!checkOk) {
+                //     return;
+                // }
                 
-            //     this._busyDialog = new sap.m.BusyDialog({});
-            //     this._busyDialog.open();
-            //     var that = this;
+                this._busyDialog = new sap.m.BusyDialog({});
+                this._busyDialog.open();
+                var that = this;
 
-            //     var elem = this.getView().getBindingContext("pstore");
-            //     var oModel = elem.getModel();
-            //     var d = elem.getObject();
+                var elem = this.getView().getBindingContext("pstore");
+                var oModel = elem.getModel();
+                var d = elem.getObject();
 
-            //     //Deep Entities
-            //     d.GoodsSet = []
+                //Deep Entities
+                d.GoodsSet = []
 
-            //     d.EffectiveCashSet = [];
-            //     d.LossCashSet = [];
-            //     d.PlanCashSet = [];
-            //     d.InCashSet = [];
-            //     d.OutCashSet = [];
-            //     d.InCashSet = [];
-            //     d.OutCashSet = [];
-            //     delete d.__metadata;
+                d.EffectiveCashSet = [];
+                d.LossCashSet = [];
+                d.PlanCashSet = [];
+                d.InCashSet = [];
+                d.OutCashSet = [];
+                d.InCashSet = [];
+                d.OutCashSet = [];
+                delete d.__metadata;
 
-            //     d.Fi1007 = [];
+                d.Fi1007 = [];
 
-            //     var o = {};
-            //     d.MessageSet = [];
-            //     d.Action = 'G';
-
-            //     o.d = d;
-
-            //     var promise = new Promise(function (resolve, reject) {
-            //         oModel.setHeaders({"action":"approval"});
-            //         oModel.create('/StoreSet', o, {
-            //             success: function (oData, oResponse) {
-            //                 var oMessage = {};
-            //                 oMessage.MessageSet = oData.MessageSet.results;
-            //                 var logModel = new JSONModel(oMessage);
-            //                 that.getView().setModel(logModel, "log");
-            //                 that._busyDialog.close();
-            //                 that._comm.showMessagePopoverFor(that, "log", "/MessageSet", "btnMessagePopover")
-            //                 oModel.refresh();
-            //                 resolve();
-            //             },
-            //             error: function (oError) {
-            //                 that._busyDialog.close();
-            //                 MessageToast.show('OData Error:' + oError.message);
-            //                 reject();
-            //             }
-            //         });
-            //     }.bind(this));
-            //     return promise;
-            // },
+                var o = {};
+                d.MessageSet = [];
+                d.Action = 'G';
+                var promise = new Promise(function (resolve, reject) {
+                    o.d = d;
+                    oModel.setHeaders({"action":"approval"});
+                    oModel.create('/StoreSet', o, {
+                        success: function (oData, oResponse) {
+                            var oMessage = {};
+                            oMessage.MessageSet = oData.MessageSet.results;
+                            var logModel = new JSONModel(oMessage);
+                            that.getView().setModel(logModel, "log");
+                            that._busyDialog.close();
+                            that._comm.showMessagePopoverFor(that, "log", "/MessageSet", "btnMessagePopover")
+                            oModel.refresh();
+                            resolve();
+                        },
+                        error: function (oError) {
+                            that._busyDialog.close();
+                            MessageToast.show('OData Error:' + oError.message);
+                            reject();
+                        }
+                    });
+                }.bind(this));
+                return promise;
+            },
             // 审批用
             handleFullScreen: function (oEvent) {
                 var sNextLayout = "MidColumnFullScreen";

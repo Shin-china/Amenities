@@ -21,8 +21,10 @@ sap.ui.define([
 
         closeDialog: function (oContext, sDialogId) {
             var oDialog = oContext.getView().byId(sDialogId);
-            oDialog.close();
-            oDialog.destroy();
+            if (oDialog) {
+                oDialog.close();
+                oDialog.destroy();
+            }
         },
 
         openDialog: function (oContext, sViewName) {

@@ -1405,7 +1405,7 @@ sap.ui.define([
                     text: this._ResourceBundle.getText("Yes"),
                     //按钮
                     press: function () {
-                        if (this._LocalData.getProperty("/Node") == "0010") {
+                        if (this._LocalData.getProperty("/Node") == "0010" && this.sAction == "Approval") {
                             this.simulationPosting().then(function (res) {
                                 var postData = this.getApprovalData();
                                 this.postAction(postData);

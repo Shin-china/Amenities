@@ -1,15 +1,10 @@
 sap.ui.define([
 	"./Base",
 	"sap/m/MessageBox",
-	"sap/ui/model/Filter",
-	//"../model/formatter",
 	"MMPurchaseRequest/model/formatter",
-	"sap/ui/core/format/DateFormat",
-	"sap/ui/core/mvc/Controller",
-	//"MMPurchaseRequest/lib/xml-js",
-	"sap/ui/model/FilterOperator",
-	"sap/m/MessageToast"
-], function(Base, MessageBox, Filter, formatter, DateFormat, Controller, FilterOperator, MessageToast) {
+	"./messages",
+	"sap/m/Button",
+], function(Base, MessageBox, formatter, messages,Button) {
 
 	"use strict";
 	return Base.extend("MMPurchaseRequest.controller.Detail", {
@@ -21,7 +16,9 @@ sap.ui.define([
 		 */
 		onInit: function() {
 			this._LocalData = this.getOwnerComponent().getModel("local");
+			this._oData = this.getOwnerComponent().getModel();
 			this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			this.getView().setModel(this._oData);
 			// post data
 			this._postData = [];
 			//this.byId("page").setTitle("test");
@@ -1271,7 +1268,130 @@ sap.ui.define([
 				this.getModel("local").setProperty("/editCreate", true);
 				this.byId("idChange").setText(this._ResourceBundle.getText("DisplayButton"));
 			}
-		}
+		},
 
+		onVariantPress: function (oEvent) {
+			var oButton = oEvent.getSource(),
+				oView = this.getView();
+
+			// create popover
+			if (!this._pPopover) {
+				this._pPopover = this.loadFragment({
+					name: "MMPurchaseRequest.fragment.VariantPopover"
+				}).then(function(oPopover){
+					oView.addDependent(oPopover);
+					return oPopover;
+				});
+			}
+			this.getVariant().then(function(res){
+				this._pPopover.then(function(oPopover){
+					oPopover.openBy(oButton);
+				}.bind(this));
+			}.bind(this));
+			
+		},
+
+		getVariant: function () {
+			var promise = new Promise( function (resolve, reject) {
+				var mParameters = {
+					success: function (oData) {
+						resolve(oData.results);
+					}.bind(this),
+					error: function (oError) {
+						messages.showError(messages.parseErrors(oError));
+					}.bind(this)
+				}
+				this.getOwnerComponent().getModel().read("/ZzVariantSet", mParameters);
+			}.bind(this));
+			return promise;
+		},
+
+		onPressSaveAs: function () {
+			if (!this.pDialog) {
+				this.pDialog = this.loadFragment({
+					name: "MMPurchaseRequest.fragment.VariantSave"
+				});
+			}
+			this.pDialog.then(function (oDialog) {
+				var beginButton = new Button({
+                    type: "Emphasized",
+                    text: this._ResourceBundle.getText("save"),
+					//保存按钮
+                    press: function () {
+                        this.onSaveVariant().then(function(res){
+							oDialog.close();
+						});
+                    }.bind(this)
+                });
+                var endButton = new Button({
+                    text: this._ResourceBundle.getText("cancel"),
+                    press: function () {
+                        oDialog.close();
+                    }.bind(this)
+                });
+                // 添加按钮
+                if (oDialog.getButtons().length === 0){
+                    oDialog.addButton(beginButton);
+                    oDialog.addButton(endButton);
+                }
+                oDialog.open();
+			}.bind(this));
+		},
+
+		onSaveVariant: function () {
+			var promise = new Promise(function (resolve,reject) {
+				var variantName = this.byId("idVariantName").getValue();
+				if (!variantName) {
+					this.byId("idVariantName").focus();
+					return;
+				}
+
+			
+				resolve();
+			}.bind(this));
+			return promise;
+		},
+
+		onVariantChange: function (oEvent) {
+			var value = oEvent.getParameter("value");
+			if (!value) {
+				oEvent.getSource().setValueState("Error");
+				oEvent.getSource().setValueStateText(this._ResourceBundle.getText("msgPleaseEnterName"));
+			} else {
+				oEvent.getSource().setValueState("None");
+			}
+		},
+
+		onPressManage: function (oEvent) {
+			if (!this.pDialog) {
+				this.pDialog = this.loadFragment({
+					name: "MMPurchaseRequest.fragment.VariantManage"
+				});
+			}
+			this.pDialog.then(function (oDialog) {
+				var beginButton = new Button({
+                    type: "Emphasized",
+                    text: this._ResourceBundle.getText("save"),
+					//保存按钮
+                    press: function () {
+                        this.onSaveVariant().then(function(res){
+							oDialog.close();
+						});
+                    }.bind(this)
+                });
+                var endButton = new Button({
+                    text: this._ResourceBundle.getText("cancel"),
+                    press: function () {
+                        oDialog.close();
+                    }.bind(this)
+                });
+                // 添加按钮
+                if (oDialog.getButtons().length === 0){
+                    oDialog.addButton(beginButton);
+                    oDialog.addButton(endButton);
+                }
+                oDialog.open();
+			}.bind(this));
+		}
 	});
 });

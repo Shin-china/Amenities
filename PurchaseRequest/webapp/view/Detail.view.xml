@@ -3,6 +3,15 @@
 	xmlns:CustomData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:layout="sap.ui.layout"
 	xmlns:form1="sap.ui.comp.smartform" xmlns:smartField="sap.ui.comp.smartfield" xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page showNavButton="true" navButtonPress="onNavBack">
+		<!-- <headerContent>
+			<Button text="标准" press="onPress" />
+		</headerContent> -->
+		<customHeader>
+			<OverflowToolbar width="100%">
+				<Button icon="sap-icon://navigation-left-arrow" press="onNavBack"/>
+				<Button text="标准" press="onVariantPress" class="sapUiMediumMargin"/>
+			</OverflowToolbar>
+		</customHeader>
 		<content>
 			<ux:ObjectPageLayout showHeaderContent="true" showFooter="true" >
 				<!-- <ux:headerTitle>
@@ -478,7 +487,7 @@
 							<ux:ObjectPageSubSection>
 								<ux:blocks>
 									<List id="list" mode="Delete" delete="onAttachmentDelete" enableBusyIndicator="true" headerText="" growing="true"
-										items="{ path:'local>/ZzAttachment'}" itemPress="onAttachmentPress1" busy="{settings>/appProperties/busy}" select="onAttachmentPress">
+										items="{ path:'local>/ZzAttachment'}" itemPress="onAttachmentPress1" busy="{settings>/appProperties/busy}" selectionChange="onAttachmentPress">
 										<StandardListItem type="Active" title="{local>Filename}" icon="sap-icon://document-text" iconDensityAware="false" iconInset="false" press="onAttachmentPress" detailPresss="onAttachmentPress" />
 										<!--<StandardListItem title="{Lifnr}" description="{ProductId}" icon="{ProductPicUrl}" iconDensityAware="false" iconInset="false"/>-->
 									</List>

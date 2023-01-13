@@ -1,0 +1,17 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <Dialog
+        class="sapUiResponsivePadding--header"
+        title="{i18n>saveView}"
+        contentWidth="20%"
+        contentHeight="13%"
+    >
+        <VBox width="100%">
+            <Label text="{i18n>view}:" class="dialogPadding sapUiTinyMarginTop"/>
+            <Input id="idVariantName" value="標準" class="dialogPadding" liveChange="onVariantChange"/>
+            <CheckBox text="{i18n>public}" class="sapUiSmallMarginBegin"/>
+        </VBox>
+    </Dialog>
+</c:FragmentDefinition>

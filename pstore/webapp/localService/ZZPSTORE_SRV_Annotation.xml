@@ -283,6 +283,138 @@
                     </Collection>
                 </Annotation>
             </Annotations>
+            <Annotations Target="ZZPSTORE_SRV.AccountDoc/TenpoCd">
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+                    <Record Type="com.sap.vocabularies.Common.v1.ValueListType">
+                        <PropertyValue Property="Label" String=""/>
+                        <PropertyValue Property="CollectionPath" String="StoreCodeSet"/>
+                        <PropertyValue Property="CollectionRoot" String=""/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterOut">
+                                    <PropertyValue Property="ValueListProperty" String="TenpoCd"/>
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="TenpoCd"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="TenpoNm"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Kokrs"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="NikkeihyoKbn"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Ktext"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Ltext"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Mctxt"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZPSTORE_SRV.AccountDoc/KaishaCd">
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+                    <Record Type="com.sap.vocabularies.Common.v1.ValueListType">
+                        <PropertyValue Property="Label" String=""/>
+                        <PropertyValue Property="CollectionPath" String="CompanySet"/>
+                        <PropertyValue Property="CollectionRoot" String=""/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterOut">
+                                    <PropertyValue Property="ValueListProperty" String="Bukrs"/>
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="KaishaCd"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Butxt"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Land1"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Ort01"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Waers"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZPSTORE_SRV.Store/KaishaCd">
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+                    <Record Type="com.sap.vocabularies.Common.v1.ValueListType">
+                        <PropertyValue Property="Label" String="会社コード"/>
+                        <PropertyValue Property="CollectionPath" String="CompanySet"/>
+                        <PropertyValue Property="CollectionRoot" String=""/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterOut">
+                                    <PropertyValue Property="ValueListProperty" String="Bukrs"/>
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="KaishaCd"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Butxt"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Land1"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Ort01"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Waers"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZPSTORE_SRV.Store/TenpoCd">
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+                    <Record Type="com.sap.vocabularies.Common.v1.ValueListType">
+                        <PropertyValue Property="Label" String="店舗コード"/>
+                        <PropertyValue Property="CollectionPath" String="StoreCodeSet"/>
+                        <PropertyValue Property="CollectionRoot" String=""/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterOut">
+                                    <PropertyValue Property="ValueListProperty" String="TenpoCd"/>
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="TenpoCd"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="TenpoNm"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Kokrs"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="NikkeihyoKbn"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Ktext"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Ltext"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Mctxt"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="ZZPSTORE_SRV.Store/KihyoshaName">
                 <Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
                     <Record Type="com.sap.vocabularies.Common.v1.ValueListType">
@@ -396,6 +528,47 @@
                     </Collection>
                 </Annotation>
             </Annotations>
+            <Annotations Target="ZZPSTORE_SRV.AGood">
+                <Annotation Term="com.sap.vocabularies.UI.v1.SelectionFields">
+                    <Collection>
+                        <PropertyPath>ShohinCd</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZPSTORE_SRV.AGood">
+                <Annotation Term="com.sap.vocabularies.UI.v1.LineItem">
+                    <Collection>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="表示場所"/>
+                            <PropertyValue Property="Criticality" EnumMember="Critical"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="Hyojibasho"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="賞品コード"/>
+                            <PropertyValue Property="Criticality" EnumMember="Information"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="ShohinCd"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="賞品名"/>
+                            <PropertyValue Property="Criticality" EnumMember="Information"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="ShohinName"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="店舗コード"/>
+                            <PropertyValue Property="Criticality" EnumMember="Information"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="TenpoCd"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
             <Annotations Target="ZZPSTORE_SRV.CostCenter">
                 <Annotation Term="com.sap.vocabularies.UI.v1.SelectionFields">
                     <Collection>
@@ -474,6 +647,40 @@
                             <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
                             <PropertyValue Property="IconUrl" String=""/>
                             <PropertyValue Property="Value" Path="Text1"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZPSTORE_SRV.B01Account">
+                <Annotation Term="com.sap.vocabularies.UI.v1.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Hkont</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZPSTORE_SRV.B01Account">
+                <Annotation Term="com.sap.vocabularies.UI.v1.LineItem">
+                    <Collection>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="G/L 勘定コード"/>
+                            <PropertyValue Property="Criticality" EnumMember="Critical"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="Hkont"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="タイプ"/>
+                            <PropertyValue Property="Criticality" EnumMember="Information"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="Type"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="勘定科目"/>
+                            <PropertyValue Property="Criticality" EnumMember="Information"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember=""/>
+                            <PropertyValue Property="IconUrl" String=""/>
+                            <PropertyValue Property="Value" Path="Text"/>
                         </Record>
                     </Collection>
                 </Annotation>

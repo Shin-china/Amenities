@@ -1,0 +1,39 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <Dialog title="{i18n>variantManage}" contentWidth="50%">
+        <Table
+            items="{
+                path:'/ZzVariantSet'
+            }"
+        >
+            <columns>
+                <Column width="4em"/>
+                <Column
+                    width="10em">
+                    <Text text="{i18n>Variant}" />
+                </Column>
+                <Column >
+                    <Text text="{i18n>Public}" />
+                </Column>
+                <Column>
+                    <Text text="{i18n>Createby}" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                    <cells>
+                        <ToggleButton type="Transparent" icon="sap-icon://unfavorite" pressed="{Isfavorite}"/>
+                        <Text
+                            text="{Variant}" />
+                        <Text
+                            text="{IsGlobal}" />
+                            <Text
+                            text="{Createby}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Dialog>
+</c:FragmentDefinition>

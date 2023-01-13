@@ -1,0 +1,35 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <Popover
+		id="myPopover"
+		showHeader="false"
+		contentWidth="320px"
+		contentHeight="300px"
+		placement="Bottom">
+        <Page
+            id="master"
+            class="sapUiResponsivePadding--header"
+            title="{i18n>myView}">
+            <List
+                id="variantlist"
+                items="{
+                    path:'/ZzVariantSet',
+                    filters: [{path: 'Isfavorite', operator: 'EQ', value1: true}]
+                }" >
+                <StandardListItem
+                    title="{Variant}"
+                    type="Active"
+                />
+            </List>
+            <footer>
+                <OverflowToolbar>
+                    <ToolbarSpacer/>
+                    <Button text="{i18n>saveAs}" type="Emphasized" press="onPressSaveAs"/>
+                    <Button text="{i18n>manage}" press="onPressManage"/>
+                </OverflowToolbar>
+            </footer>
+        </Page>
+	</Popover>
+</c:FragmentDefinition>

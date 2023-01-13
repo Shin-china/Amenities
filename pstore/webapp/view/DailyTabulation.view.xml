@@ -84,7 +84,7 @@
                                 <Text text="{TenpoName}" wrapping="false" tooltip="{TenpoName}"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="7rem" label="{i18n>tab1_col07}" sortProperty="NikkeihyoStatus" filterProperty="NikkeihyoStatus" visible="true">
+                        <table:Column width="8rem" label="{i18n>tab1_col07}" sortProperty="NikkeihyoStatus" filterProperty="NikkeihyoStatus" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"NikkeihyoStatus", "leadingProperty":"NikkeihyoStatus", "sortProperty":"NikkeihyoStatus", "filterProperty": "NikkeihyoStatus"}'/>
                             </table:customData>

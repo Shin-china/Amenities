@@ -190,6 +190,44 @@ sap.ui.define([
 			return value;
 		},
 
+        accAdd : function(arg1, arg2) {
+            if (!Number(arg1)) {
+                arg1 = 0;
+            }
+            if (!Number(arg2)) {
+                arg2 = 0;
+            }
+			var r1, r2, m, c,
+				s1 = Number(arg1).toString(), 
+				s2 = Number(arg2).toString();
+			try {
+				r1 = s1.split(".")[1].length;
+			} catch (e) {
+				r1 = 0;
+			}
+			try {
+				r2 = s2.split(".")[1].length;
+			} catch (e) {
+				r2 = 0;
+			}
+			c = Math.abs(r1 - r2); //位数差的绝对值
+			m = Math.pow(10, Math.max(r1, r2)); //较大数的幂
+			if (c > 0) { //位数相差
+				var cm = Math.pow(10, c);
+				if (r1 > r2) {     
+					arg1 = Number(s1.replace(".", "")); //转化成数字
+					arg2 = Number(s2.replace(".", "")) * cm;
+				} else {
+					arg1 = Number(s1.replace(".", "")) * cm;
+					arg2 = Number(s2.replace(".", ""));
+				}
+			} else { //位数相等
+				arg1 = Number(s1.replace(".", ""));
+				arg2 = Number(s2.replace(".", ""));
+			}
+			return ((arg1 + arg2) / m).toString();
+		},
+
         formatFinancialYear: function(sValue){
             if(sValue === '0000'){
                 return '';

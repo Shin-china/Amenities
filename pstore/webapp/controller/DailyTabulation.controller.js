@@ -202,7 +202,8 @@ sap.ui.define([
                     success: function (oData, oResponse) {
                         that._busyDialog.close();
                         that._comm.closeDialog(that, "addDialog");
-
+                        //如果上一次是正确执行，就不会打开消息弹窗，那么没有点击关闭按钮，就没有destroy，再创建就会报错
+                        that._comm.closeDialog(that, "showLogDialog");
                         that.loadFragment({
                             name: "com.shin.pstore.pstore.view.ShowLog"
                         }).then(function (oDialog) {
@@ -283,7 +284,8 @@ sap.ui.define([
                     success: function (oData, oResponse) {
                         that._busyDialog.close();
                         that._comm.closeDialog(that, "copyDialog");
-
+                        //如果上一次是正确执行，就不会打开消息弹窗，那么没有点击关闭按钮，就没有destroy，再创建就会报错
+                        that._comm.closeDialog(that, "showLogDialog");
                         that.loadFragment({
                             name: "com.shin.pstore.pstore.view.ShowLog"
                         }).then(function (oDialog) {
@@ -361,6 +363,8 @@ sap.ui.define([
             p.then(function () {
                 that._busyDialog.close();
 
+                //如果上一次是正确执行，就不会打开消息弹窗，那么没有点击关闭按钮，就没有destroy，再创建就会报错
+                that._comm.closeDialog(that, "showLogDialog");
                 that.loadFragment({
                     name: "com.shin.pstore.pstore.view.ShowLog"
                 }).then(function (o) {
@@ -433,6 +437,8 @@ sap.ui.define([
             p.then(function () {
                 that._busyDialog.close();
 
+                //如果上一次是正确执行，就不会打开消息弹窗，那么没有点击关闭按钮，就没有destroy，再创建就会报错
+                that._comm.closeDialog(that, "showLogDialog");
                 that.loadFragment({
                     name: "com.shin.pstore.pstore.view.ShowLog"
                 }).then(function (o) {

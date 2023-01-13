@@ -37,6 +37,7 @@ sap.ui.define([
             },
 
             _onDetailMatched: function (oEvent) {
+                this.byId("txtKihyoshaName").setValueState("None");
                 this._path = oEvent.getParameter("arguments").path;
                 var mode = oEvent.getParameter("arguments").mode;
                 var sPath = "/" + this._path;
@@ -180,6 +181,10 @@ sap.ui.define([
             },
 
             onSave: function () {
+                if (this.checkRequired()) {
+                    MessageToast.show(this._ResourceBundle.getText("inputRequired"));
+                    return;
+                }
                 // that._comm.removeAllMessages();
                 // this._comm.showMessagePopoverFor(that, "log", "", "btnMessagePopover");
                 this.byId("btnMessagePopover").setVisible(false);
@@ -508,6 +513,7 @@ sap.ui.define([
                         oModel.setProperty(oContext.sPath + "/SyohinTanka", oData.ShohinTanka);
                         //更新景品仕入高合计
                         that.onLineAmountChange();
+                        that._goodsSource.setValueState("None");
                     },
                     error: function (oError) {
                         that._goodsSource.setValueState("Error");
@@ -858,7 +864,6 @@ sap.ui.define([
 
             onCalcHnjtsKrkshdk:function (oEvent,precision,scale) {
                 this.onSetDefaultValue(oEvent);
-                // this.onInpuValidation(oEvent,'15','2');
                 this.onInpuValidation(oEvent,precision,scale);
                 
                 //Sum I - II + III + A - B
@@ -1111,6 +1116,10 @@ sap.ui.define([
             },
 
             onSetDefaultValue: function(oEvent){ 
+                if(!oEvent) {
+                    return;
+                }
+                
                 var oSource = oEvent.getSource();
                 var name = oSource.getMetadata().getName();
                 if(name === 'sap.m.Input'){
@@ -1122,6 +1131,9 @@ sap.ui.define([
             },
 
             onSetDefaultValuetab1Col7: function(oEvent){ 
+                if(!oEvent) {
+                    return;
+                }
                 this.onSetDefaultValue(oEvent);
                 this.onInpuValidation(oEvent,'6','0');
                 if (this._Error) {
@@ -1130,6 +1142,9 @@ sap.ui.define([
             },
 
             onSetDefaultValuetab: function(oEvent){ 
+                if(!oEvent) {
+                    return;
+                }
                 this.onSetDefaultValue(oEvent);
                 this.onInpuValidation(oEvent,'15','2');
                 if (this._Error) {
@@ -1138,25 +1153,34 @@ sap.ui.define([
             },
 
             onInpuValidation: function (oEvent,precision,scale) {
+                if(!oEvent) {
+                    return;
+                }
                 this.onSetDefaultValue(oEvent);
 
-                var oFormat = NumberFormat.getFloatInstance();
+                var oFormat = NumberFormat.getFloatInstance({
+                    //如果不设置 数值过大会解析成科学计数格式
+                    "parseAsString":true
+                });
                 var iIntager = precision - scale;
                 var oSource = oEvent.getSource();
                 var value = oEvent.getParameter("value");
                 if (value == "") {
                     value = "0";
                 }
-                value = oFormat.parse(value);
-                // var value = oSource.getBindingContext().getObject().Amount;
-                oSource.setValueState("None");
+                var parseValue = oFormat.parse(value);
+                try {
+                    oSource.setValueState("None");
+                } catch (error) {
+                    return;
+                }
                 this._Error = false;
-                if (isNaN(value)) {
+                if (isNaN(parseValue)) {
                     oSource.setValueState("Error");
                     oSource.setValueStateText(this._ResourceBundle.getText("notNumber"));
                     this._Error = true;
                 } else {
-                    var aSplitNumber = value.toString().split(".");
+                    var aSplitNumber = parseValue.toString().split(".");
                     if (aSplitNumber[0].length > iIntager) {
                         oSource.setValueState("Error");
                         oSource.setValueStateText(this._ResourceBundle.getText("integerLengthError",[iIntager]));
@@ -1169,6 +1193,15 @@ sap.ui.define([
                     }
                 }
 
+            },
+
+            checkRequired: function () {
+                var isError = false;
+                if (this.byId("txtKihyoshaName").getValue() == "") {
+                    this.byId("txtKihyoshaName").setValueState("Warning");
+                    isError = true;
+                } 
+                return isError;
             },
 
         });

@@ -95,7 +95,7 @@
             "id": "App"
         },
         "dependencies": {
-            "minUI5Version": "1.65.6",
+            "minUI5Version": "1.103.0",
             "libs": {
                 "sap.collaboration": {},
                 "sap.m": {},

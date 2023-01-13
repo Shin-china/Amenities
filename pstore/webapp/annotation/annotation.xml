@@ -71,7 +71,7 @@
 			<Annotations Target="Metadata.StoreCode/TenpoCd">
 				<Annotation Term="Common.Label" String="{@i18n&gt;tab1_col05}"/>
 			</Annotations>
-			<Annotations Target="Metadata.StoreCode/TenpoCd">
+			<Annotations Target="Metadata.StoreCode/TenpoNm">
 				<Annotation Term="Common.Label" String="{@i18n&gt;tab1_col06}"/>
 			</Annotations>
 
@@ -119,7 +119,30 @@
 				</Annotation>
 			</Annotations>
 
-			
+			<Annotations Target="Metadata.StoreStatus/NikkeihyoStatusCd">
+				<Annotation Term="Common.Label" String="{@i18n&gt;NikkeihyoStatusCd}"/>
+			</Annotations>
+			<Annotations Target="Metadata.StoreStatus/NikkeihyoStatus">
+				<Annotation Term="Common.Label" String="{@i18n&gt;NikkeihyoStatus}"/>
+			</Annotations>
+			<Annotations Target="Metadata.Store/NikkeihyoStatusCd">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="StoreStatusSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="NikkeihyoStatusCd"/>
+									<PropertyValue Property="ValueListProperty" String="NikkeihyoStatusCd"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="NikkeihyoStatus"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

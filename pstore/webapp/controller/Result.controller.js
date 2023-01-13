@@ -22,6 +22,23 @@ sap.ui.define([
                 this._comm = new Common();
             }
 
+            if(!this._filter){
+                this._filter = {};
+                var dDate = new Date();
+                var nDay = dDate.getUTCDate();
+                
+                if(nDay === 1){
+                    this._filter.StartDate = this._comm.getFirstDayOfLastMonth();
+                    this._filter.EndDate = this._comm.getFirstDayOfMonth();
+                }else{
+                    this._filter.StartDate = this._comm.getFirstDayOfMonth();
+                    this._filter.EndDate = this._comm.getLastDayOfMonth();
+                }
+                
+                var oModel = new JSONModel(this._filter);
+                this.getView().setModel(oModel, "filter");
+            }
+
             //Authorization
             var that = this;
             var oDataModel = this.getOwnerComponent().getModel();
