@@ -196,7 +196,7 @@
 									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" singleContainerFullSize="false"
 										labelSpanL="4" labelSpanM="3" emptySpanL="4" emptySpanM="2" breakpointM="400" columnsL="2">
 										<Label text="{i18n>Title1}" />
-										<Input value="{path:'local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input value="{path:'local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:0}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<!-- 入金合計 -->
 										<Label text="{i18n>Title4c}" />
 										<Input value="{path:'local>/dailyBalance/0/SNT_GNKN_SHNY_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
