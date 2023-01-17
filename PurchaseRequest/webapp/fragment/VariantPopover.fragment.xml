@@ -9,7 +9,7 @@
 		contentHeight="300px"
 		placement="Bottom">
         <Page
-            id="master"
+            id="idVariant"
             class="sapUiResponsivePadding--header"
             title="{i18n>myView}">
             <List
@@ -17,7 +17,8 @@
                 items="{
                     path:'/ZzVariantSet',
                     filters: [{path: 'Isfavorite', operator: 'EQ', value1: true}]
-                }" >
+                }" 
+                itemPress="onVariantSelection">
                 <StandardListItem
                     title="{Variant}"
                     type="Active"

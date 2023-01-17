@@ -9,7 +9,7 @@
 		<customHeader>
 			<OverflowToolbar width="100%">
 				<Button icon="sap-icon://navigation-left-arrow" press="onNavBack"/>
-				<Button text="标准" press="onVariantPress" class="sapUiMediumMargin"/>
+				<Button text="へんけい" press="onVariantPress" class="sapUiMediumMargin"/>
 			</OverflowToolbar>
 		</customHeader>
 		<content>

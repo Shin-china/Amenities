@@ -2,8 +2,10 @@
 	xmlns="sap.m"
 	xmlns:c="sap.ui.core"
 >
-    <Dialog title="{i18n>variantManage}" contentWidth="50%">
-        <Table
+    <Dialog title="{i18n>variantManage}" contentWidth="50%" afterOpen="onVariantManageOpened">
+        <Table 
+            id="idManageTable"
+            updateStarted="manageTableChange"
             items="{
                 path:'/ZzVariantSet'
             }"
@@ -20,17 +22,16 @@
                 <Column>
                     <Text text="{i18n>Createby}" />
                 </Column>
+                <Column />
             </columns>
             <items>
                 <ColumnListItem vAlign="Middle">
                     <cells>
-                        <ToggleButton type="Transparent" icon="sap-icon://unfavorite" pressed="{Isfavorite}"/>
-                        <Text
-                            text="{Variant}" />
-                        <Text
-                            text="{IsGlobal}" />
-                            <Text
-                            text="{Createby}" />
+                        <ToggleButton type="Transparent" icon="sap-icon://unfavorite" pressed="{Isfavorite}" press="onPressFavorite"/>
+                        <Text text="{Variant}" />
+                        <Text text="{path:'Isglobal', formatter:'.formatter.isPublic'}" />
+                        <Text text="{Createby}" />
+                        <c:Icon color="#2C4E6C" src="sap-icon://decline" press="onDeleteVariant"/>
                     </cells>
                 </ColumnListItem>
             </items>

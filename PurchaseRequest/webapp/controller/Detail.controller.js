@@ -4,7 +4,8 @@ sap.ui.define([
 	"MMPurchaseRequest/model/formatter",
 	"./messages",
 	"sap/m/Button",
-], function(Base, MessageBox, formatter, messages,Button) {
+	"sap/ui/model/Filter"
+], function(Base, MessageBox, formatter, messages,Button,Filter) {
 
 	"use strict";
 	return Base.extend("MMPurchaseRequest.controller.Detail", {
@@ -25,6 +26,8 @@ sap.ui.define([
 
 			var oRouter = this.getRouter();
             oRouter.getRoute("Detail").attachMatched(this._onRouteMatched, this);
+
+			this._oData.setDeferredGroups(["changes"]);
 		},
 
 		_onRouteMatched: function (oEvent) {
@@ -1283,19 +1286,31 @@ sap.ui.define([
 					return oPopover;
 				});
 			}
-			this.getVariant().then(function(res){
-				this._pPopover.then(function(oPopover){
-					oPopover.openBy(oButton);
-				}.bind(this));
+
+			if(this.byId("variantlist")) {
+				this.byId("variantlist").getBinding("items").refresh();
+				// this.getVariant();
+			}
+
+			this._pPopover.then(function(oPopover){
+				oPopover.openBy(oButton);
 			}.bind(this));
+
+			// this.getVariant().then(function(res){
+			// 	this._pPopover.then(function(oPopover){
+			// 		oPopover.openBy(oButton);
+			// 	}.bind(this));
+			// }.bind(this));
 			
 		},
 
 		getVariant: function () {
 			var promise = new Promise( function (resolve, reject) {
 				var mParameters = {
+					filters:[new Filter("Isfavorite","EQ",true)],
 					success: function (oData) {
-						resolve(oData.results);
+						// resolve(oData.results);
+						this.byId("variantlist").getBinding("items").filter([new Filter("Isfavorite","EQ",true)]);
 					}.bind(this),
 					error: function (oError) {
 						messages.showError(messages.parseErrors(oError));
@@ -1307,12 +1322,12 @@ sap.ui.define([
 		},
 
 		onPressSaveAs: function () {
-			if (!this.pDialog) {
-				this.pDialog = this.loadFragment({
+			if (!this.pVariantSaveDialog) {
+				this.pVariantSaveDialog = this.loadFragment({
 					name: "MMPurchaseRequest.fragment.VariantSave"
 				});
 			}
-			this.pDialog.then(function (oDialog) {
+			this.pVariantSaveDialog.then(function (oDialog) {
 				var beginButton = new Button({
                     type: "Emphasized",
                     text: this._ResourceBundle.getText("save"),
@@ -1339,15 +1354,83 @@ sap.ui.define([
 		},
 
 		onSaveVariant: function () {
-			var promise = new Promise(function (resolve,reject) {
-				var variantName = this.byId("idVariantName").getValue();
-				if (!variantName) {
-					this.byId("idVariantName").focus();
-					return;
-				}
+			var variantName = this.byId("idVariantName").getValue();
+			if (!variantName) {
+				this.byId("idVariantName").focus();
+				return;
+			}
+			// 后台检查有没有同名变式
+			var promise = new Promise(function (resolve) {
+				this.checkVariant().then(function (res) {
+					var oInput = this.byId("idVariantName");
+					if (res.length > 0) {
+						oInput.setValueState("Error");
+						oInput.setValueStateText(this._ResourceBundle.getText("msgPleaseEnterName"));
+					} else {
+						oInput.setValueState("None");
+						this.onPostVariant().then(function(res){
 
+							resolve();
+						})
+					}
+				}.bind(this));
+			}.bind(this));
 			
-				resolve();
+			return promise;
+		},
+
+		onPostVariant: function () {
+			var oHeader = this._LocalData.getProperty("/ZzHeader");
+			var postData = {
+				Variant: this.byId("idVariantName").getValue(),
+				Bukrs: oHeader.Bukrs,
+				Ekgrp: oHeader.Ekgrp,
+				Bsart: oHeader.Bsart,
+				Department: oHeader.Department,
+				Isglobal: this.byId("idGobal").getSelected(),
+			};
+			var promise = new Promise(function(resolve){
+				var mParameters = {
+					// refreshAfterChange:true,
+					success: function (oData) {
+						resolve();
+					}.bind(this),
+					error: function (oError) {
+						messages.showError(messages.parseErrors(oError));
+					}.bind(this),
+				};
+				this.getOwnerComponent().getModel().create("/ZzVariantSet",postData,mParameters);
+			}.bind(this));
+			return promise;
+		},
+
+		checkVariant: function () {
+			var sVariant = this.byId("idVariantName").getValue();
+			var isGlobal = this.byId("idGobal").getSelected();
+			if (isGlobal) {
+				isGlobal = "X";
+			} else {
+				isGlobal = "";
+			}
+			var aFilter = [new Filter("Variant","EQ",sVariant)];
+			var promise = new Promise( function (resolve, reject) {
+				var mParameters = {
+					filters: aFilter,
+					success: function (oData) {
+						this.getOwnerComponent().getModel().setHeaders(null);
+						if (oData.results) {
+							resolve(oData.results);
+						} else {
+							resolve([]);
+						}
+					}.bind(this),
+					error: function (oError) {
+						this.getOwnerComponent().getModel().setHeaders(null);
+						messages.showError(messages.parseErrors(oError));
+					}.bind(this)
+				}
+				this.getOwnerComponent().getModel().setHeaders({"action":"check","isglobal":isGlobal})
+				this.getOwnerComponent().getModel().read("/ZzVariantSet", mParameters);
 			}.bind(this));
 			return promise;
 		},
@@ -1363,25 +1446,41 @@ sap.ui.define([
 		},
 
 		onPressManage: function (oEvent) {
-			if (!this.pDialog) {
-				this.pDialog = this.loadFragment({
+			this._oData.resetChanges(["/ZzVariantSet"],true)
+			// this._oData.setUseBatch(false);
+			if (!this.pVariantManageDialog) {
+				this.pVariantManageDialog = this.loadFragment({
 					name: "MMPurchaseRequest.fragment.VariantManage"
 				});
 			}
-			this.pDialog.then(function (oDialog) {
+			if(this.byId("idManageTable")) {
+				this.byId("idManageTable").getBinding("items").refresh();
+			}
+			this.pVariantManageDialog.then(function (oDialog) {
 				var beginButton = new Button({
                     type: "Emphasized",
                     text: this._ResourceBundle.getText("save"),
 					//保存按钮
                     press: function () {
-                        this.onSaveVariant().then(function(res){
-							oDialog.close();
-						});
+						// submitchanges因为设置的原因不会调用回调函数，所以这段没有作用
+                        // this.onSaveVariantChanges().then(function(res){
+						// 	var aItems = this.byId("idManageTable").getItems()
+						// 	if (aItems) {
+						// 		aItems.forEach(function (item) {
+						// 			item.setVisible(true);
+						// 		});
+						// 	}
+						// 	oDialog.close();
+						// }.bind(this));
+						this.onSaveVariantChanges()
+						// this._oData.setUseBatch(true);
+						oDialog.close();
                     }.bind(this)
                 });
                 var endButton = new Button({
                     text: this._ResourceBundle.getText("cancel"),
                     press: function () {
+						this._oData.resetChanges(["/ZzVariantSet"],true)
                         oDialog.close();
                     }.bind(this)
                 });
@@ -1392,6 +1491,63 @@ sap.ui.define([
                 }
                 oDialog.open();
 			}.bind(this));
+		},
+
+		onDeleteVariant: function (oEvent) {
+			var sPath = oEvent.getSource().getBindingContext().sPath;
+			this._oData.remove(sPath,{"groupId":"changes","refreshAfterChange":true});
+			oEvent.getSource().getParent().setVisible(false);
+		},
+
+		onSaveVariantChanges: function () {
+			var promise = new Promise(function(resolve,reject){
+				var mParameters = {
+					// 由于之前设置了批处理模式setUseBatch(false)
+					// submitChanges在禁用批处理模式的情况想不会调用回调函数，所以这里的函数没有实际用处
+					success: function (oData) {
+						resolve();
+					}.bind(this),
+					error: function (oError) {
+						messages.showError(messages.parseErrors(oError));
+					}.bind(this)
+				}
+				this._oData.submitChanges(mParameters);
+			}.bind(this));
+			return promise;
+		},
+
+		manageTableChange:function (oEvent) {
+			// oEvent.getSource().getBinding("items").refresh()
+			// var aItems = oEvent.getSource().getItems();
+			// if (aItems) {
+			// 	aItems.forEach(function (item) {
+			// 		item.setVisible(true);
+			// 	});
+			// }
+		},
+
+		onVariantManageOpened:function () {
+			var aItems = this.byId("idManageTable").getItems()
+			if (aItems) {
+				aItems.forEach(function (item) {
+					item.setVisible(true);
+				});
+			}
+		},
+
+		onPressFavorite: function (oEvent) {
+			var sPath = oEvent.getSource().getBindingContext().sPath;
+			this._oData.setProperty(sPath + "/Isfavorite",oEvent.getParameter("pressed"));
+		},
+
+		onVariantSelection:function (oEvent) {
+			var oHeader = oEvent.getParameter("listItem").getBindingContext().getObject();
+			this._LocalData.setProperty("/ZzHeader/Bukrs",oHeader.Bukrs);
+			this._LocalData.setProperty("/ZzHeader/Ekgrp",oHeader.Ekgrp);
+			this._LocalData.setProperty("/ZzHeader/Bsart",oHeader.Bsart);
+			this._LocalData.setProperty("/ZzHeader/Department",oHeader.Department);
+			this._LocalData.refresh();
+			oEvent.getSource().getParent().getParent().close();
 		}
 	});
 });

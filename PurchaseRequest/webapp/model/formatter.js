@@ -138,6 +138,14 @@ sap.ui.define([
 			}
 		},
 
+		isPublic: function (value) {
+			if (value) {
+				return "公開";
+			} else {
+				return "プライベート";
+			}
+		},
+
 		accAdd : function(arg1, arg2) {
             if (!Number(arg1)) {
                 arg1 = 0;
