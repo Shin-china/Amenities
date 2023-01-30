@@ -59,7 +59,7 @@
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"ZJM", "leadingProperty":"ZJM", "sortProperty":"ZJM", "filterProperty": "ZJM"}'/>
                                 </t:customData>
-                                <t:template>
+                                <t:template> 
                                     <Text text="{ZJM}"/>
                                 </t:template>
                             </t:Column>
