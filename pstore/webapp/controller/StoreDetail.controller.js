@@ -169,6 +169,8 @@ sap.ui.define([
                 var viewStateModel = new sap.ui.model.json.JSONModel(this._viewState);
                 oView.setModel(viewStateModel, "viewState");
 
+                oModel.resetChanges();
+
                 this.byId("btnMessagePopover").setVisible(false);
                 this.byId("btnChange").setText( this._comm.getI18nMessage(this, "footer_f2"));
             },
