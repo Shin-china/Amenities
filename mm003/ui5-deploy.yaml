@@ -18,6 +18,6 @@ builder:
           client: "230"
         app:
           name: ZMM003
-          description: 購買受信ボックス
+          description: GB WB 20230130 MM-003 New Requirements
           package: z001
-          transport: RD1K908455
+          transport: RD1K908620

@@ -13,7 +13,7 @@
                 <f:DynamicPageTitle>
                     <f:heading>
                         <sv:SmartVariantManagement id="__SVM01" showShare="true" persistencyKey="dailybalanceProcessSV" showExecuteOnSelection="true"
-                            entitySet="ZzHeaderSet"/>
+                            entitySet="ZzHeaderSet"/> 
                     </f:heading>
                 </f:DynamicPageTitle>
             </f:title>
@@ -35,9 +35,9 @@
                     requestAtLeastFields="EBELN,TYPE"
                     class="sapUiThinyMarginTop"> -->
                 <smartTable:SmartTable id="smartTable" smartFilterId="smartFilterBarProcess" enableExport="false" entitySet="ZzHeaderSet"  showRowCount="true" 
-                    smartVariant="__SVM01" useVariantManagement="true"  beforeRebindTable="onBeforeRebindTable"
-                    useTablePersonalisation="true" persistencyKey="salespriceTable" enableAutoBinding="false" placeToolbarInTable="true" class="sapUiThinyMarginTop"
-                    requestAtLeastFields="ZBANFN,ZJM,BUKRS,BSART,EKORG,EKGRP,LIFNR,WAERS,ERNAM,ACCEPT,REJECT,to_ZzItems,to_ZzTotal,to_ZzApprovalHistory">
+                    smartVariant="__SVM01" useVariantManagement="true" 
+                    useTablePersonalisation="true" persistencyKey="salespriceTable"  beforeRebindTable="onBeforeRebindTable" enableAutoBinding="true" placeToolbarInTable="true" class="sapUiThinyMarginTop"
+                    requestAtLeastFields="ZBANFN,ZJM,BUKRS,BSART,EKORG,EKGRP,TYPE,LIFNR,WAERS,ERNAM,ACCEPT,REJECT,ZSQLY,PREIS_SUM,to_ZzItems,to_ZzTotal,to_ZzApprovalHistory" enableAutoColumnWidth="true">
                     <t:Table id="reportTable" visibleRowCountMode="Auto" rowActionCount="1" selectionMode="None">
                         <t:rowActionTemplate>
                             <t:RowAction>
@@ -55,7 +55,7 @@
                                     <Text text="{path:'ERDAT', formatter:'.formatter.formtDate_8'}"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="8rem" label="{i18n>ZJM}" sortProperty="ZJM">
+                            <t:Column width="18rem" label="{i18n>ZJM}" sortProperty="ZJM">
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"ZJM", "leadingProperty":"ZJM", "sortProperty":"ZJM", "filterProperty": "ZJM"}'/>
                                 </t:customData>
@@ -88,12 +88,21 @@
                                     <Text text="{ERNAM_DESC}"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="8rem" label="{i18n>EBELN}" sortProperty="EBELN">
+                            <t:Column width="8rem" label="{i18n>EBELN}" visible="true" autoResizable="true"  sortProperty="EBELN" filterProperty="EBELN">
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"EBELN", "leadingProperty":"EBELN", "sortProperty":"EBELN", "filterProperty": "EBELN"}'/>
                                 </t:customData>
                                 <t:template>
                                     <Text text="{EBELN}"/>
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column width="8rem" label="{i18n>TYPE}" sortProperty="TYPE" visible="false">
+                                <t:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"TYPE", "leadingProperty":"TYPE", "sortProperty":"TYPE", "filterProperty": "TYPE"}'/>
+                                </t:customData>
+                                <t:template>
+                                    <Text text="{TYPE}"/>
                                 </t:template>
                             </t:Column>
 
