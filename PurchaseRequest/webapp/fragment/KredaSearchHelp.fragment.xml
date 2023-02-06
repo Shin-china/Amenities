@@ -1,18 +1,18 @@
 <core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
 	xmlns:f="sap.f" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
-	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" title="Select:{i18n>Lifnr}">
+	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="50%" contentHeight="60%" resizable="true" title="Select:{i18n>Lifnr}">
 		<!--<content>-->
 		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Lifnr" liveMode="true" showGoOnFB="true"
 			showFilterConfiguration="true" entitySet="KredaSet">
 			<smartfilterbar:controlConfiguration>
 				<smartfilterbar:ControlConfiguration index="1" key="Lifnr" visibleInAdvancedArea="true" label="{i18n>Lifnr}"/>
 				<smartfilterbar:ControlConfiguration index="2" key="Sortl" visibleInAdvancedArea="true" label="{i18n>Sortl}"/>
-				<smartfilterbar:ControlConfiguration index="3" key="Mcod1" visibleInAdvancedArea="true" label="{i18n>Sortl}"/>
+				<smartfilterbar:ControlConfiguration index="3" key="Mcod1" visibleInAdvancedArea="true" label="{i18n>Mcod1}"/>
 			</smartfilterbar:controlConfiguration>
 		</smartfilterbar:SmartFilterBar>
-		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
+		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" height="75%"
 			beforeRebindTable="onRebingTable" entitySet="KredaSet">
-			<table:Table id="internalTable" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLineLifnr"
+			<table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowSelectionChange="onSelectLineLifnr"
 				cellClick="onSelectLineLifnr">
 				<table:columns>
 					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Lifnr" filterProperty="Lifnr">

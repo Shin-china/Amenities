@@ -185,10 +185,10 @@ sap.ui.define([
 				return;
 			}
 
-			if (oHeader.Department === "") {
-				MessageBox.error(this.getI18nBundle().getText("msgDepartmentIsEmpty"));
-				return;
-			}
+			// if (oHeader.Department === "") {
+			// 	MessageBox.error(this.getI18nBundle().getText("msgDepartmentIsEmpty"));
+			// 	return;
+			// }
 
 			if (oHeader.Zjm === "") {
 				MessageBox.error(this.getI18nBundle().getText("msgZjmIsEmpty"));
@@ -231,6 +231,12 @@ sap.ui.define([
 					break;
 				}
 
+				if (aItem[i].Meins === "") {
+					MessageBox.error(this.getI18nBundle().getText("msgMeinsIsEmpty"));
+					bHasError = true;
+					break;
+				}
+
 				if (aItem[i].Preis === "" || aItem[i].Preis === "0" || aItem[i].Preis === 0) {
 					MessageBox.error(this.getI18nBundle().getText("msgPreisIsEmpty"));
 					bHasError = true;
@@ -239,6 +245,18 @@ sap.ui.define([
 
 				if (oHeader.Bsart !== "Z999" && aItem[i].Lifnr === "") {
 					MessageBox.error(this.getI18nBundle().getText("msgLifnrIsEmpty"));
+					bHasError = true;
+					break;
+				}
+
+				if (aItem[i].Saknr === "") {
+					MessageBox.error(this.getI18nBundle().getText("msgSaknrIsEmpty"));
+					bHasError = true;
+					break;
+				}
+
+				if (aItem[i].Kostl === "") {
+					MessageBox.error(this.getI18nBundle().getText("msgKostlIsEmpty"));
 					bHasError = true;
 					break;
 				}
@@ -603,6 +621,11 @@ sap.ui.define([
 				sItemNo = "0" + iItemNo;
 			} else sItemNo = iItemNo;
 
+			// 納入日付 Lfdat
+			var dLfdat = this._LocalData.getProperty("/ZzHeader/Badat");
+			dLfdat = new Date(dLfdat);
+			dLfdat.setDate(dLfdat.getDate() + 7);
+			dLfdat = dLfdat.toLocaleDateString("ja");
 			var oRow = {
 				Zbanfn: this.getModel("local").getProperty("/ZzHeader/Zbanfn"),
 				//Zbnfpo: iItemNo.toString(),
@@ -621,7 +644,7 @@ sap.ui.define([
 				Zsubtotal: "",
 				Lifnr: "",
 				Lifnrname: "",
-				Lfdat: null,
+				Lfdat: dLfdat,
 				Saknr: "",
 				Kostl: "",
 				Zremarks: "",
@@ -952,6 +975,26 @@ sap.ui.define([
 				//oSmartTable.setEntitySet(oContext._sEntitySet);
 				//oContext.byId("dialogSelect").setTitle(sTitle);
 			}.bind(oContext));
+		},
+
+		onRebingTableT161: function (oEvent) {
+			var sValue = this._LocalData.getProperty("/ZzHeader/Ekgrp");
+			if (sValue) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
+				binding.filters.push(oFilter);
+
+				var oFilterData = {
+					"Ekgrp": {
+						"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue, "tokenText":"="+sValue}]
+					}
+					
+				};
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+
+			
 		},
 
 		/*	onRebingTable: function(oEvent) {
@@ -1361,7 +1404,14 @@ sap.ui.define([
 			}
 			// 后台检查有没有同名变式
 			var promise = new Promise(function (resolve) {
-				this.checkVariant().then(function (res) {
+				var sVariant = this.byId("idVariantName").getValue();
+				var isGlobal = this.byId("idGobal").getSelected();
+				if (isGlobal) {
+					isGlobal = "X";
+				} else {
+					isGlobal = "";
+				}
+				this.checkVariant(sVariant,isGlobal).then(function (res) {
 					var oInput = this.byId("idVariantName");
 					if (res.length > 0) {
 						oInput.setValueState("Error");
@@ -1404,14 +1454,7 @@ sap.ui.define([
 			return promise;
 		},
 
-		checkVariant: function () {
-			var sVariant = this.byId("idVariantName").getValue();
-			var isGlobal = this.byId("idGobal").getSelected();
-			if (isGlobal) {
-				isGlobal = "X";
-			} else {
-				isGlobal = "";
-			}
+		checkVariant: function (sVariant,isGlobal) {
 			var aFilter = [new Filter("Variant","EQ",sVariant)];
 			var promise = new Promise( function (resolve, reject) {
 				var mParameters = {
@@ -1446,7 +1489,8 @@ sap.ui.define([
 		},
 
 		onPressManage: function (oEvent) {
-			this._oData.resetChanges(["/ZzVariantSet"],true)
+			this._oData.resetChanges(["/ZzVariantSet"],true);
+			this._oData.resetChanges();
 			// this._oData.setUseBatch(false);
 			if (!this.pVariantManageDialog) {
 				this.pVariantManageDialog = this.loadFragment({
@@ -1480,7 +1524,8 @@ sap.ui.define([
                 var endButton = new Button({
                     text: this._ResourceBundle.getText("cancel"),
                     press: function () {
-						this._oData.resetChanges(["/ZzVariantSet"],true)
+						// this._oData.resetChanges(["/ZzVariantSet"],true);
+						this._oData.resetChanges(["/ZzVariantSet"],true);
                         oDialog.close();
                     }.bind(this)
                 });
@@ -1527,6 +1572,7 @@ sap.ui.define([
 		},
 
 		onVariantManageOpened:function () {
+			this._oData.updateBindings();
 			var aItems = this.byId("idManageTable").getItems()
 			if (aItems) {
 				aItems.forEach(function (item) {
@@ -1548,6 +1594,42 @@ sap.ui.define([
 			this._LocalData.setProperty("/ZzHeader/Department",oHeader.Department);
 			this._LocalData.refresh();
 			oEvent.getSource().getParent().getParent().close();
+		},
+
+		onTogglePublic: function (oEvent) {
+			var sPath = oEvent.getSource().getBindingContext().sPath;
+			sPath = sPath + "/Isglobal"
+			this._oData.setProperty(sPath, oEvent.getParameter("pressed"));
+		},
+
+		onVariantNameChange: function (oEvent) {
+			var oInput = oEvent.getSource();
+			var sVariant = oEvent.getParameter("value");
+			var isGlobal = oInput.getBindingContext().getObject().Isglobal;
+			if (isGlobal) {
+				isGlobal = "X";
+			} else {
+				isGlobal = "";
+			}
+			this.checkVariant(sVariant,isGlobal).then(function (res) {
+				if (res.length > 0) {
+					//跳过自己本来名字
+					var isError = false;
+					res.forEach(function (e){
+						if (e.Uuid !== oInput.getBindingContext().getObject().Uuid) {
+							isError = true;
+						}
+					}) 
+					if (isError) {
+						oInput.setValueState("Error");
+						oInput.setValueStateText(this._ResourceBundle.getText("msgPleaseEnterName"));
+					} else {
+						oInput.setValueState("None");
+					}
+				} else {
+					oInput.setValueState("None");
+				}
+			}.bind(this));
 		}
 	});
 });

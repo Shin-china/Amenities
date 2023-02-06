@@ -176,20 +176,20 @@
 										selectionMode="None"
 										visibleRowCount="4">
 										<uitable:columns>
-											<uitable:Column width="15rem">
+											<uitable:Column width="25%">
 												<Label text="" />
 												<uitable:template>
 													<Text text="{local>Title}" wrapping="false" class="writeSpace"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
+											<uitable:Column width="8%">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
 													<Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:0,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onTable6Calc($event,'/table6')" enabled="{path:'local>Id', formatter:'.formatter.setTable6Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
+											<uitable:Column width="15%">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
 													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
@@ -197,11 +197,11 @@
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="20rem">
+											<uitable:Column width="52%">
 												<Label text="{i18n>Remark}" />
 												<uitable:template>
 													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable6Visible'}"
-														editable="{local>/viewEditable}"/>
+														editable="{local>/viewEditable}" maxLength="40"/>
 												</uitable:template>
 											</uitable:Column>
 											
@@ -218,43 +218,43 @@
 										selectionMode="None"
 										visibleRowCount="5">
 										<uitable:columns>
-											<uitable:Column width="4rem">
+											<uitable:Column width="5%">
 												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6rem">
+											<uitable:Column width="5%">
 												<Label text="{i18n>Shop}" />
 												<uitable:template>
 													<Text text="{local>Shop}" wrapping="false" class="writeSpace"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6rem">
+											<uitable:Column width="15%">
 												<Label text="{i18n>FieldTitle}" />
 												<uitable:template>
 													<Text text="{local>Title}" wrapping="false" class="writeSpace"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
+											<uitable:Column width="8%">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
 													<Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', constraints:{precision:5,scale:0}}" change=".onTable6Calc($event,'/table7')" enabled="{path:'local>Id', formatter:'.formatter.setTable7Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
+											<uitable:Column width="15%">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
 													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable6Calc($event,'/table7')" enabled="{path:'local>Id', formatter:'.formatter.setTable7Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="16rem">
+											<uitable:Column width="52%">
 												<Label text="{i18n>Remark}" />
 												<uitable:template>
 													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable7Visible'}"
-														editable="{local>/viewEditable}"/>
+														editable="{local>/viewEditable}" maxLength="40"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -270,43 +270,43 @@
 										selectionMode="None"
 										visibleRowCount="9">
 										<uitable:columns>
-											<uitable:Column width="4rem">
+											<uitable:Column width="5%">
 												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6rem">
+											<uitable:Column width="5%">
 												<Label text="{i18n>Shop}" />
 												<uitable:template>
 													<Text text="{local>Shop}" wrapping="false" class="writeSpace"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="8rem">
+											<uitable:Column width="15%">
 												<Label text="{i18n>FieldTitle}" />
 												<uitable:template>
 													<Text text="{local>Title}" wrapping="false" class="writeSpace"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
+											<uitable:Column width="8%">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
 													<Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{emptyString:0}, constraints:{precision:5,scale:0}}" change=".onTable6Calc($event,'/table8')" enabled="{path:'local>Id', formatter:'.formatter.setTable8Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
+											<uitable:Column width="15%">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
 													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable6Calc($event,'/table8')" enabled="{path:'local>Id', formatter:'.formatter.setTable8Enabled'}"
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="16rem">
+											<uitable:Column width="52%">
 												<Label text="{i18n>Remark}" />
 												<uitable:template>
 													<Input value="{local>Remark}" visible="{path:'local>Id', formatter:'.formatter.setTable8Visible'}"
-														editable="{local>/viewEditable}"/>
+														editable="{local>/viewEditable}" maxLength="40"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -322,13 +322,13 @@
 										selectionMode="None"
 										visibleRowCount="4">
 										<uitable:columns>
-											<uitable:Column width="4%">
+											<uitable:Column width="5%">
 												<Label text="{i18n>Number}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="14%">
+											<uitable:Column width="13%">
 												<Label text="{i18n>FieldTitle}" wrapping="true"/>
 												<uitable:template>
                                                     <Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable9Enabled'}"
@@ -412,13 +412,13 @@
 										selectionMode="None"
 										visibleRowCount="4">
 										<uitable:columns>
-											<uitable:Column width="4%">
+											<uitable:Column width="5%">
 												<Label text="{i18n>Number}" wrapping="true"/>
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="14%">
+											<uitable:Column width="13%">
 												<Label text="{i18n>FieldTitle}" wrapping="true"/>
 												<uitable:template>
 													<Input value="{local>Title}" enabled="{path:'local>Id', formatter:'.formatter.setTable10Enabled'}" editable="{local>/viewEditable}"/>
@@ -501,20 +501,20 @@
 										selectionMode="None"
 										visibleRowCount="16">
 										<uitable:columns>
-											<uitable:Column width="4rem">
+											<uitable:Column width="5%">
 												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
+											<uitable:Column width="34%">
 												<Label text="{i18n>WorksTitle}" />
 												<uitable:template>
                                                     <Input id="KUAS_SAKUHINMEI" value="{local>WorksTitle}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}" editable="{local>/viewEditable}"
-														enabled="{local>/KUAS_SAKUHINMEI}"/>
+														enabled="{local>/KUAS_SAKUHINMEI}" maxLength="22"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="9rem">
+											<uitable:Column width="9%">
 												<Label text="{i18n>Ticket}" />
 												<uitable:template>
                                                     <!-- <Input value="{local>Ticket}"  enabled="{path:'local>Id', formatter:'.formatter.setTable11Enabled'}"/> -->
@@ -528,7 +528,7 @@
 													</Select>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
+											<uitable:Column width="10%">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
 													<Input id="KUAS_KENSUU" value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change=".onTable6Calc($event,'/table11')" 
@@ -536,7 +536,7 @@
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
+											<uitable:Column width="16%">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
 													<Input id="KUAS_AMT" value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTable6Calc($event,'/table11')" 
@@ -544,11 +544,11 @@
 														editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="16rem">
+											<uitable:Column width="20%">
 												<Label text="{i18n>Supply}" />
 												<uitable:template>
 													<Input id="KUAS_HAIKYUU" value="{local>Supply}" visible="{path:'local>Id', formatter:'.formatter.setTable11Visible'}"
-														editable="{local>/viewEditable}" enabled="{local>/KUAS_HAIKYUU}"/>
+														editable="{local>/viewEditable}" enabled="{local>/KUAS_HAIKYUU}" maxLength="12"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>
@@ -564,13 +564,13 @@
 										selectionMode="None"
 										visibleRowCount="2">
 										<uitable:columns>
-											<uitable:Column width="4rem">
+											<uitable:Column width="5%">
 												<Label text="{i18n>Number}" />
 												<uitable:template>
 													<Text text="{local>No}" wrapping="false"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="6rem">
+											<uitable:Column width="9%">
 												<Label text="{i18n>Shop}" />
 												<uitable:template>
                                                     <Input value="{local>Shop}" enabled="{path:'local>Id', formatter:'.formatter.setTable12Enabled'}"
@@ -578,28 +578,28 @@
 														change=".onCheckInValueHelp($event, 'ProfitVH')" />
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
+											<uitable:Column width="14%">
 												<Label text="{i18n>FieldTitle}" />
 												<uitable:template>
 													<Text text="{local>Title}" wrapping="false" class="writeSpace"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="10rem">
+											<uitable:Column width="8%">
 												<Label text="{i18n>Quantity}" />
 												<uitable:template>
 													<Input value="{path:'local>Quantity', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:5,scale:0}}" change="setValueToZero" editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="12rem">
+											<uitable:Column width="14%">
 												<Label text="{i18n>Amount}" />
 												<uitable:template>
 													<Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="onTable12AmountChange" editable="{local>/viewEditable}" textAlign="Right"/>
 												</uitable:template>
 											</uitable:Column>
-											<uitable:Column width="16rem">
+											<uitable:Column width="50%">
 												<Label text="{i18n>Remark}" />
 												<uitable:template>
-													<Input value="{local>Remark}" editable="{local>/viewEditable}"/>
+													<Input value="{local>Remark}" editable="{local>/viewEditable}" maxLength="40"/>
 												</uitable:template>
 											</uitable:Column>
 										</uitable:columns>

@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
 	xmlns:f="sap.f" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
-	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" title="Select:{i18n>Banfn}">
+	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="50%" contentHeight="60%" resizable="true" title="Select:{i18n>Banfn}">
 		<!--<content>-->
 		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Banfn" liveMode="true" showGoOnFB="true"
 			showFilterConfiguration="true" entitySet="ZzSHZbanfnSet">
@@ -21,7 +21,7 @@
 				<smartfilterbar:ControlConfiguration index="10" key="Zbanfn" visibleInAdvancedArea="true" label="{i18n>Zbanfn}" visible="false"/>
 			</smartfilterbar:controlConfiguration>
 		</smartfilterbar:SmartFilterBar>
-		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
+		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" height="75%"
 			beforeRebindTable="onRebingTable" entitySet="ZzSHZbanfnSet" requestAtLeastFields="Zbanfn,Zspzt">
 			<table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowSelectionChange="onSelectLineBanfn"
 				cellClick="onSelectLineBanfn">

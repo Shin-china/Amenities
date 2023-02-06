@@ -40,7 +40,7 @@
                             <smartfilterbar:ControlConfiguration index="8" key="Ernam" visibleInAdvancedArea="true" label="{i18n>Ernam}" />
                             <smartfilterbar:ControlConfiguration index="9" key="Badat" visibleInAdvancedArea="true" label="{i18n>Badat}" />
                             <smartfilterbar:ControlConfiguration index="10" key="Zbanfn" visibleInAdvancedArea="true" label="{i18n>Zbanfn}" visible="false" />
-                            <smartfilterbar:ControlConfiguration index="11" key="Department" visibleInAdvancedArea="true" label="{i18n>Department}" />
+                            <!-- <smartfilterbar:ControlConfiguration index="11" key="Department" visibleInAdvancedArea="true" label="{i18n>Department}" /> -->
                         </smartfilterbar:controlConfiguration>
                     </smartfilterbar:SmartFilterBar>
                 </f:content>
@@ -184,7 +184,7 @@
                             </table:template>
                         </table:Column>
                     </table:columns>
-                    <table:columns>
+                    <!-- <table:columns>
                         <table:Column width="8rem" visible="true" autoResizable="true" sortProperty="Department" filterProperty="Department">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Department", "leadingProperty":"Department", "sortProperty": "Department", "filterProperty": "Department"}' />
@@ -209,7 +209,7 @@
                                 <Label text="{Departmenttext}" tooltip="{Departmenttext}"/>
                             </table:template>
                         </table:Column>
-                    </table:columns>
+                    </table:columns> -->
                     <table:columns>
                         <table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Badat" filterProperty="Badat">
                             <table:customData>

@@ -11,9 +11,9 @@
             }"
         >
             <columns>
-                <Column width="4em"/>
+                <Column width="4rem"/>
                 <Column
-                    width="10em">
+                    width="18rem">
                     <Text text="{i18n>Variant}" />
                 </Column>
                 <Column >
@@ -28,8 +28,8 @@
                 <ColumnListItem vAlign="Middle">
                     <cells>
                         <ToggleButton type="Transparent" icon="sap-icon://unfavorite" pressed="{Isfavorite}" press="onPressFavorite"/>
-                        <Text text="{Variant}" />
-                        <Text text="{path:'Isglobal', formatter:'.formatter.isPublic'}" />
+                        <Input value="{Variant}" maxLength="40" liveChange="onVariantNameChange"/>
+                        <ToggleButton text="{path:'Isglobal', formatter:'.formatter.isPublic'}" pressed="{Isglobal}" press="onTogglePublic"/>
                         <Text text="{Createby}" />
                         <c:Icon color="#2C4E6C" src="sap-icon://decline" press="onDeleteVariant"/>
                     </cells>

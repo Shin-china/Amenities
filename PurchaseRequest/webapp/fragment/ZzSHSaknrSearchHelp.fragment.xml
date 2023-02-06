@@ -1,19 +1,27 @@
 <core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
 	xmlns:f="sap.f" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
-	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" title="Select:{i18n>Saknr}">
+	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="50%" contentHeight="60%" resizable="true" title="Select:{i18n>Saknr}">
 		<!--<content>-->
 		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Saknr" liveMode="true" showGoOnFB="true"
 			showFilterConfiguration="true" entitySet="ZzSHSaknrSet">
 			<smartfilterbar:controlConfiguration>
 				<smartfilterbar:ControlConfiguration index="1" key="Saknr" visibleInAdvancedArea="true" label="{i18n>Saknr}"/>
-				<smartfilterbar:ControlConfiguration index="2" key="Ktopl" visibleInAdvancedArea="true" label="{i18n>Ktopl}"/>
-				<smartfilterbar:ControlConfiguration index="3" key="Spras" visibleInAdvancedArea="true" label="{i18n>Spras}"/>
-				<smartfilterbar:ControlConfiguration index="4" key="Txt20" visibleInAdvancedArea="true" label="{i18n>Txt20}"/>
+				<smartfilterbar:ControlConfiguration index="2" key="Ktopl" visibleInAdvancedArea="false" label="{i18n>Ktopl}">
+					<smartfilterbar:defaultFilterValues>
+						<smartfilterbar:SelectOption low="1000"></smartfilterbar:SelectOption>
+					</smartfilterbar:defaultFilterValues>
+				</smartfilterbar:ControlConfiguration>
+				<smartfilterbar:ControlConfiguration index="3" key="Spras" visibleInAdvancedArea="false" label="{i18n>Spras}">
+					<smartfilterbar:defaultFilterValues>
+						<smartfilterbar:SelectOption low="JA"></smartfilterbar:SelectOption>
+					</smartfilterbar:defaultFilterValues>
+				</smartfilterbar:ControlConfiguration>
+				<smartfilterbar:ControlConfiguration index="4" key="Txt50" visibleInAdvancedArea="true" label="{i18n>Txt50}"/>
 			</smartfilterbar:controlConfiguration>
 		</smartfilterbar:SmartFilterBar>
-		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
+		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" height="75%"
 			beforeRebindTable="onRebingTable" entitySet="ZzSHSaknrSet">
-			<table:Table id="internalTable" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLine"
+			<table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowSelectionChange="onSelectLine"
 				cellClick="onSelectLine">
 				<table:columns>
 					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Saknr" filterProperty="Saknr">
@@ -29,7 +37,7 @@
 						</table:template>
 					</table:Column>
 				</table:columns>
-				<table:columns>
+				<!-- <table:columns>
 					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Ktopl" filterProperty="Ktopl">
 						<table:customData>
 							<core:CustomData key="p13nData"
@@ -70,7 +78,7 @@
 							<Label text="{Txt20}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
+				</table:columns> -->
 				<table:columns>
 					<table:Column width="15rem" visible="true" autoResizable="true" sortProperty="Txt50" filterProperty="Txt50">
 						<table:customData>
@@ -85,7 +93,7 @@
 						</table:template>
 					</table:Column>
 				</table:columns>
-				<table:columns>
+				<!-- <table:columns>
 					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Mcod1" filterProperty="Mcod1">
 						<table:customData>
 							<core:CustomData key="p13nData"
@@ -98,7 +106,7 @@
 							<Label text="{Mcod1}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
+				</table:columns> -->
 			</table:Table>
 		</smarttable:SmartTable>
 		<!--</content>-->

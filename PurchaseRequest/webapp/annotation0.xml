@@ -251,6 +251,12 @@
 			<Annotations Target="ZZPURCHASEREQUEST_SRV.HT024/Eknam">
 				<Annotation Term="Common.Label" String="{@i18n&gt;Eknam}"/>
 			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.HT024/Ektel">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Ektel}"/>
+			</Annotations>
+			<Annotations Target="ZZPURCHASEREQUEST_SRV.HT024/Telfx">
+				<Annotation Term="Common.Label" String="{@i18n&gt;Telfx}"/>
+			</Annotations>
 			<Annotations Target="ZZPURCHASEREQUEST_SRV.ZzSHZbanfn/Ekgrp">
 				<Annotation Term="Common.ValueList">
 					<Record Type="Common.ValueListType">
