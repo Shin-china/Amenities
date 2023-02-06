@@ -49,7 +49,7 @@
                                     </layoutData>
                                 </Label>
 
-                                <Input id="txtKihyoshaName" editable="{viewState>/editable}" value="{KihyoshaName}" required="true">
+                                <Input id="txtKihyoshaName" editable="{viewState>/editable}" value="{KihyoshaName}" required="true" change="invUserNameChange">
                                     <layoutData>
                                         <l:GridData id="gd4" span="XL4 L4 M12 S12" />
                                     </layoutData>
@@ -177,7 +177,7 @@
                                         <l:GridData id="gd18" span="XL4 L4 M12 S12" />
                                     </layoutData>
                                     </Input> -->
-                                    <smartfield:SmartField id="txtKamokuSetei1" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei1" value="{KamokuSetei1}" maxLength="10" editable="{viewState>/editable}" change="invUserNameChange">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd18" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -371,7 +371,7 @@
                                             <l:GridData id="gd32" span="XL4 L4 M12 S12" />
                                         </layoutData>
                                     </Input> -->
-                                    <smartfield:SmartField id="txtKamokuSetei2" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei2" value="{KamokuSetei2}" maxLength="10" editable="{viewState>/editable}" change="invUserNameChange">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd32" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -388,7 +388,7 @@
                                             <l:GridData id="gd34" span="XL4 L4 M12 S12" />
                                         </layoutData>
                                     </Input> -->
-                                    <smartfield:SmartField id="txtKamokuSetei3" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei3" value="{KamokuSetei3}" maxLength="10" editable="{viewState>/editable}" change="invUserNameChange">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd34" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -501,7 +501,7 @@
                                             <l:GridData id="gd46" span="XL4 L4 M12 S12" />
                                         </layoutData>
                                     </Input> -->
-                                    <smartfield:SmartField id="txtKamokuSetei4" value="{KamokuSetei4}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei4" value="{KamokuSetei4}" maxLength="10" editable="{viewState>/editable}" change="invUserNameChange">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd46" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -550,7 +550,7 @@
                                             <l:GridData id="gd50" span="XL4 L4 M12 S12" />
                                         </layoutData>
                                     </Input> -->
-                                    <smartfield:SmartField id="txtKamokuSetei5" value="{KamokuSetei5}" maxLength="10" editable="{viewState>/editable}">
+                                    <smartfield:SmartField id="txtKamokuSetei5" value="{KamokuSetei5}" maxLength="10" editable="{viewState>/editable}" change="invUserNameChange">
                                         <smartfield:layoutData>
                                             <l:GridData id="gd50" span="XL4 L4 M12 S12" />
                                         </smartfield:layoutData>
@@ -608,7 +608,7 @@
                                     <table:extension>
                                         <HBox id="hbox2" alignContent="Center" alignItems="Center">
                                             <Label id="lblHacyuNo" labelFor="txtHacyuNo" text="{i18n>sec6_f1}" />
-                                            <Input id="txtHacyuNo" value="{HacyuNo}" maxLength="10" editable="{viewState>/editable}" />
+                                            <Input id="txtHacyuNo" value="{HacyuNo}" maxLength="10" editable="{viewState>/editable}" change="invUserNameChange"/>
                                         </HBox>
                                     </table:extension>
 
@@ -931,7 +931,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input id="txtGnknKfskShosai" value="{GnknKfskShosai}" maxLength="50" editable="{viewState>/editable}">
+                                    <Input id="txtGnknKfskShosai" value="{GnknKfskShosai}" maxLength="50" editable="{viewState>/editable}" change="invUserNameChange">
                                         <layoutData>
                                             <l:GridData id="gd86" span="XL4 L4 M12 S12" />
                                         </layoutData>
@@ -943,7 +943,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <TextArea id="txtBiko1" value="{Biko1}" maxLength="300" rows="5" editable="{viewState>/editable}">
+                                    <TextArea id="txtBiko1" value="{Biko1}" maxLength="300" rows="5" editable="{viewState>/editable}" change="invUserNameChange">
                                         <layoutData>
                                             <l:GridData id="gd88" span="XL9 L9 M12 S12" />
                                         </layoutData>
@@ -1001,16 +1001,16 @@
                                         <items>
                                             <ColumnListItem>
                                                 <cells>
-                                                    <Input id="txtTab3KeijoBusho" value="{InCash>KeijoBusho}" showValueHelp="true" valueHelpRequest="onShowKeijoBusho" editable="{viewState>/editable}"/>
+                                                    <Input id="txtTab3KeijoBusho" value="{InCash>KeijoBusho}" showValueHelp="true" valueHelpRequest="onShowKeijoBusho" editable="{viewState>/editable}" change="invUserNameChange"/>
                                                     <!-- <Input id="txtTab3DrkamokuCd" value="{InCash>DrkamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowCreditAccount"/> -->
-                                                    <Input id="txtTab3NyknSaki" value="{InCash>NyknSaki}" editable="{viewState>/editable}"/>
-                                                    <Input id="txtTab3NyknTekiyo" value="{InCash>NyknTekiyo}" editable="{viewState>/editable}"/>
+                                                    <Input id="txtTab3NyknSaki" value="{InCash>NyknSaki}" editable="{viewState>/editable}" change="invUserNameChange"/>
+                                                    <Input id="txtTab3NyknTekiyo" value="{InCash>NyknTekiyo}" editable="{viewState>/editable}" change="invUserNameChange"/>
                                                     <Input id="txtTab3NyknKingaku" value="{parts:[{path:'InCash>NyknKingaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
                                                         formatOptions: {showMeasure: false}}" change="onTabInCashRowUpdate" editable="{viewState>/editable}" textAlign="Right"/>
                                                     <Input id="txtTab3NyknKamokuCd" value="{InCash>NyknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowNyknKamokuCd" change="onGetNyknKamokuNm"/>
-                                                    <Input id="txtTab3NyknKamokuNm" value="{InCash>NyknKamokuNm}" editable="{viewState>/editable}"/>
-                                                    <Input id="txtTab3ZeiCd" value="{InCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowInCashTax"/>
-                                                    <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}" />
+                                                    <Input id="txtTab3NyknKamokuNm" value="{InCash>NyknKamokuNm}" editable="{viewState>/editable}" change="invUserNameChange"/>
+                                                    <Input id="txtTab3ZeiCd" value="{InCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowInCashTax" change="invUserNameChange"/>
+                                                    <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}"/>
                                                 </cells>
                                             </ColumnListItem>
                                         </items>
@@ -1080,14 +1080,14 @@
                                             <items>
                                                 <ColumnListItem>
                                                     <cells>
-                                                        <Input id="txtTab4KeihiFutanBusho" value="{OutCash>KeihiFutanBusho}" showValueHelp="true" valueHelpRequest="onShowKeihiFutanBusho" editable="{viewState>/editable}"/>
-                                                        <Input id="txtTab4ShknSaki" value="{OutCash>ShknSaki}" editable="{viewState>/editable}"/>
-                                                        <Input id="txtTab4ShknTekiyo" value="{OutCash>ShknTekiyo}" editable="{viewState>/editable}"/>
+                                                        <Input id="txtTab4KeihiFutanBusho" value="{OutCash>KeihiFutanBusho}" showValueHelp="true" valueHelpRequest="onShowKeihiFutanBusho" editable="{viewState>/editable}" change="invUserNameChange"/>
+                                                        <Input id="txtTab4ShknSaki" value="{OutCash>ShknSaki}" editable="{viewState>/editable}" change="invUserNameChange"/>
+                                                        <Input id="txtTab4ShknTekiyo" value="{OutCash>ShknTekiyo}" editable="{viewState>/editable}" change="invUserNameChange"/>
                                                         <Input id="txtTab4ShknKingaku" value="{parts:[{path:'OutCash>ShknKingaku'},{path: 'Waers'}], type: 'sap.ui.model.type.Currency',
                                                             formatOptions: {showMeasure: false}}" change="onTabOutCashRowUpdate" editable="{viewState>/editable}" textAlign="Right"/>
                                                         <Input id="txtTab4ShknKamokuCd" value="{OutCash>ShknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowShknKamokuCd" change="onGetShknKamokuNm"/>
-                                                        <Input id="txtTab4ShknKamokuNm" value="{OutCash>ShknKamokuNm}" editable="{viewState>/editable}"/>
-                                                        <Input id="txtTab4ZeiCd" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowOutCashTax"/>
+                                                        <Input id="txtTab4ShknKamokuNm" value="{OutCash>ShknKamokuNm}" editable="{viewState>/editable}" change="invUserNameChange"/>
+                                                        <Input id="txtTab4ZeiCd" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowOutCashTax" change="invUserNameChange"/>
                                                         <CheckBox id="chkTab4Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}" />
                                                     </cells>
                                                 </ColumnListItem>
@@ -1456,7 +1456,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <TextArea id="txtBikou2" maxLength="300" value="{Fi1007/Bikou2}" editable="{viewState>/editable}" rows="5">
+                                    <TextArea id="txtBikou2" maxLength="300" value="{Fi1007/Bikou2}" editable="{viewState>/editable}" rows="5" change="invUserNameChange">
                                         <layoutData>
                                             <l:GridData id="gd110" spanXL="10" spanL="10" spanM="12" spanS="12" />
                                         </layoutData>

@@ -6,11 +6,11 @@ sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
         "mm003/model/models",
-        "sap/f/FlexibleColumnLayoutSemanticHelper",
+
         "sap/f/library",
         "sap/ui/core/routing/HashChanger"
     ],
-    function (UIComponent, Device, models, FlexibleColumnLayoutSemanticHelper, library, HashChanger) {
+    function(UIComponent, Device, models, library, HashChanger) {
         "use strict";
         var LayoutType = library.LayoutType;
         return UIComponent.extend("mm003.Component", {
@@ -23,10 +23,7 @@ sap.ui.define([
              * @public
              * @override
              */
-            init: function () {
-                // reset the routing hash
-                HashChanger.getInstance().replaceHash("");
-
+            init: function() {
                 // call the base component's init function
                 UIComponent.prototype.init.apply(this, arguments);
 
@@ -36,12 +33,12 @@ sap.ui.define([
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
 
-                // set the local model
-			    this.setModel(models.createLocalModel(), "local");
+                //set the local model
+                this.setModel(models.createLocalModel(), "local");
 
-            },
+            }
 
-            getHelper: function () {
+            /***getHelper: function() {
                 var oFCL = this.getRootControl().byId("fcl"),
                     // oParams = UriParameters.fromQuery(location.search),
                     oSettings = {
@@ -49,9 +46,9 @@ sap.ui.define([
                         defaultThreeColumnLayoutType: LayoutType.ThreeColumnsMidExpanded,
                         maxColumnsCount: 2
                     };
-    
+
                 return FlexibleColumnLayoutSemanticHelper.getInstanceFor(oFCL, oSettings);
-            }
+            }***/
         });
     }
 );
