@@ -51,6 +51,7 @@ sap.ui.define([
                 this._Error = false;
                 //汇总model
                 this._sum = {
+                    "ZnjtsHnshSfknRk": 0,         
                     "PUriage": 0, //1. a + b
                     "SUriage": 0, //2. c + d
                     "GenkinUragGokei": 0, //3. a + c
@@ -119,7 +120,8 @@ sap.ui.define([
                             that._sum.ZyunbikinGkiAmt = oData.Fi1007.ZyunbikinGkiAmt;
                             that._sum.Yokuzitukinkonai = oData.Fi1007.Yokuzitukinkonai;
                             that._sum.Sagaku = oData.Fi1007.Sagaku;
-
+                            // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　規程元金金額　 
+                            that._sum.ZnjtsHnshSfknRk = oData.ZnjtsHnshSfknRk;
 
                             var oSumModel = new JSONModel(that._sum, "sum");
                             that.getView().setModel(oSumModel, "sum");
@@ -895,13 +897,18 @@ sap.ui.define([
                 
                 //Sum I - II + III + A - B
                 var oCurrencyParse = NumberFormat.getFloatInstance();
-                var fZnjtsKrkshGankin = this.byId("txtZnjtsKrkshGankin").getValue();
+                var fZnjtsKrkshGankin = this.byId("txtZnjtsKrkshGankin").getValue(); 
                 var fGnkNyukinSogaku = this.byId("txtGnkNyukinSogaku").getValue();
                 var fRyogaekinUkeire = this.byId("txtRyogaekinUkeire").getValue();
+                var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
 
                 fZnjtsKrkshGankin = this._convertInputValue(fZnjtsKrkshGankin);
                 fGnkNyukinSogaku = this._convertInputValue(fGnkNyukinSogaku);
                 fRyogaekinUkeire = this._convertInputValue(fRyogaekinUkeire);
+                fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
+
+                // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　規程元金金額
+                this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fKiteiGankinAmt);
 
                 this._sum.HnjtsKrkshdk = oCurrencyParse.parse(fZnjtsKrkshGankin) -
                     oCurrencyParse.parse(fGnkNyukinSogaku) +
@@ -943,9 +950,16 @@ sap.ui.define([
                 //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
+                var fZnjtsKrkshGankin = this.byId("txtZnjtsKrkshGankin").getValue();
+                
                 fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
+                fZnjtsKrkshGankin = this._convertInputValue(fZnjtsKrkshGankin);
 
                 this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt);
+
+
+                // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　規程元金金額
+                this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fKiteiGankinAmt);
             },
 
             onCalcYokuzitunyuukin: function (oEvent) {

@@ -821,7 +821,7 @@
 
                                     <Input
                                         id="txtZnjtsHnshSfknRk"
-                                        value="{path:'ZnjtsHnshSfknRk', type:'sap.ui.model.odata.type.Decimal',
+                                        value="{path:'sum>/ZnjtsHnshSfknRk', type:'sap.ui.model.odata.type.Decimal',
                                            formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
                                         
                                         textAlign="Right"
