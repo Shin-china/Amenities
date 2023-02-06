@@ -934,10 +934,12 @@ sap.ui.define([
                 fRyogaekinModoshi = this._convertInputValue(fRyogaekinModoshi);
 
                 var oCurrencyParse = NumberFormat.getFloatInstance();
+
+                var fHnjtsHnshSofukin = this._convertInputValue(this._sum.HnjtsHnshSofukin);
                 
-                this._sum.SofukinGokei = this._sum.HnjtsHnshSofukin
+                this._sum.SofukinGokei = oCurrencyParse.parse(fHnjtsHnshSofukin)
                     + oCurrencyParse.parse(fZnjtsHnshSfknRk)
-                    + oCurrencyParse.parse(fRyogaekinModoshi);
+                    + oCurrencyParse.parse(fRyogaekinModoshi);        
             },
 
             onCalcHnjtsKrkshdkUgki: function (oEvent) {
@@ -947,19 +949,27 @@ sap.ui.define([
                 if (this._Error) {
                     return;
                 }; 
-                //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
+                
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
                 var fZnjtsKrkshGankin = this.byId("txtZnjtsKrkshGankin").getValue();
-                
+
                 fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
-                fZnjtsKrkshGankin = this._convertInputValue(fZnjtsKrkshGankin);
-
-                this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt);
-
+                fZnjtsKrkshGankin = this._convertInputValue(fZnjtsKrkshGankin);  
 
                 // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　規程元金金額
                 this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fKiteiGankinAmt);
+
+                //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
+                this.onCalcSofukinGokei(oEvent);
+
+                var fSec8F4 = this.byId("txtSec8F4").getValue();
+                var fSofukinGokei = this._convertInputValue(fSec8F4);
+                // var fSofukinGokei = this._convertInputValue(this._sum.SofukinGokei);
+
+　　　　　　　　　//本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
+                // this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt); 
+                this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(fSofukinGokei) + oCurrencyParse.parse(fKiteiGankinAmt); 
             },
 
             onCalcYokuzitunyuukin: function (oEvent) {
