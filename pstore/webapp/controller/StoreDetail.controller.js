@@ -901,11 +901,13 @@ sap.ui.define([
                 var fGnkNyukinSogaku = this.byId("txtGnkNyukinSogaku").getValue();
                 var fRyogaekinUkeire = this.byId("txtRyogaekinUkeire").getValue();
                 var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
+ 
 
                 fZnjtsKrkshGankin = this._convertInputValue(fZnjtsKrkshGankin);
                 fGnkNyukinSogaku = this._convertInputValue(fGnkNyukinSogaku);
                 fRyogaekinUkeire = this._convertInputValue(fRyogaekinUkeire);
                 fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
+
 
                 // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　規程元金金額
                 this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fKiteiGankinAmt);
@@ -917,6 +919,31 @@ sap.ui.define([
                     oCurrencyParse.parse(this._sum.ShishutsuGokei.toString());
 
                 // this._sum.HnjtsKrkshdkUgki = this._sum.HnjtsKrkshdk;   
+
+                //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
+                var fZnjtsHnshSfknRk = this.byId("txtZnjtsHnshSfknRk").getValue();
+                var fRyogaekinModoshi = this.byId("txtRyogaekinModoshi").getValue();
+                var ftxtSec8F1 = this.byId("txtSec8F1").getValue();
+                
+                fZnjtsHnshSfknRk = this._convertInputValue(fZnjtsHnshSfknRk);
+                fRyogaekinModoshi = this._convertInputValue(fRyogaekinModoshi);
+                ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
+
+                // var fHnjtsHnshSofukin = this._convertInputValue(this._sum.HnjtsHnshSofukin);
+
+                this._sum.SofukinGokei = oCurrencyParse.parse(ftxtSec8F1)
+                    + oCurrencyParse.parse(fZnjtsHnshSfknRk)
+                    + oCurrencyParse.parse(fRyogaekinModoshi); 
+
+                var fSec8F4 = this.byId("txtSec8F4").getValue();
+                var fSofukinGokei = this._convertInputValue(fSec8F4);
+                // var fSofukinGokei = this._convertInputValue(this._sum.SofukinGokei);
+
+　　　　　　　　　//本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
+                // this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt); 
+                this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(fSofukinGokei) + oCurrencyParse.parse(fKiteiGankinAmt); 
+
+
             },
 
             onCalcSofukinGokei: function (oEvent) {
@@ -929,17 +956,27 @@ sap.ui.define([
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
                 var fZnjtsHnshSfknRk = this.byId("txtZnjtsHnshSfknRk").getValue();
                 var fRyogaekinModoshi = this.byId("txtRyogaekinModoshi").getValue();
+                var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
 
                 fZnjtsHnshSfknRk = this._convertInputValue(fZnjtsHnshSfknRk);
                 fRyogaekinModoshi = this._convertInputValue(fRyogaekinModoshi);
+                fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
 
                 var oCurrencyParse = NumberFormat.getFloatInstance();
 
-                var fHnjtsHnshSofukin = this._convertInputValue(this._sum.HnjtsHnshSofukin);
+                var ftxtSec8F1 = this.byId("txtSec8F1").getValue();
+                ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
+
+                // var fHnjtsHnshSofukin = this._convertInputValue(this._sum.HnjtsHnshSofukin);
                 
-                this._sum.SofukinGokei = oCurrencyParse.parse(fHnjtsHnshSofukin)
+                this._sum.SofukinGokei = oCurrencyParse.parse(ftxtSec8F1)
                     + oCurrencyParse.parse(fZnjtsHnshSfknRk)
-                    + oCurrencyParse.parse(fRyogaekinModoshi);        
+                    + oCurrencyParse.parse(fRyogaekinModoshi); 
+
+                this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(ftxtSec8F1)
+                + oCurrencyParse.parse(fZnjtsHnshSfknRk)
+                + oCurrencyParse.parse(fRyogaekinModoshi)+ oCurrencyParse.parse(fKiteiGankinAmt);  
+ 
             },
 
             onCalcHnjtsKrkshdkUgki: function (oEvent) {
