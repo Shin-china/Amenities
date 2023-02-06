@@ -16,12 +16,17 @@
 		displayBlock="true"
 		xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 
-		<m:Page id="DetailPage1" showNavButton="false" busy="{local>/page1Busy}" title="購買稟議承認" busyIndicatorDelay="0">
+		<m:Page id="DetailPage1" showNavButton="true" busy="{local>/page1Busy}" title="購買稟議承認" busyIndicatorDelay="0"
+			navButtonPress="onNavBack">
 			<form:SimpleForm id="IDGenSimpleForm1" editable="true" entitySet="ZzHeaderSet">
 				<m:Label id="_IDGenLabel1" text="購買依頼"/>
 				<m:Text id="getValue" text="{local>/item/0/EBELN}"/>
+				<m:Label id="_IDGenLabe30" text="税抜総額"/>
+				<m:Text id="getValue30" text="{local>/item/0/PREIS_SUM}"/>
 				<m:Label id="_IDGenLabel2" text="件名"/>
-				<m:Text id="getProperty" text="{local>/item/0/ZJM}"
+				<m:Text id="getProperty" text="{local>/item/0/ZJM}"/>
+				<m:Label id="_IDGenLabel31" text="申請理由"/>
+				<m:Text id="getProperty31" text="{local>/item/0/ZSQLY}"
 				/>
 			</form:SimpleForm>
 
@@ -34,7 +39,7 @@
 						<m:content>
 							<Table
 								id="table"
-								selectionMode="MultiToggle"
+								selectionMode="None"
 								rows="{local>/Total}"
 								visibleRowCount="7"
 								showColumnVisibilityMenu="{ui>/showVisibilityMenuEntry}"
@@ -58,13 +63,13 @@
 										</template>
 									</Column>
 									<Column id="productId" filterProperty="ProductId" sortProperty="ProductId" width="11rem">
-										<m:Label id="_IDGenLabel4" text="税抜小計金額" />
+										<m:Label id="_IDGenLabel4" text="合计金额" />
 										<template>
 											<m:Text id="_IDGenText4" text="{local>ZNETVALUE}" wrapping="false" />
 										</template>
 									</Column>
 									<Column id="image" width="11rem" columnMenuOpen="onColumnMenuOpen">
-										<m:Label id="_IDGenLabel5" text="消費税(10%)" />
+										<m:Label id="_IDGenLabel5" text="消費税" />
 										<template>
 											<m:Text id="_IDGenText5" text="{local>ZCONSUMTAX}" wrapping="false" /> 
 										</template>
@@ -75,18 +80,12 @@
 											<m:Text id="_IDGenText6" text="{local>ZSUBTOTAL}" wrapping="false" /> 
 										</template>
 									</Column>
-									<Column id="_IDGenColumn3" width="11rem">
-										<m:Label id="_IDGenLabel7" text="税込見積小計" />
-										<template>
-											<m:Text id="_IDGenText7" text="{local>ZESTVAT}" wrapping="false" /> 
-										</template>
-									</Column>
 								</columns>
 							</Table>
 						</m:content>
 
 						<m:content>
-							<Table id="table2" class="sapUxAPObjectPageSubSectionAlignContent" width="auto" rows="{local>/Items}">
+							<Table id="table2" selectionMode="None" class="sapUxAPObjectPageSubSectionAlignContent" width="auto" rows="{local>/Items}">
 								<extension>
 									<m:OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear">
 										<m:Title id="title" text="明細"/>
@@ -95,12 +94,13 @@
 								</extension>
 
 								<columns>
+									<!-- 
 									<Column id="mx" width="6rem" sortProperty="mx" filterProperty="mx" showFilterMenuEntry="true" showSortMenuEntry="true">
 										<m:Label id="_IDGenLabel8" text="明細" />
 										<template>
 											<m:Text id="_IDGenText8" text="{local>EBELP}" wrapping="false" />
 										</template>
-									</Column>
+									</Column>-->
 									<Column
 										id="srx"
 										filterProperty="srx"
