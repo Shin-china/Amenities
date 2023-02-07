@@ -52,7 +52,6 @@ sap.ui.define(
             tableConverted_dis: function(sKey) {
                 var aItemsKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzItems");
                 var aTotalKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzTotal");
-                console.log("aItemsKey", aItemsKey);
                 var aApprovalHistoryKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzApprovalHistory");
                 //获取数据
                 // var oHeader = this._oDataModel.getProperty("/" + aItemsKey[0]);
