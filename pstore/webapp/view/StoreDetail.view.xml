@@ -1010,7 +1010,8 @@
                                                     <Input id="txtTab3NyknKamokuCd" value="{InCash>NyknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowNyknKamokuCd" change="onGetNyknKamokuNm"/>
                                                     <Input id="txtTab3NyknKamokuNm" value="{InCash>NyknKamokuNm}" editable="{viewState>/editable}" change="invUserNameChange"/>
                                                     <Input id="txtTab3ZeiCd" value="{InCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowInCashTax" change="invUserNameChange"/>
-                                                    <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}"/>
+                                                    <!-- <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}"/> -->
+                                                    <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'InCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}"/>
                                                 </cells>
                                             </ColumnListItem>
                                         </items>
@@ -1088,7 +1089,7 @@
                                                         <Input id="txtTab4ShknKamokuCd" value="{OutCash>ShknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowShknKamokuCd" change="onGetShknKamokuNm"/>
                                                         <Input id="txtTab4ShknKamokuNm" value="{OutCash>ShknKamokuNm}" editable="{viewState>/editable}" change="invUserNameChange"/>
                                                         <Input id="txtTab4ZeiCd" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowOutCashTax" change="invUserNameChange"/>
-                                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}" />
+                                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onOutCashCheckBox"  editable="{viewState>/editable}" />
                                                     </cells>
                                                 </ColumnListItem>
                                             </items>
