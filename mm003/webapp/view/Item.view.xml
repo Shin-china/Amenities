@@ -63,7 +63,7 @@
 										</template>
 									</Column>
 									<Column id="productId" filterProperty="ProductId" sortProperty="ProductId" width="11rem">
-										<m:Label id="_IDGenLabel4" text="合计金额" />
+										<m:Label id="_IDGenLabel4" text="税抜小計金額" />
 										<template>
 											<m:Text id="_IDGenText4" text="{local>ZNETVALUE}" wrapping="false" />
 										</template>
@@ -143,7 +143,7 @@
 										</template>
 									</Column>
 									<Column id="_IDGenColumn6" width="6rem">
-										<m:Label id="_IDGenLabel14" text="税抜金額" />
+										<m:Label id="_IDGenLabel14" text="合計金額" />
 										<template>
 											<m:Text id="_IDGenText14" text="{local>PREIS}" wrapping="false" /> 
 										</template>
@@ -155,7 +155,7 @@
 										</template>
 									</Column>
 									<Column id="_IDGenColumn8" width="6rem">
-										<m:Label id="_IDGenLabel16" text="税込金額" />
+										<m:Label id="_IDGenLabel16" text="税込合計金額" />
 										<template>
 											<m:Text id="_IDGenText16" text="{local>ZSUBTOTAL}" wrapping="false" /> 
 										</template>
