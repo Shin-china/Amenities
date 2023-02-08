@@ -471,6 +471,11 @@ sap.ui.define([
             // },
 
             onTabInCashAdd: function (oEvent) {
+
+                if (this._InCashSet.length == '10') {
+                    return;
+                }
+
                 var oNewObj = {};
                 oNewObj.Loekz = false;
                 oNewObj.KaishaCd = this._KaishaCd;
@@ -496,6 +501,11 @@ sap.ui.define([
             },
 
             onTabOutCashAdd: function (oEvent) {
+
+                if (this._OutCashSet.length == '30') {
+                    return;
+                }
+
                 var oNewObj = {};
                 oNewObj.Loekz = false;
                 oNewObj.KaishaCd = this._KaishaCd;
