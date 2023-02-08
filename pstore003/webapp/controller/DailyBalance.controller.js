@@ -86,10 +86,10 @@ sap.ui.define([
             var iMaxLength = 0;
             if (sTableId == "idCashIncomeTable") {
                 sPath = "/CashIncome";
-                iMaxLength = 15;
+                iMaxLength = 10;
             } else if (sTableId == "idCashPaymentTable") {
                 sPath = "/CashPayment";
-                iMaxLength = 25;
+                iMaxLength = 30;
             }
             var aCashModel = this._LocalData.getProperty(sPath);
             if (aCashModel.length >= iMaxLength) {

@@ -406,8 +406,22 @@ sap.ui.define([
 
             onCashCheckBox: function (oEvent) {
                 this._saveRequired = false;
-                // var sPath = oEvent.getSource().getBindingContext("local").sPath;
-                // this._LocalData.setProperty(sPath + "/Jidoutenkifuyo", oEvent.getParameter("selected"));
+                // var pSelected = oEvent.getParameter("selected");
+                var oInput = oEvent.getSource();
+                var oBindingContext = oInput.getParent().getBindingContext("InCash");
+                var sPath = oBindingContext.sPath + "/Jidoutenkifuyo";
+                var oModel = oBindingContext.getModel();
+                oModel.setProperty(sPath , oEvent.getParameter("selected"));
+            },
+
+            onOutCashCheckBox: function (oEvent) {
+                this._saveRequired = false;
+                // var pSelected = oEvent.getParameter("selected");
+                var oInput = oEvent.getSource();
+                var oBindingContext = oInput.getParent().getBindingContext("OutCash");
+                var sPath = oBindingContext.sPath + "/Jidoutenkifuyo";
+                var oModel = oBindingContext.getModel();
+                oModel.setProperty(sPath , oEvent.getParameter("selected"));
             },
 
             _deleteRow: function (oContext, sModelName, sTabName, sBindingProperty, oEvent) {
@@ -457,6 +471,11 @@ sap.ui.define([
             // },
 
             onTabInCashAdd: function (oEvent) {
+
+                if (this._InCashSet.length == '10') {
+                    return;
+                }
+
                 var oNewObj = {};
                 oNewObj.Loekz = false;
                 oNewObj.KaishaCd = this._KaishaCd;
@@ -482,6 +501,11 @@ sap.ui.define([
             },
 
             onTabOutCashAdd: function (oEvent) {
+
+                if (this._OutCashSet.length == '30') {
+                    return;
+                }
+
                 var oNewObj = {};
                 oNewObj.Loekz = false;
                 oNewObj.KaishaCd = this._KaishaCd;
