@@ -540,7 +540,7 @@ sap.ui.define([
                 this._saveRequired = false;
 
                 var oSource = oEvent.getSource()
-                var oContext = oSource.getBindingContext();setValueState
+                var oContext = oSource.getBindingContext();
                 var sValue = oEvent.mParameters.newValue.toUpperCase();
                 oSource.setValue(sValue);
 
