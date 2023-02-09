@@ -91,6 +91,7 @@ sap.ui.define([
                             that._TenpoCd = oData.TenpoCd;
                             that._EigyoBi = oData.EigyoBi;
                             that._KihyoNo = oData.KihyoNo; 
+                            that._NikkeihyoStatus = oData.NikkeihyoStatus;  
                             // var title = that._comm.getI18nMessage(that, "detail_title");
                             // title = title.concat(" " + oData.KihyoNo);
                             var title
@@ -383,6 +384,76 @@ sap.ui.define([
             onStop: function () {
                 if (this._comm) {
                     this._comm.navBackFrom(this);
+                }
+            },
+
+            onExportPdf: function () {
+                // var oTable = this.byId("table1").getTable();
+                // var aIndex = oTable.getSelectedIndices();
+    
+                // for (var i = 0; i < aIndex.length; i++) {
+                //     var oContext = oTable.getContextByIndex(aIndex[i]);
+                //     var oData = oContext.getObject();
+                //     var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + oData.KaishaCd + "',TenpoCd='" + oData.TenpoCd + "',KihyoNo='" + oData.KihyoNo + "')/$value";
+                //     // window.open(sUrl, "_blank");
+                //     var sShop = oData.TenpoCd;
+                //         if (sShop.length == 3) {
+                //             sShop = "0" + sShop;
+                //         }
+                //         var sFielName = "Amenities_P店舗_" + sShop + "_" + this.formatter.date_8(oData.EigyoBi) + oData.NikkeihyoStatus;
+                //         this.download(sUrl, sFielName);
+                // }
+
+                // var oData = oResponse.mParameters.data;this._KaishaCd
+                var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + this._KaishaCd + "',TenpoCd='" + this._TenpoCd + "',KihyoNo='" + this._KihyoNo + "')/$value";
+                // window.open(sUrl, "_blank");
+                var sShop = this._TenpoCd;
+                    if (sShop.length == 3) {
+                        sShop = "0" + sShop;
+                    }
+                    var sFielName = "Amenities_P店舗_" + sShop + "_" + this.formatter.date_8(this._EigyoBi) + this._NikkeihyoStatus;
+                    this.download(sUrl, sFielName);
+
+            },
+            download: function (url, sFielName) {
+                this.getBlob(url).then(blob => {
+                  this.saveAs(blob, sFielName);
+                });
+            },
+            getBlob: function (url) {
+                return new Promise(resolve => {
+                  const xhr = new XMLHttpRequest();
+            
+                  xhr.open('GET', url, true);
+                  xhr.responseType = 'blob';
+                  xhr.onload = () => {
+                    if (xhr.status === 200) {
+                      resolve(xhr.response);
+                    }
+                  };
+            
+                  xhr.send();
+                });
+            },
+
+            saveAs: function (blob, filename) {
+                if (window.navigator.msSaveOrOpenBlob) {
+                  navigator.msSaveBlob(blob, filename);
+                } else {
+                  const link = document.createElement('a');
+                  const body = document.querySelector('body');
+            
+                  link.href = window.URL.createObjectURL(blob);
+                  link.download = filename;
+            
+                  // fix Firefox
+                  link.style.display = 'none';
+                  body.appendChild(link);
+            
+                  link.click();
+                  body.removeChild(link);
+            
+                  window.URL.revokeObjectURL(link.href);
                 }
             },
 
@@ -1086,7 +1157,7 @@ sap.ui.define([
                     aFilters);
             },
 
-            onShowNyknKamokuCd: function (oEvent) {
+            onShowNyknKamokuCd: function (oEvent) {this._KaishaCd
                 var aFilters = [];
                 // var filter = { field: "Ktopl", value: this._KaishaCd };
                 var filter = { field: "Ktopl", value: "1000" };

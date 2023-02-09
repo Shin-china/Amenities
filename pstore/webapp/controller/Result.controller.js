@@ -133,7 +133,8 @@ sap.ui.define([
                         param.dBudat = dBudat;
                     }
 
-                    oModel.callFunction("/CancelAccDoc", {
+                    oModel.callFunction("/CancelAccDoc", { 
+                        // method: "GET",
                         method: "GET",
                         urlParameters: param,
                         success: function (oData, oResponse) {

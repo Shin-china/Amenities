@@ -1483,6 +1483,7 @@
                     />
 
                     <ToolbarSpacer id="pageToolbarSpacer" />
+                    <Button id="btnExportPdf" text="{i18n>tab1_btn05}" type="Transparent" press="onExportPdf" />
                     <Button id="btnSave" text="{i18n>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
                     <!-- <Button id="btnChange" text="{i18n>footer_f2}" enabled="{= ${viewState>/editable} === false &amp;&amp; ${Editable} === true}" press="onChange" /> -->
                     <Button id="btnChange" text="{i18n>footer_f2}" enabled="{= ${Editable} === true}" press="onChange" />
