@@ -14,10 +14,9 @@ builder:
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          url: https://ad1-amenities.aee.hec.ondemand.com
-          client: "230"
+          url: https://ad1-amenities.aee.hec.ondemand.com:443
         app:
           name: ZPSTORE003
           description: 本部日計表
           package: z001
-          transport: RD1K908516
+          transport: RD1K908638
