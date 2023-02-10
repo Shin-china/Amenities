@@ -408,6 +408,8 @@
 				type="Negative"
 				press="onMessagePopoverPress" />
 			<ToolbarSpacer/>
+
+			<Button type="Transparent" text="{i18n>Print}" press="onPrintPDF"/>
 			<Button id="idSave" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')" enabled="{local>/viewEditable}"/>
             <Button id="idChange" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress" enabled="{local>/btChange}"/>
 			<Button type="Transparent" text="{i18n>Apply}" press="onApplyConfirm" enabled="{local>/btApply}"/>
