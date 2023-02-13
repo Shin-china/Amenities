@@ -1060,13 +1060,12 @@ sap.ui.define([
 
                 // oData.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsHnshSfknRk);
 
-                // var oInput = oEvent.getSource();
-                // var oBindingContext = oInput.getParent().getBindingContext("Store");
-                // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
-                // var oModel = oBindingContext.getModel();
-                // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk));
-
- 
+                var oInput = oEvent.getSource();
+                var oBindingContext = oInput.getParent().getBindingContext();
+                var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = oBindingContext.getModel();
+                oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk));
+                oModel.refresh();
             },
 
             onCalcHnjtsKrkshdkUgki: function (oEvent) {
