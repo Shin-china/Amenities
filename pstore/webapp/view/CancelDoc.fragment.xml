@@ -16,7 +16,7 @@
                         </Select>
  
                         <Label id="lbl02" text="{i18n>dialog2_f2}" labelFor="inputTab1Col05" />
-                        <DatePicker id="datePostingDate" displayFormat="yyyy-MM-dd" />      
+                        <DatePicker id="datePostingDate" displayFormat="yyyy-MM-dd" />  
                 </form:content>
 
             </form:SimpleForm>

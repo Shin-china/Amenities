@@ -92,6 +92,7 @@ sap.ui.define([
                             that._EigyoBi = oData.EigyoBi;
                             that._KihyoNo = oData.KihyoNo; 
                             that._NikkeihyoStatus = oData.NikkeihyoStatus;  
+
                             // var title = that._comm.getI18nMessage(that, "detail_title");
                             // title = title.concat(" " + oData.KihyoNo);
                             var title
@@ -121,7 +122,7 @@ sap.ui.define([
                             that._sum.ZyunbikinGkiAmt = oData.Fi1007.ZyunbikinGkiAmt;
                             that._sum.Yokuzitukinkonai = oData.Fi1007.Yokuzitukinkonai;
                             that._sum.Sagaku = oData.Fi1007.Sagaku;
-                            // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　規程元金金額　 
+                            // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　銀行入金総額[Ⅱ]　-　規程元金金額
                             that._sum.ZnjtsHnshSfknRk = oData.ZnjtsHnshSfknRk;
 
                             var oSumModel = new JSONModel(that._sum, "sum");
@@ -388,25 +389,9 @@ sap.ui.define([
             },
 
             onExportPdf: function () {
-                // var oTable = this.byId("table1").getTable();
-                // var aIndex = oTable.getSelectedIndices();
-    
-                // for (var i = 0; i < aIndex.length; i++) {
-                //     var oContext = oTable.getContextByIndex(aIndex[i]);
-                //     var oData = oContext.getObject();
-                //     var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + oData.KaishaCd + "',TenpoCd='" + oData.TenpoCd + "',KihyoNo='" + oData.KihyoNo + "')/$value";
-                //     // window.open(sUrl, "_blank");
-                //     var sShop = oData.TenpoCd;
-                //         if (sShop.length == 3) {
-                //             sShop = "0" + sShop;
-                //         }
-                //         var sFielName = "Amenities_P店舗_" + sShop + "_" + this.formatter.date_8(oData.EigyoBi) + oData.NikkeihyoStatus;
-                //         this.download(sUrl, sFielName);
-                // }
-
-                // var oData = oResponse.mParameters.data;this._KaishaCd
+ 
                 var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + this._KaishaCd + "',TenpoCd='" + this._TenpoCd + "',KihyoNo='" + this._KihyoNo + "')/$value";
-                // window.open(sUrl, "_blank");
+
                 var sShop = this._TenpoCd;
                     if (sShop.length == 3) {
                         sShop = "0" + sShop;
@@ -1004,16 +989,14 @@ sap.ui.define([
                 fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
 
 
-                // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　規程元金金額
-                this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fKiteiGankinAmt);
+                // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　銀行入金総額[Ⅱ]　-　規程元金金額
+                this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fGnkNyukinSogaku) - oCurrencyParse.parse(fKiteiGankinAmt);
 
                 this._sum.HnjtsKrkshdk = oCurrencyParse.parse(fZnjtsKrkshGankin) -
                     oCurrencyParse.parse(fGnkNyukinSogaku) +
                     oCurrencyParse.parse(fRyogaekinUkeire) +
                     oCurrencyParse.parse(this._sum.SyunyuGokei.toString()) -
                     oCurrencyParse.parse(this._sum.ShishutsuGokei.toString());
-
-                // this._sum.HnjtsKrkshdkUgki = this._sum.HnjtsKrkshdk;   
 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
                 var fZnjtsHnshSfknRk = this.byId("txtZnjtsHnshSfknRk").getValue();
@@ -1023,22 +1006,23 @@ sap.ui.define([
                 fZnjtsHnshSfknRk = this._convertInputValue(fZnjtsHnshSfknRk);
                 fRyogaekinModoshi = this._convertInputValue(fRyogaekinModoshi);
                 ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
+ 
+                var oInput = oEvent.getSource();
+                var oBindingContext = oInput.getParent().getBindingContext();
+                var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = oBindingContext.getModel();
+                oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
 
-                // var fHnjtsHnshSofukin = this._convertInputValue(this._sum.HnjtsHnshSofukin);
-
+                // [Ⅴ]送付金合計(g＋h＋i)
                 this._sum.SofukinGokei = oCurrencyParse.parse(ftxtSec8F1)
                     + oCurrencyParse.parse(fZnjtsHnshSfknRk)
                     + oCurrencyParse.parse(fRyogaekinModoshi); 
 
                 var fSec8F4 = this.byId("txtSec8F4").getValue();
-                var fSofukinGokei = this._convertInputValue(fSec8F4);
-                // var fSofukinGokei = this._convertInputValue(this._sum.SofukinGokei);
+                var fSofukinGokei = this._convertInputValue(fSec8F4); 
 
-　　　　　　　　　//本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
-                // this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt); 
-                this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(fSofukinGokei) + oCurrencyParse.parse(fKiteiGankinAmt); 
-
-
+                //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額 
+                this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(fSofukinGokei) + oCurrencyParse.parse(fKiteiGankinAmt);    
             },
 
             onCalcSofukinGokei: function (oEvent) {
@@ -1062,16 +1046,21 @@ sap.ui.define([
                 var ftxtSec8F1 = this.byId("txtSec8F1").getValue();
                 ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
 
-                // var fHnjtsHnshSofukin = this._convertInputValue(this._sum.HnjtsHnshSofukin);
-                
+                var oInput = oEvent.getSource();
+                var oBindingContext = oInput.getParent().getBindingContext();
+                var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = oBindingContext.getModel();
+                oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
+
+                // [Ⅴ]送付金合計(g＋h＋i) 
                 this._sum.SofukinGokei = oCurrencyParse.parse(ftxtSec8F1)
                     + oCurrencyParse.parse(fZnjtsHnshSfknRk)
                     + oCurrencyParse.parse(fRyogaekinModoshi); 
-
+                
+                // ★本日繰越高合計(Ⅴ-Ⅵ)＝[Ⅳ]
                 this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(ftxtSec8F1)
                 + oCurrencyParse.parse(fZnjtsHnshSfknRk)
-                + oCurrencyParse.parse(fRyogaekinModoshi)+ oCurrencyParse.parse(fKiteiGankinAmt);  
- 
+                + oCurrencyParse.parse(fRyogaekinModoshi)+ oCurrencyParse.parse(fKiteiGankinAmt);   
             },
 
             onCalcHnjtsKrkshdkUgki: function (oEvent) {
@@ -1085,23 +1074,29 @@ sap.ui.define([
                 var oCurrencyParse = NumberFormat.getFloatInstance();
                 var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
                 var fZnjtsKrkshGankin = this.byId("txtZnjtsKrkshGankin").getValue();
+                var fGnkNyukinSogaku = this.byId("txtGnkNyukinSogaku").getValue();
 
                 fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
                 fZnjtsKrkshGankin = this._convertInputValue(fZnjtsKrkshGankin);  
+                fGnkNyukinSogaku  = this._convertInputValue(fGnkNyukinSogaku); 
 
-                // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　規程元金金額
-                this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fKiteiGankinAmt);
+                // ①前日までの本社送付金累計 = 前日繰越元金[Ⅰ]　-　銀行入金総額[Ⅱ]　-　規程元金金額
+                this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fGnkNyukinSogaku) - oCurrencyParse.parse(fKiteiGankinAmt);
 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
                 this.onCalcSofukinGokei(oEvent);
 
                 var fSec8F4 = this.byId("txtSec8F4").getValue();
-                var fSofukinGokei = this._convertInputValue(fSec8F4);
-                // var fSofukinGokei = this._convertInputValue(this._sum.SofukinGokei);
+                var fSofukinGokei = this._convertInputValue(fSec8F4); 
 
-　　　　　　　　　//本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
-                // this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt); 
+　　　　　　　　　//本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額 
                 this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(fSofukinGokei) + oCurrencyParse.parse(fKiteiGankinAmt); 
+
+                var oInput = oEvent.getSource();
+                var oBindingContext = oInput.getParent().getBindingContext();
+                var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = oBindingContext.getModel();
+                oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
             },
 
             onCalcYokuzitunyuukin: function (oEvent) {
