@@ -92,6 +92,7 @@ sap.ui.define([
                             that._EigyoBi = oData.EigyoBi;
                             that._KihyoNo = oData.KihyoNo; 
                             that._NikkeihyoStatus = oData.NikkeihyoStatus;  
+
                             // var title = that._comm.getI18nMessage(that, "detail_title");
                             // title = title.concat(" " + oData.KihyoNo);
                             var title
@@ -388,25 +389,9 @@ sap.ui.define([
             },
 
             onExportPdf: function () {
-                // var oTable = this.byId("table1").getTable();
-                // var aIndex = oTable.getSelectedIndices();
-    
-                // for (var i = 0; i < aIndex.length; i++) {
-                //     var oContext = oTable.getContextByIndex(aIndex[i]);
-                //     var oData = oContext.getObject();
-                //     var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + oData.KaishaCd + "',TenpoCd='" + oData.TenpoCd + "',KihyoNo='" + oData.KihyoNo + "')/$value";
-                //     // window.open(sUrl, "_blank");
-                //     var sShop = oData.TenpoCd;
-                //         if (sShop.length == 3) {
-                //             sShop = "0" + sShop;
-                //         }
-                //         var sFielName = "Amenities_P店舗_" + sShop + "_" + this.formatter.date_8(oData.EigyoBi) + oData.NikkeihyoStatus;
-                //         this.download(sUrl, sFielName);
-                // }
-
-                // var oData = oResponse.mParameters.data;this._KaishaCd
+ 
                 var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + this._KaishaCd + "',TenpoCd='" + this._TenpoCd + "',KihyoNo='" + this._KihyoNo + "')/$value";
-                // window.open(sUrl, "_blank");
+
                 var sShop = this._TenpoCd;
                     if (sShop.length == 3) {
                         sShop = "0" + sShop;
@@ -1071,6 +1056,16 @@ sap.ui.define([
                 this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(ftxtSec8F1)
                 + oCurrencyParse.parse(fZnjtsHnshSfknRk)
                 + oCurrencyParse.parse(fRyogaekinModoshi)+ oCurrencyParse.parse(fKiteiGankinAmt);  
+
+
+                // oData.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsHnshSfknRk);
+
+                // var oInput = oEvent.getSource();
+                // var oBindingContext = oInput.getParent().getBindingContext("Store");
+                // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                // var oModel = oBindingContext.getModel();
+                // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk));
+
  
             },
 
