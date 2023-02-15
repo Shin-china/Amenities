@@ -126,12 +126,11 @@
                 "viewPath": "mm003.view",
                 "controlAggregation": "pages",
                 "controlId": "app",
-                "transition": "slide",
-                "clearTarget": "true"
+                "clearControlAggregation": false
             },
             "routes": [{
                     "name": "List",
-                    "pattern": ":?query:",
+                    "pattern": "",
                     "target": [
                         "List"
                     ]
@@ -157,21 +156,21 @@
                 "List": {
                     "viewType": "XML",
                     "transition": "slide",
-                    "clearControlAggregation": false,
+                    "clearControlAggregation": true,
                     "viewId": "List",
                     "viewName": "List"
                 },
                 "Item": {
                     "viewType": "XML",
                     "transition": "slide",
-                    "clearControlAggregation": false,
+                    "clearControlAggregation": true,
                     "viewId": "Item",
                     "viewName": "Item"
                 },
                 "PoItem": {
                     "viewType": "XML",
                     "transition": "slide",
-                    "clearControlAggregation": false,
+                    "clearControlAggregation": true,
                     "viewId": "PoItem",
                     "viewName": "PoItem"
                 }

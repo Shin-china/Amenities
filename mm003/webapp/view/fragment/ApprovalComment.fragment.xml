@@ -1,0 +1,26 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog id="ApprovalComment" contentWidth="40%" contentHeight="10%" title="{/title/name}">
+    <Text text="承認コメント" class="sapUiTinyMarginTop"/>
+    <TextArea  id="idComments" value="{local>/item/0/COMMENTS}" growing="true" growingMaxLines="7"  width="80%"/>
+      
+
+        <beginButton>
+            <Button
+               id="confirm"
+               text="確認"
+               press=".onConfrimPost"/>
+        </beginButton>
+
+
+        <endButton>
+            <Button
+               id="cancel"
+               text="取消"
+               press=".onCloseDialog"/>
+        </endButton>
+    
+</Dialog>
+</c:FragmentDefinition>
