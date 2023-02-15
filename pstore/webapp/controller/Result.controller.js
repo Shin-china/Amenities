@@ -98,15 +98,16 @@ sap.ui.define([
                 return;
             }
 
-            // if (dBudat === "") {
-            //     this.byId("datePostingDate").setValueState("Error");
-            //     return;
-            // }
             var oDateFormatter = DateFormat.getDateInstance();
-            if (dBudat !== '') {
-                dBudat = oDateFormatter.parse(dBudat, true, true);
-            }
+            
+            var oNow = new Date();  
+            var otime = oNow.getTime(); 
 
+            if (dBudat !== '') {
+                // dBudat = oDateFormatter.parse(dBudat, true, true);
+                // dBudat = this.formatter.dateTime(dBudat, "01000000");
+                dBudat = this.formatter.dateTime(dBudat,otime);
+            }
 
             this._busyDialog = new sap.m.BusyDialog({});
             this._busyDialog.open();
@@ -133,7 +134,8 @@ sap.ui.define([
                         param.dBudat = dBudat;
                     }
 
-                    oModel.callFunction("/CancelAccDoc", {
+                    oModel.callFunction("/CancelAccDoc", { 
+                        // method: "GET",
                         method: "GET",
                         urlParameters: param,
                         success: function (oData, oResponse) {
@@ -144,7 +146,7 @@ sap.ui.define([
                             }
                         },
                         error: function (oError) {
-                            reject();
+                            reject(oError);
                         }
                     });
                 }

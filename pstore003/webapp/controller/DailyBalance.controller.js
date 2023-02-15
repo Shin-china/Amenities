@@ -86,10 +86,10 @@ sap.ui.define([
             var iMaxLength = 0;
             if (sTableId == "idCashIncomeTable") {
                 sPath = "/CashIncome";
-                iMaxLength = 15;
+                iMaxLength = 10;
             } else if (sTableId == "idCashPaymentTable") {
                 sPath = "/CashPayment";
-                iMaxLength = 25;
+                iMaxLength = 30;
             }
             var aCashModel = this._LocalData.getProperty(sPath);
             if (aCashModel.length >= iMaxLength) {
@@ -1442,6 +1442,65 @@ sap.ui.define([
                     oEvent.getSource().setValue("0");
                 }
             }
+        },
+
+        onPrintPDF: function (oEvent) {
+            // var sAccount = oEvent.getParameter("value"); 
+            var sKAISHA_CD = this._LocalData.getProperty("/dailyBalance/0/KAISHA_CD");
+            var sKIHYO_NO = this._LocalData.getProperty("/dailyBalance/0/KIHYO_NO");
+            var sTENPO_CD = this._LocalData.getProperty("/dailyBalance/0/TENPO_CD");
+            var sEIGYO_BI = this._LocalData.getProperty("/dailyBalance/0/EIGYO_BI");
+            var sNIKKEIHYO_STATUS = this._LocalData.getProperty("/dailyBalance/0/NIKKEIHYO_STATUS");
+
+            var sUrl = "/sap/opu/odata/sap/ZZPSTORE003_SRV/ZzExportSet(KAISHA_CD='" + sKAISHA_CD + "',KIHYO_NO='" + sKIHYO_NO + "')/$value";
+            // window.open(sUrl, "_blank");
+            var sShop = sTENPO_CD;
+            if (sShop.length == 3) {
+                sShop = "0" + sShop;
+            }
+            var sFielName = "Amenities_本部_" + sShop + "_" + sEIGYO_BI + sNIKKEIHYO_STATUS;
+            this.download(sUrl, sFielName);　
+        },
+
+        getBlob: function (url) {
+            return new Promise(resolve => {
+              const xhr = new XMLHttpRequest();
+        
+              xhr.open('GET', url, true);
+              xhr.responseType = 'blob';
+              xhr.onload = () => {
+                if (xhr.status === 200) {
+                  resolve(xhr.response);
+                }
+              };
+        
+              xhr.send();
+            });
+        },
+        saveAs: function (blob, filename) {
+            if (window.navigator.msSaveOrOpenBlob) {
+              navigator.msSaveBlob(blob, filename);
+            } else {
+              const link = document.createElement('a');
+              const body = document.querySelector('body');
+        
+              link.href = window.URL.createObjectURL(blob);
+              link.download = filename;
+        
+              // fix Firefox
+              link.style.display = 'none';
+              body.appendChild(link);
+        
+              link.click();
+              body.removeChild(link);
+        
+              window.URL.revokeObjectURL(link.href);
+            }
+        },
+        download: function (url, sFielName) {
+            this.getBlob(url).then(blob => {
+              this.saveAs(blob, sFielName);
+            });
         },
 
         controlFieldEnabled: function () {

@@ -1,6 +1,7 @@
 <mvc:View
     xmlns:smartfield="sap.ui.comp.smartfield"
     xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
     xmlns:uxap="sap.uxap"
     controllerName="com.shin.pstore.pstore.controller.StoreDetail"
     xmlns:mvc="sap.ui.core.mvc"
@@ -468,17 +469,40 @@
                                 </form:SimpleForm>
                             </uxap:ObjectPageSubSection>
 
-                            <!-- 販売額（カード会社） -->
-                            <uxap:ObjectPageSubSection id="subsection5">
+
+                            <uxap:ObjectPageSubSection id="subsection5"> 
                                 <form:SimpleForm id="subForm5" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1">
-                                    <Label id="lblHanbaiAmt" labelFor="txtHanbaiAmt" text="{i18n>sec4_f1}">
+                                    <form:content>
+
+                                        <!-- その他収支 -->  
+                                        <core:Title text="{i18n>sec4_f0}" />
+
+                                        <!-- 販売額（カード会社） --> 
+                                        <Label id="lblHanbaiAmt" labelFor="txtHanbaiAmt" text="{i18n>sec4_f1}">
+                                            <layoutData>
+                                                <l:GridData id="gd43" span="XL2 L2 M12 S12" />
+                                            </layoutData>
+                                        </Label> 
+                                        <Input
+                                            id="txtHanbaiAmt" 
+                                            value="{path:'HanbaiAmt',type:'sap.ui.model.odata.type.Decimal',
+                                            formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+                                            textAlign="Right"
+                                            editable="{viewState>/editable}"
+                                            change="onCalcKadoHanbaiGokei" >
+                                            <layoutData>
+                                                <l:GridData id="gd44" span="XL4 L4 M12 S12" />
+                                            </layoutData>
+                                        </Input>
+                                    </form:content>
+                                    <!-- <Label id="lblHanbaiAmt" labelFor="txtHanbaiAmt" text="{i18n>sec4_f1}">
                                         <layoutData>
                                             <l:GridData id="gd43" span="XL2 L2 M12 S12" />
                                         </layoutData>
-                                    </Label>
+                                    </Label> -->
 
                                     <!-- 販売額（カード会社） --> 
-                                    <Input
+                                    <!-- <Input
                                         id="txtHanbaiAmt" 
                                         value="{path:'HanbaiAmt',type:'sap.ui.model.odata.type.Decimal',
                                            formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
@@ -488,7 +512,7 @@
                                         <layoutData>
                                             <l:GridData id="gd44" span="XL4 L4 M12 S12" />
                                         </layoutData>
-                                    </Input>
+                                    </Input> -->
 
                                     <!-- 科目設定4 -->
                                     <Label id="lblKamokuSetei4" labelFor="txtKamokuSetei4" text="{i18n>sec4_f2}">
@@ -899,44 +923,8 @@
                                             <l:GridData id="gd74" span="XL4 L4 M12 S12" />
                                         </layoutData>
                                     </Input>
-                                </form:SimpleForm>
-                            </uxap:ObjectPageSubSection>
-                        </uxap:subSections>
-                    </uxap:ObjectPageSection>
 
-                    <!-- 元金過不足 -->
-                    <uxap:ObjectPageSection id="section7" title="{i18n>section7_title}">
-                        <uxap:subSections>
-                            <uxap:ObjectPageSubSection id="subsection17">
-                                <form:SimpleForm id="subForm15" layout="ResponsiveGridLayout" editable="true" columnsXL="2" columnsL="2" columnsM="1">
-                                    <Label id="lblGnknKfskUchwk" labelFor="txtGnknKfskUchwk" text="{i18n>sec8_f7}">
-                                        <layoutData>
-                                            <l:GridData id="gd75" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
-                                        </layoutData>
-                                    </Label>
-
-                                    <!-- 元金過不足内訳・金額 -->
-                                    <Input id="txtGnknKfskUchwk" 
-                                       value="{path:'GnknKfskUchwk', type:'sap.ui.model.odata.type.Decimal',
-                                           formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
-                                        textAlign="Right" editable="{viewState>/editable}" change="onSetDefaultValuetab">
-                                        <layoutData>
-                                            <l:GridData id="gd76" span="XL4 L4 M12 S12" />
-                                        </layoutData>
-                                    </Input>
-
-                                    <Label id="lblGnknKfskShosai" labelFor="txtGnknKfskShosai" text="{i18n>sec8_f8}">
-                                        <layoutData>
-                                            <l:GridData id="gd85" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
-                                        </layoutData>
-                                    </Label>
-
-                                    <Input id="txtGnknKfskShosai" value="{GnknKfskShosai}" maxLength="50" editable="{viewState>/editable}" change="invUserNameChange">
-                                        <layoutData>
-                                            <l:GridData id="gd86" span="XL4 L4 M12 S12" />
-                                        </layoutData>
-                                    </Input>
-
+                                    <!-- 備考１ --> 
                                     <Label id="lblBiko1" labelFor="txtBiko1" text="{i18n>sec8_f9}">
                                         <layoutData>
                                             <l:GridData id="gd87" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -948,6 +936,75 @@
                                             <l:GridData id="gd88" span="XL9 L9 M12 S12" />
                                         </layoutData>
                                     </TextArea>
+                                </form:SimpleForm>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <!-- 元金過不足 -->
+                    <uxap:ObjectPageSection id="section7" title="{i18n>section7_title}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="subsection17">
+                                <form:SimpleForm id="subForm15" layout="ResponsiveGridLayout" editable="true" columnsXL="2" columnsL="2" columnsM="1">
+
+                                    <form:content>
+
+                                        <!-- ■元金過不足内訳（過不足発生報告書承認まで継続入力） -->  
+                                        <core:Title text="{i18n>sec8_f10}" /> 
+                                        
+                                        <Label id="lblGnknKfskUchwk" labelFor="txtGnknKfskUchwk" text="{i18n>sec8_f7}">
+                                            <layoutData>
+                                                <l:GridData id="gd75" span="XL1 L1 M12 S12" linebreakXL="true" linebreakL="true" />
+                                            </layoutData>
+                                        </Label>
+
+                                        <!-- 元金過不足内訳・金額 -->
+                                        <Input id="txtGnknKfskUchwk" 
+                                        value="{path:'GnknKfskUchwk', type:'sap.ui.model.odata.type.Decimal',
+                                            formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
+                                            textAlign="Right" editable="{viewState>/editable}" change="onSetDefaultValuetab">
+                                            <layoutData>
+                                                <l:GridData id="gd76" span="XL4 L4 M12 S12" />
+                                            </layoutData>
+                                        </Input>
+
+                                        <Text text="{i18n>sec8_f11}"/>
+
+                                        <Label id="lblGnknKfskShosai" labelFor="txtGnknKfskShosai" text="{i18n>sec8_f8}">
+                                            <layoutData>
+                                                <l:GridData id="gd85" span="XL1 L1 M12 S12" linebreakXL="true" linebreakL="true" />
+                                            </layoutData>
+                                        </Label>
+
+                                        <!-- <Input id="txtGnknKfskShosai" value="{GnknKfskShosai}" maxLength="50" editable="{viewState>/editable}" change="invUserNameChange">
+                                            <layoutData>
+                                                <l:GridData id="gd86" span="XL4 L4 M12 S12" />
+                                            </layoutData>
+                                        </Input> -->
+                                        <TextArea id="txtGnknKfskShosai" value="{GnknKfskShosai}" maxLength="50" editable="{viewState>/editable}" rows="1" change="invUserNameChange">
+                                            <layoutData>
+                                                <l:GridData id="gd86" span="XL4 L8 M12 S12" />
+                                            </layoutData>
+                                        </TextArea>
+                                    </form:content>
+
+                                    <!-- <TextArea id="txtBikou2" maxLength="300" value="{Fi1007/Bikou2}" editable="{viewState>/editable}" rows="5" change="invUserNameChange">
+                                        <layoutData>
+                                            <l:GridData id="gd110" spanXL="10" spanL="10" spanM="12" spanS="12" />
+                                        </layoutData>
+                                    </TextArea> -->
+
+                                    <!-- <Label id="lblBiko1" labelFor="txtBiko1" text="{i18n>sec8_f9}">
+                                        <layoutData>
+                                            <l:GridData id="gd87" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
+                                        </layoutData>
+                                    </Label>
+
+                                    <TextArea id="txtBiko1" value="{Biko1}" maxLength="300" rows="5" editable="{viewState>/editable}" change="invUserNameChange">
+                                        <layoutData>
+                                            <l:GridData id="gd88" span="XL9 L9 M12 S12" />
+                                        </layoutData>
+                                    </TextArea> -->
                                 </form:SimpleForm>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
@@ -1010,7 +1067,8 @@
                                                     <Input id="txtTab3NyknKamokuCd" value="{InCash>NyknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowNyknKamokuCd" change="onGetNyknKamokuNm"/>
                                                     <Input id="txtTab3NyknKamokuNm" value="{InCash>NyknKamokuNm}" editable="{viewState>/editable}" change="invUserNameChange"/>
                                                     <Input id="txtTab3ZeiCd" value="{InCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowInCashTax" change="invUserNameChange"/>
-                                                    <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}"/>
+                                                    <!-- <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}"/> -->
+                                                    <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'InCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}"/>
                                                 </cells>
                                             </ColumnListItem>
                                         </items>
@@ -1088,7 +1146,7 @@
                                                         <Input id="txtTab4ShknKamokuCd" value="{OutCash>ShknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowShknKamokuCd" change="onGetShknKamokuNm"/>
                                                         <Input id="txtTab4ShknKamokuNm" value="{OutCash>ShknKamokuNm}" editable="{viewState>/editable}" change="invUserNameChange"/>
                                                         <Input id="txtTab4ZeiCd" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowOutCashTax" change="invUserNameChange"/>
-                                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}" />
+                                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onOutCashCheckBox"  editable="{viewState>/editable}" />
                                                     </cells>
                                                 </ColumnListItem>
                                             </items>
@@ -1482,6 +1540,7 @@
                     />
 
                     <ToolbarSpacer id="pageToolbarSpacer" />
+                    <Button id="btnExportPdf" text="{i18n>tab1_btn05}" type="Transparent" press="onExportPdf" />
                     <Button id="btnSave" text="{i18n>footer_f1}" enabled="{viewState>/editable}" press="onSave" />
                     <!-- <Button id="btnChange" text="{i18n>footer_f2}" enabled="{= ${viewState>/editable} === false &amp;&amp; ${Editable} === true}" press="onChange" /> -->
                     <Button id="btnChange" text="{i18n>footer_f2}" enabled="{= ${Editable} === true}" press="onChange" />
