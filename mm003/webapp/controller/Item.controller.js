@@ -7,9 +7,11 @@ sap.ui.define(
         "./messages",
         "../model/formatter",
         "sap/ui/core/routing/HashChanger",
-        "sap/ui/model/Filter"
+        "sap/ui/model/Filter",
+        "sap/ui/core/Fragment",
+        "sap/ui/model/json/JSONModel"
     ],
-    function(BaseController, History, UIComponent, MessageBox, messages, formatter, HashChanger, Filter) {
+    function(BaseController, History, UIComponent, MessageBox, messages, formatter, HashChanger, Filter, Fragment) {
         "use strict";
 
         return BaseController.extend("mm003.controller.Item", {
@@ -52,7 +54,6 @@ sap.ui.define(
             tableConverted_dis: function(sKey) {
                 var aItemsKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzItems");
                 var aTotalKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzTotal");
-                console.log("aItemsKey", aItemsKey);
                 var aApprovalHistoryKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzApprovalHistory");
                 //获取数据
                 // var oHeader = this._oDataModel.getProperty("/" + aItemsKey[0]);
@@ -142,9 +143,33 @@ sap.ui.define(
             },
 
             onApprovalConfirm: function(sAction) {
-                var sTitle = this._ResourceBundle.getText("ConfirmTitle");
+                //var sTitle = this._ResourceBundle.getText("ConfirmTitle");
                 var sText = this._ResourceBundle.getText(sAction);
                 this.sAction = sAction;
+                var actionStr;
+                if (sAction == "Accept") {
+                    actionStr = "承認";
+                } else if (sAction == "Reject") {
+                    actionStr = "却下";
+                } else {
+                    actionStr = "差戻";
+                };
+                var oTitle = {
+                    title: {
+                        name: actionStr
+                    }
+                }
+                if (!this.pDialog) {
+                    //load asynchronous XML Fragment
+                    this.pDialog = this.loadFragment({
+                        name: "mm003.view.fragment.ApprovalComment"
+                    });
+                }
+                this.pDialog.then(function(oDialog) {
+                    oDialog.setModel(new sap.ui.model.json.JSONModel(oTitle));
+                    oDialog.open();
+                }.bind(this));
+                /** 
                 MessageBox.confirm(sText, {
                     title: sTitle,
                     icon: MessageBox.Icon.WARNING,
@@ -158,8 +183,17 @@ sap.ui.define(
                             var postData = this.getApprovalData();
                             this.postAction(postData);
                         }
-                    }.bind(this)
-                });
+                    }.bind(this) 
+                });*/
+            },
+            onConfrimPost: function() {
+                var postData = this.getApprovalData();
+                debugger;
+                this.postAction(postData);
+            },
+
+            onCloseDialog: function() {
+                this.byId("ApprovalComment").close();
             },
 
             postAction: function(postData) {
@@ -190,7 +224,7 @@ sap.ui.define(
                 var postData = {
                     EBELN: oRecord.EBELN,
                     TYPE: oRecord.TYPE,
-                    COMMENTS: this.byId("TextArea1").getValue()
+                    COMMENTS: this.byId("idComments").getValue()
                 };
                 return postData
             },
