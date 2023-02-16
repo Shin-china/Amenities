@@ -20,6 +20,7 @@ sap.ui.define(
                 this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             },
             onBeforeRebindTable: function(oEvent) {
+                debugger;
                 HashChanger.getInstance().replaceHash("");
                 //this._LocalData.setProperty("/layout", "OneColumn");
                 this._oDataModel.resetChanges();

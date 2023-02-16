@@ -47,7 +47,7 @@
                             </t:RowAction>
                         </t:rowActionTemplate>
                         <t:columns>
-                            <t:Column width="8rem" label="{i18n>ERDAT}" sortProperty="ERDAT">
+                            <t:Column width="6rem" label="{i18n>ERDAT}" sortProperty="ERDAT">
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"ERDAT", "leadingProperty":"ERDAT", "sortProperty":"ERDAT", "filterProperty": "ERDAT"}'/>
                                 </t:customData>
@@ -55,7 +55,7 @@
                                     <Text text="{path:'ERDAT', formatter:'.formatter.formtDate_8'}"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="18rem" label="{i18n>ZJM}" sortProperty="ZJM">
+                            <t:Column width="20rem" label="{i18n>ZJM}" sortProperty="ZJM">
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"ZJM", "leadingProperty":"ZJM", "sortProperty":"ZJM", "filterProperty": "ZJM"}'/>
                                 </t:customData>
@@ -72,7 +72,7 @@
                                 </t:template>
                             </t:Column>
 
-                            <t:Column width="8rem" label="{i18n>TYPE_DESC}" sortProperty="TYPE_DESC">
+                            <t:Column width="5rem" label="{i18n>TYPE_DESC}" sortProperty="TYPE_DESC">
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"TYPE_DESC", "leadingProperty":"TYPE_DESC", "sortProperty":"TYPE_DESC", "filterProperty": "TYPE_DESC"}'/>
                                 </t:customData>
@@ -88,7 +88,7 @@
                                     <Text text="{ERNAM_DESC}"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="8rem" label="{i18n>EBELN}" visible="true" autoResizable="true"  sortProperty="EBELN" filterProperty="EBELN">
+                            <t:Column width="6rem" label="{i18n>EBELN}" visible="true" autoResizable="true"  sortProperty="EBELN" filterProperty="EBELN">
                                 <t:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"EBELN", "leadingProperty":"EBELN", "sortProperty":"EBELN", "filterProperty": "EBELN"}'/>
                                 </t:customData>
