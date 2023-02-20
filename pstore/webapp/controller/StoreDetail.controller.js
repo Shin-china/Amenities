@@ -302,6 +302,7 @@ sap.ui.define([
                 d.InCashSet = [];
                 d.OutCashSet = [];
                 delete d.__metadata;
+                d = this._comm.convertJsonNumberToString(d);
 
                 d.Fi1007 = [];
 
@@ -1006,25 +1007,27 @@ sap.ui.define([
                 fRyogaekinModoshi = this._convertInputValue(fRyogaekinModoshi);
                 ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
  
-                var oInput = oEvent.getSource();
-                var oBindingContext = oInput.getParent().getBindingContext();
-                // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
-                var sPath = oBindingContext.sPath;
-                var oModel = oBindingContext.getModel();
-                // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
-                var oSource = oEvent.getSource()
-                var oContext = oSource.getBindingContext();
+                // var oInput = oEvent.getSource();
+                // var oBindingContext = oInput.getParent().getBindingContext();
+                // // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                // var sPath = oBindingContext.sPath;
+                // var oModel = oBindingContext.getModel();
+                // // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
+                // var oSource = oEvent.getSource()
+                // var oContext = oSource.getBindingContext();
 
-                oModel.read(sPath, {
-                    success: function (oData, oResponse) {
-                        oModel.setProperty(oContext.sPath + "/ZnjtsHnshSfknRk", oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
-                        that._goodsSource.setValueState("None");
-                    },
-                    error: function (oError) {
-                        that._goodsSource.setValueState("Error");
-                    }
-                });
+                // oModel.read(sPath, {
+                //     success: function (oData, oResponse) {
+                //         oModel.setProperty(oContext.sPath + "/ZnjtsHnshSfknRk", oCurrencyParse.parse(fZnjtsHnshSfknRk));  
+                //     },
+                //     error: function (oError) { 
+                //     }
+                // });
 
+                var elem = this.getView().getBindingContext();
+                var sPath = elem.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = elem.getModel();
+                oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
 
                 // [Ⅴ]送付金合計(g＋h＋i)
                 this._sum.SofukinGokei = oCurrencyParse.parse(ftxtSec8F1)
@@ -1059,24 +1062,27 @@ sap.ui.define([
                 var ftxtSec8F1 = this.byId("txtSec8F1").getValue();
                 ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
 
-                var oInput = oEvent.getSource();
-                var oBindingContext = oInput.getParent().getBindingContext();
-                // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
-                var sPath = oBindingContext.sPath;
-                var oModel = oBindingContext.getModel();
-                // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
-                var oSource = oEvent.getSource()
-                var oContext = oSource.getBindingContext();
+                // var oInput = oEvent.getSource();
+                // var oBindingContext = oInput.getParent().getBindingContext();
+                // // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                // var sPath = oBindingContext.sPath;
+                // var oModel = oBindingContext.getModel();
+                // // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
+                // var oSource = oEvent.getSource()
+                // var oContext = oSource.getBindingContext();
 
-                oModel.read(sPath, {
-                    success: function (oData, oResponse) {
-                        oModel.setProperty(oContext.sPath + "/ZnjtsHnshSfknRk", oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
-                        that._goodsSource.setValueState("None");
-                    },
-                    error: function (oError) {
-                        that._goodsSource.setValueState("Error");
-                    }
-                });
+                // oModel.read(sPath, {
+                //     success: function (oData, oResponse) {
+                //         oModel.setProperty(oContext.sPath + "/ZnjtsHnshSfknRk", oCurrencyParse.parse(fZnjtsHnshSfknRk));  
+                //     },
+                //     error: function (oError) { 
+                //     }
+                // });
+
+                var elem = this.getView().getBindingContext();
+                var sPath = elem.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = elem.getModel();
+                oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
 
                 // [Ⅴ]送付金合計(g＋h＋i) 
                 this._sum.SofukinGokei = oCurrencyParse.parse(ftxtSec8F1)
@@ -1121,24 +1127,27 @@ sap.ui.define([
                 var fZnjtsHnshSfknRk = this.byId("txtZnjtsHnshSfknRk").getValue(); 
                 fZnjtsHnshSfknRk = this._convertInputValue(fZnjtsHnshSfknRk);
 
-                var oInput = oEvent.getSource();
-                var oBindingContext = oInput.getParent().getBindingContext();
-                // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
-                var sPath = oBindingContext.sPath;
-                var oModel = oBindingContext.getModel();
-                // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
-                var oSource = oEvent.getSource()
-                var oContext = oSource.getBindingContext();
+                // var oInput = oEvent.getSource();
+                // var oBindingContext = oInput.getParent().getBindingContext();
+                // // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                // var sPath = oBindingContext.sPath;
+                // var oModel = oBindingContext.getModel();
+                // // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
+                // var oSource = oEvent.getSource()
+                // var oContext = oSource.getBindingContext();
 
-                oModel.read(sPath, {
-                    success: function (oData, oResponse) {
-                        oModel.setProperty(oContext.sPath + "/ZnjtsHnshSfknRk", oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
-                        that._goodsSource.setValueState("None");
-                    },
-                    error: function (oError) {
-                        that._goodsSource.setValueState("Error");
-                    }
-                });
+                // oModel.read(sPath, {
+                //     success: function (oData, oResponse) {
+                //         oModel.setProperty(oContext.sPath + "/ZnjtsHnshSfknRk", oCurrencyParse.parse(fZnjtsHnshSfknRk));  
+                //     },
+                //     error: function (oError) { 
+                //     }
+                // });
+
+                var elem = this.getView().getBindingContext();
+                var sPath = elem.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = elem.getModel();
+                oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
             },
 
             onCalcYokuzitunyuukin: function (oEvent) {
