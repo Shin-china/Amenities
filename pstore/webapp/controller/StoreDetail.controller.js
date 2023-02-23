@@ -88,6 +88,7 @@ sap.ui.define([
                     events: {
                         dataReceived: function (oResponse) {
                             var oData = oResponse.mParameters.data;
+                            that._NikkeihyoStatus = oData.NikkeihyoStatus;
                             that._KaishaCd = oData.KaishaCd;
                             that._TenpoCd = oData.TenpoCd;
                             that._EigyoBi = oData.EigyoBi;
@@ -391,6 +392,11 @@ sap.ui.define([
 
             onExportPdf: function () {
  
+                if (this._NikkeihyoStatus == "取消済" || this._NikkeihyoStatus == "仕訳取消済") {
+                    MessageToast.show(this._ResourceBundle.getText("saveRequired"));
+                    return;
+                } 
+
                 var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + this._KaishaCd + "',TenpoCd='" + this._TenpoCd + "',KihyoNo='" + this._KihyoNo + "')/$value";
 
                 var sShop = this._TenpoCd;
