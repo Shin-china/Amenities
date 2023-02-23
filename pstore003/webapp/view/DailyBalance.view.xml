@@ -410,7 +410,14 @@
                                                 <uitable:Column >
                                                     <Label text="{i18n>Amount}" />
                                                     <uitable:template>
-                                                        <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change=".onTableColumnSum($event,'idCurrencyTable3')" editable="{local>/viewEditable}" textAlign="Right"/>
+													 
+                                                        <!-- <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+														       change=".onTableColumnSum($event,'idCurrencyTable3')"  
+															   textAlign="Right"
+															   editable="{local>/viewEditable}" /> -->
+                                                        <Input value="0" 
+															   textAlign="Right"
+															   enabled="false" editable="false"/>
                                                     </uitable:template>
                                                 </uitable:Column>
                                             </uitable:columns>
@@ -442,7 +449,8 @@
                                             <uitable:Column width="40%">
                                                 <Label text="{i18n>Amount}"/>
                                                 <uitable:template>
-                                                    <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="{local>Enabled}" change="onCurrencyTable4ValueChange" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                    <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+													       enabled="{local>Enabled}" change="onCurrencyTable4ValueChange" editable="{local>/viewEditable}" textAlign="Right"/>
                                                 </uitable:template>
                                             </uitable:Column>
                                         </uitable:columns>

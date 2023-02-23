@@ -96,12 +96,12 @@
         "Total":""
     },
     "CurrencyTable4":[
-        {"Id":"1", "Enabled":true, "Title":"翌日本社送付金", "Amount":""},
-        {"Id":"2", "Enabled":true, "Title":"翌日両替金依頼額", "Amount":""},
+        {"Id":"1", "Enabled":false, "Title":"翌日本社送付金", "Amount":""},
+        {"Id":"2", "Enabled":false, "Title":"翌日両替金依頼額", "Amount":""},
         {"Id":"3", "Enabled":false, "Title":"翌日銀行入金総額 [Ⅺ]", "Amount":""},
         {"Id":"4", "Enabled":false, "Title":"翌日金庫内現金総額 [Ⅻ]\r\n[Ⅷ]+[Ⅸ]+[Ⅹ]+[Ⅺ]", "Amount":""},
         {"Id":"5", "Enabled":false, "Title":"本日繰越高(日計表1枚目参照） [Ⅳ]", "Amount":""},
-        {"Id":"6", "Enabled":true, "Title":"翌日規程元金金額", "Amount":""},
+        {"Id":"6", "Enabled":false, "Title":"翌日規程元金金額", "Amount":""},
         {"Id":"7", "Enabled":false, "Title":"差額 [Ⅻ]-[Ⅳ]", "Amount":""}
     ]
 }
