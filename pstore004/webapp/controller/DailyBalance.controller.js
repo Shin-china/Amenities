@@ -1373,23 +1373,23 @@ sap.ui.define([
             }
             var oButtonMap = {
                 //未保存
-                "":{"save":true, "change":true, "apply":false, "posting":false},
+                "":{"save":true, "change":true, "apply":false, "posting":false, "pdf":true},
                 //仮保存
-                "1":{"save":true, "change":true, "apply":true, "posting":false},
+                "1":{"save":true, "change":true, "apply":true, "posting":false, "pdf":true},
                 //申請中
-                "2":{"save":false, "change":false, "apply":false, "posting":false},
+                "2":{"save":false, "change":false, "apply":false, "posting":false, "pdf":true},
                 //申請済
-                "3":{"save":false, "change":false, "apply":false, "posting":false},
+                "3":{"save":false, "change":false, "apply":false, "posting":false, "pdf":true},
                 //承認済
-                "4":{"save":false, "change":false, "apply":false, "posting":true},
+                "4":{"save":false, "change":false, "apply":false, "posting":true, "pdf":true},
                 //否認
-                "5":{"save":true, "change":true, "apply":true, "posting":false},
+                "5":{"save":true, "change":true, "apply":true, "posting":false, "pdf":true},
                 //再申請
-                "6":{"save":false, "change":false, "apply":false, "posting":false},
+                "6":{"save":false, "change":false, "apply":false, "posting":false, "pdf":true},
                 //仕訳作成済
-                "7":{"save":false, "change":false, "apply":false, "posting":false},
+                "7":{"save":false, "change":false, "apply":false, "posting":false, "pdf":true},
                 //取消済
-                "8":{"save":false, "change":false, "apply":false, "posting":false},
+                "8":{"save":false, "change":false, "apply":false, "posting":false, "pdf":false},
             };
             if (!oButtonMap[sDocumentStatus][sAction]) {
                 messages.showError(this._ResourceBundle.getText("msg5"));
@@ -1407,6 +1407,9 @@ sap.ui.define([
         },
 
         onPrintPDF: function (oEvent) {
+            var oDailyBalance = this._LocalData.getProperty("/dailyBalance")[0];
+            if(!this.checkButtonEnable(oDailyBalance.NIKKEIHYO_STATUS_CD, "pdf")) {return;}
+
             // var sAccount = oEvent.getParameter("value"); 
             var sKAISHA_CD = this._LocalData.getProperty("/dailyBalance/0/KAISHA_CD");
             var sKIHYO_NO = this._LocalData.getProperty("/dailyBalance/0/KIHYO_NO");
@@ -1414,13 +1417,13 @@ sap.ui.define([
             var sEIGYO_BI = this._LocalData.getProperty("/dailyBalance/0/EIGYO_BI");
             var sNIKKEIHYO_STATUS = this._LocalData.getProperty("/dailyBalance/0/NIKKEIHYO_STATUS");
 
-            var sUrl = "/sap/opu/odata/sap/ZZPSTORE003_SRV/ZzExportSet(KAISHA_CD='" + sKAISHA_CD + "',KIHYO_NO='" + sKIHYO_NO + "')/$value";
+            var sUrl = "/sap/opu/odata/sap/ZZAMAREA_SRV/ZzExportSet(KAISHA_CD='" + sKAISHA_CD + "',KIHYO_NO='" + sKIHYO_NO + "')/$value";
             // window.open(sUrl, "_blank");
             var sShop = sTENPO_CD;
             if (sShop.length == 3) {
                 sShop = "0" + sShop;
             }
-            var sFielName = "Amenities_本部_" + sShop + "_" + sEIGYO_BI + sNIKKEIHYO_STATUS;
+            var sFielName = "Amenities_アムエリア_" + sShop + "_" + sEIGYO_BI + sNIKKEIHYO_STATUS;
             this.download(sUrl, sFielName);　
         },
 

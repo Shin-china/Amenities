@@ -351,6 +351,7 @@ sap.ui.define([
                             if (oData.results.length > 0) {
                                 // this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HONZITUKURIKOSI);
                                 this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HNJTS_KRKSH_GANKIN);
+                                this._LocalData.setProperty("/dailyBalance/0/KITEI_GANKIN",oData.results[0].KITEI_GANKIN);
                             }
                         }.bind(this),
                         error: function (oError) {
