@@ -342,6 +342,7 @@ sap.ui.define([
                 aFilters.push(new Filter("TENPO_CD", "EQ", this.byId("idShop").getValue())); 
                 var sDate = this.byId("idDP1").getValue();
                 aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate))); 
+                 
                 var promise = new Promise( function (resolve, reject) {
                     var mParameters = {
                         refreshAfterChange: false,
@@ -349,7 +350,11 @@ sap.ui.define([
                         success: function (oData) {
                             resolve();
                             if (oData.results.length > 0) {
-                                // this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HONZITUKURIKOSI);
+                                // this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HONZITUKURIKOSI); 
+
+                                this._LocalData.setProperty("/CurrencyTable4/5/Amount", oData.results[0].YOKUZITUKITEIMOTOKIN); 
+                                this._LocalData.refresh();
+
                                 this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HNJTS_KRKSH_GANKIN);
                                 this._LocalData.setProperty("/dailyBalance/0/KITEI_GANKIN",oData.results[0].KITEI_GANKIN);
                             }
