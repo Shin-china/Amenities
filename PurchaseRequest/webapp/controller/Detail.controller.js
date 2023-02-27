@@ -398,7 +398,90 @@ sap.ui.define([
 			}
 		},
 
-		onItemChange: function(sValue) {
+		getLifnrname: function (sSupplier) {
+			if (sSupplier) {
+				var sBukrs = this.getOwnerComponent().getModel("local").getProperty("/ZzHeader/Bukrs");
+				var promise = new Promise(function (resolve,reject){
+					var aFilter = [new Filter("Lifnr","EQ",sSupplier),new Filter("Bukrs","EQ",sBukrs),];
+					var mParameters = {
+						filters:aFilter,
+						success: function (oData) {
+							resolve(oData.results);
+							if (oData.results[0]) {
+							}
+						}.bind(this),
+						error: function (oError) {
+							messages.showError(messages.parseErrors(oError));
+						}.bind(this)
+					}
+					this.getOwnerComponent().getModel().read("/KredaSet", mParameters);
+				}.bind(this));
+				return promise.then(function(res){
+					if (res[0]) {
+						return res[0].Mcod1;
+					} else {
+						return sSupplier
+					}
+				})
+			}
+			
+		},
+
+		onItemChange: function(oEvent,field) {
+			//手动修改物料时 取描述
+			if (oEvent && oEvent.getParameter("value") && field) {
+				var sPath = oEvent.getSource().getBindingContext("local").sPath;
+				switch (field) {
+					case "Matnr":
+						var sMaterial = oEvent.getParameter("value");
+						if (sMaterial) {
+							this.getOwnerComponent().getModel("local").setProperty(sPath + "/Txz01","");
+							var sPlant = oEvent.getSource().getBindingContext("local").getObject().Werks;
+							var aFilter = [new Filter("Matnr","EQ",sMaterial)];
+							if (sPlant) {
+								aFilter.push(new Filter("Werks","EQ",sPlant));
+							}
+							var mParameters = {
+								filters:aFilter,
+								success: function (oData) {
+									if (oData.results[0]) {
+										this.getOwnerComponent().getModel("local").setProperty(sPath + "/Txz01",oData.results[0].Maktg);
+									}
+								}.bind(this),
+								error: function (oError) {
+									messages.showError(messages.parseErrors(oError));
+								}.bind(this)
+							}
+							this.getOwnerComponent().getModel().read("/Mat1wSet", mParameters)
+						}
+						break;
+					case "Lifnr":
+						var sSupplier = oEvent.getParameter("value");
+						if (sSupplier) {
+							this.getOwnerComponent().getModel("local").setProperty(sPath + "/Lifnrname","");
+							var sPlant = oEvent.getSource().getBindingContext("local").getObject().Werks;
+							var aFilter = [new Filter("Lifnr","EQ",sSupplier)];
+							if (sPlant) {
+								aFilter.push(new Filter("Bukrs","EQ",sPlant));
+							}
+							var mParameters = {
+								filters:aFilter,
+								success: function (oData) {
+									if (oData.results[0]) {
+										this.getOwnerComponent().getModel("local").setProperty(sPath + "/Lifnrname",oData.results[0].Mcod1);
+									}
+								}.bind(this),
+								error: function (oError) {
+									messages.showError(messages.parseErrors(oError));
+								}.bind(this)
+							}
+							this.getOwnerComponent().getModel().read("/KredaSet", mParameters)
+						}
+						break;
+				}
+				
+			}
+
 			var oHeader = this.getModel("local").getProperty("/ZzHeader");
 			var aItem = this.getModel("local").getProperty("/ZzItem");
 			var aSum = this.getModel("local").getProperty("/ZzSum");
@@ -410,7 +493,6 @@ sap.ui.define([
 			var iPreis = 0;
 			var iPeinh = 1;
 			var iConsumtaxSum = 0;
-			//sValue.getSource().getBindingContext("local").getObject().Zbanfn
 			aItem.forEach(function(oItem) {
 				if (oItem.Loekz === true || oItem.Loekz === "X") {
 
@@ -433,10 +515,15 @@ sap.ui.define([
 					iZnetvalue = iZnetvalue / iPeinh;
 					iZnetvalue = Number(iZnetvalue).toFixed(2);
 
+					// 明细行单个数量的税
 					oItem.Zconsumtax = iPreis * 0.1;
-					iConsumtaxSum = iPreis * 0.1 * iMenge / iPeinh;
+					// 明细行所有数量的税，本来在这里乘1.1的，但是现在明细行不显示了，所以在最后计算，减少合计误差
+					// iConsumtaxSum = iPreis * 0.1 * iMenge / iPeinh;
+					iConsumtaxSum = iPreis * iMenge / iPeinh;
 					iConsumtaxSum = Number(iConsumtaxSum).toFixed(2);
-					oItem.Zsubtotal = iPreis * 1.1 * iMenge / iPeinh;
+					// oItem.Zsubtotal = iPreis * 1.1 * iMenge / iPeinh;
+					// 明细行的含税金额，本来在这里乘1.1的，但是现在明细行不显示了，所以在最后计算，减少合计误差
+					oItem.Zsubtotal = iPreis * iMenge / iPeinh;
 					oItem.Zvat = iPreis * 1.1;
 
 					oItem.Zconsumtax = oItem.Zconsumtax.toFixed(2);
@@ -510,8 +597,10 @@ sap.ui.define([
 			}.bind(this));
 			for (var i = 0; i < aCalc.length; i++) {
 				aCalc[i].Znetvalue = formatter.clearCommaToNumber(aCalc[i].Znetvalue);
-				aCalc[i].Zconsumtax = formatter.clearCommaToNumber(aCalc[i].Zconsumtax);
-				aCalc[i].Zsubtotal = formatter.clearCommaToNumber(aCalc[i].Zsubtotal);
+				//合计表的 税额（每行合计之后在这里计算税，减少误差）
+				aCalc[i].Zconsumtax = (formatter.clearCommaToNumber(aCalc[i].Zconsumtax) * 0.1).toFixed(0);
+				//合计表的 含税金额（每行合计之后在这里计算税，减少误差）
+				aCalc[i].Zsubtotal = (formatter.clearCommaToNumber(aCalc[i].Zsubtotal) * 1.1).toFixed(0);
 				aCalc[i].Zestvat = formatter.clearCommaToNumber(aCalc[i].Zestvat);
 				aCalc[i].Zzhje = formatter.clearCommaToNumber(aCalc[i].Zzhje);
 				aCalc[i].Zvat = formatter.clearCommaToNumber(aCalc[i].Zvat);
@@ -525,41 +614,55 @@ sap.ui.define([
 
 			}
 			// 金额合计 add by zk 
-			this.itemSum(aItem);
+			this.itemSum(aCalc);
 			this.getModel("local").setProperty("/ZzSum", aCalc);
 			this.getModel("local").refresh();
 		},
 
+		//金额合计
 		itemSum: function (aItem) {
 			var total1 = 0, total2 = 0, total3 = 0, total4 = 0;
-			aItem.forEach(function (item) {
-				var Menge = formatter.clearCommaToNumber(item.Menge);
-				var Preis = formatter.clearCommaToNumber(item.Preis);
-				var Peinh = formatter.clearCommaToNumber(item.Peinh);
-				var Zvat = formatter.clearCommaToNumber(item.Zvat);
-				var Zconsumtax = formatter.clearCommaToNumber(item.Zconsumtax);
-				var Zzhje = formatter.clearCommaToNumber(item.Zzhje);
 
-				//金额合计
-				//税抜総額
-				var amount1 = 0;
-				amount1 = this.formatter.accMul(Menge, Preis);
-				total1 = this.formatter.accAdd(total1, amount1);
-				//税込総額
-				amount1 = 0;
-				amount1 = this.formatter.accMul(Menge, Zvat);
-				total2 = this.formatter.accAdd(total2, amount1);
+			aItem.forEach(function (item) {
+				var Znetvalue = formatter.clearCommaToNumber(item.Znetvalue);
+				var Zsubtotal = formatter.clearCommaToNumber(item.Zsubtotal);
+				var Zconsumtax = formatter.clearCommaToNumber(item.Zconsumtax);
+				//税抜総額 = 合计：税抜小計金額
+				total1 = this.formatter.accAdd(total1, Znetvalue);
+				//税込総額 = 合计：税込小計金額
+				total2 = this.formatter.accAdd(total2, Zsubtotal);
 				//消費税総額
-				amount1 = 0;
-				amount1 = this.formatter.accMul(Menge, Zconsumtax);
-				total3 = this.formatter.accAdd(total3, amount1);
-				//値引き後総額
-				total4 = this.formatter.accAdd(total4, Zzhje);
+				total3 = this.formatter.accAdd(total3, Zconsumtax);
 			}.bind(this));
+
+			// aItem.forEach(function (item) {
+			// 	var Menge = formatter.clearCommaToNumber(item.Menge);
+			// 	var Preis = formatter.clearCommaToNumber(item.Preis);
+			// 	var Peinh = formatter.clearCommaToNumber(item.Peinh);
+			// 	var Zvat = formatter.clearCommaToNumber(item.Zvat);
+			// 	var Zconsumtax = formatter.clearCommaToNumber(item.Zconsumtax);
+			// 	var Zzhje = formatter.clearCommaToNumber(item.Zzhje);
+
+			// 	//金额合计
+			// 	//税抜総額
+			// 	var amount1 = 0;
+			// 	amount1 = this.formatter.accMul(Menge, Preis);
+			// 	total1 = this.formatter.accAdd(total1, amount1);
+			// 	//税込総額
+			// 	amount1 = 0;
+			// 	amount1 = this.formatter.accMul(Menge, Zvat);
+			// 	total2 = this.formatter.accAdd(total2, amount1);
+			// 	//消費税総額
+			// 	amount1 = 0;
+			// 	amount1 = this.formatter.accMul(Menge, Zconsumtax);
+			// 	total3 = this.formatter.accAdd(total3, amount1);
+			// 	//値引き後総額
+			// 	total4 = this.formatter.accAdd(total4, Zzhje);
+			// }.bind(this));
 			this.getModel("local").setProperty("/total1", formatter.amountFormat(total1));
 			this.getModel("local").setProperty("/total2", formatter.amountFormat(total2));
 			this.getModel("local").setProperty("/total3", formatter.amountFormat(total3));
-			this.getModel("local").setProperty("/total4", formatter.amountFormat(total4));
+			// this.getModel("local").setProperty("/total4", formatter.amountFormat(total4));
 			this.getModel("local").refresh();
 		},
 
@@ -626,12 +729,13 @@ sap.ui.define([
 			dLfdat = new Date(dLfdat);
 			dLfdat.setDate(dLfdat.getDate() + 7);
 			dLfdat = dLfdat.toLocaleDateString("ja");
+			var sPlant = this._LocalData.getProperty("/ZzHeader/Bukrs");
 			var oRow = {
 				Zbanfn: this.getModel("local").getProperty("/ZzHeader/Zbanfn"),
 				//Zbnfpo: iItemNo.toString(),
 				Zbnfpo: sItemNo,
 				Knttp: "K",
-				Werks: "",
+				Werks: sPlant,
 				Lgort: "",
 				Matnr: "",
 				Txz01: "",
@@ -961,6 +1065,11 @@ sap.ui.define([
 		},
 
 		showCustomSearchHelpDialog: function(oContext, oEvent, sTitle, sViewName, sEntitySet, sBindingField, aFilters) {
+			this._LocalData.setProperty("/dailogOpen", true);
+			if (this.byId("dialogSelect")) {
+				this.byId("dialogSelect").close();
+				this.byId("dialogSelect").destroy();
+			}
 			oContext._inputSource = oEvent.getSource();
 			//oContext._aFilters = aFilters;
 			oContext._sEntitySet = sEntitySet;
@@ -976,26 +1085,165 @@ sap.ui.define([
 				//oContext.byId("dialogSelect").setTitle(sTitle);
 			}.bind(oContext));
 		},
-
-		onRebingTableT161: function (oEvent) {
-			var sValue = this._LocalData.getProperty("/ZzHeader/Ekgrp");
-			if (sValue) {
+		
+		//采购组搜索帮助联动过滤
+		onRebingTableT024: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
 				var binding = oEvent.getParameter("bindingParams");
 				var oFilter;
-				oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue);
+				oFilter = new sap.ui.model.Filter("Bukrs", sap.ui.model.FilterOperator.EQ, sValue1);
 				binding.filters.push(oFilter);
 
 				var oFilterData = {
-					"Ekgrp": {
-						"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue, "tokenText":"="+sValue}]
+					"Bukrs": {
+						"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
 					}
 					
 				};
 				this.byId("smartFilter").setFilterData(oFilterData);
 			}
+		},
+		//采购订单类型搜索帮助联动过滤
+		onRebingTableT161: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Bukrs", sap.ui.model.FilterOperator.EQ, sValue1);
+				binding.filters.push(oFilter);
+				oFilterData["Bukrs"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			var sValue2 = this._LocalData.getProperty("/ZzHeader/Ekgrp");
+			if (sValue2) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue2);
+				binding.filters.push(oFilter);
 
+				oFilterData["Ekgrp"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue2, "tokenText":"=" + sValue2}]
+				};
+				
+			}
+			if (sValue1 || sValue2) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
 			
 		},
+		//物料联动搜索帮助（工厂）
+		onRebingTableMat1: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			// 工厂等于公司代码
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Werks", sap.ui.model.FilterOperator.EQ, sValue1);
+		
+				binding.filters.push(oFilter);
+				oFilterData["Werks"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			if (sValue1) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+		},
+		//供应商联动搜索帮助（工厂）
+		onRebingTableKreda: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			// 工厂等于公司代码
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Bukrs", sap.ui.model.FilterOperator.EQ, sValue1);
+				binding.filters.push(oFilter);
+				oFilterData["Bukrs"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			if (sValue1) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+		},
+		//成本中心联动搜索帮助（工厂）
+		onRebingTableKostn: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			// 工厂等于公司代码
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Kokrs", sap.ui.model.FilterOperator.EQ, sValue1);
+				binding.filters.push(oFilter);
+				oFilterData["Kokrs"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			if (sValue1) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+		},
+
+		onRebingTableT023: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			// 工厂等于公司代码
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Bukrs", sap.ui.model.FilterOperator.EQ, sValue1);
+				binding.filters.push(oFilter);
+				oFilterData["Bukrs"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			if (sValue1) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+		},
+
 
 		/*	onRebingTable: function(oEvent) {
 				var binding = oEvent.getParameter("bindingParams");
@@ -1630,6 +1878,13 @@ sap.ui.define([
 					oInput.setValueState("None");
 				}
 			}.bind(this));
+		},
+		onBukrsChange:function (oEvent) {
+			var sPlant = this.getModel("local").getProperty("/ZzHeader/Bukrs");
+			var aItem = this.getModel("local").getProperty("/ZzItem");
+			aItem.forEach(function (item) {
+				item.Werks = sPlant;
+			});
 		}
 	});
 });

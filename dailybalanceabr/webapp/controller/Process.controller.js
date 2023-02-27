@@ -346,6 +346,7 @@ sap.ui.define([
                             resolve();
                             if (oData.results.length > 0) {
                                 this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HONZITUKURIKOSI);
+                                this._LocalData.setProperty("/dailyBalance/0/GANKIN_AMT",oData.results[0].GANKIN_AMT);
                             }
                         }.bind(this),
                         error: function (oError) {
@@ -950,6 +951,8 @@ sap.ui.define([
                     this.download(sUrl, sFielName);
                 }
             },
+
+            
 
             getBlob: function (url) {
                 return new Promise(resolve => {

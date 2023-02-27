@@ -28,8 +28,6 @@
 							<Label text="{Ekgrp}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
-				<table:columns>
 					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Bsart" filterProperty="Bsart">
 						<table:customData>
 							<core:CustomData key="p13nData"
@@ -42,8 +40,6 @@
 							<Label text="{Bsart}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
-				<table:columns>
 					<table:Column width="15rem" visible="true" autoResizable="true" sortProperty="Batxt" filterProperty="Batxt">
 						<table:customData>
 							<core:CustomData key="p13nData"

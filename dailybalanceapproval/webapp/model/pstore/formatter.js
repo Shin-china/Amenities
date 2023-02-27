@@ -279,5 +279,18 @@ sap.ui.define([
 					return "";
 			}
 		},
+        date_8: function (value) {
+            if(value) {
+				var date = new Date(value);
+				if (date instanceof Date && isNaN(date.getTime())) {
+					return value;
+				}
+                var oDateFormat = DateFormat.getDateTimeInstance({
+					pattern: "yyyyMMdd"
+				});
+                return oDateFormat.format(new Date(value));
+            }
+            return value;
+        },
     };
 });

@@ -12,7 +12,7 @@
 			</smartfilterbar:controlConfiguration>
 		</smartfilterbar:SmartFilterBar>
 		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" height="75%"
-			 entitySet="KostnSet">
+			beforeRebindTable="onRebingTableKostn" entitySet="KostnSet">
 			<table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowSelectionChange="onSelectLine"
 				cellClick="onSelectLine">
 				<table:columns>

@@ -430,6 +430,7 @@
 				visible="{= ${messages>/}.length > 0 }"
 				type="Negative"
 				press="onMessagePopoverPress" />
+			<Button type="Transparent" text="{i18n_based>Print}" press="onPrintPDFinDetail"/>
 			<Button type="Accept" text="{i18n>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>
 			<Button type="Reject" text="{i18n>Reject}" press=".approvalAction('Reject')" visible="{local>/rejectVisible}"/>
 			<Button id="idConfirm" type="Ghost" text="{i18n>ShopConfirm}" press=".approvalAction('Approval')" visible="{local>/confirmVisible}"/>

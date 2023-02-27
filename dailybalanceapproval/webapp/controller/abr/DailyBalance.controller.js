@@ -117,6 +117,8 @@ sap.ui.define([
                 aCahsModel.splice(element,1);
             });
             oTable.removeSelections();
+            this.collectionIncome();
+            this.collectionPayment();
             this._LocalData.refresh();
         },
 
@@ -796,10 +798,13 @@ sap.ui.define([
             var value1 = this._LocalData.getProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN");
             //Ⅵ元金金額
             var value2 = this._LocalData.getProperty("/dailyBalance/0/GANKIN_AMT");
+            //Ⅱ銀行入金総額
+            var value3 = this._LocalData.getProperty("/dailyBalance/0/GNK_NYUKIN_SOGAKU");
 
             // 前日までの本社送付金累計(Ⅰ-Ⅵ)
             var result = "0";
             result = this.formatter.accSub(value1,value2);
+            result = this.formatter.accSub(result,value3);
             this._LocalData.setProperty("/dailyBalance/0/ZNJT_HNSH_SFKN_RKI", result);
 
             this.resultCalc2();
@@ -1499,6 +1504,9 @@ sap.ui.define([
             var oRecord = this._LocalData.getProperty("/dailyBalance/0");
             var postData = {
                 KIHYO_NO: oRecord.KIHYO_NO,
+                KAISHA_CD: oRecord.KAISHA_CD,
+                TENPO_CD: oRecord.TENPO_CD,
+                EIGYO_BI: this.formatter.date_8(oRecord.EIGYO_BI),
                 NODE: this._LocalData.getProperty("/Node"),
                 COMMENTS: this.byId("idComments").getValue()
             };
@@ -1540,6 +1548,62 @@ sap.ui.define([
                     oPage.insertSection(oHistorySection, 10);
 				});
 			}
+        },
+
+        onPrintPDFinDetail: function () {
+            // check button
+            var isError = false;
+            var oItem = this._LocalData.getProperty("/dailyBalance/0");
+
+            var oData = oItem;
+            var sUrl = "/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV/ZzExportSet(KAISHA_CD='" + oData.KAISHA_CD + "',KIHYO_NO='" + oData.KIHYO_NO + "')/$value";
+            // window.open(sUrl, "_blank");
+            var sShop = oData.TENPO_CD;
+            if (sShop.length == 3) {
+                sShop = "0" + sShop;
+            }
+            var sFielName = "Amenities_ABR_" + sShop + "_" + oData.EIGYO_BI + oData.NIKKEIHYO_STATUS;
+            this.download(sUrl, sFielName);
+        },
+        saveAs: function (blob, filename) {
+            if (window.navigator.msSaveOrOpenBlob) {
+              navigator.msSaveBlob(blob, filename);
+            } else {
+              const link = document.createElement('a');
+              const body = document.querySelector('body');
+        
+              link.href = window.URL.createObjectURL(blob);
+              link.download = filename;
+        
+              // fix Firefox
+              link.style.display = 'none';
+              body.appendChild(link);
+        
+              link.click();
+              body.removeChild(link);
+        
+              window.URL.revokeObjectURL(link.href);
+            }
+        },
+        download: function (url, sFielName) {
+            this.getBlob(url).then(blob => {
+              this.saveAs(blob, sFielName);
+            });
+        },
+        getBlob: function (url) {
+            return new Promise(resolve => {
+              const xhr = new XMLHttpRequest();
+        
+              xhr.open('GET', url, true);
+              xhr.responseType = 'blob';
+              xhr.onload = () => {
+                if (xhr.status === 200) {
+                  resolve(xhr.response);
+                }
+              };
+        
+              xhr.send();
+            });
         },
 
 	});

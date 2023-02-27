@@ -17,8 +17,7 @@ sap.ui.define([
 		convertDate: function(sDate) {
 			if (sDate) {
 				var oDateFormat = DateFormat.getDateTimeInstance({
-					// pattern: "yyyy/MM/dd"
-					pattern: "yyyy-MM-dd"
+					pattern: "yyyy/MM/dd"
 				});
 				return oDateFormat.format(new Date(sDate));
 			} else {

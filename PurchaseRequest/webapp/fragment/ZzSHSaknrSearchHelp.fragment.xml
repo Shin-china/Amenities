@@ -6,17 +6,7 @@
 			showFilterConfiguration="true" entitySet="ZzSHSaknrSet">
 			<smartfilterbar:controlConfiguration>
 				<smartfilterbar:ControlConfiguration index="1" key="Saknr" visibleInAdvancedArea="true" label="{i18n>Saknr}"/>
-				<smartfilterbar:ControlConfiguration index="2" key="Ktopl" visibleInAdvancedArea="false" label="{i18n>Ktopl}">
-					<smartfilterbar:defaultFilterValues>
-						<smartfilterbar:SelectOption low="1000"></smartfilterbar:SelectOption>
-					</smartfilterbar:defaultFilterValues>
-				</smartfilterbar:ControlConfiguration>
-				<smartfilterbar:ControlConfiguration index="3" key="Spras" visibleInAdvancedArea="false" label="{i18n>Spras}">
-					<smartfilterbar:defaultFilterValues>
-						<smartfilterbar:SelectOption low="JA"></smartfilterbar:SelectOption>
-					</smartfilterbar:defaultFilterValues>
-				</smartfilterbar:ControlConfiguration>
-				<smartfilterbar:ControlConfiguration index="4" key="Txt50" visibleInAdvancedArea="true" label="{i18n>Txt50}"/>
+				<smartfilterbar:ControlConfiguration index="2" key="Txt50" visibleInAdvancedArea="true" label="{i18n>Txt50}"/>
 			</smartfilterbar:controlConfiguration>
 		</smartfilterbar:SmartFilterBar>
 		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" height="75%"
@@ -37,48 +27,6 @@
 						</table:template>
 					</table:Column>
 				</table:columns>
-				<!-- <table:columns>
-					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Ktopl" filterProperty="Ktopl">
-						<table:customData>
-							<core:CustomData key="p13nData"
-								value='\{"columnKey":"Ktopl", "leadingProperty":"Ktopl", "sortProperty": "Ktopl", "filterProperty": "Ktopl"}'/>
-						</table:customData>
-						<table:label>
-							<Label text="{i18n>Ktopl}"/>
-						</table:label>
-						<table:template>
-							<Label text="{Ktopl}"/>
-						</table:template>
-					</table:Column>
-				</table:columns>
-				<table:columns>
-					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Spras" filterProperty="Sort2">
-						<table:customData>
-							<core:CustomData key="p13nData"
-								value='\{"columnKey":"Spras", "leadingProperty":"Spras", "sortProperty": "Spras", "filterProperty": "Spras"}'/>
-						</table:customData>
-						<table:label>
-							<Label text="{i18n>Spras}"/>
-						</table:label>
-						<table:template>
-							<Label text="{Spras}"/>
-						</table:template>
-					</table:Column>
-				</table:columns>
-				<table:columns>
-					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Txt20" filterProperty="Txt20">
-						<table:customData>
-							<core:CustomData key="p13nData"
-								value='\{"columnKey":"Txt20", "leadingProperty":"Txt20", "sortProperty": "Txt20", "filterProperty": "Txt20"}'/>
-						</table:customData>
-						<table:label>
-							<Label text="{i18n>Txt20}"/>
-						</table:label>
-						<table:template>
-							<Label text="{Txt20}"/>
-						</table:template>
-					</table:Column>
-				</table:columns> -->
 				<table:columns>
 					<table:Column width="15rem" visible="true" autoResizable="true" sortProperty="Txt50" filterProperty="Txt50">
 						<table:customData>
@@ -93,20 +41,6 @@
 						</table:template>
 					</table:Column>
 				</table:columns>
-				<!-- <table:columns>
-					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Mcod1" filterProperty="Mcod1">
-						<table:customData>
-							<core:CustomData key="p13nData"
-								value='\{"columnKey":"Mcod1", "leadingProperty":"Mcod1", "sortProperty": "Mcod1", "filterProperty": "Mcod1"}'/>
-						</table:customData>
-						<table:label>
-							<Label text="{i18n>Mcod1}"/>
-						</table:label>
-						<table:template>
-							<Label text="{Mcod1}"/>
-						</table:template>
-					</table:Column>
-				</table:columns> -->
 			</table:Table>
 		</smarttable:SmartTable>
 		<!--</content>-->

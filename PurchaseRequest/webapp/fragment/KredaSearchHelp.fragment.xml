@@ -5,52 +5,49 @@
 		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Lifnr" liveMode="true" showGoOnFB="true"
 			showFilterConfiguration="true" entitySet="KredaSet">
 			<smartfilterbar:controlConfiguration>
-				<smartfilterbar:ControlConfiguration index="1" key="Lifnr" visibleInAdvancedArea="true" label="{i18n>Lifnr}"/>
-				<smartfilterbar:ControlConfiguration index="2" key="Sortl" visibleInAdvancedArea="true" label="{i18n>Sortl}"/>
-				<smartfilterbar:ControlConfiguration index="3" key="Mcod1" visibleInAdvancedArea="true" label="{i18n>Mcod1}"/>
+				<smartfilterbar:ControlConfiguration index="1" key="Bukrs" visibleInAdvancedArea="true" label="{i18n>Werks}"/>
+				<smartfilterbar:ControlConfiguration index="2" key="Lifnr" visibleInAdvancedArea="true" label="{i18n>Lifnr}"/>
+				<smartfilterbar:ControlConfiguration index="3" key="Sortl" visibleInAdvancedArea="true" label="{i18n>Sortl}"/>
+				<smartfilterbar:ControlConfiguration index="4" key="Mcod1" visibleInAdvancedArea="true" label="{i18n>Mcod1}"/>
 			</smartfilterbar:controlConfiguration>
 		</smartfilterbar:SmartFilterBar>
 		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" height="75%"
-			beforeRebindTable="onRebingTable" entitySet="KredaSet">
+			beforeRebindTable="onRebingTableKreda" entitySet="KredaSet">
 			<table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowSelectionChange="onSelectLineLifnr"
 				cellClick="onSelectLineLifnr">
 				<table:columns>
-					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Lifnr" filterProperty="Lifnr">
+					<table:Column label="{i18n>Werks}" width="10rem" visible="true" autoResizable="true" sortProperty="Bukrs" filterProperty="Bukrs">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Bukrs", "leadingProperty":"Bukrs", "sortProperty": "Bukrs", "filterProperty": "Bukrs"}'/>
+						</table:customData>
+						<table:template>
+							<Label text="{Bukrs}"/>
+						</table:template>
+					</table:Column>
+					<table:Column label="{i18n>Lifnr}" width="10rem" visible="true" autoResizable="true" sortProperty="Lifnr" filterProperty="Lifnr">
 						<table:customData>
 							<core:CustomData key="p13nData"
 								value='\{"columnKey":"Lifnr", "leadingProperty":"Lifnr", "sortProperty": "Lifnr", "filterProperty": "Lifnr"}'/>
 						</table:customData>
-						<table:label>
-							<Label text="{i18n>Lifnr}"/>
-						</table:label>
 						<table:template>
 							<Label text="{Lifnr}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
-				<table:columns>
-					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Sortl" filterProperty="Sortl">
+					<table:Column label="{i18n>Sortl}" width="6rem" visible="true" autoResizable="true" sortProperty="Sortl" filterProperty="Sortl">
 						<table:customData>
 							<core:CustomData key="p13nData"
 								value='\{"columnKey":"Sortl", "leadingProperty":"Sortl", "sortProperty": "Sortl", "filterProperty": "Sortl"}'/>
 						</table:customData>
-						<table:label>
-							<Label text="{i18n>Sortl}"/>
-						</table:label>
 						<table:template>
 							<Label text="{Sortl}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
-				<table:columns>
-					<table:Column width="16rem" visible="true" autoResizable="true" sortProperty="Mcod1" filterProperty="Mcod1">
+					<table:Column label="{i18n>Mcod1}" width="16rem" visible="true" autoResizable="true" sortProperty="Mcod1" filterProperty="Mcod1">
 						<table:customData>
 							<core:CustomData key="p13nData"
 								value='\{"columnKey":"Mcod1", "leadingProperty":"Mcod1", "sortProperty": "Mcod1", "filterProperty": "Mcod1"}'/>
 						</table:customData>
-						<table:label>
-							<Label text="{i18n>Mcod1}"/>
-						</table:label>
 						<table:template>
 							<Label text="{Mcod1}"/>
 						</table:template>
