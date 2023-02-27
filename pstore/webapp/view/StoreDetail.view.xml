@@ -669,7 +669,6 @@
                                                        textAlign="Right" 
                                                        value="{path:'SyohinZenjtsZan',type:'sap.ui.model.odata.type.Decimal',
                                                              formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:6,scale:0}}"
-                                                       visible="{Visible}" 
                                                        editable="{viewState>/editable}" 
                                                        change="onLineAmountChange" />
                                             </table:template>
@@ -727,7 +726,6 @@
                                                     id="txtSyohinShirAmt"
                                                     value="{parts:[{path: 'Waers'},{path: 'SyohinShirSu'},{path:'SyohinTanka'}], 
                                                             formatter:'.formatter.formatGoodsTodayRemainAmount'}"
-                                                    
                                                     textAlign="Right"
                                                     visible="{Visible}"
                                                     editable="false" />
