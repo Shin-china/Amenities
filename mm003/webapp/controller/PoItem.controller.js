@@ -136,8 +136,8 @@ sap.ui.define(
             },
             onConfrimPost: function() {
                 var postData = this.getApprovalData();
-                debugger;
                 this.postAction(postData);
+                this.byId("ApprovalComment").close();
             },
 
             onCloseDialog: function() {
