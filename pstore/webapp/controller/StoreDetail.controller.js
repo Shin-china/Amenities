@@ -1263,7 +1263,7 @@ sap.ui.define([
 
             onShowInCashTax: function (oEvent) {
                 var aFilters = [];
-                aFilters.push({ field: "Mwart", value: 'A' });
+                // aFilters.push({ field: "Mwart", value: 'A' });
                 this._comm.showCustomSearchHelpDialog(
                     this,
                     oEvent,
@@ -1291,7 +1291,7 @@ sap.ui.define([
 
             onShowOutCashTax: function (oEvent) {
                 var aFilters = [];
-                aFilters.push({ field: "Mwart", value: "V" });
+                // aFilters.push({ field: "Mwart", value: "V" });
                 this._comm.showCustomSearchHelpDialog(
                     this,
                     oEvent,
