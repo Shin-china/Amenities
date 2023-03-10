@@ -228,9 +228,11 @@
 										<Label text="{i18n_based>Title2}" />
 										<Input value="{path:'local>/dailyBalance/0/HNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
 										<Label text="{i18n_based>Title3}" />
-										<Input value="{path:'local>/dailyBalance/0/KITEI_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input value="0" enabled="false" editable="false" textAlign="Right"/>
+										<!-- <Input value="{path:'local>/dailyBalance/0/KITEI_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/> -->
 										<Label text="{i18n_based>Title4}" />
-										<Input value="{path:'local>/dailyBalance/0/GNK_AZKR_YTIGK', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
+										<Input value="0" enabled="false" editable="false" textAlign="Right"/>
+										<!-- <Input value="{path:'local>/dailyBalance/0/GNK_AZKR_YTIGK', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/> -->
 									</form:SimpleForm>
 								</VBox>
 							</uxap:blocks>

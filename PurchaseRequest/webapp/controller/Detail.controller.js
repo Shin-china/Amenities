@@ -219,6 +219,12 @@ sap.ui.define([
 					break;
 				}
 
+				if (aItem[i].Tzx01 === "") {
+					MessageBox.error(this.getI18nBundle().getText("msgTxz01IsEmpty"));
+					bHasError = true;
+					break;
+				}
+
 				if (aItem[i].Lfdat === "" || aItem[i].Lfdat === null) {
 					MessageBox.error(this.getI18nBundle().getText("msgLfdatIsEmpty"));
 					bHasError = true;
@@ -1885,6 +1891,19 @@ sap.ui.define([
 			aItem.forEach(function (item) {
 				item.Werks = sPlant;
 			});
+		},
+
+		toUpperCase:function (oEvent) {
+			var sPath = oEvent.getSource().mBindingInfos.value.binding.sPath;
+			var value = this._LocalData.getProperty(sPath);
+			this._LocalData.setProperty(sPath, value.toUpperCase());
+			
+		},
+		itemToUpperCase: function (oEvent) {
+			var sPath = oEvent.getSource().getBindingContext("local");
+			sPath = sPath + "/" + oEvent.getSource().mBindingInfos.value.binding.sPath;
+			var value = this._LocalData.getProperty(sPath);
+			this._LocalData.setProperty(sPath, value.toUpperCase());
 		}
 	});
 });

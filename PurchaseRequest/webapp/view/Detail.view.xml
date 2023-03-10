@@ -81,7 +81,7 @@
 																<VBox>
 																	<Label id="Ekgrp1" text="{i18n>Ekgrp}" required="true"/>
 																	<Input id="Ekgrp" editable="{local>/editCreate}" value="{local>/ZzHeader/Ekgrp}" width="auto" required="true" showValueHelp="true"
-																		valueHelpRequest="onShowEkgrpHelp"/>
+																		valueHelpRequest="onShowEkgrpHelp" change="toUpperCase"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -102,7 +102,7 @@
 																<VBox>
 																	<Label id="Bsart1" text="{i18n>Bsart}" required="true"/>
 																	<Input id="Bsart" editable="{local>/editCreate}" value="{local>/ZzHeader/Bsart}" width="auto" required="true" showValueHelp="true"
-																		valueHelpRequest="onShowBsartHelp"/>
+																		valueHelpRequest="onShowBsartHelp" change="toUpperCase"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -289,7 +289,7 @@
 												</t:template>
 											</t:Column>
 											<t:Column width="12rem" sortProperty="Txz01">
-												<Label text="{i18n>Txz01}"/>
+												<Label text="{i18n>Txz01}" required="true"/>
 												<t:template>
 													<Input id="Txz01" editable="{local>/editCreate}" value="{local>Txz01}" required="false"/>
 												</t:template>
@@ -298,7 +298,7 @@
 												<Label text="{i18n>Matkl}" required="true"/>
 												<t:template>
 													<Input id="Matkl" editable="{local>/editCreate}" value="{local>Matkl}" required="true" showValueHelp="true"
-														valueHelpRequest="onShowMatklHelp"/>
+														valueHelpRequest="onShowMatklHelp" change="itemToUpperCase"/>
 												</t:template>
 											</t:Column>
 											<t:Column width="7rem" sortProperty="Lifnr">
