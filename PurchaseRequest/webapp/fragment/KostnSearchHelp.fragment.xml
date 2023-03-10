@@ -1,19 +1,19 @@
 <core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
 	xmlns:f="sap.f" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
-	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" title="Select:{i18n>Kostl}">
+	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="50%" contentHeight="60%" resizable="true" title="Select:{i18n>Kostl}">
 		<!--<content>-->
 		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Kostl" liveMode="true" showGoOnFB="true"
 			showFilterConfiguration="true" entitySet="KostnSet">
 			<smartfilterbar:controlConfiguration>
 				<smartfilterbar:ControlConfiguration index="1" key="Kostl" visibleInAdvancedArea="true" label="{i18n>Kostl}"/>
-				<smartfilterbar:ControlConfiguration index="2" key="Bukrs" visibleInAdvancedArea="true" label="{i18n>Bukrs}"/>
-				<smartfilterbar:ControlConfiguration index="3" key="Spras" visibleInAdvancedArea="true" label="{i18n>Spras}"/>
+				<smartfilterbar:ControlConfiguration index="2" key="Kokrs" visibleInAdvancedArea="true" label="{i18n>Bukrs}"/>
+				<!-- <smartfilterbar:ControlConfiguration index="3" key="Spras" visibleInAdvancedArea="true" label="{i18n>Spras}"/> -->
 				<smartfilterbar:ControlConfiguration index="4" key="Mctxt" visibleInAdvancedArea="true" label="{i18n>Mctxt}"/>
 			</smartfilterbar:controlConfiguration>
 		</smartfilterbar:SmartFilterBar>
-		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
-			beforeRebindTable="onRebingTable" entitySet="KostnSet">
-			<table:Table id="internalTable" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLine"
+		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" height="75%"
+			beforeRebindTable="onRebingTableKostn" entitySet="KostnSet">
+			<table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowSelectionChange="onSelectLine"
 				cellClick="onSelectLine">
 				<table:columns>
 					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Kostl" filterProperty="Kostl">
@@ -30,21 +30,21 @@
 					</table:Column>
 				</table:columns>
 				<table:columns>
-					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Bukrs" filterProperty="Bukrs">
+					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Kokrs" filterProperty="Kokrs">
 						<table:customData>
 							<core:CustomData key="p13nData"
-								value='\{"columnKey":"Bukrs", "leadingProperty":"Bukrs", "sortProperty": "Bukrs", "filterProperty": "Bukrs"}'/>
+								value='\{"columnKey":"Kokrs", "leadingProperty":"Kokrs", "sortProperty": "Kokrs", "filterProperty": "Kokrs"}'/>
 						</table:customData>
 						<table:label>
 							<Label text="{i18n>Bukrs}"/>
 						</table:label>
 						<table:template>
-							<Label text="{Bukrs}"/>
+							<Label text="{Kokrs}"/>
 						</table:template>
 					</table:Column>
 				</table:columns>
-				<table:columns>
-					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Sort1" filterProperty="Spras">
+				<!-- <table:columns>
+					<table:Column width="6rem" visible="false" autoResizable="true" sortProperty="Sort1" filterProperty="Spras">
 						<table:customData>
 							<core:CustomData key="p13nData"
 								value='\{"columnKey":"Spras", "leadingProperty":"Spras", "sortProperty": "Spras", "filterProperty": "Spras"}'/>
@@ -56,7 +56,7 @@
 							<Label text="{Spras}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
+				</table:columns> -->
 				<table:columns>
 					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Name2" filterProperty="Mctxt">
 						<table:customData>

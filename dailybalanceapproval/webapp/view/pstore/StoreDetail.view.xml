@@ -721,7 +721,7 @@
 
                                     <Input
                                         id="txtZnjtsHnshSfknRk"
-                                        value="{path:'pstore>ZnjtsHnshSfknRk', type:'sap.ui.model.odata.type.Decimal',
+                                        value="{path:'sum>/ZnjtsHnshSfknRk', type:'sap.ui.model.odata.type.Decimal',
                                            formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
                                         
                                         textAlign="Right"
@@ -731,7 +731,7 @@
                                             <l:GridData id="gd66" span="XL4 L4 M12 S12" />
                                         </layoutData>
                                     </Input>
-
+                                    <!-- (i)両替金戻し -->
                                     <Label id="lblRyogaekinModoshi" labelFor="txtRyogaekinModoshi" text="{i18n_pstore>sec8_f3}">
                                         <layoutData>
                                             <l:GridData id="gd67" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
@@ -846,7 +846,7 @@
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
-
+                    <!-- その他現金収入 -->
                     <uxap:ObjectPageSection id="section3" title="{i18n_pstore>section3_title}" showTitle="true">
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection id="subsection11">
@@ -903,7 +903,7 @@
                                                     <Input id="txtTab3NyknKamokuCd" value="{InCash>NyknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowNyknKamokuCd" change="onGetNyknKamokuNm"/>
                                                     <Input id="txtTab3NyknKamokuNm" value="{InCash>NyknKamokuNm}" editable="{viewState>/editable}"/>
                                                     <Input id="txtTab3ZeiCd" value="{InCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowInCashTax"/>
-                                                    <CheckBox id="chkTab3Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}" />
+                                                    <CheckBox id="chkTab3Jidoutenkifuyo" selected="{InCash>Jidoutenkifuyo}" select="onCashCheckBox"  editable="{viewState>/editable}" />
                                                 </cells>
                                             </ColumnListItem>
                                         </items>
@@ -927,7 +927,7 @@
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
-
+                    <!-- その他現金支出 -->
                     <uxap:ObjectPageSection id="section4" title="{i18n_pstore>section4_title}" showTitle="true">
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection id="subsection12">
@@ -980,7 +980,7 @@
                                                         <Input id="txtTab4ShknKamokuCd" value="{OutCash>ShknKamokuCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowShknKamokuCd" change="onGetShknKamokuNm"/>
                                                         <Input id="txtTab4ShknKamokuNm" value="{OutCash>ShknKamokuNm}" editable="{viewState>/editable}"/>
                                                         <Input id="txtTab4ZeiCd" value="{OutCash>ZeiCd}" editable="{viewState>/editable}" showValueHelp="true" valueHelpRequest="onShowOutCashTax"/>
-                                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{path:'OutCash>Jidoutenkifuyo', formatter:'.formatter.toBoolean'}" select="onCashCheckBox"  editable="{viewState>/editable}" />
+                                                        <CheckBox id="chkTab4Jidoutenkifuyo" selected="{OutCash>Jidoutenkifuyo}" select="onCashCheckBox"  editable="{viewState>/editable}" />
                                                     </cells>
                                                 </ColumnListItem>
                                             </items>
@@ -1343,6 +1343,7 @@
                     />
 
                     <ToolbarSpacer id="pageToolbarSpacer" />
+                    <Button id="btnExportPdf" text="{i18n_pstore>tab1_btn05}" enabled="{auth>/Export}" type="Transparent" press="onExportPdfInDetail" />
                     <Button id="btnSave" text="{i18n_pstore>footer_f1}" enabled="{viewState>/editable}" press="onSave" visible="{local>/saveVisible}"/>
                     <Button id="btnChange" text="{i18n_pstore>footer_f2}" press="onChange" visible="{local>/editVisible}"/>
                     <Button type="Accept" text="{i18n>Approval}" press=".approvalAction('Approval')" visible="{local>/acceptVisible}"/>

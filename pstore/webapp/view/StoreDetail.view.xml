@@ -669,7 +669,6 @@
                                                        textAlign="Right" 
                                                        value="{path:'SyohinZenjtsZan',type:'sap.ui.model.odata.type.Decimal',
                                                              formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:6,scale:0}}"
-                                                       visible="{Visible}" 
                                                        editable="{viewState>/editable}" 
                                                        change="onLineAmountChange" />
                                             </table:template>
@@ -727,7 +726,6 @@
                                                     id="txtSyohinShirAmt"
                                                     value="{parts:[{path: 'Waers'},{path: 'SyohinShirSu'},{path:'SyohinTanka'}], 
                                                             formatter:'.formatter.formatGoodsTodayRemainAmount'}"
-                                                    
                                                     textAlign="Right"
                                                     visible="{Visible}"
                                                     editable="false" />
@@ -843,14 +841,22 @@
                                         </layoutData>
                                     </Label>
 
-                                    <Input
+                                    <!-- <Input
                                         id="txtZnjtsHnshSfknRk"
                                         value="{path:'sum>/ZnjtsHnshSfknRk', type:'sap.ui.model.odata.type.Decimal',
-                                           formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}"
-                                        
+                                           formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
                                         textAlign="Right"
                                         editable="{viewState>/editable}"
-                                        change="onCalcSofukinGokei" >
+                                        change="onCalcSofukinGokei" > --> 
+
+                                    <!-- 前日までの本社送付金累計 -->
+                                    <Input 
+                                        id="txtZnjtsHnshSfknRk"
+                                        value="{path:'sum>/ZnjtsHnshSfknRk', type:'sap.ui.model.odata.type.Decimal',
+                                        formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+                                        textAlign="Right"
+                                        editable="{viewState>/editable}"
+                                        change="onCalcSofukinGokei"> 
                                         <layoutData>
                                             <l:GridData id="gd66" span="XL4 L4 M12 S12" />
                                         </layoutData>
@@ -881,8 +887,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <!-- 送付金合計 -->
-
+                                    <!-- 送付金合計 --> 
                                     <Input id="txtSec8F4" value="{parts:[{path:'sum>/SofukinGokei'},{path: 'sum>/Waers'}], type: 'sap.ui.model.type.Currency',
                                         formatOptions: {showMeasure: false}}" textAlign="Right" enabled="false">
                                         <layoutData>

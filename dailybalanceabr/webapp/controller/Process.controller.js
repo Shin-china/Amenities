@@ -345,7 +345,11 @@ sap.ui.define([
                         success: function (oData) {
                             resolve();
                             if (oData.results.length > 0) {
+                                //Ⅳ本日繰越高
                                 this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HONZITUKURIKOSI);
+                                //Ⅵ元金金額
+                                this._LocalData.setProperty("/dailyBalance/0/GANKIN_AMT",oData.results[0].GANKIN_AMT);
+                                this._LocalData.setProperty("/CurrencyTable4/5/Amount",oData.results[0].YOKUZITUKITEIMOTOKIN);
                             }
                         }.bind(this),
                         error: function (oError) {
@@ -950,6 +954,8 @@ sap.ui.define([
                     this.download(sUrl, sFielName);
                 }
             },
+
+            
 
             getBlob: function (url) {
                 return new Promise(resolve => {

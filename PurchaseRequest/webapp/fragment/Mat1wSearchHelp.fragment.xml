@@ -1,23 +1,23 @@
 <core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
 	xmlns:f="sap.f" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
-	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" title="Select:{i18n>Matnr}">
+	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="50%" contentHeight="60%" resizable="true" title="Select:{i18n>Matnr}">
 		<!--<content>-->
 		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Matnr" liveMode="true" showGoOnFB="true"
 			showFilterConfiguration="true" entitySet="Mat1wSet">
 			<smartfilterbar:controlConfiguration>
 				<smartfilterbar:ControlConfiguration index="1" key="Matnr" visibleInAdvancedArea="true" label="{i18n>Matnr}"/>
 				<smartfilterbar:ControlConfiguration index="2" key="Werks" visibleInAdvancedArea="true" label="{i18n>Werks}"/>
-				<smartfilterbar:ControlConfiguration index="3" key="Spras" visibleInAdvancedArea="true" label="{i18n>Spras}">
+				<!-- <smartfilterbar:ControlConfiguration index="3" key="Spras" visibleInAdvancedArea="false" label="{i18n>Spras}">
 					<smartfilterbar:defaultFilterValues>
 						<smartfilterbar:SelectOption low="JA"></smartfilterbar:SelectOption>
 					</smartfilterbar:defaultFilterValues>
-				</smartfilterbar:ControlConfiguration>
+				</smartfilterbar:ControlConfiguration> -->
 				<smartfilterbar:ControlConfiguration index="4" key="Maktg" visibleInAdvancedArea="true" label="{i18n>Maktg}"/>
 			</smartfilterbar:controlConfiguration>
 		</smartfilterbar:SmartFilterBar>
-		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
-			beforeRebindTable="onRebingTable" entitySet="Mat1wSet">
-			<table:Table id="internalTable" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLineMatnr"
+		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" height="75%"
+			beforeRebindTable="onRebingTableMat1" entitySet="Mat1wSet">
+			<table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowSelectionChange="onSelectLineMatnr"
 				cellClick="onSelectLineMatnr">
 				<table:columns>
 					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Matnr" filterProperty="Matnr">
@@ -47,7 +47,7 @@
 						</table:template>
 					</table:Column>
 				</table:columns>
-				<table:columns>
+				<!-- <table:columns>
 					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Spras" filterProperty="Spras">
 						<table:customData>
 							<core:CustomData key="p13nData"
@@ -60,7 +60,7 @@
 							<Label text="{Spras}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
+				</table:columns> -->
 				<table:columns>
 					<table:Column width="16rem" visible="true" autoResizable="true" sortProperty="Maktg" filterProperty="Maktg">
 						<table:customData>

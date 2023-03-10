@@ -55,6 +55,10 @@ sap.ui.define([
                 this.byId("idCol3").setVisible(false);
             },
 
+            onDataReceived: function (oEvent) {
+                this.tableRows = oEvent.getParameters().getParameter("data")["results"];
+            },
+
             onReversePress: function () {
                 //至少选择一条
                 var oTable = this.byId("reportTable");
@@ -110,19 +114,8 @@ sap.ui.define([
             prepareReserveBody: function() {
                 var postDocs = [], aData = [];	
                 var oTable = this.byId("reportTable");
-
-                var aDataKey = Object.getOwnPropertyNames(this._oDataModel.getProperty("/"));
-                var sEntitySetName = "ZzDailyBalanceDisplaySet";
-                for (var i = aDataKey.length - 1; i >= 0; i--) {
-                    if (aDataKey[i].substr(0, sEntitySetName.length) !== sEntitySetName) {
-                        aDataKey.splice(i, 1);
-                    }
-                }
-                var postDocItem = [];
-                aDataKey.forEach(function(key, index){
-                    var postData = this._oDataModel.getProperty("/" + key);
-                    postDocItem.push(postData);
-                }, this);
+ 
+                var postDocItem = this.tableRows;
 
                 //将其他相同起番号的行也选中
                 //获取选中的行

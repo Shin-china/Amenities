@@ -461,6 +461,12 @@ sap.ui.define([
             for (var i = 0; i < aIndex.length; i++) {
                 var oContext = oTable.getContextByIndex(aIndex[i]);
                 var oData = oContext.getObject();
+
+                if (oData.NikkeihyoStatus == "取消済" || oData.NikkeihyoStatus == "仕訳取消済") {
+                    MessageToast.show(this._comm.getI18nMessage(this, "saveRequired"));
+                    return;
+                }
+
                 var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + oData.KaishaCd + "',TenpoCd='" + oData.TenpoCd + "',KihyoNo='" + oData.KihyoNo + "')/$value";
                 // window.open(sUrl, "_blank");
                 var sShop = oData.TenpoCd;

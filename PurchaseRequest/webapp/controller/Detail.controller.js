@@ -4,7 +4,8 @@ sap.ui.define([
 	"MMPurchaseRequest/model/formatter",
 	"./messages",
 	"sap/m/Button",
-], function(Base, MessageBox, formatter, messages,Button) {
+	"sap/ui/model/Filter"
+], function(Base, MessageBox, formatter, messages,Button,Filter) {
 
 	"use strict";
 	return Base.extend("MMPurchaseRequest.controller.Detail", {
@@ -25,6 +26,8 @@ sap.ui.define([
 
 			var oRouter = this.getRouter();
             oRouter.getRoute("Detail").attachMatched(this._onRouteMatched, this);
+
+			this._oData.setDeferredGroups(["changes"]);
 		},
 
 		_onRouteMatched: function (oEvent) {
@@ -182,10 +185,10 @@ sap.ui.define([
 				return;
 			}
 
-			if (oHeader.Department === "") {
-				MessageBox.error(this.getI18nBundle().getText("msgDepartmentIsEmpty"));
-				return;
-			}
+			// if (oHeader.Department === "") {
+			// 	MessageBox.error(this.getI18nBundle().getText("msgDepartmentIsEmpty"));
+			// 	return;
+			// }
 
 			if (oHeader.Zjm === "") {
 				MessageBox.error(this.getI18nBundle().getText("msgZjmIsEmpty"));
@@ -216,6 +219,12 @@ sap.ui.define([
 					break;
 				}
 
+				if (aItem[i].Tzx01 === "") {
+					MessageBox.error(this.getI18nBundle().getText("msgTxz01IsEmpty"));
+					bHasError = true;
+					break;
+				}
+
 				if (aItem[i].Lfdat === "" || aItem[i].Lfdat === null) {
 					MessageBox.error(this.getI18nBundle().getText("msgLfdatIsEmpty"));
 					bHasError = true;
@@ -228,6 +237,12 @@ sap.ui.define([
 					break;
 				}
 
+				if (aItem[i].Meins === "") {
+					MessageBox.error(this.getI18nBundle().getText("msgMeinsIsEmpty"));
+					bHasError = true;
+					break;
+				}
+
 				if (aItem[i].Preis === "" || aItem[i].Preis === "0" || aItem[i].Preis === 0) {
 					MessageBox.error(this.getI18nBundle().getText("msgPreisIsEmpty"));
 					bHasError = true;
@@ -236,6 +251,18 @@ sap.ui.define([
 
 				if (oHeader.Bsart !== "Z999" && aItem[i].Lifnr === "") {
 					MessageBox.error(this.getI18nBundle().getText("msgLifnrIsEmpty"));
+					bHasError = true;
+					break;
+				}
+
+				if (aItem[i].Saknr === "") {
+					MessageBox.error(this.getI18nBundle().getText("msgSaknrIsEmpty"));
+					bHasError = true;
+					break;
+				}
+
+				if (aItem[i].Kostl === "") {
+					MessageBox.error(this.getI18nBundle().getText("msgKostlIsEmpty"));
 					bHasError = true;
 					break;
 				}
@@ -377,7 +404,90 @@ sap.ui.define([
 			}
 		},
 
-		onItemChange: function(sValue) {
+		getLifnrname: function (sSupplier) {
+			if (sSupplier) {
+				var sBukrs = this.getOwnerComponent().getModel("local").getProperty("/ZzHeader/Bukrs");
+				var promise = new Promise(function (resolve,reject){
+					var aFilter = [new Filter("Lifnr","EQ",sSupplier),new Filter("Bukrs","EQ",sBukrs),];
+					var mParameters = {
+						filters:aFilter,
+						success: function (oData) {
+							resolve(oData.results);
+							if (oData.results[0]) {
+							}
+						}.bind(this),
+						error: function (oError) {
+							messages.showError(messages.parseErrors(oError));
+						}.bind(this)
+					}
+					this.getOwnerComponent().getModel().read("/KredaSet", mParameters);
+				}.bind(this));
+				return promise.then(function(res){
+					if (res[0]) {
+						return res[0].Mcod1;
+					} else {
+						return sSupplier
+					}
+				})
+			}
+			
+		},
+
+		onItemChange: function(oEvent,field) {
+			//手动修改物料时 取描述
+			if (oEvent && oEvent.getParameter("value") && field) {
+				var sPath = oEvent.getSource().getBindingContext("local").sPath;
+				switch (field) {
+					case "Matnr":
+						var sMaterial = oEvent.getParameter("value");
+						if (sMaterial) {
+							this.getOwnerComponent().getModel("local").setProperty(sPath + "/Txz01","");
+							var sPlant = oEvent.getSource().getBindingContext("local").getObject().Werks;
+							var aFilter = [new Filter("Matnr","EQ",sMaterial)];
+							if (sPlant) {
+								aFilter.push(new Filter("Werks","EQ",sPlant));
+							}
+							var mParameters = {
+								filters:aFilter,
+								success: function (oData) {
+									if (oData.results[0]) {
+										this.getOwnerComponent().getModel("local").setProperty(sPath + "/Txz01",oData.results[0].Maktg);
+									}
+								}.bind(this),
+								error: function (oError) {
+									messages.showError(messages.parseErrors(oError));
+								}.bind(this)
+							}
+							this.getOwnerComponent().getModel().read("/Mat1wSet", mParameters)
+						}
+						break;
+					case "Lifnr":
+						var sSupplier = oEvent.getParameter("value");
+						if (sSupplier) {
+							this.getOwnerComponent().getModel("local").setProperty(sPath + "/Lifnrname","");
+							var sPlant = oEvent.getSource().getBindingContext("local").getObject().Werks;
+							var aFilter = [new Filter("Lifnr","EQ",sSupplier)];
+							if (sPlant) {
+								aFilter.push(new Filter("Bukrs","EQ",sPlant));
+							}
+							var mParameters = {
+								filters:aFilter,
+								success: function (oData) {
+									if (oData.results[0]) {
+										this.getOwnerComponent().getModel("local").setProperty(sPath + "/Lifnrname",oData.results[0].Mcod1);
+									}
+								}.bind(this),
+								error: function (oError) {
+									messages.showError(messages.parseErrors(oError));
+								}.bind(this)
+							}
+							this.getOwnerComponent().getModel().read("/KredaSet", mParameters)
+						}
+						break;
+				}
+				
+			}
+
 			var oHeader = this.getModel("local").getProperty("/ZzHeader");
 			var aItem = this.getModel("local").getProperty("/ZzItem");
 			var aSum = this.getModel("local").getProperty("/ZzSum");
@@ -389,7 +499,6 @@ sap.ui.define([
 			var iPreis = 0;
 			var iPeinh = 1;
 			var iConsumtaxSum = 0;
-			//sValue.getSource().getBindingContext("local").getObject().Zbanfn
 			aItem.forEach(function(oItem) {
 				if (oItem.Loekz === true || oItem.Loekz === "X") {
 
@@ -412,10 +521,15 @@ sap.ui.define([
 					iZnetvalue = iZnetvalue / iPeinh;
 					iZnetvalue = Number(iZnetvalue).toFixed(2);
 
+					// 明细行单个数量的税
 					oItem.Zconsumtax = iPreis * 0.1;
-					iConsumtaxSum = iPreis * 0.1 * iMenge / iPeinh;
+					// 明细行所有数量的税，本来在这里乘1.1的，但是现在明细行不显示了，所以在最后计算，减少合计误差
+					// iConsumtaxSum = iPreis * 0.1 * iMenge / iPeinh;
+					iConsumtaxSum = iPreis * iMenge / iPeinh;
 					iConsumtaxSum = Number(iConsumtaxSum).toFixed(2);
-					oItem.Zsubtotal = iPreis * 1.1 * iMenge / iPeinh;
+					// oItem.Zsubtotal = iPreis * 1.1 * iMenge / iPeinh;
+					// 明细行的含税金额，本来在这里乘1.1的，但是现在明细行不显示了，所以在最后计算，减少合计误差
+					oItem.Zsubtotal = iPreis * iMenge / iPeinh;
 					oItem.Zvat = iPreis * 1.1;
 
 					oItem.Zconsumtax = oItem.Zconsumtax.toFixed(2);
@@ -489,8 +603,10 @@ sap.ui.define([
 			}.bind(this));
 			for (var i = 0; i < aCalc.length; i++) {
 				aCalc[i].Znetvalue = formatter.clearCommaToNumber(aCalc[i].Znetvalue);
-				aCalc[i].Zconsumtax = formatter.clearCommaToNumber(aCalc[i].Zconsumtax);
-				aCalc[i].Zsubtotal = formatter.clearCommaToNumber(aCalc[i].Zsubtotal);
+				//合计表的 税额（每行合计之后在这里计算税，减少误差）
+				aCalc[i].Zconsumtax = (formatter.clearCommaToNumber(aCalc[i].Zconsumtax) * 0.1).toFixed(0);
+				//合计表的 含税金额（每行合计之后在这里计算税，减少误差）
+				aCalc[i].Zsubtotal = (formatter.clearCommaToNumber(aCalc[i].Zsubtotal) * 1.1).toFixed(0);
 				aCalc[i].Zestvat = formatter.clearCommaToNumber(aCalc[i].Zestvat);
 				aCalc[i].Zzhje = formatter.clearCommaToNumber(aCalc[i].Zzhje);
 				aCalc[i].Zvat = formatter.clearCommaToNumber(aCalc[i].Zvat);
@@ -504,41 +620,55 @@ sap.ui.define([
 
 			}
 			// 金额合计 add by zk 
-			this.itemSum(aItem);
+			this.itemSum(aCalc);
 			this.getModel("local").setProperty("/ZzSum", aCalc);
 			this.getModel("local").refresh();
 		},
 
+		//金额合计
 		itemSum: function (aItem) {
 			var total1 = 0, total2 = 0, total3 = 0, total4 = 0;
-			aItem.forEach(function (item) {
-				var Menge = formatter.clearCommaToNumber(item.Menge);
-				var Preis = formatter.clearCommaToNumber(item.Preis);
-				var Peinh = formatter.clearCommaToNumber(item.Peinh);
-				var Zvat = formatter.clearCommaToNumber(item.Zvat);
-				var Zconsumtax = formatter.clearCommaToNumber(item.Zconsumtax);
-				var Zzhje = formatter.clearCommaToNumber(item.Zzhje);
 
-				//金额合计
-				//税抜総額
-				var amount1 = 0;
-				amount1 = this.formatter.accMul(Menge, Preis);
-				total1 = this.formatter.accAdd(total1, amount1);
-				//税込総額
-				amount1 = 0;
-				amount1 = this.formatter.accMul(Menge, Zvat);
-				total2 = this.formatter.accAdd(total2, amount1);
+			aItem.forEach(function (item) {
+				var Znetvalue = formatter.clearCommaToNumber(item.Znetvalue);
+				var Zsubtotal = formatter.clearCommaToNumber(item.Zsubtotal);
+				var Zconsumtax = formatter.clearCommaToNumber(item.Zconsumtax);
+				//税抜総額 = 合计：税抜小計金額
+				total1 = this.formatter.accAdd(total1, Znetvalue);
+				//税込総額 = 合计：税込小計金額
+				total2 = this.formatter.accAdd(total2, Zsubtotal);
 				//消費税総額
-				amount1 = 0;
-				amount1 = this.formatter.accMul(Menge, Zconsumtax);
-				total3 = this.formatter.accAdd(total3, amount1);
-				//値引き後総額
-				total4 = this.formatter.accAdd(total4, Zzhje);
+				total3 = this.formatter.accAdd(total3, Zconsumtax);
 			}.bind(this));
+
+			// aItem.forEach(function (item) {
+			// 	var Menge = formatter.clearCommaToNumber(item.Menge);
+			// 	var Preis = formatter.clearCommaToNumber(item.Preis);
+			// 	var Peinh = formatter.clearCommaToNumber(item.Peinh);
+			// 	var Zvat = formatter.clearCommaToNumber(item.Zvat);
+			// 	var Zconsumtax = formatter.clearCommaToNumber(item.Zconsumtax);
+			// 	var Zzhje = formatter.clearCommaToNumber(item.Zzhje);
+
+			// 	//金额合计
+			// 	//税抜総額
+			// 	var amount1 = 0;
+			// 	amount1 = this.formatter.accMul(Menge, Preis);
+			// 	total1 = this.formatter.accAdd(total1, amount1);
+			// 	//税込総額
+			// 	amount1 = 0;
+			// 	amount1 = this.formatter.accMul(Menge, Zvat);
+			// 	total2 = this.formatter.accAdd(total2, amount1);
+			// 	//消費税総額
+			// 	amount1 = 0;
+			// 	amount1 = this.formatter.accMul(Menge, Zconsumtax);
+			// 	total3 = this.formatter.accAdd(total3, amount1);
+			// 	//値引き後総額
+			// 	total4 = this.formatter.accAdd(total4, Zzhje);
+			// }.bind(this));
 			this.getModel("local").setProperty("/total1", formatter.amountFormat(total1));
 			this.getModel("local").setProperty("/total2", formatter.amountFormat(total2));
 			this.getModel("local").setProperty("/total3", formatter.amountFormat(total3));
-			this.getModel("local").setProperty("/total4", formatter.amountFormat(total4));
+			// this.getModel("local").setProperty("/total4", formatter.amountFormat(total4));
 			this.getModel("local").refresh();
 		},
 
@@ -600,12 +730,18 @@ sap.ui.define([
 				sItemNo = "0" + iItemNo;
 			} else sItemNo = iItemNo;
 
+			// 納入日付 Lfdat
+			var dLfdat = this._LocalData.getProperty("/ZzHeader/Badat");
+			dLfdat = new Date(dLfdat);
+			dLfdat.setDate(dLfdat.getDate() + 7);
+			dLfdat = dLfdat.toLocaleDateString("ja");
+			var sPlant = this._LocalData.getProperty("/ZzHeader/Bukrs");
 			var oRow = {
 				Zbanfn: this.getModel("local").getProperty("/ZzHeader/Zbanfn"),
 				//Zbnfpo: iItemNo.toString(),
 				Zbnfpo: sItemNo,
 				Knttp: "K",
-				Werks: "",
+				Werks: sPlant,
 				Lgort: "",
 				Matnr: "",
 				Txz01: "",
@@ -618,7 +754,7 @@ sap.ui.define([
 				Zsubtotal: "",
 				Lifnr: "",
 				Lifnrname: "",
-				Lfdat: null,
+				Lfdat: dLfdat,
 				Saknr: "",
 				Kostl: "",
 				Zremarks: "",
@@ -935,6 +1071,11 @@ sap.ui.define([
 		},
 
 		showCustomSearchHelpDialog: function(oContext, oEvent, sTitle, sViewName, sEntitySet, sBindingField, aFilters) {
+			this._LocalData.setProperty("/dailogOpen", true);
+			if (this.byId("dialogSelect")) {
+				this.byId("dialogSelect").close();
+				this.byId("dialogSelect").destroy();
+			}
 			oContext._inputSource = oEvent.getSource();
 			//oContext._aFilters = aFilters;
 			oContext._sEntitySet = sEntitySet;
@@ -950,6 +1091,165 @@ sap.ui.define([
 				//oContext.byId("dialogSelect").setTitle(sTitle);
 			}.bind(oContext));
 		},
+		
+		//采购组搜索帮助联动过滤
+		onRebingTableT024: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Bukrs", sap.ui.model.FilterOperator.EQ, sValue1);
+				binding.filters.push(oFilter);
+
+				var oFilterData = {
+					"Bukrs": {
+						"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+					}
+					
+				};
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+		},
+		//采购订单类型搜索帮助联动过滤
+		onRebingTableT161: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Bukrs", sap.ui.model.FilterOperator.EQ, sValue1);
+				binding.filters.push(oFilter);
+				oFilterData["Bukrs"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			var sValue2 = this._LocalData.getProperty("/ZzHeader/Ekgrp");
+			if (sValue2) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Ekgrp", sap.ui.model.FilterOperator.EQ, sValue2);
+				binding.filters.push(oFilter);
+
+				oFilterData["Ekgrp"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue2, "tokenText":"=" + sValue2}]
+				};
+				
+			}
+			if (sValue1 || sValue2) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+			
+		},
+		//物料联动搜索帮助（工厂）
+		onRebingTableMat1: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			// 工厂等于公司代码
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Werks", sap.ui.model.FilterOperator.EQ, sValue1);
+		
+				binding.filters.push(oFilter);
+				oFilterData["Werks"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			if (sValue1) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+		},
+		//供应商联动搜索帮助（工厂）
+		onRebingTableKreda: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			// 工厂等于公司代码
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Bukrs", sap.ui.model.FilterOperator.EQ, sValue1);
+				binding.filters.push(oFilter);
+				oFilterData["Bukrs"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			if (sValue1) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+		},
+		//成本中心联动搜索帮助（工厂）
+		onRebingTableKostn: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			// 工厂等于公司代码
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Kokrs", sap.ui.model.FilterOperator.EQ, sValue1);
+				binding.filters.push(oFilter);
+				oFilterData["Kokrs"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			if (sValue1) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+		},
+
+		onRebingTableT023: function (oEvent) {
+			if(this._LocalData.getProperty("/dailogOpen")) {
+				this._LocalData.setProperty("/dailogOpen",false);
+			} else {
+				return;
+			}
+			var oFilterData = {};
+			// 工厂等于公司代码
+			var sValue1 = this._LocalData.getProperty("/ZzHeader/Bukrs");
+			if (sValue1) {
+				var binding = oEvent.getParameter("bindingParams");
+				var oFilter;
+				oFilter = new sap.ui.model.Filter("Bukrs", sap.ui.model.FilterOperator.EQ, sValue1);
+				binding.filters.push(oFilter);
+				oFilterData["Bukrs"] = {
+					"ranges":[{"exclude":false, "operation":"EQ", "value1":sValue1, "tokenText":"=" + sValue1}]
+				};
+				
+			}
+			if (sValue1) {
+				this.byId("smartFilter").setFilterData(oFilterData);
+			}
+		},
+
 
 		/*	onRebingTable: function(oEvent) {
 				var binding = oEvent.getParameter("bindingParams");
@@ -1283,19 +1583,31 @@ sap.ui.define([
 					return oPopover;
 				});
 			}
-			this.getVariant().then(function(res){
-				this._pPopover.then(function(oPopover){
-					oPopover.openBy(oButton);
-				}.bind(this));
+
+			if(this.byId("variantlist")) {
+				this.byId("variantlist").getBinding("items").refresh();
+				// this.getVariant();
+			}
+
+			this._pPopover.then(function(oPopover){
+				oPopover.openBy(oButton);
 			}.bind(this));
+
+			// this.getVariant().then(function(res){
+			// 	this._pPopover.then(function(oPopover){
+			// 		oPopover.openBy(oButton);
+			// 	}.bind(this));
+			// }.bind(this));
 			
 		},
 
 		getVariant: function () {
 			var promise = new Promise( function (resolve, reject) {
 				var mParameters = {
+					filters:[new Filter("Isfavorite","EQ",true)],
 					success: function (oData) {
-						resolve(oData.results);
+						// resolve(oData.results);
+						this.byId("variantlist").getBinding("items").filter([new Filter("Isfavorite","EQ",true)]);
 					}.bind(this),
 					error: function (oError) {
 						messages.showError(messages.parseErrors(oError));
@@ -1307,12 +1619,12 @@ sap.ui.define([
 		},
 
 		onPressSaveAs: function () {
-			if (!this.pDialog) {
-				this.pDialog = this.loadFragment({
+			if (!this.pVariantSaveDialog) {
+				this.pVariantSaveDialog = this.loadFragment({
 					name: "MMPurchaseRequest.fragment.VariantSave"
 				});
 			}
-			this.pDialog.then(function (oDialog) {
+			this.pVariantSaveDialog.then(function (oDialog) {
 				var beginButton = new Button({
                     type: "Emphasized",
                     text: this._ResourceBundle.getText("save"),
@@ -1339,15 +1651,83 @@ sap.ui.define([
 		},
 
 		onSaveVariant: function () {
-			var promise = new Promise(function (resolve,reject) {
-				var variantName = this.byId("idVariantName").getValue();
-				if (!variantName) {
-					this.byId("idVariantName").focus();
-					return;
+			var variantName = this.byId("idVariantName").getValue();
+			if (!variantName) {
+				this.byId("idVariantName").focus();
+				return;
+			}
+			// 后台检查有没有同名变式
+			var promise = new Promise(function (resolve) {
+				var sVariant = this.byId("idVariantName").getValue();
+				var isGlobal = this.byId("idGobal").getSelected();
+				if (isGlobal) {
+					isGlobal = "X";
+				} else {
+					isGlobal = "";
 				}
+				this.checkVariant(sVariant,isGlobal).then(function (res) {
+					var oInput = this.byId("idVariantName");
+					if (res.length > 0) {
+						oInput.setValueState("Error");
+						oInput.setValueStateText(this._ResourceBundle.getText("msgPleaseEnterName"));
+					} else {
+						oInput.setValueState("None");
+						this.onPostVariant().then(function(res){
 
+							resolve();
+						})
+					}
+				}.bind(this));
+			}.bind(this));
 			
-				resolve();
+			return promise;
+		},
+
+		onPostVariant: function () {
+			var oHeader = this._LocalData.getProperty("/ZzHeader");
+			var postData = {
+				Variant: this.byId("idVariantName").getValue(),
+				Bukrs: oHeader.Bukrs,
+				Ekgrp: oHeader.Ekgrp,
+				Bsart: oHeader.Bsart,
+				Department: oHeader.Department,
+				Isglobal: this.byId("idGobal").getSelected(),
+			};
+			var promise = new Promise(function(resolve){
+				var mParameters = {
+					// refreshAfterChange:true,
+					success: function (oData) {
+						resolve();
+					}.bind(this),
+					error: function (oError) {
+						messages.showError(messages.parseErrors(oError));
+					}.bind(this),
+				};
+				this.getOwnerComponent().getModel().create("/ZzVariantSet",postData,mParameters);
+			}.bind(this));
+			return promise;
+		},
+
+		checkVariant: function (sVariant,isGlobal) {
+			var aFilter = [new Filter("Variant","EQ",sVariant)];
+			var promise = new Promise( function (resolve, reject) {
+				var mParameters = {
+					filters: aFilter,
+					success: function (oData) {
+						this.getOwnerComponent().getModel().setHeaders(null);
+						if (oData.results) {
+							resolve(oData.results);
+						} else {
+							resolve([]);
+						}
+					}.bind(this),
+					error: function (oError) {
+						this.getOwnerComponent().getModel().setHeaders(null);
+						messages.showError(messages.parseErrors(oError));
+					}.bind(this)
+				}
+				this.getOwnerComponent().getModel().setHeaders({"action":"check","isglobal":isGlobal})
+				this.getOwnerComponent().getModel().read("/ZzVariantSet", mParameters);
 			}.bind(this));
 			return promise;
 		},
@@ -1363,25 +1743,43 @@ sap.ui.define([
 		},
 
 		onPressManage: function (oEvent) {
-			if (!this.pDialog) {
-				this.pDialog = this.loadFragment({
+			this._oData.resetChanges(["/ZzVariantSet"],true);
+			this._oData.resetChanges();
+			// this._oData.setUseBatch(false);
+			if (!this.pVariantManageDialog) {
+				this.pVariantManageDialog = this.loadFragment({
 					name: "MMPurchaseRequest.fragment.VariantManage"
 				});
 			}
-			this.pDialog.then(function (oDialog) {
+			if(this.byId("idManageTable")) {
+				this.byId("idManageTable").getBinding("items").refresh();
+			}
+			this.pVariantManageDialog.then(function (oDialog) {
 				var beginButton = new Button({
                     type: "Emphasized",
                     text: this._ResourceBundle.getText("save"),
 					//保存按钮
                     press: function () {
-                        this.onSaveVariant().then(function(res){
-							oDialog.close();
-						});
+						// submitchanges因为设置的原因不会调用回调函数，所以这段没有作用
+                        // this.onSaveVariantChanges().then(function(res){
+						// 	var aItems = this.byId("idManageTable").getItems()
+						// 	if (aItems) {
+						// 		aItems.forEach(function (item) {
+						// 			item.setVisible(true);
+						// 		});
+						// 	}
+						// 	oDialog.close();
+						// }.bind(this));
+						this.onSaveVariantChanges()
+						// this._oData.setUseBatch(true);
+						oDialog.close();
                     }.bind(this)
                 });
                 var endButton = new Button({
                     text: this._ResourceBundle.getText("cancel"),
                     press: function () {
+						// this._oData.resetChanges(["/ZzVariantSet"],true);
+						this._oData.resetChanges(["/ZzVariantSet"],true);
                         oDialog.close();
                     }.bind(this)
                 });
@@ -1392,6 +1790,120 @@ sap.ui.define([
                 }
                 oDialog.open();
 			}.bind(this));
+		},
+
+		onDeleteVariant: function (oEvent) {
+			var sPath = oEvent.getSource().getBindingContext().sPath;
+			this._oData.remove(sPath,{"groupId":"changes","refreshAfterChange":true});
+			oEvent.getSource().getParent().setVisible(false);
+		},
+
+		onSaveVariantChanges: function () {
+			var promise = new Promise(function(resolve,reject){
+				var mParameters = {
+					// 由于之前设置了批处理模式setUseBatch(false)
+					// submitChanges在禁用批处理模式的情况想不会调用回调函数，所以这里的函数没有实际用处
+					success: function (oData) {
+						resolve();
+					}.bind(this),
+					error: function (oError) {
+						messages.showError(messages.parseErrors(oError));
+					}.bind(this)
+				}
+				this._oData.submitChanges(mParameters);
+			}.bind(this));
+			return promise;
+		},
+
+		manageTableChange:function (oEvent) {
+			// oEvent.getSource().getBinding("items").refresh()
+			// var aItems = oEvent.getSource().getItems();
+			// if (aItems) {
+			// 	aItems.forEach(function (item) {
+			// 		item.setVisible(true);
+			// 	});
+			// }
+		},
+
+		onVariantManageOpened:function () {
+			this._oData.updateBindings();
+			var aItems = this.byId("idManageTable").getItems()
+			if (aItems) {
+				aItems.forEach(function (item) {
+					item.setVisible(true);
+				});
+			}
+		},
+
+		onPressFavorite: function (oEvent) {
+			var sPath = oEvent.getSource().getBindingContext().sPath;
+			this._oData.setProperty(sPath + "/Isfavorite",oEvent.getParameter("pressed"));
+		},
+
+		onVariantSelection:function (oEvent) {
+			var oHeader = oEvent.getParameter("listItem").getBindingContext().getObject();
+			this._LocalData.setProperty("/ZzHeader/Bukrs",oHeader.Bukrs);
+			this._LocalData.setProperty("/ZzHeader/Ekgrp",oHeader.Ekgrp);
+			this._LocalData.setProperty("/ZzHeader/Bsart",oHeader.Bsart);
+			this._LocalData.setProperty("/ZzHeader/Department",oHeader.Department);
+			this._LocalData.refresh();
+			oEvent.getSource().getParent().getParent().close();
+		},
+
+		onTogglePublic: function (oEvent) {
+			var sPath = oEvent.getSource().getBindingContext().sPath;
+			sPath = sPath + "/Isglobal"
+			this._oData.setProperty(sPath, oEvent.getParameter("pressed"));
+		},
+
+		onVariantNameChange: function (oEvent) {
+			var oInput = oEvent.getSource();
+			var sVariant = oEvent.getParameter("value");
+			var isGlobal = oInput.getBindingContext().getObject().Isglobal;
+			if (isGlobal) {
+				isGlobal = "X";
+			} else {
+				isGlobal = "";
+			}
+			this.checkVariant(sVariant,isGlobal).then(function (res) {
+				if (res.length > 0) {
+					//跳过自己本来名字
+					var isError = false;
+					res.forEach(function (e){
+						if (e.Uuid !== oInput.getBindingContext().getObject().Uuid) {
+							isError = true;
+						}
+					}) 
+					if (isError) {
+						oInput.setValueState("Error");
+						oInput.setValueStateText(this._ResourceBundle.getText("msgPleaseEnterName"));
+					} else {
+						oInput.setValueState("None");
+					}
+				} else {
+					oInput.setValueState("None");
+				}
+			}.bind(this));
+		},
+		onBukrsChange:function (oEvent) {
+			var sPlant = this.getModel("local").getProperty("/ZzHeader/Bukrs");
+			var aItem = this.getModel("local").getProperty("/ZzItem");
+			aItem.forEach(function (item) {
+				item.Werks = sPlant;
+			});
+		},
+
+		toUpperCase:function (oEvent) {
+			var sPath = oEvent.getSource().mBindingInfos.value.binding.sPath;
+			var value = this._LocalData.getProperty(sPath);
+			this._LocalData.setProperty(sPath, value.toUpperCase());
+			
+		},
+		itemToUpperCase: function (oEvent) {
+			var sPath = oEvent.getSource().getBindingContext("local");
+			sPath = sPath + "/" + oEvent.getSource().mBindingInfos.value.binding.sPath;
+			var value = this._LocalData.getProperty(sPath);
+			this._LocalData.setProperty(sPath, value.toUpperCase());
 		}
 	});
 });

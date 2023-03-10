@@ -17,8 +17,7 @@ sap.ui.define([
 		convertDate: function(sDate) {
 			if (sDate) {
 				var oDateFormat = DateFormat.getDateTimeInstance({
-					// pattern: "yyyy/MM/dd"
-					pattern: "yyyy-MM-dd"
+					pattern: "yyyy/MM/dd"
 				});
 				return oDateFormat.format(new Date(sDate));
 			} else {
@@ -135,6 +134,14 @@ sap.ui.define([
 					return "否決";
 				default:
 					return "";
+			}
+		},
+
+		isPublic: function (value) {
+			if (value) {
+				return "公開";
+			} else {
+				return "プライベート";
 			}
 		},
 

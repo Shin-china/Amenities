@@ -1,56 +1,53 @@
 <core:FragmentDefinition xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:smarttable="sap.ui.comp.smarttable" xmlns="sap.m"
 	xmlns:f="sap.f" xmlns:table="sap.ui.table" xmlns:core="sap.ui.core">
-	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="70%" contentHeight="60%" resizable="true" title="Select:{i18n>Matkl}">
+	<Dialog id="dialogSelect" class="sapUiContentMargin" contentWidth="50%" contentHeight="60%" resizable="true" title="Select:{i18n>Matkl}">
 		<!--<content>-->
 		<smartfilterbar:SmartFilterBar id="smartFilter" enableBasicSearch="false" basicSearchFieldName="Matkl" liveMode="true" showGoOnFB="true"
 			showFilterConfiguration="true" entitySet="HT023Set">
 			<smartfilterbar:controlConfiguration>
-				<smartfilterbar:ControlConfiguration index="1" key="Matkl" visibleInAdvancedArea="true" label="{i18n>Matkl}"/>
-				<smartfilterbar:ControlConfiguration index="2" key="Wgbez" visibleInAdvancedArea="true" label="{i18n>Wgbez}"/>
-				<smartfilterbar:ControlConfiguration index="3" key="Wgbez60" visibleInAdvancedArea="true" label="{i18n>Wgbez60}"/>
+				<smartfilterbar:ControlConfiguration index="1" key="Bukrs" visibleInAdvancedArea="true" label="{i18n>Bukrs}"/>
+				<smartfilterbar:ControlConfiguration index="2" key="Matkl" visibleInAdvancedArea="true" label="{i18n>Matkl}"/>
+				<smartfilterbar:ControlConfiguration index="3" key="Wgbez" visibleInAdvancedArea="true" label="{i18n>Wgbez}"/>
+				<smartfilterbar:ControlConfiguration index="4" key="Wgbez60" visibleInAdvancedArea="true" label="{i18n>Wgbez60}"/>
 			</smartfilterbar:controlConfiguration>
 		</smartfilterbar:SmartFilterBar>
-		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table"
-			beforeRebindTable="onRebingTable" entitySet="HT023Set">
-			<table:Table id="internalTable" visibleRowCount="20" threshold="10" selectionMode="Single" rowSelectionChange="onSelectLine"
+		<smarttable:SmartTable id="smartTable" enableAutoBinding="true" smartFilterId="smartFilter" tableType="Table" height="75%"
+			beforeRebindTable="onRebingTableT023" entitySet="HT023Set">
+			<table:Table id="internalTable" visibleRowCountMode="Auto" selectionMode="Single" rowSelectionChange="onSelectLine"
 				cellClick="onSelectLine">
 				<table:columns>
-					<table:Column width="6rem" visible="true" autoResizable="true" sortProperty="Matkl" filterProperty="Matkl">
+					<table:Column width="6rem" label="{i18n>Bukrs}" visible="true" autoResizable="true" sortProperty="Bukrs" filterProperty="Bukrs">
+						<table:customData>
+							<core:CustomData key="p13nData"
+								value='\{"columnKey":"Bukrs", "leadingProperty":"Bukrs", "sortProperty": "Bukrs", "filterProperty": "Bukrs"}'/>
+						</table:customData>
+						<table:template>
+							<Label text="{Bukrs}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="6rem" label="{i18n>Matkl}" visible="true" autoResizable="true" sortProperty="Matkl" filterProperty="Matkl">
 						<table:customData>
 							<core:CustomData key="p13nData"
 								value='\{"columnKey":"Matkl", "leadingProperty":"Matkl", "sortProperty": "Matkl", "filterProperty": "Matkl"}'/>
 						</table:customData>
-						<table:label>
-							<Label text="{i18n>Matkl}"/>
-						</table:label>
 						<table:template>
 							<Label text="{Matkl}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
-				<table:columns>
-					<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="Wgbez" filterProperty="Wgbez">
+					<table:Column width="10rem" label="{i18n>Wgbez}" visible="true" autoResizable="true" sortProperty="Wgbez" filterProperty="Wgbez">
 						<table:customData>
 							<core:CustomData key="p13nData"
 								value='\{"columnKey":"Wgbez", "leadingProperty":"Wgbez", "sortProperty": "Wgbez", "filterProperty": "Wgbez"}'/>
 						</table:customData>
-						<table:label>
-							<Label text="{i18n>Wgbez}"/>
-						</table:label>
 						<table:template>
 							<Label text="{Wgbez}"/>
 						</table:template>
 					</table:Column>
-				</table:columns>
-				<table:columns>
-					<table:Column width="15rem" visible="true" autoResizable="true" sortProperty="Wgbez60" filterProperty="Wgbez60">
+					<table:Column width="15rem" label="{i18n>Wgbez60}" visible="true" autoResizable="true" sortProperty="Wgbez60" filterProperty="Wgbez60">
 						<table:customData>
 							<core:CustomData key="p13nData"
 								value='\{"columnKey":"Wgbez60", "leadingProperty":"Wgbez60", "sortProperty": "Wgbez60", "filterProperty": "Wgbez60"}'/>
 						</table:customData>
-						<table:label>
-							<Label text="{i18n>Wgbez60}"/>
-						</table:label>
 						<table:template>
 							<Label text="{Wgbez60}"/>
 						</table:template>

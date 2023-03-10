@@ -115,6 +115,9 @@ sap.ui.define([
                 aCahsModel.splice(element,1);
             });
             oTable.removeSelections();
+
+            this.collectionIncome();
+            this.collectionPayment();
             this._LocalData.refresh();
         },
 
@@ -881,10 +884,13 @@ sap.ui.define([
             var value1 = this._LocalData.getProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN");
             //Ⅵ元金金額
             var value2 = this._LocalData.getProperty("/dailyBalance/0/GANKIN_AMT");
+            //Ⅱ銀行入金総額
+            var value3 = this._LocalData.getProperty("/dailyBalance/0/GNK_NYUKIN_SOGAKU");
 
-            // 前日までの本社送付金累計(Ⅰ-Ⅵ)
+            // 前日までの本社送付金累計(Ⅰ-Ⅱ-Ⅵ)
             var result = "0";
             result = this.formatter.accSub(value1,value2);
+            result = this.formatter.accSub(result,value3);
             this._LocalData.setProperty("/dailyBalance/0/ZNJT_HNSH_SFKN_RKI", result);
 
             this.resultCalc2();
@@ -1414,23 +1420,23 @@ sap.ui.define([
             }
             var oButtonMap = {
                 //未保存
-                "":{"save":true, "change":true, "apply":false, "posting":false},
+                "":{"save":true, "change":true, "apply":false, "posting":false, "pdf":false},
                 //仮保存
-                "1":{"save":true, "change":true, "apply":true, "posting":false},
+                "1":{"save":true, "change":true, "apply":true, "posting":false, "pdf":true},
                 //申請中
-                "2":{"save":false, "change":false, "apply":false, "posting":false},
+                "2":{"save":false, "change":false, "apply":false, "posting":false, "pdf":true},
                 //申請済
-                "3":{"save":false, "change":false, "apply":false, "posting":false},
+                "3":{"save":false, "change":false, "apply":false, "posting":false, "pdf":true},
                 //承認済
-                "4":{"save":false, "change":false, "apply":false, "posting":true},
+                "4":{"save":false, "change":false, "apply":false, "posting":true, "pdf":true},
                 //否認
-                "5":{"save":true, "change":true, "apply":true, "posting":false},
+                "5":{"save":true, "change":true, "apply":true, "posting":false, "pdf":true},
                 //再申請
-                "6":{"save":false, "change":false, "apply":false, "posting":false},
+                "6":{"save":false, "change":false, "apply":false, "posting":false, "pdf":true},
                 //仕訳作成済
-                "7":{"save":false, "change":false, "apply":false, "posting":false},
+                "7":{"save":false, "change":false, "apply":false, "posting":false, "pdf":true},
                 //取消済
-                "8":{"save":false, "change":false, "apply":false, "posting":false},
+                "8":{"save":false, "change":false, "apply":false, "posting":false, "pdf":false},
             };
             if (!oButtonMap[sDocumentStatus][sAction]) {
                 messages.showError(this._ResourceBundle.getText("msg5"));
@@ -1519,7 +1525,64 @@ sap.ui.define([
             aTableColumn.forEach(function (fieldId) {
                 this._LocalData.setProperty("/" + fieldId, true);
             }.bind(this))
-        }
+        },
+        onPrintPDFinDetail: function () {
+            // check button
+            var isError = false;
+            var oItem = this._LocalData.getProperty("/dailyBalance/0");
+            isError = !this.checkButtonEnable(oItem.NIKKEIHYO_STATUS_CD, "pdf")
+            if (isError) {return;}
+
+            var oData = oItem;
+            var sUrl = "/sap/opu/odata/sap/ZZDAILYBALANCEABR_SRV/ZzExportSet(KAISHA_CD='" + oData.KAISHA_CD + "',KIHYO_NO='" + oData.KIHYO_NO + "')/$value";
+            // window.open(sUrl, "_blank");
+            var sShop = oData.TENPO_CD;
+            if (sShop.length == 3) {
+                sShop = "0" + sShop;
+            }
+            var sFielName = "Amenities_ABR_" + sShop + "_" + oData.EIGYO_BI + oData.NIKKEIHYO_STATUS;
+            this.download(sUrl, sFielName);
+        },
+        saveAs: function (blob, filename) {
+            if (window.navigator.msSaveOrOpenBlob) {
+              navigator.msSaveBlob(blob, filename);
+            } else {
+              const link = document.createElement('a');
+              const body = document.querySelector('body');
+        
+              link.href = window.URL.createObjectURL(blob);
+              link.download = filename;
+        
+              // fix Firefox
+              link.style.display = 'none';
+              body.appendChild(link);
+        
+              link.click();
+              body.removeChild(link);
+        
+              window.URL.revokeObjectURL(link.href);
+            }
+        },
+        download: function (url, sFielName) {
+            this.getBlob(url).then(blob => {
+              this.saveAs(blob, sFielName);
+            });
+        },
+        getBlob: function (url) {
+            return new Promise(resolve => {
+              const xhr = new XMLHttpRequest();
+        
+              xhr.open('GET', url, true);
+              xhr.responseType = 'blob';
+              xhr.onload = () => {
+                if (xhr.status === 200) {
+                  resolve(xhr.response);
+                }
+              };
+        
+              xhr.send();
+            });
+        },
         
 	});
 

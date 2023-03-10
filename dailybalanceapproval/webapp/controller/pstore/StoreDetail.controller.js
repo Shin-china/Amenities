@@ -58,6 +58,7 @@ sap.ui.define([
                 this._OutCashSet = [];
                 //汇总model
                 this._sum = {
+                    "ZnjtsHnshSfknRk": 0,
                     "PUriage": 0, //1. a + b
                     "SUriage": 0, //2. c + d
                     "GenkinUragGokei": 0, //3. a + c
@@ -122,7 +123,8 @@ sap.ui.define([
                             that._sum.ZyunbikinGkiAmt = oData.Fi1007.ZyunbikinGkiAmt;
                             that._sum.Yokuzitukinkonai = oData.Fi1007.Yokuzitukinkonai;
                             that._sum.Sagaku = oData.Fi1007.Sagaku;
-
+                             // ①前日までの本社送付金累計 
+                             that._sum.ZnjtsHnshSfknRk = oData.ZnjtsHnshSfknRk;
 
                             var oSumModel = new JSONModel(that._sum, "sum");
                             that.getView().setModel(oSumModel, "sum");
@@ -563,7 +565,7 @@ sap.ui.define([
                 this.onCalcHnjtsKrkshdk(oEvent);
 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
-                this.onCalcSofukinGokei(oEvent);
+                this.onCalcSofukinGokei();
 
                 //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
                 this.onCalcHnjtsKrkshdkUgki(oEvent);
@@ -667,7 +669,7 @@ sap.ui.define([
                 this._sum.HnjtsHnshSofukin = this._sum.SyunyuGokei - this._sum.ShishutsuGokei;
 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
-                this.onCalcSofukinGokei(oEvent);
+                this.onCalcSofukinGokei();
 
                 //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
                 this.onCalcHnjtsKrkshdkUgki(oEvent);
@@ -689,7 +691,7 @@ sap.ui.define([
                 this._sum.HnjtsHnshSofukin = this._sum.SyunyuGokei - this._sum.ShishutsuGokei;
 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
-                this.onCalcSofukinGokei(oEvent);
+                this.onCalcSofukinGokei();
 
                 //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
                 this.onCalcHnjtsKrkshdkUgki(oEvent);
@@ -790,7 +792,7 @@ sap.ui.define([
                 this._sum.HnjtsHnshSofukin = this._sum.SyunyuGokei - this._sum.ShishutsuGokei;
 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
-                this.onCalcSofukinGokei(oEvent);
+                this.onCalcSofukinGokei();
 
                 //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
                 this.onCalcHnjtsKrkshdkUgki(oEvent);
@@ -823,7 +825,7 @@ sap.ui.define([
                 this._sum.HnjtsHnshSofukin = this._sum.SyunyuGokei - this._sum.ShishutsuGokei;
 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
-                this.onCalcSofukinGokei(oEvent);
+                this.onCalcSofukinGokei();
 
                 //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
                 this.onCalcHnjtsKrkshdkUgki(oEvent);
@@ -858,7 +860,7 @@ sap.ui.define([
                 this._sum.HnjtsHnshSofukin = this._sum.SyunyuGokei - this._sum.ShishutsuGokei;
 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
-                this.onCalcSofukinGokei(oEvent);
+                this.onCalcSofukinGokei();
 
                 //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
                 this.onCalcHnjtsKrkshdkUgki(oEvent);
@@ -872,19 +874,32 @@ sap.ui.define([
                 return sVal;
             },
 
+            //[Ⅳ]本日繰越高(Ⅰ－Ⅱ＋Ⅲ+A－B)
             onCalcHnjtsKrkshdk:function (oEvent,precision,scale) {
+                
                 this.onSetDefaultValue(oEvent);
                 this.onInpuValidation(oEvent,precision,scale);
                 
                 //Sum I - II + III + A - B
                 var oCurrencyParse = NumberFormat.getFloatInstance();
-                var fZnjtsKrkshGankin = this.byId("txtZnjtsKrkshGankin").getValue();
+                //Ⅰ前日繰越元金
+                var fZnjtsKrkshGankin = this.byId("txtZnjtsKrkshGankin").getValue(); 
+                //Ⅱ銀行入金総額
                 var fGnkNyukinSogaku = this.byId("txtGnkNyukinSogaku").getValue();
+                //Ⅲ両替金受入
                 var fRyogaekinUkeire = this.byId("txtRyogaekinUkeire").getValue();
+                //規定元金金額
+                var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
+ 
 
                 fZnjtsKrkshGankin = this._convertInputValue(fZnjtsKrkshGankin);
                 fGnkNyukinSogaku = this._convertInputValue(fGnkNyukinSogaku);
                 fRyogaekinUkeire = this._convertInputValue(fRyogaekinUkeire);
+                fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
+
+
+                // ①前日までの本社送付金累計 = = 前日繰越元金[Ⅰ] - 銀行入金総額[Ⅱ]　-　規程元金金額　
+                this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fGnkNyukinSogaku) - oCurrencyParse.parse(fKiteiGankinAmt);
 
                 this._sum.HnjtsKrkshdk = oCurrencyParse.parse(fZnjtsKrkshGankin) -
                     oCurrencyParse.parse(fGnkNyukinSogaku) +
@@ -893,26 +908,71 @@ sap.ui.define([
                     oCurrencyParse.parse(this._sum.ShishutsuGokei.toString());
 
                 // this._sum.HnjtsKrkshdkUgki = this._sum.HnjtsKrkshdk;   
-            },
 
-            onCalcSofukinGokei: function (oEvent) {
-                this.onSetDefaultValue(oEvent);
-                this.onInpuValidation(oEvent,'15','2');
-                if (this._Error) {
-                    return;
-                }; 
                 //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
                 var fZnjtsHnshSfknRk = this.byId("txtZnjtsHnshSfknRk").getValue();
                 var fRyogaekinModoshi = this.byId("txtRyogaekinModoshi").getValue();
+                var ftxtSec8F1 = this.byId("txtSec8F1").getValue();
+                
+                fZnjtsHnshSfknRk = this._convertInputValue(fZnjtsHnshSfknRk);
+                fRyogaekinModoshi = this._convertInputValue(fRyogaekinModoshi);
+                ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
+
+                // var fHnjtsHnshSofukin = this._convertInputValue(this._sum.HnjtsHnshSofukin);
+
+                this._sum.SofukinGokei = oCurrencyParse.parse(ftxtSec8F1)
+                    + oCurrencyParse.parse(fZnjtsHnshSfknRk)
+                    + oCurrencyParse.parse(fRyogaekinModoshi); 
+
+                var fSec8F4 = this.byId("txtSec8F4").getValue();
+                var fSofukinGokei = this._convertInputValue(fSec8F4);
+                // var fSofukinGokei = this._convertInputValue(this._sum.SofukinGokei);
+
+　　　　　　　　　//本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
+                // this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt); 
+                this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(fSofukinGokei) + oCurrencyParse.parse(fKiteiGankinAmt); 
+            },
+
+            onCalcSofukinGokei: function (oEvent) {
+
+                if (oEvent) {
+                    this.onSetDefaultValue(oEvent);
+                    this.onInpuValidation(oEvent,'15','2');
+                    if (this._Error) {
+                        return;
+                    }; 
+                }
+
+                //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
+                var fZnjtsHnshSfknRk = this.byId("txtZnjtsHnshSfknRk").getValue();
+                var fRyogaekinModoshi = this.byId("txtRyogaekinModoshi").getValue();
+                var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
 
                 fZnjtsHnshSfknRk = this._convertInputValue(fZnjtsHnshSfknRk);
                 fRyogaekinModoshi = this._convertInputValue(fRyogaekinModoshi);
+                fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
 
                 var oCurrencyParse = NumberFormat.getFloatInstance();
-                
-                this._sum.SofukinGokei = this._sum.HnjtsHnshSofukin
+
+                var ftxtSec8F1 = this.byId("txtSec8F1").getValue();
+                ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
+
+                if (oEvent) {
+                    var oInput = oEvent.getSource();
+                    var oBindingContext = oInput.getParent().getBindingContext("pstore");
+                    var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                    var oModel = oBindingContext.getModel();
+                    oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
+                }
+                // [Ⅴ]送付金合計(g＋h＋i) 
+                this._sum.SofukinGokei = oCurrencyParse.parse(ftxtSec8F1)
                     + oCurrencyParse.parse(fZnjtsHnshSfknRk)
-                    + oCurrencyParse.parse(fRyogaekinModoshi);
+                    + oCurrencyParse.parse(fRyogaekinModoshi); 
+                
+                // ★本日繰越高合計(Ⅴ-Ⅵ)＝[Ⅳ]
+                this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(ftxtSec8F1)
+                + oCurrencyParse.parse(fZnjtsHnshSfknRk)
+                + oCurrencyParse.parse(fRyogaekinModoshi)+ oCurrencyParse.parse(fKiteiGankinAmt);  
             },
 
             onCalcHnjtsKrkshdkUgki: function (oEvent) {
@@ -921,12 +981,32 @@ sap.ui.define([
                 if (this._Error) {
                     return;
                 }; 
-                //本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
+                
                 var oCurrencyParse = NumberFormat.getFloatInstance();
+                //前日繰越元金
+                var fZnjtsKrkshGankin = this.byId("txtZnjtsKrkshGankin").getValue();
+                //規程元金金額
                 var fKiteiGankinAmt = this.byId("txtKiteiGankinAmt").getValue();
-                fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
+                //銀行入金総額
+                var fGnkNyukinSogaku = this.byId("txtGnkNyukinSogaku").getValue();
 
-                this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt);
+
+                fKiteiGankinAmt = this._convertInputValue(fKiteiGankinAmt);
+                fZnjtsKrkshGankin = this._convertInputValue(fZnjtsKrkshGankin);  
+                fGnkNyukinSogaku = this._convertInputValue(fGnkNyukinSogaku);  
+                // ①前日までの本社送付金累計 = = 前日繰越元金[Ⅰ] - 銀行入金総額[Ⅱ]　-　規程元金金額　
+                this._sum.ZnjtsHnshSfknRk = oCurrencyParse.parse(fZnjtsKrkshGankin) - oCurrencyParse.parse(fGnkNyukinSogaku) - oCurrencyParse.parse(fKiteiGankinAmt);
+
+                //送付金合计 A - B + ZnjtsHnshSfknRk + RyogaekinModoshi;
+                this.onCalcSofukinGokei();
+
+                var fSec8F4 = this.byId("txtSec8F4").getValue();
+                var fSofukinGokei = this._convertInputValue(fSec8F4);
+                // var fSofukinGokei = this._convertInputValue(this._sum.SofukinGokei);
+
+　　　　　　　　　//本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額
+                // this._sum.HnjtsKrkshdkUgki = this._sum.SofukinGokei + oCurrencyParse.parse(fKiteiGankinAmt); 
+                this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(fSofukinGokei) + oCurrencyParse.parse(fKiteiGankinAmt); 
             },
 
             onCalcYokuzitunyuukin: function (oEvent) {
@@ -1318,6 +1398,9 @@ sap.ui.define([
                 var oRecord = this.getOwnerComponent().getModel("pstore").getProperty(sPath);
                 var postData = {
                     KIHYO_NO: oRecord.KihyoNo,
+                    KAISHA_CD: oRecord.KaishaCd,
+                    TENPO_CD: oRecord.TenpoCd,
+                    EIGYO_BI: this.formatter.date_8(oRecord.EigyoBi),
                     NODE: this._LocalData.getProperty("/Node"),
                     COMMENTS: this.byId("idComments").getValue()
                 };
@@ -1388,6 +1471,8 @@ sap.ui.define([
                 d.OutCashSet = [];
                 delete d.__metadata;
 
+                d = this._comm.convertJsonNumberToString(d);
+
                 d.Fi1007 = [];
 
                 var o = {};
@@ -1405,7 +1490,19 @@ sap.ui.define([
                             that._busyDialog.close();
                             that._comm.showMessagePopoverFor(that, "log", "/MessageSet", "btnMessagePopover")
                             oModel.refresh();
-                            resolve();
+                            let isError = false;
+                            if (oMessage.MessageSet) {
+                                oMessage.MessageSet.forEach(function (item) {
+                                    if (item.Type == "Error") {
+                                        isError = true;
+                                    }
+                                });
+                            }
+                            if (isError) {
+                                reject();
+                            } else {
+                                resolve();
+                            }
                         },
                         error: function (oError) {
                             that._busyDialog.close();
@@ -1438,6 +1535,58 @@ sap.ui.define([
             handleClose: function () {
                 var sNextLayout = "OneColumn";
                 this._oRouter.navTo("ApprovalList", {layout: sNextLayout});
+            },
+
+            onExportPdfInDetail: function () {
+                var oData = this.getView().getBindingContext("pstore").getObject()
+                var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + oData.KaishaCd + "',TenpoCd='" + oData.TenpoCd + "',KihyoNo='" + oData.KihyoNo + "')/$value";
+                // window.open(sUrl, "_blank");
+                var sShop = oData.TenpoCd;
+                if (sShop.length == 3) {
+                    sShop = "0" + sShop;
+                }
+                var sFielName = "Amenities_P店舗_" + sShop + "_" + this.formatter.date_8(oData.EigyoBi) + oData.NikkeihyoStatus;
+                this.download(sUrl, sFielName);
+            },
+            download: function (url, sFielName) {
+                this.getBlob(url).then(blob => {
+                  this.saveAs(blob, sFielName);
+                });
+            },
+            getBlob: function (url) {
+                return new Promise(resolve => {
+                  const xhr = new XMLHttpRequest();
+            
+                  xhr.open('GET', url, true);
+                  xhr.responseType = 'blob';
+                  xhr.onload = () => {
+                    if (xhr.status === 200) {
+                      resolve(xhr.response);
+                    }
+                  };
+            
+                  xhr.send();
+                });
+            },
+            saveAs: function (blob, filename) {
+                if (window.navigator.msSaveOrOpenBlob) {
+                  navigator.msSaveBlob(blob, filename);
+                } else {
+                  const link = document.createElement('a');
+                  const body = document.querySelector('body');
+            
+                  link.href = window.URL.createObjectURL(blob);
+                  link.download = filename;
+            
+                  // fix Firefox
+                  link.style.display = 'none';
+                  body.appendChild(link);
+            
+                  link.click();
+                  body.removeChild(link);
+            
+                  window.URL.revokeObjectURL(link.href);
+                }
             },
 
         });

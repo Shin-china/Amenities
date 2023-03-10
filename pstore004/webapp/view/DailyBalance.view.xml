@@ -194,9 +194,12 @@
 								<VBox class="sapUiSmallMargin">
 								<!-- <form:SimpleForm layout="ResponsiveGridLayout" columnsXL="2" editable="true" adjustLabelSpan="false" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="5" columnsL="2" columnsM="2"> -->
 									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" singleContainerFullSize="false"
-										labelSpanL="4" labelSpanM="3" emptySpanL="4" emptySpanM="2" breakpointM="400" columnsL="2">
+									    columnsXL="2" columnsL="2" columnsM="1">
+										<!-- labelSpanL="4" labelSpanM="3" emptySpanL="4" emptySpanM="2" breakpointM="400" columnsL="2"> -->
+										<!-- 前日繰越元金[Ⅰ] -->
 										<Label text="{i18n>Title1}" />
-										<Input value="{path:'local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:0}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input value="{path:'local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:0}}" 
+										       change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<!-- 入金合計 -->
 										<Label text="{i18n>Title4c}" />
 										<Input value="{path:'local>/dailyBalance/0/SNT_GNKN_SHNY_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
@@ -205,10 +208,17 @@
 										<Input value="{path:'local>/dailyBalance/0/SNT_GNKN_SHSHT_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
 										<Label text="{i18n>Title2}" />
 										<Input value="{path:'local>/dailyBalance/0/HNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
+										<!-- 規定元金[Ⅴ] -->
 										<Label text="{i18n>Title3}" />
-										<Input value="{path:'local>/dailyBalance/0/KITEI_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										<Input value="{path:'local>/dailyBalance/0/KITEI_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+										       change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
+										
 										<Label text="{i18n>Title4}" />
-										<Input value="{path:'local>/dailyBalance/0/GNK_AZKR_YTIGK', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
+										<Input value="{path:'local>/dailyBalance/0/GNK_AZKR_YTIGK', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+										       change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
+                                      
+									    <Label text="{i18n>Remark1}" class="paddingTop"/>
+                                        <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="100%" height="8rem" editable="{local>/viewEditable}"/>
 									</form:SimpleForm>
 								</VBox>
 							</uxap:blocks>
@@ -218,26 +228,49 @@
                 <uxap:ObjectPageSection titleUppercase="false" title="{i18n>Section5}">
                     <uxap:subSections>
 						<uxap:ObjectPageSubSection title="{i18n>Section5}">
-							<uxap:blocks>
-                                <VBox>
+						<form:SimpleForm id="subForm5" layout="ResponsiveGridLayout" columnsL="2" columnsXL="2" columnsM="1">
+							<form:content>
+
+							  <core:Title text="{i18n>Title4a1}" /> 
+							 <!-- <uxap:blocks> -->
+                                <!-- <VBox> -->
                                     <!-- 元金過不足内訳・金額 -->
-                                    <HBox>
-                                        <Text width="{local>/labelWidth}" text="{i18n>Title4s}" class="paddingTop"/>
-                                        <Input value="{path:'local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" editable="{local>/viewEditable}" textAlign="Right"/>
-                                    </HBox>
-                                    <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
+                                    <!-- <HBox> -->
+                                        <Label text="{i18n>Title4s}" class="paddingTop">
+                                            <layoutData>
+                                                <l:GridData id="gd1" span="XL1 L1 M12 S12" linebreakXL="true" linebreakL="true" />
+                                            </layoutData>
+										</Label>
+                                        <Input value="{path:'local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+										       editable="{local>/viewEditable}" textAlign="Right">
+                                            <layoutData>
+                                                <l:GridData id="gd2" span="XL4 L4 M12 S12" />
+                                            </layoutData>
+									    </Input>
+                                    <!-- </HBox> -->
+                            
                                     <!-- 元金過不足詳細・全角50文字以内 -->
-                                    <HBox>
-                                        <Text width="{local>/labelWidth}" text="{i18n>Title4t}" class="paddingTop"/>
+                                    <!-- <HBox> -->
+                                        <Label text="{i18n>Title4t}" class="paddingTop">
+                                            <layoutData>
+                                                <l:GridData id="gd3" span="XL1 L1 M12 S12" linebreakXL="true" linebreakL="true" />
+                                            </layoutData>
+										</Label>
                                         <!-- <Input value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_AMT}" editable="{local>/viewEditable}"/> -->
-                                    </HBox>
-                                    <Text width="{local>/labelWidth}" text="{i18n>Title4s1}" class="paddingTop"/>
-                                    <TextArea value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_BIKOU}" maxLength="50" width="50%" editable="{local>/viewEditable}"/>
-                                    
-                                    <Text width="{local>/labelWidth}" text="{i18n>Remark}" class="paddingTop"/>
-                                    <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
-                                </VBox>
-                            </uxap:blocks>
+                                    <!-- </HBox> -->
+                                     
+                                    <TextArea value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_BIKOU}" maxLength="50" width="50%" 
+									          editable="{local>/viewEditable}">
+                                            <layoutData>
+                                                <l:GridData id="gd4" span="XL8 L10 M12 S12" />
+                                            </layoutData>
+									</TextArea>
+							</form:content>
+						</form:SimpleForm>
+                                    <!-- <Text width="{local>/labelWidth}" text="{i18n>Remark1}" class="paddingTop"/>
+                                    <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/> -->
+                                <!-- </VBox> -->
+                            <!-- </uxap:blocks> -->
                         </uxap:ObjectPageSubSection>
                     </uxap:subSections>
                 </uxap:ObjectPageSection>
@@ -382,7 +415,8 @@
                                             <uitable:Column width="40%">
                                                 <Label text="{i18n>Amount}"/>
                                                 <uitable:template>
-                                                    <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="{local>Enabled}" change="onCurrencyTable4ValueChange" editable="{local>/viewEditable}" textAlign="Right"/>
+                                                    <Input value="{path:'local>Amount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+													       enabled="{local>Enabled}" change="onCurrencyTable4ValueChange" editable="{local>/viewEditable}" textAlign="Right"/>
                                                 </uitable:template>
                                             </uitable:Column>
                                         </uitable:columns>

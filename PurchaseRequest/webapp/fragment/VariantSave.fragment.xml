@@ -11,7 +11,7 @@
         <VBox width="100%">
             <Label text="{i18n>view}:" class="dialogPadding sapUiTinyMarginTop"/>
             <Input id="idVariantName" value="標準" class="dialogPadding" liveChange="onVariantChange"/>
-            <CheckBox text="{i18n>public}" class="sapUiSmallMarginBegin"/>
+            <CheckBox id="idGobal" text="{i18n>public}" class="sapUiSmallMarginBegin"/>
         </VBox>
     </Dialog>
 </c:FragmentDefinition>

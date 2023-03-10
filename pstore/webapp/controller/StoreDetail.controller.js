@@ -40,6 +40,7 @@ sap.ui.define([
             },
 
             _onDetailMatched: function (oEvent) {
+                this._saveRequired = true;
                 this.byId("txtKihyoshaName").setValueState("None");
                 this._path = oEvent.getParameter("arguments").path;
                 var mode = oEvent.getParameter("arguments").mode;
@@ -87,11 +88,13 @@ sap.ui.define([
                     events: {
                         dataReceived: function (oResponse) {
                             var oData = oResponse.mParameters.data;
+                            that._NikkeihyoStatus = oData.NikkeihyoStatus;
                             that._KaishaCd = oData.KaishaCd;
                             that._TenpoCd = oData.TenpoCd;
                             that._EigyoBi = oData.EigyoBi;
                             that._KihyoNo = oData.KihyoNo; 
                             that._NikkeihyoStatus = oData.NikkeihyoStatus;  
+                            that.mode = mode;
 
                             // var title = that._comm.getI18nMessage(that, "detail_title");
                             // title = title.concat(" " + oData.KihyoNo);
@@ -138,8 +141,6 @@ sap.ui.define([
                         }.bind(this)
                     }
                 });
-
-
 
                 var sInCashPath = sPath + "/InCashSet";
                 oModel.read(sInCashPath, {
@@ -303,6 +304,7 @@ sap.ui.define([
                 d.InCashSet = [];
                 d.OutCashSet = [];
                 delete d.__metadata;
+                d = this._comm.convertJsonNumberToString(d);
 
                 d.Fi1007 = [];
 
@@ -390,6 +392,11 @@ sap.ui.define([
 
             onExportPdf: function () {
  
+                if (this._NikkeihyoStatus == "取消済" || this._NikkeihyoStatus == "仕訳取消済") {
+                    MessageToast.show(this._ResourceBundle.getText("saveRequired"));
+                    return;
+                } 
+
                 var sUrl = "/sap/opu/odata/sap/ZZPSTORE_SRV/ExportSet(KaishaCd='" + this._KaishaCd + "',TenpoCd='" + this._TenpoCd + "',KihyoNo='" + this._KihyoNo + "')/$value";
 
                 var sShop = this._TenpoCd;
@@ -461,7 +468,9 @@ sap.ui.define([
             },
 
             onCashCheckBox: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 // var pSelected = oEvent.getParameter("selected");
                 var oInput = oEvent.getSource();
                 var oBindingContext = oInput.getParent().getBindingContext("InCash");
@@ -471,7 +480,9 @@ sap.ui.define([
             },
 
             onOutCashCheckBox: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 // var pSelected = oEvent.getParameter("selected");
                 var oInput = oEvent.getSource();
                 var oBindingContext = oInput.getParent().getBindingContext("OutCash");
@@ -593,7 +604,9 @@ sap.ui.define([
 
             onSyohinCdChange: function (oEvent) {
 
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
 
                 var oSource = oEvent.getSource()
                 var oContext = oSource.getBindingContext();
@@ -624,7 +637,9 @@ sap.ui.define([
 
             //景品仕入高合计
             onLineAmountChange: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 this.onSetDefaultValue(oEvent);
                 this.onInpuValidation(oEvent,'6','0');
                 if (this._Error) {
@@ -741,7 +756,9 @@ sap.ui.define([
             },
 
             onTabInCashRowUpdate: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 this.onSetDefaultValue(oEvent);
                 //sum 6.
                 // this._sum.SonotaNyukinKei = this._calcTableColumnSum(this, "InCash", "tabInCash", "NyknKingaku", null);
@@ -766,7 +783,9 @@ sap.ui.define([
             },
 
             onTabOutCashRowUpdate: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 this.onSetDefaultValue(oEvent);
                 //sum 7.
                 // this._sum.SonotaShunyuKei = this._calcTableColumnSum(this, "OutCash", "tabOutCash", "ShknKingaku", null);
@@ -924,7 +943,9 @@ sap.ui.define([
 
             onCalcKadoHanbaiGokei: function (oEvent) {
 
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
 
                 this.onSetDefaultValue(oEvent);
                 this.onInpuValidation(oEvent,'15','2');
@@ -970,7 +991,9 @@ sap.ui.define([
 
             onCalcHnjtsKrkshdk:function (oEvent,precision,scale) {
 
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                  this._saveRequired = false;
+                }
                 
                 this.onSetDefaultValue(oEvent);
                 this.onInpuValidation(oEvent,precision,scale);
@@ -1007,10 +1030,26 @@ sap.ui.define([
                 fRyogaekinModoshi = this._convertInputValue(fRyogaekinModoshi);
                 ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
  
-                var oInput = oEvent.getSource();
-                var oBindingContext = oInput.getParent().getBindingContext();
-                var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
-                var oModel = oBindingContext.getModel();
+                // var oInput = oEvent.getSource();
+                // var oBindingContext = oInput.getParent().getBindingContext();
+                // // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                // var sPath = oBindingContext.sPath;
+                // var oModel = oBindingContext.getModel();
+                // // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
+                // var oSource = oEvent.getSource()
+                // var oContext = oSource.getBindingContext();
+
+                // oModel.read(sPath, {
+                //     success: function (oData, oResponse) {
+                //         oModel.setProperty(oContext.sPath + "/ZnjtsHnshSfknRk", oCurrencyParse.parse(fZnjtsHnshSfknRk));  
+                //     },
+                //     error: function (oError) { 
+                //     }
+                // });
+
+                var elem = this.getView().getBindingContext();
+                var sPath = elem.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = elem.getModel();
                 oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
 
                 // [Ⅴ]送付金合計(g＋h＋i)
@@ -1026,7 +1065,9 @@ sap.ui.define([
             },
 
             onCalcSofukinGokei: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 this.onSetDefaultValue(oEvent);
                 this.onInpuValidation(oEvent,'15','2');
                 if (this._Error) {
@@ -1046,10 +1087,26 @@ sap.ui.define([
                 var ftxtSec8F1 = this.byId("txtSec8F1").getValue();
                 ftxtSec8F1 = this._convertInputValue(ftxtSec8F1);
 
-                var oInput = oEvent.getSource();
-                var oBindingContext = oInput.getParent().getBindingContext();
-                var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
-                var oModel = oBindingContext.getModel();
+                // var oInput = oEvent.getSource();
+                // var oBindingContext = oInput.getParent().getBindingContext();
+                // // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                // var sPath = oBindingContext.sPath;
+                // var oModel = oBindingContext.getModel();
+                // // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
+                // var oSource = oEvent.getSource()
+                // var oContext = oSource.getBindingContext();
+
+                // oModel.read(sPath, {
+                //     success: function (oData, oResponse) {
+                //         oModel.setProperty(oContext.sPath + "/ZnjtsHnshSfknRk", oCurrencyParse.parse(fZnjtsHnshSfknRk));  
+                //     },
+                //     error: function (oError) { 
+                //     }
+                // });
+
+                var elem = this.getView().getBindingContext();
+                var sPath = elem.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = elem.getModel();
                 oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
 
                 // [Ⅴ]送付金合計(g＋h＋i) 
@@ -1064,7 +1121,9 @@ sap.ui.define([
             },
 
             onCalcHnjtsKrkshdkUgki: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 this.onSetDefaultValue(oEvent);
                 this.onInpuValidation(oEvent,'15','2');
                 if (this._Error) {
@@ -1092,15 +1151,36 @@ sap.ui.define([
 　　　　　　　　　//本日繰越高内訳合計 = 送付金合计(A - B + 前日までの本社送付金累計 + 両替金戻し) + 規定元金金額 
                 this._sum.HnjtsKrkshdkUgki = oCurrencyParse.parse(fSofukinGokei) + oCurrencyParse.parse(fKiteiGankinAmt); 
 
-                var oInput = oEvent.getSource();
-                var oBindingContext = oInput.getParent().getBindingContext();
-                var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
-                var oModel = oBindingContext.getModel();
+                var fZnjtsHnshSfknRk = this.byId("txtZnjtsHnshSfknRk").getValue(); 
+                fZnjtsHnshSfknRk = this._convertInputValue(fZnjtsHnshSfknRk);
+
+                // var oInput = oEvent.getSource();
+                // var oBindingContext = oInput.getParent().getBindingContext();
+                // // var sPath = oBindingContext.sPath + "/ZnjtsHnshSfknRk";
+                // var sPath = oBindingContext.sPath;
+                // var oModel = oBindingContext.getModel();
+                // // oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
+                // var oSource = oEvent.getSource()
+                // var oContext = oSource.getBindingContext();
+
+                // oModel.read(sPath, {
+                //     success: function (oData, oResponse) {
+                //         oModel.setProperty(oContext.sPath + "/ZnjtsHnshSfknRk", oCurrencyParse.parse(fZnjtsHnshSfknRk));  
+                //     },
+                //     error: function (oError) { 
+                //     }
+                // });
+
+                var elem = this.getView().getBindingContext();
+                var sPath = elem.sPath + "/ZnjtsHnshSfknRk";
+                var oModel = elem.getModel();
                 oModel.setProperty(sPath ,oCurrencyParse.parse(fZnjtsHnshSfknRk)); 
             },
 
             onCalcYokuzitunyuukin: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
 
                 this.onSetDefaultValue(oEvent);
                 this.onInpuValidation(oEvent,'15','2');
@@ -1183,7 +1263,7 @@ sap.ui.define([
 
             onShowInCashTax: function (oEvent) {
                 var aFilters = [];
-                aFilters.push({ field: "Mwart", value: 'A' });
+                // aFilters.push({ field: "Mwart", value: 'A' });
                 this._comm.showCustomSearchHelpDialog(
                     this,
                     oEvent,
@@ -1211,7 +1291,7 @@ sap.ui.define([
 
             onShowOutCashTax: function (oEvent) {
                 var aFilters = [];
-                aFilters.push({ field: "Mwart", value: "V" });
+                // aFilters.push({ field: "Mwart", value: "V" });
                 this._comm.showCustomSearchHelpDialog(
                     this,
                     oEvent,
@@ -1282,12 +1362,16 @@ sap.ui.define([
             },
 
             onGetNyknKamokuNm: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 this._getAccountDesc(oEvent, "/NyknKamokuNm", "InCash");
             },
 
             onGetShknKamokuNm: function (oEvent) {
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 this._getAccountDesc(oEvent, "/ShknKamokuNm", "OutCash");
             },
 
@@ -1299,7 +1383,9 @@ sap.ui.define([
             },
 
             onSetDefaultValue: function(oEvent){ 
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 if(!oEvent) {
                     return;
                 }
@@ -1315,7 +1401,9 @@ sap.ui.define([
             },
 
             onSetDefaultValuetab1Col7: function(oEvent){ 
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 if(!oEvent) {
                     return;
                 }
@@ -1327,7 +1415,9 @@ sap.ui.define([
             },
 
             onSetDefaultValuetab: function(oEvent){ 
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
                 if(!oEvent) {
                     return;
                 }
@@ -1340,7 +1430,9 @@ sap.ui.define([
 
             onInpuValidation: function (oEvent,precision,scale) {
 
-                this._saveRequired = false;
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
 
                 if(!oEvent) {
                     return;
@@ -1384,8 +1476,10 @@ sap.ui.define([
 
             },
 
-            invUserNameChange: function () {
-                this._saveRequired = false; 
+            invUserNameChange: function (oEvent) {
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
             }, 
 
             checkRequired: function () {

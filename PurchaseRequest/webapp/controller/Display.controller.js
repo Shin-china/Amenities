@@ -162,16 +162,16 @@ sap.ui.define([
 
 			that.setBusy(true);
 
-			if (sOption === "1" || sOption === "2") {
-
-			} else {
-				this.getAttachment();
-			}
-
 			this.getInitData(aFilters).then(
 				function (oData) {
 					that.gotoDetailPage(oData);
-				}
+					// 获取附件
+					if (sOption === "1" || sOption === "2") {
+
+					} else {
+						this.getAttachment();
+					}
+				}.bind(this)
 			).catch(
 				function (err) {
 					MessageBox.error(err);
@@ -268,14 +268,14 @@ sap.ui.define([
 			};
 
 			var aItems = oData.results[0].to_ZzPRItem.results;
-			var total1 = 0, total2 = 0, total3 = 0, total4 = 0;
+			
 			aItems.forEach(function (item, index, array) {
-				var Menge = item.Menge;
-				var Preis = item.Preis;
-				var Peinh = item.Peinh;
-				var Zvat = item.Zvat;
-				var Zconsumtax = item.Zconsumtax;
-				var Zzhje = item.Zzhje;
+				// var Menge = item.Menge;
+				// var Preis = item.Preis;
+				// var Peinh = item.Peinh;
+				// var Zvat = item.Zvat;
+				// var Zconsumtax = item.Zconsumtax;
+				// var Zzhje = item.Zzhje;
 				array[index].Lfdat = formatter.convertDate(item.Lfdat);
 				//array[index].Zbnfpo = array[index].Zbnfpo.toString().replace(/\b(0+)/gi, "");
 				array[index].Menge = formatter.amountFormat(array[index].Menge);
@@ -286,28 +286,29 @@ sap.ui.define([
 				array[index].Zzhje = formatter.amountFormat(array[index].Zzhje);
 				array[index].Zvat = formatter.amountFormat(array[index].Zvat);
 
-				//金额合计
-				//税抜総額
-				var amount1 = 0;
-				amount1 = this.formatter.accMul(Menge, Preis);
-				total1 = this.formatter.accAdd(total1, amount1);
-				//税込総額
-				amount1 = 0;
-				amount1 = this.formatter.accMul(Menge, Zvat);
-				total2 = this.formatter.accAdd(total2, amount1);
-				//消費税総額
-				amount1 = 0;
-				amount1 = this.formatter.accMul(Menge, Zconsumtax);
-				total3 = this.formatter.accAdd(total3, amount1);
-				//値引き後総額
-				total4 = this.formatter.accAdd(total4, Zzhje);
+				// //金额合计
+				// //税抜総額
+				// var amount1 = 0;
+				// amount1 = this.formatter.accMul(Menge, Preis);
+				// total1 = this.formatter.accAdd(total1, amount1);
+				// //税込総額
+				// amount1 = 0;
+				// amount1 = this.formatter.accMul(Menge, Zvat);
+				// total2 = this.formatter.accAdd(total2, amount1);
+				// //消費税総額
+				// amount1 = 0;
+				// amount1 = this.formatter.accMul(Menge, Zconsumtax);
+				// total3 = this.formatter.accAdd(total3, amount1);
+				// //値引き後総額
+				// total4 = this.formatter.accAdd(total4, Zzhje);
 			}.bind(this));
-			this.getModel("local").setProperty("/total1", formatter.amountFormat(total1));
-			this.getModel("local").setProperty("/total2", formatter.amountFormat(total2));
-			this.getModel("local").setProperty("/total3", formatter.amountFormat(total3));
-			this.getModel("local").setProperty("/total4", formatter.amountFormat(total4));
+			// this.getModel("local").setProperty("/total1", formatter.amountFormat(total1));
+			// this.getModel("local").setProperty("/total2", formatter.amountFormat(total2));
+			// this.getModel("local").setProperty("/total3", formatter.amountFormat(total3));
+			// this.getModel("local").setProperty("/total4", formatter.amountFormat(total4));
 
 			var aSum = oData.results[0].to_ZzPRSum.results;
+			var total1 = 0, total2 = 0, total3 = 0, total4 = 0;
 			aSum.forEach(function (item, index, array) {
 				array[index].Znetvalue = formatter.amountFormat(array[index].Znetvalue);
 				array[index].Zconsumtax = formatter.amountFormat(array[index].Zconsumtax);
@@ -315,7 +316,19 @@ sap.ui.define([
 				array[index].Zestvat = formatter.amountFormat(array[index].Zestvat);
 				array[index].Zzhje = formatter.amountFormat(array[index].Zzhje);
 				array[index].Zvat = formatter.amountFormat(array[index].Zvat);
-			});
+
+				formatter.clearCommaToNumber(item.Znetvalue);
+				//税抜総額 = 合计：税抜小計金額
+				total1 = this.formatter.accAdd(total1, formatter.clearCommaToNumber(item.Znetvalue));
+				//税込総額 = 合计：税込小計金額
+				total2 = this.formatter.accAdd(total2, formatter.clearCommaToNumber(item.Zsubtotal));
+				//消費税総額
+				total3 = this.formatter.accAdd(total3, formatter.clearCommaToNumber(item.Zconsumtax));
+
+			}.bind(this));
+			this.getModel("local").setProperty("/total1", formatter.amountFormat(total1));
+			this.getModel("local").setProperty("/total2", formatter.amountFormat(total2));
+			this.getModel("local").setProperty("/total3", formatter.amountFormat(total3));
 
 			this.getModel("local").setProperty("/ZzHeader", oHeader);
 			this.getModel("local").setProperty("/ZzItem", aItems);

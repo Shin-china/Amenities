@@ -9,7 +9,7 @@
 		<customHeader>
 			<OverflowToolbar width="100%">
 				<Button icon="sap-icon://navigation-left-arrow" press="onNavBack"/>
-				<Button text="标准" press="onVariantPress" class="sapUiMediumMargin"/>
+				<Button text="お気に入り" press="onVariantPress" class="sapUiMediumMargin"/>
 			</OverflowToolbar>
 		</customHeader>
 		<content>
@@ -59,7 +59,7 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Bukrs1" text="{i18n>Bukrs}" required="true"/>
-																	<Input id="Bukrs" editable="{local>/editCreate}" value="{local>/ZzHeader/Bukrs}" width="10rem" required="true" showValueHelp="true"
+																	<Input id="Bukrs" editable="{local>/editCreate}" value="{local>/ZzHeader/Bukrs}" change="onBukrsChange" width="auto" required="true" showValueHelp="true"
 																		valueHelpRequest="onShowCompanyHelp"/>
 																</VBox>
 															</form:fields>
@@ -68,7 +68,7 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Name_text1" text="{i18n>Name_text}"/>
-																	<Input id="Name_text" editable="false" value="{local>/ZzHeader/Name_text}" width="10rem"/>
+																	<Input id="Name_text" editable="false" value="{local>/ZzHeader/Name_text}" width="auto"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -80,8 +80,8 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Ekgrp1" text="{i18n>Ekgrp}" required="true"/>
-																	<Input id="Ekgrp" editable="{local>/editCreate}" value="{local>/ZzHeader/Ekgrp}" width="10rem" required="true" showValueHelp="true"
-																		valueHelpRequest="onShowEkgrpHelp"/>
+																	<Input id="Ekgrp" editable="{local>/editCreate}" value="{local>/ZzHeader/Ekgrp}" width="auto" required="true" showValueHelp="true"
+																		valueHelpRequest="onShowEkgrpHelp" change="toUpperCase"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -89,7 +89,7 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Banfn1" text="{i18n>Banfn}"/>
-																	<Input id="Banfn" editable="false" value="{local>/ZzHeader/Banfn}" width="10rem"/>
+																	<Input id="Banfn" editable="false" value="{local>/ZzHeader/Banfn}" width="auto"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -101,8 +101,8 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Bsart1" text="{i18n>Bsart}" required="true"/>
-																	<Input id="Bsart" editable="{local>/editCreate}" value="{local>/ZzHeader/Bsart}" width="10rem" required="true" showValueHelp="true"
-																		valueHelpRequest="onShowBsartHelp"/>
+																	<Input id="Bsart" editable="{local>/editCreate}" value="{local>/ZzHeader/Bsart}" width="auto" required="true" showValueHelp="true"
+																		valueHelpRequest="onShowBsartHelp" change="toUpperCase"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -110,7 +110,7 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Zspzt" text="{i18n>Zspzt}"/>
-																	<Input id="ZspztText" editable="false" value="{local>/ZzHeader/ZspztText}" width="10rem"/>
+																	<Input id="ZspztText" editable="false" value="{local>/ZzHeader/ZspztText}" width="auto"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -122,7 +122,7 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Badat" text="{i18n>Badat}"/>
-																	<DatePicker value="{local>/ZzHeader/Badat}" valueFormat="yyyy-MM-dd" displayFormat="short" enabled="{local>/editCreate}"/>
+																	<DatePicker value="{local>/ZzHeader/Badat}" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" enabled="{local>/editCreate}"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -142,7 +142,7 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Zspqx" text="{i18n>Zspqx}"/>
-																	<DatePicker value="{local>/ZzHeader/Zspqx}" valueFormat="yyyy-MM-dd" displayFormat="short" enabled="{local>/editCreate}"/>
+																	<DatePicker value="{local>/ZzHeader/Zspqx}" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" enabled="{local>/editCreate}"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -150,7 +150,7 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Zbanfn1" text="{i18n>Zbanfn}"/>
-																	<Input id="Zbanfn" editable="false" value="{local>/ZzHeader/Zbanfn}" width="10rem"/>
+																	<Input id="Zbanfn" editable="false" value="{local>/ZzHeader/Zbanfn}" width="auto"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -166,14 +166,14 @@
 																</VBox>
 															</form:fields>
 														</form:FormElement>
-														<form:FormElement>
+														<!-- <form:FormElement>
 															<form:fields>
 																<VBox>
 																	<Label text="{i18n>Department}" required="true"/>
 																	<Input value="{local>/ZzHeader/Department}" enabled="{local>/editCreate}" required="true" showValueHelp="true" valueHelpRequest="onShowDepartmentHelp"/>
 																</VBox>
 															</form:fields>
-														</form:FormElement>
+														</form:FormElement> -->
 													</form:formElements>
 												</form:FormContainer>
 											</form:formContainers>
@@ -189,7 +189,7 @@
 														<form:fields>
 															<VBox>
 																<Label text="{i18n>Zjm}" required="true"/>
-																<Input id="Zjm" editable="{local>/editCreate}" value="{local>/ZzHeader/Zjm}"/>
+																<Input id="Zjm" maxLength="40" editable="{local>/editCreate}" value="{local>/ZzHeader/Zjm}"/>
 															</VBox>
 														</form:fields>
 													</form:FormElement>
@@ -197,7 +197,7 @@
 														<form:fields>
 															<VBox>
 																<Label text="{i18n>Zsqly}"/>
-																<TextArea id="Zsqly" editable="{local>/editCreate}" value="{local>/ZzHeader/Zsqly}" rows="4" width="100%"/>
+																<TextArea id="Zsqly" maxLength="1000" editable="{local>/editCreate}" value="{local>/ZzHeader/Zsqly}" rows="4" width="100%"/>
 															</VBox>
 														</form:fields>
 													</form:FormElement>
@@ -234,9 +234,9 @@
 											<OverflowToolbar>
 												<Text text="{/logInfo}"/>
 												<ObjectStatus title="{i18n>total1}" text="{local>/total1}" class="sapUiSmallMarginEnd"/>
-												<ObjectStatus title="{i18n>total2}" text="{local>/total2}" class="sapUiSmallMarginEnd"/>
 												<ObjectStatus title="{i18n>total3}" text="{local>/total3}" class="sapUiSmallMarginEnd"/>
-												<ObjectStatus title="{i18n>total4}" text="{local>/total4}" class="sapUiSmallMarginEnd"/>
+												<ObjectStatus title="{i18n>total2}" text="{local>/total2}" class="sapUiSmallMarginEnd"/>
+												<ObjectStatus visible="false" title="{i18n>total4}" text="{local>/total4}" class="sapUiSmallMarginEnd"/>
 												<ToolbarSpacer/>
 												<Button icon="sap-icon://add" text="{i18n>bAddRow}" press="onAddRow" enabled="{local>/editCreate}"/>
 											</OverflowToolbar>
@@ -248,7 +248,7 @@
 													<Button icon="sap-icon://delete" press="onDeleteRow" type="Reject" enabled="{local>/editCreate}"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="6rem" sortProperty="Zbnfpo">
+											<t:Column width="5rem" sortProperty="Zbnfpo">
 												<Label text="{i18n>Zbnfpo}" required="true"/>
 												<t:template>
 													<Input id="Zbnfpo" editable="{local>/editCreate}" value="{local>Zbnfpo}" required="true"/>
@@ -260,13 +260,6 @@
 													<Input id="Knttp" editable="{local>/editCreate}" value="{local>Knttp}" required="true"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="6rem" sortProperty="Werks">
-												<Label text="{i18n>Werks}" required="true"/>
-												<t:template>
-													<Input id="Werks" editable="{local>/editCreate}" value="{local>Werks}" required="false" showValueHelp="true"
-														valueHelpRequest="onShowWerksHelp"/>
-												</t:template>
-											</t:Column>
 											<t:Column width="6rem" sortProperty="Lgort">
 												<Label text="{i18n>Lgort}" required="true"/>
 												<t:template>
@@ -274,61 +267,71 @@
 														valueHelpRequest="onShowLgortHelp"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="10rem" sortProperty="Matnr">
+											<t:Column width="7rem" sortProperty="Kostl">
+												<Label text="{i18n>Kostl}" required="true"/>
+												<t:template>
+													<Input id="Kostl" editable="{local>/editCreate}" value="{local>Kostl}" required="false" showValueHelp="true"
+														valueHelpRequest="onShowKostlHelp"/>
+												</t:template>
+											</t:Column>
+											<t:Column width="7rem" sortProperty="Saknr">
+												<Label text="{i18n>Saknr}" required="true"/>
+												<t:template>
+													<Input id="Saknr" editable="{local>/editCreate}" value="{local>Saknr}" required="false" showValueHelp="true"
+														valueHelpRequest="onShowSaknrHelp"/>
+												</t:template>
+											</t:Column>
+											<t:Column width="7rem" sortProperty="Matnr">
 												<Label text="{i18n>Matnr}" required="false"/>
 												<t:template>
 													<Input id="Matnr" editable="{local>/editCreate}" value="{local>Matnr}" required="false" showValueHelp="true"
-														valueHelpRequest="onShowMatnrHelp" change="onItemChange"/>
+														valueHelpRequest="onShowMatnrHelp" change=".onItemChange($event,'Matnr')"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="15rem" sortProperty="Txz01">
-												<Label text="{i18n>Txz01}"/>
+											<t:Column width="12rem" sortProperty="Txz01">
+												<Label text="{i18n>Txz01}" required="true"/>
 												<t:template>
 													<Input id="Txz01" editable="{local>/editCreate}" value="{local>Txz01}" required="false"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="10rem" sortProperty="Matkl">
+											<t:Column width="8rem" sortProperty="Matkl">
 												<Label text="{i18n>Matkl}" required="true"/>
 												<t:template>
 													<Input id="Matkl" editable="{local>/editCreate}" value="{local>Matkl}" required="true" showValueHelp="true"
-														valueHelpRequest="onShowMatklHelp"/>
+														valueHelpRequest="onShowMatklHelp" change="itemToUpperCase"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="10rem" sortProperty="Menge">
+											<t:Column width="7rem" sortProperty="Lifnr">
+												<Label text="{i18n>Lifnr}" required="true"/>
+												<t:template>
+													<Input id="Lifnr" editable="{local>/editCreate}" value="{local>Lifnr}" required="false" change=".onItemChange($event,'Lifnr')" showValueHelp="true"
+														valueHelpRequest="onShowLifnrHelp"/>
+												</t:template>
+											</t:Column>
+											<t:Column width="12rem" sortProperty="Lifnrname" visible="true">
+												<Label text="{i18n>Lifnrname}"/>
+												<t:template>
+													<!--<Text id="Lifnrname" text="{local>Lifnrname}"/>-->
+													<Input id="Lifnrname" editable="false" value="{local>Lifnrname}" required="false"/>
+												</t:template>
+											</t:Column>
+											<t:Column width="6rem" sortProperty="Menge">
 												<Label text="{i18n>Menge}" required="true"/>
 												<t:template>
 													<Input id="Menge" editable="{local>/editCreate}" value="{local>Menge}" required="true" textAlign="Right" change="onItemChange"/>
 												</t:template>
 											</t:Column>
 											<t:Column width="6rem" sortProperty="Meins" resizable="true">
-												<Label text="{i18n>Meins}"/>
+												<Label text="{i18n>Meins}" required="true"/>
 												<t:template>
 													<Input id="Meins" editable="{local>/editCreate}" value="{local>Meins}" showValueHelp="true" valueHelpRequest="onShowMeinsHelp"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="10rem" sortProperty="Preis">
+											<t:Column width="8rem" sortProperty="Preis">
 												<Label text="{i18n>Preis}" required="true"/>
 												<t:template>
 													<Input id="Preis" editable="{local>/editCreate}" value="{local>Preis}" required="true" textAlign="Right" change="onItemChange"/>
 													<!--<Input id="Preis" editable="{local>/editCreate}" value="{path:'local>Preis',formatter:'.formatter.amountFormat'}" required="true" textAlign="Right" change="onItemChange"/>-->
-												</t:template>
-											</t:Column>
-											<t:Column width="6rem" sortProperty="Waers" resizable="true">
-												<Label text="{i18n>Waers}"/>
-												<t:template>
-													<Input id="Waers" editable="{local>/editCreate}" value="{local>Waers}" change="onItemChange"/>
-												</t:template>
-											</t:Column>
-											<t:Column width="6rem" sortProperty="Peinh">
-												<Label text="{i18n>Peinh}"/>
-												<t:template>
-													<Input id="Peinh" editable="{local>/editCreate}" value="{local>Peinh}" change="onItemChange"/>
-												</t:template>
-											</t:Column>
-											<t:Column width="10rem" sortProperty="Zconsumtax">
-												<Label text="{i18n>Zconsumtax}" required="false"/>
-												<t:template>
-													<Input id="Zconsumtax" editable="false" value="{local>Zconsumtax}" required="false" textAlign="Right" change="onItemChange"/>
 												</t:template>
 											</t:Column>
 											<t:Column width="10rem" sortProperty="Zsubtotal">
@@ -337,54 +340,52 @@
 													<Input id="Zsubtotal" editable="false" value="{local>Zsubtotal}" required="false" textAlign="Right" change="onItemChange"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="10rem" sortProperty="Lifnr">
-												<Label text="{i18n>Lifnr}" required="true"/>
-												<t:template>
-													<Input id="Lifnr" editable="{local>/editCreate}" value="{local>Lifnr}" required="false" change="onItemChange" showValueHelp="true"
-														valueHelpRequest="onShowLifnrHelp"/>
-												</t:template>
-											</t:Column>
-											<t:Column width="15rem" sortProperty="Lifnrname" visible="true">
-												<Label text="{i18n>Lifnrname}"/>
-												<t:template>
-													<!--<Text id="Lifnrname" text="{local>Lifnrname}"/>-->
-													<Input id="Lifnrname" editable="false" value="{local>Lifnrname}" required="false"/>
-												</t:template>
-											</t:Column>
-											<t:Column width="10rem" sortProperty="Lfdat">
+											<t:Column width="8rem" sortProperty="Lfdat">
 												<Label text="{i18n>Lfdat}" required="true"/>
 												<t:template>
 													<!--<Input id="Datab" editable="true" value="{local>Datab, formatter: '.formatter.convertDate'}"/>-->
 													<DatePicker value="{local>Lfdat}" valueFormat="yyyy-MM-dd" displayFormat="short" enabled="{local>/editCreate}"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="10rem" sortProperty="Saknr">
-												<Label text="{i18n>Saknr}" required="false"/>
-												<t:template>
-													<Input id="Saknr" editable="{local>/editCreate}" value="{local>Saknr}" required="false" showValueHelp="true"
-														valueHelpRequest="onShowSaknrHelp"/>
-												</t:template>
-											</t:Column>
-											<t:Column width="10rem" sortProperty="Kostl">
-												<Label text="{i18n>Kostl}" required="false"/>
-												<t:template>
-													<Input id="Kostl" editable="{local>/editCreate}" value="{local>Kostl}" required="false" showValueHelp="true"
-														valueHelpRequest="onShowKostlHelp"/>
-												</t:template>
-											</t:Column>
-											<t:Column width="10rem" sortProperty="Zremarks">
+											<t:Column width="6rem" sortProperty="Zremarks">
 												<Label text="{i18n>Zremarks}" required="false"/>
 												<t:template>
 													<Input id="Zremarks" editable="{local>/editCreate}" value="{local>Zremarks}" required="false"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="10rem" sortProperty="Zzhje">
+
+											<t:Column width="6rem" sortProperty="Waers" resizable="true" visible="false">
+												<Label text="{i18n>Waers}"/>
+												<t:template>
+													<Input id="Waers" editable="{local>/editCreate}" value="{local>Waers}" change="onItemChange"/>
+												</t:template>
+											</t:Column>
+											<t:Column width="6rem" sortProperty="Peinh" visible="false">
+												<Label text="{i18n>Peinh}"/>
+												<t:template>
+													<Input id="Peinh" editable="{local>/editCreate}" value="{local>Peinh}" change="onItemChange"/>
+												</t:template>
+											</t:Column>
+											<t:Column width="8rem" sortProperty="Zconsumtax" visible="false">
+												<Label text="{i18n>Zconsumtax}" required="false"/>
+												<t:template>
+													<Input id="Zconsumtax" editable="false" value="{local>Zconsumtax}" required="false" textAlign="Right" change="onItemChange"/>
+												</t:template>
+											</t:Column>
+											<t:Column width="6rem" sortProperty="Werks" visible="false">
+												<Label text="{i18n>Werks}" required="true"/>
+												<t:template>
+													<Input id="Werks" editable="{local>/editCreate}" value="{local>Werks}" required="false" showValueHelp="true"
+														valueHelpRequest="onShowWerksHelp"/>
+												</t:template>
+											</t:Column>
+											<t:Column width="10rem" sortProperty="Zzhje" visible="false">
 												<Label text="{i18n>Zzhje}" required="false"/>
 												<t:template>
 													<Input id="Zzhje" editable="{local>/editCreate}" value="{local>Zzhje}" required="false" textAlign="Right" change="onItemChange"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="10rem" sortProperty="Zvat">
+											<t:Column width="10rem" sortProperty="Zvat" visible="false">
 												<Label text="{i18n>Zvat}" required="false"/>
 												<t:template>
 													<Input id="Zvat" editable="false" value="{local>Zvat}" required="false" textAlign="Right" change="onItemChange"/>
@@ -430,7 +431,8 @@
 						<ux:subSections>
 							<ux:ObjectPageSubSection>
 								<ux:blocks>
-									<t:Table id="tableItemSum" rows="{ path:'local>/ZzSum' }" class="sapUiSizeCompact" threshold="20" visibleRowCount="10" selectionMode="None"
+									<t:Table id="tableItemSum" rows="{ path:'local>/ZzSum' }" class="sapUiSizeCompact" threshold="20" visibleRowCountMode="Interactive"
+										minAutoRowCount="5" visibleRowCount="5" selectionMode="None"
 										editable="true" selectionBehavior="Row" busy="{settings>/appProperties/busy}">
 										<!--	<t:extension>
 											<OverflowToolbar>
@@ -440,37 +442,38 @@
 											</OverflowToolbar>
 										</t:extension>-->
 										<t:columns>
-											<t:Column width="12rem" sortProperty="Lifnr">
+											<t:Column width="auto" sortProperty="Lifnr">
 												<Label text="{i18n>Lifnr}"/>
 												<t:template>
-													<Input id="Lifnr1" editable="false" value="{local>Lifnr}"/>
+													<!-- <Input id="Lifnr1" editable="false" value="{local>Lifnr}"/> -->
+													<Input editable="false" value="{path:'local>Lifnr',formatter:'.getLifnrname'}"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="6rem" sortProperty="Waers">
+											<t:Column width="6rem" sortProperty="Waers" visible="false">
 												<Label text="{i18n>Waers}"/>
 												<t:template>
 													<Input id="Waers1" editable="false" value="{local>Waers}"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="12rem" sortProperty="Znetvalue">
+											<t:Column width="8rem" sortProperty="Znetvalue">
 												<Label text="{i18n>Znetvalue}" required="false"/>
 												<t:template>
 													<Input id="Znetvalue" editable="false" value="{local>Znetvalue}" required="false" textAlign="Right"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="12rem" sortProperty="Zsubtotal">
-												<Label text="{i18n>ZsubtotalSum}" required="false"/>
-												<t:template>
-													<Input id="Zsubtotal1" editable="false" value="{local>Zsubtotal}" required="false" textAlign="Right"/>
-												</t:template>
-											</t:Column>
-											<t:Column width="12rem" sortProperty="Zconsumtax">
+											<t:Column width="8rem" sortProperty="Zconsumtax">
 												<Label text="{i18n>ZconsumtaxSum}" required="false"/>
 												<t:template>
 													<Input id="Zconsumtax1" editable="false" value="{local>Zconsumtax}" required="false" textAlign="Right"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="12rem" sortProperty="Zestvat">
+											<t:Column width="8rem" sortProperty="Zsubtotal">
+												<Label text="{i18n>ZsubtotalSum}" required="false"/>
+												<t:template>
+													<Input id="Zsubtotal1" editable="false" value="{local>Zsubtotal}" required="false" textAlign="Right"/>
+												</t:template>
+											</t:Column>
+											<t:Column width="8rem" sortProperty="Zestvat" visible="false">
 												<Label text="{i18n>Zestvat}" required="false"/>
 												<t:template>
 													<Input id="Zestvat" editable="{local>/editCreate}" value="{local>Zestvat}" required="false" textAlign="Right" change="onItemChangeSum"/>
