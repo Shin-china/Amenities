@@ -122,7 +122,7 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Badat" text="{i18n>Badat}"/>
-																	<DatePicker value="{local>/ZzHeader/Badat}" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" enabled="{local>/editCreate}"/>
+																	<DatePicker value="{local>/ZzHeader/Badat}" editable="false" valueFormat="yyyy-MM-dd"  displayFormat="yyyy/MM/dd" enabled="{local>/editCreate}"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
@@ -142,7 +142,7 @@
 															<form:fields>
 																<VBox>
 																	<Label id="Zspqx" text="{i18n>Zspqx}"/>
-																	<DatePicker value="{local>/ZzHeader/Zspqx}" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" enabled="{local>/editCreate}"/>
+																	<DatePicker value="{local>/ZzHeader/Zspqx}" editable="false" valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd"   enabled="{local>/editCreate}"/>
 																</VBox>
 															</form:fields>
 														</form:FormElement>
