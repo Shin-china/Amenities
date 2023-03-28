@@ -855,11 +855,22 @@ sap.ui.define([
             result = this.formatter.accSub(result, value3);
             // result = this.formatter.accSub(result, value4);
             this._LocalData.setProperty("/dailyBalance/0/HNJTS_KRKSH_GANKIN", result);
+
+            var aCurrencyTable4 = this._LocalData.getProperty("/CurrencyTable4");
+
+            var amount1 = this._LocalData.getProperty("/dailyBalance/0/HNJTS_KRKSH_GANKIN");
+            if (!amount1) {
+                amount1 = "0";
+            }
+
+            //本日繰越高(日計表1枚目参照）
+            aCurrencyTable4[4].Amount = amount1;
+
             //銀行入金予定額 [Ⅵ] = 本日繰越元金 [Ⅳ] - 規定元金 [Ⅴ]
             result = this.formatter.accSub(result, value4);
             this._LocalData.setProperty("/dailyBalance/0/GNK_AZKR_YTIGK", result);
             //本日繰越高(日計表1枚目参照） [Ⅳ]
-            this._LocalData.setProperty("/CurrencyTable4/4/Amount", result);
+            // this._LocalData.setProperty("/CurrencyTable4/4/Amount", result);
             //翌日金庫内現金総額  [Ⅻ]
             var value5 = this._LocalData.getProperty("/CurrencyTable4/3/Amount");
             //差額 [Ⅻ]-[Ⅳ]
