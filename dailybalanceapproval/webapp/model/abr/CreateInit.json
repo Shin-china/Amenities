@@ -24,15 +24,15 @@
         {"Id":"9", "No":"", "Shop":"", "Title":"合計", "Quantity":"", "Amount":"", "Remark":""}
     ],
     "table9": [
-        {"Id":"1", "No":"1", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "TaxC":""},
-        {"Id":"2", "No":"2", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "TaxC":""},
-        {"Id":"3", "No":"3", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "TaxC":""},
+        {"Id":"1", "No":"1", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "AccountDDesc":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "AccountCDesc":"アミューズメント売上高", "TaxC":""},
+        {"Id":"2", "No":"2", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "AccountDDesc":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "AccountCDesc":"アミューズメント売上高", "TaxC":""},
+        {"Id":"3", "No":"3", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "AccountDDesc":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "AccountCDesc":"アミューズメント売上高", "TaxC":""},
         {"Id":"4", "No":"", "Title":"合計", "Amount":""}
     ],
     "table10": [
-        {"Id":"1", "No":"1", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "TaxC":""},
-        {"Id":"2", "No":"2", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "TaxC":""},
-        {"Id":"3", "No":"3", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "TaxC":""},
+        {"Id":"1", "No":"1", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "AccountCDesc":"アミューズメント売上高", "TaxC":""},
+        {"Id":"2", "No":"2", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "AccountCDesc":"アミューズメント売上高", "TaxC":""},
+        {"Id":"3", "No":"3", "Title":"", "Amount":"", "ShopD":"", "AccountD":"", "TaxD":"", "ShopC":"", "AccountC":"811120", "AccountCDesc":"アミューズメント売上高", "TaxC":""},
         {"Id":"4", "No":"", "Title":"合計", "Amount":""}
     ],
     "table11": [
