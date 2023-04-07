@@ -935,8 +935,14 @@
                                             <l:GridData id="gd87" span="XL3 L3 M12 S12" linebreakXL="true" linebreakL="true" />
                                         </layoutData>
                                     </Label>
-
-                                    <TextArea id="txtBiko1" value="{Biko1}" maxLength="300" rows="5" editable="{viewState>/editable}" change="invUserNameChange">
+ 
+                                    <TextArea id="txtBiko1" 
+                                              
+                                              value="{Biko1}" 
+                                              maxLength="300"  
+                                              rows="5"  
+                                              editable="{viewState>/editable}" 
+                                              change="txtBiko1Change">
                                         <layoutData>
                                             <l:GridData id="gd88" span="XL9 L9 M12 S12" />
                                         </layoutData>

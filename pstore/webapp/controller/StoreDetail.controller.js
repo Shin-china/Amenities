@@ -1479,7 +1479,26 @@ sap.ui.define([
             invUserNameChange: function (oEvent) {
                 if (oEvent.sId == 'change') { 
                     this._saveRequired = false;
+                  } 
+            }, 
+
+            txtBiko1Change: function (oEvent) {
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
                   }
+                
+                var text = this.byId("txtBiko1").getValue(); 
+                var lines = text.split("\n");
+                var count = lines.length;
+                var oSource = oEvent.getSource();
+                 
+                oSource.setValueState("None");
+                this._Error = false;   
+                if(count > 5){ 
+                    
+                    oSource.setValueState("Error"); 
+                    this._Error = true;
+                  } 
             }, 
 
             checkRequired: function () {
