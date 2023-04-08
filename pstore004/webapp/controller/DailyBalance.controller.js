@@ -22,6 +22,7 @@ sap.ui.define([
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            this._Error = false;
 
             var oMessageManager, oView;
 			oView = this.getView();
@@ -154,6 +155,10 @@ sap.ui.define([
         onBalanceSave: function (sAction) {
             if (this.checkRequired()) {
                 MessageToast.show(this._ResourceBundle.getText("inputRequired"));
+                return;
+            }
+
+            if(this._Error==true){
                 return;
             }
 
@@ -619,7 +624,22 @@ sap.ui.define([
             postDoc.to_ZzTreasuryCash = [convertedTable];
             return postDoc;
         },
-        
+        //add by stanley 20230408
+        memo1Change:function(oEvent){
+            var getId = oEvent.getParameter("id");
+            var id = getId.split("--");
+            var text = this.byId(id[1]).getValue(); 
+            var lines = text.split("\n");
+            var count = lines.length;
+            var oSource = oEvent.getSource();
+            this._Error = false;
+             
+            oSource.setValueState("None");   
+            if(count > 3){ 
+                this._Error = true;
+                oSource.setValueState("Error"); 
+              }    
+        },
         //dailyBalanceCalc
         onDailyBalanceCalc: function () {
             this.setValueToZero(oEvent);

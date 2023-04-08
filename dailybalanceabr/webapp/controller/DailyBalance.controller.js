@@ -22,6 +22,7 @@ sap.ui.define([
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel();
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            this._Error = false;
 
             var oMessageManager, oView;
 			oView = this.getView();
@@ -120,6 +121,19 @@ sap.ui.define([
             this.collectionPayment();
             this._LocalData.refresh();
         },
+        memo1Change:function(oEvent){
+            var text = oEvent.getParameter("newValue");
+            var lines = text.split("\n");
+            var count = lines.length;
+            var oSource = oEvent.getSource();
+
+            oSource.setValueState("None");
+            this._Error = false;
+            if(count > 3){
+                oSource.setValueState("Error"); 
+                this._Error = true;
+            }
+        },
 
         onMulti: function (oEvent, sParam) {
             var oFormat = NumberFormat.getFloatInstance();
@@ -147,6 +161,10 @@ sap.ui.define([
         onBalanceSave: function (sAction) {
             if (this.checkRequired()) {
                 MessageToast.show(this._ResourceBundle.getText("inputRequired"));
+                return;
+            }
+            
+            if (this._Error==true){
                 return;
             }
 

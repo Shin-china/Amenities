@@ -215,7 +215,7 @@
 										
 										<!-- 備考 -->
 										<Label text="{i18n>Remark1}" class="paddingTop"/> 
-										<TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="100%" height="8rem" editable="{local>/viewEditable}"/>
+										<TextArea id="memo1" value="{local>/dailyBalance/0/BIKOU1}" rows="3" change="memo1Change" maxLength="300" width="100%"  editable="{local>/viewEditable}"/>
 							 
 									</form:SimpleForm>
 								</VBox>
@@ -457,7 +457,7 @@
                                     </uitable:Table>
 									<!-- 備考2 -->
 									<Text width="{local>/labelWidth}" text="{i18n>Remark}" class="paddingTop"/>
-									<TextArea id="idBIKOU2" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
+									<TextArea id="idBIKOU2" maxLength="300" width="50%"  rows="3" change="memo1Change"  editable="{local>/viewEditable}"/>
                                 </VBox>
                             </uxap:blocks>
                         </uxap:ObjectPageSubSection>

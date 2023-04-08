@@ -1486,8 +1486,10 @@ sap.ui.define([
                 if (oEvent.sId == 'change') { 
                     this._saveRequired = false;
                   }
-                
-                var text = this.byId("txtBiko1").getValue(); 
+                var getId = oEvent.getParameter("id");
+                var id = getId.split("--");
+                var maxId = id.length - 1;
+                var text = this.byId(id[maxId]).getValue(); 
                 var lines = text.split("\n");
                 var count = lines.length;
                 var oSource = oEvent.getSource();
