@@ -197,7 +197,7 @@
 														<form:fields>
 															<VBox>
 																<Label text="{i18n>Zsqly}"/>
-																<TextArea id="Zsqly" maxLength="1000" editable="{local>/editCreate}" value="{local>/ZzHeader/Zsqly}" rows="4" width="100%"/>
+																<TextArea growing="true" id="Zsqly" maxLength="1000" editable="{local>/editCreate}" value="{local>/ZzHeader/Zsqly}" rows="4" width="100%"/>
 															</VBox>
 														</form:fields>
 													</form:FormElement>
