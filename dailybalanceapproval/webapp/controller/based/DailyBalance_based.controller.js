@@ -23,6 +23,7 @@ sap.ui.define([
             this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel("based");
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n_based").getResourceBundle();
+            this_Error = false;
 
             var oMessageManager, oView;
 			oView = this.getView();
@@ -38,7 +39,26 @@ sap.ui.define([
             this.insertHistorySection();
             
 		},
-
+        txtBiko1Change: function (oEvent) {
+            if (oEvent.sId == 'change') { 
+                this._saveRequired = false;
+              }
+            var getId = oEvent.getParameter("id");
+            var id = getId.split("--");
+            var maxId = id.length - 1;
+            var text = this.byId(id[maxId]).getValue(); 
+            var lines = text.split("\n");
+            var count = lines.length;
+            var oSource = oEvent.getSource();
+             
+            oSource.setValueState("None");
+            this._Error = false;   
+            if(count > 5){ 
+                
+                oSource.setValueState("Error"); 
+                this._Error = true;
+              } 
+        }, 
         //当路径导航到此页面时，设置页面的数据绑定
         _onRouteMatched : function (oEvent) {
             // set title
@@ -137,7 +157,7 @@ sap.ui.define([
 
         // 日记表数据保存
         onBalanceSave: function (sAction) {
-            if (this.checkRequired()) {
+            if (this.checkRequired() || this._Error == true) {
                 MessageToast.show(this._ResourceBundle.getText("inputRequired"));
                 return;
             }

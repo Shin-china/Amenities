@@ -257,7 +257,7 @@
                                     <TextArea value="{local>/dailyBalance/0/MOTOKINKAFUSOKU_BIKOU}" maxLength="50" width="50%" editable="{local>/viewEditable}"/>
                                     
                                     <Text width="{local>/labelWidth}" text="{i18n_amu>Remark}" class="paddingTop"/>
-                                    <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
+                                    <TextArea value="{local>/dailyBalance/0/BIKOU1}" maxLength="120" width="36.5rem" rows="3" change="memo1Change" editable="{local>/viewEditable}"/>
                                 </VBox>
                             </uxap:blocks>
                         </uxap:ObjectPageSubSection>
@@ -411,7 +411,7 @@
                                     </uitable:Table>
 									<!-- 備考2 -->
 									<Text width="{local>/labelWidth}" text="{i18n_amu>Remark}" class="paddingTop"/>
-									<TextArea id="idBIKOU2" maxLength="300" width="50%" height="8rem" editable="{local>/viewEditable}"/>
+									<TextArea id="idBIKOU2"  maxLength="120" width="36.5rem" rows="3" change="memo1Change" editable="{local>/viewEditable}"/>
                                 </VBox>
                             </uxap:blocks>
                         </uxap:ObjectPageSubSection>

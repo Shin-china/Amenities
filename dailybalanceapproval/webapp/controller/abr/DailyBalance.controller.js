@@ -24,7 +24,7 @@ sap.ui.define([
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel("abr");
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n_abr").getResourceBundle();
-
+            this._Error = false;
             var oMessageManager, oView;
 			oView = this.getView();
             // set message model
@@ -73,6 +73,19 @@ sap.ui.define([
 
             // 设置字段可编辑
             this.controlFieldEnabled();
+        },
+        memo1Change:function(oEvent){
+            var text = oEvent.getParameter("newValue");
+            var lines = text.split("\n");
+            var count = lines.length;
+            var oSource = oEvent.getSource();
+
+            oSource.setValueState("None");
+            this._Error = false;
+            if(count > 3){
+                oSource.setValueState("Error"); 
+                this._Error = true;
+            }
         },
 
         onAddLine: function (oEvent, sTableId) {
@@ -149,6 +162,9 @@ sap.ui.define([
         onBalanceSave: function (sAction) {
             if (this.checkRequired()) {
                 MessageToast.show(this._ResourceBundle.getText("inputRequired"));
+                return;
+            }
+            if (this._Error==true){
                 return;
             }
 

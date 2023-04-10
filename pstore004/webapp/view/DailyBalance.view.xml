@@ -193,32 +193,32 @@
 							<uxap:blocks>
 								<VBox class="sapUiSmallMargin">
 								<!-- <form:SimpleForm layout="ResponsiveGridLayout" columnsXL="2" editable="true" adjustLabelSpan="false" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="5" columnsL="2" columnsM="2"> -->
-									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="false" singleContainerFullSize="false"
+									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" adjustLabelSpan="true" singleContainerFullSize="true"
 									    columnsXL="2" columnsL="2" columnsM="1">
 										<!-- labelSpanL="4" labelSpanM="3" emptySpanL="4" emptySpanM="2" breakpointM="400" columnsL="2"> -->
 										<!-- 前日繰越元金[Ⅰ] -->
 										<Label text="{i18n>Title1}" />
-										<Input value="{path:'local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:0}}" 
+										<Input width="36.5rem" value="{path:'local>/dailyBalance/0/ZNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:0}}" 
 										       change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										<!-- 入金合計 -->
 										<Label text="{i18n>Title4c}" />
-										<Input value="{path:'local>/dailyBalance/0/SNT_GNKN_SHNY_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
+										<Input width="36.5rem" value="{path:'local>/dailyBalance/0/SNT_GNKN_SHNY_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
 										<!-- 出金合計 -->
 										<Label text="{i18n>Title4d}" />
-										<Input value="{path:'local>/dailyBalance/0/SNT_GNKN_SHSHT_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
+										<Input width="36.5rem" value="{path:'local>/dailyBalance/0/SNT_GNKN_SHSHT_GKI', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" enabled="false" editable="false" textAlign="Right"/>
 										<Label text="{i18n>Title2}" />
-										<Input value="{path:'local>/dailyBalance/0/HNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
+										<Input width="36.5rem" value="{path:'local>/dailyBalance/0/HNJTS_KRKSH_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
 										<!-- 規定元金[Ⅴ] -->
 										<Label text="{i18n>Title3}" />
-										<Input value="{path:'local>/dailyBalance/0/KITEI_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+										<Input width="36.5rem" value="{path:'local>/dailyBalance/0/KITEI_GANKIN', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
 										       change="resultCalc" editable="{local>/viewEditable}" textAlign="Right"/>
 										
 										<Label text="{i18n>Title4}" />
-										<Input value="{path:'local>/dailyBalance/0/GNK_AZKR_YTIGK', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
+										<Input width="36.5rem" value="{path:'local>/dailyBalance/0/GNK_AZKR_YTIGK', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:0,maxFractionDigits:2,emptyString:0}, constraints:{precision:15,scale:2}}" 
 										       change="resultCalc" enabled="false" editable="false" textAlign="Right"/>
                                       
 									    <Label text="{i18n>Remark1}" class="paddingTop"/>
-                                        <TextArea value="{local>/dailyBalance/0/BIKOU1}" id="idBIKOU1" maxLength="300" width="100%" rows="3" change="memo1Change" editable="{local>/viewEditable}"/>
+                                        <TextArea value="{local>/dailyBalance/0/BIKOU1}" id="idBIKOU1" maxLength="120" width="36.5rem" rows="3" change="memo1Change" editable="{local>/viewEditable}"/>
 									</form:SimpleForm>
 								</VBox>
 							</uxap:blocks>
@@ -423,7 +423,7 @@
                                     </uitable:Table>
 									<!-- 備考2 -->
 									<Text width="{local>/labelWidth}" text="{i18n>Remark}" class="paddingTop"/>
-									<TextArea id="idBIKOU2" maxLength="300" width="50%" rows="3" change="memo1Change" editable="{local>/viewEditable}"/>
+									<TextArea id="idBIKOU2" maxLength="120" width="36.5rem" rows="3" change="memo1Change" editable="{local>/viewEditable}"/>
                                 </VBox>
                             </uxap:blocks>
                         </uxap:ObjectPageSubSection>

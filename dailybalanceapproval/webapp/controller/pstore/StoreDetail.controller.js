@@ -45,7 +45,26 @@ sap.ui.define([
                 this.insertHistorySection();
 
             },
-
+            txtBiko1Change: function (oEvent) {
+                if (oEvent.sId == 'change') { 
+                    this._saveRequired = false;
+                  }
+                var getId = oEvent.getParameter("id");
+                var id = getId.split("--");
+                var maxId = id.length - 1;
+                var text = this.byId(id[maxId]).getValue(); 
+                var lines = text.split("\n");
+                var count = lines.length;
+                var oSource = oEvent.getSource();
+                 
+                oSource.setValueState("None");
+                this._Error = false;   
+                if(count > 5){ 
+                    
+                    oSource.setValueState("Error"); 
+                    this._Error = true;
+                  } 
+            }, 
             _onDetailMatched: function (oEvent) {
                 this.byId("txtKihyoshaName").setValueState("None");
                 this.byId("detailPage").setTitle(this._LocalData.getProperty("/NodeName"));
@@ -199,10 +218,9 @@ sap.ui.define([
                     return;
                 }
                 var checkOk = this.checkEditData();
-                if (!checkOk) {
+                if (!checkOk || this._Error == true) {
                     return;
                 }
-
                 this._busyDialog = new sap.m.BusyDialog({});
                 this._busyDialog.open();
                 var that = this;

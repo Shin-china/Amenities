@@ -19,7 +19,7 @@ sap.ui.define([
 			this._LocalData = this.getOwnerComponent().getModel("local");
             this._oDataModel = this.getOwnerComponent().getModel("amu");
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n_amu").getResourceBundle();
-
+            this._Error = false;
             var oMessageManager, oView;
 			oView = this.getView();
             // set message model
@@ -69,7 +69,20 @@ sap.ui.define([
 
             this._LocalData.setProperty("/detailPageBusy",false);
         },
+        //add by stanley 20230408
+        memo1Change:function(oEvent){
+            var text = oEvent.getParameter("newValue");
+            var lines = text.split("\n");
+            var count = lines.length;
+            var oSource = oEvent.getSource();
 
+            oSource.setValueState("None");
+            this._Error = false;
+            if(count > 3){
+                oSource.setValueState("Error"); 
+                this._Error = true;
+            }
+        },
         onAddLine: function (oEvent, sTableId) {
             var sPath = "";
             var iMaxLength = 0;
@@ -144,7 +157,9 @@ sap.ui.define([
                 MessageToast.show(this._ResourceBundle.getText("inputRequired"));
                 return;
             }
-
+            if(this._Error==true){
+                return;
+            }
             if (sAction == "Posting") {
                 this.onConfirmBox(sAction);
             } else {

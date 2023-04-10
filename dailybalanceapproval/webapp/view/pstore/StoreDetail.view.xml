@@ -837,7 +837,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <TextArea id="txtBiko1" value="{pstore>Biko1}" maxLength="300" rows="5" editable="{viewState>/editable}">
+                                    <TextArea id="txtBiko1" value="{pstore>Biko1}" maxLength="300" rows="5" change="txtBiko1Change" editable="{viewState>/editable}">
                                         <layoutData>
                                             <l:GridData id="gd88" span="XL9 L9 M12 S12" />
                                         </layoutData>
@@ -1317,7 +1317,7 @@
                                         </layoutData>
                                     </Label>
 
-                                    <TextArea id="txtBikou2" maxLength="300" value="{pstore>Fi1007/Bikou2}" editable="{viewState>/editable}" rows="5">
+                                    <TextArea id="txtBikou2" maxLength="300" width="36.5rem"  change="txtBiko1Change" value="{pstore>Fi1007/Bikou2}" editable="{viewState>/editable}" rows="5">
                                         <layoutData>
                                             <l:GridData id="gd110" spanXL="10" spanL="10" spanM="12" spanS="12" />
                                         </layoutData>
