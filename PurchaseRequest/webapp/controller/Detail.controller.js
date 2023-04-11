@@ -777,11 +777,6 @@ sap.ui.define([
                 Message: ""
             };
 
-            //ADD BY STANLEY 20230410
-            if (index !== -1) {
-                Object.assign(oRow, aItem[index]);
-                oRow.Zbnfpo = sItemNo;
-            }
 
             if (index === -1) {
                 //appends
