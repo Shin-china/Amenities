@@ -239,6 +239,7 @@
 												<ObjectStatus visible="false" title="{i18n>total4}" text="{local>/total4}" class="sapUiSmallMarginEnd"/>
 												<ToolbarSpacer/>
 												<Button icon="sap-icon://add" text="{i18n>bAddRow}" press="onAddRow" enabled="{local>/editCreate}"/>
+												<Button icon="sap-icon://copy" text="{i18n>bCopyRow}" press="onCopyRow" enabled="{local>/editCreate}"/>
 											</OverflowToolbar>
 										</t:extension>
 										<t:columns>

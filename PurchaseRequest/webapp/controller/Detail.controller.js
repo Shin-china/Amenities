@@ -777,6 +777,12 @@ sap.ui.define([
                 Message: ""
             };
 
+            //ADD BY STANLEY 20230410
+            if (index !== -1) {
+                Object.assign(oRow, aItem[index]);
+                oRow.Zbnfpo = sItemNo;
+            }
+
             if (index === -1) {
                 //appends
                 aItem.push(oRow);
@@ -788,6 +794,55 @@ sap.ui.define([
             this.onItemChange();
             this.getModel("local").refresh();
 
+        },
+
+        onCopyRow: function(oEvent) {
+            var aItem = this.getModel("local").getProperty("/ZzItem");
+            var index = this.getView().byId("tableItem").getSelectedIndex();
+            var oRow = {};
+            var iItemNo = 0;
+            var sItemNo = "";
+            var iZbnfpo = 0;
+
+            for (var i = 0; i < aItem.length; i++) {
+                if (aItem[i].Zbnfpo) {
+                    iZbnfpo = aItem[i].Zbnfpo;
+                } else {
+                    iZbnfpo = 0;
+                }
+                if (Number(iZbnfpo) > Number(iItemNo)) {
+                    iItemNo = iZbnfpo;
+                }
+            }
+
+            iItemNo = Number(iItemNo) + 10;
+            if (iItemNo < 10) {
+                sItemNo = "0000" + iItemNo;
+            } else if (iItemNo < 100) {
+                sItemNo = "000" + iItemNo;
+            } else if (iItemNo < 1000) {
+                sItemNo = "00" + iItemNo;
+            } else if (iItemNo < 10000) {
+                sItemNo = "0" + iItemNo;
+            } else sItemNo = iItemNo;
+
+
+            //ADD BY STANLEY 20230410
+            if (index !== -1) {
+                Object.assign(oRow, aItem[index]);
+                oRow.Zbnfpo = sItemNo;
+            }
+            if (index === -1) {
+                //error
+                MessageBox.error(this.getI18nBundle().getText("msgSelectOneLine"));
+                return;
+            } else {
+                //insert
+                index++;
+                aItem.splice(index, 0, oRow);
+            }
+            this.onItemChange();
+            this.getModel("local").refresh();
         },
 
         onDeleteRow: function(oEvent) {
