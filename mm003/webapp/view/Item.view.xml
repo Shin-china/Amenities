@@ -31,6 +31,9 @@
 					<m:Text id="getValue" text="{local>/item/0/EBELN}"/>
 					<m:Label id="_IDGenLabel2" labelFor="_IDGenLabel1" text="{i18n>PR_TXT02}"/>
 					<m:Text id="getValue2" text="{local>/item/0/PREIS_SUM}"/>
+						
+					<m:Label id="_IDGenLabel4" labelFor="_IDGenLabel1" text="{i18n>PR_TXT05}"/>
+					<m:Text id="getValue14" text="{local>/item/0/TAX_SUM}"/>
 					<m:Label id="_IDGenLabel3" labelFor="_IDGenLabel1" text="{i18n>PR_TXT03}"/>
 					<m:Text id="getValue3" text="{local>/item/0/ZJM}"/>
 				</form:SimpleForm>

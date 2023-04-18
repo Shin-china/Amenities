@@ -412,7 +412,7 @@
                                         </uitable:columns>
                                     </uitable:Table>
 									<!-- 備考2 -->
-									<Text width="{local>/labelWidth}" text="{i18n_based>Remark}" class="paddingTop"/>
+									<Text width="{local>/labelWidth}" text="{i18n_based>Remark2}" class="paddingTop"/>
 									<TextArea id="idBIKOU2" maxLength="120" width="50%" rows="3" change="txtBiko1Change" editable="{local>/viewEditable}"/>
                                 </VBox>
                             </uxap:blocks>
