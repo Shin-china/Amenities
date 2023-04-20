@@ -19,4 +19,4 @@ builder:
           name: ZPSOTRE002
           description: Pstore
           package: z001
-          transport: RD1K908828
+          transport: RD1K908847

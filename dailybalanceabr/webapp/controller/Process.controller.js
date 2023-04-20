@@ -17,6 +17,7 @@ sap.ui.define([
                 this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
                 this.InitModel = new JSONModel(sap.ui.require.toUrl("FICO/dailybalanceabr/model/CreateInit.json"));
 
+
                 this._oDataModel.attachBatchRequestCompleted(function(oEvent) {
                     this.setBusy(false);
                     var errors = this._LocalData.getProperty("/errors");

@@ -43,6 +43,11 @@ sap.ui.define([
             this.byId("idUser").setValueState("None");
             //localmodel中当前行的绑定路径
             var oArgs = oEvent.getParameter("arguments");
+            //ADD BY STANLEY 20230419
+            this.byId("idSave").setVisible(true);
+            this.byId("idApply").setVisible(true);
+            //END
+
             // 显示界面
             if (oArgs.view == "Display") {
                 this._LocalData.setProperty("/viewEditable", false);
@@ -68,6 +73,7 @@ sap.ui.define([
                 this.byId("idChange").setVisible(false);
                 this.byId("idPosting").setVisible(false);
                 this.byId("idBIKOU2").setValue(""); //ADD BY STANLEY 20230412
+
             }
             sap.ui.getCore().getMessageManager().removeAllMessages();
 
@@ -389,6 +395,13 @@ sap.ui.define([
                     this._LocalData.setProperty("/dailyBalance/0/NIKKEIHYO_STATUS_CD", oData.NIKKEIHYO_STATUS_CD);
                     this.byId("idDailyBalanceCreate").setBusy(false);
                     messages.showText(oData.Message);
+                    //ADD BY STANLEY 20230419
+                    this.byId("idSave").setVisible(false);
+                    this.byId("idChange").setVisible(false);
+                    this.byId("idApply").setVisible(false);
+                    this.byId("idPosting").setVisible(false);
+                    this._LocalData.setProperty("/viewEditable", false);
+
                     // this._LocalData.setProperty("/differenceConfirmDetail" , oData.to_Item.results);
                 }.bind(this),
                 error: function(oError) {
