@@ -445,7 +445,7 @@
 			<Button type="Transparent" text="{i18n>Print}" press="onPrintPDF"/>
 			<Button id="idSave" type="Transparent" text="{i18n>PreSave}" press=".onBalanceSave('Save')" enabled="{local>/viewEditable}"/>
             <Button id="idChange" type="Transparent" text="{i18n>ChangeButton}" press="onChangePress" enabled="{local>/btChange}"/>
-			<Button type="Transparent" text="{i18n>Apply}" press="onApplyConfirm" enabled="{local>/btApply}"/>
+			<Button id="idApply" type="Transparent" text="{i18n>Apply}" press="onApplyConfirm" enabled="{local>/btApply}"/>
             <Button id="idPosting" type="Transparent" text="{i18n>Posting}" press="onBalanceSave('Posting')" enabled="{local>/btPosting}"/>
 			<Button type="Transparent" text="{i18n>Suspend}" press="onSuspend"/>
 		</OverflowToolbar>
