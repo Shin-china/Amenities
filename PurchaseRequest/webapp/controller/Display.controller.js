@@ -171,7 +171,7 @@ sap.ui.define([
                     that.gotoDetailPage(oData);
                     // 获取附件
                     if (sOption === "1" || sOption === "2") {
-
+                        this.getModel("local").setProperty("/ZzAttachment", "");
                     } else {
                         this.getAttachment();
                     }
@@ -224,6 +224,7 @@ sap.ui.define([
         },
         gotoDetailPage: function(oData) {
             var sOption = this._LocalData.getProperty("/sOption");
+
             if (oData.results.length === 0) {
                 MessageBox.error(this.getI18nBundle().getText("msgNoData"));
                 return;
@@ -348,6 +349,7 @@ sap.ui.define([
             this.getModel("local").setProperty("/ZzHeaderOld", JSON.parse(JSON.stringify(oHeader)));
             this.getModel("local").setProperty("/ZzItemOld", JSON.parse(JSON.stringify(aItems)));
             this.getModel("local").setProperty("/ZzSumOld", JSON.parse(JSON.stringify(aSum)));
+
 
             this.getModel("local").setProperty("/editCreate", false);
             this.getModel("local").setProperty("/editChange", false);
