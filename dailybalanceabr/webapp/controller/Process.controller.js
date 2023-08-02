@@ -525,7 +525,8 @@ sap.ui.define([
                     changeSetId: i,
                     success: function(oData) {
                         this.byId("smartFilterBarProcess").search();
-                        messages.showText(oData.Message);
+                        //messages.showText(oData.Message);
+                        messages.showText("Successful");
                         this.byId("idProcessPage").setBusy(false);
                     }.bind(this),
                     error: function(oError) {
@@ -928,6 +929,8 @@ sap.ui.define([
                     this._LocalData.setProperty("/btPosting", oButtonAuth.SIWAKESAKUSEI);
                     //一括取消
                     this._LocalData.setProperty("/btReverse", oButtonAuth.TORIKESI);
+                    //ADD BY STANLEY 20230801
+                    this._LocalData.setProperty('/MappingType', oButtonAuth.MAPPINGTYPE)
                 } else {
 
                 }
@@ -1004,24 +1007,47 @@ sap.ui.define([
 
             //第一界面要限制的按钮：参照新规，删除，凭证做成，pdf打印
             checkButtonEnable: function(sDocumentStatus, sAction) {
-                var oButtonMap = {
-                    //仮保存
-                    "1": { "refrence": false, "delete": true, "posting": false, "pdf": true },
-                    //申請中
-                    "2": { "refrence": false, "delete": false, "posting": false, "pdf": true },
-                    //申請済
-                    "3": { "refrence": false, "delete": false, "posting": false, "pdf": true },
-                    //承認済
-                    "4": { "refrence": false, "delete": false, "posting": true, "pdf": true },
-                    //否認
-                    "5": { "refrence": false, "delete": false, "posting": false, "pdf": true },
-                    //再申請
-                    "6": { "refrence": false, "delete": false, "posting": false, "pdf": true },
-                    //仕訳作成済
-                    "7": { "refrence": false, "delete": false, "posting": false, "pdf": true },
-                    //取消済
-                    "8": { "refrence": true, "delete": false, "posting": false, "pdf": false }
-                };
+                //ADD By stanley 20230801
+                var mappingtype = this._LocalData.getProperty("/MappingType");
+                if (mappingtype == "10") {
+                    var oButtonMap = {
+                        //仮保存
+                        "1": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //申請中
+                        "2": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //申請済
+                        "3": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //承認済
+                        "4": { "refrence": false, "delete": true, "posting": true, "pdf": true },
+                        //否認
+                        "5": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //再申請
+                        "6": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //仕訳作成済
+                        "7": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //取消済
+                        "8": { "refrence": true, "delete": false, "posting": false, "pdf": false }
+                    };
+                } else {
+                    oButtonMap = {
+                        //仮保存
+                        "1": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //申請中
+                        "2": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //申請済
+                        "3": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //承認済
+                        "4": { "refrence": false, "delete": false, "posting": true, "pdf": true },
+                        //否認
+                        "5": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //再申請
+                        "6": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //仕訳作成済
+                        "7": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //取消済
+                        "8": { "refrence": true, "delete": false, "posting": false, "pdf": false }
+                    };
+                }
                 if (!oButtonMap[sDocumentStatus][sAction]) {
                     messages.showError(this._ResourceBundle.getText("msg5"));
                     return false;
