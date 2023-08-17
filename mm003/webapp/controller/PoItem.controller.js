@@ -5,9 +5,10 @@ sap.ui.define(
         "sap/m/MessageBox",
         "./messages",
         "../model/formatter",
+        "sap/ui/model/Filter",
         "sap/ui/core/routing/HashChanger"
     ],
-    function(BaseController, History, MessageBox, messages, formatter, HashChanger) {
+    function(BaseController, History, MessageBox, messages, formatter, Filter, HashChanger) {
         "use strict";
 
         return BaseController.extend("mm003.controller.PoItem", {
@@ -38,7 +39,7 @@ sap.ui.define(
                 var oHeader = this._oDataModel.getProperty("/" + oArgs.contextPath);
                 this.tableConverted_dis(oArgs.contextPath);
                 this._LocalData.setProperty("/item", [oHeader]);
-
+                this.getAttachment(oHeader); //ADD BY STANLEY 20230816
                 sap.ui.getCore().getMessageManager().removeAllMessages();
 
                 //每次进入详细页面，默认会保存上一次的section，滚动到页头第一个section
@@ -47,6 +48,59 @@ sap.ui.define(
 
                 this._LocalData.setProperty("/page2Busy", false);
             },
+
+            getAttachment: function(oRecord) {
+                var oNewFilter,
+                    aNewFilters = [];
+                var sZbanfn = oRecord.EBELN;
+
+                aNewFilters.push(new Filter("Objectid", sap.ui.model.FilterOperator.EQ, sZbanfn));
+                aNewFilters.push(new Filter("Objtype", sap.ui.model.FilterOperator.EQ, "01"));
+
+                oNewFilter = new Filter({
+                    filters: aNewFilters,
+                    and: true
+                });
+
+                var oParam = {
+                    filters: aNewFilters,
+                    success: function(oData) {
+                        var aAtta = [];
+                        aAtta = oData.results;
+                        this._LocalData.setProperty("/ZzAttachment", aAtta);
+                        this._LocalData.refresh();
+                    }.bind(this),
+                    error: function(oError) {
+                        var sErrorMessage;
+                        if (oError.statusCode === "500") {
+
+                        }
+                        try {
+                            var oJsonMessage = JSON.parse(oError.responseText);
+                            sErrorMessage = oJsonMessage.error.message.value;
+                        } catch (e) {
+                            sErrorMessage = oError.responseText;
+                        }
+
+                    }.bind(this)
+                };
+                this.getOwnerComponent().getModel("Attachment").read("/UploadSet", oParam);
+
+            },
+            onAttachmentPress: function(oEvent) {
+
+                var Zbanfn = this._LocalData.getProperty("/item/0/EBELN");
+
+                // var Zbanfn = this.getModel("local").getProperty("/ZzHeader/Zbanfn");
+                var fileName = oEvent.getSource().getProperty("title");
+                var url = "/sap/opu/odata/SAP/ZUI5_FILE_UPLOAD_N_SRV";
+                if (fileName !== undefined && fileName != null) {
+                    url = url + "/UploadSet(Objtype='',Objectid=" + "'" + Zbanfn + "'" + ",Filename=" + "'" + fileName + "'" + ")/$value";
+                    window.open(url, "_blank");
+                }
+
+            },
+
             tableConverted_dis: function(sKey) {
                 var aItemsKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzItems");
                 var aTotalKey = this._oDataModel.getProperty("/" + sKey + "/to_ZzTotal");
@@ -107,7 +161,7 @@ sap.ui.define(
                     }
                 }
                 if (!this.pDialog) {
-                    //load asynchronous XML Fragment
+                    //load asynchronous XML Fragmentattachment
                     this.pDialog = this.loadFragment({
                         name: "mm003.view.fragment.ApprovalComment"
                     });

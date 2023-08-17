@@ -1,26 +1,26 @@
 sap.ui.define([
-    "FICO/pstore004/controller/BaseController",
-    "../model/formatter",
-    "sap/m/Button",
-    "sap/m/MessageBox",
-    "sap/ui/model/json/JSONModel",
-    "./messages",
-    "sap/ui/model/Filter",
-],
-    function (BaseController, formatter, Button, MessageBox, JSONModel, messages, Filter) {
+        "FICO/pstore004/controller/BaseController",
+        "../model/formatter",
+        "sap/m/Button",
+        "sap/m/MessageBox",
+        "sap/ui/model/json/JSONModel",
+        "./messages",
+        "sap/ui/model/Filter",
+    ],
+    function(BaseController, formatter, Button, MessageBox, JSONModel, messages, Filter) {
         "use strict";
         return BaseController.extend("FICO.pstore004.controller.Process", {
             formatter: formatter,
-            onInit: function () {
+            onInit: function() {
                 this._LocalData = this.getOwnerComponent().getModel("local");
                 this._oDataModel = this.getOwnerComponent().getModel();
-			    this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+                this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
                 this.InitModel = new JSONModel(sap.ui.require.toUrl("FICO/pstore004/model/CreateInit.json"));
-                
-                this._oDataModel.attachBatchRequestCompleted(function(oEvent){
+
+                this._oDataModel.attachBatchRequestCompleted(function(oEvent) {
                     this.setBusy(false);
                     var errors = this._LocalData.getProperty("/errors");
-                    if(errors){
+                    if (errors) {
                         messages.showError(errors);
                     }
                     this._LocalData.setProperty("/errors", "");
@@ -29,7 +29,7 @@ sap.ui.define([
                 this.getConfiguration.call(this);
 
                 this._LocalData.setProperty("/processBusy", true);
-                this.getButtonAuth().then(function (oData) {
+                this.getButtonAuth().then(function(oData) {
                     this.setButtonStatus(oData);
                     this._LocalData.setProperty("/processBusy", false);
                 }.bind(this));
@@ -43,7 +43,7 @@ sap.ui.define([
                     dateFrom.setMonth(dateFrom.getMonth() - 1);
                 } else {
                     dateFrom.setDate(1);
-                    dateTo.setMonth(dateTo.getMonth() + 1) ;
+                    dateTo.setMonth(dateTo.getMonth() + 1);
                     dateTo.setDate(0);
                 }
                 oDateRange.setFrom(dateFrom);
@@ -52,7 +52,7 @@ sap.ui.define([
 
             onBeforeRebindTable: function(oEvent) {
                 this._oDataModel.resetChanges();
-                this._oDataModel.refresh(true,true);
+                this._oDataModel.refresh(true, true);
                 var mBindingParams = oEvent.getParameter("bindingParams");
                 mBindingParams.parameters["expand"] = "to_Header,to_ZzCashIncome,to_ZzCashPayment,to_ZzTreasuryCash";
                 var aFilter = oEvent.getParameter("bindingParams").filters;
@@ -63,12 +63,12 @@ sap.ui.define([
                 if (dTo && dFrom) {
                     dFrom = this.formatter.date_8(dFrom);
                     dTo = this.formatter.date_8(dTo);
-                    aFilters.push(new Filter("EIGYO_BI", "BT", dFrom, dTo)); 
+                    aFilters.push(new Filter("EIGYO_BI", "BT", dFrom, dTo));
                 }
 
                 var oNewFilter = new Filter({
-                    filters:aFilters,
-                    and:true
+                    filters: aFilters,
+                    and: true
                 });
                 if (aFilters.length > 0) {
                     aFilter.push(oNewFilter);
@@ -79,10 +79,10 @@ sap.ui.define([
                 this.byId("idCol3").setVisible(false);
             },
 
-            onNavDailyBalanceView: function (oEvent,sView) {
+            onNavDailyBalanceView: function(oEvent, sView) {
                 this._LocalData.setProperty("/processBusy", true);
-                
-                var oUrl = {view: sView};
+
+                var oUrl = { view: sView };
                 if (sView == "Display") {
                     //localmodel中当前行的绑定路径
                     var sPath = oEvent.getSource().getBindingContext().getPath();
@@ -91,10 +91,10 @@ sap.ui.define([
                 }
                 this._LocalData.setProperty("/isCreate", false);
                 this._LocalData.setProperty("/isRefrence", false);
-                this.getRouter().navTo("DailyBalance",oUrl);
+                this.getRouter().navTo("DailyBalance", oUrl);
             },
 
-            onCreatePress: function (oEvent, sButton) {
+            onCreatePress: function(oEvent, sButton) {
                 var sDialogTitle = "";
                 //创建
                 if (sButton === "Create") {
@@ -104,7 +104,7 @@ sap.ui.define([
                     this._LocalData.setProperty("/dailyBalance/0/KAISHA_CD", "1000");
                     // this._LocalData.setProperty("/dailyBalance/0/EIGYO_BI", "");
                     this._LocalData.setProperty("/isRefrence", false);
-                //参考
+                    //参考
                 } else if (sButton === "Reference") {
                     sDialogTitle = this._ResourceBundle.getText("DialogTitle2");
                     this._LocalData.setProperty("/isCreate", false);
@@ -126,7 +126,7 @@ sap.ui.define([
                     this.pDialog = this.loadFragment({
                         name: "FICO.pstore004.view.fragment.CreateDialog"
                     });
-                } 
+                }
 
                 this.pDialog.then(function(oDialog) {
                     this.byId("idCompany").setValueState("None");
@@ -154,7 +154,7 @@ sap.ui.define([
                         type: "Emphasized",
                         text: this._ResourceBundle.getText("Create"),
                         //登录按钮
-                        press: function () {
+                        press: function() {
                             if (this.sButton === "Create") {
                                 this.createButton(oDialog);
                                 // this.createButton();
@@ -166,7 +166,7 @@ sap.ui.define([
                     });
                     var endButton = new Button({
                         text: this._ResourceBundle.getText("Suspend"),
-                        press: function () {
+                        press: function() {
                             oDialog.close();
                             this.byId("idProcessPage").setBusy(false);
                         }.bind(this)
@@ -174,7 +174,7 @@ sap.ui.define([
                     //设置标题
                     oDialog.setTitle(sDialogTitle);
                     // 添加按钮
-                    if (oDialog.getButtons().length === 0){
+                    if (oDialog.getButtons().length === 0) {
                         oDialog.addButton(beginButton);
                         oDialog.addButton(endButton);
                     }
@@ -182,21 +182,21 @@ sap.ui.define([
                 }.bind(this));
             },
 
-            createButton: function (oDialog) {
-            // createButton: function () {
+            createButton: function(oDialog) {
+                // createButton: function () {
                 if (this.requiredCheck()) {
                     return true;
                 }
 
-                this.checkError().then(function (res) {
-                    if(res.TYPE) {
+                this.checkError().then(function(res) {
+                    if (res.TYPE) {
                         if (res.TYPE == "E") {
                             MessageBox.error(res.MESSAGE);
                             return;
                         } else {
-                            this.getLastRecord().then(function (res) {
+                            this.getLastRecord().then(function(res) {
                                 this.setLocalModel("Create");
-                                this.getRouter().navTo("DailyBalance",{view:"Create"});
+                                this.getRouter().navTo("DailyBalance", { view: "Create" });
                                 oDialog.close();
                             }.bind(this));
                             // this.setLocalModel("Create");
@@ -210,10 +210,10 @@ sap.ui.define([
             },
             onPressHistory: function(oEvent) {
                 var sObjectid = oEvent.getSource().getBindingContext().getObject().KIHYO_NO;
-                this.getApprovalHistory(sObjectid).then(function (res) {
+                this.getApprovalHistory(sObjectid).then(function(res) {
                     try {
                         var aApprovalHistory = [];
-                        res.forEach(function (item) {
+                        res.forEach(function(item) {
                             var sTime = this.formatter.dateTime(item.CREATE_DATE, item.CREATE_TIME);
                             aApprovalHistory.push({
                                 user: item.CREATE_USER,
@@ -230,25 +230,25 @@ sap.ui.define([
                 }.bind(this));
             },
 
-            getApprovalHistory: function (sObjectid) {
-                var promise = new Promise( function (resolve, reject) {
+            getApprovalHistory: function(sObjectid) {
+                var promise = new Promise(function(resolve, reject) {
                     var mParameters = {
                         refreshAfterChange: false,
-                        success: function (oData) {
+                        success: function(oData) {
                             resolve(oData.results);
                         }.bind(this),
-                        error: function (oError) {
+                        error: function(oError) {
                             messages.showError(messages.parseErrors(oError));
                         }.bind(this)
                     };
-                    this.getOwnerComponent().getModel().setHeaders({"objectid":sObjectid});
+                    this.getOwnerComponent().getModel().setHeaders({ "objectid": sObjectid });
                     this.getOwnerComponent().getModel().read("/ZzApprovalHistorySet", mParameters);
                 }.bind(this));
                 return promise;
             },
-            
+
             // 显示审批履历
-            approvalHistoryDialog: function () {
+            approvalHistoryDialog: function() {
                 this.byId("reportTable").setBusyIndicatorDelay(0);
                 this.byId("reportTable").setBusy(true);
                 var oView = this.getView();
@@ -258,22 +258,22 @@ sap.ui.define([
                         name: "FICO.pstore004.view.fragment.ApprovalHistory"
                     })
                 }
-                this.HistoryDialog.then(function (oHistoryDialog) {
+                this.HistoryDialog.then(function(oHistoryDialog) {
                     var endButton = new Button({
                         text: this._ResourceBundle.getText("Suspend"),
-                        press: function () {
+                        press: function() {
                             oHistoryDialog.close();
                         }.bind(this)
                     });
                     // 添加按钮
-                    if (oHistoryDialog.getButtons().length === 0){
+                    if (oHistoryDialog.getButtons().length === 0) {
                         oHistoryDialog.addButton(endButton);
                     }
                     oHistoryDialog.open();
                     this.byId("reportTable").setBusy(false);
                 }.bind(this));
             },
-            requiredCheck: function () {
+            requiredCheck: function() {
                 var isError = false;
                 var oCompany = this.byId("idCompany");
                 var oShop = this.byId("idShop");
@@ -289,7 +289,7 @@ sap.ui.define([
                 if (oDatePicker.getValue() == "") {
                     oDatePicker.setValueState("Warning");
                     isError = true;
-                } else if (new Date(oDatePicker.getValue()) > new Date()){
+                } else if (new Date(oDatePicker.getValue()) > new Date()) {
                     isError = true;
                     oDatePicker.setValueState("Warning");
                     oDatePicker.setValueStateText(this._ResourceBundle.getText("msg2"));
@@ -298,9 +298,9 @@ sap.ui.define([
                 var aShop = this._LocalData.getProperty("/ShopVH");
                 var sCompany = oCompany.getValue();
                 var sShop = oShop.getValue();
-                var aShopTemp = aShop.filter( line => line.Key1 == sShop && line.Key2 == sCompany);
+                var aShopTemp = aShop.filter(line => line.Key1 == sShop && line.Key2 == sCompany);
                 if (aShopTemp.length == 0) {
-                    MessageBox.error(this._ResourceBundle.getText("msg1"));                    
+                    MessageBox.error(this._ResourceBundle.getText("msg1"));
                     isError = true;
                 }
 
@@ -318,14 +318,14 @@ sap.ui.define([
                     "TENPO_CD": sShop,
                     "EIGYO_BI": sDate
                 };
-                var promise = new Promise (function (resolve, reject) {
+                var promise = new Promise(function(resolve, reject) {
                     var mParameters = {
                         groupId: "checkError" + Math.floor(i / 100),
                         changeSetId: i,
-                        success: function (oData) {
+                        success: function(oData) {
                             resolve(oData);
                         }.bind(this),
-                        error: function (oError) {  
+                        error: function(oError) {
                             resolve(oError);
                             // messages.showError(messages.parseErrors(oError));
                         }.bind(this),
@@ -336,30 +336,30 @@ sap.ui.define([
             },
 
             // 获取前日金额
-            getLastRecord: function () {
+            getLastRecord: function() {
                 var aFilters = [];
-                aFilters.push(new Filter("KAISHA_CD", "EQ", this.byId("idCompany").getValue())); 
-                aFilters.push(new Filter("TENPO_CD", "EQ", this.byId("idShop").getValue())); 
+                aFilters.push(new Filter("KAISHA_CD", "EQ", this.byId("idCompany").getValue()));
+                aFilters.push(new Filter("TENPO_CD", "EQ", this.byId("idShop").getValue()));
                 var sDate = this.byId("idDP1").getValue();
-                aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate))); 
-                 
-                var promise = new Promise( function (resolve, reject) {
+                aFilters.push(new Filter("EIGYO_BI", "EQ", this.formatter.date_8(sDate)));
+
+                var promise = new Promise(function(resolve, reject) {
                     var mParameters = {
                         refreshAfterChange: false,
                         filters: aFilters,
-                        success: function (oData) {
+                        success: function(oData) {
                             resolve();
                             if (oData.results.length > 0) {
                                 // this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HONZITUKURIKOSI); 
 
-                                this._LocalData.setProperty("/CurrencyTable4/5/Amount", oData.results[0].YOKUZITUKITEIMOTOKIN); 
+                                this._LocalData.setProperty("/CurrencyTable4/5/Amount", oData.results[0].YOKUZITUKITEIMOTOKIN);
                                 this._LocalData.refresh();
 
-                                this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN",oData.results[0].HNJTS_KRKSH_GANKIN);
-                                this._LocalData.setProperty("/dailyBalance/0/KITEI_GANKIN",oData.results[0].KITEI_GANKIN);
+                                this._LocalData.setProperty("/dailyBalance/0/ZNJTS_KRKSH_GANKIN", oData.results[0].HNJTS_KRKSH_GANKIN);
+                                this._LocalData.setProperty("/dailyBalance/0/KITEI_GANKIN", oData.results[0].KITEI_GANKIN);
                             }
                         }.bind(this),
-                        error: function (oError) {
+                        error: function(oError) {
                             reject();
                         }.bind(this)
                     };
@@ -369,15 +369,15 @@ sap.ui.define([
 
             },
 
-            onDatePickerChange: function (oEvent) {
+            onDatePickerChange: function(oEvent) {
                 if (oEvent.getParameter("value") != "") {
                     oEvent.getSource().setValueState("None");
                 }
             },
 
-            refrenceButton: function () {
-                this.checkError().then(function (res) {
-                    if(res.TYPE) {
+            refrenceButton: function() {
+                this.checkError().then(function(res) {
+                    if (res.TYPE) {
                         if (res.TYPE == "E") {
                             this._LocalData.setProperty("/processBusy", false);
                             MessageBox.error(res.MESSAGE);
@@ -387,9 +387,9 @@ sap.ui.define([
                             var oBinding = oTable.getBinding();
                             var sPath = oBinding.aKeys[oTable.getSelectedIndex()];
                             this.setLocalModel("Reference");
-                            this.getRouter().navTo("DailyBalance",{
+                            this.getRouter().navTo("DailyBalance", {
                                 contextPath: sPath,
-                                view:"Display"
+                                view: "Display"
                             });
                         }
                     } else {
@@ -400,7 +400,7 @@ sap.ui.define([
                 }.bind(this));
             },
 
-            onConfirmBox: function (oEvent, sMessage) {
+            onConfirmBox: function(oEvent, sMessage) {
                 //至少选择一条
                 var oTable = this.byId("reportTable");
                 if (oTable.getSelectedIndices().length == 0) {
@@ -411,8 +411,8 @@ sap.ui.define([
                 //check action
                 var aSelectedIndex = oTable.getSelectedIndices();
                 var isError = false;
-                aSelectedIndex.forEach(function (selectedIndex) {
-                    if (isError) {return;}
+                aSelectedIndex.forEach(function(selectedIndex) {
+                    if (isError) { return; }
                     var oItem = oTable.getContextByIndex(selectedIndex).getObject();
                     if (sMessage == "DeleteConfirmMsg") {
                         isError = !this.checkButtonEnable(oItem.NIKKEIHYO_STATUS_CD, "delete")
@@ -420,7 +420,7 @@ sap.ui.define([
                         isError = !this.checkButtonEnable(oItem.NIKKEIHYO_STATUS_CD, "posting")
                     }
                 }.bind(this));
-                if (isError) {return;}
+                if (isError) { return; }
 
                 var sTitle = this._ResourceBundle.getText("ConfirmTitle");
                 var sText = this._ResourceBundle.getText(sMessage);
@@ -432,7 +432,7 @@ sap.ui.define([
                         MessageBox.Action.YES,
                         MessageBox.Action.NO
                     ],
-                    onClose: function (sResult) {
+                    onClose: function(sResult) {
                         if (sResult === MessageBox.Action.YES) {
                             if (sMessage == "DeleteConfirmMsg") {
                                 this.onBalanceDelete();
@@ -444,61 +444,64 @@ sap.ui.define([
                 });
             },
 
-            onBalanceDelete: function () {
+            onBalanceDelete: function() {
                 var postDocs = this.prepareBalanceDeleteBody();
-                postDocs.forEach(function (line, index) {
+                postDocs.forEach(function(line, index) {
                     this.postDelet(line, index, "Delete");
                 }.bind(this));
             },
 
             // 批量过账
-            onBatchPosting: function (sAction) {
+            onBatchPosting: function(sAction) {
                 var postDocs = this.prepareBatchPostingBody();
-                postDocs.forEach(function (line, index) {
+                postDocs.forEach(function(line, index) {
                     this.postBatchPosting(line, index, sAction);
                 }.bind(this));
             },
 
             prepareBalanceDeleteBody: function() {
-                var postDocs = [];	
+                var postDocs = [];
                 var oTable = this.byId("reportTable");
                 var listItems = oTable.getSelectedIndices();
                 //得到选中行的flag
-                listItems.forEach(function (sSelected) {
+                listItems.forEach(function(sSelected) {
                     let key = oTable.getContextByIndex(sSelected).getPath();
-                    let lineData = this._oDataModel.getProperty(key); 
+                    let lineData = this._oDataModel.getProperty(key);
                     postDocs.push({
                         KAISHA_CD: lineData.KAISHA_CD,
                         KIHYO_NO: lineData.KIHYO_NO,
-                    })            
+                    })
                 }.bind(this));
                 return postDocs;
             },
 
             //批量过账
-            prepareBatchPostingBody: function () {
-                var postDocs = [];	
+            prepareBatchPostingBody: function() {
+                var postDocs = [];
                 var oTable = this.byId("reportTable");
                 //获取选中的行
                 var listItems = oTable.getSelectedIndices();
                 //得到选中行的flag
-                listItems.forEach(function (sSelected) {
+                listItems.forEach(function(sSelected) {
                     let sKey = oTable.getContextByIndex(sSelected).getPath();
-                    let lineData = this._oDataModel.getProperty(sKey); 
+                    let lineData = this._oDataModel.getProperty(sKey);
 
                     var aHeaderKey = this._oDataModel.getProperty(sKey + "/to_Header");
                     var aCahsIncomKey = this._oDataModel.getProperty(sKey + "/to_ZzCashIncome");
                     var aCahsPaymentKey = this._oDataModel.getProperty(sKey + "/to_ZzCashPayment");
                     var aTreasuryCashKey = this._oDataModel.getProperty(sKey + "/to_ZzTreasuryCash");
 
-                    var aHeader = [], aCahsIncome = [], aCahsPayment = [], aTreasuryCash = [];
+                    var aHeader = [],
+                        aCahsIncome = [],
+                        aCahsPayment = [],
+                        aTreasuryCash = [];
                     aHeader.push(this._oDataModel.getProperty("/" + aHeaderKey[0]));
-                    aCahsIncomKey.forEach(function (path) {
+                    aCahsIncomKey.forEach(function(path) {
                         var item = this._oDataModel.getProperty("/" + path);
                         delete item.__metadata;
                         aCahsIncome.push(item);
                     }.bind(this));
-                    aCahsPaymentKey.forEach(function (path) {
+                    aCahsPaymentKey.forEach(function(path) {
                         var item = this._oDataModel.getProperty("/" + path);
                         delete item.__metadata;
                         aCahsPayment.push(item);
@@ -520,36 +523,37 @@ sap.ui.define([
                 return postDocs;
             },
 
-            postDelet: function (postData, i, sAction) {
+            postDelet: function(postData, i, sAction) {
                 this.byId("idProcessPage").setBusy(true);
                 var mParameters = {
                     groupId: "ProcessDelete" + Math.floor(i / 100),
                     changeSetId: i,
-                    success: function (oData) {
+                    success: function(oData) {
                         this.byId("smartFilterBarProcess").search();
-                        messages.showText(oData.Message);
+                        //messages.showText(oData.Message);
+                        messages.showText("Success");
                         this.byId("idProcessPage").setBusy(false);
                     }.bind(this),
-                    error: function (oError) {  
+                    error: function(oError) {
                         messages.showError(messages.parseErrors(oError));
                         this.byId("idProcessPage").setBusy(false);
                     }.bind(this),
                 };
-                this.getOwnerComponent().getModel().setHeaders({"button":sAction});
+                this.getOwnerComponent().getModel().setHeaders({ "button": sAction });
                 //复杂结构
                 this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
                 this.byId("idProcessPage").setBusyIndicatorDelay(0);
                 this.byId("idProcessPage").setBusy(true);
             },
 
-            postBatchPosting: function (postData, i, sAction) {
+            postBatchPosting: function(postData, i, sAction) {
                 var sPath = postData.key;
                 delete postData.key;
                 this.byId("idProcessPage").setBusy(true);
                 var mParameters = {
                     groupId: "BatchPosting" + Math.floor(i / 100),
                     changeSetId: i,
-                    success: function (oData) {
+                    success: function(oData) {
                         this.byId("idCol1").setVisible(true);
                         this.byId("idCol2").setVisible(true);
                         this.byId("idCol3").setVisible(true);
@@ -557,7 +561,7 @@ sap.ui.define([
                         this._oDataModel.setProperty(sPath + "/Type", "S");
                         this._oDataModel.setProperty(sPath + "/Message", oData.Message);
                     }.bind(this),
-                    error: function (oError) {  
+                    error: function(oError) {
                         this.byId("idCol1").setVisible(true);
                         this.byId("idCol2").setVisible(true);
                         this.byId("idCol3").setVisible(true);
@@ -566,11 +570,11 @@ sap.ui.define([
                         this.byId("idProcessPage").setBusy(false);
                     }.bind(this),
                 };
-                this.getOwnerComponent().getModel().setHeaders({"button":sAction});
+                this.getOwnerComponent().getModel().setHeaders({ "button": sAction });
                 //复杂结构
                 this.getOwnerComponent().getModel().create("/ZzShopDailyBalanceSet", postData, mParameters);
             },
-            setLocalModel: function (oButton) {
+            setLocalModel: function(oButton) {
                 // 获取dialog中的参数
                 var sCompany = this.byId("idCompany").getValue();
                 var sShop = this.byId("idShop").getValue();
@@ -617,13 +621,13 @@ sap.ui.define([
                 var aCurrencyTable3 = this._LocalData.getProperty("/CurrencyTable3/Item");
                 //準備金明細
                 var sShopTmp = sShop;
-                if (sShopTmp.length == 4 && sShopTmp.substr(0,1) == "0") {
+                if (sShopTmp.length == 4 && sShopTmp.substr(0, 1) == "0") {
                     sShopTmp = sShopTmp.substr(1);
                 }
                 // var aFI0004a = aFI0004.filter( line => line.Value2 === sShopTmp);
                 var aFI0004a = aFI0004;
                 if (aFI0004a.length > 0) {
-                    aCurrencyTable3.forEach(function (line, index) {
+                    aCurrencyTable3.forEach(function(line, index) {
                         try {
                             line.Title = aFI0004a[index].Value4;
                         } catch (e) {}
@@ -647,7 +651,7 @@ sap.ui.define([
                 this._LocalData.refresh();
             },
 
-            initialLocalModel: function () {
+            initialLocalModel: function() {
                 //清空日记表
                 // 初始化为0
                 var aFields = [
@@ -682,7 +686,7 @@ sap.ui.define([
                     "SONOTA_URIAGEB8",
                     "SONOTA_URIAGEA10",
                     "SONOTA_URIAGEB10",
-                    "URIAGE_NEBIKI",//売上値引
+                    "URIAGE_NEBIKI", //売上値引
                     "URIAGE_GOKEI",
                     "GENKIN_URIAGE",
                     "KAKEURI_TO",
@@ -700,10 +704,10 @@ sap.ui.define([
                 ];
                 //为了初始值为0
                 var oDailyBalance = {};
-                aFields.forEach(function (field) {
+                aFields.forEach(function(field) {
                     oDailyBalance[field] = "0";
                 }.bind(this));
-                this._LocalData.setProperty("/dailyBalance",[oDailyBalance]);
+                this._LocalData.setProperty("/dailyBalance", [oDailyBalance]);
                 // this._LocalData.setProperty("/table6", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table6"))));
                 // this._LocalData.setProperty("/table7", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table7"))));
                 // this._LocalData.setProperty("/table8", JSON.parse(JSON.stringify(this.InitModel.getProperty("/table8"))));
@@ -721,17 +725,17 @@ sap.ui.define([
                 this._LocalData.refresh();
             },
             //获取配置参数
-            getConfiguration: function () {
+            getConfiguration: function() {
                 var mParameters = {
                     success: this.configurationProcess.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
                         this._LocalData.setProperty("/busy", false, false);
                     }.bind(this)
                 };
                 this.getOwnerComponent().getModel().read("/ZzConfigurationSet", mParameters);
             },
 
-            configurationProcess: function (oData) {
+            configurationProcess: function(oData) {
                 var aFI0004 = [],
                     // aFI0005 = [],
                     // aFI0007 = [],
@@ -743,7 +747,7 @@ sap.ui.define([
                     aProfit = [],
                     aCost = [],
                     aFI0006 = [];
-                oData.results.forEach(function(line){
+                oData.results.forEach(function(line) {
                     switch (line.ZID) {
                         // //天气
                         // case "FI0005":
@@ -765,34 +769,34 @@ sap.ui.define([
                                 Remark: line.REMARK
                             });
                             break;
-                        // //"掛売上（クレジット、電子マネー、QR決済）
-                        // case "FI0007":
-                        //     aFI0007.push({
-                        //         Seq: line.ZSEQ,
-                        //         Value1: line.ZVALUE1,
-                        //         Value2: line.ZVALUE2,
-                        //         Value3: line.ZVALUE3,
-                        //         Value4: line.ZVALUE4,
-                        //         Value5: line.ZVALUE5,
-                        //         Value6: line.ZVALUE6,
-                        //         Remark: line.REMARK
-                        //     });
-                        //     break;
-                        //冲销原因
+                            // //"掛売上（クレジット、電子マネー、QR決済）
+                            // case "FI0007":
+                            //     aFI0007.push({
+                            //         Seq: line.ZSEQ,
+                            //         Value1: line.ZVALUE1,
+                            //         Value2: line.ZVALUE2,
+                            //         Value3: line.ZVALUE3,
+                            //         Value4: line.ZVALUE4,
+                            //         Value5: line.ZVALUE5,
+                            //         Value6: line.ZVALUE6,
+                            //         Remark: line.REMARK
+                            //     });
+                            //     break;
+                            //冲销原因
                         case "VH0001":
                             aReversalReason.push({
                                 Key1: line.ZKEY1,
                                 Value1: line.ZVALUE1
                             });
                             break;
-                        //公司代码
+                            //公司代码
                         case "VH0002":
                             aCompany.push({
                                 Key1: line.ZKEY1,
                                 Value1: line.ZVALUE1
                             });
                             break;
-                        //店铺
+                            //店铺
                         case "VH0003":
                             aShop.push({
                                 Key1: line.ZKEY1,
@@ -800,22 +804,22 @@ sap.ui.define([
                                 Value1: line.ZVALUE1
                             });
                             break;
-                        //科目
+                            //科目
                         case "VH0004":
                             aAccount.push({
-                                Key1: line.ZKEY1,//科目
-                                Key2: line.ZKEY2,//公司代码
+                                Key1: line.ZKEY1, //科目
+                                Key2: line.ZKEY2, //公司代码
                                 Value1: line.ZVALUE1
                             });
                             break;
-                        //税码
+                            //税码
                         case "VH0005":
                             aTax.push({
                                 Key1: line.ZKEY1,
                                 Value1: line.ZVALUE1
                             });
                             break;
-                        //利润中心
+                            //利润中心
                         case "VH0006":
                             aProfit.push({
                                 Key1: line.ZKEY1,
@@ -824,7 +828,7 @@ sap.ui.define([
                                 Key3: line.ZKEY3
                             });
                             break;
-                        //成本中心
+                            //成本中心
                         case "VH0007":
                             aCost.push({
                                 Key1: line.ZKEY1,
@@ -834,7 +838,7 @@ sap.ui.define([
                             });
                             break;
 
-                        //借方科目コード
+                            //借方科目コード
                         case "FI0006":
                             aFI0006.push({
                                 Seq: line.ZSEQ,
@@ -859,24 +863,24 @@ sap.ui.define([
                 this._LocalData.setProperty("/FI0006", aFI0006);
             },
 
-            getButtonAuth: function () {
-                var promise = new Promise( function (resolve, reject) {
+            getButtonAuth: function() {
+                var promise = new Promise(function(resolve, reject) {
                     var mParameters = {
                         // success: this.setButtonStatus.bind(this),
                         success: function(oData) {
                             resolve(oData);
                         },
-                        error: function (oError) {
+                        error: function(oError) {
                             this._LocalData.setProperty("/busy", false, false);
                         }.bind(this)
                     };
                     this.getOwnerComponent().getModel().read("/ZzButtonAuthSet", mParameters);
                 }.bind(this));
-                
+
                 return promise;
             },
 
-            setButtonStatus: function (oData) {
+            setButtonStatus: function(oData) {
                 if (oData.results.length > 0) {
                     var oButtonAuth = oData.results[0];
                     //登録
@@ -899,26 +903,28 @@ sap.ui.define([
                     this._LocalData.setProperty("/btPosting", oButtonAuth.SIWAKESAKUSEI);
                     //一括取消
                     this._LocalData.setProperty("/btReverse", oButtonAuth.TORIKESI);
+                    //ADD BY STANLEY 20230801
+                    this._LocalData.setProperty('/MappingType', oButtonAuth.MAPPINGTYPE);
                 } else {
 
                 }
             },
 
-            setPageBusy: function (isBusy) {
+            setPageBusy: function(isBusy) {
                 sap.ui.getCore().byId("idProcessPage").setBusy(isBusy);
             },
-            
-            onPrintPDF: function () {
+
+            onPrintPDF: function() {
                 var oTable = this.byId("smartTable").getTable();
                 var aIndex = oTable.getSelectedIndices();
                 // check button
                 var isError = false;
-                aIndex.forEach(function (selectedIndex) {
-                    if (isError) {return;}
+                aIndex.forEach(function(selectedIndex) {
+                    if (isError) { return; }
                     var oItem = oTable.getContextByIndex(selectedIndex).getObject();
                     isError = !this.checkButtonEnable(oItem.NIKKEIHYO_STATUS_CD, "pdf")
                 }.bind(this));
-                if (isError) {return;}
+                if (isError) { return; }
 
                 for (var i = 0; i < aIndex.length; i++) {
                     var oContext = oTable.getContextByIndex(aIndex[i]);
@@ -934,73 +940,96 @@ sap.ui.define([
                 }
             },
 
-            getBlob: function (url) {
+            getBlob: function(url) {
                 return new Promise(resolve => {
-                  const xhr = new XMLHttpRequest();
-            
-                  xhr.open('GET', url, true);
-                  xhr.responseType = 'blob';
-                  xhr.onload = () => {
-                    if (xhr.status === 200) {
-                      resolve(xhr.response);
-                    }
-                  };
-            
-                  xhr.send();
+                    const xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', url, true);
+                    xhr.responseType = 'blob';
+                    xhr.onload = () => {
+                        if (xhr.status === 200) {
+                            resolve(xhr.response);
+                        }
+                    };
+
+                    xhr.send();
                 });
             },
-            saveAs: function (blob, filename) {
+            saveAs: function(blob, filename) {
                 if (window.navigator.msSaveOrOpenBlob) {
-                  navigator.msSaveBlob(blob, filename);
+                    navigator.msSaveBlob(blob, filename);
                 } else {
-                  const link = document.createElement('a');
-                  const body = document.querySelector('body');
-            
-                  link.href = window.URL.createObjectURL(blob);
-                  link.download = filename;
-            
-                  // fix Firefox
-                  link.style.display = 'none';
-                  body.appendChild(link);
-            
-                  link.click();
-                  body.removeChild(link);
-            
-                  window.URL.revokeObjectURL(link.href);
+                    const link = document.createElement('a');
+                    const body = document.querySelector('body');
+
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = filename;
+
+                    // fix Firefox
+                    link.style.display = 'none';
+                    body.appendChild(link);
+
+                    link.click();
+                    body.removeChild(link);
+
+                    window.URL.revokeObjectURL(link.href);
                 }
             },
-            download: function (url, sFielName) {
+            download: function(url, sFielName) {
                 this.getBlob(url).then(blob => {
-                  this.saveAs(blob, sFielName);
+                    this.saveAs(blob, sFielName);
                 });
             },
 
             //第一界面要限制的按钮：参照新规，删除，凭证做成，pdf打印
-            checkButtonEnable: function (sDocumentStatus, sAction) {
-                var oButtonMap = {
-                    //仮保存
-                    "1":{"refrence":false, "delete":true, "posting":false, "pdf":true},
-                    //申請中
-                    "2":{"refrence":false, "delete":false, "posting":false, "pdf":true},
-                    //申請済
-                    "3":{"refrence":false, "delete":false, "posting":false, "pdf":true},
-                    //承認済
-                    "4":{"refrence":false, "delete":false, "posting":true, "pdf":true},
-                    //否認
-                    "5":{"refrence":false, "delete":false, "posting":false, "pdf":true},
-                    //再申請
-                    "6":{"refrence":false, "delete":false, "posting":false, "pdf":true},
-                    //仕訳作成済
-                    "7":{"refrence":false, "delete":false, "posting":false, "pdf":true},
-                    //取消済
-                    "8":{"refrence":true, "delete":false, "posting":false, "pdf":false}
-                };
+            checkButtonEnable: function(sDocumentStatus, sAction) {
+                //Add by stanley 20230802
+                var mappingtype = this._LocalData.getProperty("/MappingType");
+                if (mappingtype == "10") {
+                    var oButtonMap = {
+                        //仮保存
+                        "1": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //申請中
+                        "2": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //申請済
+                        "3": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //承認済
+                        "4": { "refrence": false, "delete": true, "posting": true, "pdf": true },
+                        //否認
+                        "5": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //再申請
+                        "6": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //仕訳作成済
+                        "7": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //取消済
+                        "8": { "refrence": true, "delete": false, "posting": false, "pdf": false }
+                    };
+                } else {
+                    oButtonMap = {
+                        //仮保存
+                        "1": { "refrence": false, "delete": true, "posting": false, "pdf": true },
+                        //申請中
+                        "2": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //申請済
+                        "3": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //承認済
+                        "4": { "refrence": false, "delete": false, "posting": true, "pdf": true },
+                        //否認
+                        "5": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //再申請
+                        "6": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //仕訳作成済
+                        "7": { "refrence": false, "delete": false, "posting": false, "pdf": true },
+                        //取消済
+                        "8": { "refrence": true, "delete": false, "posting": false, "pdf": false }
+                    };
+                }
                 if (!oButtonMap[sDocumentStatus][sAction]) {
                     messages.showError(this._ResourceBundle.getText("msg5"));
                     return false;
                 }
                 return true;
-            }  
-            
+            }
+
         });
     });

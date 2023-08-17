@@ -134,6 +134,17 @@
 						</ux:ObjectPageSubSection>
 					</ux:ObjectPageSection>
 
+					<ux:ObjectPageSection id="section5" showTitle="true" title="{i18n>section5}" selectedSubSection="subselection5" >
+						<ux:subSections>
+							<ux:ObjectPageSubSection id="subSections5" showTitle="false" >
+								<m:List id="list" enableBusyIndicator="true" headerText="" growing="true"
+								items="{ path:'local>/ZzAttachment'}" itemPress="onAttachmentPress1" busy="{settings>/appProperties/busy}" select="onAttachmentPress">
+								<m:StandardListItem type="Active" title="{local>Filename}" icon="sap-icon://document-text" iconDensityAware="false" iconInset="false" press="onAttachmentPress" detailPresss="onAttachmentPress" />
+								<!--<StandardListItem title="{Lifnr}" description="{ProductId}" icon="{ProductPicUrl}" iconDensityAware="false" iconInset="false"/>-->
+								</m:List>
+							</ux:ObjectPageSubSection>
+						</ux:subSections>
+					</ux:ObjectPageSection>
 					<ux:ObjectPageSection id="section6" showTitle="true" title="{i18n>section6}" selectedSubSection="subselection6" >
 						<ux:subSections>
 							<ux:ObjectPageSubSection id="subSections6" showTitle="false" >
