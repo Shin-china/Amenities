@@ -32,7 +32,7 @@ server:
         backend:
           - path: /sap
             url: https://ad1-amenities.aee.hec.ondemand.com
-            client: '230'
+            client: '240'
     - name: fiori-tools-preview
       afterMiddleware: compression
       configuration:
