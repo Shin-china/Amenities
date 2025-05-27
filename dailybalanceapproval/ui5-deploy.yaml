@@ -15,9 +15,9 @@ builder:
       configuration:
         target:
           url: https://ad1-amenities.aee.hec.ondemand.com
-          client: "230"
+          client: "240"
         app:
           name: ZAPPROVAL
           description: DailyBalanceApproval
           package: z001
-          transport: RD1K908847
+          transport: RD1K909059
