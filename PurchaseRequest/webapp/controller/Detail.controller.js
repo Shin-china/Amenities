@@ -24,6 +24,7 @@ sap.ui.define([
             this._postData = [];
             //this.byId("page").setTitle("test");
 
+
             var oRouter = this.getRouter();
             oRouter.getRoute("Detail").attachMatched(this._onRouteMatched, this);
 
@@ -31,6 +32,7 @@ sap.ui.define([
         },
 
         _onRouteMatched: function(oEvent) {
+
             if (this._LocalData.getProperty("/viewModel") == "C") {
                 this._LocalData.setProperty("/editCreate", true);
             } else if (this._LocalData.getProperty("/viewModel") == "D") {
@@ -496,6 +498,8 @@ sap.ui.define([
             var iZnetvalue = 0;
             var iMenge = 0;
             var iPreis = 0;
+            var iTax = 0;
+
             var iPeinh = 1;
             var iConsumtaxSum = 0;
             aItem.forEach(function(oItem) {
@@ -512,6 +516,36 @@ sap.ui.define([
                     oItem.Preis = formatter.clearCommaToNumber(oItem.Preis);
                     oItem.Peinh = formatter.clearCommaToNumber(oItem.Peinh);
 
+                    //add by stanley 20250801
+
+
+                    if(oItem.Ztax !== 0){
+                        iTax = oItem.Ztax / 100;
+                    }
+                    if(oEvent && field == "Ztax"){
+                        //var iTaxLabel = oEvent.getParameters().selectedItem.mProperties.key;
+                        switch(oItem.Ztax){
+                            case "0":
+                                iTax = 0;
+                                break;
+                            case "8":
+                                iTax = 0.08;
+                                oItem.Ztax = formatter.amountFormat(iTax * 100 ) ;
+                                break;
+                            case "10":
+                                iTax = 0.10;
+                                oItem.Ztax = formatter.amountFormat(iTax * 100 ) ;
+                                break;
+
+                        }
+
+
+                    }
+            
+            
+
+                    //end add
+
                     iMenge = oItem.Menge;
                     iPreis = oItem.Preis;
                     iPeinh = oItem.Peinh;
@@ -521,7 +555,10 @@ sap.ui.define([
                     iZnetvalue = Number(iZnetvalue).toFixed(2);
 
                     // 明细行单个数量的税
-                    oItem.Zconsumtax = iPreis * 0.1;
+                    //Del by stanley 20250801
+                    //oItem.Zconsumtax = iPreis * 0.1;
+                    //Add by stanley 20250801
+                    oItem.Zconsumtax = iPreis * iTax;
                     // 明细行所有数量的税，本来在这里乘1.1的，但是现在明细行不显示了，所以在最后计算，减少合计误差
                     // iConsumtaxSum = iPreis * 0.1 * iMenge / iPeinh;
                     iConsumtaxSum = iPreis * iMenge / iPeinh;
@@ -529,7 +566,10 @@ sap.ui.define([
                     // oItem.Zsubtotal = iPreis * 1.1 * iMenge / iPeinh;
                     // 明细行的含税金额，本来在这里乘1.1的，但是现在明细行不显示了，所以在最后计算，减少合计误差
                     oItem.Zsubtotal = iPreis * iMenge / iPeinh;
-                    oItem.Zvat = iPreis * 1.1;
+                    // Change BY STANLEY 20250802 税率根据选择的税率来计算
+                    //oItem.Zvat = iPreis * 1.1;
+                    oItem.Zvat = iPreis * (1 + iTax);
+                    //End change
 
                     oItem.Zconsumtax = oItem.Zconsumtax.toFixed(2);
                     oItem.Zsubtotal = oItem.Zsubtotal.toFixed(2);
@@ -593,6 +633,7 @@ sap.ui.define([
                             Zconsumtax: iConsumtaxSum,
                             Zsubtotal: oItem.Zsubtotal,
                             Zestvat: 0,
+                            Ztax: oItem.Ztax,
                             Zzhje: oItem.Zzhje,
                             Zvat: oItem.Zvat
                         };
@@ -603,9 +644,16 @@ sap.ui.define([
             for (var i = 0; i < aCalc.length; i++) {
                 aCalc[i].Znetvalue = formatter.clearCommaToNumber(aCalc[i].Znetvalue);
                 //合计表的 税额（每行合计之后在这里计算税，减少误差）
-                aCalc[i].Zconsumtax = (formatter.clearCommaToNumber(aCalc[i].Zconsumtax) * 0.1).toFixed(0);
+                //Changed by stanley 20250802 根据选择税率机损
+                //aCalc[i].Zconsumtax = (formatter.clearCommaToNumber(aCalc[i].Zconsumtax) * 0.1).toFixed(0);
+                  aCalc[i].Zconsumtax = formatter.amountFormat(aCalc[i].Ztax);
+                //End Changed
+
                 //合计表的 含税金额（每行合计之后在这里计算税，减少误差）
-                aCalc[i].Zsubtotal = (formatter.clearCommaToNumber(aCalc[i].Zsubtotal) * 1.1).toFixed(0);
+                //Changed by stanley 20250802 根据选择税率
+                //aCalc[i].Zsubtotal = (formatter.clearCommaToNumber(aCalc[i].Zsubtotal) * 1.1).toFixed(0);
+                aCalc[i].Zsubtotal = (formatter.clearCommaToNumber(aCalc[i].Zsubtotal) + formatter.clearCommaToNumber(aCalc[i].Ztax));
+                //END Changed
                 aCalc[i].Zestvat = formatter.clearCommaToNumber(aCalc[i].Zestvat);
                 aCalc[i].Zzhje = formatter.clearCommaToNumber(aCalc[i].Zzhje);
                 aCalc[i].Zvat = formatter.clearCommaToNumber(aCalc[i].Zvat);
@@ -762,6 +810,7 @@ sap.ui.define([
                 Zremarks: "",
                 Zzhje: "",
                 Zvat: "",
+                Ztax: "",
                 Loekz: false,
                 Ebeln: "",
                 Ebelp: "",

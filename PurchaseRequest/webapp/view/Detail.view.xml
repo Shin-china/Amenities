@@ -361,7 +361,7 @@
 													<Input id="Waers" editable="{local>/editCreate}" value="{local>Waers}" change="onItemChange"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="6rem" sortProperty="Peinh" visible="false">
+											<t:Column width="6rem" sortProperty="Peinh" visible="true">
 												<Label text="{i18n>Peinh}"/>
 												<t:template>
 													<Input id="Peinh" editable="{local>/editCreate}" value="{local>Peinh}" change="onItemChange"/>
@@ -373,6 +373,24 @@
 													<Input id="Zconsumtax" editable="false" value="{local>Zconsumtax}" required="false" textAlign="Right" change="onItemChange"/>
 												</t:template>
 											</t:Column>
+
+											<!-- 20250723 Add by stanley 税率 -->
+											<t:Column width="6rem" sortProperty="Zsl" visible="true">
+												<Label text="{i18n>Zsl}"/>
+												<t:template>
+													<Select
+															editable="{local>/editCreate}"
+															forceSelection="true"
+															selectedKey="{local>Ztax}"
+															change=".onItemChange($event,'Ztax')"
+															>
+															<core:Item key="0" text="0%" />
+															<core:Item key="8" text="8%" />
+															<core:Item key="10" text="10%" />
+													</Select>
+												</t:template>
+											</t:Column>
+											
 											<t:Column width="6rem" sortProperty="Werks" visible="false">
 												<Label text="{i18n>Werks}" required="true"/>
 												<t:template>

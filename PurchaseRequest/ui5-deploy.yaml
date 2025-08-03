@@ -15,9 +15,9 @@ builder:
       configuration:
         target:
           url: https://ad1-amenities.aee.hec.ondemand.com
-          client: "230"
+          client: "240"
         app:
           name: ZMMPR
           description: Purchase Request
           package: z001
-          transport: RD1K908873
+          transport: RD1K909061
