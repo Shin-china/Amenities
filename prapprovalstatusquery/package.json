@@ -11,8 +11,8 @@
     "main": "webapp/index.html",
     "dependencies": {},
     "devDependencies": {
-        "@ui5/cli": "^2.14.1",
-        "@sap/ux-ui5-tooling": "1",
+        "@ui5/cli": "^4.0.22",
+        "@sap/ux-ui5-tooling": "1.18.3",
         "rimraf": "^3.0.2",
         "ui5-task-flatten-library": "0.2.5"
     },

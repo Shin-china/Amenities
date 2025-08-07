@@ -530,17 +530,16 @@ sap.ui.define([
                                 break;
                             case "8":
                                 iTax = 0.08;
-                                oItem.Ztax = formatter.amountFormat(iTax * 100 ) ;
                                 break;
                             case "10":
                                 iTax = 0.10;
-                                oItem.Ztax = formatter.amountFormat(iTax * 100 ) ;
                                 break;
 
                         }
 
 
                     }
+                    oItem.Ztax = parseInt(oItem.Ztax,10);
             
             
 
@@ -558,7 +557,7 @@ sap.ui.define([
                     //Del by stanley 20250801
                     //oItem.Zconsumtax = iPreis * 0.1;
                     //Add by stanley 20250801
-                    oItem.Zconsumtax = iPreis * iTax;
+                    oItem.Zconsumtax = iPreis * iTax / iPeinh;
                     // 明细行所有数量的税，本来在这里乘1.1的，但是现在明细行不显示了，所以在最后计算，减少合计误差
                     // iConsumtaxSum = iPreis * 0.1 * iMenge / iPeinh;
                     iConsumtaxSum = iPreis * iMenge / iPeinh;
@@ -568,7 +567,7 @@ sap.ui.define([
                     oItem.Zsubtotal = iPreis * iMenge / iPeinh;
                     // Change BY STANLEY 20250802 税率根据选择的税率来计算
                     //oItem.Zvat = iPreis * 1.1;
-                    oItem.Zvat = iPreis * (1 + iTax);
+                    oItem.Zvat = iPreis * iMenge * iTax / iPeinh;
                     //End change
 
                     oItem.Zconsumtax = oItem.Zconsumtax.toFixed(2);
@@ -646,20 +645,21 @@ sap.ui.define([
                 //合计表的 税额（每行合计之后在这里计算税，减少误差）
                 //Changed by stanley 20250802 根据选择税率机损
                 //aCalc[i].Zconsumtax = (formatter.clearCommaToNumber(aCalc[i].Zconsumtax) * 0.1).toFixed(0);
-                  aCalc[i].Zconsumtax = formatter.amountFormat(aCalc[i].Ztax);
+                  aCalc[i].Zconsumtax = aCalc[i].Zvat;
                 //End Changed
 
                 //合计表的 含税金额（每行合计之后在这里计算税，减少误差）
                 //Changed by stanley 20250802 根据选择税率
                 //aCalc[i].Zsubtotal = (formatter.clearCommaToNumber(aCalc[i].Zsubtotal) * 1.1).toFixed(0);
-                aCalc[i].Zsubtotal = (formatter.clearCommaToNumber(aCalc[i].Zsubtotal) + formatter.clearCommaToNumber(aCalc[i].Ztax));
+                aCalc[i].Zsubtotal = (formatter.clearCommaToNumber(aCalc[i].Zsubtotal) + formatter.clearCommaToNumber(aCalc[i].Zvat));
                 //END Changed
                 aCalc[i].Zestvat = formatter.clearCommaToNumber(aCalc[i].Zestvat);
                 aCalc[i].Zzhje = formatter.clearCommaToNumber(aCalc[i].Zzhje);
                 aCalc[i].Zvat = formatter.clearCommaToNumber(aCalc[i].Zvat);
 
                 aCalc[i].Znetvalue = formatter.amountFormat(aCalc[i].Znetvalue);
-                aCalc[i].Zconsumtax = formatter.amountFormat(aCalc[i].Zconsumtax);
+                //aCalc[i].Zconsumtax = formatter.amountFormat(aCalc[i].Zconsumtax);
+                aCalc[i].Zconsumtax = aCalc[i].Zconsumtax;
                 aCalc[i].Zsubtotal = formatter.amountFormat(aCalc[i].Zsubtotal);
                 aCalc[i].Zestvat = formatter.amountFormat(aCalc[i].Zestvat);
                 aCalc[i].Zzhje = formatter.amountFormat(aCalc[i].Zzhje);
