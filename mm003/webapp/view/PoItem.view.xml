@@ -103,6 +103,12 @@
 											<m:Text id="_IDGenText25" text="{local>NETPR}" width="5.9rem" textAlign="Right" /> 
 										</template>
 									</Column>
+									<Column id="_IDGenColumn56" width="7rem">
+										<m:Label id="_IDGenLabel44" text="单位" />
+											<template>
+												<m:Text id="_IDGenText34" text="{local>MEINS}" width="5.9rem" textAlign="Right" /> 
+											</template>
+									</Column>
 									<Column id="_IDGenColumn21" width="7rem">
 										<m:Label id="_IDGenLabel49" text="小計" />
 										<template>

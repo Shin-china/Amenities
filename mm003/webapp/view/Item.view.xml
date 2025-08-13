@@ -93,7 +93,7 @@
 												</template>
 											</Column>
 											<Column id="image" width="7rem" columnMenuOpen="onColumnMenuOpen">
-												<m:Label id="_IDGenLabel92" text="消費税" />
+												<m:Label id="_IDGenLabel92" text="消費税額" />
 												<template>
 													<m:Text id="_IDGenText92" text="{local>ZCONSUMTAX}" width="5.9rem" textAlign="Right" /> 
 												</template>
@@ -163,13 +163,27 @@
 													</template>
 												</Column>
 												<Column id="_IDGenColumn6" width="7rem">
-													<m:Label id="_IDGenLabel14" text="合計金額" />
+													<m:Label id="_IDGenLabel14" text="税抜金額" />
 													<template>
 														<m:Text id="_IDGenText14" text="{local>PREIS_SUM}" width="5.9rem" textAlign="Right" /> 
 													</template>
 												</Column>
+												<!-- ADD BY STANLEY 20250807 -->
+												<Column id="_IDGenColumn26" width="7rem">
+													<m:Label id="_IDGenLabel24" text="税率％" />
+													<template>
+														<m:Text id="_IDGenText24" text="{local>ZTAX}" width="5.9rem" textAlign="Right" /> 
+													</template>
+												</Column>
+												<Column id="_IDGenColumn36" width="7rem">
+													<m:Label id="_IDGenLabel34" text="单位" />
+													<template>
+														<m:Text id="_IDGenText34" text="{local>MEINS}" width="5.9rem" textAlign="Right" /> 
+													</template>
+												</Column>
+												<!-- END ADD -->
 												<Column id="_IDGenColumn7" width="7rem">
-													<m:Label id="_IDGenLabel15" text="消費税" />
+													<m:Label id="_IDGenLabel15" text="消費税額" />
 													<template>
 														<m:Text id="_IDGenText15" text="{local>ZVAT}" width="5.9rem" textAlign="Right"/> 
 													</template>
