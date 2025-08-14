@@ -269,6 +269,14 @@ sap.ui.define([
                     break;
                 }
 
+                //ADD BY STANLEY 20250814
+                if(String(aItem[i].Preis).includes('.')){
+                    MessageBox.error(this.getI18nBundle().getText("msgPreisIsError"));
+                    bHasError = true;
+                    break;
+                }
+                //END ADD
+
                 aItem[i].Lfdat = (aItem[i].Lfdat === "" || aItem[i].Lfdat === null) ? null : this.convertDateToOdata(aItem[i].Lfdat);
                 aItem[i].Erdat = (aItem[i].Erdat === "" || aItem[i].Erdat === null) ? null : this.convertDateToOdata(aItem[i].Erdat);
                 aItem[i].Aedat = (aItem[i].Aedat === "" || aItem[i].Aedat === null) ? null : this.convertDateToOdata(aItem[i].Aedat);
@@ -551,13 +559,13 @@ sap.ui.define([
 
                     iZnetvalue = iMenge * iPreis;
                     iZnetvalue = iZnetvalue / iPeinh;
-                    iZnetvalue = Number(iZnetvalue).toFixed(2);
+                    iZnetvalue = Number(iZnetvalue).toFixed(0);
 
                     // 明细行单个数量的税
                     //Del by stanley 20250801
                     //oItem.Zconsumtax = iPreis * 0.1;
                     //Add by stanley 20250801
-                    oItem.Zconsumtax = iPreis * iTax / iPeinh;
+                    oItem.Zconsumtax = Number(iPreis * iTax / iPeinh).toFixed(0);
                     // 明细行所有数量的税，本来在这里乘1.1的，但是现在明细行不显示了，所以在最后计算，减少合计误差
                     // iConsumtaxSum = iPreis * 0.1 * iMenge / iPeinh;
                     iConsumtaxSum = iPreis * iMenge / iPeinh;
@@ -567,13 +575,13 @@ sap.ui.define([
                     oItem.Zsubtotal = iPreis * iMenge / iPeinh;
                     // Change BY STANLEY 20250802 税率根据选择的税率来计算
                     //oItem.Zvat = iPreis * 1.1;
-                    oItem.Zvat = iPreis * iMenge * iTax / iPeinh;
+                    oItem.Zvat = Number(iPreis * iMenge * iTax / iPeinh).toFixed(0);
                     //End change
 
-                    oItem.Zconsumtax = oItem.Zconsumtax.toFixed(2);
-                    oItem.Zsubtotal = oItem.Zsubtotal.toFixed(2);
-                    oItem.Zvat = oItem.Zvat.toFixed(2);
-                    oItem.Zzhje = formatter.clearCommaToNumber(oItem.Zzhje).toFixed(2);
+                    //oItem.Zconsumtax = oItem.Zconsumtax;
+                    oItem.Zsubtotal = oItem.Zsubtotal.toFixed(0);
+                    //oItem.Zvat = oItem.Zvat;
+                    oItem.Zzhje = formatter.clearCommaToNumber(oItem.Zzhje).toFixed(0);
 
                     oItem.Zconsumtax = formatter.clearCommaToNumber(oItem.Zconsumtax);
                     oItem.Zsubtotal = formatter.clearCommaToNumber(oItem.Zsubtotal);

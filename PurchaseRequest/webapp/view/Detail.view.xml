@@ -335,6 +335,12 @@
 													<!--<Input id="Preis" editable="{local>/editCreate}" value="{path:'local>Preis',formatter:'.formatter.amountFormat'}" required="true" textAlign="Right" change="onItemChange"/>-->
 												</t:template>
 											</t:Column>
+											<t:Column width="6rem" sortProperty="Peinh" visible="true">
+												<Label text="{i18n>Peinh}"/>
+												<t:template>
+													<Input id="Peinh" editable="{local>/editCreate}" value="{local>Peinh}" change="onItemChange"/>
+												</t:template>
+											</t:Column>
 											<t:Column width="10rem" sortProperty="Zsubtotal">
 												<Label text="{i18n>Zsubtotal}" required="false"/>
 												<t:template>
@@ -361,12 +367,6 @@
 													<Input id="Waers" editable="{local>/editCreate}" value="{local>Waers}" change="onItemChange"/>
 												</t:template>
 											</t:Column>
-											<t:Column width="6rem" sortProperty="Peinh" visible="true">
-												<Label text="{i18n>Peinh}"/>
-												<t:template>
-													<Input id="Peinh" editable="{local>/editCreate}" value="{local>Peinh}" change="onItemChange"/>
-												</t:template>
-											</t:Column>
 											<t:Column width="8rem" sortProperty="Zconsumtax" visible="false">
 												<Label text="{i18n>Zconsumtax}" required="false"/>
 												<t:template>
@@ -375,7 +375,7 @@
 											</t:Column>
 
 											<!-- 20250723 Add by stanley 税率 -->
-											<t:Column width="6rem" sortProperty="Zsl" visible="true">
+											<t:Column width="8rem" sortProperty="Zsl" visible="true">
 												<Label text="{i18n>Zsl}"/>
 												<t:template>
 													<Select
