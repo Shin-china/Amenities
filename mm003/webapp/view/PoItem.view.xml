@@ -104,7 +104,7 @@
 										</template>
 									</Column>
 									<Column id="_IDGenColumn56" width="7rem">
-										<m:Label id="_IDGenLabel44" text="单位" />
+										<m:Label id="_IDGenLabel44" text="単位" />
 											<template>
 												<m:Text id="_IDGenText34" text="{local>MEINS}" width="5.9rem" textAlign="Right" /> 
 											</template>
