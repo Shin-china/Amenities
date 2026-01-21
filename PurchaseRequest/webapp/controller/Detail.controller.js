@@ -527,9 +527,9 @@ sap.ui.define([
                     //add by stanley 20250801
 
 
-                    if(oItem.Ztax !== 0){
+                   // if(oItem.Ztax !== 0){ DEL BY STANLEY 20260121
                         iTax = oItem.Ztax / 100;
-                    }
+                   // }
                     if(oEvent && field == "Ztax"){
                         //var iTaxLabel = oEvent.getParameters().selectedItem.mProperties.key;
                         switch(oItem.Ztax){
